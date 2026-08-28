@@ -1,541 +1,1050 @@
 <!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  
+  <!-- SEO Semántico & Indexación para Google Search Console y Agentes IA -->
+  <title>Sillar Dental Especialidades · Odontología Digital y Precisión en Yanahuara, Arequipa</title>
+  <meta name="description" content="Centro odontológico boutique de alta precisión en Yanahuara, Arequipa. Ortodoncia, implantes dentales, diseño de sonrisa 3D y odontopediatría sin dolor ni ansiedad."/>
+  <meta name="keywords" content="clinica dental arequipa, dentista yanahuara, ortodoncia invisible arequipa, implantes dentales arequipa, sillar dental, odontologia digital, tomografia cbct arequipa"/>
+  <meta name="author" content="Sillar Dental Especialidades"/>
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1"/>
+  <link rel="canonical" href="http://localhost:8085/public/index.html"/>
+  
+  <!-- Geo-etiquetas Arequipa, Perú -->
+  <meta name="geo.region" content="PE-ARE"/>
+  <meta name="geo.placename" content="Yanahuara, Arequipa"/>
+  <meta name="geo.position" content="-16.3907;-71.5435"/>
+  <meta name="ICBM" content="-16.3907, -71.5435"/>
 
-<html class="light" lang="es"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Sillar Dental - Inicio</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-  tailwind.config = {
-    darkMode: "class",
-    theme: {
-      extend: {
-        "colors": {
-                "surface-tint": "#465f88",
-                "on-primary-fixed": "#001b3d",
-                "primary": "#002046",
-                "secondary-fixed": "#d5e3ff",
-                "on-secondary-fixed": "#0a1c34",
-                "on-primary-fixed-variant": "#2e476f",
-                "on-secondary-container": "#52617d",
-                "on-background": "#0b1c30",
-                "surface-container-high": "#dce9ff",
-                "secondary": "#4f5f7a",
-                "on-surface-variant": "#44474e",
-                "inverse-primary": "#aec7f7",
-                "surface": "#f8f9ff",
-                "outline-variant": "#c4c6cf",
-                "surface-dim": "#cbdbf5",
-                "primary-container": "#1b365d",
-                "error-container": "#ffdad6",
-                "tertiary-fixed-dim": "#c8c6c4",
-                "tertiary": "#20211f",
-                "secondary-container": "#cdddfe",
-                "on-surface": "#0b1c30",
-                "on-error-container": "#93000a",
-                "surface-bright": "#f8f9ff",
-                "background": "#f8f9ff",
-                "primary-fixed": "#d6e3ff",
-                "on-primary": "#ffffff",
-                "on-error": "#ffffff",
-                "on-tertiary": "#ffffff",
-                "on-secondary-fixed-variant": "#384761",
-                "inverse-on-surface": "#eaf1ff",
-                "on-tertiary-container": "#a09f9c",
-                "on-primary-container": "#87a0cd",
-                "on-tertiary-fixed-variant": "#474745",
-                "tertiary-fixed": "#e4e2df",
-                "tertiary-container": "#363634",
-                "inverse-surface": "#213145",
-                "surface-container-highest": "#d3e4fe",
-                "surface-container-low": "#eff4ff",
-                "on-tertiary-fixed": "#1b1c1a",
-                "surface-container-lowest": "#ffffff",
-                "surface-container": "#e5eeff",
-                "primary-fixed-dim": "#aec7f7",
-                "outline": "#74777f",
-                "secondary-fixed-dim": "#b7c7e7",
-                "error": "#ba1a1a",
-                "surface-variant": "#d3e4fe",
-                "on-secondary": "#ffffff"
+  <!-- OpenGraph / Facebook / WhatsApp -->
+  <meta property="og:locale" content="es_PE"/>
+  <meta property="og:type" content="medical.clinic"/>
+  <meta property="og:site_name" content="Sillar Dental Especialidades"/>
+  <meta property="og:title" content="Sillar Dental · Odontología que puedes ver, entender y decidir"/>
+  <meta property="og:description" content="Diagnóstico integral 100% digital, tomografía CBCT y hospitalidad clínica en Yanahuara, Arequipa. Reserva tu evaluación."/>
+  <meta property="og:url" content="http://localhost:8085/public/index.html"/>
+  <meta property="og:image" content="http://localhost:8085/assets/images/public/technology/evaluacion-dental-digital-5622234.jpg"/>
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Sillar Dental · Odontología de Precisión en Arequipa"/>
+  <meta name="twitter:description" content="Centro odontológico en Yanahuara con tecnología 3D, odontograma digital y atención personalizada."/>
+  
+  <!-- Schema.org JSON-LD: Dentist + MedicalClinic + LocalBusiness + FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": ["Dentist", "MedicalClinic", "LocalBusiness"],
+        "@id": "http://localhost:8085/#clinic",
+        "name": "Sillar Dental Especialidades",
+        "image": "http://localhost:8085/assets/brand/sillar-dental-mark.svg",
+        "telephone": "+51-054-283910",
+        "url": "http://localhost:8085/public/index.html",
+        "priceRange": "$$",
+        "paymentAccepted": "Cash, Credit Card, Debit Card, Yape, Plin, Bank Transfer",
+        "currenciesAccepted": "PEN, USD",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Av. Ejército 712",
+          "addressLocality": "Yanahuara",
+          "addressRegion": "Arequipa",
+          "postalCode": "04017",
+          "addressCountry": "PE"
         },
-        "borderRadius": {
-                "DEFAULT": "0.25rem",
-                "lg": "0.5rem",
-                "xl": "0.75rem",
-                "full": "9999px"
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": -16.3907,
+          "longitude": -71.5435
         },
-        "spacing": {
-                "unit": "8px",
-                "margin-mobile": "16px",
-                "margin-desktop": "48px",
-                "container-max-width": "1280px",
-                "gutter": "24px"
-        },
-        "fontFamily": {
-                "display-lg": ["Manrope"],
-                "label-sm": ["Source Sans 3"],
-                "headline-lg": ["Manrope"],
-                "display-lg-mobile": ["Manrope"],
-                "label-md": ["Source Sans 3"],
-                "body-md": ["Source Sans 3"],
-                "headline-md": ["Manrope"],
-                "body-lg": ["Source Sans 3"]
-        },
-        "fontSize": {
-                "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800"}],
-                "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
-                "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
-                "display-lg-mobile": ["40px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "800"}],
-                "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
-                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
-                "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+            "opens": "08:00",
+            "closes": "20:00"
+          }
+        ],
+        "medicalSpecialty": [
+          "Orthodontics",
+          "Prosthodontics",
+          "Periodontics",
+          "PediatricDentistry",
+          "Endodontics",
+          "OralSurgery"
+        ],
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.9",
+          "bestRating": "5",
+          "reviewCount": "148"
         }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "http://localhost:8085/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "¿Cómo se realiza el diagnóstico en Sillar Dental?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Utilizamos escaneo intraoral 3D y tomografía volumétrica CBCT para proyectar tu diagnóstico en pantalla antes de iniciar, explicando cada hallazgo según la norma técnica NTS N.° 188-MINSA."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Ofrecen facilidades de pago o cuotas sin intereses?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sí, disponemos de planes de financiamiento fraccionado en cuotas mensuales para ortodoncia e implantes, además de pagos directos con Yape, Plin, POS Niubiz y transferencias BCP."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Dónde queda ubicada la clínica dental?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Nuestra sede principal se encuentra en Av. Ejército 712, en el distrito de Yanahuara, Arequipa."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <!-- Fuentes Tipográficas Editoriales -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Manrope:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Hojas de Estilos Maestras -->
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/tokens.css">
+
+  <style>
+    body {
+      background-color: var(--paper);
+      color: var(--ink);
+      font-family: var(--font);
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    /* Cabecera Sticky Editorial */
+    .sd-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(250, 249, 246, 0.94);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+      transition: all 0.2s ease;
+    }
+    [data-theme="dark"] .sd-header {
+      background: rgba(7, 19, 31, 0.94);
+    }
+    .sd-header-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 76px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .sd-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--ink);
+    }
+    .sd-logo-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--ink);
+      color: var(--paper);
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: 1.3rem;
+    }
+    [data-theme="dark"] .sd-logo-icon {
+      background: var(--action);
+      color: #07131f;
+    }
+    .sd-logo-text strong {
+      font-family: var(--display);
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+      display: block;
+      line-height: 1.1;
+    }
+    .sd-logo-text span {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--ink-faint);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .sd-nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .sd-nav-links a {
+      color: var(--ink-soft);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.92rem;
+      transition: color 0.15s ease;
+    }
+    .sd-nav-links a:hover {
+      color: var(--action);
+    }
+
+    /* Hero Asimétrico 60/40 */
+    .sd-hero {
+      padding: 80px 0 60px;
+      background: radial-gradient(circle at top right, var(--action-soft) 0%, transparent 60%);
+    }
+    .sd-hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 56px;
+      align-items: center;
+    }
+    .sd-badge-location {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--ink-soft);
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-small);
+    }
+    .sd-hero h1 {
+      font-family: var(--display);
+      font-size: clamp(2.4rem, 4vw, 3.6rem);
+      font-weight: 800;
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      margin: 0 0 20px;
+      color: var(--ink);
+    }
+    .sd-hero h1 span.highlight {
+      color: var(--action);
+      position: relative;
+    }
+    .sd-hero p.lead {
+      font-size: 1.18rem;
+      line-height: 1.6;
+      color: var(--ink-soft);
+      margin: 0 0 32px;
+      max-width: 540px;
+    }
+    .sd-hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+    .sd-trust-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+    }
+    .sd-trust-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--ink-soft);
+    }
+
+    .sd-hero-visual {
+      position: relative;
+    }
+    .sd-hero-img-wrap {
+      width: 100%;
+      height: 480px;
+      border-radius: 32px 32px 18px 18px;
+      overflow: hidden;
+      box-shadow: var(--shadow-elevated);
+      border: 6px solid var(--surface);
+      position: relative;
+    }
+    .sd-hero-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .sd-floating-badge {
+      position: absolute;
+      bottom: 24px;
+      left: -20px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      padding: 16px 20px;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      animation: floatBadge 4s ease-in-out infinite;
+    }
+    @keyframes floatBadge {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* Secciones Comunes */
+    .sd-section {
+      padding: 90px 0;
+      border-top: 1px solid var(--line);
+    }
+    .sd-section-dim {
+      background: var(--surface-dim);
+    }
+    .sd-section-header {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 50px;
+    }
+    .sd-section-header h2 {
+      font-family: var(--display);
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin: 8px 0 14px;
+      color: var(--ink);
+    }
+
+    /* Buscador por Necesidades */
+    .sd-needs-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 36px;
+    }
+    .sd-tab-btn {
+      padding: 12px 22px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--ink-soft);
+      font-weight: 700;
+      font-size: 0.92rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .sd-tab-btn.active, .sd-tab-btn:hover {
+      background: var(--action);
+      color: white;
+      border-color: var(--action);
+      box-shadow: 0 4px 14px rgba(0, 122, 85, 0.25);
+    }
+    .sd-need-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 40px;
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    /* The Studio Experience - 4 Columnas */
+    .sd-experience-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .sd-exp-item {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 28px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .sd-exp-item:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+    .sd-exp-num {
+      font-family: var(--mono);
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--action);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    /* Simulador de Cuotas */
+    .sd-calc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .sd-calc-box {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 36px;
+      box-shadow: var(--shadow);
+    }
+
+    /* Plana Médica */
+    .sd-doctors-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+    .sd-doc-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow-small);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .sd-doc-img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+    }
+    .sd-doc-body {
+      padding: 24px;
+    }
+
+    /* FAQ */
+    .sd-faq-container {
+      max-width: 760px;
+      margin: 0 auto;
+      display: grid;
+      gap: 14px;
+    }
+    .sd-faq-item {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 20px 24px;
+      cursor: pointer;
+    }
+    .sd-faq-item summary {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--ink);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      list-style: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 960px) {
+      .sd-hero-grid, .sd-need-card, .sd-calc-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .sd-experience-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .sd-doctors-grid {
+        grid-template-columns: 1fr;
+      }
+      .sd-floating-badge {
+        position: static;
+        margin-top: 16px;
+      }
+      .sd-nav-links {
+        display: none;
       }
     }
-  }
-</script>
-<style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
-        }
-        .filled-icon {
-            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        
-        .shadow-soft-deep {
-            box-shadow: 0 20px 40px rgba(0, 32, 70, 0.08);
-        }
-        
-        .glass-panel {
-            background-color: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(0, 32, 70, 0.05);
-        }
-    </style>
-  <link href="/styles/unified-upgrade.css" rel="stylesheet"/>
+  </style>
 </head>
-<body class="bg-background text-on-background font-body-md text-body-md antialiased overflow-x-hidden selection:bg-primary selection:text-on-primary">
-<!-- Top Navigation -->
-<nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-on-surface/5 shadow-sm">
-<div class="flex justify-between items-center h-20 px-margin-mobile md:px-margin-desktop max-w-container-max-width mx-auto">
-<!-- Brand -->
-<div class="font-display-lg-mobile text-headline-md tracking-tighter text-primary">
-                Sillar Dental
-            </div>
-<!-- Desktop Nav Links -->
-<ul class="hidden md:flex items-center gap-8 font-label-md text-label-md tracking-wider">
-<li><a class="text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Clínicas</a></li>
-<li><a class="text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Servicios</a></li>
-<li><a class="text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Nosotros</a></li>
-<li><a class="text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Investigación</a></li>
-</ul>
-<!-- Trailing Action -->
-<div class="flex items-center gap-4">
-<button class="hidden md:flex items-center justify-center bg-primary text-on-primary font-label-md text-label-md px-6 py-3 rounded-full hover:bg-primary-container transition-all shadow-md">
-                    Agendar Consulta
-                </button>
-<!-- Mobile Menu Toggle -->
-<button class="md:hidden text-primary">
-<span class="material-symbols-outlined text-[28px]">menu</span>
-</button>
-</div>
-</div>
-</nav>
-<main>
-<!-- Hero Section -->
-<section class="relative pt-32 pb-24 lg:pt-48 lg:pb-32 overflow-hidden flex items-center min-h-[921px]">
-<!-- Ambient Glow Behind Hero -->
-<div class="absolute top-1/4 -left-1/4 w-1/2 h-1/2 bg-primary/5 blur-[120px] rounded-full pointer-events-none"></div>
-<div class="max-w-container-max-width mx-auto px-margin-mobile md:px-margin-desktop w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-gutter items-center relative z-10">
-<!-- Text Narrative -->
-<div class="flex flex-col items-start space-y-8 max-w-xl">
-<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border-primary/10">
-<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest">Precisión Clínica</span>
-</div>
-<h1 class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-on-background">
-                        Odontología que puedes <span class="text-primary italic font-light">ver</span>, entender y <span class="text-secondary">decidir.</span>
-</h1>
-<p class="font-body-lg text-body-lg text-on-surface-variant max-w-md">
-                        Redefinimos el cuidado dental. Nuestro enfoque moderno combina diagnósticos de vanguardia con un entorno de hospitalidad premium, garantizando transparencia total en cada tratamiento.
-                    </p>
-<div class="flex flex-col sm:flex-row gap-4 pt-4 w-full sm:w-auto">
-<button class="bg-primary text-on-primary font-label-md text-label-md px-8 py-4 rounded-full hover:bg-primary-container transition-all shadow-md flex items-center justify-center gap-2">
-<span>Comenzar Experiencia</span>
-<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
-</button>
-<button class="glass-panel text-on-surface font-label-md text-label-md px-8 py-4 rounded-full hover:bg-surface-container transition-all flex items-center justify-center gap-2">
-<span>Conocer Clínicas</span>
-</button>
-</div>
-</div>
-<!-- Sillar Arch Visual Anchor -->
-<div class="relative flex justify-center lg:justify-end w-full mt-12 lg:mt-0">
-<!-- The Arch Container -->
-<div class="relative w-[90%] max-w-[480px] aspect-[3/4] rounded-t-full rounded-b-xl overflow-hidden glass-panel border-[4px] border-white p-2 shadow-soft-deep group">
-<div class="w-full h-full rounded-t-full rounded-b-lg overflow-hidden relative">
-<img class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" data-alt="Un interior de clínica dental sofisticado y de alta gama. La luz natural suave entra por grandes ventanales, resaltando equipos de diagnóstico modernos y minimalistas. El ambiente se siente lujoso y tranquilo, utilizando una paleta de colores nocturnos profundos con acentos clínicos blancos nítidos." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0e0kyVVNe0JZvCiAxOF8c1LQygnhcKLijl5Dm46C4KoZrr0X8pdUJUTeIpe0QA6scxLyd6nrq3Qk6BRZ8QH_Pi2P9czHooNdnTFw0cMjx46w2iXEZaEzXlnCa9bldx1LgDiWsj-ie_6HNWb7b9sp0DnGsD6dgngqh8rB9ADOU4FKeYDqOzeLX5cO_1w_HXj_rzVcSpCyZz6_fqr8RoFjrS19mz4Vx6fM9jQxWiPh0U9vtg8gWqF7-IB8XLpe8jgxBKXG-w0hOCktB"/>
-<!-- Overlay Gradient -->
-<div class="absolute inset-0 bg-gradient-to-t from-white/20 via-transparent to-transparent"></div>
-</div>
-<!-- Floating Glass Metric Card - Shifted slightly right (was -left-8 lg:-left-12, now 0 lg:-left-4) -->
-<div class="absolute bottom-8 left-0 lg:-left-4 glass-panel p-4 rounded-xl flex items-center gap-4 shadow-xl animate-[bounce_4s_infinite]">
-<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-<span class="material-symbols-outlined filled-icon">3d_rotation</span>
-</div>
-<div>
-<p class="font-label-sm text-label-sm text-on-surface-variant">Diagnóstico Integral</p>
-<p class="font-headline-md text-headline-md text-on-surface">100% Digital</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Features (Clinical Benefits) Bento Grid -->
-<section class="py-24 bg-surface-container-lowest relative border-y border-on-surface/5">
-<div class="max-w-container-max-width mx-auto px-margin-mobile md:px-margin-desktop">
-<div class="mb-16 max-w-2xl">
-<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">El nuevo estándar clínico.</h2>
-<p class="font-body-lg text-body-lg text-on-surface-variant">Diseñado para tu tranquilidad, impulsado por tecnología de precisión.</p>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[minmax(280px,auto)]">
-<!-- Feature Card 1: Large Span -->
-<div class="md:col-span-2 glass-panel rounded-xl p-8 lg:p-12 flex flex-col justify-between group hover:bg-surface-container transition-colors duration-500 overflow-hidden relative">
-<div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-[80px] group-hover:bg-primary/10 transition-all duration-500"></div>
-<div class="relative z-10">
-<div class="w-14 h-14 rounded-full border border-primary/20 flex items-center justify-center text-primary mb-6">
-<span class="material-symbols-outlined text-[28px]">visibility</span>
-</div>
-<h3 class="font-headline-md text-headline-md text-on-surface mb-3">Transparencia Total</h3>
-<p class="font-body-md text-body-md text-on-surface-variant max-w-md">
-                                Visualiza tu tratamiento antes de comenzar. Utilizamos escáneres 3D e inteligencia artificial para proyectar resultados exactos, eliminando la incertidumbre.
-                            </p>
-</div>
-</div>
-<!-- Feature Card 2 -->
-<div class="glass-panel rounded-xl p-8 flex flex-col justify-between group hover:bg-surface-container transition-colors duration-500">
-<div class="w-14 h-14 rounded-full bg-primary/5 flex items-center justify-center text-primary mb-6">
-<span class="material-symbols-outlined text-[28px]">spa</span>
-</div>
-<div>
-<h3 class="font-headline-md text-headline-md text-on-surface mb-3">Entorno Hospitalario</h3>
-<p class="font-body-md text-body-md text-on-surface-variant">
-                                Espacios diseñados para reducir la ansiedad. Aromaterapia, acústica controlada y sillones ergonómicos premium.
-                            </p>
-</div>
-</div>
-<!-- Feature Card 3 -->
-<div class="glass-panel rounded-xl p-8 flex flex-col justify-between group hover:bg-surface-container transition-colors duration-500">
-<div class="w-14 h-14 rounded-full border border-secondary/20 flex items-center justify-center text-secondary mb-6">
-<span class="material-symbols-outlined text-[28px]">verified_user</span>
-</div>
-<div>
-<h3 class="font-headline-md text-headline-md text-on-surface mb-3">Materiales Nativos</h3>
-<p class="font-body-md text-body-md text-on-surface-variant">
-                                Biocompatibilidad absoluta. Utilizamos cerámicas y resinas que se integran de forma natural con tu biología dental.
-                            </p>
-</div>
-</div>
-<!-- Feature Card 4: Wide Image/Tech Focus -->
-<div class="md:col-span-2 relative rounded-xl overflow-hidden shadow-soft-deep group">
-<div class="absolute inset-0 bg-primary-container z-0">
-<img class="w-full h-full object-cover opacity-60 mix-blend-multiply group-hover:scale-105 transition-transform duration-1000" data-alt="Vista de cerca de un renderizado de escaneo digital dental 3D en un monitor de modo oscuro de alta resolución. Los puntos de datos brillan en azul y verde, mostrando precisión clínica." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAR10foEPzhufIlIiEvmq_dvHfC5yXTgcGq7LyZUpC90dFel0YXVXDnT7xFPCWvLgqjjmF4vraE5cZu6eY1K1a9YYAF8HB-NIdEsYC2Y8jug8zSq8XYyDxx4xSQeA-4VGvLPHTv8DPdpfJjVo4oRCAvuyXZZgg7pIxkv9w-cpTj2jrJ5oBQYMkwASmztbw_RxPz7m9Wdw1YnPj2E0PaaT99l5Fx5ipAW26d8DmuBieF_eev7qcvVNGOW-mGVyYkEU_M0Zc9tbxR7Qei"/>
-</div>
-<div class="absolute inset-0 bg-gradient-to-r from-primary to-transparent z-10 pointer-events-none opacity-40"></div>
-<div class="relative z-20 p-8 lg:p-12 h-full flex flex-col justify-end w-3/4">
-<span class="px-3 py-1 bg-white/10 backdrop-blur-md rounded border border-white/20 font-label-sm text-label-sm text-white w-fit mb-4 uppercase">Tecnología Sillar</span>
-<h3 class="font-headline-md text-headline-md text-white mb-2">Microprecisión Robótica</h3>
-<p class="font-body-md text-body-md text-white/80">
-                                Márgenes de error reducidos a micras. Tus restauraciones son talladas digitalmente para un ajuste perfecto desde el primer día.
-                            </p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Portal Preview (Digital Companion) -->
-<section class="py-32 bg-surface relative overflow-hidden">
-<!-- Decorative background elements -->
-<div class="absolute top-0 right-0 w-[800px] h-[800px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/5 via-surface/0 to-surface/0 rounded-full blur-[100px] pointer-events-none"></div>
-<div class="max-w-container-max-width mx-auto px-margin-mobile md:px-margin-desktop flex flex-col lg:flex-row items-center gap-16 relative z-10">
-<!-- Text Content -->
-<div class="flex-1 space-y-6">
-<div class="w-12 h-12 rounded-lg bg-white border border-on-surface/5 flex items-center justify-center text-primary mb-4 shadow-sm">
-<span class="material-symbols-outlined text-[24px]">devices</span>
-</div>
-<h2 class="font-display-lg-mobile text-display-lg-mobile md:font-headline-lg md:text-headline-lg text-on-background">
-                        Tu progreso, siempre contigo.
-                    </h2>
-<p class="font-body-lg text-body-lg text-on-surface-variant mb-8">
-                        Nuestro Portal de Paciente te da control total. Revisa tus escaneos 3D, gestiona próximas citas, aprueba presupuestos y mantén una línea directa con tu especialista clínico.
-                    </p>
-<ul class="space-y-4 mb-8">
-<li class="flex items-center gap-3">
-<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
-<span class="font-body-md text-body-md text-on-surface">Historial clínico 100% digitalizado.</span>
-</li>
-<li class="flex items-center gap-3">
-<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
-<span class="font-body-md text-body-md text-on-surface">Notificaciones inteligentes de seguimiento.</span>
-</li>
-<li class="flex items-center gap-3">
-<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
-<span class="font-body-md text-body-md text-on-surface">Visualización interactiva de tu plan de tratamiento.</span>
-</li>
-</ul>
-<button class="bg-white border border-on-surface/10 text-on-surface font-label-md text-label-md px-6 py-3 rounded-full hover:bg-surface-container transition-all flex items-center justify-center gap-2 shadow-sm">
-<span>Explorar el Portal</span>
-<span class="material-symbols-outlined text-[18px]">open_in_new</span>
-</button>
-</div>
-<!-- High-Fidelity Dashboard Mockup -->
-<div class="flex-1 w-full relative">
-<div class="relative w-full max-w-lg mx-auto aspect-square lg:aspect-auto lg:h-[600px] bg-white rounded-3xl border border-on-surface/10 shadow-soft-deep p-6 overflow-hidden flex flex-col gap-4">
-<!-- Dashboard Header Mock -->
-<div class="flex justify-between items-center pb-4 border-b border-on-surface/5">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden">
-<img class="w-full h-full object-cover" data-alt="Retrato de avatar profesional de un paciente moderno, iluminación suave, fondo minimalista." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAch51NpWavymky-CFaWdZd4YDLtbyHGxuaNO48e-cfDPso9cvhMm7SfdMVZ3YxL29FYem7AAbapy_1f6RBgWflsUlR0230es3iPgHqqri1okXsi60pGUJKAG4gSur81hShaL9sXIOafNh1zXXlTKrcvQaWgSaDW9YT-Nylq53V2NvOZmzoDUuEfl47u82Mayhepgy9vyLOS_OHF8TZEK-Y1JH6VRFPU5ssVx9fgQA-PAs2glpMZwVdCjSDVr4LetUZOyPbg0ZtuHQj"/>
-</div>
-<div>
-<p class="font-label-sm text-label-sm text-on-surface-variant">Hola,</p>
-<p class="font-label-md text-label-md text-on-surface">Alejandro V.</p>
-</div>
-</div>
-<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
-</div>
-<!-- Dashboard Card 1: Next Appointment -->
-<div class="bg-surface-container-low rounded-xl p-5 border border-on-surface/5">
-<div class="flex justify-between items-start mb-4">
-<span class="px-2 py-1 bg-primary/10 text-primary rounded text-[10px] font-bold uppercase tracking-wider">Próxima Cita</span>
-<span class="material-symbols-outlined text-on-surface-variant text-[18px]">calendar_month</span>
-</div>
-<p class="font-headline-md text-headline-md text-on-surface">Escaneo de Control</p>
-<p class="font-body-md text-body-md text-on-surface-variant mb-4">Dra. Elena Ramos • Clínica Norte</p>
-<div class="flex items-center justify-between mt-2 pt-4 border-t border-on-surface/5">
-<div class="font-label-md text-label-md text-primary">12 Oct, 10:30 AM</div>
-<button class="text-primary font-label-sm text-label-sm hover:underline">Reagendar</button>
-</div>
-</div>
-<!-- Dashboard Card 2: Progress -->
-<div class="bg-surface-container-low rounded-xl p-5 border border-on-surface/5 flex-1 flex flex-col">
-<div class="flex justify-between items-start mb-4">
-<span class="font-label-md text-label-md text-on-surface">Progreso del Tratamiento</span>
-<span class="font-label-md text-label-md text-primary">60%</span>
-</div>
-<!-- Progress Bar Mock -->
-<div class="w-full h-2 bg-on-surface/10 rounded-full overflow-hidden mb-6">
-<div class="w-[60%] h-full bg-primary rounded-full relative"></div>
-</div>
-<!-- 3D Model Placeholder Box -->
-<div class="flex-1 bg-white rounded-lg border border-on-surface/5 flex items-center justify-center relative overflow-hidden group cursor-pointer">
-<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent"></div>
-<span class="material-symbols-outlined text-[48px] text-on-surface/10 group-hover:scale-110 transition-transform">3d_rotation</span>
-<div class="absolute bottom-3 left-3 right-3 flex justify-between items-center">
-<span class="font-label-sm text-label-sm text-on-surface-variant">Fase 2: Alineación</span>
-<span class="material-symbols-outlined text-[16px] text-primary">fullscreen</span>
-</div>
-</div>
-</div>
-<!-- Gradient overlay for depth -->
-<div class="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
-</div>
-</div>
-</div>
-</section>
-</main>
-<!-- Footer -->
-<footer class="w-full py-12 md:py-24 bg-surface-container-lowest flex flex-col md:flex-row justify-between items-center gap-gutter px-margin-mobile md:px-margin-desktop max-w-container-max-width mx-auto border-t border-on-surface/5 relative z-10">
-<div class="flex flex-col items-center md:items-start gap-4">
-<div class="font-display-lg-mobile text-headline-md text-primary">
-                Sillar Dental
-            </div>
-<p class="font-body-md text-body-md text-on-surface-variant text-center md:text-left max-w-sm">
-                © 2024 Ecosistema Sillar Dental. Precisión Clínica. Impulsado por la Hospitalidad.
-            </p>
-</div>
-<ul class="flex flex-wrap justify-center gap-6 md:gap-8 font-body-md text-body-md">
-<li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Política de Privacidad</a></li>
-<li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Términos de Servicio</a></li>
-<li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Estándares Clínicos</a></li>
-<li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Contacto</a></li>
-</ul>
-</footer>
+<body>
 
-<!-- Floating Switcher Script -->
-<script>
-(function() {
-  document.addEventListener('DOMContentLoaded', () => {
-    const bar = document.createElement('div');
-    bar.id = 'sd-flow-bar';
-    bar.style.cssText = 'position:fixed; bottom:1.25rem; right:1.25rem; z-index:99999; display:flex; gap:0.5rem; font-family:Manrope,sans-serif; background:rgba(5,20,36,0.95); backdrop-filter:blur(16px); border:1px solid rgba(255,255,255,0.2); padding:0.6rem 0.85rem; border-radius:30px; box-shadow:0 12px 36px rgba(0,0,0,0.6); align-items:center;';
-
-    const loc = window.location.pathname;
-    const isPublic = loc.includes('/public/');
-    const isPatient = loc.includes('/patient/');
-    const prefix = isPublic || isPatient ? '../' : './';
-
-    bar.innerHTML = `
-      <a href="index.html" style="background:#002046; color:#ffffff; text-decoration:none; padding:0.4rem 0.85rem; border-radius:20px; font-weight:700; font-size:0.8rem; display:flex; align-items:center; gap:0.35rem; box-shadow:0 4px 12px rgba(0,0,0,0.3);">
-        🌓 Cambiar a Modo Oscuro
+  <!-- Navegación Superior Editorial -->
+  <header class="sd-header">
+    <div class="sd-header-inner">
+      <a href="/public/index.html" class="sd-logo">
+        <div class="sd-logo-icon">S</div>
+        <div class="sd-logo-text">
+          <strong>Sillar Dental</strong>
+          <span>Especialidades · Yanahuara</span>
+        </div>
       </a>
-      <div style="width:1px; height:18px; background:rgba(255,255,255,0.2);"></div>
-      <a href="${prefix}public/index.html" style="color:#b9c7e4; text-decoration:none; font-weight:700; font-size:0.8rem; padding:0.35rem 0.65rem; border-radius:20px; background:${loc.includes('public/index') ? 'rgba(70,252,180,0.2)' : 'transparent'};">🌐 Pública</a>
-      <a href="${prefix}staff/admin.html" style="color:#b9c7e4; text-decoration:none; font-weight:700; font-size:0.8rem; padding:0.35rem 0.65rem; border-radius:20px; background:${loc.includes('staff/admin') ? 'rgba(70,252,180,0.2)' : 'transparent'};">⚙️ Portales Admin</a>
-      <a href="${prefix}patient/index.html" style="color:#b9c7e4; text-decoration:none; font-weight:700; font-size:0.8rem; padding:0.35rem 0.65rem; border-radius:20px; background:${loc.includes('patient/index') ? 'rgba(70,252,180,0.2)' : 'transparent'};">👤 Paciente</a>
-      <a href="${prefix}catalogo.html" style="color:#38bdf8; text-decoration:none; font-weight:700; font-size:0.8rem; padding:0.35rem 0.65rem; border-radius:20px; background:rgba(56,189,248,0.15);">🔍 Catálogo 45</a>
-    `;
-    document.body.appendChild(bar);
 
-    // Intercept links to keep smooth flow navigation
-    document.querySelectorAll('a').forEach(el => {
-      const text = (el.innerText || '').toLowerCase();
-      if (text.includes('portal del paciente') || (text.includes('ingresar') && el.closest('div')?.innerText.toLowerCase().includes('paciente'))) {
-        el.setAttribute('href', prefix + 'patient/index.html');
-      } else if (text.includes('consola de administración') || (text.includes('ingresar') && el.closest('div')?.innerText.toLowerCase().includes('administración'))) {
-        el.setAttribute('href', prefix + 'staff/dashboard.html');
-      } else if (text.includes('agendar consulta') || text.includes('reservar')) {
-        el.setAttribute('href', prefix + 'public/reservar.html');
-      } else if (text.includes('citas') || text.includes('agenda')) {
-        el.setAttribute('href', prefix + 'staff/citas.html');
-      } else if (text.includes('usuarios') || text.includes('personal')) {
-        el.setAttribute('href', prefix + 'staff/usuarios.html');
-      } else if (text.includes('inventario') || text.includes('insumos')) {
-        el.setAttribute('href', prefix + 'staff/inventario.html');
-      } else if (text.includes('consulta') || text.includes('odontograma')) {
-        el.setAttribute('href', prefix + 'staff/consulta.html');
+      <ul class="sd-nav-links">
+        <li><a href="/public/especialidades.html">Especialidades</a></li>
+        <li><a href="/public/tecnologia.html">Tecnología 3D</a></li>
+        <li><a href="/public/equipo.html">Especialistas COP</a></li>
+        <li><a href="/public/contacto.html">Sede Yanahuara</a></li>
+        <li><a href="/patient/index.html" style="color: var(--action); font-weight: 700;">Portal Paciente ↗</a></li>
+      </ul>
+
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <button id="themeToggleBtn" class="btn btn-secondary btn-small" title="Cambiar Tema" style="border-radius: 999px; padding: 0 12px;">
+          🌓 Modo
+        </button>
+        <a href="/public/reservar.html" class="btn btn-primary btn-small" style="font-weight: 700; border-radius: 999px;">
+          Reservar Cita
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- 1. HERO ASIMÉTRICO 60/40 -->
+    <section class="sd-hero">
+      <div class="container sd-hero-grid">
+        <div>
+          <div class="sd-badge-location">
+            <span style="color: var(--action);">📍</span> Sede Yanahuara · Av. Ejército 712, Arequipa
+          </div>
+          <h1>Odontología que puedes <span class="highlight">ver, entender</span> y decidir.</h1>
+          <p class="lead">
+            Revolucionamos el cuidado dental en Arequipa. Combinamos diagnóstico 3D en pantalla grande con un entorno sereno de roca volcánica y atención especializada sin dolor ni esperas.
+          </p>
+
+          <div class="sd-hero-actions">
+            <a href="/public/reservar.html" class="btn btn-primary" style="padding: 14px 28px; font-size: 1rem; border-radius: 999px; font-weight: 700;">
+              🗓️ Reservar Evaluación Digital
+            </a>
+            <a href="https://wa.me/51954123456" target="_blank" class="btn btn-secondary" style="padding: 14px 24px; font-size: 0.95rem; border-radius: 999px;">
+              💬 WhatsApp Yanahuara
+            </a>
+          </div>
+
+          <div class="sd-trust-row">
+            <div class="sd-trust-item">
+              <strong style="color: var(--ink);">★ 4.9</strong> / 5.0 en Google
+            </div>
+            <div class="sd-trust-item">
+              <span style="color: var(--action);">✔</span> Tomografía CBCT 3D
+            </div>
+            <div class="sd-trust-item">
+              <span style="color: var(--action);">✔</span> 8 Doctores Colegiados COP
+            </div>
+          </div>
+        </div>
+
+        <div class="sd-hero-visual">
+          <div class="sd-hero-img-wrap">
+            <img src="/assets/images/public/technology/evaluacion-dental-digital-5622234.jpg" alt="Evaluación digital 3D en Sillar Dental Yanahuara">
+          </div>
+          <div class="sd-floating-badge">
+            <div style="width: 40px; height: 40px; border-radius: 10px; background: var(--action-soft); color: var(--action); display: grid; place-items: center; font-size: 1.3rem;">
+              🦷
+            </div>
+            <div>
+              <strong style="font-size: 0.9rem; display: block; color: var(--ink);">Diagnóstico 100% Digital</strong>
+              <span style="font-size: 0.76rem; color: var(--ink-soft);">Sin moldes incómodos · Pantalla 3D</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. BUSCADOR POR NECESIDAD / SÍNTOMA (Interactivo) -->
+    <section class="sd-section sd-section-dim" id="necesidades">
+      <div class="container">
+        <div class="sd-section-header">
+          <span class="chip chip-success" style="margin-bottom: 8px;">Diagnóstico Orientado a Ti</span>
+          <h2>¿Qué deseas resolver hoy?</h2>
+          <p class="muted">Explora las soluciones clínicas diseñadas según tu necesidad y agenda tu evaluación directa.</p>
+        </div>
+
+        <div class="sd-needs-tabs">
+          <button class="sd-tab-btn active" data-need="alinear">✨ Alinear mis dientes</button>
+          <button class="sd-tab-btn" data-need="dolor">⚡ Dolor o urgencia</button>
+          <button class="sd-tab-btn" data-need="implante">🦷 Recuperar piezas ausentes</button>
+          <button class="sd-tab-btn" data-need="estetica">💎 Diseño de sonrisa y carillas</button>
+          <button class="sd-tab-btn" data-need="ninos">👶 Odontopediatría infantil</button>
+        </div>
+
+        <div class="sd-need-card" id="needCard">
+          <div>
+            <span class="eyebrow" id="needSpecialtyLabel">Especialidad Recomendada</span>
+            <h3 style="font-size: 1.8rem; font-family: var(--display); margin: 6px 0 16px; color: var(--ink);" id="needTitle">
+              Ortodoncia Digital & Alineadores Invisibles
+            </h3>
+            <p class="muted" style="margin-bottom: 24px;" id="needDesc">
+              Corrección biomecánica precisa sin necesidad de moldes incómodos. Mediante escáner intraoral 3D proyectamos la posición exacta de cada diente antes de colocar los alineadores o brackets estéticos.
+            </p>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 28px;">
+              <div style="background: var(--paper); padding: 14px; border-radius: 12px; border: 1px solid var(--line);">
+                <span class="tiny block">Tiempo Estimado</span>
+                <strong style="color: var(--action); font-size: 1.1rem;" id="needTime">6 a 18 meses</strong>
+              </div>
+              <div style="background: var(--paper); padding: 14px; border-radius: 12px; border: 1px solid var(--line);">
+                <span class="tiny block">Tecnología de Apoyo</span>
+                <strong style="color: var(--ink); font-size: 1.1rem;" id="needTech">Escaneo 3D iTero</strong>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+              <a href="/public/reservar.html?specialty=ortodoncia" id="needBtn" class="btn btn-primary" style="font-weight: 700; border-radius: 999px;">
+                Reservar Evaluación de Ortodoncia
+              </a>
+              <a href="/public/especialidades.html" class="btn btn-secondary" style="border-radius: 999px;">
+                Ver Todas las Especialidades
+              </a>
+            </div>
+          </div>
+
+          <div style="border-radius: 18px; overflow: hidden; height: 320px; box-shadow: var(--shadow-small);">
+            <img id="needImg" src="/assets/images/public/services/ortodoncia-referencia-6529107.jpg" alt="Tratamiento de ortodoncia digital" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. THE SILLAR STUDIO EXPERIENCE (Odontología sin ansiedad) -->
+    <section class="sd-section">
+      <div class="container">
+        <div class="sd-section-header">
+          <span class="chip chip-neutral" style="margin-bottom: 8px;">Hospitalidad Clínica</span>
+          <h2>The Sillar Studio Experience</h2>
+          <p class="muted">Diseñamos cada detalle de nuestra sede Yanahuara para transformar una visita al dentista en una experiencia de calma y bienestar.</p>
+        </div>
+
+        <div class="sd-experience-grid">
+          <div class="sd-exp-item">
+            <span class="sd-exp-num">01</span>
+            <h3 style="font-size: 1.2rem; margin-bottom: 8px;">Arquitectura Sillar</h3>
+            <p class="muted" style="font-size: 0.9rem;">Paredes de roca volcánica natural que aportan serenidad acústica, luminosidad y aislamiento térmico.</p>
+          </div>
+
+          <div class="sd-exp-item">
+            <span class="sd-exp-num">02</span>
+            <h3 style="font-size: 1.2rem; margin-bottom: 8px;">Aromaterapia & Calma</h3>
+            <p class="muted" style="font-size: 0.9rem;">Eliminamos el clásico olor a dentista mediante difusores de aceites esenciales y música ambiental suave.</p>
+          </div>
+
+          <div class="sd-exp-item">
+            <span class="sd-exp-num">03</span>
+            <h3 style="font-size: 1.2rem; margin-bottom: 8px;">Anestesia Sin Dolor</h3>
+            <p class="muted" style="font-size: 0.9rem;">Sistemas de inyección digital computarizada que adormecen únicamente la pieza a tratar sin pinchazos molestos.</p>
+          </div>
+
+          <div class="sd-exp-item">
+            <span class="sd-exp-num">04</span>
+            <h3 style="font-size: 1.2rem; margin-bottom: 8px;">Pantalla en Sillón</h3>
+            <p class="muted" style="font-size: 0.9rem;">Visualiza tu tomografía 3D o disfruta de contenidos relajantes mientras los doctores realizan tu procedimiento.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. SIMULADOR DE CUOTAS TRANSPARENTES -->
+    <section class="sd-section sd-section-dim" id="financiamiento">
+      <div class="container">
+        <div class="sd-calc-grid">
+          <div>
+            <span class="chip chip-success" style="margin-bottom: 8px;">Transparencia Financiera</span>
+            <h2 style="font-family: var(--display); font-size: 2.2rem; font-weight: 800; line-height: 1.2; margin: 8px 0 16px;">
+              Sin sorpresas. Cuotas mensuales calculadas para tu tranquilidad.
+            </h2>
+            <p class="muted" style="margin-bottom: 24px; font-size: 1.05rem;">
+              En Sillar Dental creemos que la claridad en el presupuesto es parte esencial del bienestar del paciente. Emisión de boletas electrónicas oficiales (serie B001), cuotas fraccionadas y múltiples formas de pago peruanas.
+            </p>
+
+            <ul style="padding-left: 20px; color: var(--ink-soft); font-size: 0.95rem; display: grid; gap: 10px; margin-bottom: 24px;">
+              <li><strong>Presupuesto cerrado:</strong> Confirmado tras tu primera tomografía CBCT sin costos ocultos.</li>
+              <li><strong>Portal Digital:</strong> Revisa tus cuotas pagadas y pendientes desde tu celular.</li>
+              <li><strong>Medios de pago:</strong> Yape, Plin, POS Niubiz (Visa/Mastercard) y transferencias BCP.</li>
+            </ul>
+          </div>
+
+          <div class="sd-calc-box">
+            <h3 style="font-size: 1.3rem; margin-bottom: 20px; font-family: var(--display); color: var(--ink);">
+              💳 Simulador de Cuotas Estimadas
+            </h3>
+
+            <div style="display: grid; gap: 20px;">
+              <div>
+                <label style="font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 6px;">Selecciona el Tratamiento:</label>
+                <select id="calcTreatment" class="form-select" style="font-weight: 600;">
+                  <option value="ortodoncia" data-total="3600" data-months="18">Ortodoncia / Alineadores Invisibles (18 cuotas)</option>
+                  <option value="implante" data-total="2800" data-months="6">Implante Dental Guiado de Titanio (6 cuotas)</option>
+                  <option value="carillas" data-total="2400" data-months="4">Carillas de Porcelana Estética (4 cuotas)</option>
+                  <option value="diseno" data-total="4500" data-months="10">Rehabilitación Oral Completa (10 cuotas)</option>
+                </select>
+              </div>
+
+              <div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.88rem; font-weight: 700; margin-bottom: 6px;">
+                  <span>Cuota Inicial Opcional:</span>
+                  <span id="initialDisplay" style="color: var(--action); font-family: var(--mono);">S/ 500</span>
+                </div>
+                <input type="range" id="calcInitial" min="0" max="2000" step="100" value="500" style="width: 100%; accent-color: var(--action);">
+              </div>
+
+              <div style="background: var(--paper); border: 2px dashed var(--action); padding: 20px; border-radius: 16px; display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                  <span class="tiny block">Cuota Mensual Estimada</span>
+                  <div id="monthlyDisplay" style="font-family: var(--display); font-size: 2rem; font-weight: 800; color: var(--action); line-height: 1;">
+                    S/ 172 /mes
+                  </div>
+                  <span id="monthsDisplay" class="tiny" style="color: var(--ink-soft);">en 18 cuotas mensuales</span>
+                </div>
+                <span class="chip chip-success" style="font-size: 0.75rem;">Sin Intereses</span>
+              </div>
+
+              <a href="/public/reservar.html" class="btn btn-primary" style="width: 100%; text-align: center; justify-content: center; font-weight: 700; border-radius: 12px; padding: 14px 0;">
+                Agendar Evaluación y Fijar Presupuesto
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. PLANA MÉDICA COLEGIADA -->
+    <section class="sd-section" id="equipo">
+      <div class="container">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; flex-wrap: wrap; gap: 16px;">
+          <div>
+            <span class="chip chip-neutral" style="margin-bottom: 8px;">Cuerpo Médico Especializado</span>
+            <h2 style="font-family: var(--display); font-size: 2.2rem; font-weight: 800; margin: 0; color: var(--ink);">
+              Especialistas Colegiados COP
+            </h2>
+          </div>
+          <a href="/public/equipo.html" style="color: var(--action); font-weight: 700; text-decoration: none; font-size: 0.95rem;">
+            Ver todo el equipo médico (8 doctores) ↗
+          </a>
+        </div>
+
+        <div class="sd-doctors-grid">
+          <!-- Doctor 1 -->
+          <div class="sd-doc-card">
+            <div>
+              <img src="/assets/images/public/team/profesional-dental-referencia-37458046.jpg" alt="Dra. Ana Flores Vanesa" class="sd-doc-img">
+              <div class="sd-doc-body">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <span class="chip chip-success" style="font-family: var(--mono); font-size: 0.72rem;">COP 18240</span>
+                  <span class="tiny">Sede Yanahuara</span>
+                </div>
+                <h3 style="font-size: 1.25rem; margin-bottom: 4px; color: var(--ink);">Dra. Ana Flores Vanesa</h3>
+                <p class="muted" style="font-size: 0.88rem; font-weight: 600; color: var(--action); margin-bottom: 8px;">Ortodoncia & Alineadores Invisibles</p>
+                <p class="muted" style="font-size: 0.84rem; line-height: 1.5; margin: 0;">Más de 10 años corrigiendo sonrisas con sistemas invisibles e Invisalign en Arequipa.</p>
+              </div>
+            </div>
+            <div style="padding: 0 24px 24px;">
+              <a href="/public/reservar.html" class="btn btn-secondary btn-small" style="width: 100%; border-radius: 8px;">Agendar con Dra. Flores</a>
+            </div>
+          </div>
+
+          <!-- Doctor 2 -->
+          <div class="sd-doc-card">
+            <div>
+              <img src="/assets/images/public/team/equipo-dental-clinica-37458124.jpg" alt="Dr. Roberto Carpio Málaga" class="sd-doc-img">
+              <div class="sd-doc-body">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <span class="chip chip-success" style="font-family: var(--mono); font-size: 0.72rem;">COP 14920</span>
+                  <span class="tiny">Sede Yanahuara</span>
+                </div>
+                <h3 style="font-size: 1.25rem; margin-bottom: 4px; color: var(--ink);">Dr. Roberto Carpio Málaga</h3>
+                <p class="muted" style="font-size: 0.88rem; font-weight: 600; color: var(--action); margin-bottom: 8px;">Cirugía Oral & Implantología 3D</p>
+                <p class="muted" style="font-size: 0.84rem; line-height: 1.5; margin: 0;">Especialista en carga inmediata y cirugía guiada por tomografía 3D de alta precisión.</p>
+              </div>
+            </div>
+            <div style="padding: 0 24px 24px;">
+              <a href="/public/reservar.html" class="btn btn-secondary btn-small" style="width: 100%; border-radius: 8px;">Agendar con Dr. Carpio</a>
+            </div>
+          </div>
+
+          <!-- Doctor 3 -->
+          <div class="sd-doc-card">
+            <div>
+              <img src="/assets/images/public/services/explicacion-modelo-dental-6627325.jpg" alt="Dra. Sofía Mendoza Salas" class="sd-doc-img">
+              <div class="sd-doc-body">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <span class="chip chip-success" style="font-family: var(--mono); font-size: 0.72rem;">COP 22105</span>
+                  <span class="tiny">Sede Yanahuara</span>
+                </div>
+                <h3 style="font-size: 1.25rem; margin-bottom: 4px; color: var(--ink);">Dra. Sofía Mendoza Salas</h3>
+                <p class="muted" style="font-size: 0.88rem; font-weight: 600; color: var(--action); margin-bottom: 8px;">Odontopediatría & Prevención</p>
+                <p class="muted" style="font-size: 0.84rem; line-height: 1.5; margin: 0;">Especializada en crear experiencias divertidas y sin dolor para niños y adolescentes.</p>
+              </div>
+            </div>
+            <div style="padding: 0 24px 24px;">
+              <a href="/public/reservar.html" class="btn btn-secondary btn-small" style="width: 100%; border-radius: 8px;">Agendar con Dra. Mendoza</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. PREGUNTAS FRECUENTES (FAQ) -->
+    <section class="sd-section sd-section-dim" id="faq">
+      <div class="container">
+        <div class="sd-section-header">
+          <span class="chip chip-neutral" style="margin-bottom: 8px;">Dudas y Preguntas</span>
+          <h2>Preguntas Frecuentes</h2>
+          <p class="muted">Todo lo que necesitas saber antes de tu primera consulta en Sillar Dental.</p>
+        </div>
+
+        <div class="sd-faq-container">
+          <details class="sd-faq-item" open>
+            <summary>
+              <span>¿Cómo se realiza la primera cita de evaluación?</span>
+              <span style="color: var(--action);">▼</span>
+            </summary>
+            <p class="muted" style="margin-top: 12px; font-size: 0.94rem;">
+              Realizamos una inspección clínica completa, toma de fotos y escaneo intraoral 3D. Te mostramos el estado de tus dientes en pantalla grande y explicamos las opciones de tratamiento antes de cualquier procedimiento.
+            </p>
+          </details>
+
+          <details class="sd-faq-item">
+            <summary>
+              <span>¿Cuáles son las opciones de financiamiento y pago?</span>
+              <span style="color: var(--action);">▼</span>
+            </summary>
+            <p class="muted" style="margin-top: 12px; font-size: 0.94rem;">
+              Ofrecemos pagos fraccionados en cuotas mensuales para ortodoncia e implantes dentales. Aceptamos Yape, Plin, tarjetas de crédito/débito Niubiz/Izipay y transferencias directas al BCP.
+            </p>
+          </details>
+
+          <details class="sd-faq-item">
+            <summary>
+              <span>¿Qué sucede si tengo fobia o miedo al dentista?</span>
+              <span style="color: var(--action);">▼</span>
+            </summary>
+            <p class="muted" style="margin-top: 12px; font-size: 0.94rem;">
+              Nuestra clínica cuenta con protocolo de anestesia computarizada sin dolor, salas acústicamente aisladas y aromaterapia. Puedes detener el procedimiento en cualquier momento haciendo una señal pactada con el especialista.
+            </p>
+          </details>
+
+          <details class="sd-faq-item">
+            <summary>
+              <span>¿Cómo accedo a mis radiografías e informes médicos?</span>
+              <span style="color: var(--action);">▼</span>
+            </summary>
+            <p class="muted" style="margin-top: 12px; font-size: 0.94rem;">
+              Tras tu consulta, tus imágenes tomográficas CBCT y recetas médicas se cargan automáticamente a tu Portal del Paciente, al cual puedes ingresar desde cualquier celular o computadora las 24 horas del día.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Pie de Página Institucional -->
+  <footer style="background: var(--surface); border-top: 1px solid var(--line); padding: 60px 0 30px;">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 40px; margin-bottom: 40px;">
+        <div>
+          <div class="sd-logo" style="margin-bottom: 16px;">
+            <div class="sd-logo-icon">S</div>
+            <div class="sd-logo-text">
+              <strong>Sillar Dental</strong>
+              <span>Especialidades · Yanahuara</span>
+            </div>
+          </div>
+          <p class="muted" style="font-size: 0.88rem; max-width: 320px;">
+            Centro odontológico de precisión y hospitalidad clínica. Conforme a la norma técnica NTS N.° 188-MINSA.
+          </p>
+          <div style="font-size: 0.8rem; color: var(--ink-faint); margin-top: 12px;">
+            RUC: 20601234567 · Sillar Dental E.I.R.L.
+          </div>
+        </div>
+
+        <div>
+          <strong style="display: block; margin-bottom: 14px; font-size: 0.95rem;">Especialidades</strong>
+          <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.88rem; display: grid; gap: 8px;">
+            <li><a href="/public/especialidades.html" class="muted" style="text-decoration: none;">Ortodoncia Invisible</a></li>
+            <li><a href="/public/especialidades.html" class="muted" style="text-decoration: none;">Implantología 3D</a></li>
+            <li><a href="/public/especialidades.html" class="muted" style="text-decoration: none;">Diseño de Sonrisa</a></li>
+            <li><a href="/public/especialidades.html" class="muted" style="text-decoration: none;">Endodoncia Digital</a></li>
+            <li><a href="/public/especialidades.html" class="muted" style="text-decoration: none;">Odontopediatría</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <strong style="display: block; margin-bottom: 14px; font-size: 0.95rem;">Portales & Accesos</strong>
+          <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.88rem; display: grid; gap: 8px;">
+            <li><a href="/patient/index.html" style="color: var(--action); text-decoration: none; font-weight: 700;">Portal Paciente (María Q.)</a></li>
+            <li><a href="/staff/index.html" class="muted" style="text-decoration: none;">Consola Staff / Odontograma</a></li>
+            <li><a href="/public/reservar.html" class="muted" style="text-decoration: none;">Agendar Cita en Línea</a></li>
+            <li><a href="/prototipo-stitc/index.html" class="muted" style="text-decoration: none;">Catálogo 45 Diseños</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <strong style="display: block; margin-bottom: 14px; font-size: 0.95rem;">Sede Yanahuara</strong>
+          <div style="font-size: 0.88rem; color: var(--ink-soft); display: grid; gap: 8px;">
+            <div>📍 Av. Ejército 712, Yanahuara, Arequipa</div>
+            <div>📞 (054) 283-910</div>
+            <div>💬 +51 954 123 456</div>
+            <div>🕒 Lun - Sáb: 8:00 AM a 8:00 PM</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="border-top: 1px solid var(--line); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; font-size: 0.8rem; color: var(--ink-faint);">
+        <div>© 2026 Sillar Dental Especialidades. Todos los derechos reservados.</div>
+        <div style="display: flex; gap: 20px;">
+          <span>Boletas Electrónicas Serie B001</span>
+          <span>NTS N.° 188-MINSA</span>
+          <span>Ley N.° 29733 (LPDP)</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Switcher Widget -->
+  <script src="/components/prototype-switcher.js"></script>
+
+  <!-- Scripts Interactivos -->
+  <script>
+    // 1. Buscador por Necesidades
+    const needData = {
+      alinear: {
+        title: "Ortodoncia Digital & Alineadores Invisibles",
+        desc: "Corrección biomecánica precisa sin necesidad de moldes incómodos. Mediante escáner intraoral 3D proyectamos la posición exacta de cada diente antes de colocar los alineadores o brackets estéticos.",
+        time: "6 a 18 meses",
+        tech: "Escaneo 3D iTero",
+        img: "/assets/images/public/services/ortodoncia-referencia-6529107.jpg",
+        btnText: "Reservar Evaluación de Ortodoncia",
+        btnHref: "/public/reservar.html?specialty=ortodoncia"
+      },
+      dolor: {
+        title: "Urgencias & Endodoncia Microscópica",
+        desc: "Alivio inmediato del dolor dental agudo. Empleamos localizadores apicales y magnificación óptica para desinfectar y sellar conductos en una sola sesión indolora.",
+        time: "1 a 2 sesiones",
+        tech: "Microscopía & CBCT",
+        img: "/assets/images/public/technology/evaluacion-dental-digital-5622234.jpg",
+        btnText: "Atención de Urgencia en el Día",
+        btnHref: "/public/reservar.html?specialty=endodoncia"
+      },
+      implante: {
+        title: "Implantología & Cirugía Guiada por Tomografía",
+        desc: "Recupera la fuerza masticatoria y la estética de tus piezas ausentes con implantes de titanio osteointegrados y coronas de zirconio talladas por tecnología CAD/CAM.",
+        time: "3 a 6 meses",
+        tech: "Guía Quirúrgica 3D",
+        img: "/assets/images/public/team/equipo-dental-clinica-37458124.jpg",
+        btnText: "Reservar Consulta de Implantes",
+        btnHref: "/public/reservar.html?specialty=implantes"
+      },
+      estetica: {
+        title: "Diseño Digital de Sonrisa & Carillas Cerámicas",
+        desc: "Lentes de contacto dental y carillas ultradelgadas que corrigen forma, color y simetría dental con biocompatibilidad absoluta y acabado natural.",
+        time: "2 a 3 citas",
+        tech: "DSD & Fresado CAD/CAM",
+        img: "/assets/images/public/team/profesional-dental-referencia-37458046.jpg",
+        btnText: "Reservar Evaluación Estética",
+        btnHref: "/public/reservar.html?specialty=estetica"
+      },
+      ninos: {
+        title: "Odontopediatría & Experiencia Sin Ansiedad",
+        desc: "Cuidado preventivo y adaptativo para niños. Espacios lúdicos, sellantes protectores y fluorización en un entorno amigable que fomenta hábitos de salud positivos.",
+        time: "Controles semestrales",
+        tech: "Técnica Adaptativa",
+        img: "/assets/images/public/services/explicacion-modelo-dental-6627325.jpg",
+        btnText: "Reservar Cita Infantil",
+        btnHref: "/public/reservar.html?specialty=odontopediatria"
       }
-    });
-  });
-})();
-</script>
+    };
 
+    const tabs = document.querySelectorAll('.sd-tab-btn');
+    const titleEl = document.getElementById('needTitle');
+    const descEl = document.getElementById('needDesc');
+    const timeEl = document.getElementById('needTime');
+    const techEl = document.getElementById('needTech');
+    const imgEl = document.getElementById('needImg');
+    const btnEl = document.getElementById('needBtn');
 
-<script>
-(function() {
-  document.addEventListener('DOMContentLoaded', () => {
-    const loc = window.location.pathname;
-    const isPublic = loc.includes('/public/');
-    const isPatient = loc.includes('/patient/');
-    const prefix = isPublic || isPatient ? '../' : './';
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
 
-    // Intercept all clicks on links and buttons
-    document.querySelectorAll('a, button, [onclick]').forEach(el => {
-      const text = (el.innerText || el.getAttribute('aria-label') || '').toLowerCase().trim();
-      const currentHref = el.getAttribute('href');
-
-      if (!currentHref || currentHref === '#' || currentHref === '') {
-        if (text.includes('portal del paciente') || text.includes('paciente') || text.includes('mi cuenta') || text.includes('mis citas')) {
-          el.setAttribute('href', prefix + 'patient/index.html');
-        } else if (text.includes('consola de administración') || text.includes('dashboard') || text.includes('administración')) {
-          el.setAttribute('href', prefix + 'staff/dashboard.html');
-        } else if (text.includes('portales') || text.includes('seleccione su portal') || text.includes('admin')) {
-          el.setAttribute('href', prefix + 'staff/admin.html');
-        } else if (text.includes('agendar') || text.includes('reservar') || text.includes('nueva cita')) {
-          el.setAttribute('href', prefix + 'public/reservar.html');
-        } else if (text.includes('agenda semanal') || text.includes('semanal')) {
-          el.setAttribute('href', prefix + 'staff/agenda-semanal.html');
-        } else if (text.includes('calendario') || text.includes('mensual')) {
-          el.setAttribute('href', prefix + 'staff/calendario-mensual.html');
-        } else if (text.includes('citas')) {
-          el.setAttribute('href', prefix + (isPatient ? 'patient/citas.html' : 'staff/citas.html'));
-        } else if (text.includes('consulta') || text.includes('odontograma')) {
-          el.setAttribute('href', prefix + 'staff/consulta.html');
-        } else if (text.includes('ortodoncia')) {
-          el.setAttribute('href', prefix + 'staff/ortodoncia.html');
-        } else if (text.includes('cirugía') || text.includes('implantología')) {
-          el.setAttribute('href', prefix + 'staff/cirugia.html');
-        } else if (text.includes('endodoncia') || text.includes('operatoria')) {
-          el.setAttribute('href', prefix + 'staff/endodoncia.html');
-        } else if (text.includes('rehabilitación') || text.includes('periodoncia')) {
-          el.setAttribute('href', prefix + 'staff/rehabilitacion.html');
-        } else if (text.includes('inventario') || text.includes('insumos')) {
-          el.setAttribute('href', prefix + 'staff/inventario.html');
-        } else if (text.includes('usuarios') || text.includes('personal')) {
-          el.setAttribute('href', prefix + 'staff/usuarios.html');
-        } else if (text.includes('cerrar sesión') || text.includes('salir')) {
-          el.setAttribute('href', prefix + 'patient/login.html');
-        } else if (text.includes('inicio') || text.includes('home')) {
-          el.setAttribute('href', prefix + 'public/index.html');
+        const needKey = tab.getAttribute('data-need');
+        const item = needData[needKey];
+        if (item && titleEl) {
+          titleEl.textContent = item.title;
+          descEl.textContent = item.desc;
+          timeEl.textContent = item.time;
+          techEl.textContent = item.tech;
+          imgEl.src = item.img;
+          btnEl.textContent = item.btnText;
+          btnEl.href = item.btnHref;
         }
-      }
+      });
     });
-  });
-})();
-</script>
 
+    // 2. Simulador de Cuotas
+    const calcSelect = document.getElementById('calcTreatment');
+    const calcInitial = document.getElementById('calcInitial');
+    const initialDisplay = document.getElementById('initialDisplay');
+    const monthlyDisplay = document.getElementById('monthlyDisplay');
+    const monthsDisplay = document.getElementById('monthsDisplay');
 
+    function updateCalculator() {
+      if (!calcSelect || !calcInitial) return;
+      const opt = calcSelect.options[calcSelect.selectedIndex];
+      const total = parseFloat(opt.getAttribute('data-total') || 3600);
+      const months = parseInt(opt.getAttribute('data-months') || 18);
+      const initial = parseFloat(calcInitial.value || 0);
 
+      initialDisplay.textContent = `S/ ${initial}`;
+      const remaining = Math.max(0, total - initial);
+      const monthly = Math.round(remaining / months);
 
+      monthlyDisplay.textContent = `S/ ${monthly} /mes`;
+      monthsDisplay.textContent = `en ${months} cuotas mensuales (Saldo: S/ ${remaining})`;
+    }
 
-<!-- Root-Relative Bulletproof Navigation Script -->
-<script>
-(function() {
-  function applyRootLinks() {
-    const loc = window.location.pathname;
+    if (calcSelect && calcInitial) {
+      calcSelect.addEventListener('change', updateCalculator);
+      calcInitial.addEventListener('input', updateCalculator);
+      updateCalculator();
+    }
 
-    document.querySelectorAll('a, button').forEach(el => {
-      const target = el.tagName === 'A' ? el : el.closest('a');
-      if (!target) return;
-
-      const text = (target.textContent || target.getAttribute('aria-label') || '').toLowerCase().trim();
-
-      // Patient Portal Card or Nav Link
-      if (text.includes('portal del paciente') || (text.includes('paciente') && !text.includes('doctor') && !text.includes('historial'))) {
-        target.href = '/patient/index.html';
-      }
-      // Consola de Administración Card
-      else if (text.includes('consola de administración') || text.includes('dashboard principal')) {
-        target.href = '/staff/dashboard.html';
-      }
-      // Admin Gateway Selector
-      else if (text.includes('seleccione su portal') || text.includes('portales admin')) {
-        target.href = '/staff/admin.html';
-      }
-      // Public / Landing
-      else if (text.includes('sillar dental') && (text.includes('inicio') || text.includes('home'))) {
-        target.href = '/public/index.html';
-      } else if (text.includes('agendar') || text.includes('reservar')) {
-        target.href = '/public/reservar.html';
-      }
-      // Subviews
-      else if (text.includes('agenda semanal') || text.includes('semanal')) {
-        target.href = '/staff/agenda-semanal.html';
-      } else if (text.includes('calendario mensual') || text.includes('mensual')) {
-        target.href = '/staff/calendario-mensual.html';
-      } else if (text.includes('mis citas') || text.includes('citas paciente')) {
-        target.href = '/patient/citas.html';
-      } else if (text.includes('citas') || text.includes('agenda')) {
-        target.href = '/staff/citas.html';
-      } else if (text.includes('consulta') || text.includes('odontograma')) {
-        target.href = '/staff/consulta.html';
-      } else if (text.includes('ortodoncia')) {
-        target.href = '/staff/ortodoncia.html';
-      } else if (text.includes('cirugía') || text.includes('implantología')) {
-        target.href = '/staff/cirugia.html';
-      } else if (text.includes('endodoncia') || text.includes('operatoria')) {
-        target.href = '/staff/endodoncia.html';
-      } else if (text.includes('rehabilitación') || text.includes('periodoncia')) {
-        target.href = '/staff/rehabilitacion.html';
-      } else if (text.includes('inventario') || text.includes('insumos')) {
-        target.href = '/staff/inventario.html';
-      } else if (text.includes('usuarios') || text.includes('personal')) {
-        target.href = '/staff/usuarios.html';
-      } else if (text.includes('cerrar sesión') || text.includes('salir')) {
-        target.href = '/patient/login.html';
-      }
-    });
-  }
-
-  document.addEventListener('DOMContentLoaded', applyRootLinks);
-  window.addEventListener('load', applyRootLinks);
-})();
-</script>
-
-</body></html>
+    // 3. Toggle de Modo Claro / Oscuro
+    const toggleBtn = document.getElementById('themeToggleBtn');
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+        const nextTheme = currentTheme === 'light' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', nextTheme);
+        localStorage.setItem('sillar_theme', nextTheme);
+      });
+    }
+  </script>
+</body>
+</html>
