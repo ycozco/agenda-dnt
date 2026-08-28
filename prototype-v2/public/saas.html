@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  
+  <title>Sillar Dental OS · Software de Gestión Clínica Odontológica & Odontograma 52P</title>
+  <meta name="description" content="Plataforma SaaS para clínicas y consultorios odontológicos en Perú. Odontograma 52 piezas NTS-188, agenda multi-sillón, facturación electrónica SUNAT y portal paciente."/>
+  <meta name="keywords" content="software dental peru, odontograma digital 52 piezas, sistema gestion clinica dental arequipa, saas odontologico, software para dentistas"/>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/tokens.css">
+
+  <style>
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'Source Sans 3', sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+    .saas-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(250, 249, 246, 0.95);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+    }
+    [data-theme="dark"] .saas-header {
+      background: rgba(7, 19, 31, 0.95);
+    }
+    .saas-nav-inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 78px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .saas-hero {
+      padding: 80px 0 60px;
+      text-align: center;
+      background: radial-gradient(circle at top, rgba(0, 122, 85, 0.12) 0%, transparent 70%);
+      border-bottom: 1px solid var(--line);
+    }
+    .saas-features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      max-width: 1240px;
+      margin: 60px auto;
+      padding: 0 24px;
+    }
+    .feature-box {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: var(--shadow-small);
+      transition: all 0.2s ease;
+    }
+    .feature-box:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+      border-color: var(--action);
+    }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      max-width: 1240px;
+      margin: 40px auto 80px;
+      padding: 0 24px;
+    }
+    .price-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+    .price-card.popular {
+      border: 2px solid var(--action);
+      box-shadow: 0 20px 48px rgba(0, 122, 85, 0.15);
+    }
+    .badge-popular {
+      position: absolute;
+      top: -14px;
+      left: 36px;
+      background: var(--action);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 999px;
+    }
+    @media (max-width: 900px) {
+      .saas-features-grid, .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navegación SaaS -->
+  <header class="saas-header">
+    <div class="saas-nav-inner">
+      <a href="saas.html" style="display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink);">
+        <div style="width: 40px; height: 40px; background: #0A2540; color: white; border-radius: 10px; display: grid; place-items: center; font-weight: 800; font-family: 'Manrope', sans-serif;">OS</div>
+        <div>
+          <strong style="font-family: 'Manrope', sans-serif; font-size: 1.15rem; display: block; line-height: 1.1;">Sillar Dental OS</strong>
+          <span style="font-size: 0.72rem; color: var(--ink-soft); text-transform: uppercase; font-weight: 600;">Plataforma SaaS Odontológica</span>
+        </div>
+      </a>
+
+      <div style="display: flex; align-items: center; gap: 20px;">
+        <a href="index.html" style="color: var(--ink-soft); text-decoration: none; font-weight: 600; font-size: 0.92rem;">← Ver Web de la Clínica</a>
+        <a href="/selector.html" class="btn btn-secondary btn-small" style="font-weight: 700; border-radius: 999px;">
+          Probar Demo en Vivo
+        </a>
+        <a href="#planes" class="btn btn-primary btn-small" style="font-weight: 700; border-radius: 999px;">
+          Ver Planes de Membresía
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SAAS -->
+    <section class="saas-hero">
+      <div class="container" style="max-width: 900px; margin: 0 auto; padding: 0 24px;">
+        <span class="chip chip-success" style="margin-bottom: 16px;">SaaS Odontológico · Hecho para Perú</span>
+        <h1 style="font-family: 'Manrope', sans-serif; font-size: clamp(2.4rem, 4.5vw, 3.6rem); font-weight: 800; line-height: 1.15; margin: 0 0 20px; color: var(--ink);">
+          El sistema operativo integral para consultorios y clínicas odontológicas.
+        </h1>
+        <p class="lead" style="max-width: 720px; margin: 0 auto 36px; font-size: 1.18rem; color: var(--ink-soft);">
+          Odontograma digital conforme a la norma NTS N.° 188-MINSA de 52 piezas, agenda inteligente multi-sillón, facturación electrónica SUNAT y portal digital para tus pacientes.
+        </p>
+
+        <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap;">
+          <a href="/staff/index.html?view=patient" class="btn btn-primary" style="padding: 14px 28px; font-weight: 700; border-radius: 999px;">
+            🩺 Probar Odontograma 52P
+          </a>
+          <a href="/selector.html" class="btn btn-secondary" style="padding: 14px 24px; font-weight: 700; border-radius: 999px;">
+            🧭 Ver Todos los Módulos
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- MÓDULOS DEL SAAS -->
+    <section style="padding: 80px 0; border-bottom: 1px solid var(--line);">
+      <div class="container" style="max-width: 1240px; margin: 0 auto; padding: 0 24px;">
+        <div style="text-align: center; max-width: 640px; margin: 0 auto 50px;">
+          <span class="chip chip-neutral" style="margin-bottom: 8px;">Funcionalidades Incluidas</span>
+          <h2 style="font-family: 'Manrope', sans-serif; font-size: 2.2rem; font-weight: 800; margin: 0; color: var(--ink);">
+            Todo lo que tu clínica necesita en una sola suite
+          </h2>
+        </div>
+
+        <div class="saas-features-grid" style="margin: 0;">
+          <div class="feature-box">
+            <div style="font-size: 1.8rem; margin-bottom: 12px;">🩺</div>
+            <h3 style="font-family: 'Manrope', sans-serif; font-size: 1.25rem; margin: 0 0 8px;">Odontograma 52 Piezas COP</h3>
+            <p class="muted" style="font-size: 0.9rem; margin: 0;">Registro legal de 32 piezas permanentes y 20 temporales con 5 caras interactivas bajo la norma NTS N.° 188-MINSA.</p>
+          </div>
+
+          <div class="feature-box">
+            <div style="font-size: 1.8rem; margin-bottom: 12px;">🗓️</div>
+            <h3 style="font-family: 'Manrope', sans-serif; font-size: 1.25rem; margin: 0 0 8px;">Agenda Multi-Sillón & Recordatorios</h3>
+            <p class="muted" style="font-size: 0.9rem; margin: 0;">Control de 1 a N sillones en paralelo, sincronización con doctores y recordatorios automáticos por WhatsApp.</p>
+          </div>
+
+          <div class="feature-box">
+            <div style="font-size: 1.8rem; margin-bottom: 12px;">📱</div>
+            <h3 style="font-family: 'Manrope', sans-serif; font-size: 1.25rem; margin: 0 0 8px;">Portal Digital del Paciente</h3>
+            <p class="muted" style="font-size: 0.9rem; margin: 0;">Tus pacientes acceden a sus radiografías CBCT, recetas médicas, plan de cuotas y citas desde cualquier celular.</p>
+          </div>
+
+          <div class="feature-box">
+            <div style="font-size: 1.8rem; margin-bottom: 12px;">🧾</div>
+            <h3 style="font-family: 'Manrope', sans-serif; font-size: 1.25rem; margin: 0 0 8px;">Facturación Electrónica SUNAT</h3>
+            <p class="muted" style="font-size: 0.9rem; margin: 0;">Emisión automática de boletas (B001) y facturas (F001), reportes de cierre de caja e integración con Niubiz/Yape.</p>
+          </div>
+
+          <div class="feature-box">
+            <div style="font-size: 1.8rem; margin-bottom: 12px;">📦</div>
+            <h3 style="font-family: 'Manrope', sans-serif; font-size: 1.25rem; margin: 0 0 8px;">Inventario & Trazabilidad de Insumos</h3>
+            <p class="muted" style="font-size: 0.9rem; margin: 0;">Alertas de stock mínimo de anestésicos, resinas y brackets con registro de lotes y fechas de caducidad.</p>
+          </div>
+
+          <div class="feature-box">
+            <div style="font-size: 1.8rem; margin-bottom: 12px;">🔒</div>
+            <h3 style="font-family: 'Manrope', sans-serif; font-size: 1.25rem; margin: 0 0 8px;">Auditoría Clínica & Roles</h3>
+            <p class="muted" style="font-size: 0.9rem; margin: 0;">Permisos diferenciados para Doctor, Recepción y Administrador con logs inmutables de cambios en historias clínicas.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLANES DE MEMBRESÍA SAAS -->
+    <section style="padding: 80px 0; background: var(--surface-dim);" id="planes">
+      <div class="container" style="max-width: 1240px; margin: 0 auto; padding: 0 24px;">
+        <div style="text-align: center; max-width: 640px; margin: 0 auto 50px;">
+          <span class="chip chip-success" style="margin-bottom: 8px;">Membresías Mensuales</span>
+          <h2 style="font-family: 'Manrope', sans-serif; font-size: 2.2rem; font-weight: 800; margin: 0; color: var(--ink);">
+            Planes adaptados a tu consultorio o clínica
+          </h2>
+          <p class="muted" style="margin-top: 10px;">Sin contratos forzados. Puedes cancelar o cambiar de plan en cualquier momento.</p>
+        </div>
+
+        <div class="pricing-grid">
+          <!-- Plan 1: Consultorio Individual -->
+          <div class="price-card">
+            <div>
+              <h3 style="font-family: 'Manrope', sans-serif; font-size: 1.3rem; margin: 0 0 6px;">Plan Consultorio</h3>
+              <p class="muted" style="font-size: 0.88rem; margin: 0 0 20px;">Para odontólogos independientes con 1 sillón dental.</p>
+
+              <div style="font-family: 'Manrope', sans-serif; font-size: 2.4rem; font-weight: 800; color: var(--ink); margin-bottom: 4px;">
+                S/ 149 <span style="font-size: 0.95rem; font-weight: 600; color: var(--ink-soft);">/ mes</span>
+              </div>
+              <span class="tiny muted">Facturado mensual o anual (15% desc)</span>
+
+              <hr style="border: none; border-top: 1px solid var(--line); margin: 24px 0;">
+
+              <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.9rem; display: grid; gap: 10px; color: var(--ink-soft);">
+                <li>✔ 1 Cuenta de Doctor + 1 Asistente</li>
+                <li>✔ 1 Sillón dental en agenda</li>
+                <li>✔ Odontograma legal 52 piezas COP</li>
+                <li>✔ Historias clínicas ilimitadas</li>
+                <li>✔ Portal del paciente móvil</li>
+              </ul>
+            </div>
+            <a href="/selector.html" class="btn btn-secondary" style="width: 100%; text-align: center; justify-content: center; font-weight: 700; border-radius: 12px; margin-top: 28px;">
+              Probar Plan Consultorio
+            </a>
+          </div>
+
+          <!-- Plan 2: Clínica Boutique (Popular) -->
+          <div class="price-card popular">
+            <span class="badge-popular">MÁS POPULAR</span>
+            <div>
+              <h3 style="font-family: 'Manrope', sans-serif; font-size: 1.3rem; margin: 0 0 6px;">Plan Clínica Pro</h3>
+              <p class="muted" style="font-size: 0.88rem; margin: 0 0 20px;">Para centros odontológicos con múltiples especialistas.</p>
+
+              <div style="font-family: 'Manrope', sans-serif; font-size: 2.4rem; font-weight: 800; color: var(--action); margin-bottom: 4px;">
+                S/ 289 <span style="font-size: 0.95rem; font-weight: 600; color: var(--ink-soft);">/ mes</span>
+              </div>
+              <span class="tiny muted">Facturado mensual o anual</span>
+
+              <hr style="border: none; border-top: 1px solid var(--line); margin: 24px 0;">
+
+              <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.9rem; display: grid; gap: 10px; color: var(--ink-soft);">
+                <li>✔ Hasta 6 Doctores especialistas</li>
+                <li>✔ Hasta 4 Sillones en agenda multi-box</li>
+                <li>✔ Facturación electrónica SUNAT B001/F001</li>
+                <li>✔ Control de stock e inventario con alertas</li>
+                <li>✔ Recordatorios automáticos por WhatsApp</li>
+                <li>✔ Reportes de KPI de ingresos y ocupación</li>
+              </ul>
+            </div>
+            <a href="/selector.html" class="btn btn-primary" style="width: 100%; text-align: center; justify-content: center; font-weight: 700; border-radius: 12px; margin-top: 28px;">
+              Iniciar Demo Clínica Pro
+            </a>
+          </div>
+
+          <!-- Plan 3: Red de Clínicas -->
+          <div class="price-card">
+            <div>
+              <h3 style="font-family: 'Manrope', sans-serif; font-size: 1.3rem; margin: 0 0 6px;">Plan Corporativo</h3>
+              <p class="muted" style="font-size: 0.88rem; margin: 0 0 20px;">Para redes de sedes o franquicias odontológicas.</p>
+
+              <div style="font-family: 'Manrope', sans-serif; font-size: 2.4rem; font-weight: 800; color: var(--ink); margin-bottom: 4px;">
+                S/ 590 <span style="font-size: 0.95rem; font-weight: 600; color: var(--ink-soft);">/ mes</span>
+              </div>
+              <span class="tiny muted">Multisede con soporte dedicado</span>
+
+              <hr style="border: none; border-top: 1px solid var(--line); margin: 24px 0;">
+
+              <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.9rem; display: grid; gap: 10px; color: var(--ink-soft);">
+                <li>✔ Doctores y sillones ilimitados</li>
+                <li>✔ Multi-sede (Yanahuara, Cayma, etc.)</li>
+                <li>✔ Integración API para laboratorio 3D</li>
+                <li>✔ Soporte prioritario 24/7 y capacitación</li>
+                <li>✔ Backups redundantes y SLA 99.9%</li>
+              </ul>
+            </div>
+            <a href="/selector.html" class="btn btn-secondary" style="width: 100%; text-align: center; justify-content: center; font-weight: 700; border-radius: 12px; margin-top: 28px;">
+              Contactar Asesor SaaS
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer style="background: var(--surface); border-top: 1px solid var(--line); padding: 40px 0; text-align: center; font-size: 0.85rem; color: var(--ink-faint);">
+    <div class="container">
+      Sillar Dental OS · Suite Odontológica en la Nube · Arequipa, Perú · Prototipo V2.0
+    </div>
+  </footer>
+</body>
+</html>

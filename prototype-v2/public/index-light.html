@@ -4,53 +4,12 @@
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
   
-  <title>Sillar Dental · Clínica Odontológica Boutique y Precisión Digital en Yanahuara, Arequipa</title>
-  <meta name="description" content="Centro odontológico de alta precisión en Yanahuara, Arequipa. Ortodoncia digital con alineadores, implantes guiados 3D y odontopediatría sin dolor ni ansiedad."/>
-  <meta name="keywords" content="clinica dental arequipa, dentista yanahuara, ortodoncia invisible arequipa, implantes dentales arequipa, sillar dental, odontologia digital, tomografia cbct arequipa"/>
-  <meta name="author" content="Sillar Dental Especialidades"/>
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1"/>
+  <title>Alínea Studio · Clínica de Corrección Dental y Alineadores Invisibles en Yanahuara, Arequipa</title>
+  <meta name="description" content="Especialistas en corrección dental, ortodoncia invisible y diseño de sonrisa en Yanahuara, Arequipa. Simula tu sonrisa en 3D antes de empezar. Cuotas sin intereses."/>
+  <meta name="keywords" content="alineadores invisibles arequipa, ortodoncia arequipa, clinica dental yanahuara, correccion dental, brackets esteticos, brackets zafiro arequipa, diseño de sonrisa arequipa"/>
+  <meta name="author" content="Alínea Studio Dental"/>
+  <meta name="robots" content="index, follow"/>
   <link rel="canonical" href="http://localhost:8085/public/index.html"/>
-  
-  <!-- Schema.org JSON-LD -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": ["Dentist", "MedicalClinic", "LocalBusiness"],
-        "@id": "http://localhost:8085/#clinic",
-        "name": "Sillar Dental Especialidades",
-        "image": "http://localhost:8085/assets/brand/sillar-dental-mark.svg",
-        "telephone": "+51-054-283910",
-        "url": "http://localhost:8085/public/index.html",
-        "priceRange": "$$",
-        "paymentAccepted": "Cash, Credit Card, Debit Card, Yape, Plin, Bank Transfer",
-        "currenciesAccepted": "PEN, USD",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Av. Ejército 712",
-          "addressLocality": "Yanahuara",
-          "addressRegion": "Arequipa",
-          "postalCode": "04017",
-          "addressCountry": "PE"
-        },
-        "geo": {
-          "@type": "GeoCoordinates",
-          "latitude": -16.3907,
-          "longitude": -71.5435
-        },
-        "openingHoursSpecification": [
-          {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-            "opens": "08:00",
-            "closes": "20:00"
-          }
-        ]
-      }
-    ]
-  }
-  </script>
 
   <!-- Google Fonts: Manrope + Source Sans 3 + Fira Code -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -62,443 +21,428 @@
   <link rel="stylesheet" href="../assets/css/tokens.css">
 
   <style>
-    /* ==========================================================================
-       ARQUITECTURA VISUAL BESPOKE: SILLAR CLINICAL STUDIO (AREQUIPA)
-       ========================================================================== */
     :root {
-      --sillar-white: #FAF9F6;
-      --sillar-dark: #07131F;
-      --sillar-navy: #0A2540;
-      --sillar-emerald: #007A55;
-      --sillar-emerald-light: #E6F6F0;
-      --sillar-terracotta: #C25438;
-      --sillar-border: rgba(10, 37, 64, 0.12);
-      --sillar-radius: 20px;
+      --brand-primary: #007A55;
+      --brand-primary-light: #E6F6F0;
+      --brand-primary-hover: #005F42;
+      --brand-navy: #0A2540;
+      --brand-paper: #FAF9F6;
+      --brand-surface: #FFFFFF;
+      --brand-surface-dim: #F4F3EE;
+      --brand-border: rgba(10, 37, 64, 0.1);
+      --brand-radius: 20px;
     }
 
     [data-theme="dark"] {
-      --sillar-white: #07131F;
-      --sillar-dark: #FAF9F6;
-      --sillar-navy: #E2E8F0;
-      --sillar-border: rgba(255, 255, 255, 0.12);
-      --sillar-emerald-light: rgba(0, 122, 85, 0.15);
+      --brand-primary: #10B981;
+      --brand-primary-light: rgba(16, 185, 129, 0.15);
+      --brand-primary-hover: #059669;
+      --brand-navy: #FAF9F6;
+      --brand-paper: #07131F;
+      --brand-surface: #0C1E30;
+      --brand-surface-dim: #051424;
+      --brand-border: rgba(255, 255, 255, 0.1);
     }
 
     body {
-      background-color: var(--sillar-white);
+      background-color: var(--brand-paper);
       color: var(--ink);
-      font-family: 'Source Sans 3', -apple-system, sans-serif;
+      font-family: 'Source Sans 3', sans-serif;
       margin: 0;
       padding: 0;
       line-height: 1.6;
     }
 
-    /* 1. Barra de Telemetría Clínica en Vivo */
-    .live-clinic-bar {
-      background: var(--sillar-navy);
+    /* Barra Superior de Sede Yanahuara */
+    .top-promo-bar {
+      background: var(--brand-navy);
       color: #ffffff;
-      font-family: 'Fira Code', monospace;
-      font-size: 0.8rem;
-      padding: 8px 16px;
+      font-size: 0.84rem;
+      padding: 9px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      overflow-x: auto;
-      white-space: nowrap;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      font-family: 'Manrope', sans-serif;
     }
-    .live-dot {
-      width: 8px;
-      height: 8px;
-      background: #10B981;
-      border-radius: 50%;
-      display: inline-block;
-      box-shadow: 0 0 8px #10B981;
-      animation: pulseDot 2s infinite;
-    }
-    @keyframes pulseDot {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(1.3); }
+    .top-promo-bar a {
+      color: #38bdf8;
+      text-decoration: none;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
     }
 
-    /* 2. Cabecera Minimalista Editorial */
-    .sillar-nav {
+    /* Navegación Clínica Dental */
+    .clinic-nav {
       position: sticky;
       top: 0;
-      z-index: 90;
-      background: rgba(250, 249, 246, 0.94);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--sillar-border);
+      z-index: 100;
+      background: rgba(250, 249, 246, 0.95);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--brand-border);
+      transition: background 0.2s;
     }
-    [data-theme="dark"] .sillar-nav {
-      background: rgba(7, 19, 31, 0.94);
+    [data-theme="dark"] .clinic-nav {
+      background: rgba(7, 19, 31, 0.95);
     }
-    .nav-container {
-      max-width: 1280px;
+    .nav-inner {
+      max-width: 1240px;
       margin: 0 auto;
       padding: 0 24px;
-      height: 80px;
+      height: 78px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
-    .brand-mark {
+    .nav-logo {
       display: flex;
       align-items: center;
       gap: 12px;
       text-decoration: none;
       color: var(--ink);
     }
-    .brand-icon {
+    .logo-badge {
       width: 42px;
       height: 42px;
-      background: var(--sillar-emerald);
+      background: var(--brand-primary);
       color: white;
-      border-radius: 10px;
+      border-radius: 12px;
       display: grid;
       place-items: center;
-      font-family: 'Manrope', sans-serif;
-      font-weight: 800;
       font-size: 1.3rem;
-      letter-spacing: -0.02em;
+      box-shadow: 0 4px 12px rgba(0, 122, 85, 0.25);
     }
-    .brand-name {
+    .logo-text-wrap strong {
       font-family: 'Manrope', sans-serif;
       font-weight: 800;
-      font-size: 1.2rem;
-      line-height: 1.1;
+      font-size: 1.25rem;
       letter-spacing: -0.03em;
-    }
-    .brand-tag {
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--ink-soft);
-      font-weight: 600;
       display: block;
+      line-height: 1.1;
     }
-    .nav-menu {
+    .logo-text-wrap span {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--ink-soft);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
       display: flex;
       align-items: center;
-      gap: 32px;
+      gap: 28px;
       list-style: none;
       margin: 0;
       padding: 0;
     }
-    .nav-menu a {
+    .nav-links a {
       color: var(--ink-soft);
       text-decoration: none;
       font-weight: 600;
       font-size: 0.94rem;
       transition: color 0.15s ease;
     }
-    .nav-menu a:hover {
-      color: var(--sillar-emerald);
+    .nav-links a:hover {
+      color: var(--brand-primary);
     }
 
-    /* 3. Hero Asimétrico con Buscador de Turnos Inmediato */
-    .hero-studio {
-      padding: 60px 0 80px;
-      background: radial-gradient(circle at 85% 15%, var(--sillar-emerald-light) 0%, transparent 60%);
-      border-bottom: 1px solid var(--sillar-border);
+    /* Hero Principal de Corrección Dental */
+    .hero-correction {
+      padding: 70px 0 80px;
+      background: radial-gradient(circle at 85% 20%, var(--brand-primary-light) 0%, transparent 60%);
+      border-bottom: 1px solid var(--brand-border);
     }
-    .hero-layout {
-      max-width: 1280px;
+    .hero-container {
+      max-width: 1240px;
       margin: 0 auto;
       padding: 0 24px;
       display: grid;
       grid-template-columns: 1.15fr 0.85fr;
-      gap: 56px;
+      gap: 50px;
       align-items: center;
     }
-    .hero-title {
+    .hero-badge-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      background: var(--brand-surface);
+      border: 1px solid var(--brand-border);
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--brand-primary);
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-small);
+    }
+    .hero-heading {
       font-family: 'Manrope', sans-serif;
-      font-size: clamp(2.5rem, 4.2vw, 3.8rem);
+      font-size: clamp(2.4rem, 4.2vw, 3.6rem);
       font-weight: 800;
-      line-height: 1.1;
+      line-height: 1.12;
       letter-spacing: -0.03em;
       margin: 0 0 20px;
       color: var(--ink);
     }
-    .hero-title em {
-      font-style: normal;
-      color: var(--sillar-emerald);
-      position: relative;
+    .hero-heading span.gradient-text {
+      color: var(--brand-primary);
     }
-    .hero-lead {
-      font-size: 1.18rem;
+    .hero-paragraph {
+      font-size: 1.15rem;
       line-height: 1.6;
       color: var(--ink-soft);
-      margin: 0 0 36px;
-      max-width: 580px;
+      margin: 0 0 32px;
+      max-width: 560px;
     }
-
-    /* Barra de Agendamiento Inmediato */
-    .smart-booking-bar {
-      background: var(--surface);
-      border: 1px solid var(--sillar-border);
-      border-radius: 20px;
-      padding: 18px 24px;
-      box-shadow: 0 12px 36px rgba(10, 37, 64, 0.08);
-      display: grid;
-      grid-template-columns: 1.2fr 1fr 1fr auto;
+    .hero-cta-group {
+      display: flex;
+      flex-wrap: wrap;
       gap: 16px;
       align-items: center;
-      margin-bottom: 32px;
+      margin-bottom: 36px;
     }
-    .booking-field label {
-      display: block;
-      font-size: 0.72rem;
+    .btn-hero-primary {
+      background: var(--brand-primary);
+      color: white;
+      text-decoration: none;
+      padding: 16px 32px;
+      border-radius: 999px;
       font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--ink-soft);
-      margin-bottom: 4px;
+      font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 8px 24px rgba(0, 122, 85, 0.28);
+      transition: all 0.2s ease;
     }
-    .booking-field select {
-      width: 100%;
-      border: none;
-      background: transparent;
-      font-family: 'Manrope', sans-serif;
+    .btn-hero-primary:hover {
+      background: var(--brand-primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(0, 122, 85, 0.35);
+    }
+    .btn-hero-secondary {
+      background: var(--brand-surface);
+      color: var(--ink);
+      text-decoration: none;
+      padding: 16px 26px;
+      border-radius: 999px;
       font-weight: 700;
       font-size: 0.95rem;
-      color: var(--ink);
-      cursor: pointer;
-      padding: 0;
-      outline: none;
+      border: 1px solid var(--brand-border);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+    .btn-hero-secondary:hover {
+      border-color: var(--brand-primary);
+      color: var(--brand-primary);
     }
 
-    /* Visualizador Interactivo 3D en Hero */
-    .interactive-viewer-card {
-      background: var(--surface);
-      border: 1px solid var(--sillar-border);
+    /* Tarjeta Interactiva del Hero (Simulador 3D) */
+    .hero-interactive-card {
+      background: var(--brand-surface);
+      border: 1px solid var(--brand-border);
       border-radius: 28px;
       padding: 24px;
-      box-shadow: 0 20px 48px rgba(10, 37, 64, 0.12);
+      box-shadow: 0 20px 48px rgba(10, 37, 64, 0.08);
       position: relative;
     }
-    .viewer-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 16px;
-    }
-    .viewer-tabs {
-      display: flex;
-      gap: 8px;
-    }
-    .viewer-tab-btn {
-      padding: 6px 14px;
-      border-radius: 999px;
-      border: 1px solid var(--sillar-border);
-      background: var(--paper);
-      font-size: 0.78rem;
-      font-weight: 700;
-      color: var(--ink-soft);
-      cursor: pointer;
-      transition: all 0.15s ease;
-    }
-    .viewer-tab-btn.active {
-      background: var(--sillar-emerald);
-      color: white;
-      border-color: var(--sillar-emerald);
-    }
-    .viewer-media-frame {
+    .card-media-box {
       border-radius: 20px;
       overflow: hidden;
-      height: 340px;
+      height: 330px;
       position: relative;
-      background: #000;
+      background: #07131f;
     }
-    .viewer-media-frame img {
+    .card-media-box img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
-    .viewer-overlay-badge {
+    .floating-case-pill {
       position: absolute;
       bottom: 16px;
       left: 16px;
-      background: rgba(10, 37, 64, 0.85);
-      backdrop-filter: blur(10px);
+      right: 16px;
+      background: rgba(10, 37, 64, 0.88);
+      backdrop-filter: blur(12px);
       color: white;
-      padding: 10px 16px;
-      border-radius: 12px;
-      font-size: 0.82rem;
-      font-family: 'Fira Code', monospace;
+      padding: 12px 18px;
+      border-radius: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
     }
 
-    /* 4. Sección de Los 4 Pasos Sin Ansiedad */
-    .section-padding {
-      padding: 100px 0;
-      border-bottom: 1px solid var(--sillar-border);
+    /* Secciones */
+    .clinic-section {
+      padding: 90px 0;
+      border-bottom: 1px solid var(--brand-border);
     }
-    .section-dim {
-      background: var(--surface-dim);
+    .section-bg-dim {
+      background: var(--brand-surface-dim);
     }
-    .section-container {
-      max-width: 1280px;
+    .sec-container {
+      max-width: 1240px;
       margin: 0 auto;
       padding: 0 24px;
     }
-    .section-head {
+    .sec-header {
       text-align: center;
       max-width: 680px;
-      margin: 0 auto 60px;
+      margin: 0 auto 56px;
     }
-    .section-head h2 {
-      font-family: 'Manrope', sans-serif;
-      font-size: clamp(2rem, 3.2vw, 2.6rem);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      margin: 10px 0 16px;
-      color: var(--ink);
-    }
-
-    .journey-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-    }
-    .journey-card {
-      background: var(--surface);
-      border: 1px solid var(--sillar-border);
-      border-radius: 24px;
-      padding: 32px 24px;
-      position: relative;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .journey-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 16px 36px rgba(10, 37, 64, 0.08);
-      border-color: var(--sillar-emerald);
-    }
-    .journey-step-num {
-      font-family: 'Fira Code', monospace;
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--sillar-emerald);
+    .sec-tag {
       display: inline-block;
-      margin-bottom: 20px;
-      background: var(--sillar-emerald-light);
-      padding: 4px 10px;
-      border-radius: 8px;
-    }
-    .journey-card h3 {
-      font-family: 'Manrope', sans-serif;
-      font-size: 1.25rem;
-      font-weight: 700;
-      margin: 0 0 12px;
-      color: var(--ink);
-    }
-    .journey-card p {
-      font-size: 0.92rem;
-      color: var(--ink-soft);
-      margin: 0;
-      line-height: 1.55;
-    }
-
-    /* 5. Comparador Clínico Transparente con Cuotas */
-    .matrix-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 30px;
-    }
-    .matrix-card {
-      background: var(--surface);
-      border: 1px solid var(--sillar-border);
-      border-radius: 24px;
-      padding: 36px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: all 0.2s ease;
-    }
-    .matrix-card.featured {
-      border: 2px solid var(--sillar-emerald);
-      box-shadow: 0 20px 48px rgba(0, 122, 85, 0.12);
-      position: relative;
-    }
-    .featured-badge {
-      position: absolute;
-      top: -14px;
-      left: 36px;
-      background: var(--sillar-emerald);
-      color: white;
-      font-size: 0.75rem;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.76rem;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.06em;
-      padding: 4px 14px;
-      border-radius: 999px;
+      background: var(--brand-primary-light);
+      color: var(--brand-primary);
+      margin-bottom: 12px;
     }
-    .matrix-price {
+    .sec-title {
       font-family: 'Manrope', sans-serif;
-      font-size: 2.4rem;
+      font-size: clamp(2rem, 3.2vw, 2.5rem);
       font-weight: 800;
-      color: var(--sillar-emerald);
-      margin: 16px 0 6px;
-      display: flex;
-      align-items: baseline;
-      gap: 6px;
+      letter-spacing: -0.02em;
+      margin: 0 0 14px;
+      color: var(--ink);
     }
-    .matrix-price span {
-      font-size: 1rem;
+    .sec-subtitle {
+      font-size: 1.05rem;
       color: var(--ink-soft);
-      font-weight: 600;
+      margin: 0;
     }
 
-    /* 6. Plana Médica COP */
-    .doctors-grid {
+    /* 1. Selector de Problema / Caso a Corregir */
+    .cases-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+    }
+    .case-card {
+      background: var(--brand-surface);
+      border: 1px solid var(--brand-border);
+      border-radius: 20px;
+      padding: 24px;
+      text-decoration: none;
+      color: var(--ink);
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .case-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+      border-color: var(--brand-primary);
+    }
+    .case-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--brand-primary-light);
+      color: var(--brand-primary);
+      display: grid;
+      place-items: center;
+      font-size: 1.4rem;
+      margin-bottom: 16px;
+    }
+
+    /* 2. Comparador de Métodos de Corrección */
+    .compare-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 30px;
+      gap: 28px;
     }
-    .doctor-card {
-      background: var(--surface);
-      border: 1px solid var(--sillar-border);
+    .compare-card {
+      background: var(--brand-surface);
+      border: 1px solid var(--brand-border);
       border-radius: 24px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+    .compare-card.highlight {
+      border: 2px solid var(--brand-primary);
+      box-shadow: 0 16px 40px rgba(0, 122, 85, 0.12);
+    }
+    .compare-tag {
+      position: absolute;
+      top: -13px;
+      left: 32px;
+      background: var(--brand-primary);
+      color: white;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 4px 12px;
+      border-radius: 999px;
+    }
+
+    /* 3. Precios y Cuotas Transparentes */
+    .fee-simulator-box {
+      background: var(--brand-surface);
+      border: 1px solid var(--brand-border);
+      border-radius: 28px;
+      padding: 40px;
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    /* 4. Plana Médica de Ortodoncia */
+    .doctors-layout {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    .doc-box {
+      background: var(--brand-surface);
+      border: 1px solid var(--brand-border);
+      border-radius: 20px;
       overflow: hidden;
       box-shadow: var(--shadow-small);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
-    .doctor-img-wrap {
-      height: 260px;
+    .doc-photo {
+      height: 240px;
       overflow: hidden;
     }
-    .doctor-img-wrap img {
+    .doc-photo img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.4s ease;
-    }
-    .doctor-card:hover .doctor-img-wrap img {
-      transform: scale(1.04);
-    }
-    .doctor-info {
-      padding: 28px;
-    }
-    .doctor-cop {
-      font-family: 'Fira Code', monospace;
-      font-size: 0.76rem;
-      font-weight: 700;
-      color: var(--sillar-emerald);
-      background: var(--sillar-emerald-light);
-      padding: 4px 8px;
-      border-radius: 6px;
-      display: inline-block;
-      margin-bottom: 8px;
     }
 
-    /* Responsive */
-    @media (max-width: 980px) {
-      .hero-layout, .smart-booking-bar, .journey-grid, .matrix-grid, .doctors-grid {
+    /* Footer */
+    .clinic-footer {
+      background: var(--brand-navy);
+      color: #ffffff;
+      padding: 60px 0 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    @media (max-width: 960px) {
+      .hero-container, .cases-grid, .compare-grid, .fee-simulator-box, .doctors-layout {
         grid-template-columns: 1fr;
-        gap: 24px;
       }
-      .nav-menu {
+      .nav-links {
         display: none;
       }
     }
@@ -506,336 +450,365 @@
 </head>
 <body>
 
-  <!-- 1. Barra de Telemetría Clínica en Vivo -->
-  <div class="live-clinic-bar">
-    <div style="display: flex; align-items: center; gap: 10px;">
-      <span class="live-dot"></span>
-      <span>SEDE YANAHUARA ABIERTA HOY · 08:00 - 20:00</span>
+  <!-- Barra Superior de Sede -->
+  <div class="top-promo-bar">
+    <div>
+      📍 <strong>Sede Yanahuara:</strong> Av. Ejército 712 · Abierto hoy hasta las 8:00 PM
     </div>
-    <div style="display: flex; gap: 24px;">
-      <span>🩺 3 DOCTORES EN CONSULTORIO</span>
-      <span>⏱️ TIEMPO ESPERA: 0 MIN</span>
-      <span>⚡ PRÓXIMO TURNO: HOY 16:30 (DRA. FLORES)</span>
+    <div style="display: flex; gap: 20px; align-items: center;">
+      <span>📞 Central: (054) 283-910</span>
+      <a href="saas.html">💼 ¿Eres odontólogo? Ver Software SaaS →</a>
     </div>
   </div>
 
-  <!-- 2. Cabecera Editorial -->
-  <header class="sillar-nav">
-    <div class="nav-container">
-      <a href="/public/index.html" class="brand-mark">
-        <div class="brand-icon">S</div>
-        <div>
-          <span class="brand-name">Sillar Dental</span>
-          <span class="brand-tag">Estudio Clínico · Yanahuara</span>
+  <!-- Navegación Principal de la Clínica Dental -->
+  <header class="clinic-nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <div class="logo-badge">🦷</div>
+        <div class="logo-text-wrap">
+          <strong>Alínea Studio</strong>
+          <span>Corrección Dental & Alineadores</span>
         </div>
       </a>
 
-      <ul class="nav-menu">
-        <li><a href="/public/especialidades.html">Especialidades</a></li>
-        <li><a href="/public/tecnologia.html">Tecnología 3D</a></li>
-        <li><a href="/public/equipo.html">Especialistas COP</a></li>
-        <li><a href="/public/contacto.html">Sede Yanahuara</a></li>
-        <li><a href="/patient/index.html" style="color: var(--sillar-emerald); font-weight: 700;">Portal Paciente ↗</a></li>
-        <li><a href="/selector.html" style="color: #38bdf8; font-weight: 700; font-family: monospace;">Hub Vistas</a></li>
+      <ul class="nav-links">
+        <li><a href="#alineadores">Alineadores Invisibles</a></li>
+        <li><a href="#comparador">Métodos de Corrección</a></li>
+        <li><a href="#precios">Precios & Cuotas</a></li>
+        <li><a href="#especialistas">Ortodoncistas COP</a></li>
+        <li><a href="contacto.html">Sede Yanahuara</a></li>
+        <li><a href="/patient/index.html" style="color: var(--brand-primary); font-weight: 700;">Portal Paciente ↗</a></li>
       </ul>
 
-      <div style="display: flex; align-items: center; gap: 14px;">
-        <button id="themeBtn" class="btn btn-secondary btn-small" style="border-radius: 999px; font-weight: 700;">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <button id="themeToggleBtn" class="btn btn-secondary btn-small" style="border-radius: 999px;">
           🌓 Modo
         </button>
-        <a href="/public/reservar.html" class="btn btn-primary btn-small" style="font-weight: 700; border-radius: 999px; padding: 0 20px;">
-          Reservar Cita
+        <a href="reservar.html?specialty=ortodoncia" class="btn btn-primary btn-small" style="font-weight: 700; border-radius: 999px; padding: 0 20px;">
+          Agendar Evaluación 3D
         </a>
       </div>
     </div>
   </header>
 
   <main>
-    <!-- 3. HERO ASIMÉTRICO & SMART BOOKING ENGINE -->
-    <section class="hero-studio">
-      <div class="hero-layout">
+    <!-- HERO PRINCIPAL B2C -->
+    <section class="hero-correction">
+      <div class="hero-container">
         <div>
-          <div style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; background: var(--surface); border: 1px solid var(--sillar-border); border-radius: 999px; font-size: 0.82rem; font-weight: 700; color: var(--sillar-emerald); margin-bottom: 20px;">
-            <span>📍</span> Yanahuara, Arequipa · Av. Ejército 712
+          <div class="hero-badge-tag">
+            <span>✨</span> Especialistas en Corrección Dental & Alineación Invisible
           </div>
-          <h1 class="hero-title">
-            La clínica donde ves el resultado de tu sonrisa <em>antes de empezar</em>.
+          <h1 class="hero-heading">
+            Tu sonrisa perfectamente alineada, <span class="gradient-text">sin brackets metálicos ni dolor</span>.
           </h1>
-          <p class="hero-lead">
-            Revolucionamos la odontología en Arequipa. Diagnóstico 100% digital en pantalla grande, tecnología de anestesia indolora y un ambiente de serenidad en roca volcánica sin esperas.
+          <p class="hero-paragraph">
+            En Alínea Studio corregimos apiñamientos, espacios y mordidas con escaneo intraoral 3D y alineadores transparentes. Mira la simulación digital de tu resultado final antes de iniciar.
           </p>
 
-          <!-- Motor de Reserva Rápida en el Hero -->
-          <div class="smart-booking-bar">
-            <div class="booking-field">
-              <label>1. Especialidad</label>
-              <select id="heroSpecialty">
-                <option value="ortodoncia">Ortodoncia & Alineadores</option>
-                <option value="implantes">Implante Dental 3D</option>
-                <option value="urgencia">Dolor agudo / Urgencia</option>
-                <option value="estetica">Diseño de Sonrisa & Carillas</option>
-                <option value="ninos">Odontopediatría Infantil</option>
-              </select>
-            </div>
-
-            <div class="booking-field">
-              <label>2. Especialista</label>
-              <select id="heroDoctor">
-                <option value="flores">Dra. Ana Flores (COP 18240)</option>
-                <option value="carpio">Dr. Roberto Carpio (COP 14920)</option>
-                <option value="mendoza">Dra. Sofía Mendoza (COP 22105)</option>
-                <option value="any">Cualquier Especialista</option>
-              </select>
-            </div>
-
-            <div class="booking-field">
-              <label>3. Fecha</label>
-              <select id="heroDay">
-                <option value="today">Hoy (Turnos de Tarde)</option>
-                <option value="tomorrow">Mañana</option>
-                <option value="saturday">Este Sábado</option>
-              </select>
-            </div>
-
-            <a href="/public/reservar.html" id="heroBookingBtn" class="btn btn-primary" style="font-weight: 700; border-radius: 12px; padding: 12px 24px; white-space: nowrap;">
-              Ver Turnos →
+          <div class="hero-cta-group">
+            <a href="reservar.html?specialty=ortodoncia" class="btn-hero-primary">
+              <span>🗓️ Agendar Evaluación + Escaneo 3D</span>
+            </a>
+            <a href="https://wa.me/51954123456" target="_blank" class="btn-hero-secondary">
+              <span>💬 WhatsApp Yanahuara</span>
             </a>
           </div>
 
-          <div style="display: flex; gap: 28px; font-size: 0.88rem; color: var(--ink-soft); font-weight: 600;">
+          <div style="display: flex; flex-wrap: wrap; gap: 24px; font-size: 0.88rem; color: var(--ink-soft); font-weight: 600;">
             <div><strong style="color: var(--ink);">★ 4.9</strong> en Google (148 reseñas)</div>
-            <div><strong style="color: var(--ink);">✔</strong> Tomografía CBCT 3D</div>
-            <div><strong style="color: var(--ink);">✔</strong> Sin Intereses con Boleta B001</div>
+            <div><strong style="color: var(--ink);">✔</strong> Simulación 3D en Pantalla</div>
+            <div><strong style="color: var(--ink);">✔</strong> Cuotas desde S/ 170 /mes</div>
           </div>
         </div>
 
-        <!-- Visor Interactivo 3D en Vivo -->
-        <div class="interactive-viewer-card">
-          <div class="viewer-header">
-            <span style="font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 0.95rem;">Visor Clínico 3D</span>
-            <div class="viewer-tabs">
-              <button class="viewer-tab-btn active" data-view="alineacion">Alineadores</button>
-              <button class="viewer-tab-btn" data-view="implante">Implante 3D</button>
-              <button class="viewer-tab-btn" data-view="carillas">Carillas</button>
+        <!-- Tarjeta Interactiva del Hero -->
+        <div class="hero-interactive-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+            <span style="font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 0.95rem;">Simulación Digital iTero 3D</span>
+            <span class="chip chip-success" style="font-size: 0.72rem;">Caso Real</span>
+          </div>
+
+          <div class="card-media-box">
+            <img src="/assets/images/public/services/ortodoncia-referencia-6529107.jpg" alt="Alineación dental invisible 3D en Arequipa">
+            <div class="floating-case-pill">
+              <div>
+                <strong style="display: block;">Corrección en 12 Meses</strong>
+                <span style="font-size: 0.75rem; opacity: 0.8;">Sin alambres · Removibles para comer</span>
+              </div>
+              <span style="font-family: 'Fira Code', monospace; font-size: 0.8rem; color: #10B981;">100% DISCRETO</span>
             </div>
           </div>
 
-          <div class="viewer-media-frame">
-            <img id="viewerImage" src="/assets/images/public/technology/evaluacion-dental-digital-5622234.jpg" alt="Simulación clínica 3D en pantalla">
-            <div class="viewer-overlay-badge" id="viewerBadge">
-              PROYECCIÓN: 32 PIEZAS · SCANNER ITERO 3D
-            </div>
-          </div>
-
-          <div style="margin-top: 18px; display: flex; justify-content: space-between; align-items: center;">
-            <div>
-              <strong style="font-size: 0.9rem; display: block;" id="viewerCaseTitle">Corrección Biomecánica Digital</strong>
-              <span class="muted" style="font-size: 0.78rem;" id="viewerCaseTime">Tiempo estimado: 8 a 14 meses</span>
-            </div>
-            <a href="/public/reservar.html" class="btn btn-secondary btn-small" style="font-weight: 700; border-radius: 8px;">
-              Simular mi caso
+          <div style="margin-top: 16px; display: flex; justify-content: space-between; align-items: center;">
+            <span class="muted" style="font-size: 0.84rem;">Diagnóstico con tomografía computarizada</span>
+            <a href="reservar.html?specialty=ortodoncia" style="color: var(--brand-primary); font-weight: 700; font-size: 0.88rem; text-decoration: none;">
+              Simular mi sonrisa →
             </a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 4. EL RECORRIDO SIN ANSIEDAD (4 PASOS) -->
-    <section class="section-padding">
-      <div class="section-container">
-        <div class="section-head">
-          <span class="chip chip-success">La Experiencia Sillar</span>
-          <h2>Odontología sin ansiedad, paso a paso.</h2>
-          <p class="muted">Rediseñamos cada momento de tu consulta para que tengas control, comodidad y total comprensión.</p>
+    <!-- 1. ¿QUÉ CASO O PROBLEMA DESEAS CORREGIR? -->
+    <section class="clinic-section">
+      <div class="sec-container">
+        <div class="sec-header">
+          <span class="sec-tag">Diagnóstico Personalizado</span>
+          <h2 class="sec-title">¿Qué deseas corregir en tu sonrisa?</h2>
+          <p class="sec-subtitle">Nuestros especialistas corrigen cada caso con biomecánica digital de máxima precisión.</p>
         </div>
 
-        <div class="journey-grid">
-          <div class="journey-card">
-            <span class="journey-step-num">01 / DIAGNÓSTICO</span>
-            <h3>Escaneo Óptico 3D</h3>
-            <p>Olvídate de las pastas y moldes con náuseas. En 5 minutos capturamos un gemelo digital exacto de tu boca.</p>
+        <div class="cases-grid">
+          <div class="case-card">
+            <div>
+              <div class="case-icon">🦷</div>
+              <h3 style="font-size: 1.15rem; margin: 0 0 8px; font-family: 'Manrope', sans-serif;">Dientes Apiñados o Chuecos</h3>
+              <p class="muted" style="font-size: 0.88rem; margin: 0 0 16px;">Falta de espacio y dientes montados que dificultan la higiene y estética.</p>
+            </div>
+            <span style="color: var(--brand-primary); font-weight: 700; font-size: 0.84rem;">Alineadores o Brackets →</span>
           </div>
 
-          <div class="journey-card">
-            <span class="journey-step-num">02 / PLANIFICACIÓN</span>
-            <h3>Decisión en Pantalla 4K</h3>
-            <p>El doctor te muestra tu tomografía en pantalla grande. Explicamos cada opción y costo antes de tocar una pieza.</p>
+          <div class="case-card">
+            <div>
+              <div class="case-icon">↔️</div>
+              <h3 style="font-size: 1.15rem; margin: 0 0 8px; font-family: 'Manrope', sans-serif;">Dientes Separados (Diastemas)</h3>
+              <p class="muted" style="font-size: 0.88rem; margin: 0 0 16px;">Espacios visibles entre los dientes frontales que afectan la simetría.</p>
+            </div>
+            <span style="color: var(--brand-primary); font-weight: 700; font-size: 0.84rem;">Cierre de Espacios 3D →</span>
           </div>
 
-          <div class="journey-card">
-            <span class="journey-step-num">03 / TRATAMIENTO</span>
-            <h3>Anestesia Computarizada</h3>
-            <p>Inyección digital controlada que elimina el pinchazo molesto y duerme únicamente la zona de trabajo.</p>
+          <div class="case-card">
+            <div>
+              <div class="case-icon">⚡</div>
+              <h3 style="font-size: 1.15rem; margin: 0 0 8px; font-family: 'Manrope', sans-serif;">Mordida Cruzada o Abierta</h3>
+              <p class="muted" style="font-size: 0.88rem; margin: 0 0 16px;">Dificultad para masticar o desgaste prematuro por mal encaje de maxilares.</p>
+            </div>
+            <span style="color: var(--brand-primary); font-weight: 700; font-size: 0.84rem;">Ortopedia & Alineación →</span>
           </div>
 
-          <div class="journey-card">
-            <span class="journey-step-num">04 / COMPAÑERO</span>
-            <h3>Portal en tu Celular</h3>
-            <p>Accede a tus radiografías, recetas médicas y control de cuotas las 24 horas sin depender de papeles.</p>
+          <div class="case-card">
+            <div>
+              <div class="case-icon">✨</div>
+              <h3 style="font-size: 1.15rem; margin: 0 0 8px; font-family: 'Manrope', sans-serif;">Sonrisa y Piezas Ausentes</h3>
+              <p class="muted" style="font-size: 0.88rem; margin: 0 0 16px;">Combinación de alineación con implantes guiados de titanio y carillas.</p>
+            </div>
+            <span style="color: var(--brand-primary); font-weight: 700; font-size: 0.84rem;">Rehabilitación Integral →</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 5. COMPARADOR CLÍNICO DE TRATAMIENTOS Y CUOTAS -->
-    <section class="section-padding section-dim">
-      <div class="section-container">
-        <div class="section-head">
-          <span class="chip chip-neutral">Transparencia Total</span>
-          <h2>Planes y Cuotas Mensuales Claras</h2>
-          <p class="muted">Presupuestos cerrados sin cargos sorpresa. Emisión de boletas electrónicas oficiales (serie B001).</p>
+    <!-- 2. COMPARADOR DE MÉTODOS DE CORRECCIÓN DENTAL -->
+    <section class="clinic-section section-bg-dim" id="comparador">
+      <div class="sec-container">
+        <div class="sec-header">
+          <span class="sec-tag">Opciones de Tratamiento</span>
+          <h2 class="sec-title">Encuentra el método ideal para ti</h2>
+          <p class="sec-subtitle">Comparamos transparencia, comodidad y tiempos de cada alternativa clínica.</p>
         </div>
 
-        <div class="matrix-grid">
-          <!-- Tarjeta 1: Ortodoncia -->
-          <div class="matrix-card featured">
-            <span class="featured-badge">MÁS SOLICITADO</span>
+        <div class="compare-grid">
+          <!-- Opción 1: Alineadores -->
+          <div class="compare-card highlight" id="alineadores">
+            <span class="compare-tag">MÁS POPULAR</span>
             <div>
-              <h3 style="font-family: 'Manrope', sans-serif; font-size: 1.4rem; margin: 0 0 6px;">Alineadores Invisibles</h3>
-              <p class="muted" style="font-size: 0.88rem;">Corrección biomecánica transparente sin brackets de metal.</p>
-              
-              <div class="matrix-price">
-                S/ 170 <span>/ mes</span>
-              </div>
-              <span class="tiny muted">en 18 cuotas sin intereses</span>
+              <h3 style="font-family: 'Manrope', sans-serif; font-size: 1.35rem; margin: 0 0 6px;">Alineadores Invisibles</h3>
+              <p class="muted" style="font-size: 0.88rem; margin: 0 0 20px;">Placas transparentes termoformadas que mueven tus dientes gradualmente.</p>
 
-              <hr style="border: none; border-top: 1px solid var(--sillar-border); margin: 24px 0;">
+              <div style="font-family: 'Manrope', sans-serif; font-size: 2.2rem; font-weight: 800; color: var(--brand-primary); margin-bottom: 4px;">
+                S/ 170 <span style="font-size: 0.95rem; font-weight: 600; color: var(--ink-soft);">/ mes</span>
+              </div>
+              <span class="tiny muted">Plan 18 cuotas mensuales sin intereses</span>
+
+              <hr style="border: none; border-top: 1px solid var(--brand-border); margin: 20px 0;">
 
               <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.9rem; display: grid; gap: 10px; color: var(--ink-soft);">
-                <li>✔ Escaneo intraoral 3D inicial incluido</li>
-                <li>✔ Simulación digital de sonrisa antes de empezar</li>
-                <li>✔ Set completo de alineadores numerados</li>
-                <li>✔ Controles mensuales presenciales en Yanahuara</li>
+                <li>✔ <strong>100% Discretos:</strong> Casi invisibles al hablar</li>
+                <li>✔ <strong>Removibles:</strong> Comes y te lavas los dientes con libertad</li>
+                <li>✔ <strong>Sin llagas:</strong> Cero alambres ni cortes en encías</li>
+                <li>✔ <strong>Menos visitas:</strong> Controles cada 6 a 8 semanas</li>
               </ul>
             </div>
-            <a href="/public/reservar.html?specialty=ortodoncia" class="btn btn-primary" style="width: 100%; text-align: center; justify-content: center; font-weight: 700; border-radius: 12px; margin-top: 28px;">
-              Reservar Evaluación de Alineadores
+            <a href="reservar.html?specialty=ortodoncia" class="btn btn-primary" style="width: 100%; text-align: center; justify-content: center; font-weight: 700; border-radius: 12px; margin-top: 24px;">
+              Elegir Alineadores Invisibles
             </a>
           </div>
 
-          <!-- Tarjeta 2: Implantes -->
-          <div class="matrix-card">
+          <!-- Opción 2: Brackets de Zafiro -->
+          <div class="compare-card">
             <div>
-              <h3 style="font-family: 'Manrope', sans-serif; font-size: 1.4rem; margin: 0 0 6px;">Implante Dental Guiado</h3>
-              <p class="muted" style="font-size: 0.88rem;">Recupera piezas ausentes con titanio grado médico y corona 3D.</p>
-              
-              <div class="matrix-price">
-                S/ 280 <span>/ mes</span>
-              </div>
-              <span class="tiny muted">en 6 cuotas mensuales</span>
+              <h3 style="font-family: 'Manrope', sans-serif; font-size: 1.35rem; margin: 0 0 6px;">Brackets de Zafiro / Cerámicos</h3>
+              <p class="muted" style="font-size: 0.88rem; margin: 0 0 20px;">Brackets transparentes de cristal de zafiro de alta estética y fijación.</p>
 
-              <hr style="border: none; border-top: 1px solid var(--sillar-border); margin: 24px 0;">
+              <div style="font-family: 'Manrope', sans-serif; font-size: 2.2rem; font-weight: 800; color: var(--ink); margin-bottom: 4px;">
+                S/ 140 <span style="font-size: 0.95rem; font-weight: 600; color: var(--ink-soft);">/ mes</span>
+              </div>
+              <span class="tiny muted">Plan 18 cuotas mensuales</span>
+
+              <hr style="border: none; border-top: 1px solid var(--brand-border); margin: 20px 0;">
 
               <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.9rem; display: grid; gap: 10px; color: var(--ink-soft);">
-                <li>✔ Tomografía volumétrica CBCT de diagnóstico</li>
-                <li>✔ Guía quirúrgica 3D personalizada</li>
-                <li>✔ Implante de titanio osteointegrable</li>
-                <li>✔ Corona estética de zirconio fresada en CAD/CAM</li>
+                <li>✔ <strong>Estética cristalina:</strong> Se mimetizan con el diente</li>
+                <li>✔ <strong>No se manchan:</strong> Resisten café y bebidas</li>
+                <li>✔ <strong>Alta resistencia:</strong> Ideales para rotaciones complejas</li>
+                <li>✔ Controles mensuales en Yanahuara</li>
               </ul>
             </div>
-            <a href="/public/reservar.html?specialty=implantes" class="btn btn-secondary" style="width: 100%; text-align: center; justify-content: center; font-weight: 700; border-radius: 12px; margin-top: 28px;">
-              Consultar Implantología
+            <a href="reservar.html?specialty=ortodoncia" class="btn btn-secondary" style="width: 100%; text-align: center; justify-content: center; font-weight: 700; border-radius: 12px; margin-top: 24px;">
+              Consultar Brackets Estéticos
             </a>
           </div>
 
-          <!-- Tarjeta 3: Diseño de Sonrisa -->
-          <div class="matrix-card">
+          <!-- Opción 3: Brackets Autoligados -->
+          <div class="compare-card">
             <div>
-              <h3 style="font-family: 'Manrope', sans-serif; font-size: 1.4rem; margin: 0 0 6px;">Diseño de Sonrisa & Carillas</h3>
-              <p class="muted" style="font-size: 0.88rem;">Lentes de contacto cerámicos ultrafinos para armonía y brillo.</p>
-              
-              <div class="matrix-price">
-                S/ 240 <span>/ mes</span>
-              </div>
-              <span class="tiny muted">en 4 cuotas mensuales</span>
+              <h3 style="font-family: 'Manrope', sans-serif; font-size: 1.35rem; margin: 0 0 6px;">Brackets Autoligados</h3>
+              <p class="muted" style="font-size: 0.88rem; margin: 0 0 20px;">Tecnología sin ligas elásticas que reduce la fricción y acelera el movimiento.</p>
 
-              <hr style="border: none; border-top: 1px solid var(--sillar-border); margin: 24px 0;">
+              <div style="font-family: 'Manrope', sans-serif; font-size: 2.2rem; font-weight: 800; color: var(--ink); margin-bottom: 4px;">
+                S/ 120 <span style="font-size: 0.95rem; font-weight: 600; color: var(--ink-soft);">/ mes</span>
+              </div>
+              <span class="tiny muted">Plan 18 cuotas mensuales</span>
+
+              <hr style="border: none; border-top: 1px solid var(--brand-border); margin: 20px 0;">
 
               <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.9rem; display: grid; gap: 10px; color: var(--ink-soft);">
-                <li>✔ Mockup estético de prueba en tu boca</li>
-                <li>✔ Cerámica feldespática de alta resistencia</li>
-                <li>✔ Mínimo desgaste dental biopreservador</li>
-                <li>✔ Pulido y garantía clínica Sillar</li>
+                <li>✔ <strong>Mayor rapidez:</strong> Movimiento continuo eficiente</li>
+                <li>✔ <strong>Higiene más fácil:</strong> Sin gomitas acumuladoras de placa</li>
+                <li>✔ Máxima durabilidad biomecánica</li>
+                <li>✔ Opción más económica de ortodoncia avanzada</li>
               </ul>
             </div>
-            <a href="/public/reservar.html?specialty=estetica" class="btn btn-secondary" style="width: 100%; text-align: center; justify-content: center; font-weight: 700; border-radius: 12px; margin-top: 28px;">
-              Consultar Diseño Estético
+            <a href="reservar.html?specialty=ortodoncia" class="btn btn-secondary" style="width: 100%; text-align: center; justify-content: center; font-weight: 700; border-radius: 12px; margin-top: 24px;">
+              Consultar Autoligados
             </a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 6. PLANA MÉDICA COLEGIADA COP -->
-    <section class="section-padding" id="equipo">
-      <div class="section-container">
-        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 50px; flex-wrap: wrap; gap: 16px;">
+    <!-- 3. SIMULADOR DE CUOTAS Y PRECIOS TRANSPARENTES -->
+    <section class="clinic-section" id="precios">
+      <div class="sec-container">
+        <div class="fee-simulator-box">
           <div>
-            <span class="chip chip-neutral">Cuerpo Médico Especializado</span>
-            <h2 style="font-family: 'Manrope', sans-serif; font-size: 2.4rem; font-weight: 800; margin: 8px 0 0;">
-              Especialistas Colegiados COP
+            <span class="sec-tag">Transparencia Financiera</span>
+            <h2 style="font-family: 'Manrope', sans-serif; font-size: 2.2rem; font-weight: 800; margin: 8px 0 16px; line-height: 1.2;">
+              Calcula tu cuota mensual sin sorpresas ni letra chica.
+            </h2>
+            <p class="muted" style="margin-bottom: 20px; font-size: 1.05rem;">
+              En Alínea Studio financiamos tu tratamiento en cuotas fijas en Soles (PEN). Emitimos boletas electrónicas oficiales (serie B001) para tu tranquilidad fiscal.
+            </p>
+            <ul style="padding-left: 20px; color: var(--ink-soft); font-size: 0.94rem; display: grid; gap: 8px;">
+              <li>Aceptamos Yape, Plin, POS Niubiz (Visa/Mastercard) y transferencias BCP.</li>
+              <li>Sin intereses bancarios por financiamiento directo de la clínica.</li>
+              <li>Seguimiento de cuotas pagadas y pendientes desde tu Portal Paciente.</li>
+            </ul>
+          </div>
+
+          <div style="background: var(--brand-surface-dim); border: 1px solid var(--brand-border); border-radius: 20px; padding: 28px;">
+            <label style="font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 8px;">Tratamiento Seleccionado:</label>
+            <select id="calcTreatment" class="form-select" style="font-weight: 600; margin-bottom: 18px;">
+              <option value="alineadores" data-total="3600" data-months="18">Alineadores Invisibles Completos (18 cuotas)</option>
+              <option value="zafiro" data-total="2800" data-months="18">Brackets Estéticos de Zafiro (18 cuotas)</option>
+              <option value="autoligado" data-total="2400" data-months="18">Brackets Autoligados de Precisión (18 cuotas)</option>
+              <option value="implante" data-total="2800" data-months="6">Implante Dental Guiado 3D (6 cuotas)</option>
+            </select>
+
+            <div style="display: flex; justify-content: space-between; font-size: 0.88rem; font-weight: 700; margin-bottom: 6px;">
+              <span>Cuota Inicial (Opcional):</span>
+              <span id="initialDisplay" style="color: var(--brand-primary); font-family: 'Fira Code', monospace;">S/ 500</span>
+            </div>
+            <input type="range" id="calcInitial" min="0" max="2000" step="100" value="500" style="width: 100%; accent-color: var(--brand-primary); margin-bottom: 20px;">
+
+            <div style="background: var(--brand-surface); border: 2px dashed var(--brand-primary); padding: 18px; border-radius: 16px; display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <span class="tiny block">Tu Cuota Mensual Estimada:</span>
+                <div id="monthlyDisplay" style="font-family: 'Manrope', sans-serif; font-size: 2rem; font-weight: 800; color: var(--brand-primary); line-height: 1;">
+                  S/ 172 /mes
+                </div>
+                <span id="monthsDisplay" class="tiny muted">en 18 cuotas fijas</span>
+              </div>
+              <span class="chip chip-success">Sin Intereses</span>
+            </div>
+
+            <a href="reservar.html?specialty=ortodoncia" class="btn btn-primary" style="width: 100%; text-align: center; justify-content: center; font-weight: 700; border-radius: 12px; margin-top: 20px; padding: 14px 0;">
+              Confirmar Evaluación en Yanahuara
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. ORTODONCISTAS COLEGIADOS COP -->
+    <section class="clinic-section section-bg-dim" id="especialistas">
+      <div class="sec-container">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 44px; flex-wrap: wrap; gap: 16px;">
+          <div>
+            <span class="sec-tag">Cuerpo Médico Especializado</span>
+            <h2 style="font-family: 'Manrope', sans-serif; font-size: 2.2rem; font-weight: 800; margin: 0;">
+              Nuestros Especialistas Colegiados COP
             </h2>
           </div>
-          <a href="/public/equipo.html" style="color: var(--sillar-emerald); font-weight: 700; text-decoration: none; font-size: 1rem;">
-            Ver los 8 especialistas de la sede Yanahuara →
+          <a href="equipo.html" style="color: var(--brand-primary); font-weight: 700; text-decoration: none;">
+            Ver todo el equipo clínico (8 doctores) →
           </a>
         </div>
 
-        <div class="doctors-grid">
-          <!-- Doctor 1 -->
-          <div class="doctor-card">
+        <div class="doctors-layout">
+          <!-- Doctora 1 -->
+          <div class="doc-box">
             <div>
-              <div class="doctor-img-wrap">
-                <img src="/assets/images/public/team/profesional-dental-referencia-37458046.jpg" alt="Dra. Ana Flores Vanesa">
+              <div class="doc-photo">
+                <img src="/assets/images/public/team/profesional-dental-referencia-37458046.jpg" alt="Dra. Ana Flores Vanesa - Ortodoncista">
               </div>
-              <div class="doctor-info">
-                <span class="doctor-cop">COP 18240 · ORTODONCIA</span>
-                <h3 style="font-family: 'Manrope', sans-serif; font-size: 1.3rem; margin: 4px 0 6px;">Dra. Ana Flores Vanesa</h3>
-                <p class="muted" style="font-size: 0.88rem; line-height: 1.5; margin: 0;">
-                  Especialista en biomecánica con alineadores transparentes y corrección 3D en Arequipa.
-                </p>
+              <div style="padding: 24px;">
+                <span class="chip chip-success" style="font-family: 'Fira Code', monospace; font-size: 0.72rem; margin-bottom: 8px;">COP 18240</span>
+                <h3 style="font-family: 'Manrope', sans-serif; font-size: 1.25rem; margin: 0 0 4px;">Dra. Ana Flores Vanesa</h3>
+                <p style="color: var(--brand-primary); font-weight: 700; font-size: 0.88rem; margin: 0 0 8px;">Especialista en Ortodoncia & Alineadores</p>
+                <p class="muted" style="font-size: 0.84rem; margin: 0; line-height: 1.5;">Certificada en biomecánica con alineadores transparentes y tomografía 3D en Arequipa.</p>
               </div>
             </div>
-            <div style="padding: 0 28px 28px;">
-              <a href="/public/reservar.html" class="btn btn-secondary btn-small" style="width: 100%; border-radius: 10px;">Agendar con Dra. Flores</a>
+            <div style="padding: 0 24px 24px;">
+              <a href="reservar.html?specialty=ortodoncia" class="btn btn-secondary btn-small" style="width: 100%; border-radius: 8px;">Agendar con Dra. Flores</a>
             </div>
           </div>
 
           <!-- Doctor 2 -->
-          <div class="doctor-card">
+          <div class="doc-box">
             <div>
-              <div class="doctor-img-wrap">
+              <div class="doc-photo">
                 <img src="/assets/images/public/team/equipo-dental-clinica-37458124.jpg" alt="Dr. Roberto Carpio Málaga">
               </div>
-              <div class="doctor-info">
-                <span class="doctor-cop">COP 14920 · IMPLANTES</span>
-                <h3 style="font-family: 'Manrope', sans-serif; font-size: 1.3rem; margin: 4px 0 6px;">Dr. Roberto Carpio Málaga</h3>
-                <p class="muted" style="font-size: 0.88rem; line-height: 1.5; margin: 0;">
-                  Cirujano dentista especializado en carga inmediata y cirugía guiada por tomografía 3D.
-                </p>
+              <div style="padding: 24px;">
+                <span class="chip chip-success" style="font-family: 'Fira Code', monospace; font-size: 0.72rem; margin-bottom: 8px;">COP 14920</span>
+                <h3 style="font-family: 'Manrope', sans-serif; font-size: 1.25rem; margin: 0 0 4px;">Dr. Roberto Carpio Málaga</h3>
+                <p style="color: var(--brand-primary); font-weight: 700; font-size: 0.88rem; margin: 0 0 8px;">Cirugía Oral & Implantología 3D</p>
+                <p class="muted" style="font-size: 0.84rem; margin: 0; line-height: 1.5;">Especialista en carga inmediata de implantes y rehabilitación estética coordinada.</p>
               </div>
             </div>
-            <div style="padding: 0 28px 28px;">
-              <a href="/public/reservar.html" class="btn btn-secondary btn-small" style="width: 100%; border-radius: 10px;">Agendar con Dr. Carpio</a>
+            <div style="padding: 0 24px 24px;">
+              <a href="reservar.html?specialty=implantes" class="btn btn-secondary btn-small" style="width: 100%; border-radius: 8px;">Agendar con Dr. Carpio</a>
             </div>
           </div>
 
-          <!-- Doctor 3 -->
-          <div class="doctor-card">
+          <!-- Doctora 3 -->
+          <div class="doc-box">
             <div>
-              <div class="doctor-img-wrap">
+              <div class="doc-photo">
                 <img src="/assets/images/public/services/explicacion-modelo-dental-6627325.jpg" alt="Dra. Sofía Mendoza Salas">
               </div>
-              <div class="doctor-info">
-                <span class="doctor-cop">COP 22105 · ODONTOPEDIATRÍA</span>
-                <h3 style="font-family: 'Manrope', sans-serif; font-size: 1.3rem; margin: 4px 0 6px;">Dra. Sofía Mendoza Salas</h3>
-                <p class="muted" style="font-size: 0.88rem; line-height: 1.5; margin: 0;">
-                  Manejo adaptativo sin miedo, fluorización y sellantes preventivos para niños y adolescentes.
-                </p>
+              <div style="padding: 24px;">
+                <span class="chip chip-success" style="font-family: 'Fira Code', monospace; font-size: 0.72rem; margin-bottom: 8px;">COP 22105</span>
+                <h3 style="font-family: 'Manrope', sans-serif; font-size: 1.25rem; margin: 0 0 4px;">Dra. Sofía Mendoza Salas</h3>
+                <p style="color: var(--brand-primary); font-weight: 700; font-size: 0.88rem; margin: 0 0 8px;">Odontopediatría & Ortopedia Infantil</p>
+                <p class="muted" style="font-size: 0.84rem; margin: 0; line-height: 1.5;">Atención temprana de mordidas en niños con manejo lúdico y sin ansiedad.</p>
               </div>
             </div>
-            <div style="padding: 0 28px 28px;">
-              <a href="/public/reservar.html" class="btn btn-secondary btn-small" style="width: 100%; border-radius: 10px;">Agendar con Dra. Mendoza</a>
+            <div style="padding: 0 24px 24px;">
+              <a href="reservar.html?specialty=ninos" class="btn btn-secondary btn-small" style="width: 100%; border-radius: 8px;">Agendar con Dra. Mendoza</a>
             </div>
           </div>
         </div>
@@ -843,50 +816,47 @@
     </section>
   </main>
 
-  <!-- Pie de Página Completo -->
-  <footer style="background: var(--sillar-navy); color: #ffffff; padding: 70px 0 30px; border-top: 1px solid rgba(255,255,255,0.1);">
-    <div class="section-container">
-      <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 40px; margin-bottom: 50px;">
+  <!-- Pie de Página Institucional -->
+  <footer class="clinic-footer">
+    <div class="sec-container">
+      <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 40px; margin-bottom: 40px;">
         <div>
-          <div class="brand-mark" style="color: white; margin-bottom: 16px;">
-            <div class="brand-icon">S</div>
-            <div>
-              <span class="brand-name">Sillar Dental</span>
-              <span class="brand-tag" style="color: #94a3b8;">Estudio Clínico Yanahuara</span>
-            </div>
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 14px;">
+            <div class="logo-badge" style="width: 36px; height: 36px; font-size: 1.1rem;">🦷</div>
+            <strong style="font-size: 1.2rem; font-family: 'Manrope', sans-serif;">Alínea Studio</strong>
           </div>
-          <p style="color: #94a3b8; font-size: 0.9rem; max-width: 320px; line-height: 1.6;">
-            Odontología de alta precisión, tomografía 3D CBCT y hospitalidad clínica bajo la norma NTS N.° 188-MINSA.
+          <p style="color: #94a3b8; font-size: 0.88rem; max-width: 320px; line-height: 1.6;">
+            Centro odontológico de precisión y corrección dental digital en Arequipa. Conforme a la norma técnica NTS N.° 188-MINSA.
           </p>
-          <div style="color: #64748b; font-size: 0.82rem; margin-top: 12px;">
-            RUC: 20601234567 · Sillar Dental E.I.R.L.
+          <div style="color: #64748b; font-size: 0.8rem; margin-top: 10px;">
+            RUC: 20601234567 · Alínea Dental E.I.R.L.
           </div>
         </div>
 
         <div>
-          <strong style="display: block; margin-bottom: 14px; font-size: 0.95rem; color: #f1f5f9;">Especialidades</strong>
-          <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.88rem; display: grid; gap: 8px; color: #94a3b8;">
-            <li><a href="/public/especialidades.html" style="color: inherit; text-decoration: none;">Ortodoncia Invisible</a></li>
-            <li><a href="/public/especialidades.html" style="color: inherit; text-decoration: none;">Implantología 3D</a></li>
-            <li><a href="/public/especialidades.html" style="color: inherit; text-decoration: none;">Diseño de Sonrisa</a></li>
-            <li><a href="/public/especialidades.html" style="color: inherit; text-decoration: none;">Endodoncia Microscópica</a></li>
-            <li><a href="/public/especialidades.html" style="color: inherit; text-decoration: none;">Odontopediatría</a></li>
+          <strong style="display: block; margin-bottom: 12px; font-size: 0.92rem; color: #f1f5f9;">Tratamientos</strong>
+          <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.86rem; display: grid; gap: 8px; color: #94a3b8;">
+            <li><a href="#alineadores" style="color: inherit; text-decoration: none;">Alineadores Invisibles</a></li>
+            <li><a href="#comparador" style="color: inherit; text-decoration: none;">Brackets de Zafiro</a></li>
+            <li><a href="#comparador" style="color: inherit; text-decoration: none;">Brackets Autoligados</a></li>
+            <li><a href="especialidades.html" style="color: inherit; text-decoration: none;">Implantes Dentales 3D</a></li>
+            <li><a href="especialidades.html" style="color: inherit; text-decoration: none;">Diseño de Sonrisa</a></li>
           </ul>
         </div>
 
         <div>
-          <strong style="display: block; margin-bottom: 14px; font-size: 0.95rem; color: #f1f5f9;">Accesos Directos</strong>
-          <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.88rem; display: grid; gap: 8px; color: #94a3b8;">
+          <strong style="display: block; margin-bottom: 12px; font-size: 0.92rem; color: #f1f5f9;">Accesos</strong>
+          <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.86rem; display: grid; gap: 8px; color: #94a3b8;">
             <li><a href="/patient/index.html" style="color: #10B981; font-weight: 700; text-decoration: none;">Portal Paciente (María Q.)</a></li>
-            <li><a href="/staff/index.html?view=patient" style="color: inherit; text-decoration: none;">Odontograma 52P COP</a></li>
-            <li><a href="/staff/index.html?view=agenda" style="color: inherit; text-decoration: none;">Agenda Multi-Sillón</a></li>
-            <li><a href="/selector.html" style="color: #38bdf8; font-weight: 700; text-decoration: none;">Hub de Portales (Selector)</a></li>
+            <li><a href="saas.html" style="color: #38bdf8; font-weight: 700; text-decoration: none;">Software para Clínicas (SaaS)</a></li>
+            <li><a href="/selector.html" style="color: inherit; text-decoration: none;">Hub de Portales (Selector)</a></li>
+            <li><a href="reservar.html" style="color: inherit; text-decoration: none;">Agendar Cita en Línea</a></li>
           </ul>
         </div>
 
         <div>
-          <strong style="display: block; margin-bottom: 14px; font-size: 0.95rem; color: #f1f5f9;">Sede Yanahuara</strong>
-          <div style="font-size: 0.88rem; color: #94a3b8; display: grid; gap: 8px;">
+          <strong style="display: block; margin-bottom: 12px; font-size: 0.92rem; color: #f1f5f9;">Sede Yanahuara</strong>
+          <div style="font-size: 0.86rem; color: #94a3b8; display: grid; gap: 6px;">
             <div>📍 Av. Ejército 712, Yanahuara, Arequipa</div>
             <div>📞 (054) 283-910</div>
             <div>💬 +51 954 123 456</div>
@@ -895,9 +865,9 @@
         </div>
       </div>
 
-      <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; font-size: 0.82rem; color: #64748b;">
-        <div>© 2026 Sillar Dental Especialidades. Todos los derechos reservados.</div>
-        <div style="display: flex; gap: 20px;">
+      <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; font-size: 0.8rem; color: #64748b;">
+        <div>© 2026 Alínea Studio Dental. Todos los derechos reservados.</div>
+        <div style="display: flex; gap: 16px;">
           <span>Boletas Electrónicas Serie B001</span>
           <span>NTS N.° 188-MINSA</span>
           <span>Ley N.° 29733 (LPDP)</span>
@@ -906,53 +876,36 @@
     </div>
   </footer>
 
-  <!-- Lógica Interactiva del Visor 3D -->
+  <!-- Script del Simulador de Cuotas y Tema -->
   <script>
-    const viewerData = {
-      alineacion: {
-        title: "Corrección Biomecánica Digital",
-        time: "Tiempo estimado: 8 a 14 meses",
-        badge: "PROYECCIÓN: 32 PIEZAS · SCANNER ITERO 3D",
-        img: "/assets/images/public/technology/evaluacion-dental-digital-5622234.jpg"
-      },
-      implante: {
-        title: "Implantología Guiada por Tomografía CBCT",
-        time: "Tiempo estimado: 3 a 6 meses (Carga inmediata)",
-        badge: "CIRUGÍA GUIADA · TITANIO GRADO MÉDICO",
-        img: "/assets/images/public/services/explicacion-modelo-dental-6627325.jpg"
-      },
-      carillas: {
-        title: "Diseño Estético & Lentes Cerámicos",
-        time: "Tiempo estimado: 2 citas presenciales",
-        badge: "CERÁMICA FELDESPÁTICA · CAD/CAM FRESADO",
-        img: "/assets/images/public/services/ortodoncia-referencia-6529107.jpg"
-      }
-    };
+    const calcSelect = document.getElementById('calcTreatment');
+    const calcInitial = document.getElementById('calcInitial');
+    const initialDisplay = document.getElementById('initialDisplay');
+    const monthlyDisplay = document.getElementById('monthlyDisplay');
+    const monthsDisplay = document.getElementById('monthsDisplay');
 
-    const viewerTabs = document.querySelectorAll('.viewer-tab-btn');
-    const viewerImg = document.getElementById('viewerImage');
-    const viewerBadge = document.getElementById('viewerBadge');
-    const caseTitle = document.getElementById('viewerCaseTitle');
-    const caseTime = document.getElementById('viewerCaseTime');
+    function updateCalculator() {
+      if (!calcSelect || !calcInitial) return;
+      const opt = calcSelect.options[calcSelect.selectedIndex];
+      const total = parseFloat(opt.getAttribute('data-total') || 3600);
+      const months = parseInt(opt.getAttribute('data-months') || 18);
+      const initial = parseFloat(calcInitial.value || 0);
 
-    viewerTabs.forEach(btn => {
-      btn.addEventListener('click', () => {
-        viewerTabs.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
+      initialDisplay.textContent = `S/ ${initial}`;
+      const remaining = Math.max(0, total - initial);
+      const monthly = Math.round(remaining / months);
 
-        const key = btn.getAttribute('data-view');
-        const d = viewerData[key];
-        if (d) {
-          viewerImg.src = d.img;
-          viewerBadge.textContent = d.badge;
-          caseTitle.textContent = d.title;
-          caseTime.textContent = d.time;
-        }
-      });
-    });
+      monthlyDisplay.textContent = `S/ ${monthly} /mes`;
+      monthsDisplay.textContent = `en ${months} cuotas fijas (Saldo: S/ ${remaining})`;
+    }
 
-    // Theme Toggle
-    const themeBtn = document.getElementById('themeBtn');
+    if (calcSelect && calcInitial) {
+      calcSelect.addEventListener('change', updateCalculator);
+      calcInitial.addEventListener('input', updateCalculator);
+      updateCalculator();
+    }
+
+    const themeBtn = document.getElementById('themeToggleBtn');
     if (themeBtn) {
       themeBtn.addEventListener('click', () => {
         const cur = document.documentElement.getAttribute('data-theme') || 'light';
