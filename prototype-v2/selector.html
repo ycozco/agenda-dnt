@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Selector de Portales y Vistas · Sillar Dental Ecosystem</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Manrope:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <style>
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--font);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 0;
+      margin: 0;
+    }
+    .selector-hero {
+      padding: 60px 24px 30px;
+      text-align: center;
+      background: radial-gradient(circle at top, var(--action-soft) 0%, transparent 70%);
+      border-bottom: 1px solid var(--line);
+    }
+    .selector-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 24px;
+    }
+    .portal-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: var(--shadow-small);
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-decoration: none;
+      color: var(--ink);
+    }
+    .portal-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-elevated);
+      border-color: var(--action);
+    }
+    .portal-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: var(--action-soft);
+      color: var(--action);
+      display: grid;
+      place-items: center;
+      font-size: 1.5rem;
+      margin-bottom: 16px;
+    }
+    .badge-live {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      background: rgba(0, 122, 85, 0.1);
+      color: var(--action);
+      font-family: var(--mono);
+    }
+  </style>
+</head>
+<body>
+  <div class="selector-hero">
+    <div style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; font-size: 0.8rem; font-weight: 700; color: var(--action); margin-bottom: 16px;">
+      ⚡ Sillar Dental Ecosystem · Hub de Portales
+    </div>
+    <h1 style="font-family: var(--display); font-size: clamp(2rem, 3.5vw, 2.8rem); margin: 0 0 12px; font-weight: 800;">
+      Navegador de Vistas y Módulos Clínicos
+    </h1>
+    <p class="muted" style="max-width: 600px; margin: 0 auto; font-size: 1.05rem;">
+      Acceso directo a todos los subsistemas del prototipo clínico Sillar Dental sin widgets superpuestos.
+    </p>
+  </div>
+
+  <main class="selector-grid">
+    <!-- 1. Web Pública -->
+    <a href="/public/index.html" class="portal-card">
+      <div>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div class="portal-icon">🌐</div>
+          <span class="badge-live">PORTADA PRINCIPAL</span>
+        </div>
+        <h2 style="font-size: 1.3rem; margin: 0 0 8px; font-family: var(--display);">Web Pública & Landing</h2>
+        <p class="muted" style="font-size: 0.9rem; margin: 0 0 16px;">
+          Experiencia del paciente con buscador por necesidad, simulador de cuotas, estudio Yanahuara y reserva.
+        </p>
+      </div>
+      <div style="color: var(--action); font-weight: 700; font-size: 0.9rem;">Ingresar a la Web Pública →</div>
+    </a>
+
+    <!-- 2. Portal del Paciente -->
+    <a href="/patient/index.html" class="portal-card">
+      <div>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div class="portal-icon">👤</div>
+          <span class="badge-live">PACIENTE: MARÍA Q.</span>
+        </div>
+        <h2 style="font-size: 1.3rem; margin: 0 0 8px; font-family: var(--display);">Portal del Paciente</h2>
+        <p class="muted" style="font-size: 0.9rem; margin: 0 0 16px;">
+          Ficha del paciente, visor de tomografías 3D CBCT, recetas médicas, cuotas y próximos controles.
+        </p>
+      </div>
+      <div style="color: var(--action); font-weight: 700; font-size: 0.9rem;">Ingresar al Portal Paciente →</div>
+    </a>
+
+    <!-- 3. Recepción & Citas -->
+    <a href="/staff/index.html?view=agenda" class="portal-card">
+      <div>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div class="portal-icon">🗓️</div>
+          <span class="badge-live">MULTI-SILLÓN</span>
+        </div>
+        <h2 style="font-size: 1.3rem; margin: 0 0 8px; font-family: var(--display);">Recepción & Citas</h2>
+        <p class="muted" style="font-size: 0.9rem; margin: 0 0 16px;">
+          Agenda semanal y diaria con 3 sillones en paralelo, filtros por doctor y estados de cita en tiempo real.
+        </p>
+      </div>
+      <div style="color: var(--action); font-weight: 700; font-size: 0.9rem;">Abrir Agenda de Citas →</div>
+    </a>
+
+    <!-- 4. Consulta & Odontograma 52 Piezas COP -->
+    <a href="/staff/index.html?view=patient" class="portal-card">
+      <div>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div class="portal-icon">🩺</div>
+          <span class="badge-live">NTS 188-MINSA</span>
+        </div>
+        <h2 style="font-size: 1.3rem; margin: 0 0 8px; font-family: var(--display);">Consulta & Odontograma</h2>
+        <p class="muted" style="font-size: 0.9rem; margin: 0 0 16px;">
+          Odontograma interactivo de 52 piezas (32 permanentes + 20 deciduas), 5 caras por pieza y plan de tratamiento.
+        </p>
+      </div>
+      <div style="color: var(--action); font-weight: 700; font-size: 0.9rem;">Abrir Odontograma 52P →</div>
+    </a>
+
+    <!-- 5. Centro de Administración -->
+    <a href="/staff/index.html?view=dashboard" class="portal-card">
+      <div>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div class="portal-icon">⚙️</div>
+          <span class="badge-live">KPI & SUNAT</span>
+        </div>
+        <h2 style="font-size: 1.3rem; margin: 0 0 8px; font-family: var(--display);">Centro de Administración</h2>
+        <p class="muted" style="font-size: 0.9rem; margin: 0 0 16px;">
+          Dashboard de métricas clínicas, ingresos del mes, ocupación de sillones y emisión de comprobantes.
+        </p>
+      </div>
+      <div style="color: var(--action); font-weight: 700; font-size: 0.9rem;">Abrir Dashboard Admin →</div>
+    </a>
+
+    <!-- 6. Inventario de Insumos -->
+    <a href="/staff/index.html?view=inventory" class="portal-card">
+      <div>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div class="portal-icon">📦</div>
+          <span class="badge-live">CONTROL STOCK</span>
+        </div>
+        <h2 style="font-size: 1.3rem; margin: 0 0 8px; font-family: var(--display);">Gestión de Inventario</h2>
+        <p class="muted" style="font-size: 0.9rem; margin: 0 0 16px;">
+          Control de lotes, alertas de stock mínimo de resinas/anestesia y trazabilidad por sede.
+        </p>
+      </div>
+      <div style="color: var(--action); font-weight: 700; font-size: 0.9rem;">Abrir Inventario →</div>
+    </a>
+
+    <!-- 7. Usuarios y Auditoría -->
+    <a href="/staff/index.html?view=audit" class="portal-card">
+      <div>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div class="portal-icon">👥</div>
+          <span class="badge-live">ROLES & LOGS</span>
+        </div>
+        <h2 style="font-size: 1.3rem; margin: 0 0 8px; font-family: var(--display);">Usuarios & Auditoría</h2>
+        <p class="muted" style="font-size: 0.9rem; margin: 0 0 16px;">
+          Permisos por rol (Doctor, Recepción, Administrador) y registro inmutable de auditoría clínica.
+        </p>
+      </div>
+      <div style="color: var(--action); font-weight: 700; font-size: 0.9rem;">Abrir Auditoría →</div>
+    </a>
+
+    <!-- 8. Catálogo Completo 45 Diseños -->
+    <a href="/prototipo-stitc/index.html" class="portal-card">
+      <div>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div class="portal-icon">🔎</div>
+          <span class="badge-live">CATÁLOGO 45</span>
+        </div>
+        <h2 style="font-size: 1.3rem; margin: 0 0 8px; font-family: var(--display);">Visor de 45 Diseños</h2>
+        <p class="muted" style="font-size: 0.9rem; margin: 0 0 16px;">
+          Catálogo demostrativo de especificaciones y variantes de pantallas del ecosistema.
+        </p>
+      </div>
+      <div style="color: var(--action); font-weight: 700; font-size: 0.9rem;">Ver 45 Diseños →</div>
+    </a>
+  </main>
+
+  <footer style="text-align: center; padding: 24px; border-top: 1px solid var(--line); font-size: 0.85rem; color: var(--ink-faint);">
+    Sillar Dental Ecosystem · Yanahuara, Arequipa · Prototipo V2.0
+  </footer>
+</body>
+</html>
