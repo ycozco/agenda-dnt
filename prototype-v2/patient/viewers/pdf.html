@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visor de Documento PDF · Sillar Dental</title>
+  <link rel="stylesheet" href="../../assets/css/base.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <style>
+    body { background: #1e293b; color: white; min-height: 100vh; display: flex; flex-direction: column; }
+    .pdf-toolbar { background: #0f172a; padding: 12px 24px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; }
+    .pdf-viewport { flex: 1; display: flex; justify-content: center; align-items: center; padding: 30px; overflow: auto; }
+    .pdf-page-mock { background: white; color: var(--ink); width: min(800px, 100%); min-height: 900px; padding: 48px; border-radius: 8px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); font-family: var(--font); }
+  </style>
+</head>
+<body>
+
+  <div class="pdf-toolbar">
+    <div style="display: flex; align-items: center; gap: 16px;">
+      <a href="../index.html?view=documents" style="color: #94a3b8; text-decoration: none; font-size: 0.9rem;">← Volver a Documentos</a>
+      <span style="font-weight: 600; font-size: 0.95rem;" id="pdfTitle">Informe_Diagnostico_Clinico.pdf</span>
+    </div>
+    <div style="display: flex; gap: 12px; align-items: center;">
+      <button class="btn btn-secondary btn-small" id="zoomOutBtn">Zoom -</button>
+      <span id="zoomLabel" style="font-size: 0.85rem; color: #94a3b8;">100%</span>
+      <button class="btn btn-secondary btn-small" id="zoomInBtn">Zoom +</button>
+      <button class="btn btn-primary btn-small" id="downloadBtn">📥 Descargar Simulación</button>
+    </div>
+  </div>
+
+  <div class="pdf-viewport">
+    <div class="pdf-page-mock" id="pdfPage">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid var(--blue); padding-bottom: 20px; margin-bottom: 30px;">
+        <div>
+          <h2 style="color: var(--blue-deep); margin-bottom: 4px;">Sillar Dental Especialidades</h2>
+          <div style="font-size: 0.82rem; color: var(--ink-soft);">Sede Yanahuara · Av. Ejército 712, Arequipa</div>
+        </div>
+        <div style="text-align: right; font-size: 0.82rem; color: var(--ink-soft);">
+          <strong>Informe Clínico № 2026-00412</strong><br>
+          Fecha: 15 de Julio de 2026
+        </div>
+      </div>
+
+      <div style="background: var(--paper); padding: 16px; border-radius: 10px; margin-bottom: 24px; font-size: 0.9rem; display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+        <div><strong>Paciente:</strong> María Quispe Condori</div>
+        <div><strong>DNI:</strong> 45892104</div>
+        <div><strong>Especialista:</strong> Dra. Ana Flores Vanesa (COP 18240)</div>
+        <div><strong>Tratamiento:</strong> Ortodoncia & Rehabilitación</div>
+      </div>
+
+      <h3 style="color: var(--blue-deep); margin-bottom: 12px;">1. Resumen de Anamnesis & Diagnóstico</h3>
+      <p style="font-size: 0.92rem; line-height: 1.6; color: var(--ink-soft); margin-bottom: 20px;">
+        Paciente femenina de 35 años acude a consulta por apiñamiento anteroinferior leve y discrepancia oclusal. Al examen clínico y tomográfico CBCT se evidencia relación canina Clase I con ligera rotación en pieza #21 y restauración previa conservada en pieza #16.
+      </p>
+
+      <h3 style="color: var(--blue-deep); margin-bottom: 12px;">2. Plan de Tratamiento Propuesto</h3>
+      <ul style="font-size: 0.92rem; line-height: 1.6; color: var(--ink-soft); margin-bottom: 30px;">
+        <li>Fase 1: Profilaxis ultrasonica y detartraje (Completado).</li>
+        <li>Fase 2: Instalación de aparatología fija estética (En proceso).</li>
+        <li>Fase 3: Contención con retenedores termoformados.</li>
+      </ul>
+
+      <div style="margin-top: 60px; border-top: 1px dashed var(--line); padding-top: 20px; text-align: right;">
+        <div style="font-family: var(--display); font-weight: 700; color: var(--blue);">Dra. Ana Flores Vanesa</div>
+        <div style="font-size: 0.8rem; color: var(--ink-faint);">COP 18240 · Especialista en Ortodoncia</div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { showToast } from '../../assets/js/components.js';
+
+    let zoom = 100;
+    const page = document.getElementById("pdfPage");
+    const label = document.getElementById("zoomLabel");
+
+    document.getElementById("zoomInBtn").addEventListener("click", () => {
+      if (zoom < 160) {
+        zoom += 15;
+        page.style.transform = `scale(${zoom / 100})`;
+        label.innerText = `${zoom}%`;
+      }
+    });
+
+    document.getElementById("zoomOutBtn").addEventListener("click", () => {
+      if (zoom > 70) {
+        zoom -= 15;
+        page.style.transform = `scale(${zoom / 100})`;
+        label.innerText = `${zoom}%`;
+      }
+    });
+
+    document.getElementById("downloadBtn").addEventListener("click", () => {
+      showToast("Simulación de descarga iniciada: Informe_Clinico_MariaQuispe.pdf", "info");
+    });
+  </script>
+</body>
+</html>

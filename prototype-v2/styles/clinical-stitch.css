@@ -1,0 +1,3 @@
+/* Clinical Consult & 52P Odontogram Custom CSS */
+    .odontogram-tooth { transition: all 0.2s ease; cursor: pointer; }
+    .odontogram-tooth:hover { transform: scale(1.08); }

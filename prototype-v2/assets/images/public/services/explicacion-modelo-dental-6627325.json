@@ -1,0 +1,25 @@
+﻿{
+    "id":  "pexels-consulta-modelo-6627325",
+    "filename":  "explicacion-modelo-dental-6627325.jpg",
+    "path":  "prototype-v2\\assets\\images\\public\\services\\explicacion-modelo-dental-6627325.jpg",
+    "category":  "public-services",
+    "purpose":  "especialidades y tratamientos",
+    "sourcePage":  "https://www.pexels.com/photo/patient-having-an-appointment-with-a-dentist-6627321/",
+    "downloadUrl":  "https://images.pexels.com/photos/6627325/pexels-photo-6627325.jpeg?cs=srgb\u0026dl=pexels-karola-g-6627325.jpg\u0026fm=jpg",
+    "provider":  "Pexels",
+    "author":  "Karola G",
+    "license":  "Pexels License",
+    "usage":  "Referencia de educaciÃ³n al paciente y plan visible.",
+    "alt":  "Dentista explicando un modelo dental durante una consulta",
+    "tags":  [
+                 "educacion",
+                 "consulta",
+                 "modelo-dental",
+                 "plan",
+                 "referencia"
+             ],
+    "bytes":  1504521,
+    "sha256":  "65a4433a73c5c49656206860ea88377a7e56f127c5ac35b3e7167d94ca54d735",
+    "downloadedAt":  "2026-07-26T00:52:32.1772599Z",
+    "status":  "reference-only"
+}

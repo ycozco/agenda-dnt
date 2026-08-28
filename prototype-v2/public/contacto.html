@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto & Ubicación · Sillar Dental Yanahuara</title>
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+</head>
+<body>
+
+  <div id="headerApp"></div>
+
+  <section style="background: var(--surface); padding: 50px 0 30px; border-bottom: 1px solid var(--line);">
+    <div class="container">
+      <span class="eyebrow">Contacto</span>
+      <h1>Estamos para atenderte</h1>
+      <p class="muted" style="max-width: 640px; font-size: 1.1rem;">Envíanos tu consulta previa o visita nuestra sede clínica en Yanahuara, Arequipa.</p>
+    </div>
+  </section>
+
+  <section class="container" style="padding: 60px 0;">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+      <div>
+        <div class="card" style="margin-bottom: 24px;">
+          <h3>Información de la Sede</h3>
+          <p class="muted" style="font-size: 0.92rem; margin-bottom: 16px;"><strong>Sede Principal Yanahuara</strong></p>
+          <div style="display: grid; gap: 10px; font-size: 0.9rem; color: var(--ink-soft);">
+            <div>📍 <strong>Dirección:</strong> Av. Ejército 712, Yanahuara, Arequipa</div>
+            <div>📞 <strong>Teléfono Fijo:</strong> (054) 283-910</div>
+            <div>💬 <strong>WhatsApp:</strong> +51 954 123 456</div>
+            <div>🕒 <strong>Horario:</strong> Lunes a Sábado de 8:00 AM a 8:00 PM</div>
+          </div>
+        </div>
+
+        <div class="card" style="background: var(--blue-soft); border-color: var(--blue-deep);">
+          <h4 style="color: var(--blue-deep); margin-bottom: 8px;">ℹ Emergencias Dentales</h4>
+          <p class="tiny" style="color: var(--blue-deep); margin-bottom: 0;">Para casos de dolor agudo o traumatismo dental, comunícate directamente vía WhatsApp institucional para atención prioritaria en sede.</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <h3 style="margin-bottom: 20px;">Formulario de Consulta Previa</h3>
+          <form id="contactForm" style="display: grid; gap: 16px;">
+            <label class="form-label">
+              Nombre Completo *
+              <input type="text" class="form-control" required placeholder="Ej. María Quispe">
+            </label>
+            <label class="form-label">
+              Teléfono / WhatsApp *
+              <input type="tel" class="form-control" required placeholder="Ej. 954123456">
+            </label>
+            <label class="form-label">
+              Motivo de Consulta
+              <select class="form-select">
+                <option>Consulta general o presupuesto</option>
+                <option>Ortodoncia / Alineadores</option>
+                <option>Implantes Dentales</option>
+                <option>Estética / Carillas</option>
+                <option>Odontopediatría</option>
+              </select>
+            </label>
+            <label class="form-label">
+              Mensaje
+              <textarea class="form-control" rows="4" placeholder="Describe brevemente tus dudas o consulta clínica…"></textarea>
+            </label>
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Enviar Mensaje de Consulta</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="footerApp"></div>
+
+  <script type="module">
+    import { renderPublicHeader, renderPublicFooter, setupHeaderInteractions, showToast } from '../assets/js/components.js';
+
+    document.getElementById("headerApp").innerHTML = renderPublicHeader("contacto");
+    document.getElementById("footerApp").innerHTML = renderPublicFooter();
+    setupHeaderInteractions();
+
+    document.getElementById("contactForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      showToast("Solicitud de consulta enviada. Código ficticio: REQ-" + Math.floor(Math.random() * 9000 + 1000), "success");
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>

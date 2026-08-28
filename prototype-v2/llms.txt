@@ -1,0 +1,28 @@
+﻿# Sillar Dental Especialidades - Contexto para Agentes de IA
+
+> Sillar Dental Especialidades es un centro odontológico boutique de alta precisión ubicado en Yanahuara, Arequipa, Perú. Combina tecnología digital 3D (CBCT, escaneo intraoral, cirugía guiada) con un enfoque de hospitalidad clínica y bienestar integral del paciente.
+
+## Información de la Entidad
+- **Nombre:** Sillar Dental Especialidades
+- **Ubicación:** Av. Ejército 712, Yanahuara, Arequipa 04017, Perú
+- **Teléfono:** +51 (054) 283-910 / WhatsApp: +51 954 123 456
+- **Horario:** Lunes a Sábado de 08:00 a 20:00 (GMT-5)
+- **Marco Normativo:** NTS N.° 188-MINSA/DGIESP-2022 (Odontograma FDI de 52 piezas) y Ley N.° 29733 de Protección de Datos Personales.
+
+## Especialidades y Procedimientos
+1. **Ortodoncia & Alineadores Invisibles:** Corrección biomecánica y estética con brackets de autoligado y alineadores transparentes.
+2. **Implantología & Cirugía Guiada:** Rehabilitación de piezas ausentes mediante implantes de titanio/zirconio y tomografía CBCT.
+3. **Rehabilitación Oral & Estética:** Carillas cerámicas, coronas libres de metal e incrustaciones CAD/CAM.
+4. **Endodoncia Microscópica:** Tratamientos de conducto con localizador apical rotatorio y magnificación óptica.
+5. **Odontopediatría:** Cuidado dental infantil preventivo y manejo adaptativo sin ansiedad.
+6. **Periodoncia:** Terapia de soporte periodontal, detartraje ultrasónico y regeneración ósea.
+
+## Equipo Médico Clave
+- **Dra. Ana Flores Vanesa:** Especialista en Ortodoncia y Ortopedia Maxilar (COP 18240).
+- **Dr. Roberto Carpio Málaga:** Cirujano Dentista e Implantólogo Oral (COP 14920).
+- **Dra. Sofía Mendoza Salas:** Odontopediatra y Prevención (COP 22105).
+
+## Canales Digitales y Portales
+- **Web Pública y Reservas:** /public/index.html y /public/reservar.html
+- **Portal del Paciente:** /patient/index.html (Consulta de citas, cuotas, recetas y radiografías).
+- **Consola Clínica Staff:** /staff/index.html (Odontograma digital, agenda multi-sillón, caja chica y auditoría).

@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sillar Dental | Gestión de Inventario</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Manrope', sans-serif;
+            background-color: #051424;
+            color: #d4e4fa;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        .glass-panel {
+            background: rgba(18, 33, 49, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sillar-arch {
+            border-radius: 40px 40px 4px 4px;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .status-chip {
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #051424;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #273647;
+            border-radius: 10px;
+        }
+
+        .hover-glow:hover {
+            box-shadow: 0 0 20px rgba(0, 223, 154, 0.15);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ffb4ab",
+                        "on-tertiary-container": "#1286d6",
+                        "on-background": "#d4e4fa",
+                        "on-surface-variant": "#c5c6cd",
+                        "surface-container": "#122131",
+                        "on-surface": "#d4e4fa",
+                        "primary": "#b9c7e4",
+                        "secondary-fixed": "#4affb7",
+                        "on-primary-fixed-variant": "#39475f",
+                        "primary-fixed-dim": "#b9c7e4",
+                        "surface": "#051424",
+                        "on-secondary-fixed-variant": "#005236",
+                        "tertiary": "#9bcbff",
+                        "surface-bright": "#2c3a4c",
+                        "primary-fixed": "#d6e3ff",
+                        "surface-dim": "#051424",
+                        "surface-container-highest": "#273647",
+                        "on-primary-container": "#74829d",
+                        "outline-variant": "#44474d",
+                        "on-primary": "#233148",
+                        "outline": "#8f9097",
+                        "secondary-container": "#00df9a",
+                        "surface-variant": "#273647",
+                        "surface-container-lowest": "#010f1f",
+                        "inverse-primary": "#515f78",
+                        "surface-container-high": "#1c2b3c",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary-container": "#005d3e",
+                        "surface-container-low": "#0d1c2d",
+                        "surface-tint": "#b9c7e4",
+                        "secondary": "#46fcb4",
+                        "background": "#051424",
+                        "inverse-on-surface": "#233143",
+                        "on-tertiary-fixed-variant": "#004a7a",
+                        "on-error": "#690005",
+                        "tertiary-fixed-dim": "#9bcbff",
+                        "tertiary-container": "#001a30",
+                        "on-tertiary-fixed": "#001d34",
+                        "tertiary-fixed": "#d0e4ff",
+                        "primary-container": "#0a192f",
+                        "on-primary-fixed": "#0d1c32",
+                        "secondary-fixed-dim": "#0fe29c",
+                        "on-tertiary": "#003256",
+                        "error-container": "#93000a",
+                        "on-secondary-fixed": "#002113",
+                        "on-secondary": "#003824",
+                        "inverse-surface": "#d4e4fa"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "container-max-width": "1280px",
+                        "gutter": "24px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "64px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "display-lg": ["Manrope"],
+                        "headline-lg": ["Manrope"]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background antialiased overflow-hidden">
+<!-- NAVIGATION SHELL -->
+<aside class="w-64 h-screen fixed left-0 top-0 overflow-y-auto bg-surface-container-low backdrop-blur-xl border-r border-white/10 shadow-2xl shadow-primary/15 z-50 transition-all flex flex-col p-unit">
+<div class="px-4 py-8 mb-4">
+<h1 class="font-headline-md text-headline-md font-bold text-on-surface tracking-tight">Sillar Dental</h1>
+<p class="text-on-primary-container font-label-md text-label-md">Panel Administrativo</p>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-bright/20 transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-secondary">dashboard</span>
+<span class="font-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-bright/20 transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-secondary">group</span>
+<span class="font-label-md">Pacientes</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-bright/20 transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-secondary">save_as</span>
+<span class="font-label-md">Usuarios</span>
+</a>
+<!-- Active Tab -->
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-lg font-bold transition-all duration-300 shadow-lg shadow-secondary/20" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+<span class="font-label-md">Inventario</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-bright/20 transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-secondary">calendar_month</span>
+<span class="font-label-md">Citas</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-bright/20 transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-secondary">settings</span>
+<span class="font-label-md">Configuración</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-white/5 pt-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md">Ayuda</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-error/80 hover:text-error transition-colors" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md">Cerrar Sesión</span>
+</a>
+</div>
+</aside>
+<!-- MAIN CONTENT -->
+<main class="ml-64 w-[calc(100%-16rem)] h-screen flex flex-col">
+<!-- TOP BAR -->
+<header class="fixed top-0 right-0 w-[calc(100%-16rem)] h-16 z-40 bg-surface/80 backdrop-blur-2xl border-b border-white/5 flex justify-between items-center px-gutter">
+<div class="relative flex-1 max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-high border-none rounded-full py-2 pl-10 pr-4 text-on-surface focus:ring-2 focus:ring-secondary/50 placeholder:text-on-surface-variant/50 transition-all font-body-md" placeholder="Buscar insumos o proveedores..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-surface-variant/50 transition-all relative">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border border-surface"></span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-surface-variant/50 transition-all">
+<span class="material-symbols-outlined text-on-surface-variant">mail</span>
+</button>
+<div class="h-8 w-px bg-white/10 mx-2"></div>
+<div class="flex items-center gap-3 cursor-pointer group">
+<div class="text-right hidden lg:block">
+<p class="font-label-md text-on-surface">Dr. Adrián Sillar</p>
+<p class="text-xs text-on-surface-variant">Administrador</p>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-secondary/30 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a Hispanic male dentist in his late 40s, wearing a clean white clinical coat with a subtle Sillar Dental logo. He has a warm, confident expression. The background is a blurred, high-end dental office with soft lighting and cool-toned shadows, maintaining a premium medical aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_kFvCsPTD-jfFMDRGBkMvZVlz4zgP5rhHHhpOKHX2-x6zrN-p2q0WTVl8G4K9LttdzVUHuqIwtN3Lgf02SJCIRbMakSfB1iEG5QbbZr_GChz-i8KdWagfy6NkK1tBdFnXOOTm86rFDzyuoj_Fn3qpB-s2y2ELsFNHpf8C_3Xm-M3VIG14hKp816tUYf7MRrRp5GY6RCxJz0uuoDm3D6-c20M4xtoYSyZ_VVpHCxDgc8EiBqIofcK6dj_Q9eUHDuqCSGrnWWjE1jMh"/>
+</div>
+</div>
+</div>
+</header>
+<!-- DASHBOARD BODY -->
+<div class="mt-16 p-gutter overflow-y-auto flex-1">
+<div class="max-w-[1400px] mx-auto space-y-8">
+<!-- HEADER SECTION -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Gestión de Inventario</h2>
+<p class="text-on-surface-variant font-body-md">Monitoreo de suministros clínicos en tiempo real.</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="glass-panel px-6 py-3 rounded-full flex items-center gap-2 text-on-surface hover:bg-white/10 transition-all active:scale-95">
+<span class="material-symbols-outlined">cloud_download</span>
+<span class="font-label-md">Exportar Reporte</span>
+</button>
+<button class="bg-secondary text-on-secondary-container px-6 py-3 rounded-full flex items-center gap-2 font-bold hover:shadow-lg hover:shadow-secondary/20 transition-all active:scale-95">
+<span class="material-symbols-outlined">add</span>
+<span>Nuevo Pedido</span>
+</button>
+</div>
+</div>
+<!-- BENTO STATS -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<div class="glass-panel p-6 rounded-[24px] flex flex-col justify-between hover-glow transition-all">
+<div class="flex justify-between items-start">
+<div class="p-3 bg-on-secondary-container/10 rounded-xl text-secondary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">inventory</span>
+</div>
+<span class="text-secondary font-label-md">+12% vs mes ant.</span>
+</div>
+<div class="mt-6">
+<p class="text-on-surface-variant font-label-md">Total de Insumos</p>
+<h3 class="text-4xl font-extrabold text-on-surface">1,248</h3>
+</div>
+</div>
+<div class="glass-panel p-6 rounded-[24px] flex flex-col justify-between border-secondary-container/20">
+<div class="flex justify-between items-start">
+<div class="p-3 bg-secondary-container/20 rounded-xl text-secondary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+<div class="mt-6">
+<p class="text-on-surface-variant font-label-md">En Stock</p>
+<h3 class="text-4xl font-extrabold text-on-surface">1,102</h3>
+</div>
+</div>
+<div class="glass-panel p-6 rounded-[24px] flex flex-col justify-between border-error/20">
+<div class="flex justify-between items-start">
+<div class="p-3 bg-error/10 rounded-xl text-error">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+<span class="text-error font-label-md">Crítico</span>
+</div>
+<div class="mt-6">
+<p class="text-on-surface-variant font-label-md">Bajo Stock / Agotado</p>
+<h3 class="text-4xl font-extrabold text-on-surface">36</h3>
+</div>
+</div>
+<div class="glass-panel p-6 rounded-[24px] flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<div class="p-3 bg-on-tertiary-container/10 rounded-xl text-tertiary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">local_shipping</span>
+</div>
+</div>
+<div class="mt-6">
+<p class="text-on-surface-variant font-label-md">Pedidos en Tránsito</p>
+<h3 class="text-4xl font-extrabold text-on-surface">04</h3>
+</div>
+</div>
+</div>
+<!-- MAIN INVENTORY SECTION -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- INVENTORY LIST (TABLE) -->
+<div class="lg:col-span-2 glass-panel rounded-[32px] overflow-hidden flex flex-col">
+<div class="p-6 border-b border-white/5 flex justify-between items-center bg-surface-container-high/30">
+<div class="flex gap-4">
+<button class="font-label-md text-secondary border-b-2 border-secondary pb-1">Todos</button>
+<button class="font-label-md text-on-surface-variant hover:text-on-surface transition-colors pb-1">Materiales</button>
+<button class="font-label-md text-on-surface-variant hover:text-on-surface transition-colors pb-1">Herramientas</button>
+<button class="font-label-md text-on-surface-variant hover:text-on-surface transition-colors pb-1">Medicamentos</button>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-surface-container-highest/20">
+<tr>
+<th class="px-6 py-4 font-label-md text-on-surface-variant uppercase text-[11px] tracking-widest">Insumo</th>
+<th class="px-6 py-4 font-label-md text-on-surface-variant uppercase text-[11px] tracking-widest">Categoría</th>
+<th class="px-6 py-4 font-label-md text-on-surface-variant uppercase text-[11px] tracking-widest">Stock</th>
+<th class="px-6 py-4 font-label-md text-on-surface-variant uppercase text-[11px] tracking-widest">Estado</th>
+<th class="px-6 py-4 font-label-md text-on-surface-variant uppercase text-[11px] tracking-widest"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-white/5">
+<!-- Row 1 -->
+<tr class="hover:bg-white/5 transition-colors cursor-pointer group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-bright flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">medical_services</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Resina Z350 XT</p>
+<p class="text-xs text-on-surface-variant">3M ESPE - A2</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 font-body-md">Materiales</td>
+<td class="px-6 py-4 font-bold">42 <span class="text-on-surface-variant text-xs font-normal">und</span></td>
+<td class="px-6 py-4">
+<span class="status-chip bg-secondary-container/20 text-secondary">En Stock</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-on-surface">more_vert</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-white/5 transition-colors cursor-pointer group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-bright flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary">pill</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Anestesia Lidocaína</p>
+<p class="text-xs text-on-surface-variant">Carpules 2% Epinefrina</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 font-body-md">Medicamentos</td>
+<td class="px-6 py-4 font-bold">08 <span class="text-on-surface-variant text-xs font-normal">und</span></td>
+<td class="px-6 py-4">
+<span class="status-chip bg-orange-500/20 text-orange-400">Bajo Stock</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-on-surface">more_vert</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-white/5 transition-colors cursor-pointer group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-bright flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">precision_manufacturing</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Fresa Diamantada 801</p>
+<p class="text-xs text-on-surface-variant">Alta Velocidad</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 font-body-md">Herramientas</td>
+<td class="px-6 py-4 font-bold">0 <span class="text-on-surface-variant text-xs font-normal">und</span></td>
+<td class="px-6 py-4">
+<span class="status-chip bg-error/20 text-error">Agotado</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-on-surface">more_vert</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-white/5 transition-colors cursor-pointer group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-bright flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">masks</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Guantes Nitrilo M</p>
+<p class="text-xs text-on-surface-variant">Caja x 100und</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 font-body-md">Materiales</td>
+<td class="px-6 py-4 font-bold">120 <span class="text-on-surface-variant text-xs font-normal">und</span></td>
+<td class="px-6 py-4">
+<span class="status-chip bg-secondary-container/20 text-secondary">En Stock</span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-on-surface">more_vert</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 bg-surface-container-high/10 mt-auto flex justify-center">
+<button class="text-secondary font-label-md hover:underline">Ver todo el inventario</button>
+</div>
+</div>
+<!-- PROVIDERS & SIDE INFO -->
+<div class="space-y-6">
+<!-- PROVIDERS PANEL -->
+<div class="glass-panel rounded-[32px] p-6 sillar-arch">
+<div class="flex justify-between items-center mb-6">
+<h4 class="font-headline-md text-on-surface">Proveedores</h4>
+<button class="text-secondary hover:bg-secondary/10 p-2 rounded-full transition-all">
+<span class="material-symbols-outlined">person_add</span>
+</button>
+</div>
+<div class="space-y-4">
+<!-- Provider 1 -->
+<div class="flex items-center gap-4 p-3 rounded-2xl hover:bg-white/5 transition-all cursor-pointer">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-white/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">store</span>
+</div>
+<div class="flex-1">
+<p class="font-bold text-on-surface">DentaLogix S.A.</p>
+<p class="text-xs text-on-surface-variant">Suministros Generales</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+</div>
+<!-- Provider 2 -->
+<div class="flex items-center gap-4 p-3 rounded-2xl hover:bg-white/5 transition-all cursor-pointer">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-white/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">biotech</span>
+</div>
+<div class="flex-1">
+<p class="font-bold text-on-surface">BioMed Labs</p>
+<p class="text-xs text-on-surface-variant">Farmacéuticos</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+</div>
+<!-- Provider 3 -->
+<div class="flex items-center gap-4 p-3 rounded-2xl hover:bg-white/5 transition-all cursor-pointer">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-white/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">handyman</span>
+</div>
+<div class="flex-1">
+<p class="font-bold text-on-surface">TechDental Equipos</p>
+<p class="text-xs text-on-surface-variant">Mantenimiento</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+</div>
+</div>
+<button class="w-full mt-6 py-3 rounded-xl border border-white/10 text-on-surface-variant font-label-md hover:text-on-surface hover:bg-white/5 transition-all">Gestionar Proveedores</button>
+</div>
+<!-- RECENT ORDERS -->
+<div class="glass-panel rounded-[32px] p-6">
+<h4 class="font-headline-md text-on-surface mb-6">Pedidos Recientes</h4>
+<div class="space-y-4">
+<div class="border-l-2 border-secondary pl-4 py-1">
+<p class="font-bold text-on-surface text-sm">#ORD-2841 - DentaLogix</p>
+<p class="text-xs text-on-surface-variant italic">Esperando recepción • Hoy, 10:24 AM</p>
+</div>
+<div class="border-l-2 border-on-surface-variant/20 pl-4 py-1">
+<p class="font-bold text-on-surface text-sm">#ORD-2839 - BioMed Labs</p>
+<p class="text-xs text-on-secondary/60">Entregado • Ayer, 4:15 PM</p>
+</div>
+<div class="border-l-2 border-on-surface-variant/20 pl-4 py-1">
+<p class="font-bold text-on-surface text-sm">#ORD-2838 - TechDental</p>
+<p class="text-xs text-on-secondary/60">Entregado • 15 Oct, 2:00 PM</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB for Quick Actions (On Mobile context, though here we prioritize Desktop as per instructions) -->
+<div class="fixed bottom-10 right-10 z-50 md:hidden">
+<button class="w-16 h-16 bg-secondary text-on-secondary-container rounded-full shadow-2xl flex items-center justify-center active:scale-90 transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'wght' 700;">add</span>
+</button>
+</div>
+<!-- Micro-interaction Scripts -->
+<script>
+        document.querySelectorAll('tr').forEach(row => {
+            row.addEventListener('mouseenter', () => {
+                row.style.transform = 'translateX(4px)';
+            });
+            row.addEventListener('mouseleave', () => {
+                row.style.transform = 'translateX(0)';
+            });
+        });
+
+        // Search Bar Focus Effect
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('scale-105');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('scale-105');
+        });
+    </script>
+</body></html>

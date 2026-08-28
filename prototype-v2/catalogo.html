@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html class="dark" lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo Maestro de Vistas Stitch — Sillar Dental</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "background": "#051424",
+            "surface": "#0d1c2d",
+            "surface-card": "#122131",
+            "primary": "#b9c7e4",
+            "secondary": "#46fcb4",
+            "accent-blue": "#38bdf8"
+          },
+          fontFamily: {
+            "display": ["Manrope", "sans-serif"]
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #051424;
+      background-image: radial-gradient(circle at top right, rgba(70, 252, 180, 0.06), transparent 40%),
+                        radial-gradient(circle at bottom left, rgba(56, 189, 248, 0.06), transparent 40%);
+      font-family: 'Manrope', sans-serif;
+    }
+    .glass-header {
+      background: rgba(5, 20, 36, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glass-card {
+      background: rgba(13, 28, 45, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .glass-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(70, 252, 180, 0.4);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+    }
+  </style>
+</head>
+<body class="text-slate-100 min-h-screen flex flex-col">
+
+  <!-- Navigation Header -->
+  <header class="glass-header sticky top-0 z-50 px-6 py-4">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-4 flex-wrap">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#002046] to-[#006c49] flex items-center justify-center text-secondary border border-secondary/30">
+          <span class="material-symbols-outlined text-2xl">diamond</span>
+        </div>
+        <div>
+          <h1 class="text-xl font-extrabold tracking-tight text-white">Sillar Dental — Catálogo Maestro 1:1</h1>
+          <p class="text-xs text-slate-400">45 Vistas Corregidas y Clasificadas del Proyecto Stitch</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <a href="staff/admin.html" class="px-4 py-2 rounded-xl bg-secondary/15 text-secondary border border-secondary/30 text-xs font-bold hover:bg-secondary hover:text-black transition-all flex items-center gap-2">
+          <span class="material-symbols-outlined text-sm">dashboard</span> Ir a Portales (Seleccione su Portal)
+        </a>
+        <a href="public/index.html" class="px-4 py-2 rounded-xl bg-white/10 text-white border border-white/15 text-xs font-bold hover:bg-white/20 transition-all flex items-center gap-2">
+          <span class="material-symbols-outlined text-sm">home</span> Landing Page Premium
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Controls & Search -->
+  <section class="max-w-7xl mx-auto w-full px-6 mt-8">
+    <div class="flex flex-col md:flex-row gap-4 justify-between items-center bg-surface-card p-4 rounded-2xl border border-white/10">
+      <div class="relative w-full md:w-96">
+        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+        <input type="text" id="search-input" placeholder="Buscar pantalla (ej. ortodoncia, citas, admin)..." class="w-full pl-10 pr-4 py-2.5 bg-background border border-white/10 rounded-xl text-sm text-white placeholder-slate-400 focus:outline-none focus:border-secondary transition-all">
+      </div>
+
+      <div class="flex gap-2 overflow-x-auto w-full md:w-auto pb-1 md:pb-0" id="category-filters">
+        <!-- Categories injected via JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Grid of Cards -->
+  <main class="max-w-7xl mx-auto w-full px-6 my-8 flex-1">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="catalog-grid">
+      <!-- Cards rendered via JS -->
+    </div>
+  </main>
+
+  <!-- Modal Preview -->
+  <div id="modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="bg-surface-card border border-white/15 rounded-2xl w-full max-w-5xl h-[85vh] flex flex-col overflow-hidden shadow-2xl">
+      <div class="p-4 border-b border-white/10 flex justify-between items-center bg-background/80">
+        <h3 id="modal-title" class="font-bold text-lg text-white">Vista Previa</h3>
+        <div class="flex items-center gap-2">
+          <a id="modal-external-link" href="#" target="_blank" class="px-3 py-1.5 rounded-lg bg-secondary text-black font-bold text-xs flex items-center gap-1">
+            <span class="material-symbols-outlined text-sm">open_in_new</span> Abrir Pestaña
+          </a>
+          <button onclick="closeModal()" class="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center text-slate-300">
+            <span class="material-symbols-outlined text-sm">close</span>
+          </button>
+        </div>
+      </div>
+      <div class="flex-1 bg-black relative" id="modal-body">
+        <!-- iframe or img injected -->
+      </div>
+    </div>
+  </div>
+
+  <footer class="border-t border-white/10 py-6 text-center text-xs text-slate-400 bg-background/50">
+    Sillar Dental Ecosystem &copy; 2026 — Catálogo Maestro de Vistas Stitch 1:1
+  </footer>
+
+  <script>
+    let catalog = [];
+    let currentCategory = 'all';
+
+    const routeMap = {
+      'sillar_dental_inicio_redise_o_premium_es': 'public/index.html?theme=dark',
+      'sillar_dental_inicio_light_mode_final_es': 'public/index.html?theme=light',
+      'sillar_dental_admin_center_dark_mode_final_es': 'staff/admin.html?theme=dark',
+      'sillar_dental_admin_center_light_mode_final_es': 'staff/admin.html?theme=light',
+      'sillar_dental_dashboard_principal_dark_mode': 'staff/dashboard.html?theme=dark',
+      'sillar_dental_dashboard_principal_light_mode': 'staff/dashboard.html?theme=light',
+      'sillar_dental_gesti_n_de_usuarios_dark_mode': 'staff/usuarios.html?theme=dark',
+      'sillar_dental_gesti_n_de_usuarios_light_mode': 'staff/usuarios.html?theme=light',
+      'sillar_dental_gesti_n_de_citas_refinado_dark': 'staff/citas.html?theme=dark',
+      'sillar_dental_gesti_n_de_citas_refinado_light': 'staff/citas.html?theme=light',
+      'sillar_dental_consulta_cl_nica_1080p_refinado': 'staff/consulta.html',
+      'sillar_dental_odontograma_integral_1080p_refinado': 'staff/odontograma.html',
+      'sillar_dental_especialidad_ortodoncia_1080p_refinado': 'staff/ortodoncia.html',
+      'sillar_dental_cirug_a_e_implantolog_a_1080p_refinado': 'staff/cirugia.html',
+      'sillar_dental_operatoria_y_endodoncia_1080p_refinado': 'staff/endodoncia.html',
+      'sillar_dental_rehabilitaci_n_y_periodoncia_1080p_refinado': 'staff/rehabilitacion.html',
+      'sillar_dental_gesti_n_de_inventario_dark_mode': 'staff/inventario.html?theme=dark',
+      'sillar_dental_gesti_n_de_inventario_light_mode': 'staff/inventario.html?theme=light',
+      'sillar_dental_dashboard_de_citas_dark_mode': 'patient/index.html?theme=dark',
+      'sillar_dental_dashboard_de_citas_light_mode': 'patient/index.html?theme=light'
+    };
+
+    async function loadCatalog() {
+      try {
+        const res = await fetch('data/catalog.json');
+        catalog = await res.json();
+        renderFilters();
+        renderGrid(catalog);
+      } catch (e) {
+        console.error("Error loading catalog", e);
+      }
+    }
+
+    function renderFilters() {
+      const categories = ['Todas', ...new Set(catalog.map(i => i.category))];
+      const container = document.getElementById('category-filters');
+      container.innerHTML = categories.map((cat, idx) => {
+        const key = cat === 'Todas' ? 'all' : cat;
+        return `
+          <button onclick="filterCategory('${key}', this)" class="filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap border border-white/10 text-slate-300 hover:text-white hover:bg-white/10 transition-all ${idx === 0 ? 'bg-secondary/20 text-secondary border-secondary/40' : ''}">
+            ${cat}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function filterCategory(key, btn) {
+      currentCategory = key;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('bg-secondary/20', 'text-secondary', 'border-secondary/40'));
+      btn.classList.add('bg-secondary/20', 'text-secondary', 'border-secondary/40');
+      applyFilters();
+    }
+
+    function applyFilters() {
+      const q = document.getElementById('search-input').value.toLowerCase().trim();
+      const filtered = catalog.filter(item => {
+        const matchCat = currentCategory === 'all' || item.category === currentCategory;
+        const matchQuery = !q || item.title.toLowerCase().includes(q) || item.htmlTitle.toLowerCase().includes(q) || item.tags.some(t => t.toLowerCase().includes(q));
+        return matchCat && matchQuery;
+      });
+      renderGrid(filtered);
+    }
+
+    document.getElementById('search-input').addEventListener('input', applyFilters);
+
+    function renderGrid(items) {
+      const grid = document.getElementById('catalog-grid');
+      if (items.length === 0) {
+        grid.innerHTML = `<div class="col-span-full text-center py-12 text-slate-400">No se encontraron vistas con ese término.</div>`;
+        return;
+      }
+
+      grid.innerHTML = items.map(item => {
+        const directRoute = routeMap[item.id] || `/prototipo-stitc/${item.relCodePath}`;
+        const screenImg = `/prototipo-stitc/${item.relScreenPath}`;
+
+        return `
+          <div class="glass-card rounded-2xl overflow-hidden flex flex-col">
+            <div class="h-44 bg-black/40 relative overflow-hidden flex items-center justify-center border-b border-white/10">
+              <span class="absolute top-3 left-3 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider ${item.mode.includes('Dark') ? 'bg-slate-900 text-sky-400 border border-sky-400/30' : 'bg-white text-slate-900'}">
+                ${item.mode}
+              </span>
+              ${item.relScreenPath ? `
+                <img src="${screenImg}" alt="${item.title}" class="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500" loading="lazy">
+              ` : `
+                <div class="text-slate-500 flex flex-col items-center gap-1 text-xs">
+                  <span class="material-symbols-outlined text-3xl">description</span>
+                  <span>Especificación Tokens</span>
+                </div>
+              `}
+            </div>
+
+            <div class="p-5 flex-1 flex flex-col gap-3">
+              <div>
+                <span class="text-[11px] font-bold text-accent-blue uppercase tracking-wider">${item.category}</span>
+                <h3 class="font-bold text-base text-white line-clamp-1 mt-0.5">${item.title}</h3>
+                <p class="text-xs text-slate-400 line-clamp-2 mt-1">${item.htmlTitle}</p>
+              </div>
+
+              <div class="flex gap-1.5 flex-wrap mt-auto pt-2">
+                ${item.tags.map(t => `<span class="text-[10px] px-2 py-0.5 rounded bg-white/5 border border-white/10 text-slate-300">${t}</span>`).join('')}
+              </div>
+
+              <div class="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-white/10">
+                <a href="${directRoute}" class="px-3 py-2 rounded-xl bg-secondary/20 hover:bg-secondary hover:text-black text-secondary font-bold text-xs text-center transition-all flex items-center justify-center gap-1">
+                  <span class="material-symbols-outlined text-sm">play_arrow</span> Abrir Vista
+                </a>
+                <button onclick="previewScreen('${screenImg}', '${item.title}')" class="px-3 py-2 rounded-xl bg-white/5 hover:bg-white/15 text-slate-200 font-bold text-xs text-center transition-all flex items-center justify-center gap-1">
+                  <span class="material-symbols-outlined text-sm">image</span> Captura
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function previewScreen(imgUrl, title) {
+      document.getElementById('modal-title').textContent = title + ' — Captura Original Stitch';
+      document.getElementById('modal-external-link').href = imgUrl;
+      document.getElementById('modal-body').innerHTML = `<img src="${imgUrl}" class="w-full h-full object-contain p-4">`;
+      document.getElementById('modal').classList.remove('hidden');
+      document.getElementById('modal').classList.add('flex');
+    }
+
+    function closeModal() {
+      document.getElementById('modal').classList.add('hidden');
+      document.getElementById('modal').classList.remove('flex');
+      document.getElementById('modal-body').innerHTML = '';
+    }
+
+    loadCatalog();
+  </script>
+
+<script>
+(function() {
+  document.addEventListener('DOMContentLoaded', () => {
+    const loc = window.location.pathname;
+    const isPublic = loc.includes('/public/');
+    const isPatient = loc.includes('/patient/');
+    const prefix = isPublic || isPatient ? '../' : './';
+
+    // Intercept all clicks on links and buttons
+    document.querySelectorAll('a, button, [onclick]').forEach(el => {
+      const text = (el.innerText || el.getAttribute('aria-label') || '').toLowerCase().trim();
+      const currentHref = el.getAttribute('href');
+
+      if (!currentHref || currentHref === '#' || currentHref === '') {
+        if (text.includes('portal del paciente') || text.includes('paciente') || text.includes('mi cuenta') || text.includes('mis citas')) {
+          el.setAttribute('href', prefix + 'patient/index.html');
+        } else if (text.includes('consola de administración') || text.includes('dashboard') || text.includes('administración')) {
+          el.setAttribute('href', prefix + 'staff/dashboard.html');
+        } else if (text.includes('portales') || text.includes('seleccione su portal') || text.includes('admin')) {
+          el.setAttribute('href', prefix + 'staff/admin.html');
+        } else if (text.includes('agendar') || text.includes('reservar') || text.includes('nueva cita')) {
+          el.setAttribute('href', prefix + 'public/reservar.html');
+        } else if (text.includes('agenda semanal') || text.includes('semanal')) {
+          el.setAttribute('href', prefix + 'staff/agenda-semanal.html');
+        } else if (text.includes('calendario') || text.includes('mensual')) {
+          el.setAttribute('href', prefix + 'staff/calendario-mensual.html');
+        } else if (text.includes('citas')) {
+          el.setAttribute('href', prefix + (isPatient ? 'patient/citas.html' : 'staff/citas.html'));
+        } else if (text.includes('consulta') || text.includes('odontograma')) {
+          el.setAttribute('href', prefix + 'staff/consulta.html');
+        } else if (text.includes('ortodoncia')) {
+          el.setAttribute('href', prefix + 'staff/ortodoncia.html');
+        } else if (text.includes('cirugía') || text.includes('implantología')) {
+          el.setAttribute('href', prefix + 'staff/cirugia.html');
+        } else if (text.includes('endodoncia') || text.includes('operatoria')) {
+          el.setAttribute('href', prefix + 'staff/endodoncia.html');
+        } else if (text.includes('rehabilitación') || text.includes('periodoncia')) {
+          el.setAttribute('href', prefix + 'staff/rehabilitacion.html');
+        } else if (text.includes('inventario') || text.includes('insumos')) {
+          el.setAttribute('href', prefix + 'staff/inventario.html');
+        } else if (text.includes('usuarios') || text.includes('personal')) {
+          el.setAttribute('href', prefix + 'staff/usuarios.html');
+        } else if (text.includes('cerrar sesión') || text.includes('salir')) {
+          el.setAttribute('href', prefix + 'patient/login.html');
+        } else if (text.includes('inicio') || text.includes('home')) {
+          el.setAttribute('href', prefix + 'public/index.html');
+        }
+      }
+    });
+  });
+})();
+</script>
+
+
+
+
+
+<!-- Root-Relative Bulletproof Navigation Script -->
+<script>
+(function() {
+  function applyRootLinks() {
+    const loc = window.location.pathname;
+
+    document.querySelectorAll('a, button').forEach(el => {
+      const target = el.tagName === 'A' ? el : el.closest('a');
+      if (!target) return;
+
+      const text = (target.textContent || target.getAttribute('aria-label') || '').toLowerCase().trim();
+
+      // Patient Portal Card or Nav Link
+      if (text.includes('portal del paciente') || (text.includes('paciente') && !text.includes('doctor') && !text.includes('historial'))) {
+        target.href = '/patient/index.html';
+      }
+      // Consola de Administración Card
+      else if (text.includes('consola de administración') || text.includes('dashboard principal')) {
+        target.href = '/staff/dashboard.html';
+      }
+      // Admin Gateway Selector
+      else if (text.includes('seleccione su portal') || text.includes('portales admin')) {
+        target.href = '/staff/admin.html';
+      }
+      // Public / Landing
+      else if (text.includes('sillar dental') && (text.includes('inicio') || text.includes('home'))) {
+        target.href = '/public/index.html';
+      } else if (text.includes('agendar') || text.includes('reservar')) {
+        target.href = '/public/reservar.html';
+      }
+      // Subviews
+      else if (text.includes('agenda semanal') || text.includes('semanal')) {
+        target.href = '/staff/agenda-semanal.html';
+      } else if (text.includes('calendario mensual') || text.includes('mensual')) {
+        target.href = '/staff/calendario-mensual.html';
+      } else if (text.includes('mis citas') || text.includes('citas paciente')) {
+        target.href = '/patient/citas.html';
+      } else if (text.includes('citas') || text.includes('agenda')) {
+        target.href = '/staff/citas.html';
+      } else if (text.includes('consulta') || text.includes('odontograma')) {
+        target.href = '/staff/consulta.html';
+      } else if (text.includes('ortodoncia')) {
+        target.href = '/staff/ortodoncia.html';
+      } else if (text.includes('cirugía') || text.includes('implantología')) {
+        target.href = '/staff/cirugia.html';
+      } else if (text.includes('endodoncia') || text.includes('operatoria')) {
+        target.href = '/staff/endodoncia.html';
+      } else if (text.includes('rehabilitación') || text.includes('periodoncia')) {
+        target.href = '/staff/rehabilitacion.html';
+      } else if (text.includes('inventario') || text.includes('insumos')) {
+        target.href = '/staff/inventario.html';
+      } else if (text.includes('usuarios') || text.includes('personal')) {
+        target.href = '/staff/usuarios.html';
+      } else if (text.includes('cerrar sesión') || text.includes('salir')) {
+        target.href = '/patient/login.html';
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', applyRootLinks);
+  window.addEventListener('load', applyRootLinks);
+})();
+</script>
+
+</body>
+</html>

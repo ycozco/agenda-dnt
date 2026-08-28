@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil Profesional · Sillar Dental</title>
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+</head>
+<body>
+
+  <div id="headerApp"></div>
+
+  <section class="container" style="padding: 60px 0;">
+    <div id="doctorProfile"></div>
+  </section>
+
+  <div id="footerApp"></div>
+
+  <script type="module">
+    import { renderPublicHeader, renderPublicFooter, setupHeaderInteractions } from '../assets/js/components.js';
+    import { SEED_V2 } from '../data/seed-v2.js';
+
+    document.getElementById("headerApp").innerHTML = renderPublicHeader("equipo");
+    document.getElementById("footerApp").innerHTML = renderPublicFooter();
+    setupHeaderInteractions();
+
+    const params = new URLSearchParams(window.location.search);
+    const docId = params.get("id") || "pro_ana";
+    const doc = SEED_V2.practitioners.find(p => p.id === docId) || SEED_V2.practitioners[0];
+
+    document.title = `${doc.name} · Sillar Dental`;
+
+    document.getElementById("doctorProfile").innerHTML = `
+      <div style="margin-bottom: 20px;">
+        <a href="equipo.html" class="muted" style="font-size: 0.88rem;">← Volver al equipo médico</a>
+      </div>
+      <div class="card" style="padding: 36px; display: grid; grid-template-columns: 280px 1fr; gap: 36px;">
+        <div>
+          <img src="${doc.photo}" alt="${doc.name}" style="width: 100%; height: 320px; object-fit: cover; border-radius: 16px;">
+          <div style="margin-top: 16px; background: var(--blue-soft); padding: 14px; border-radius: 12px; text-align: center;">
+            <div style="font-size: 0.78rem; font-weight: 700; color: var(--blue-deep);">COLEGIO ODONTOLÓGICO DEL PERÚ</div>
+            <div style="font-weight: 700; color: var(--blue); font-size: 1.1rem; margin-top: 2px;">${doc.cmp}</div>
+          </div>
+        </div>
+        <div>
+          <span class="eyebrow">${doc.specialty}</span>
+          <h1 style="font-size: 2.4rem; margin-bottom: 12px;">${doc.name}</h1>
+          <p class="muted" style="font-size: 1.05rem; line-height: 1.6; margin-bottom: 24px;">${doc.bio}</p>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 30px;">
+            <div style="background: var(--paper); padding: 16px; border-radius: 12px;">
+              <strong>Sede de Atención:</strong>
+              <div class="muted" style="font-size: 0.9rem; margin-top: 4px;">Sede Principal Yanahuara</div>
+            </div>
+            <div style="background: var(--paper); padding: 16px; border-radius: 12px;">
+              <strong>Idiomas:</strong>
+              <div class="muted" style="font-size: 0.9rem; margin-top: 4px;">Español, Inglés</div>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+            <a href="reservar.html?doctor=${doc.id}" class="btn btn-primary">Solicitar cita con ${doc.name.split(" ")[1]}</a>
+            <a href="contacto.html" class="btn btn-secondary">Consulta previa</a>
+          </div>
+
+          <p class="tiny" style="margin-top: 24px; color: var(--ink-faint);">
+            ℹ Perfil ficticio de demostración clínica para Sillar Dental Arequipa.
+          </p>
+        </div>
+      </div>
+    `;
+  </script>
+</body>
+</html>

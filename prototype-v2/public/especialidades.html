@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Especialidades Dentales · Sillar Dental Arequipa</title>
+  <meta name="description" content="Catálogo demostrativo de ocho especialidades odontológicas en Yanahuara, Arequipa.">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/public-v2.css">
+  <style>
+    .catalog-hero { padding: clamp(54px, 7vw, 92px) 0 46px; background: var(--surface); border-bottom: 1px solid var(--line); }
+    .catalog-hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 40px; align-items: end; }
+    .catalog-hero h1 { max-width: 760px; margin: 10px 0 20px; }
+    .catalog-hero p { max-width: 670px; margin: 0; color: var(--ink-soft); font-size: 1.1rem; }
+    .catalog-note { border-left: 2px solid var(--terracotta); padding-left: 16px; color: var(--ink-soft); font-size: .9rem; }
+    .catalog-note strong { display: block; color: var(--ink); font-family: var(--display); font-size: 1.5rem; }
+    .catalog-main { padding: clamp(58px, 8vw, 110px) 0; }
+    .catalog-main .specialty-entry { min-height: 210px; }
+    .catalog-entry-actions { display: flex; align-items: end; justify-content: space-between; gap: 10px; margin-top: 22px; }
+    .catalog-entry-actions a { color: var(--blue); font-weight: 700; font-size: .8rem; }
+    @media (max-width: 820px) { .catalog-hero-grid { grid-template-columns: 1fr; gap: 24px; } }
+  </style>
+</head>
+<body>
+  <div id="headerApp"></div>
+  <section class="catalog-hero">
+    <div class="container catalog-hero-grid">
+      <div><span class="eyebrow">Catálogo clínico · 02</span><h1>Especialidades organizadas por el momento de tu tratamiento.</h1><p>Explora el recorrido, la tecnología de apoyo y el equipo relacionado antes de reservar una evaluación.</p></div>
+      <div class="catalog-note"><strong>8 áreas</strong>Una sede, una historia compartida y seguimiento desde tu portal.</div>
+    </div>
+  </section>
+  <main class="catalog-main">
+    <div class="container">
+      <div id="specialtiesGrid" class="specialty-index"></div>
+    </div>
+  </main>
+  <div id="footerApp"></div>
+
+  <script type="module">
+    import { renderPublicHeader, renderPublicFooter, setupHeaderInteractions } from '../assets/js/components.js';
+    import { CONTENT_V2 } from '../data/content-v2.js';
+    document.getElementById('headerApp').innerHTML = renderPublicHeader('especialidades');
+    document.getElementById('footerApp').innerHTML = renderPublicFooter();
+    setupHeaderInteractions();
+    document.getElementById('specialtiesGrid').innerHTML = CONTENT_V2.specialties.map((s, index) => `
+      <article class="specialty-entry">
+        <span class="specialty-index-number">${String(index + 1).padStart(2, '0')}</span>
+        <div>
+          <div class="specialty-meta">${s.icon} · ${s.tech}</div>
+          <h3>${s.name}</h3>
+          <p>${s.desc}</p>
+          <div class="catalog-entry-actions"><span class="tiny">${s.duration} · ${s.steps} etapas</span><a href="especialidad.html?slug=${s.id}">Ver detalle ↗</a></div>
+        </div>
+        <div class="specialty-side"><span>Diagnóstico<br>coordinado</span><a class="btn btn-secondary btn-small" href="reservar.html?specialty=${s.id}">Reservar</a></div>
+      </article>
+    `).join('');
+  </script>
+
+<script>
+(function() {
+  document.addEventListener('DOMContentLoaded', () => {
+    const loc = window.location.pathname;
+    const isPublic = loc.includes('/public/');
+    const isPatient = loc.includes('/patient/');
+    const prefix = isPublic || isPatient ? '../' : './';
+
+    // Intercept all clicks on links and buttons
+    document.querySelectorAll('a, button, [onclick]').forEach(el => {
+      const text = (el.innerText || el.getAttribute('aria-label') || '').toLowerCase().trim();
+      const currentHref = el.getAttribute('href');
+
+      if (!currentHref || currentHref === '#' || currentHref === '') {
+        if (text.includes('portal del paciente') || text.includes('paciente') || text.includes('mi cuenta') || text.includes('mis citas')) {
+          el.setAttribute('href', prefix + 'patient/index.html');
+        } else if (text.includes('consola de administración') || text.includes('dashboard') || text.includes('administración')) {
+          el.setAttribute('href', prefix + 'staff/dashboard.html');
+        } else if (text.includes('portales') || text.includes('seleccione su portal') || text.includes('admin')) {
+          el.setAttribute('href', prefix + 'staff/admin.html');
+        } else if (text.includes('agendar') || text.includes('reservar') || text.includes('nueva cita')) {
+          el.setAttribute('href', prefix + 'public/reservar.html');
+        } else if (text.includes('agenda semanal') || text.includes('semanal')) {
+          el.setAttribute('href', prefix + 'staff/agenda-semanal.html');
+        } else if (text.includes('calendario') || text.includes('mensual')) {
+          el.setAttribute('href', prefix + 'staff/calendario-mensual.html');
+        } else if (text.includes('citas')) {
+          el.setAttribute('href', prefix + (isPatient ? 'patient/citas.html' : 'staff/citas.html'));
+        } else if (text.includes('consulta') || text.includes('odontograma')) {
+          el.setAttribute('href', prefix + 'staff/consulta.html');
+        } else if (text.includes('ortodoncia')) {
+          el.setAttribute('href', prefix + 'staff/ortodoncia.html');
+        } else if (text.includes('cirugía') || text.includes('implantología')) {
+          el.setAttribute('href', prefix + 'staff/cirugia.html');
+        } else if (text.includes('endodoncia') || text.includes('operatoria')) {
+          el.setAttribute('href', prefix + 'staff/endodoncia.html');
+        } else if (text.includes('rehabilitación') || text.includes('periodoncia')) {
+          el.setAttribute('href', prefix + 'staff/rehabilitacion.html');
+        } else if (text.includes('inventario') || text.includes('insumos')) {
+          el.setAttribute('href', prefix + 'staff/inventario.html');
+        } else if (text.includes('usuarios') || text.includes('personal')) {
+          el.setAttribute('href', prefix + 'staff/usuarios.html');
+        } else if (text.includes('cerrar sesión') || text.includes('salir')) {
+          el.setAttribute('href', prefix + 'patient/login.html');
+        } else if (text.includes('inicio') || text.includes('home')) {
+          el.setAttribute('href', prefix + 'public/index.html');
+        }
+      }
+    });
+  });
+})();
+</script>
+
+
+
+
+
+<!-- Root-Relative Bulletproof Navigation Script -->
+<script>
+(function() {
+  function applyRootLinks() {
+    const loc = window.location.pathname;
+
+    document.querySelectorAll('a, button').forEach(el => {
+      const target = el.tagName === 'A' ? el : el.closest('a');
+      if (!target) return;
+
+      const text = (target.textContent || target.getAttribute('aria-label') || '').toLowerCase().trim();
+
+      // Patient Portal Card or Nav Link
+      if (text.includes('portal del paciente') || (text.includes('paciente') && !text.includes('doctor') && !text.includes('historial'))) {
+        target.href = '/patient/index.html';
+      }
+      // Consola de Administración Card
+      else if (text.includes('consola de administración') || text.includes('dashboard principal')) {
+        target.href = '/staff/dashboard.html';
+      }
+      // Admin Gateway Selector
+      else if (text.includes('seleccione su portal') || text.includes('portales admin')) {
+        target.href = '/staff/admin.html';
+      }
+      // Public / Landing
+      else if (text.includes('sillar dental') && (text.includes('inicio') || text.includes('home'))) {
+        target.href = '/public/index.html';
+      } else if (text.includes('agendar') || text.includes('reservar')) {
+        target.href = '/public/reservar.html';
+      }
+      // Subviews
+      else if (text.includes('agenda semanal') || text.includes('semanal')) {
+        target.href = '/staff/agenda-semanal.html';
+      } else if (text.includes('calendario mensual') || text.includes('mensual')) {
+        target.href = '/staff/calendario-mensual.html';
+      } else if (text.includes('mis citas') || text.includes('citas paciente')) {
+        target.href = '/patient/citas.html';
+      } else if (text.includes('citas') || text.includes('agenda')) {
+        target.href = '/staff/citas.html';
+      } else if (text.includes('consulta') || text.includes('odontograma')) {
+        target.href = '/staff/consulta.html';
+      } else if (text.includes('ortodoncia')) {
+        target.href = '/staff/ortodoncia.html';
+      } else if (text.includes('cirugía') || text.includes('implantología')) {
+        target.href = '/staff/cirugia.html';
+      } else if (text.includes('endodoncia') || text.includes('operatoria')) {
+        target.href = '/staff/endodoncia.html';
+      } else if (text.includes('rehabilitación') || text.includes('periodoncia')) {
+        target.href = '/staff/rehabilitacion.html';
+      } else if (text.includes('inventario') || text.includes('insumos')) {
+        target.href = '/staff/inventario.html';
+      } else if (text.includes('usuarios') || text.includes('personal')) {
+        target.href = '/staff/usuarios.html';
+      } else if (text.includes('cerrar sesión') || text.includes('salir')) {
+        target.href = '/patient/login.html';
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', applyRootLinks);
+  window.addEventListener('load', applyRootLinks);
+})();
+</script>
+
+</body>
+</html>

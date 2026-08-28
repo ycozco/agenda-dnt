@@ -1,0 +1,12 @@
+services:
+  sillar-dental-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sillar_dental_prototype_v2
+    ports:
+      - "8085:80"
+    volumes:
+      - .:/usr/share/nginx/html:ro
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    restart: unless-stopped

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalle de Especialidad · Sillar Dental</title>
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+</head>
+<body>
+
+  <div id="headerApp"></div>
+
+  <section style="background: var(--surface); padding: 50px 0 30px; border-bottom: 1px solid var(--line);">
+    <div class="container" id="specialtyHeader"></div>
+  </section>
+
+  <section class="container" style="padding: 60px 0;">
+    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 40px;" id="specialtyBody"></div>
+  </section>
+
+  <div id="footerApp"></div>
+
+  <script type="module">
+    import { renderPublicHeader, renderPublicFooter, setupHeaderInteractions } from '../assets/js/components.js';
+    import { CONTENT_V2 } from '../data/content-v2.js';
+    import { SEED_V2 } from '../data/seed-v2.js';
+
+    document.getElementById("headerApp").innerHTML = renderPublicHeader("especialidades");
+    document.getElementById("footerApp").innerHTML = renderPublicFooter();
+    setupHeaderInteractions();
+
+    const params = new URLSearchParams(window.location.search);
+    const slug = params.get("slug") || "ortodoncia";
+    const specialty = CONTENT_V2.specialties.find(s => s.id === slug) || CONTENT_V2.specialties[0];
+
+    document.title = `${specialty.name} · Sillar Dental Arequipa`;
+
+    document.getElementById("specialtyHeader").innerHTML = `
+      <div style="margin-bottom: 12px;">
+        <a href="especialidades.html" class="muted" style="font-size: 0.88rem;">← Volver a especialidades</a>
+      </div>
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <span style="font-size: 3rem;">${specialty.icon}</span>
+        <div>
+          <h1>${specialty.name}</h1>
+          <p class="muted" style="font-size: 1.1rem; margin-bottom: 0;">${specialty.desc}</p>
+        </div>
+      </div>
+    `;
+
+    document.getElementById("specialtyBody").innerHTML = `
+      <div>
+        <div class="card" style="margin-bottom: 30px;">
+          <h3>¿En qué consiste el tratamiento?</h3>
+          <p class="muted">En Sillar Dental realizamos la planificación clínica en 4 etapas transparentes: evaluación tomográfica/fotográfica inicial, propuesta tridimensional, ejecución guiada y etapa de mantenimiento.</p>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px; margin-top: 24px;">
+            <div style="background: var(--paper); padding: 16px; border-radius: 12px; text-align: center;">
+              <span class="eyebrow" style="margin-bottom: 4px;">Etapa 1</span>
+              <h4 style="margin-bottom: 4px; font-size: 0.95rem;">Escaneo 3D</h4>
+              <p class="tiny">Toma digital de modelos</p>
+            </div>
+            <div style="background: var(--paper); padding: 16px; border-radius: 12px; text-align: center;">
+              <span class="eyebrow" style="margin-bottom: 4px;">Etapa 2</span>
+              <h4 style="margin-bottom: 4px; font-size: 0.95rem;">Diagnóstico</h4>
+              <p class="tiny">Planificación por especialista</p>
+            </div>
+            <div style="background: var(--paper); padding: 16px; border-radius: 12px; text-align: center;">
+              <span class="eyebrow" style="margin-bottom: 4px;">Etapa 3</span>
+              <h4 style="margin-bottom: 4px; font-size: 0.95rem;">Tratamiento</h4>
+              <p class="tiny">Ejecución clínica controlada</p>
+            </div>
+            <div style="background: var(--paper); padding: 16px; border-radius: 12px; text-align: center;">
+              <span class="eyebrow" style="margin-bottom: 4px;">Etapa 4</span>
+              <h4 style="margin-bottom: 4px; font-size: 0.95rem;">Controles</h4>
+              <p class="tiny">Seguimiento semestral</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Tecnología involucrada en ${specialty.name}</h3>
+          <p class="muted">Este tratamiento hace uso del equipamiento ${specialty.tech} disponible en nuestra sede Yanahuara.</p>
+          <img src="../assets/images/public/services/explicacion-modelo-dental-6627325.jpg" alt="Explicación de modelo dental" style="width: 100%; border-radius: 12px; margin-top: 16px; height: 260px; object-fit: cover;">
+        </div>
+      </div>
+
+      <div>
+        <div class="card" style="position: sticky; top: 100px;">
+          <h3 style="margin-bottom: 16px;">Solicitar Evaluación</h3>
+          <div style="display: grid; gap: 12px; margin-bottom: 20px; font-size: 0.88rem; color: var(--ink-soft);">
+            <div>⏱️ <strong>Duración estimada:</strong> ${specialty.duration}</div>
+            <div>📍 <strong>Sede:</strong> Yanahuara, Arequipa</div>
+            <div>👨‍⚕️ <strong>Especialista asignado:</strong> ${SEED_V2.practitioners[0].name}</div>
+          </div>
+          <a href="reservar.html?specialty=${specialty.id}" class="btn btn-primary" style="width: 100%; margin-bottom: 12px;">Reservar cita para esta área</a>
+          <a href="contacto.html" class="btn btn-secondary" style="width: 100%;">Hacer una consulta previa</a>
+        </div>
+      </div>
+    `;
+  </script>
+</body>
+</html>

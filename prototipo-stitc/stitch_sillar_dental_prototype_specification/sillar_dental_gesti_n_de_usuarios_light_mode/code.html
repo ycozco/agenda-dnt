@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sillar Dental - Gestión de Usuarios</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Source+Sans+3:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "error-container": "#ffdad6",
+                    "surface-container-highest": "#d3e4fe",
+                    "on-tertiary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "inverse-surface": "#213145",
+                    "inverse-on-surface": "#eaf1ff",
+                    "surface-bright": "#f8f9ff",
+                    "surface": "#f8f9ff",
+                    "on-error": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "primary": "#002046",
+                    "secondary-fixed-dim": "#b7c7e7",
+                    "outline": "#74777f",
+                    "primary-container": "#1b365d",
+                    "on-background": "#0b1c30",
+                    "on-secondary-fixed": "#0a1c34",
+                    "on-tertiary-fixed": "#1b1c1a",
+                    "tertiary-fixed-dim": "#c8c6c4",
+                    "error": "#ba1a1a",
+                    "primary-fixed": "#d6e3ff",
+                    "on-surface": "#0b1c30",
+                    "tertiary-container": "#363634",
+                    "surface-container-low": "#eff4ff",
+                    "inverse-primary": "#aec7f7",
+                    "on-secondary-container": "#52617d",
+                    "surface-container-high": "#dce9ff",
+                    "on-tertiary-fixed-variant": "#474745",
+                    "on-secondary": "#ffffff",
+                    "secondary": "#4f5f7a",
+                    "on-primary-fixed-variant": "#2e476f",
+                    "on-secondary-fixed-variant": "#384761",
+                    "surface-variant": "#d3e4fe",
+                    "surface-container": "#e5eeff",
+                    "on-surface-variant": "#44474e",
+                    "tertiary": "#20211f",
+                    "outline-variant": "#c4c6cf",
+                    "primary-fixed-dim": "#aec7f7",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-dim": "#cbdbf5",
+                    "surface-tint": "#465f88",
+                    "secondary-fixed": "#d5e3ff",
+                    "on-tertiary-container": "#a09f9c",
+                    "secondary-container": "#cdddfe",
+                    "on-primary-container": "#87a0cd",
+                    "tertiary-fixed": "#e4e2df",
+                    "on-primary-fixed": "#001b3d",
+                    "background": "#f8f9ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "48px",
+                    "margin-mobile": "16px",
+                    "container-max": "1280px",
+                    "gutter": "24px",
+                    "base": "8px",
+                    "unit": "24px"
+            },
+            "fontFamily": {
+                    "caption": ["\"Source Sans 3\""],
+                    "label-md": ["\"Source Sans 3\""],
+                    "headline-xl": ["Manrope"],
+                    "headline-md": ["Manrope"],
+                    "headline-lg": ["Manrope"],
+                    "headline-lg-mobile": ["Manrope"],
+                    "body-md": ["\"Source Sans 3\""],
+                    "body-lg": ["\"Source Sans 3\""]
+            },
+            "fontSize": {
+                    "caption": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .sillar-arch {
+            clip-path: ellipse(100% 100% at 50% 100%);
+        }
+        .sillar-card {
+            background: #ffffff;
+            border: 1px solid rgba(79, 95, 122, 0.1);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #d5e3ff; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden">
+<!-- SideNavBar Anchor -->
+<aside class="w-64 h-screen fixed left-0 top-0 overflow-y-auto bg-surface dark:bg-surface-container-lowest bg-surface-container-low dark:bg-surface-container-low backdrop-blur-xl border-r border-white/10 shadow-2xl shadow-primary/15 flex flex-col h-full p-unit z-50">
+<div class="mb-10">
+<h1 class="font-headline-md text-headline-md font-bold text-on-surface dark:text-on-background tracking-tight">Sillar Dental</h1>
+<p class="font-label-md text-label-md text-secondary opacity-70">Panel Administrativo</p>
+</div>
+<nav class="flex-1 space-y-2">
+<!-- Dashboard -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface transition-colors duration-200 hover:bg-surface-bright/20 hover:backdrop-blur-md rounded-lg active:scale-95 transition-transform duration-150 cursor-pointer" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<!-- Pacientes -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface transition-colors duration-200 hover:bg-surface-bright/20 hover:backdrop-blur-md rounded-lg active:scale-95 transition-transform duration-150 cursor-pointer" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-label-md text-label-md">Pacientes</span>
+</a>
+<!-- Usuarios (Active) -->
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-lg font-bold transition-all duration-300 active:scale-95 transition-transform duration-150 cursor-pointer" href="#">
+<span class="material-symbols-outlined" data-icon="person_manage">save_as</span>
+<span class="font-label-md text-label-md">Usuarios</span>
+</a>
+<!-- Inventario -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface transition-colors duration-200 hover:bg-surface-bright/20 hover:backdrop-blur-md rounded-lg active:scale-95 transition-transform duration-150 cursor-pointer" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="font-label-md text-label-md">Inventario</span>
+</a>
+<!-- Citas -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface transition-colors duration-200 hover:bg-surface-bright/20 hover:backdrop-blur-md rounded-lg active:scale-95 transition-transform duration-150 cursor-pointer" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
+<span class="font-label-md text-label-md">Citas</span>
+</a>
+<!-- Configuración -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface transition-colors duration-200 hover:bg-surface-bright/20 hover:backdrop-blur-md rounded-lg active:scale-95 transition-transform duration-150 cursor-pointer" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md">Configuración</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 space-y-2 border-t border-outline-variant/30">
+<button class="w-full bg-primary text-on-primary py-3 rounded-xl font-bold flex items-center justify-center gap-2 active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                Nuevo Registro
+            </button>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-label-md text-label-md">Ayuda</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-error transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-label-md text-label-md">Cerrar Sesión</span>
+</a>
+</div>
+</aside>
+<!-- TopAppBar Anchor -->
+<header class="fixed top-0 right-0 w-[calc(100%-16rem)] h-16 z-40 bg-surface/80 dark:bg-surface-container/80 backdrop-blur-2xl border-b border-white/5 flex justify-between items-center px-gutter">
+<div class="flex items-center bg-surface-container-low px-4 py-2 rounded-full w-96 group focus-within:ring-2 focus-within:ring-secondary/50 transition-all">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 w-full text-label-md ml-2 placeholder:text-on-surface-variant/50" placeholder="Buscar personal o permisos..." type="text"/>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-on-surface-variant hover:bg-surface-variant/50 p-2 rounded-full transition-all relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-surface"></span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-variant/50 p-2 rounded-full transition-all">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+</button>
+<div class="flex items-center gap-3 pl-4 border-l border-outline-variant/30">
+<div class="text-right">
+<p class="font-label-md text-label-md leading-none">Dr. Alejandro Vizcarra</p>
+<p class="text-caption text-secondary">Administrador</p>
+</div>
+<div class="w-10 h-10 rounded-full bg-secondary-container overflow-hidden ring-2 ring-white shadow-sm">
+<img class="w-full h-full object-cover" data-alt="A professional portrait of a senior male dentist in a clean white clinic environment. He has a friendly, authoritative expression, wearing a navy blue medical scrub and a stethoscope. The lighting is soft and clinical, with the bright, textured white walls of an Arequipa clinic in the background. High-quality corporate photography style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCg89aF4_1LDy1DnhdHI1DetFvMnnCr5Idtoo5_ft2a5PJ6q5cYqVnbfqq88bbvAMV5WmOujkFafiyLi5ql7gyQmaLvpePAu8CyngtKR2FZpgWJ2KJ2AypPybmMFvArMvFyDjOW8TP550oXT8fZ9WZxnEIFD6O0rGrtXTdbiD9bVFn3WTCLZJpp4WMJbAWu0ItlvWDwqd97WKzge1kfeZa4fWq_ZOWbsjtl6Lo6cpUys_murknS4ZEP4j0lsesFbOJf8VGnDc5rrdcm"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 pt-24 px-gutter pb-12 min-h-screen">
+<!-- Welcome Section / Hero -->
+<div class="mb-10 flex justify-between items-end">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary tracking-tight">Gestión de Usuarios</h2>
+<p class="font-body-md text-body-md text-secondary mt-1">Control de accesos, roles y personal médico de la clínica.</p>
+</div>
+<div class="flex gap-3">
+<button class="px-6 py-2 rounded-lg border border-secondary text-secondary font-label-md flex items-center gap-2 hover:bg-secondary/5 transition-all active:scale-95">
+<span class="material-symbols-outlined text-[18px]" data-icon="file_download">file_download</span>
+                    Exportar Lista
+                </button>
+<button class="px-6 py-2 rounded-lg bg-primary text-on-primary font-label-md flex items-center gap-2 hover:opacity-90 shadow-lg shadow-primary/10 transition-all active:scale-95">
+<span class="material-symbols-outlined text-[18px]" data-icon="person_add">person_add</span>
+                    Añadir Usuario
+                </button>
+</div>
+</div>
+<!-- Bento Filter Grid -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-8">
+<div class="md:col-span-1 sillar-card p-4 rounded-xl flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="badge">badge</span>
+</div>
+<div>
+<p class="text-caption text-secondary">Total Personal</p>
+<p class="font-headline-md text-headline-md leading-tight">42</p>
+</div>
+</div>
+<div class="md:col-span-1 sillar-card p-4 rounded-xl flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg bg-secondary-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+</div>
+<div>
+<p class="text-caption text-secondary">Administradores</p>
+<p class="font-headline-md text-headline-md leading-tight">05</p>
+</div>
+</div>
+<div class="md:col-span-2 sillar-card p-4 rounded-xl flex flex-col justify-center">
+<div class="flex justify-between items-center px-2">
+<div class="flex -space-x-3">
+<div class="w-8 h-8 rounded-full border-2 border-white bg-surface-container-highest flex items-center justify-center text-[10px] font-bold">JD</div>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-primary-fixed flex items-center justify-center text-[10px] font-bold">MA</div>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-secondary-fixed flex items-center justify-center text-[10px] font-bold">RV</div>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-surface-variant flex items-center justify-center text-[10px] font-bold text-on-surface-variant">+8</div>
+</div>
+<div class="text-right">
+<p class="text-caption text-secondary">Conectados ahora</p>
+<p class="font-label-md text-label-md text-primary">11 miembros activos</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Data Table Container -->
+<div class="sillar-card rounded-2xl overflow-hidden shadow-sm">
+<div class="p-6 border-b border-outline-variant/30 flex justify-between items-center">
+<div class="flex gap-4">
+<select class="bg-surface-container-low border-none rounded-lg text-label-md py-2 px-4 focus:ring-2 focus:ring-primary/20">
+<option>Todos los roles</option>
+<option>Dentista</option>
+<option>Asistente</option>
+<option>Recepcionista</option>
+<option>Administrador</option>
+</select>
+<select class="bg-surface-container-low border-none rounded-lg text-label-md py-2 px-4 focus:ring-2 focus:ring-primary/20">
+<option>Estado: Activo</option>
+<option>Estado: Inactivo</option>
+<option>Estado: En Vacaciones</option>
+</select>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors" data-icon="filter_list">filter_list</span>
+<span class="text-label-md">Ordenar por: Recientes</span>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low/50">
+<tr>
+<th class="px-6 py-4 font-label-md text-label-md text-secondary uppercase tracking-wider">Usuario</th>
+<th class="px-6 py-4 font-label-md text-label-md text-secondary uppercase tracking-wider">Rol / Especialidad</th>
+<th class="px-6 py-4 font-label-md text-label-md text-secondary uppercase tracking-wider">Estado</th>
+<th class="px-6 py-4 font-label-md text-label-md text-secondary uppercase tracking-wider">Último Acceso</th>
+<th class="px-6 py-4 font-label-md text-label-md text-secondary uppercase tracking-wider">Permisos</th>
+<th class="px-6 py-4 font-label-md text-label-md text-secondary uppercase tracking-wider text-right">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/20">
+<!-- User Row 1 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Close-up headshot of a female dental assistant, mid-20s, with a warm smile, wearing a professional clinic uniform. The lighting is bright and airy, typical of a modern medical office in the daytime. Clean white stone textures in the background create a high-end feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPSGot9lh-5KR7x1pCQ8vKLpdzWU-gl70EY4XsQYZtTno865hhFp2S4UqeHaKZmADEkHWOOGZiBAvI1OUDs31KVlsxLgZdQhvgY0jdoX1E0wShip3Tqydp_1h8cxCfZJm7uiNzomdy_YJF7FF6_lrUtP_zCZtxrBg_CuLcqkW4yNF0AeLKwa7ytw4wOvkA49znXO7bacnBzTdDX4BaN7jxl7CiRsruscGocuY7AX8I-NKYl5bPvCXU2Ckit5ezbOgAIKU8g6uagOxN"/>
+</div>
+<div>
+<p class="font-label-md text-label-md text-primary font-bold">Dra. Claudia Benavides</p>
+<p class="text-caption text-secondary">c.benavides@sillardental.pe</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<p class="text-label-md text-on-surface">Odontóloga General</p>
+<p class="text-caption text-secondary">Sede Yanahuara</p>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 rounded-full bg-secondary-container/30 text-secondary text-caption font-bold flex items-center gap-1 w-fit">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                                    Activo
+                                </span>
+</td>
+<td class="px-6 py-5">
+<p class="text-label-md text-on-surface">Hoy, 09:14 AM</p>
+<p class="text-caption text-secondary">IP: 192.168.1.104</p>
+</td>
+<td class="px-6 py-5">
+<div class="flex gap-1">
+<span class="material-symbols-outlined text-[18px] text-secondary-fixed-dim" data-icon="clinical_notes" title="Historias Clínicas">clinical_notes</span>
+<span class="material-symbols-outlined text-[18px] text-secondary-fixed-dim" data-icon="calendar_today" title="Citas">calendar_today</span>
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant/20" data-icon="payments" title="Pagos (Sin Acceso)">payments</span>
+</div>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 hover:bg-surface-variant/50 rounded-lg transition-all text-secondary">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- User Row 2 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Portrait of a young male dental technician working in a clinical lab, wearing a light grey professional apron over a white shirt. He looks focused and professional. The background shows blurred medical equipment and high-end clinic interior with natural light hitting sillar stone surfaces." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEFW6jEGe5fdCXXReWSi6qX1puKmud-9Y46elUAeORfCvdr2ziOr8fOi-majBBZe_COr4OnojxvwsqC281S6a7GoLEDIL9m1nxvL_lxD3EkL5-GZUxcaTT6XeD4abuczXnxdXh60Tw9ydG-tCEFtFeyIKGIHEwVnuLULbNJo6Ot-2xeHEO-btmBMEO6oF1s4CIXYuyBWSsHDKFBb0vUlIwiWo-ZjdEbtTgRndgwWM-8zdExWLkVK22VovYQqqt_ThaHODF5CyVKk3m"/>
+</div>
+<div>
+<p class="font-label-md text-label-md text-primary font-bold">Roberto Valdivia</p>
+<p class="text-caption text-secondary">r.valdivia@sillardental.pe</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<p class="text-label-md text-on-surface">Técnico Dental</p>
+<p class="text-caption text-secondary">Laboratorio Interno</p>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 rounded-full bg-error-container/20 text-error text-caption font-bold flex items-center gap-1 w-fit">
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+                                    En Vacaciones
+                                </span>
+</td>
+<td class="px-6 py-5">
+<p class="text-label-md text-on-surface">Hace 3 días</p>
+<p class="text-caption text-secondary">IP: 192.168.1.112</p>
+</td>
+<td class="px-6 py-5">
+<div class="flex gap-1">
+<span class="material-symbols-outlined text-[18px] text-secondary-fixed-dim" data-icon="inventory_2" title="Inventario">inventory_2</span>
+</div>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 hover:bg-surface-variant/50 rounded-lg transition-all text-secondary">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- User Row 3 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A front desk female receptionist at a premium dental clinic, professional and smiling. She is wearing a navy blue corporate vest and white blouse. The background is a minimalist reception area with a large arch feature and bright lighting, reflecting an atmosphere of trust and clinical excellence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAn7CzeYV9JtFDBCZVv5chluQqzIsa7vpBj_df_tZmmoZFF2VZAuQVjSzfT8czXlu6YCK5e2Px3v-4Iy2quXLWZtj_kxDkhH0KCB7rBx1Mei__0-8v8nJQwJ5_fameZdTL3luDGaKRT3h15QfhTXxhBucWXk7wpOwcSmZR0EdajoCrqMI1ZQkDbNZJsn7uXbTBthkzZYMHVwJInHLTYgjfBYm2zdvEFBwExJuuWe1qHL4h5Md5EWYwoosYitFAKV2tRsghs0wIANsaG"/>
+</div>
+<div>
+<p class="font-label-md text-label-md text-primary font-bold">Lucía Mendívil</p>
+<p class="text-caption text-secondary">l.mendivil@sillardental.pe</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<p class="text-label-md text-on-surface">Recepcionista</p>
+<p class="text-caption text-secondary">Atención al Cliente</p>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 rounded-full bg-secondary-container/30 text-secondary text-caption font-bold flex items-center gap-1 w-fit">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                                    Activo
+                                </span>
+</td>
+<td class="px-6 py-5">
+<p class="text-label-md text-on-surface">En línea ahora</p>
+<p class="text-caption text-secondary">IP: 192.168.1.101</p>
+</td>
+<td class="px-6 py-5">
+<div class="flex gap-1">
+<span class="material-symbols-outlined text-[18px] text-secondary-fixed-dim" data-icon="calendar_today" title="Citas">calendar_today</span>
+<span class="material-symbols-outlined text-[18px] text-secondary-fixed-dim" data-icon="payments" title="Pagos">payments</span>
+<span class="material-symbols-outlined text-[18px] text-secondary-fixed-dim" data-icon="person_search" title="Pacientes">person_search</span>
+</div>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 hover:bg-surface-variant/50 rounded-lg transition-all text-secondary">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Extra Row for Density -->
+<tr class="hover:bg-surface-container-low/30 transition-colors">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A portrait of a male dental specialist, middle-aged, with a confident and clinical look. He wears a high-end white doctor coat with embroidered clinic logo. The architectural background features a sweeping arch from the Sillar Dental clinic in Arequipa, with natural light filtering through textured stone." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyAKDtsCrjt6DRNeI3XJqP6SgZjc2kOmz_sLMEKPSj7-LL8GReZzJEP_P3mERtOyKG1-3ZySSXA75KD3KBHtLgwxNEjcUnzlbXNAviKAn_z7TzHzxlTRC7ycNV6H4t33tt_-ZFFMRn_GQba3fOl_ccxyFDD0cEdMeqQohQiLDfZRThbEGv3Q5IKtLDEDGiaxxJQpplRiqJXThQJLOLIwBRkmBaZobe_fZ8oCcAS0Lz1fmtUGoxATkNcVHv0HIscy-l4I0uMXbEIn7L"/>
+</div>
+<div>
+<p class="font-label-md text-label-md text-primary font-bold">Dr. Marco Arredondo</p>
+<p class="text-caption text-secondary">m.arredondo@sillardental.pe</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<p class="text-label-md text-on-surface">Endodoncista</p>
+<p class="text-caption text-secondary">Sede Principal</p>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 rounded-full bg-secondary-container/30 text-secondary text-caption font-bold flex items-center gap-1 w-fit">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+                                    Activo
+                                </span>
+</td>
+<td class="px-6 py-5">
+<p class="text-label-md text-on-surface">Ayer, 04:30 PM</p>
+<p class="text-caption text-secondary">IP: 192.168.1.109</p>
+</td>
+<td class="px-6 py-5">
+<div class="flex gap-1">
+<span class="material-symbols-outlined text-[18px] text-secondary-fixed-dim" data-icon="clinical_notes" title="Historias Clínicas">clinical_notes</span>
+<span class="material-symbols-outlined text-[18px] text-secondary-fixed-dim" data-icon="calendar_today" title="Citas">calendar_today</span>
+</div>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 hover:bg-surface-variant/50 rounded-lg transition-all text-secondary">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Footer / Pagination -->
+<div class="px-6 py-4 bg-surface-container-low/30 border-t border-outline-variant/30 flex justify-between items-center">
+<p class="text-caption text-secondary">Mostrando 4 de 42 usuarios registrados</p>
+<div class="flex gap-2">
+<button class="px-3 py-1 border border-outline-variant rounded hover:bg-white transition-all text-caption disabled:opacity-30" disabled="">Anterior</button>
+<button class="px-3 py-1 bg-primary text-on-primary rounded text-caption font-bold">1</button>
+<button class="px-3 py-1 border border-outline-variant rounded hover:bg-white transition-all text-caption">2</button>
+<button class="px-3 py-1 border border-outline-variant rounded hover:bg-white transition-all text-caption">3</button>
+<button class="px-3 py-1 border border-outline-variant rounded hover:bg-white transition-all text-caption">Siguiente</button>
+</div>
+</div>
+</div>
+<!-- Quick Actions & Stats -->
+<div class="mt-8 grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Permisos rápidos -->
+<div class="lg:col-span-2 sillar-card p-6 rounded-2xl">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-md text-headline-md text-primary">Permisos Críticos</h3>
+<button class="text-primary font-label-md hover:underline">Gestionar Roles</button>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-secondary" data-icon="shield_person">shield_person</span>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Acceso a Financiero</p>
+<p class="text-caption text-secondary">Permite ver reportes de ingresos y egresos.</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-secondary" data-icon="database">database</span>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Edición de Historias Clínicas</p>
+<p class="text-caption text-secondary">Solo personal médico verificado.</p>
+</div>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</div>
+<!-- Audit Log Summary -->
+<div class="sillar-card p-6 rounded-2xl">
+<h3 class="font-headline-md text-headline-md text-primary mb-6">Actividad Reciente</h3>
+<div class="space-y-6 relative before:absolute before:left-3 before:top-2 before:bottom-0 before:w-[1px] before:bg-outline-variant/30">
+<div class="relative pl-8">
+<div class="absolute left-1 top-1 w-4 h-4 rounded-full bg-secondary ring-4 ring-surface"></div>
+<p class="text-label-md text-on-surface"><strong>Admin</strong> cambió rol de Lucía M.</p>
+<p class="text-caption text-secondary">Hace 12 minutos</p>
+</div>
+<div class="relative pl-8">
+<div class="absolute left-1 top-1 w-4 h-4 rounded-full bg-primary-container ring-4 ring-surface"></div>
+<p class="text-label-md text-on-surface"><strong>Dra. Benavides</strong> inició sesión.</p>
+<p class="text-caption text-secondary">Hace 45 minutos</p>
+</div>
+<div class="relative pl-8">
+<div class="absolute left-1 top-1 w-4 h-4 rounded-full bg-error ring-4 ring-surface"></div>
+<p class="text-label-md text-on-surface">Intento de acceso fallido: IP 200.48.X.X</p>
+<p class="text-caption text-secondary">Hace 2 horas</p>
+</div>
+<div class="relative pl-8">
+<div class="absolute left-1 top-1 w-4 h-4 rounded-full bg-secondary-fixed ring-4 ring-surface"></div>
+<p class="text-label-md text-on-surface"><strong>Roberto V.</strong> marcó vacaciones.</p>
+<p class="text-caption text-secondary">Hace 5 horas</p>
+</div>
+</div>
+<button class="w-full mt-6 py-2 text-primary font-label-md border border-primary/20 rounded-lg hover:bg-primary/5 transition-all">Ver Auditoría Completa</button>
+</div>
+</div>
+</main>
+<!-- Interactive Micro-interactions Script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Hover states for table rows
+            const rows = document.querySelectorAll('tbody tr');
+            rows.forEach(row => {
+                row.addEventListener('mouseenter', () => {
+                    row.classList.add('bg-surface-container-low/50');
+                });
+                row.addEventListener('mouseleave', () => {
+                    row.classList.remove('bg-surface-container-low/50');
+                });
+            });
+
+            // Ripple effect on primary buttons
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(button => {
+                button.addEventListener('mousedown', function(e) {
+                    this.style.transform = 'scale(0.96)';
+                });
+                button.addEventListener('mouseup', function(e) {
+                    this.style.transform = 'scale(1)';
+                });
+            });
+        });
+    </script>
+</body></html>

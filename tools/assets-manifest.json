@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "1.0",
+  "project": "sillar-dental-prototype-v2",
+  "policy": "Las personas fotografiadas son material de referencia; no representan doctores de Sillar Dental y no deben vincularse con nombres o credenciales ficticias.",
+  "categories": [
+    {
+      "id": "public-hero",
+      "path": "prototype-v2/assets/images/public/hero",
+      "purpose": "hero y portada pública",
+      "assets": [
+        {
+          "id": "pexels-consulta-5355900",
+          "filename": "consulta-dental-paciente-5355900.jpg",
+          "url": "https://images.pexels.com/photos/5355900/pexels-photo-5355900.jpeg?cs=srgb&dl=pexels-tima-miroshnichenko-5355900.jpg&fm=jpg",
+          "sourcePage": "https://www.pexels.com/photo/patient-having-an-appointment-with-a-dentist-5355900/",
+          "provider": "Pexels",
+          "author": "Tima Miroshnichenko",
+          "license": "Pexels License",
+          "usage": "Referencia visual de atención; no usar como testimonio ni personal real.",
+          "alt": "Profesional dental atendiendo a un paciente durante una evaluación clínica",
+          "tags": ["hero", "consulta", "evaluacion", "atencion", "clinica", "referencia"]
+        },
+        {
+          "id": "pexels-plan-6627354",
+          "filename": "consulta-plan-dental-6627354.jpg",
+          "url": "https://images.pexels.com/photos/6627354/pexels-photo-6627354.jpeg?cs=srgb&dl=pexels-karola-g-6627354.jpg&fm=jpg",
+          "sourcePage": "https://www.pexels.com/photo/dentist-having-a-discussion-with-a-patient-6627347/",
+          "provider": "Pexels",
+          "author": "Karola G",
+          "license": "Pexels License",
+          "usage": "Referencia visual de conversación y plan; no usar para afirmar un caso real.",
+          "alt": "Dentista conversando con un paciente sobre un plan de tratamiento",
+          "tags": ["hero", "plan", "comunicacion", "paciente", "diagnostico", "referencia"]
+        }
+      ]
+    },
+    {
+      "id": "public-team",
+      "path": "prototype-v2/assets/images/public/team",
+      "purpose": "equipo y cultura clínica",
+      "assets": [
+        {
+          "id": "pexels-doctor-37458046",
+          "filename": "profesional-dental-referencia-37458046.jpg",
+          "url": "https://images.pexels.com/photos/37458046/pexels-photo-37458046.jpeg?cs=srgb&dl=pexels-emily-gaibor-2161401886-37458046.jpg&fm=jpg",
+          "sourcePage": "https://www.pexels.com/photo/confident-dentist-in-modern-dental-clinic-37458046/",
+          "provider": "Pexels",
+          "author": "Emily Gaibor",
+          "license": "Pexels License",
+          "usage": "Referencia de dirección de arte; no asociar a un perfil profesional ficticio.",
+          "alt": "Profesional dental en una clínica moderna, imagen de referencia",
+          "tags": ["equipo", "profesional", "retrato", "clinica", "referencia"]
+        },
+        {
+          "id": "pexels-team-37458124",
+          "filename": "equipo-dental-clinica-37458124.jpg",
+          "url": "https://images.pexels.com/photos/37458124/pexels-photo-37458124.jpeg?cs=srgb&dl=pexels-emily-gaibor-2161401886-37458124.jpg&fm=jpg",
+          "sourcePage": "https://www.pexels.com/photo/dentist-and-assistant-in-modern-dental-clinic-37458088/",
+          "provider": "Pexels",
+          "author": "Emily Gaibor",
+          "license": "Pexels License",
+          "usage": "Referencia de trabajo en equipo; no usar como miembros reales del staff.",
+          "alt": "Equipo dental trabajando en una clínica moderna, imagen de referencia",
+          "tags": ["equipo", "asistente", "colaboracion", "clinica", "referencia"]
+        }
+      ]
+    },
+    {
+      "id": "public-services",
+      "path": "prototype-v2/assets/images/public/services",
+      "purpose": "especialidades y tratamientos",
+      "assets": [
+        {
+          "id": "pexels-ortho-6529107",
+          "filename": "ortodoncia-referencia-6529107.jpg",
+          "url": "https://images.pexels.com/photos/6529107/pexels-photo-6529107.jpeg?cs=srgb&dl=pexels-cottonbro-6529107.jpg&fm=jpg",
+          "sourcePage": "https://www.pexels.com/photo/patient-having-a-dental-treatment-6529105/",
+          "provider": "Pexels",
+          "author": "cottonbro studio",
+          "license": "Pexels License",
+          "usage": "Referencia de ortodoncia; no presentar como caso clínico de un paciente real.",
+          "alt": "Tratamiento de ortodoncia en una clínica dental, imagen de referencia",
+          "tags": ["ortodoncia", "brackets", "tratamiento", "especialidad", "referencia"]
+        },
+        {
+          "id": "pexels-consulta-modelo-6627325",
+          "filename": "explicacion-modelo-dental-6627325.jpg",
+          "url": "https://images.pexels.com/photos/6627325/pexels-photo-6627325.jpeg?cs=srgb&dl=pexels-karola-g-6627325.jpg&fm=jpg",
+          "sourcePage": "https://www.pexels.com/photo/patient-having-an-appointment-with-a-dentist-6627321/",
+          "provider": "Pexels",
+          "author": "Karola G",
+          "license": "Pexels License",
+          "usage": "Referencia de educación al paciente y plan visible.",
+          "alt": "Dentista explicando un modelo dental durante una consulta",
+          "tags": ["educacion", "consulta", "modelo-dental", "plan", "referencia"]
+        }
+      ]
+    },
+    {
+      "id": "public-technology",
+      "path": "prototype-v2/assets/images/public/technology",
+      "purpose": "tecnología y diagnóstico",
+      "assets": [
+        {
+          "id": "pexels-examination-5622234",
+          "filename": "evaluacion-dental-digital-5622234.jpg",
+          "url": "https://images.pexels.com/photos/5622234/pexels-photo-5622234.jpeg?cs=srgb&dl=pexels-gustavo-fring-5622234.jpg&fm=jpg",
+          "sourcePage": "https://www.pexels.com/photo/patient-dental-examination-5622232/",
+          "provider": "Pexels",
+          "author": "Gustavo Fring",
+          "license": "Pexels License",
+          "usage": "Referencia de evaluación y tecnología; no diagnóstico real.",
+          "alt": "Evaluación dental en una clínica moderna, imagen de referencia",
+          "tags": ["tecnologia", "diagnostico", "evaluacion", "equipamiento", "referencia"]
+        }
+      ]
+    },
+    {
+      "id": "patient-reference",
+      "path": "prototype-v2/assets/images/patient/reference",
+      "purpose": "archivos ficticios y referencias del portal paciente",
+      "assets": []
+    }
+  ]
+}

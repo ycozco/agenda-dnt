@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mineral Clinical - Tratamiento</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary-container": "#74829d",
+                      "tertiary-fixed": "#d0e4ff",
+                      "on-surface-variant": "#c5c6cd",
+                      "surface": "#051424",
+                      "secondary-fixed": "#4affb7",
+                      "surface-container-lowest": "#010f1f",
+                      "on-primary-fixed": "#0d1c32",
+                      "on-secondary-fixed": "#002113",
+                      "on-background": "#d4e4fa",
+                      "inverse-primary": "#515f78",
+                      "surface-container-high": "#1c2b3c",
+                      "outline": "#8f9097",
+                      "on-secondary-container": "#005d3e",
+                      "on-primary": "#233148",
+                      "on-secondary": "#003824",
+                      "secondary-container": "#00df9a",
+                      "inverse-surface": "#d4e4fa",
+                      "inverse-on-surface": "#233143",
+                      "surface-container-low": "#0d1c2d",
+                      "primary-fixed-dim": "#b9c7e4",
+                      "surface-container": "#122131",
+                      "primary-fixed": "#d6e3ff",
+                      "secondary-fixed-dim": "#0fe29c",
+                      "primary-container": "#0a192f",
+                      "on-secondary-fixed-variant": "#005236",
+                      "surface-bright": "#2c3a4c",
+                      "surface-container-highest": "#273647",
+                      "on-surface": "#d4e4fa",
+                      "background": "#051424",
+                      "tertiary-fixed-dim": "#9bcbff",
+                      "on-tertiary-container": "#1286d6",
+                      "tertiary-container": "#001a30",
+                      "outline-variant": "#44474d",
+                      "on-error-container": "#ffdad6",
+                      "on-error": "#690005",
+                      "secondary": "#46fcb4",
+                      "on-tertiary-fixed-variant": "#004a7a",
+                      "tertiary": "#9bcbff",
+                      "surface-variant": "#273647",
+                      "surface-tint": "#b9c7e4",
+                      "on-primary-fixed-variant": "#39475f",
+                      "error-container": "#93000a",
+                      "on-tertiary-fixed": "#001d34",
+                      "error": "#ffb4ab",
+                      "on-tertiary": "#003256",
+                      "surface-dim": "#051424",
+                      "primary": "#b9c7e4"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-desktop": "64px",
+                      "unit": "8px",
+                      "gutter": "24px",
+                      "container-max-width": "1280px",
+                      "margin-mobile": "20px"
+              },
+              "fontFamily": {
+                      "body-md": ["Manrope"],
+                      "headline-md": ["Manrope"],
+                      "label-sm": ["Manrope"],
+                      "label-md": ["Manrope"],
+                      "headline-lg": ["Manrope"],
+                      "display-lg-mobile": ["Manrope"],
+                      "display-lg": ["Manrope"],
+                      "body-lg": ["Manrope"]
+              },
+              "fontSize": {
+                      "body-md": ["16px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+                      "headline-md": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "label-sm": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "display-lg-mobile": ["40px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "800"}],
+                      "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Custom Scrollbar for inner areas */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: theme('colors.surface-container-highest');
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: theme('colors.outline');
+        }
+
+        /* Glassmorphism Utilities */
+        .glass-panel {
+            background: theme('colors.surface-container/60');
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        
+        .soft-shadow {
+            box-shadow: 0 20px 40px -10px rgba(10, 25, 47, 0.25);
+        }
+
+        /* Input styling transition */
+        .clinical-input {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-bottom-width: 2px;
+            border-bottom-color: theme('colors.outline-variant');
+        }
+        .clinical-input:focus {
+            background-color: theme('colors.surface-container-high');
+            border-bottom-color: transparent;
+            border-radius: theme('borderRadius.xl');
+            padding: 16px;
+            outline: none;
+            box-shadow: inset 0 0 0 1px theme('colors.primary');
+        }
+    </style>
+</head>
+<body class="flex h-screen overflow-hidden antialiased selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- JSON Component: SideNavBar -->
+<nav class="hidden md:flex flex-col h-screen w-64 left-0 sticky bg-surface-container-lowest/90 backdrop-blur-lg border-r border-surface-container-high/50 shadow-[40px_0_40px_rgba(10,25,47,0.15)] p-4 gap-4 z-40">
+<!-- Header -->
+<div class="flex items-center gap-4 p-2 mb-4">
+<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-surface-container-highest shrink-0">
+<img alt="Patient Profile" class="w-full h-full object-cover" data-alt="Close up professional portrait of a female dental patient with soft, natural lighting, deep depth of field bokeh background, cool clinical color palette, conveying trust and calm." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0wfc-AIOktcsAC7XlzzRbmptBOY0JW8Jxjt9H_xNX_GD8Uyh0HVLeQimCR1Z9ATfWKmXYLUAOGErDJBe0DVdVC8avAA3InTa1-6hpJCKwmGmyzqbYsg6NU9uYtOkfuD-X8YdRp4khILbY6aTO_j0Z004tMwZtW0PjqhsxiQOaOc7hAtW5fOA1o6LeBL2GKmbEN4l1fL7weLYhB8G1avGJNpt0nnEXXP_wOdfVqnf-j1Tu90OPSrMaUfXDxO8iNEtFkJ4CiGuPCO_N"/>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-md text-headline-md text-on-surface truncate">Sarah Jenkins</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">ID: 294-002</span>
+</div>
+</div>
+<!-- Navigation Links -->
+<div class="flex flex-col gap-2 flex-grow">
+<!-- Active State: Consultation (matches clinical view intent) -->
+<button class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-xl font-bold font-label-md text-label-md transition-transform scale-95 active:scale-90">
+<span class="material-symbols-outlined icon-fill">dentistry</span>
+<span>Consultation</span>
+</button>
+<button class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-highest/50 rounded-xl font-label-md text-label-md transition-all duration-200">
+<span class="material-symbols-outlined">biotech</span>
+<span>Imaging</span>
+</button>
+<button class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-highest/50 rounded-xl font-label-md text-label-md transition-all duration-200">
+<span class="material-symbols-outlined">grid_view</span>
+<span>Periodontal</span>
+</button>
+<button class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-highest/50 rounded-xl font-label-md text-label-md transition-all duration-200">
+<span class="material-symbols-outlined">straighten</span>
+<span>Orthodontics</span>
+</button>
+<button class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-surface-container-highest/50 rounded-xl font-label-md text-label-md transition-all duration-200">
+<span class="material-symbols-outlined">payments</span>
+<span>Financials</span>
+</button>
+</div>
+<!-- CTA -->
+<button class="w-full py-3 mt-4 bg-surface-container-high text-on-surface rounded-xl font-label-md text-label-md border border-white/5 hover:bg-surface-container-highest transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">add</span>
+            New Record
+        </button>
+<!-- Footer Links -->
+<div class="flex flex-col gap-1 mt-4 pt-4 border-t border-surface-container-high/50">
+<button class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary rounded-xl font-label-md text-label-md transition-colors">
+<span class="material-symbols-outlined text-[20px]">help</span>
+<span>Support</span>
+</button>
+<button class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary rounded-xl font-label-md text-label-md transition-colors">
+<span class="material-symbols-outlined text-[20px]">logout</span>
+<span>Sign Out</span>
+</button>
+</div>
+</nav>
+<!-- Main Canvas Area -->
+<main class="flex-grow flex flex-col h-full overflow-y-auto bg-background pb-margin-mobile md:pb-margin-desktop">
+<!-- Header Area Context -->
+<header class="px-margin-mobile md:px-margin-desktop pt-8 pb-6 flex flex-col gap-2 shrink-0 z-10 sticky top-0 bg-background/80 backdrop-blur-md border-b border-surface-container-lowest">
+<div class="flex items-center gap-2 font-label-sm text-label-sm text-on-surface-variant">
+<span class="hover:text-primary cursor-pointer transition-colors">Odontograma</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-primary font-bold">Detalle de Tratamiento</span>
+</div>
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mt-2">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface flex items-center gap-3">
+                        Diente 14
+                        <span class="px-3 py-1 bg-surface-container-high text-on-surface-variant rounded-full font-label-sm text-label-sm border border-white/5">Primer Premolar Sup. Der.</span>
+</h1>
+</div>
+<div class="flex gap-3">
+<button class="px-4 py-2 glass-panel text-on-surface rounded-xl font-label-md text-label-md flex items-center gap-2 hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-[18px]">history</span>
+                        Historial
+                    </button>
+<button class="px-5 py-2 bg-secondary-container text-on-secondary-container rounded-xl font-label-md text-label-md font-bold soft-shadow hover:brightness-110 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+                        Completar Sesión
+                    </button>
+</div>
+</div>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter px-margin-mobile md:px-margin-desktop mt-6 flex-grow">
+<!-- Left Column: Odontogram Context & Diagnostics (Col Span 3) -->
+<div class="lg:col-span-3 flex flex-col gap-gutter">
+<!-- Minimized Odontogram View -->
+<div class="glass-panel rounded-2xl p-5 flex flex-col relative overflow-hidden soft-shadow">
+<!-- Subtle background glow -->
+<div class="absolute -top-10 -right-10 w-32 h-32 bg-primary/10 rounded-full blur-2xl"></div>
+<h2 class="font-label-md text-label-md text-on-surface-variant mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+                        Vista Aislada
+                    </h2>
+<div class="bg-surface-container-lowest rounded-xl p-6 flex items-center justify-center border border-white/5 h-48 relative">
+<!-- Abstract interpretation of an isolated tooth view -->
+<div class="relative w-24 h-32 flex flex-col items-center justify-center opacity-80">
+<!-- Crown -->
+<div class="w-16 h-12 bg-surface-bright rounded-t-xl border border-white/20 relative z-10">
+<div class="absolute top-0 w-full h-1/2 bg-gradient-to-b from-white/10 to-transparent rounded-t-xl"></div>
+<!-- Simulated surface highlight -->
+<div class="absolute top-2 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-secondary-container/20 blur-sm"></div>
+</div>
+<!-- Roots -->
+<div class="flex gap-1 -mt-1 relative z-0">
+<div class="w-6 h-16 bg-surface-container-highest rounded-b-[40%] border border-white/10 border-t-0"></div>
+<div class="w-6 h-14 bg-surface-container-highest rounded-b-[40%] border border-white/10 border-t-0"></div>
+</div>
+<!-- Selection Marker -->
+<div class="absolute -right-4 top-4 flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_8px_rgba(70,252,180,0.8)]"></div>
+<span class="font-label-sm text-label-sm text-secondary">Oclusal</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Diagnostic Tools -->
+<div class="glass-panel rounded-2xl p-5 flex flex-col soft-shadow">
+<h2 class="font-label-md text-label-md text-on-surface-variant mb-4">Herramientas Diagnósticas</h2>
+<div class="flex flex-col gap-3">
+<label class="flex items-center justify-between p-3 rounded-xl bg-surface-container-lowest/50 hover:bg-surface-container-highest/30 transition-colors cursor-pointer border border-transparent hover:border-white/5">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-[20px]">flashlight_on</span>
+<span class="font-body-md text-body-md text-on-surface">Transiluminación</span>
+</div>
+<!-- Toggle switch -->
+<div class="relative inline-block w-10 h-6 rounded-full bg-surface-container-high transition-colors">
+<div class="absolute left-1 top-1 bg-on-surface-variant w-4 h-4 rounded-full transition-transform"></div>
+</div>
+</label>
+<label class="flex items-center justify-between p-3 rounded-xl bg-surface-container-lowest/50 hover:bg-surface-container-highest/30 transition-colors cursor-pointer border border-transparent hover:border-white/5">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-[20px]">monitor_heart</span>
+<span class="font-body-md text-body-md text-on-surface">Prueba Vitalidad</span>
+</div>
+<div class="relative inline-block w-10 h-6 rounded-full bg-secondary-container transition-colors">
+<div class="absolute left-5 top-1 bg-surface-container-lowest w-4 h-4 rounded-full transition-transform"></div>
+</div>
+</label>
+<div class="p-3 rounded-xl bg-surface-container-lowest/50 border border-white/5 mt-2">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Sondaje Periodontal</span>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">straighten</span>
+</div>
+<div class="flex justify-between gap-1">
+<div class="flex-1 bg-surface-container h-8 rounded-lg flex items-center justify-center font-label-md text-label-md text-on-surface">3</div>
+<div class="flex-1 bg-error-container/30 border border-error/30 h-8 rounded-lg flex items-center justify-center font-label-md text-label-md text-error">5</div>
+<div class="flex-1 bg-surface-container h-8 rounded-lg flex items-center justify-center font-label-md text-label-md text-on-surface">2</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Middle Column: Procedures & Notes (Col Span 5) -->
+<div class="lg:col-span-5 flex flex-col gap-gutter">
+<!-- Procedures / Templates -->
+<div class="glass-panel rounded-2xl p-1 flex flex-col h-[55%] soft-shadow overflow-hidden">
+<div class="p-5 pb-3 border-b border-white/5 flex justify-between items-center bg-surface-container/40">
+<h2 class="font-headline-md text-headline-md text-on-surface">Procedimientos</h2>
+<button class="w-8 h-8 rounded-full bg-primary-container text-primary flex items-center justify-center hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors">
+<span class="material-symbols-outlined text-[20px]">add</span>
+</button>
+</div>
+<div class="overflow-y-auto p-4 flex flex-col gap-3">
+<!-- Procedure Item 1 (Active/Selected) -->
+<div class="p-4 rounded-xl border border-secondary-container/30 bg-surface-container-highest relative overflow-hidden group cursor-pointer">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary-container"></div>
+<div class="flex justify-between items-start">
+<div class="flex gap-3">
+<div class="w-10 h-10 rounded-lg bg-secondary-container/10 flex items-center justify-center text-secondary shrink-0">
+<span class="material-symbols-outlined icon-fill">vaccines</span>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-on-surface">Resina Compuesta</h3>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm mt-1">Superficies Oclusal, Mesial. Resina A2.</p>
+</div>
+</div>
+<span class="px-2 py-1 bg-secondary-container/20 text-secondary rounded font-label-sm text-label-sm border border-secondary-container/30">En progreso</span>
+</div>
+</div>
+<!-- Procedure Item 2 -->
+<div class="p-4 rounded-xl border border-white/5 bg-surface-container-lowest/50 hover:bg-surface-container-highest transition-colors group cursor-pointer">
+<div class="flex justify-between items-start">
+<div class="flex gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-on-surface-variant shrink-0">
+<span class="material-symbols-outlined">cleaning_services</span>
+</div>
+<div>
+<h3 class="font-label-md text-label-md text-on-surface">Profilaxis Localizada</h3>
+<p class="font-body-md text-body-md text-outline text-sm mt-1">Preparación previa a restauración.</p>
+</div>
+</div>
+<button class="opacity-0 group-hover:opacity-100 transition-opacity text-on-surface-variant hover:text-error">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+</div>
+<!-- Template Suggestion -->
+<div class="mt-4 border border-dashed border-outline-variant/50 rounded-xl p-4 flex items-center justify-center text-center hover:bg-surface-container-lowest transition-colors cursor-pointer">
+<span class="font-label-md text-label-md text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">magic_button</span>
+                                Sugerencia: Protocolo Endodoncia Unirradicular
+                            </span>
+</div>
+</div>
+</div>
+<!-- Clinical Notes -->
+<div class="glass-panel rounded-2xl flex flex-col flex-grow soft-shadow overflow-hidden">
+<div class="p-5 pb-3 border-b border-white/5 bg-surface-container/40 flex justify-between items-center">
+<h2 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-tertiary">edit_note</span>
+                            Notas Clínicas
+                        </h2>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Autoguardado 10:42 AM</span>
+</div>
+<div class="p-5 flex-grow flex flex-col">
+<textarea class="w-full h-full bg-transparent resize-none clinical-input font-body-md text-body-md text-on-surface placeholder:text-outline" placeholder="Ingrese hallazgos, anestesia utilizada, y detalles del procedimiento..."></textarea>
+</div>
+</div>
+</div>
+<!-- Right Column: Media Gallery (Col Span 4) -->
+<div class="lg:col-span-4 flex flex-col">
+<div class="glass-panel rounded-2xl flex flex-col h-full soft-shadow overflow-hidden">
+<div class="p-5 pb-3 border-b border-white/5 bg-surface-container/40 flex justify-between items-center">
+<h2 class="font-headline-md text-headline-md text-on-surface">Imágenes</h2>
+<div class="flex gap-2">
+<button class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface flex items-center justify-center hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-[18px]">upload</span>
+</button>
+<button class="w-8 h-8 rounded-full bg-surface-container-high text-on-surface flex items-center justify-center hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-[18px]">photo_camera</span>
+</button>
+</div>
+</div>
+<div class="p-4 grid grid-cols-2 gap-3 overflow-y-auto">
+<!-- X-Ray (Sillar Arch shape inspired by rounding corners asymmetrically) -->
+<div class="col-span-2 relative group rounded-tl-3xl rounded-br-3xl rounded-tr-md rounded-bl-md overflow-hidden border border-white/10 aspect-video">
+<img alt="Radiografía Periapical" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A highly detailed dental periapical X-ray image of a maxillary premolar. The image is rendered with a dark, high-contrast monochrome palette typical of digital radiography. The background interface surrounding the image is a deep, luxurious dark blue surface to maintain a modern, clinical glassmorphism aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_nG2VpsdJNLel7au192ooCel6Y33ZM5KEme18BlZcLGOSB2gItqOTfydpGDkV2NPyh2QqKNV63mBcpXtrAXNzMSOdxAhFaAuSUfictCPWFa8KNMIE19X8kG5ZN8PJ4VPjPIYJu6fBe4q7a2_pbPuwOf-rF0fUjXBq6yismIwL_iOzQx7nQ01Losf_2pwC_sGBrv_ULfotU1zfCB850wJV3uqNKtfp0MrF6fYm8UmiEni0zqBpIpUHtcxcxtDAsboDs31BqdlXz8Ih"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+<span class="font-label-sm text-label-sm text-on-surface">Rx Periapical - Previa</span>
+</div>
+<div class="absolute top-2 right-2 px-2 py-1 bg-surface-container-lowest/80 backdrop-blur rounded text-[10px] font-bold text-on-surface-variant border border-white/10">10 Oct</div>
+</div>
+<!-- Intraoral Photo 1 -->
+<div class="relative group rounded-xl overflow-hidden border border-white/10 aspect-square">
+<img alt="Foto Intraoral" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Macro photography of a human tooth (premolar) illuminated by clinical dental ring light. Soft depth of field with beautiful bokeh blurring the background oral cavity. The lighting is pristine and cool, emphasizing the texture of the enamel. Deep shadows contrast with bright highlights, fitting a premium dark-mode medical interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDth1-XojayQdcvdsJwdY420tEvG-3JPBvDbbzLsmLJbqtIPl-mz-CWS43EMG0XwqNQ2iDEJ2ev-YjKrnAsK7tSZiA7zChmnjuVXC4JCouSNItEnly8TxCid5URTpGupEm1IXN0ADIrojrICYYbxb8zrZndi6XKMyX1vk8CxCLoY6cDSyFjPm3j8dtDRrA-aO3FW77xIBNnZoDkjUWEgCCXMc0rKruwBZi1zQdy2VXQt-8ASkopzjWyLvuvaMXlNUMutEQMfu1AlXQz"/>
+<div class="absolute bottom-0 left-0 w-full p-2 bg-surface-container-lowest/80 backdrop-blur-sm">
+<span class="font-label-sm text-label-sm text-on-surface truncate block text-xs">Oclusal Inicial</span>
+</div>
+</div>
+<!-- Intraoral Photo 2 -->
+<div class="relative group rounded-xl overflow-hidden border border-white/10 aspect-square">
+<img alt="Preparación Cavitaria" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="Close-up macro clinical photography of a dental cavity preparation on a premolar tooth. Precise margins are visible. Shot with a macro lens, shallow depth of field, ring flash lighting for zero shadows inside the cavity. The surrounding context is softly blurred out into deep shadows to match a luxury clinical software interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiUTyj7lVNm6qcCh036dJzLYBF6WAZMQrS2fJQZwSO42aqBmnltZoUk4wtsOdCZ1tderyAznAYAF8m2odQsSvncEdn2hpJSeVzwxTl63VdLBWKhRqM32AoC7w31-09z9HZWrt6wFFyoJSwzLLveFF-oMQ97BBLi32KcOwJnWuElssOTfh_ZZqRIPC_t0I8-iSkQLqGNHcE2pNTMKJjrEKjuA35b3bgaLSad1gSJSfaO246qeM0Io83_-MFxU7iclSoKTLe5AaYvl7v"/>
+<div class="absolute bottom-0 left-0 w-full p-2 bg-surface-container-lowest/80 backdrop-blur-sm">
+<span class="font-label-sm text-label-sm text-on-surface truncate block text-xs">Preparación</span>
+</div>
+</div>
+<!-- Empty State / Add Image -->
+<div class="col-span-2 mt-2 h-24 rounded-xl border border-dashed border-outline-variant/50 flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-highest/30 transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-[24px] group-hover:text-primary transition-colors">add_photo_alternate</span>
+<span class="font-label-sm text-label-sm mt-1 group-hover:text-primary transition-colors">Añadir Imagen a Diente 14</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+
+
+
+
+<script>
+(function() {
+  document.addEventListener('DOMContentLoaded', () => {
+    const loc = window.location.pathname;
+    const isPublic = loc.includes('/public/');
+    const isPatient = loc.includes('/patient/');
+    const prefix = isPublic || isPatient ? '../' : './';
+
+    // Intercept all clicks on links and buttons
+    document.querySelectorAll('a, button, [onclick]').forEach(el => {
+      const text = (el.innerText || el.getAttribute('aria-label') || '').toLowerCase().trim();
+      const currentHref = el.getAttribute('href');
+
+      if (!currentHref || currentHref === '#' || currentHref === '') {
+        if (text.includes('portal del paciente') || text.includes('paciente') || text.includes('mi cuenta') || text.includes('mis citas')) {
+          el.setAttribute('href', prefix + 'patient/index.html');
+        } else if (text.includes('consola de administración') || text.includes('dashboard') || text.includes('administración')) {
+          el.setAttribute('href', prefix + 'staff/dashboard.html');
+        } else if (text.includes('portales') || text.includes('seleccione su portal') || text.includes('admin')) {
+          el.setAttribute('href', prefix + 'staff/admin.html');
+        } else if (text.includes('agendar') || text.includes('reservar') || text.includes('nueva cita')) {
+          el.setAttribute('href', prefix + 'public/reservar.html');
+        } else if (text.includes('agenda semanal') || text.includes('semanal')) {
+          el.setAttribute('href', prefix + 'staff/agenda-semanal.html');
+        } else if (text.includes('calendario') || text.includes('mensual')) {
+          el.setAttribute('href', prefix + 'staff/calendario-mensual.html');
+        } else if (text.includes('citas')) {
+          el.setAttribute('href', prefix + (isPatient ? 'patient/citas.html' : 'staff/citas.html'));
+        } else if (text.includes('consulta') || text.includes('odontograma')) {
+          el.setAttribute('href', prefix + 'staff/consulta.html');
+        } else if (text.includes('ortodoncia')) {
+          el.setAttribute('href', prefix + 'staff/ortodoncia.html');
+        } else if (text.includes('cirugía') || text.includes('implantología')) {
+          el.setAttribute('href', prefix + 'staff/cirugia.html');
+        } else if (text.includes('endodoncia') || text.includes('operatoria')) {
+          el.setAttribute('href', prefix + 'staff/endodoncia.html');
+        } else if (text.includes('rehabilitación') || text.includes('periodoncia')) {
+          el.setAttribute('href', prefix + 'staff/rehabilitacion.html');
+        } else if (text.includes('inventario') || text.includes('insumos')) {
+          el.setAttribute('href', prefix + 'staff/inventario.html');
+        } else if (text.includes('usuarios') || text.includes('personal')) {
+          el.setAttribute('href', prefix + 'staff/usuarios.html');
+        } else if (text.includes('cerrar sesión') || text.includes('salir')) {
+          el.setAttribute('href', prefix + 'patient/login.html');
+        } else if (text.includes('inicio') || text.includes('home')) {
+          el.setAttribute('href', prefix + 'public/index.html');
+        }
+      }
+    });
+  });
+})();
+</script>
+
+
+
+
+
+<!-- Root-Relative Bulletproof Navigation Script -->
+<script>
+(function() {
+  function applyRootLinks() {
+    const loc = window.location.pathname;
+
+    document.querySelectorAll('a, button').forEach(el => {
+      const target = el.tagName === 'A' ? el : el.closest('a');
+      if (!target) return;
+
+      const text = (target.textContent || target.getAttribute('aria-label') || '').toLowerCase().trim();
+
+      // Patient Portal Card or Nav Link
+      if (text.includes('portal del paciente') || (text.includes('paciente') && !text.includes('doctor') && !text.includes('historial'))) {
+        target.href = '/patient/index.html';
+      }
+      // Consola de Administración Card
+      else if (text.includes('consola de administración') || text.includes('dashboard principal')) {
+        target.href = '/staff/dashboard.html';
+      }
+      // Admin Gateway Selector
+      else if (text.includes('seleccione su portal') || text.includes('portales admin')) {
+        target.href = '/staff/admin.html';
+      }
+      // Public / Landing
+      else if (text.includes('sillar dental') && (text.includes('inicio') || text.includes('home'))) {
+        target.href = '/public/index.html';
+      } else if (text.includes('agendar') || text.includes('reservar')) {
+        target.href = '/public/reservar.html';
+      }
+      // Subviews
+      else if (text.includes('agenda semanal') || text.includes('semanal')) {
+        target.href = '/staff/agenda-semanal.html';
+      } else if (text.includes('calendario mensual') || text.includes('mensual')) {
+        target.href = '/staff/calendario-mensual.html';
+      } else if (text.includes('mis citas') || text.includes('citas paciente')) {
+        target.href = '/patient/citas.html';
+      } else if (text.includes('citas') || text.includes('agenda')) {
+        target.href = '/staff/citas.html';
+      } else if (text.includes('consulta') || text.includes('odontograma')) {
+        target.href = '/staff/consulta.html';
+      } else if (text.includes('ortodoncia')) {
+        target.href = '/staff/ortodoncia.html';
+      } else if (text.includes('cirugía') || text.includes('implantología')) {
+        target.href = '/staff/cirugia.html';
+      } else if (text.includes('endodoncia') || text.includes('operatoria')) {
+        target.href = '/staff/endodoncia.html';
+      } else if (text.includes('rehabilitación') || text.includes('periodoncia')) {
+        target.href = '/staff/rehabilitacion.html';
+      } else if (text.includes('inventario') || text.includes('insumos')) {
+        target.href = '/staff/inventario.html';
+      } else if (text.includes('usuarios') || text.includes('personal')) {
+        target.href = '/staff/usuarios.html';
+      } else if (text.includes('cerrar sesión') || text.includes('salir')) {
+        target.href = '/patient/login.html';
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', applyRootLinks);
+  window.addEventListener('load', applyRootLinks);
+})();
+</script>
+
+
+<!-- Persistent Collapsible Sidebar Engine -->
+<script>
+(function() {
+  document.addEventListener('DOMContentLoaded', () => {
+    // Only run on staff pages (excluding admin gateway selector)
+    if (window.location.pathname.includes('/staff/admin')) return;
+
+    const savedState = localStorage.getItem('sd-sidebar-collapsed') === 'true';
+
+    const sidebar = document.createElement('aside');
+    sidebar.id = 'sd-unified-sidebar';
+    sidebar.className = 'fixed top-0 left-0 h-screen z-50 transition-all duration-300 flex flex-col border-r border-white/10 shadow-2xl';
+    sidebar.style.cssText = 'width: ' + (savedState ? '76px' : '260px') + '; background: rgba(5,20,36,0.95); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);';
+
+    const currentPath = window.location.pathname;
+
+    const menuData = [
+      { category: 'Principal' },
+      { title: 'Dashboard Principal', icon: 'dashboard', href: '/staff/dashboard.html' },
+      { title: 'Gestión de Citas', icon: 'calendar_month', href: '/staff/citas.html' },
+      { title: 'Agenda Semanal', icon: 'view_week', href: '/staff/agenda-semanal.html', sub: true },
+      { title: 'Calendario Mensual', icon: 'calendar_view_month', href: '/staff/calendario-mensual.html', sub: true },
+      
+      { category: 'Clínica & Odontograma' },
+      { title: 'Odontograma 52P', icon: 'medical_services', href: '/staff/consulta.html' },
+      { title: 'Odontograma Drag&Drop', icon: 'drag_pan', href: '/staff/odontograma-dragdrop.html', sub: true },
+      
+      { category: 'Especialidades' },
+      { title: 'Ortodoncia', icon: 'orthodontics', href: '/staff/ortodoncia.html' },
+      { title: 'Cirugía e Implantes', icon: 'biomedical', href: '/staff/cirugia.html' },
+      { title: 'Endodoncia & Resinas', icon: 'dentistry', href: '/staff/endodoncia.html' },
+      { title: 'Periodoncia & Prótesis', icon: 'health_and_safety', href: '/staff/rehabilitacion.html' },
+      
+      { category: 'Administración' },
+      { title: 'Inventario & Stock', icon: 'inventory_2', href: '/staff/inventario.html' },
+      { title: 'Usuarios & Personal', icon: 'group', href: '/staff/usuarios.html' }
+    ];
+
+    let itemsHtml = '';
+    menuData.forEach(item => {
+      if (item.category) {
+        itemsHtml += `<div class="sd-sidebar-cat text-[10px] font-bold text-on-surface-variant/50 uppercase tracking-widest px-3 mt-4 mb-1 whitespace-nowrap ${savedState ? 'hidden' : 'block'}">${item.category}</div>`;
+      } else {
+        const isActive = currentPath.includes(item.href.replace('.html', ''));
+        itemsHtml += `
+          <a href="${item.href}" title="${item.title}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all font-label-md text-xs ${item.sub ? 'pl-5 opacity-90' : ''} ${isActive ? 'bg-secondary/15 text-secondary border border-secondary/30 font-bold shadow-[0_0_15px_rgba(70,252,180,0.15)]' : 'text-on-surface-variant hover:bg-white/10 hover:text-on-surface'}">
+            <span class="material-symbols-outlined text-lg shrink-0 ${isActive ? 'text-secondary' : 'opacity-80'}">${item.icon}</span>
+            <span class="sd-sidebar-text whitespace-nowrap font-medium transition-opacity duration-200 ${savedState ? 'hidden' : 'inline'}">${item.title}</span>
+          </a>
+        `;
+      }
+    });
+
+    sidebar.innerHTML = `
+      <!-- Header -->
+      <div class="h-16 px-4 flex items-center justify-between border-b border-white/10 shrink-0">
+        <a href="/staff/admin.html" class="flex items-center gap-2.5 overflow-hidden text-decoration-none">
+          <span class="material-symbols-outlined text-secondary text-2xl shrink-0">diamond</span>
+          <span id="sd-logo-text" class="font-headline-md text-sm text-primary font-bold whitespace-nowrap ${savedState ? 'hidden' : 'inline'}">Sillar Dental</span>
+        </a>
+        <button id="sd-sidebar-toggle" title="Contraer / Expandir Menú" class="p-1.5 rounded-lg text-on-surface-variant hover:bg-white/10 transition-colors flex items-center justify-center">
+          <span id="sd-toggle-icon" class="material-symbols-outlined text-lg">${savedState ? 'chevron_right' : 'chevron_left'}</span>
+        </button>
+      </div>
+
+      <!-- Menu Items -->
+      <div class="flex-1 overflow-y-auto py-3 px-2 space-y-1" style="scrollbar-width: thin;">
+        ${itemsHtml}
+      </div>
+
+      <!-- Footer Switcher -->
+      <div class="p-2 border-t border-white/10 space-y-1 shrink-0">
+        <a href="/patient/index.html" title="Portal Paciente" class="flex items-center gap-2.5 px-3 py-2 rounded-xl bg-secondary/10 text-secondary hover:bg-secondary/20 transition-all font-label-md font-bold text-xs">
+          <span class="material-symbols-outlined text-base shrink-0">person</span>
+          <span class="sd-sidebar-text whitespace-nowrap ${savedState ? 'hidden' : 'inline'}">Portal Paciente</span>
+        </a>
+        <a href="/staff/admin.html" title="Cambiar de Portal" class="flex items-center gap-2.5 px-3 py-2 rounded-xl bg-white/5 text-on-surface-variant hover:bg-white/10 transition-all font-label-md text-xs">
+          <span class="material-symbols-outlined text-base shrink-0">grid_view</span>
+          <span class="sd-sidebar-text whitespace-nowrap ${savedState ? 'hidden' : 'inline'}">Seleccionar Portal</span>
+        </a>
+      </div>
+    `;
+
+    document.body.appendChild(sidebar);
+
+    // Adjust body margin to make room for fixed sidebar
+    function updateBodyMargin(collapsed) {
+      document.body.style.transition = 'padding-left 0.3s ease';
+      document.body.style.paddingLeft = collapsed ? '76px' : '260px';
+    }
+
+    updateBodyMargin(savedState);
+
+    // Toggle Sidebar collapse / expand
+    const toggleBtn = document.getElementById('sd-sidebar-toggle');
+    const toggleIcon = document.getElementById('sd-toggle-icon');
+    const logoText = document.getElementById('sd-logo-text');
+
+    toggleBtn.addEventListener('click', () => {
+      const currentlyCollapsed = sidebar.style.width === '76px';
+      const nextCollapsed = !currentlyCollapsed;
+
+      sidebar.style.width = nextCollapsed ? '76px' : '260px';
+      toggleIcon.textContent = nextCollapsed ? 'chevron_right' : 'chevron_left';
+
+      document.querySelectorAll('.sd-sidebar-text').forEach(el => {
+        el.style.display = nextCollapsed ? 'none' : 'inline';
+      });
+
+      document.querySelectorAll('.sd-sidebar-cat').forEach(el => {
+        el.style.display = nextCollapsed ? 'none' : 'block';
+      });
+
+      if (logoText) logoText.style.display = nextCollapsed ? 'none' : 'inline';
+
+      updateBodyMargin(nextCollapsed);
+      localStorage.setItem('sd-sidebar-collapsed', nextCollapsed);
+    });
+  });
+})();
+</script>
+
+</body></html>

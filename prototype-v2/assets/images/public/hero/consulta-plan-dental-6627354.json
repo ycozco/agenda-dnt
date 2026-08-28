@@ -1,0 +1,26 @@
+﻿{
+    "id":  "pexels-plan-6627354",
+    "filename":  "consulta-plan-dental-6627354.jpg",
+    "path":  "prototype-v2\\assets\\images\\public\\hero\\consulta-plan-dental-6627354.jpg",
+    "category":  "public-hero",
+    "purpose":  "hero y portada pÃºblica",
+    "sourcePage":  "https://www.pexels.com/photo/dentist-having-a-discussion-with-a-patient-6627347/",
+    "downloadUrl":  "https://images.pexels.com/photos/6627354/pexels-photo-6627354.jpeg?cs=srgb\u0026dl=pexels-karola-g-6627354.jpg\u0026fm=jpg",
+    "provider":  "Pexels",
+    "author":  "Karola G",
+    "license":  "Pexels License",
+    "usage":  "Referencia visual de conversaciÃ³n y plan; no usar para afirmar un caso real.",
+    "alt":  "Dentista conversando con un paciente sobre un plan de tratamiento",
+    "tags":  [
+                 "hero",
+                 "plan",
+                 "comunicacion",
+                 "paciente",
+                 "diagnostico",
+                 "referencia"
+             ],
+    "bytes":  1698212,
+    "sha256":  "f29176811e0853f959c36e6798544ca1f581bfae4d903b8b64f42bddc030bdf6",
+    "downloadedAt":  "2026-07-26T00:52:27.2060043Z",
+    "status":  "reference-only"
+}

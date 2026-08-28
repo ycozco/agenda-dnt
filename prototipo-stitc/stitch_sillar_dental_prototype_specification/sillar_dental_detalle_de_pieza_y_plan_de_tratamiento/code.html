@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sillar Dental - Tratamiento y Análisis</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@100..900&display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-primary": "#515f78",
+                    "on-secondary-fixed-variant": "#005236",
+                    "background": "#051424",
+                    "on-tertiary": "#003256",
+                    "inverse-on-surface": "#233143",
+                    "secondary-fixed": "#4affb7",
+                    "tertiary-fixed-dim": "#9bcbff",
+                    "on-tertiary-fixed": "#001d34",
+                    "on-secondary-fixed": "#002113",
+                    "on-tertiary-fixed-variant": "#004a7a",
+                    "error-container": "#93000a",
+                    "on-surface": "#d4e4fa",
+                    "primary-fixed": "#d6e3ff",
+                    "surface-container-low": "#0d1c2d",
+                    "on-secondary": "#003824",
+                    "on-primary-container": "#74829d",
+                    "surface-variant": "#273647",
+                    "surface-container-lowest": "#010f1f",
+                    "tertiary": "#9bcbff",
+                    "secondary-container": "#00df9a",
+                    "secondary": "#46fcb4",
+                    "outline": "#8f9097",
+                    "on-primary-fixed-variant": "#39475f",
+                    "on-error": "#690005",
+                    "tertiary-container": "#001a30",
+                    "on-primary": "#233148",
+                    "surface-tint": "#b9c7e4",
+                    "on-error-container": "#ffdad6",
+                    "error": "#ffb4ab",
+                    "primary-container": "#0a192f",
+                    "surface-dim": "#051424",
+                    "on-surface-variant": "#c5c6cd",
+                    "surface-container": "#122131",
+                    "on-tertiary-container": "#1286d6",
+                    "surface-container-highest": "#273647",
+                    "tertiary-fixed": "#d0e4ff",
+                    "on-background": "#d4e4fa",
+                    "surface-container-high": "#1c2b3c",
+                    "inverse-surface": "#d4e4fa",
+                    "on-primary-fixed": "#0d1c32",
+                    "surface-bright": "#2c3a4c",
+                    "primary-fixed-dim": "#b9c7e4",
+                    "primary": "#b9c7e4",
+                    "outline-variant": "#44474d",
+                    "secondary-fixed-dim": "#0fe29c",
+                    "on-secondary-container": "#005d3e",
+                    "surface": "#051424"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "8px",
+                    "margin-desktop": "64px",
+                    "margin-mobile": "20px",
+                    "gutter": "24px",
+                    "container-max-width": "1280px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Manrope"],
+                    "body-lg": ["Manrope"],
+                    "headline-lg": ["Manrope"],
+                    "body-md": ["Manrope"],
+                    "label-md": ["Manrope"],
+                    "display-lg": ["Manrope"],
+                    "label-sm": ["Manrope"],
+                    "display-lg-mobile": ["Manrope"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                    "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                    "label-sm": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "display-lg-mobile": ["40px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "800"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        /* Custom Scrollbar for inner elements */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex overflow-hidden antialiased selection:bg-secondary/30 selection:text-secondary">
+<!-- SideNavBar (Shared Component) -->
+<nav class="hidden md:flex flex-col h-screen fixed left-0 py-8 docked left-0 h-full w-64 border-r border-white/10 shadow-xl bg-surface-container-low dark:bg-surface-container-lowest z-40">
+<!-- Header / Avatar -->
+<div class="px-6 mb-8 flex flex-col items-center text-center">
+<div class="w-20 h-20 rounded-full bg-surface-container-high border-2 border-white/10 mb-4 overflow-hidden relative shadow-[0_20px_40px_rgba(10,25,47,0.15)]">
+<img alt="Foto de perfil del paciente" class="object-cover w-full h-full" data-alt="A highly detailed, professional headshot of an adult male patient, softly lit against a dark, moody background, evoking a sense of premium clinical care and privacy. High resolution, shallow depth of field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJXNXfUHK1lcMv38uPsE1xIzvs6_Te7w_-8ZwSmdiecg0dv6plLRac8iBTb81PXZdOns9xlo-cs-lAR-3R1iuiORdLduj1FWj_cTepilONXQ9H6yXVn9WpD5T3Hh3FRRBKj010uk1Yjcg6y4RKYoULmSW0shPkDFnvT2zHhBQzJUOLz1rEuATi_ke5G72hmf8eruRn4qBuehRtHrJvaJGMTfzmEZnv9ZndoGd5QGtxa4HHAHz5B2HMDIjuF3SqGjIX4CfnYyv7-j7l"/>
+</div>
+<h2 class="font-headline-md text-headline-md text-primary dark:text-primary-fixed-dim">Juan Pérez</h2>
+<p class="font-label-md text-label-md text-on-surface-variant mt-1">ID: 28492 - Plan Premium</p>
+<button class="mt-6 w-full py-2.5 rounded-full bg-secondary/10 text-secondary border border-secondary/20 font-label-md text-label-md hover:bg-secondary/20 transition-colors">
+                Nuevo Diagnóstico
+            </button>
+</div>
+<!-- Navigation Links -->
+<div class="flex-1 overflow-y-auto w-full">
+<ul class="space-y-1 w-full">
+<!-- Active Tab: Odontograma -->
+<li>
+<a class="flex items-center gap-3 bg-secondary/10 text-secondary dark:text-secondary-fixed border-r-4 border-secondary p-4 w-full" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dentistry</span>
+<span class="font-label-md text-label-md">Odontograma</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant p-4 hover:bg-white/5 hover:text-on-surface transition-colors w-full group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">healing</span>
+<span class="font-label-md text-label-md">Operatoria</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant p-4 hover:bg-white/5 hover:text-on-surface transition-colors w-full group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">biotech</span>
+<span class="font-label-md text-label-md">Endodoncia</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant p-4 hover:bg-white/5 hover:text-on-surface transition-colors w-full group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">rebase</span>
+<span class="font-label-md text-label-md">Rehabilitación</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant p-4 hover:bg-white/5 hover:text-on-surface transition-colors w-full group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">grid_view</span>
+<span class="font-label-md text-label-md">Periodoncia</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant p-4 hover:bg-white/5 hover:text-on-surface transition-colors w-full group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">medical_services</span>
+<span class="font-label-md text-label-md">Cirugía</span>
+</a>
+</li>
+</ul>
+</div>
+<!-- Footer -->
+<div class="mt-auto px-4 w-full">
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant p-4 hover:bg-white/5 hover:text-on-surface transition-colors w-full rounded-lg" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Cerrar Sesión</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 relative h-screen overflow-y-auto overflow-x-hidden">
+<!-- Ambient Background Glow -->
+<div class="fixed top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-secondary/10 blur-[120px] pointer-events-none"></div>
+<div class="fixed bottom-[-20%] right-[-10%] w-[40%] h-[40%] rounded-full bg-primary/10 blur-[120px] pointer-events-none"></div>
+<div class="px-margin-mobile md:px-margin-desktop py-12 max-w-container-max-width mx-auto relative z-10 flex flex-col min-h-full">
+<!-- Page Header -->
+<header class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<div class="flex items-center gap-2 text-on-surface-variant font-label-md text-label-md mb-2 opacity-70">
+<span>Paciente</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span>Odontograma</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="text-secondary">Pieza 46</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-primary-fixed">Tratamiento y Análisis</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 max-w-2xl">
+                        Vista de detalle clínico. Registre hallazgos, revise el historial y vincule estudios radiográficos para la pieza dental seleccionada.
+                    </p>
+</div>
+<div class="flex items-center gap-4">
+<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-error-container/20 border border-error/30 text-error font-label-md text-label-md">
+<span class="w-2 h-2 rounded-full bg-error animate-pulse"></span>
+                        Caries Profunda Detectada
+                    </span>
+</div>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter flex-1 mb-8">
+<!-- Left Column: Visuals & Studies (7 cols) -->
+<div class="lg:col-span-7 flex flex-col gap-gutter">
+<!-- 3D / Zoom Tooth View (Glass Card) -->
+<section class="flex-1 bg-surface-container/40 backdrop-blur-[20px] border border-white/10 rounded-2xl shadow-[0_20px_40px_rgba(10,25,47,0.15)] overflow-hidden relative flex flex-col min-h-[400px]">
+<div class="p-6 border-b border-white/5 flex justify-between items-center bg-surface-container-low/50">
+<h3 class="font-headline-md text-[20px] text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">visibility</span>
+                                Exploración Visual - P. 46
+                            </h3>
+<div class="flex gap-2">
+<button class="w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors border border-white/10">
+<span class="material-symbols-outlined text-[18px]">zoom_in</span>
+</button>
+<button class="w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors border border-white/10">
+<span class="material-symbols-outlined text-[18px]">360</span>
+</button>
+</div>
+</div>
+<!-- Image Container simulating 3D viewer -->
+<div class="flex-1 relative bg-gradient-to-b from-surface-container-lowest to-surface-container-low flex items-center justify-center overflow-hidden cursor-crosshair">
+<!-- Overlay Grid for clinical feel -->
+<div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMSIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvc3ZnPg==')] opacity-50 pointer-events-none"></div>
+<img alt="Vista 3D Pieza 46" class="h-[80%] object-contain drop-shadow-2xl z-10 transition-transform duration-500 hover:scale-105" data-alt="A highly detailed, macro 3D medical rendering of a single human molar tooth (Piece 46) against a deep, dark navy blue background. The tooth exhibits realistic textures, subtle translucency, and clinical lighting highlighting a specific area of decay on the occlusal surface. Premium medical visualization aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJVp3M8Fp3nNMV-lNAe0mla7dJ6h1zyYqJ_SJatCCZj4xlhFoFAGIBaFerecjPAbkde0rBKwwhScuSJUaYYF7GcienChRHQXOqnWmXpIwFpR0YUPm67MfjhdatUEDvdd27VS2iF3gMcbB5OhTmd2iYRYkcRDgFNPZbW2RxcjAdV53x8fqST6UwyXVv0roB-xhxzuNV81jKEaQJnVWj6MROeixkNIlQJwUMT-CjYnutiQu_6NkcJ8EU3dYT_sdB2Kjq-w_GDMVQc-tG"/>
+<!-- Interactive Hotspot marker -->
+<div class="absolute top-[40%] right-[45%] z-20 flex flex-col items-center">
+<div class="w-4 h-4 rounded-full bg-error/80 border-2 border-white/50 animate-ping absolute"></div>
+<div class="w-4 h-4 rounded-full bg-error border-2 border-white shadow-[0_0_15px_rgba(255,180,171,0.6)] relative z-10"></div>
+<div class="mt-2 px-2 py-1 bg-surface-container-high/90 backdrop-blur-md rounded border border-white/10 font-label-sm text-label-sm text-on-surface whitespace-nowrap">
+                                    Lesión Oclusal
+                                </div>
+</div>
+</div>
+</section>
+<!-- X-Ray Studies Gallery -->
+<section class="h-[200px] bg-surface-container/40 backdrop-blur-[20px] border border-white/10 rounded-2xl shadow-[0_20px_40px_rgba(10,25,47,0.15)] flex flex-col">
+<div class="px-6 py-4 border-b border-white/5 flex justify-between items-center">
+<h3 class="font-headline-md text-[18px] text-on-surface">Estudios Radiográficos</h3>
+<button class="text-secondary hover:text-secondary-fixed text-sm font-label-md flex items-center gap-1">
+                                Ver todos <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+<div class="flex-1 p-4 flex gap-4 overflow-x-auto snap-x snap-mandatory">
+<!-- Study Item 1 -->
+<div class="min-w-[160px] h-full rounded-lg overflow-hidden border border-white/10 relative group cursor-pointer snap-center shrink-0">
+<img alt="Radiografía Periapical" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300" data-alt="A high-contrast, clear dental periapical X-ray showing a lower molar. Dark cinematic clinical presentation with glowing white highlights on the tooth structure, typical of a modern digital radiograph display." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGviTpbar_Nbax6O_JQ-Qwd6luwauoBG2cpLNWTEMjZbfTEBfilajSOn93Wny4C7arzU5AIQtsdLTeliQ-sQNQbSFAyZe7IAsr9E4eBYNr970n0KYExbG0W3YwfMu5SrVH7V5guyMKQLQrTdN4dgE9k8HTFefwbKSWyIt7De6lZ7eVw0XRiDEwIpRkOXsntVIVPir6jMyWvI8670Kp8PGHaaizNyoXvO7jvRyfTaER75pZNQ9KBp9QlOPKsic2Z476y2zQp-lwc6RK"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent flex items-end p-3">
+<span class="font-label-sm text-label-sm text-white">Periapical - 12/Oct</span>
+</div>
+</div>
+<!-- Study Item 2 -->
+<div class="min-w-[160px] h-full rounded-lg overflow-hidden border border-white/10 relative group cursor-pointer snap-center shrink-0">
+<img alt="Radiografía Aleta de mordida" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300" data-alt="A detailed digital dental bitewing X-ray showing the interproximal spaces of molars. Dark mode UI presentation, clinical, sharp, high resolution." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDm1nxJc_v7nS5n8eMx_P6N8LnCjvmDZqaF0qZtzCxRfOmaw1dYDXioYT9Kv05t1Uivs4rp54BLYgD4F3iec4i6hZVQ1z84sCblUW46Jc6pe8VmgtnWqX_i51s7qTEr4d0L_qdHNlsK1mI0_M8THL4oUBmzq42NX-Nml7BnI66gC_Yo_lFWrOvy5l-MR6pplJhjHxjmrCB2NNJByfci5sUu_pxCVyl4EAJ2HRwpGbEKRvl7AYQGySpqPwnlArpQ5VY0rrENhK5mCkj4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent flex items-end p-3">
+<span class="font-label-sm text-label-sm text-white">Aleta Mordida - 12/Oct</span>
+</div>
+</div>
+<!-- Add New Study Button -->
+<div class="min-w-[160px] h-full rounded-lg border border-dashed border-white/20 bg-white/5 hover:bg-white/10 flex flex-col items-center justify-center gap-2 cursor-pointer transition-colors snap-center shrink-0">
+<span class="material-symbols-outlined text-on-surface-variant text-[28px]">add_photo_alternate</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Vincular Estudio</span>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Data & Actions (5 cols) -->
+<div class="lg:col-span-5 flex flex-col gap-gutter">
+<!-- Clinical Findings Form -->
+<section class="bg-surface-container/60 backdrop-blur-[20px] border border-white/10 rounded-2xl shadow-[0_20px_40px_rgba(10,25,47,0.15)] p-6">
+<h3 class="font-headline-md text-[20px] text-on-surface mb-6 border-b border-white/5 pb-4">Registrar Hallazgo</h3>
+<form class="space-y-5">
+<!-- Type Select -->
+<div class="relative">
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-1">Tipo de Lesión/Condición</label>
+<select class="w-full bg-transparent border-0 border-b border-white/20 text-on-surface font-body-md py-2 px-0 focus:ring-0 focus:border-secondary transition-colors appearance-none cursor-pointer">
+<option class="bg-surface-container text-on-surface" value="caries">Caries Oclusal</option>
+<option class="bg-surface-container text-on-surface" value="fractura">Fractura Coronaria</option>
+<option class="bg-surface-container text-on-surface" value="desgaste">Desgaste Atrición</option>
+<option class="bg-surface-container text-on-surface" value="filtracion">Filtración Marginal</option>
+</select>
+<span class="material-symbols-outlined absolute right-0 bottom-2 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+<!-- Material Select -->
+<div class="relative">
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-1">Material Sugerido</label>
+<select class="w-full bg-transparent border-0 border-b border-white/20 text-on-surface font-body-md py-2 px-0 focus:ring-0 focus:border-secondary transition-colors appearance-none cursor-pointer">
+<option class="bg-surface-container text-on-surface" value="resina">Resina Compuesta (Fotocurable)</option>
+<option class="bg-surface-container text-on-surface" value="ionomero">Ionómero de Vidrio</option>
+<option class="bg-surface-container text-on-surface" value="amalgama">Amalgama</option>
+<option class="bg-surface-container text-on-surface" value="incrustacion">Incrustación Cerámica</option>
+</select>
+<span class="material-symbols-outlined absolute right-0 bottom-2 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+<!-- Severity & Sensitivity Row -->
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-2">Severidad</label>
+<div class="flex gap-2">
+<button class="flex-1 py-1 rounded border border-white/10 bg-white/5 text-on-surface-variant font-label-sm hover:bg-white/10 transition-colors" type="button">Leve</button>
+<button class="flex-1 py-1 rounded border border-secondary/50 bg-secondary/10 text-secondary font-label-sm" type="button">Mod</button>
+<button class="flex-1 py-1 rounded border border-white/10 bg-white/5 text-on-surface-variant font-label-sm hover:bg-white/10 transition-colors" type="button">Sev</button>
+</div>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-2">Sensibilidad (1-10)</label>
+<div class="flex items-center gap-3">
+<input class="w-full h-1 bg-surface-variant rounded-lg appearance-none cursor-pointer accent-secondary" max="10" min="1" type="range" value="7"/>
+<span class="font-headline-md text-[16px] text-secondary">7</span>
+</div>
+</div>
+</div>
+<!-- Notes -->
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-1">Notas Clínicas</label>
+<textarea class="w-full bg-surface-container-lowest/50 border border-white/10 rounded-lg text-on-surface font-body-md p-3 focus:ring-1 focus:ring-secondary focus:border-secondary transition-all resize-none placeholder-on-surface-variant/50" placeholder="Ej: Dolor provocado al frío, corta duración..." rows="2"></textarea>
+</div>
+<!-- CTA Form -->
+<button class="w-full py-3 mt-2 rounded-lg bg-surface-bright border border-white/10 text-on-surface hover:bg-white/10 transition-colors font-label-md text-label-md flex justify-center items-center gap-2" type="button">
+<span class="material-symbols-outlined text-[20px]">save</span>
+                                Guardar Hallazgo
+                            </button>
+</form>
+</section>
+<!-- History Widget -->
+<section class="flex-1 min-h-[200px] bg-surface-container/40 backdrop-blur-[20px] border border-white/10 rounded-2xl shadow-[0_20px_40px_rgba(10,25,47,0.15)] flex flex-col overflow-hidden">
+<div class="px-6 py-4 border-b border-white/5 bg-surface-container-low/50 sticky top-0">
+<h3 class="font-headline-md text-[18px] text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-fixed-dim text-[20px]">history</span>
+                                Historial P. 46
+                            </h3>
+</div>
+<div class="p-6 overflow-y-auto space-y-6">
+<!-- Timeline Item -->
+<div class="relative pl-6 before:absolute before:left-2 before:top-2 before:bottom-[-24px] before:w-px before:bg-white/10 last:before:hidden">
+<div class="absolute left-0 top-1.5 w-4 h-4 rounded-full bg-surface-container border-2 border-primary-fixed-dim z-10"></div>
+<p class="font-label-sm text-label-sm text-primary-fixed-dim mb-1">15 Mar, 2022</p>
+<h4 class="font-label-md text-label-md text-on-surface">Restauración Oclusal (Resina)</h4>
+<p class="font-body-md text-[14px] text-on-surface-variant mt-1">Dr. Sillar - Sin complicaciones.</p>
+</div>
+<!-- Timeline Item -->
+<div class="relative pl-6 before:absolute before:left-2 before:top-2 before:bottom-[-24px] before:w-px before:bg-white/10 last:before:hidden">
+<div class="absolute left-0 top-1.5 w-4 h-4 rounded-full bg-surface-container border-2 border-outline-variant z-10"></div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-1">10 Ene, 2019</p>
+<h4 class="font-label-md text-label-md text-on-surface-variant">Sellante de Fosas y Fisuras</h4>
+<p class="font-body-md text-[14px] text-on-surface-variant/70 mt-1">Dra. Gómez - Control preventivo.</p>
+</div>
+</div>
+</section>
+</div>
+</div>
+<!-- Global Action Footer -->
+<footer class="mt-auto pt-6 border-t border-white/10 flex justify-end items-center gap-4 bg-background/80 backdrop-blur-md sticky bottom-0 pb-6 z-20 rounded-t-2xl px-4 md:px-0">
+<button class="px-6 py-3 rounded-full bg-transparent border border-white/20 text-on-surface hover:bg-white/5 transition-all font-label-md text-label-md hidden md:block">
+                    Cancelar
+                </button>
+<button class="w-full md:w-auto px-8 py-3 rounded-full bg-secondary-container text-on-secondary-container shadow-[0_10px_30px_rgba(0,223,154,0.2)] hover:bg-secondary hover:-translate-y-0.5 transition-all duration-300 font-label-md text-[16px] flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">request_quote</span>
+                    Generar Presupuesto
+                </button>
+</footer>
+</div>
+</main>
+</body></html>

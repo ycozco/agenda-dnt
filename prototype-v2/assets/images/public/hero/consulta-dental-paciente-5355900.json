@@ -1,0 +1,26 @@
+﻿{
+    "id":  "pexels-consulta-5355900",
+    "filename":  "consulta-dental-paciente-5355900.jpg",
+    "path":  "prototype-v2\\assets\\images\\public\\hero\\consulta-dental-paciente-5355900.jpg",
+    "category":  "public-hero",
+    "purpose":  "hero y portada pÃºblica",
+    "sourcePage":  "https://www.pexels.com/photo/patient-having-an-appointment-with-a-dentist-5355900/",
+    "downloadUrl":  "https://images.pexels.com/photos/5355900/pexels-photo-5355900.jpeg?cs=srgb\u0026dl=pexels-tima-miroshnichenko-5355900.jpg\u0026fm=jpg",
+    "provider":  "Pexels",
+    "author":  "Tima Miroshnichenko",
+    "license":  "Pexels License",
+    "usage":  "Referencia visual de atenciÃ³n; no usar como testimonio ni personal real.",
+    "alt":  "Profesional dental atendiendo a un paciente durante una evaluaciÃ³n clÃ­nica",
+    "tags":  [
+                 "hero",
+                 "consulta",
+                 "evaluacion",
+                 "atencion",
+                 "clinica",
+                 "referencia"
+             ],
+    "bytes":  2606339,
+    "sha256":  "43c48db90ceb5099a3de6c72ce62974ce339a6097acf809683e89b7dcca254f3",
+    "downloadedAt":  "2026-07-26T00:52:25.7024371Z",
+    "status":  "reference-only"
+}

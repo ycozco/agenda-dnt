@@ -1,0 +1,194 @@
+<!DOCTYPE html><html class="dark" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Sillar Dental - Puerta de Enlace del Centro Administrativo</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#c5c6cd",
+                        "secondary-container": "#00df9a",
+                        "inverse-surface": "#d4e4fa",
+                        "primary-fixed": "#d6e3ff",
+                        "on-secondary-fixed-variant": "#005236",
+                        "on-tertiary-fixed": "#001d34",
+                        "on-secondary-fixed": "#002113",
+                        "on-tertiary-fixed-variant": "#004a7a",
+                        "background": "#051424",
+                        "outline-variant": "#44474d",
+                        "error-container": "#93000a",
+                        "on-surface": "#d4e4fa",
+                        "on-error": "#690005",
+                        "surface-dim": "#051424",
+                        "primary": "#b9c7e4",
+                        "on-tertiary-container": "#1286d6",
+                        "surface-container-highest": "#273647",
+                        "on-secondary-container": "#005d3e",
+                        "tertiary-fixed-dim": "#9bcbff",
+                        "outline": "#8f9097",
+                        "error": "#ffb4ab",
+                        "tertiary": "#9bcbff",
+                        "surface-container-low": "#0d1c2d",
+                        "primary-fixed-dim": "#b9c7e4",
+                        "tertiary-fixed": "#d0e4ff",
+                        "on-primary-fixed-variant": "#39475f",
+                        "on-primary-container": "#74829d",
+                        "primary-container": "#0a192f",
+                        "surface-tint": "#b9c7e4",
+                        "surface": "#051424",
+                        "on-error-container": "#ffdad6",
+                        "on-background": "#d4e4fa",
+                        "secondary-fixed-dim": "#0fe29c",
+                        "on-secondary": "#003824",
+                        "surface-container-lowest": "#010f1f",
+                        "inverse-primary": "#515f78",
+                        "on-tertiary": "#003256",
+                        "on-primary": "#233148",
+                        "surface-container": "#122131",
+                        "secondary-fixed": "#4affb7",
+                        "on-primary-fixed": "#0d1c32",
+                        "tertiary-container": "#001a30",
+                        "inverse-on-surface": "#233143",
+                        "surface-container-high": "#1c2b3c",
+                        "surface-bright": "#2c3a4c",
+                        "surface-variant": "#273647",
+                        "secondary": "#46fcb4"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "container-max-width": "1280px",
+                        "unit": "8px",
+                        "gutter": "24px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "body-md": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "label-sm": ["Manrope"],
+                        "display-lg-mobile": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "display-lg": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "display-lg-mobile": ["40px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "800"}],
+                        "headline-md": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #051424;
+            background-image: radial-gradient(circle at top right, rgba(70, 252, 180, 0.05), transparent 40%),
+                              radial-gradient(circle at bottom left, rgba(185, 199, 228, 0.05), transparent 40%);
+        }
+        .glass-panel {
+            background: rgba(1, 15, 31, 0.7);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        .glass-card {
+            background: linear-gradient(180deg, rgba(13, 28, 45, 0.4) 0%, rgba(1, 15, 31, 0.8) 100%);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+        .soft-deep-shadow {
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+        }
+        .hover-lift {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.4s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8);
+            border-color: rgba(70, 252, 180, 0.2);
+        }
+    </style>
+</head>
+<body class="text-on-background min-h-screen flex flex-col items-center justify-center p-margin-mobile md:p-margin-desktop relative overflow-x-hidden bg-background">
+<!-- Top App Bar / Branding Anchor -->
+<header class="absolute top-0 w-full flex justify-center py-12 z-20 pointer-events-none">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1; font-size: 32px;">diamond</span>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tighter">Sillar Dental</h1>
+</div>
+</header>
+<main class="w-full max-w-5xl z-10 mt-20 md:mt-32 mb-32 md:mb-40">
+<div class="text-center mb-16">
+<h2 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-6">Seleccione su Portal</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto leading-relaxed">Acceda a las herramientas y servicios diseñados específicamente para sus necesidades, con la precisión clínica y la hospitalidad que nos define.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 w-full">
+<!-- Patient Portal Card -->
+<a class="group relative rounded-3xl overflow-hidden aspect-[4/3] md:aspect-square flex items-end hover-lift border border-white/5 soft-deep-shadow glass-card" href="#">
+<div class="absolute inset-0 transition-transform duration-1000 group-hover:scale-110 opacity-100 group-hover:opacity-90" style="background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuBuOk0Gc1p64w95CqI63bB-ZHtV0ujasSqnvRpYfYS8Uvoj6W5CPFLY69gq5KSdhrUkvM3R11JlLPi8nnwZZRqlSlEY2XsL8ENNVzdQSJ5wZjWS31s8WGDwrj8gBwXREQlyTZVXftEia31oKu7tOt1pyqW827_EQRjQ237tEgTbU0eHgWFEVCkwZSBnU72F74_QdAoeeCS3RnL7zhLpUElPw7-BSaedfkAGB-jSJj653lPVb_43RWIuQHP8IiYnj14fFGyF8PBa503O&quot;); background-size: cover; background-position: center center;"></div>
+<!-- Dark Overlays -->
+<div class="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent"></div>
+<!-- Content -->
+<div class="relative w-full p-8 md:p-10 z-10 glass-panel rounded-t-[2.5rem] border-b-0 border-x-0 mt-auto">
+<div class="mb-6 inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-secondary/10 border border-secondary/20 shadow-[0_0_20px_rgba(70,252,180,0.15)]">
+<span class="material-symbols-outlined text-secondary text-4xl">medical_services</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface mb-3">Portal del Paciente</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8 opacity-80 group-hover:opacity-100 transition-opacity leading-snug">Gestione sus citas, consulte su historial clínico y comuníquese con su especialista.</p>
+<div class="flex items-center text-secondary font-label-md text-label-md tracking-widest uppercase">
+<span class="font-bold">Ingresar</span>
+<span class="material-symbols-outlined ml-3 transition-transform group-hover:translate-x-2">arrow_forward</span>
+</div>
+</div>
+</a>
+<!-- Admin Console Card -->
+<a class="group relative rounded-3xl overflow-hidden aspect-[4/3] md:aspect-square flex items-end hover-lift border border-white/5 soft-deep-shadow glass-card" href="#">
+<div class="absolute inset-0 transition-transform duration-1000 group-hover:scale-110 opacity-100 group-hover:opacity-90" style="background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuDnmX_5jnxwloxxNNetq4hhl6PVoeAQmpdExBL_41wUG1_tGB11FSozXyNT3-Mj8Sz6IrbHreDxPMRJAoah9-PYFq-WDuyBQdXFXNe_NjRMNhqZ70VSlgljnl4g8Fldo-4HG7yM35XUS65UXC6YDFPDItVS6NmqTyqpEG3j0cxDfwXkkMWRtG3XZpLZcrWekiCaX7N4OhDbnwruhMCRsWaoXLlOFiwce8YFlaA9lVoa9vKhtCjpLOij9cZOnOjfC-9YH57voug_1Oa-&quot;); background-size: cover; background-position: center center;"></div>
+<!-- Dark Overlays -->
+<div class="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent"></div>
+<!-- Content -->
+<div class="relative w-full p-8 md:p-10 z-10 glass-panel rounded-t-[2.5rem] border-b-0 border-x-0 mt-auto">
+<div class="mb-6 inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-secondary/10 border border-secondary/20 shadow-[0_0_20px_rgba(70,252,180,0.15)]">
+<span class="material-symbols-outlined text-secondary text-4xl">admin_panel_settings</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface mb-3">Consola de Administración</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8 opacity-80 group-hover:opacity-100 transition-opacity leading-snug">Acceso exclusivo para personal clínico y administrativo. Gestión integral de operaciones.</p>
+<div class="flex items-center text-secondary font-label-md text-label-md tracking-widest uppercase">
+<span class="font-bold">Ingresar</span>
+<span class="material-symbols-outlined ml-3 transition-transform group-hover:translate-x-2">arrow_forward</span>
+</div>
+</div>
+</a>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 md:py-16 flex flex-col md:flex-row justify-between items-center gap-gutter px-margin-mobile md:px-margin-desktop max-w-container-max-width mx-auto border-t border-white/5 bg-background">
+<div class="font-display-lg-mobile text-headline-md text-primary opacity-80">Sillar Dental</div>
+<div class="font-body-md text-body-md text-on-surface-variant/60 text-center md:text-left">
+            © 2024 Ecosistema Sillar Dental. Precisión Clínica. Hospitalidad de Excelencia.
+        </div>
+<div class="flex gap-8">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors" href="#">Política de Privacidad</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary transition-colors" href="#">Términos de Servicio</a>
+</div>
+</footer>
+
+
+</body></html>

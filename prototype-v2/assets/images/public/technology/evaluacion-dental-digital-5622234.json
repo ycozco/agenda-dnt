@@ -1,0 +1,25 @@
+﻿{
+    "id":  "pexels-examination-5622234",
+    "filename":  "evaluacion-dental-digital-5622234.jpg",
+    "path":  "prototype-v2\\assets\\images\\public\\technology\\evaluacion-dental-digital-5622234.jpg",
+    "category":  "public-technology",
+    "purpose":  "tecnologÃ­a y diagnÃ³stico",
+    "sourcePage":  "https://www.pexels.com/photo/patient-dental-examination-5622232/",
+    "downloadUrl":  "https://images.pexels.com/photos/5622234/pexels-photo-5622234.jpeg?cs=srgb\u0026dl=pexels-gustavo-fring-5622234.jpg\u0026fm=jpg",
+    "provider":  "Pexels",
+    "author":  "Gustavo Fring",
+    "license":  "Pexels License",
+    "usage":  "Referencia de evaluaciÃ³n y tecnologÃ­a; no diagnÃ³stico real.",
+    "alt":  "EvaluaciÃ³n dental en una clÃ­nica moderna, imagen de referencia",
+    "tags":  [
+                 "tecnologia",
+                 "diagnostico",
+                 "evaluacion",
+                 "equipamiento",
+                 "referencia"
+             ],
+    "bytes":  2207246,
+    "sha256":  "7300138cd2f866d7b31f6772d02f5a7fc22a250922a8f0da8b153e42ab75fb41",
+    "downloadedAt":  "2026-07-26T00:52:33.7825117Z",
+    "status":  "reference-only"
+}

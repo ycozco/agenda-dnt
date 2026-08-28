@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html class="dark" lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Sillar Dental - Puerta de Enlace del Centro Administrativo</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <link href="/styles/unified-upgrade.css" rel="stylesheet"/>
+  <style>
+    .glass-panel { background-color: rgba(13, 28, 45, 0.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); }
+    .glass-card { background: linear-gradient(180deg, rgba(13, 28, 45, 0.4) 0%, rgba(1, 15, 31, 0.8) 100%); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+    .soft-deep-shadow { box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6); }
+    .hover-lift { transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.4s ease; }
+    .hover-lift:hover { transform: translateY(-10px); box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8); border-color: rgba(70, 252, 180, 0.3); }
+  </style>
+</head>
+<body class="min-h-screen bg-[#051424] text-[#d4e4fa] font-['Manrope'] flex flex-col justify-between items-center relative overflow-x-hidden">
+
+  <!-- Top App Bar / Branding -->
+  <header class="w-full flex justify-center py-10 z-20">
+    <div class="flex items-center gap-3">
+      <span class="material-symbols-outlined text-secondary text-4xl" style="font-variation-settings: 'FILL' 1;">diamond</span>
+      <h1 class="text-3xl font-extrabold text-primary tracking-tighter">Sillar Dental</h1>
+    </div>
+  </header>
+
+  <!-- Title Section -->
+  <main class="w-full max-w-7xl z-10 px-6 my-auto py-6">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-4">Seleccione su Portal</h2>
+      <p class="text-base text-[#b9c7e4] max-w-2xl mx-auto leading-relaxed">Acceda a las herramientas y servicios diseñados específicamente para sus necesidades, con precisión clínica y la hospitalidad que nos define.</p>
+    </div>
+
+    <!-- 3 Tier Image Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
+
+      <!-- Card 1: Consola de Administración (Gerencia) -->
+      <a href="/staff/dashboard.html" class="group relative rounded-3xl overflow-hidden aspect-[4/5] flex items-end hover-lift border border-white/10 soft-deep-shadow glass-card">
+        <div class="absolute inset-0 transition-transform duration-1000 group-hover:scale-110 opacity-100 group-hover:opacity-90" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDnmX_5jnxwloxxNNetq4hhl6PVoeAQmpdExBL_41wUG1_tGB11FSozXyNT3-Mj8Sz6IrbHreDxPMRJAoah9-PYFq-WDuyBQdXFXNe_NjRMNhqZ70VSlgljnl4g8Fldo-4HG7yM35XUS65UXC6YDFPDItVS6NmqTyqpEG3j0cxDfwXkkMWRtG3XZpLZcrWekiCaX7N4OhDbnwruhMCRsWaoXLlOFiwce8YFlaA9lVoa9vKhtCjpLOij9cZOnOjfC-9YH57voug_1Oa-'); background-size: cover; background-position: center;"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#051424]/90 via-[#051424]/40 to-transparent"></div>
+
+        <div class="relative w-full p-6 md:p-8 z-10 glass-panel rounded-t-[2.5rem] border-b-0 border-x-0 mt-auto">
+          <div class="mb-4 inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-secondary/15 border border-secondary/30 shadow-[0_0_20px_rgba(70,252,180,0.2)]">
+            <span class="material-symbols-outlined text-secondary text-3xl">admin_panel_settings</span>
+          </div>
+          <span class="text-[10px] font-bold uppercase tracking-widest text-secondary bg-secondary/15 px-3 py-1 rounded-full border border-secondary/30 block w-fit mb-3">Nivel 01 • Gerencia</span>
+          <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-secondary transition-colors">Consola de Administración</h3>
+          <p class="text-xs text-[#b9c7e4] mb-6 opacity-80 group-hover:opacity-100 transition-opacity leading-snug">Acceso exclusivo para personal administrativo. Gestión integral de operaciones.</p>
+          <div class="flex items-center text-secondary font-bold text-xs uppercase tracking-widest">
+            <span>Ingresar</span>
+            <span class="material-symbols-outlined ml-2 text-base transition-transform group-hover:translate-x-2">arrow_forward</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 2: Portal del Doctor (Médico Specialist) -->
+      <a href="/staff/doctor.html" class="group relative rounded-3xl overflow-hidden aspect-[4/5] flex items-end hover-lift border border-white/10 soft-deep-shadow glass-card">
+        <div class="absolute inset-0 transition-transform duration-1000 group-hover:scale-110 opacity-100 group-hover:opacity-90" style="background-image: url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1200&q=80'); background-size: cover; background-position: center;"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#051424]/90 via-[#051424]/40 to-transparent"></div>
+
+        <div class="relative w-full p-6 md:p-8 z-10 glass-panel rounded-t-[2.5rem] border-b-0 border-x-0 mt-auto">
+          <div class="mb-4 inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-blue-500/15 border border-blue-500/30 shadow-[0_0_20px_rgba(59,130,246,0.2)]">
+            <span class="material-symbols-outlined text-blue-400 text-3xl">stethoscope</span>
+          </div>
+          <span class="text-[10px] font-bold uppercase tracking-widest text-blue-400 bg-blue-500/15 px-3 py-1 rounded-full border border-blue-500/30 block w-fit mb-3">Nivel 02 • Médico Specialist</span>
+          <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">Portal del Doctor</h3>
+          <p class="text-xs text-[#b9c7e4] mb-6 opacity-80 group-hover:opacity-100 transition-opacity leading-snug">Estación clínica de atención, odontograma 52P y citas asignadas del día.</p>
+          <div class="flex items-center text-blue-400 font-bold text-xs uppercase tracking-widest">
+            <span>Ingresar</span>
+            <span class="material-symbols-outlined ml-2 text-base transition-transform group-hover:translate-x-2">arrow_forward</span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 3: Portal del Paciente -->
+      <a href="/patient/index.html" class="group relative rounded-3xl overflow-hidden aspect-[4/5] flex items-end hover-lift border border-white/10 soft-deep-shadow glass-card">
+        <div class="absolute inset-0 transition-transform duration-1000 group-hover:scale-110 opacity-100 group-hover:opacity-90" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBuOk0Gc1p64w95CqI63bB-ZHtV0ujasSqnvRpYfYS8Uvoj6W5CPFLY69gq5KSdhrUkvM3R11JlLPi8nnwZZRqlSlEY2XsL8ENNVzdQSJ5wZjWS31s8WGDwrj8gBwXREQlyTZVXftEia31oKu7tOt1pyqW827_EQRjQ237tEgTbU0eHgWFEVCkwZSBnU72F74_QdAoeeCS3RnL7zhLpUElPw7-BSaedfkAGB-jSJj653lPVb_43RWIuQHP8IiYnj14fFGyF8PBa503O'); background-size: cover; background-position: center;"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-[#051424]/90 via-[#051424]/40 to-transparent"></div>
+
+        <div class="relative w-full p-6 md:p-8 z-10 glass-panel rounded-t-[2.5rem] border-b-0 border-x-0 mt-auto">
+          <div class="mb-4 inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-purple-500/15 border border-purple-500/30 shadow-[0_0_20px_rgba(168,85,247,0.2)]">
+            <span class="material-symbols-outlined text-purple-400 text-3xl">medical_services</span>
+          </div>
+          <span class="text-[10px] font-bold uppercase tracking-widest text-purple-400 bg-purple-500/15 px-3 py-1 rounded-full border border-purple-500/30 block w-fit mb-3">Nivel 03 • Paciente</span>
+          <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-purple-400 transition-colors">Portal del Paciente</h3>
+          <p class="text-xs text-[#b9c7e4] mb-6 opacity-80 group-hover:opacity-100 transition-opacity leading-snug">Gestione sus citas, consulte su historial clínico y comuníquese con su especialista.</p>
+          <div class="flex items-center text-purple-400 font-bold text-xs uppercase tracking-widest">
+            <span>Ingresar</span>
+            <span class="material-symbols-outlined ml-2 text-base transition-transform group-hover:translate-x-2">arrow_forward</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="w-full py-10 flex flex-col md:flex-row justify-between items-center gap-4 px-8 max-w-7xl border-t border-white/10 z-10">
+    <div class="text-sm font-bold text-primary opacity-80">Sillar Dental</div>
+    <div class="text-xs text-[#b9c7e4]/60 text-center">© 2024 Ecosistema Sillar Dental. Precisión Clínica. Hospitalidad de Excelencia.</div>
+    <div class="flex gap-6 text-xs text-[#b9c7e4]">
+      <a class="hover:text-secondary transition-colors" href="#">Política de Privacidad</a>
+      <a class="hover:text-secondary transition-colors" href="#">Términos de Servicio</a>
+    </div>
+  </footer>
+
+</body>
+</html>

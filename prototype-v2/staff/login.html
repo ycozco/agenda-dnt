@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acceso Consola Staff · Sillar Dental</title>
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+  <style>
+    body { min-height: 100vh; display: grid; place-items: center; background: #0c414d; color: white; }
+  </style>
+</head>
+<body>
+
+  <div class="card" style="max-width: 440px; width: 100%; padding: 36px; background: var(--surface); color: var(--ink);">
+    <div style="text-align: center; margin-bottom: 28px;">
+      <div style="width: 48px; height: 48px; background: var(--blue-deep); color: white; border-radius: 12px; display: grid; place-items: center; font-family: var(--display); font-size: 1.5rem; font-weight: 700; margin: 0 auto 12px;">S</div>
+      <h2 style="font-size: 1.6rem; margin-bottom: 4px;">Consola Clínica Staff</h2>
+      <p class="muted" style="font-size: 0.88rem;">Sillar Dental Especialidades · Yanahuara</p>
+    </div>
+
+    <form id="staffLoginForm" style="display: grid; gap: 16px;">
+      <label class="form-label">
+        Rol Demostrativo
+        <select class="form-select" id="roleSelect">
+          <option value="admin">Administrador General</option>
+          <option value="doctor">Profesional Dental (Dra. Ana Flores)</option>
+          <option value="reception">Recepción / Admisión</option>
+          <option value="cashier">Caja & Facturación</option>
+        </select>
+      </label>
+      <label class="form-label">
+        Usuario
+        <input type="text" class="form-control" value="staff.yanahuara" readonly style="background: var(--paper);">
+      </label>
+      <button type="submit" class="btn btn-primary" style="width: 100%; min-height: 46px;">Ingresar a la Consola</button>
+    </form>
+  </div>
+
+  <script type="module">
+    import { showToast } from '../assets/js/components.js';
+
+    document.getElementById("staffLoginForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const role = document.getElementById("roleSelect").value;
+      showToast(`Accediendo a la consola como ${role}`, "success");
+      setTimeout(() => {
+        window.location.href = `index.html?view=dashboard&role=${role}`;
+      }, 500);
+    });
+  </script>
+</body>
+</html>

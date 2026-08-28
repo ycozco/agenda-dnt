@@ -1,0 +1,262 @@
+/* ==========================================================================
+   STITCH COMPONENTS & LAYOUT SYSTEM
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Layout & Container Utility Classes
+   -------------------------------------------------------------------------- */
+.sd-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.sd-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.sd-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.sd-grid-2 {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+  .sd-grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Navigation Bar (Public & Portal)
+   -------------------------------------------------------------------------- */
+.sd-navbar {
+  background: var(--sd-glass-bg);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--sd-border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 0.85rem 1.5rem;
+}
+
+.sd-navbar-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.sd-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: var(--sd-on-surface);
+}
+
+.sd-brand-icon {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--sd-primary), var(--sd-secondary));
+  border-radius: var(--sd-radius-md);
+  display: grid;
+  place-items: center;
+  color: #ffffff;
+  font-weight: 800;
+}
+
+.sd-brand-name {
+  font-family: var(--sd-font-heading);
+  font-weight: 800;
+  font-size: 1.2rem;
+  letter-spacing: -0.02em;
+}
+
+.sd-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sd-nav-link {
+  color: var(--sd-on-surface-variant);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
+}
+
+.sd-nav-link:hover, .sd-nav-link.active {
+  color: var(--sd-secondary);
+}
+
+/* --------------------------------------------------------------------------
+   Cards & Surfaces
+   -------------------------------------------------------------------------- */
+.sd-card {
+  background: var(--sd-surface-card);
+  border: 1px solid var(--sd-border);
+  border-radius: var(--sd-radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--sd-shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.sd-card-interactive:hover {
+  transform: translateY(-3px);
+  border-color: var(--sd-secondary);
+  box-shadow: var(--sd-shadow-md);
+}
+
+.sd-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.sd-card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Buttons
+   -------------------------------------------------------------------------- */
+.sd-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.25rem;
+  border-radius: var(--sd-radius-md);
+  font-family: var(--sd-font-heading);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border: 1px solid transparent;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.sd-btn-primary {
+  background: var(--sd-secondary);
+  color: var(--sd-on-secondary);
+}
+
+.sd-btn-primary:hover {
+  background: var(--sd-secondary-hover);
+  box-shadow: 0 4px 12px rgba(0, 108, 73, 0.3);
+}
+
+.sd-btn-secondary {
+  background: var(--sd-primary);
+  color: var(--sd-on-primary);
+}
+
+.sd-btn-secondary:hover {
+  background: var(--sd-primary-hover);
+}
+
+.sd-btn-outline {
+  background: transparent;
+  border-color: var(--sd-border);
+  color: var(--sd-on-surface);
+}
+
+.sd-btn-outline:hover {
+  background: var(--sd-surface-container);
+  border-color: var(--sd-on-surface-variant);
+}
+
+/* --------------------------------------------------------------------------
+   Badges & Status Chips
+   -------------------------------------------------------------------------- */
+.sd-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.sd-badge-success { background: var(--sd-success-bg); color: var(--sd-success); }
+.sd-badge-warning { background: var(--sd-warning-bg); color: var(--sd-warning); }
+.sd-badge-danger { background: var(--sd-danger-bg); color: var(--sd-danger); }
+.sd-badge-info { background: var(--sd-info-bg); color: var(--sd-info); }
+
+/* --------------------------------------------------------------------------
+   Odontogram 52-Tooth System (COP Notation)
+   -------------------------------------------------------------------------- */
+.odontogram-grid {
+  display: grid;
+  grid-template-columns: repeat(16, 1fr);
+  gap: 6px;
+  padding: 1rem;
+  background: var(--sd-surface-container-low);
+  border-radius: var(--sd-radius-lg);
+  border: 1px solid var(--sd-border);
+  overflow-x: auto;
+}
+
+.tooth-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: var(--sd-radius-sm);
+  background: var(--sd-surface-card);
+  border: 1px solid var(--sd-border);
+  transition: all 0.2s ease;
+}
+
+.tooth-item:hover, .tooth-item.selected {
+  border-color: var(--sd-secondary);
+  box-shadow: 0 0 0 2px var(--sd-secondary);
+}
+
+.tooth-number {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--sd-on-surface-variant);
+}
+
+.tooth-svg {
+  width: 32px;
+  height: 38px;
+}
+
+.tooth-surface {
+  fill: var(--sd-surface-bright);
+  stroke: var(--sd-on-surface-variant);
+  stroke-width: 1.5;
+  transition: fill 0.2s ease;
+}
+
+.tooth-item[data-status="caries"] .tooth-surface.occlusal { fill: var(--sd-danger); }
+.tooth-item[data-status="restored"] .tooth-surface.occlusal { fill: var(--sd-info); }
+.tooth-item[data-status="extracted"] { opacity: 0.4; }
+.tooth-item[data-status="bracket"] .tooth-number { color: var(--sd-secondary); font-weight: 900; }

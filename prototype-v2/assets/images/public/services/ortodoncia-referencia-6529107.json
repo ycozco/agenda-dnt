@@ -1,0 +1,25 @@
+﻿{
+    "id":  "pexels-ortho-6529107",
+    "filename":  "ortodoncia-referencia-6529107.jpg",
+    "path":  "prototype-v2\\assets\\images\\public\\services\\ortodoncia-referencia-6529107.jpg",
+    "category":  "public-services",
+    "purpose":  "especialidades y tratamientos",
+    "sourcePage":  "https://www.pexels.com/photo/patient-having-a-dental-treatment-6529105/",
+    "downloadUrl":  "https://images.pexels.com/photos/6529107/pexels-photo-6529107.jpeg?cs=srgb\u0026dl=pexels-cottonbro-6529107.jpg\u0026fm=jpg",
+    "provider":  "Pexels",
+    "author":  "cottonbro studio",
+    "license":  "Pexels License",
+    "usage":  "Referencia de ortodoncia; no presentar como caso clÃ­nico de un paciente real.",
+    "alt":  "Tratamiento de ortodoncia en una clÃ­nica dental, imagen de referencia",
+    "tags":  [
+                 "ortodoncia",
+                 "brackets",
+                 "tratamiento",
+                 "especialidad",
+                 "referencia"
+             ],
+    "bytes":  1797857,
+    "sha256":  "a74eb1ab6e4fd7b1421c1a9f02e31f0814502a6ca1e5ff10fee36a1248fba863",
+    "downloadedAt":  "2026-07-26T00:52:30.9323141Z",
+    "status":  "reference-only"
+}

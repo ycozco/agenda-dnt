@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sillar Dental - Inicio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary-fixed": "#001d34",
+                      "tertiary-container": "#001a30",
+                      "tertiary-fixed-dim": "#9bcbff",
+                      "on-secondary": "#003824",
+                      "surface-container-high": "#1c2b3c",
+                      "secondary-fixed-dim": "#0fe29c",
+                      "secondary": "#46fcb4",
+                      "on-tertiary-fixed-variant": "#004a7a",
+                      "on-error": "#690005",
+                      "on-surface-variant": "#c5c6cd",
+                      "on-primary-container": "#74829d",
+                      "secondary-fixed": "#4affb7",
+                      "error": "#ffb4ab",
+                      "on-primary": "#233148",
+                      "primary": "#b9c7e4",
+                      "primary-fixed-dim": "#b9c7e4",
+                      "on-background": "#d4e4fa",
+                      "primary-container": "#0a192f",
+                      "on-surface": "#d4e4fa",
+                      "surface-tint": "#b9c7e4",
+                      "background": "#051424",
+                      "on-error-container": "#ffdad6",
+                      "error-container": "#93000a",
+                      "surface-container-highest": "#273647",
+                      "on-tertiary": "#003256",
+                      "inverse-surface": "#d4e4fa",
+                      "inverse-on-surface": "#233143",
+                      "outline-variant": "#44474d",
+                      "primary-fixed": "#d6e3ff",
+                      "surface-bright": "#2c3a4c",
+                      "on-primary-fixed": "#0d1c32",
+                      "on-secondary-container": "#005d3e",
+                      "notification": "#ffb4ab",
+                      "tertiary": "#9bcbff",
+                      "outline": "#8f9097",
+                      "on-secondary-fixed": "#002113",
+                      "on-primary-fixed-variant": "#39475f",
+                      "tertiary-fixed": "#d0e4ff",
+                      "surface-container": "#122131",
+                      "surface-dim": "#051424",
+                      "surface-container-lowest": "#010f1f",
+                      "surface": "#051424",
+                      "inverse-primary": "#515f78",
+                      "surface-container-low": "#0d1c2d",
+                      "on-tertiary-container": "#1286d6",
+                      "on-secondary-fixed-variant": "#005236",
+                      "surface-variant": "#273647",
+                      "secondary-container": "#00df9a"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "unit": "8px",
+                      "margin-mobile": "20px",
+                      "container-max-width": "1280px",
+                      "margin-desktop": "64px",
+                      "gutter": "24px"
+              },
+              "fontFamily": {
+                      "display-lg": ["Manrope"],
+                      "label-sm": ["Manrope"],
+                      "headline-lg": ["Manrope"],
+                      "display-lg-mobile": ["Manrope"],
+                      "label-md": ["Manrope"],
+                      "body-md": ["Manrope"],
+                      "headline-md": ["Manrope"],
+                      "body-lg": ["Manrope"]
+              },
+              "fontSize": {
+                      "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                      "label-sm": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "display-lg-mobile": ["40px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "800"}],
+                      "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+                      "headline-md": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .filled-icon {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        .shadow-soft-deep {
+            box-shadow: 0 20px 40px rgba(10, 25, 47, 0.4);
+        }
+        
+        .glass-panel {
+            background-color: rgba(13, 28, 45, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md antialiased overflow-x-hidden selection:bg-secondary selection:text-on-secondary">
+<!-- Navegación Superior -->
+<nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-white/10 shadow-[0_20px_40px_rgba(10,25,47,0.15)]">
+<div class="flex justify-between items-center h-20 px-margin-mobile md:px-margin-desktop max-w-container-max-width mx-auto">
+<!-- Marca -->
+<div class="font-display-lg-mobile text-headline-md tracking-tighter text-primary">
+                Sillar Dental
+            </div>
+<!-- Enlaces de Navegación -->
+<ul class="hidden md:flex items-center gap-8 font-label-md text-label-md tracking-wider">
+<li><a class="text-on-surface-variant hover:text-secondary transition-colors duration-300 hover:opacity-80" href="#">Clínicas</a></li>
+<li><a class="text-on-surface-variant hover:text-secondary transition-colors duration-300 hover:opacity-80" href="#">Servicios</a></li>
+<li><a class="text-on-surface-variant hover:text-secondary transition-colors duration-300 hover:opacity-80" href="#">Nosotros</a></li>
+<li><a class="text-on-surface-variant hover:text-secondary transition-colors duration-300 hover:opacity-80" href="#">Investigación</a></li>
+</ul>
+<!-- Acción Principal -->
+<div class="flex items-center gap-4">
+<button class="hidden md:flex items-center justify-center bg-secondary text-on-secondary font-label-md text-label-md px-6 py-3 rounded-full hover:bg-secondary-container transition-all shadow-soft-deep">
+                    Reservar Cita
+                </button>
+<!-- Menú Móvil -->
+<button class="md:hidden text-primary">
+<span class="material-symbols-outlined text-[28px]">menu</span>
+</button>
+</div>
+</div>
+</nav>
+<main>
+<!-- Sección Hero -->
+<section class="relative pt-32 pb-24 lg:pt-48 lg:pb-32 overflow-hidden flex items-center min-h-[921px]">
+<!-- Resplandor Ambiental -->
+<div class="absolute top-1/4 -left-1/4 w-1/2 h-1/2 bg-primary/20 blur-[120px] rounded-full pointer-events-none"></div>
+<div class="max-w-container-max-width mx-auto px-margin-mobile md:px-margin-desktop w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-gutter items-center relative z-10">
+<!-- Narrativa Visual -->
+<div class="flex flex-col items-start space-y-8 max-w-xl">
+<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border-primary/20">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest">Precisión Clínica</span>
+</div>
+<h1 class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-on-background">
+                        Odontología que puedes <span class="text-secondary italic font-light">ver</span>, entender y <span class="text-tertiary">decidir.</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-md">
+                        Redefinimos el cuidado dental. Nuestro enfoque moderno combina diagnósticos de vanguardia con un entorno de hospitalidad premium, garantizando total transparencia en cada tratamiento.
+                    </p>
+<div class="flex flex-col sm:flex-row gap-4 pt-4 w-full sm:w-auto">
+<button class="bg-secondary text-on-secondary font-label-md text-label-md px-8 py-4 rounded-full hover:bg-secondary-container transition-all shadow-soft-deep flex items-center justify-center gap-2">
+<span>Comenzar Experiencia</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+<button class="glass-panel text-on-surface font-label-md text-label-md px-8 py-4 rounded-full hover:bg-surface-container transition-all flex items-center justify-center gap-2">
+<span>Conocer Clínicas</span>
+</button>
+</div>
+</div>
+<!-- Anclaje Visual Sillar -->
+<div class="relative flex justify-center lg:justify-end w-full mt-12 lg:mt-0">
+<!-- Contenedor del Arco -->
+<div class="relative w-[90%] max-w-[480px] aspect-[3/4] rounded-t-full rounded-b-xl overflow-hidden glass-panel border-[4px] border-surface p-2 shadow-soft-deep group">
+<div class="w-full h-full rounded-t-full rounded-b-lg overflow-hidden relative">
+<img alt="Interior de clínica dental sofisticada" class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0e0kyVVNe0JZvCiAxOF8c1LQygnhcKLijl5Dm46C4KoZrr0X8pdUJUTeIpe0QA6scxLyd6nrq3Qk6BRZ8QH_Pi2P9czHooNdnTFw0cMjx46w2iXEZaEzXlnCa9bldx1LgDiWsj-ie_6HNWb7b9sp0DnGsD6dgngqh8rB9ADOU4FKeYDqOzeLX5cO_1w_HXj_rzVcSpCyZz6_fqr8RoFjrS19mz4Vx6fM9jQxWiPh0U9vtg8gWqF7-IB8XLpe8jgxBKXG-w0hOCktB"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-80"></div>
+</div>
+<!-- Tarjeta de Métrica Flotante - Ajustada ligeramente a la derecha -->
+<div class="absolute bottom-8 -left-4 lg:-left-6 glass-panel p-4 rounded-xl flex items-center gap-4 shadow-2xl animate-[bounce_4s_infinite]">
+<div class="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined filled-icon">3d_rotation</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Diagnóstico Integral</p>
+<p class="font-headline-md text-headline-md text-on-surface">100% Digital</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Cuadrícula de Beneficios -->
+<section class="py-24 bg-surface-container-lowest relative border-t border-white/5">
+<div class="max-w-container-max-width mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="mb-16 max-w-2xl">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">El nuevo estándar clínico.</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Diseñado para tu tranquilidad, impulsado por tecnología de precisión.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[minmax(280px,auto)]">
+<!-- Tarjeta: Transparencia -->
+<div class="md:col-span-2 glass-panel rounded-xl p-8 lg:p-12 flex flex-col justify-between group hover:bg-surface-container transition-colors duration-500 overflow-hidden relative">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-[80px] group-hover:bg-primary/20 transition-all duration-500"></div>
+<div class="relative z-10">
+<div class="w-14 h-14 rounded-full border border-primary/30 flex items-center justify-center text-primary mb-6">
+<span class="material-symbols-outlined text-[28px]">visibility</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-3">Transparencia Total</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md">
+                                Visualiza tu tratamiento antes de comenzar. Utilizamos escáneres 3D e inteligencia artificial para proyectar resultados exactos, eliminando la incertidumbre.
+                            </p>
+</div>
+</div>
+<!-- Tarjeta: Entorno -->
+<div class="glass-panel rounded-xl p-8 flex flex-col justify-between group hover:bg-surface-container transition-colors duration-500">
+<div class="w-14 h-14 rounded-full bg-secondary/10 flex items-center justify-center text-secondary mb-6">
+<span class="material-symbols-outlined text-[28px]">spa</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-3">Entorno Hospitalario</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                                Espacios diseñados para reducir la ansiedad. Aromaterapia, acústica controlada y sillones ergonómicos premium.
+                            </p>
+</div>
+</div>
+<!-- Tarjeta: Materiales -->
+<div class="glass-panel rounded-xl p-8 flex flex-col justify-between group hover:bg-surface-container transition-colors duration-500">
+<div class="w-14 h-14 rounded-full border border-tertiary/30 flex items-center justify-center text-tertiary mb-6">
+<span class="material-symbols-outlined text-[28px]">verified_user</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-3">Materiales Nativos</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                                Biocompatibilidad absoluta. Utilizamos cerámicas y resinas que se integran de forma natural con tu biología dental.
+                            </p>
+</div>
+</div>
+<!-- Tarjeta: Tecnología -->
+<div class="md:col-span-2 relative rounded-xl overflow-hidden shadow-soft-deep group">
+<div class="absolute inset-0 bg-surface-container-high z-0">
+<img alt="Escaneo digital 3D" class="w-full h-full object-cover opacity-40 mix-blend-screen group-hover:scale-105 transition-transform duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAR10foEPzhufIlIiEvmq_dvHfC5yXTgcGq7LyZUpC90dFel0YXVXDnT7xFPCWvLgqjjmF4vraE5cZu6eY1K1a9YYAF8HB-NIdEsYC2Y8jug8zSq8XYyDxx4xSQeA-4VGvLPHTv8DPdpfJjVo4oRCAvuyXZZgg7pIxkv9w-cpTj2jrJ5oBQYMkwASmztbw_RxPz7m9Wdw1YnPj2E0PaaT99l5Fx5ipAW26d8DmuBieF_eev7qcvVNGOW-mGVyYkEU_M0Zc9tbxR7Qei"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none"></div>
+<div class="relative z-20 p-8 lg:p-12 h-full flex flex-col justify-end w-3/4">
+<span class="px-3 py-1 bg-surface-container/80 backdrop-blur-md rounded border border-white/10 font-label-sm text-label-sm text-primary w-fit mb-4 uppercase">Tecnología Sillar</span>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Microprecisión Robótica</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                                Márgenes de error reducidos a micras. Tus restauraciones son talladas digitalmente para un ajuste perfecto desde el primer día.
+                            </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Vista Previa del Portal -->
+<section class="py-32 bg-surface relative overflow-hidden">
+<div class="absolute top-0 right-0 w-[800px] h-[800px] bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-surface-container-highest/40 via-surface/0 to-surface/0 rounded-full blur-[100px] pointer-events-none"></div>
+<div class="max-w-container-max-width mx-auto px-margin-mobile md:px-margin-desktop flex flex-col lg:flex-row items-center gap-16 relative z-10">
+<!-- Contenido de Texto -->
+<div class="flex-1 space-y-6">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high border border-white/10 flex items-center justify-center text-secondary mb-4 shadow-soft-deep">
+<span class="material-symbols-outlined text-[24px]">devices</span>
+</div>
+<h2 class="font-display-lg-mobile text-display-lg-mobile md:font-headline-lg md:text-headline-lg text-on-background">
+                        Tu progreso, siempre contigo.
+                    </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-8">
+                        Nuestro Portal de Paciente ("Digital Companion") te da control total. Revisa tus escaneos 3D, gestiona próximas citas, aprueba presupuestos y mantén una línea directa con tu especialista clínico.
+                    </p>
+<ul class="space-y-4 mb-8">
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary text-[20px]">check_circle</span>
+<span class="font-body-md text-body-md text-on-surface">Historial clínico 100% digitalizado.</span>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary text-[20px]">check_circle</span>
+<span class="font-body-md text-body-md text-on-surface">Notificaciones inteligentes de seguimiento.</span>
+</li>
+<li class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary text-[20px]">check_circle</span>
+<span class="font-body-md text-body-md text-on-surface">Visualización interactiva de tu plan de tratamiento.</span>
+</li>
+</ul>
+<button class="bg-surface-container border border-white/10 text-on-surface font-label-md text-label-md px-6 py-3 rounded-full hover:bg-surface-container-high transition-all flex items-center justify-center gap-2">
+<span>Explorar el Portal</span>
+<span class="material-symbols-outlined text-[18px]">open_in_new</span>
+</button>
+</div>
+<!-- Mockup del Dashboard -->
+<div class="flex-1 w-full relative">
+<div class="relative w-full max-w-lg mx-auto aspect-square lg:aspect-auto lg:h-[600px] bg-surface-container-low rounded-3xl border border-white/10 shadow-soft-deep p-6 overflow-hidden flex flex-col gap-4">
+<div class="flex justify-between items-center pb-4 border-b border-white/5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden">
+<img alt="Avatar del paciente" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAch51NpWavymky-CFaWdZd4YDLtbyHGxuaNO48e-cfDPso9cvhMm7SfdMVZ3YxL29FYem7AAbapy_1f6RBgWflsUlR0230es3iPgHqqri1okXsi60pGUJKAG4gSur81hShaL9sXIOafNh1zXXlTKrcvQaWgSaDW9YT-Nylq53V2NvOZmzoDUuEfl47u82Mayhepgy9vyLOS_OHF8TZEK-Y1JH6VRFPU5ssVx9fgQA-PAs2glpMZwVdCjSDVr4LetUZOyPbg0ZtuHQj"/>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Hola,</p>
+<p class="font-label-md text-label-md text-on-surface">Alejandro V.</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+</div>
+<div class="bg-surface rounded-xl p-5 border border-white/5 shadow-inner">
+<div class="flex justify-between items-start mb-4">
+<span class="px-2 py-1 bg-tertiary-container/50 text-tertiary rounded text-[10px] font-bold uppercase tracking-wider">Próxima Cita</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">calendar_month</span>
+</div>
+<p class="font-headline-md text-headline-md text-on-surface">Escaneo de Control</p>
+<p class="font-body-md text-body-md text-on-surface-variant mb-4">Dra. Elena Ramos • Clínica Norte</p>
+<div class="flex items-center justify-between mt-2 pt-4 border-t border-white/5">
+<div class="font-label-md text-label-md text-primary">Oct 12, 10:30 AM</div>
+<button class="text-secondary font-label-sm text-label-sm hover:underline">Reagendar</button>
+</div>
+</div>
+<div class="bg-surface rounded-xl p-5 border border-white/5 shadow-inner flex-1 flex flex-col">
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-md text-label-md text-on-surface">Progreso de Tratamiento</span>
+<span class="font-label-md text-label-md text-secondary">60%</span>
+</div>
+<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden mb-6">
+<div class="w-[60%] h-full bg-secondary rounded-full relative">
+<div class="absolute right-0 top-0 bottom-0 w-4 bg-white/30 rounded-full blur-[2px]"></div>
+</div>
+</div>
+<div class="flex-1 bg-surface-container-lowest rounded-lg border border-white/5 flex items-center justify-center relative overflow-hidden group cursor-pointer">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent"></div>
+<span class="material-symbols-outlined text-[48px] text-surface-container-highest group-hover:scale-110 transition-transform">3d_rotation</span>
+<div class="absolute bottom-3 left-3 right-3 flex justify-between items-center">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Fase 2: Alineación</span>
+<span class="material-symbols-outlined text-[16px] text-primary">fullscreen</span>
+</div>
+</div>
+</div>
+<div class="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-surface-container-low to-transparent pointer-events-none"></div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Pie de Página -->
+<footer class="w-full py-12 md:py-24 bg-surface-container-lowest flex flex-col md:flex-row justify-between items-center gap-gutter px-margin-mobile md:px-margin-desktop max-w-container-max-width mx-auto border-t border-white/5 relative z-10">
+<div class="flex flex-col items-center md:items-start gap-4">
+<div class="font-display-lg-mobile text-headline-md text-primary">
+                Sillar Dental
+            </div>
+<p class="font-body-md text-body-md text-on-surface-variant text-center md:text-left max-w-sm">
+                © 2024 Sillar Dental Ecosystem. Precisión Clínica. Hospitalidad de Vanguardia.
+            </p>
+</div>
+<ul class="flex flex-wrap justify-center gap-6 md:gap-8 font-body-md text-body-md">
+<li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Política de Privacidad</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Términos de Servicio</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Estándares Clínicos</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-all duration-300" href="#">Contacto</a></li>
+</ul>
+</footer>
+</body></html>

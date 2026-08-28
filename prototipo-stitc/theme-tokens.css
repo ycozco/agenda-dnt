@@ -1,0 +1,81 @@
+/* ==========================================================================
+   SILLAR DENTAL - STITCH PROTOTYPE DESIGN TOKENS
+   Basado en la especificación Stitch (Parts 1, 2 y 3)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Light Theme: Sillar Clinical Hospitality
+   -------------------------------------------------------------------------- */
+:root, [data-theme="light"] {
+  /* Surface & Background */
+  --sd-color-surface: #f8f9ff;
+  --sd-color-surface-dim: #cbdbf5;
+  --sd-color-surface-bright: #f8f9ff;
+  --sd-color-surface-container-lowest: #ffffff;
+  --sd-color-surface-container-low: #eff4ff;
+  --sd-color-surface-container: #e5eeff;
+  --sd-color-surface-container-high: #dce9ff;
+  --sd-color-surface-container-highest: #d3e4fe;
+  --sd-color-on-surface: #0b1c30;
+  --sd-color-on-surface-variant: #44474e;
+  
+  /* Primary Brand (Azul Sillar Mineral) */
+  --sd-color-primary: #002046;
+  --sd-color-on-primary: #ffffff;
+  --sd-color-primary-container: #1c365d;
+  --sd-color-on-primary-container: #879fcc;
+  --sd-color-primary-fixed: #d6e3ff;
+  
+  /* Secondary Brand (Verde Sillar / Acción) */
+  --sd-color-secondary: #006c49;
+  --sd-color-on-secondary: #ffffff;
+  --sd-color-secondary-container: #6cf8bb;
+  --sd-color-on-secondary-container: #00714d;
+  --sd-color-secondary-fixed: #6ffbbe;
+  
+  /* Accent & Utility */
+  --sd-color-accent-green-soft: rgba(16, 185, 129, 0.1);
+  --sd-color-glass-border: rgba(0, 32, 70, 0.08);
+  --sd-color-glass-white: rgba(255, 255, 255, 0.9);
+  --sd-color-error: #ba1a1a;
+  --sd-color-error-container: #ffdad6;
+
+  /* Typography Fonts */
+  --sd-font-heading: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+  --sd-font-body: 'Source Sans 3', 'Inter', sans-serif;
+}
+
+/* --------------------------------------------------------------------------
+   Dark Theme: Mineral Deep Narrative
+   -------------------------------------------------------------------------- */
+[data-theme="dark"] {
+  /* Surface & Background */
+  --sd-color-surface: #051424;
+  --sd-color-surface-dim: #051424;
+  --sd-color-surface-bright: #2c3a4c;
+  --sd-color-surface-container-lowest: #010f1f;
+  --sd-color-surface-container-low: #0d1c2d;
+  --sd-color-surface-container: #122131;
+  --sd-color-surface-container-high: #1c2b3c;
+  --sd-color-surface-container-highest: #273647;
+  --sd-color-on-surface: #d4e4fa;
+  --sd-color-on-surface-variant: #c5c6cd;
+  
+  /* Primary Brand (Azul Mineral Oscuro) */
+  --sd-color-primary: #b9c7e4;
+  --sd-color-on-primary: #233148;
+  --sd-color-primary-container: #0a192f;
+  --sd-color-on-primary-container: #74829d;
+
+  /* Secondary Brand (Verde Neón Clínico) */
+  --sd-color-secondary: #46fcb4;
+  --sd-color-on-secondary: #003824;
+  --sd-color-secondary-container: #00df9a;
+  --sd-color-on-secondary-container: #005d3e;
+
+  /* Glass & Accent */
+  --sd-color-glass-border: rgba(212, 228, 250, 0.12);
+  --sd-color-glass-white: rgba(18, 33, 49, 0.85);
+  --sd-color-error: #ffb4ab;
+  --sd-color-error-container: #93000a;
+}

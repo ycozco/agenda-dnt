@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "1.0",
+  "status": "reference-only",
+  "purpose": "Referencia visual para odontograma, anatomía y radiografía ficticia",
+  "assets": [
+    {
+      "filename": "dental-arches-public-domain.png",
+      "tags": ["odontograma", "arcadas", "maxilar", "mandibula", "public-domain", "reference"],
+      "alt": "Diagrama de arcadas dentales para referencia de interfaz",
+      "usage": "Base visual no clínica para explorar selección de dientes; no usar como registro diagnóstico.",
+      "license": "Public domain; conservar LICENSES.md como fuente local"
+    },
+    {
+      "filename": "dental-arches-public-domain.svg",
+      "tags": ["odontograma", "arcadas", "vector", "public-domain", "reference"],
+      "alt": "Diagrama vectorial de arcadas dentales para referencia de interfaz",
+      "usage": "Variante vectorial para escalar el mockup sin pérdida de calidad.",
+      "license": "Public domain; conservar LICENSES.md como fuente local"
+    },
+    {
+      "filename": "fdi-schema-cc0.png",
+      "tags": ["odontograma", "fdi", "numeracion", "cc0", "reference"],
+      "alt": "Esquema de numeración dental FDI para referencia",
+      "usage": "Referencia de numeración; validar cualquier adaptación con el equipo clínico.",
+      "license": "CC0; conservar LICENSES.md como fuente local"
+    },
+    {
+      "filename": "tooth-anatomy-cc-by-sa-4.png",
+      "tags": ["anatomia", "diente", "educativo", "cc-by-sa-4.0", "reference"],
+      "alt": "Anatomía ilustrada de un diente para contenido educativo",
+      "usage": "Contenido educativo ficticio; no representa un hallazgo de paciente.",
+      "license": "CC BY-SA 4.0; conservar LICENSES.md y atribución"
+    },
+    {
+      "filename": "panoramic-xray-public-domain.jpg",
+      "tags": ["radiografia", "panoramica", "resultado", "public-domain", "reference"],
+      "alt": "Radiografía panorámica dental de referencia",
+      "usage": "Solo para probar visor de resultados; nunca mezclar con pacientes ni diagnósticos reales.",
+      "license": "Public domain; conservar LICENSES.md como fuente local"
+    }
+  ]
+}

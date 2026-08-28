@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>http://localhost:8085/public/index.html</loc>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="es-PE" href="http://localhost:8085/public/index.html"/>
+  </url>
+  <url>
+    <loc>http://localhost:8085/public/especialidades.html</loc>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="es-PE" href="http://localhost:8085/public/especialidades.html"/>
+  </url>
+  <url>
+    <loc>http://localhost:8085/public/reservar.html</loc>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="es-PE" href="http://localhost:8085/public/reservar.html"/>
+  </url>
+  <url>
+    <loc>http://localhost:8085/public/tecnologia.html</loc>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es-PE" href="http://localhost:8085/public/tecnologia.html"/>
+  </url>
+  <url>
+    <loc>http://localhost:8085/public/equipo.html</loc>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es-PE" href="http://localhost:8085/public/equipo.html"/>
+  </url>
+  <url>
+    <loc>http://localhost:8085/public/contacto.html</loc>
+    <lastmod>2026-08-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="es-PE" href="http://localhost:8085/public/contacto.html"/>
+  </url>
+</urlset>

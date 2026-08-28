@@ -1,0 +1,75 @@
+{
+  "clinic": {
+    "name": "Sillar Dental",
+    "location": "Yanahuara, Arequipa",
+    "organizationId": "org_sillar_01",
+    "siteId": "site_yanahuara"
+  },
+  "patients": [
+    {
+      "id": "pat_001",
+      "name": "Ana María Torres",
+      "document": "45892301",
+      "phone": "+51 984 123 456",
+      "email": "ana.torres@gmail.com",
+      "avatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80",
+      "historyNumber": "HC-2026-0482",
+      "status": "Activo"
+    },
+    {
+      "id": "pat_002",
+      "name": "Carlos Mendoza Ruiz",
+      "document": "71204892",
+      "phone": "+51 952 876 543",
+      "email": "carlos.mendoza@outlook.com",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
+      "historyNumber": "HC-2026-0511",
+      "status": "Activo"
+    }
+  ],
+  "doctors": [
+    {
+      "id": "doc_001",
+      "name": "Dr. Gonzalo Pacheco",
+      "specialty": "Ortodoncia & Ortopedia",
+      "cop": "COP 18492",
+      "avatar": "https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=150&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": "doc_002",
+      "name": "Dra. Sofía Valdivia",
+      "specialty": "Rehabilitación Oral & Estética",
+      "cop": "COP 21045",
+      "avatar": "https://images.unsplash.com/photo-1594824813566-88855ce78c43?w=150&auto=format&fit=crop&q=80"
+    }
+  ],
+  "appointments": [
+    {
+      "id": "apt_101",
+      "patientName": "Ana María Torres",
+      "doctorName": "Dr. Gonzalo Pacheco",
+      "specialty": "Ortodoncia",
+      "date": "2026-07-28",
+      "time": "09:30 AM",
+      "chair": "Sillón 01",
+      "status": "Confirmada",
+      "type": "Control de Alineadores"
+    },
+    {
+      "id": "apt_102",
+      "patientName": "Carlos Mendoza Ruiz",
+      "doctorName": "Dra. Sofía Valdivia",
+      "specialty": "Rehabilitación Oral",
+      "date": "2026-07-28",
+      "time": "11:00 AM",
+      "chair": "Sillón 02",
+      "status": "En Proceso",
+      "type": "Evaluación de Implante"
+    }
+  ],
+  "inventory": [
+    { "id": "inv_01", "name": "Resina Fotocurable A2", "category": "Operatoria", "stock": 42, "unit": "Cartuchos", "status": "Normal" },
+    { "id": "inv_02", "name": "Brackets Metálicos Roth .022", "category": "Ortodoncia", "stock": 8, "unit": "Kits", "status": "Bajo Stock" },
+    { "id": "inv_03", "name": "Anestésico Mepivacaína 3%", "category": "Cirugía", "stock": 150, "unit": "Cárpules", "status": "Suficiente" }
+  ]
+}

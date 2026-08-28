@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sillar Dental - Calendario Mensual Expandido</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-tertiary": "#003256",
+                        "primary-fixed": "#d6e3ff",
+                        "secondary-fixed": "#4affb7",
+                        "on-surface-variant": "#c5c6cd",
+                        "on-primary": "#233148",
+                        "on-secondary-fixed-variant": "#005236",
+                        "surface-container-highest": "#273647",
+                        "tertiary-container": "#001a30",
+                        "on-tertiary-fixed-variant": "#004a7a",
+                        "on-secondary-container": "#005d3e",
+                        "surface-bright": "#2c3a4c",
+                        "on-tertiary-container": "#1286d6",
+                        "on-error": "#690005",
+                        "on-background": "#d4e4fa",
+                        "secondary-container": "#00df9a",
+                        "surface-container-high": "#1c2b3c",
+                        "tertiary-fixed-dim": "#9bcbff",
+                        "secondary": "#46fcb4",
+                        "primary": "#b9c7e4",
+                        "inverse-on-surface": "#233143",
+                        "on-tertiary-fixed": "#001d34",
+                        "on-secondary": "#003824",
+                        "on-primary-fixed": "#0d1c32",
+                        "background": "#051424",
+                        "error": "#ffb4ab",
+                        "surface": "#051424",
+                        "inverse-primary": "#515f78",
+                        "surface-variant": "#273647",
+                        "on-primary-container": "#74829d",
+                        "on-primary-fixed-variant": "#39475f",
+                        "error-container": "#93000a",
+                        "surface-container-low": "#0d1c2d",
+                        "outline-variant": "#44474d",
+                        "inverse-surface": "#d4e4fa",
+                        "tertiary": "#9bcbff",
+                        "secondary-fixed-dim": "#0fe29c",
+                        "surface-container": "#122131",
+                        "primary-container": "#0a192f",
+                        "on-error-container": "#ffdad6",
+                        "surface-dim": "#051424",
+                        "surface-container-lowest": "#010f1f",
+                        "on-surface": "#d4e4fa",
+                        "primary-fixed-dim": "#b9c7e4",
+                        "outline": "#8f9097",
+                        "tertiary-fixed": "#d0e4ff",
+                        "on-secondary-fixed": "#002113",
+                        "surface-tint": "#b9c7e4"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "unit": "8px",
+                        "margin-desktop": "64px",
+                        "margin-mobile": "20px",
+                        "gutter": "24px",
+                        "container-max-width": "1280px"
+                    },
+                    fontFamily: {
+                        "label-sm": ["Manrope"],
+                        "display-lg-mobile": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "display-lg": ["Manrope"],
+                        "body-md": ["Manrope"]
+                    },
+                    fontSize: {
+                        "label-sm": ["12px", { lineHeight: "1.2", letterSpacing: "0.05em", fontWeight: "500" }],
+                        "display-lg-mobile": ["40px", { lineHeight: "1.1", letterSpacing: "-0.03em", fontWeight: "800" }],
+                        "headline-lg": ["32px", { lineHeight: "1.2", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "label-md": ["14px", { lineHeight: "1.2", letterSpacing: "0.02em", fontWeight: "600" }],
+                        "headline-md": ["24px", { lineHeight: "1.3", letterSpacing: "-0.01em", fontWeight: "600" }],
+                        "body-lg": ["18px", { lineHeight: "1.6", letterSpacing: "0", fontWeight: "400" }],
+                        "display-lg": ["64px", { lineHeight: "1.1", letterSpacing: "-0.04em", fontWeight: "800" }],
+                        "body-md": ["16px", { lineHeight: "1.5", letterSpacing: "0", fontWeight: "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Manrope', sans-serif; }
+        .glass-panel {
+            background: rgba(10, 25, 47, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .soft-deep-shadow {
+            box-shadow: 0 20px 40px -10px rgba(10, 25, 47, 0.5);
+        }
+    </style>
+  <link href="/styles/unified-upgrade.css" rel="stylesheet"/>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- SideNavBar (JSON Component) -->
+<nav class="h-screen w-64 fixed left-0 top-0 bg-surface dark:bg-inverse-surface hidden md:flex flex-col border-r border-outline-variant dark:border-outline z-50">
+<div class="p-6">
+<h1 class="text-headline-md font-headline-md font-bold text-primary dark:text-inverse-primary">Sillar Dental</h1>
+<p class="text-label-sm font-label-sm text-on-surface-variant mt-1">Administrative Panel</p>
+</div>
+<div class="px-4 py-2">
+<button class="w-full bg-secondary-container hover:bg-secondary text-on-secondary-container text-label-md font-label-md py-3 rounded-full flex items-center justify-center gap-2 transition-colors soft-deep-shadow">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                New Appointment
+            </button>
+</div>
+<ul class="flex flex-col gap-1 px-2 mt-4 flex-grow">
+<!-- Dashboard (Inactive) -->
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant rounded-lg hover:bg-surface-container-low dark:hover:bg-primary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-label-md font-label-md">Dashboard</span>
+</a>
+</li>
+<!-- Calendar (Active) -->
+<li>
+<a class="flex items-center gap-3 px-4 py-3 border-l-4 border-on-secondary-container bg-surface-container-high dark:bg-secondary text-primary dark:text-on-secondary font-bold rounded-r-lg transform scale-[0.99] transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">calendar_month</span>
+<span class="text-label-md font-label-md">Calendar</span>
+</a>
+</li>
+<!-- Appointments (Inactive) -->
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant rounded-lg hover:bg-surface-container-low dark:hover:bg-primary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">event_note</span>
+<span class="text-label-md font-label-md">Appointments</span>
+</a>
+</li>
+<!-- Specialists (Inactive) -->
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant rounded-lg hover:bg-surface-container-low dark:hover:bg-primary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">medical_services</span>
+<span class="text-label-md font-label-md">Specialists</span>
+</a>
+</li>
+<!-- Patient Registry (Inactive) -->
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant rounded-lg hover:bg-surface-container-low dark:hover:bg-primary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-label-md font-label-md">Patient Registry</span>
+</a>
+</li>
+<!-- Communications (Inactive) -->
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant rounded-lg hover:bg-surface-container-low dark:hover:bg-primary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">chat</span>
+<span class="text-label-md font-label-md">Communications</span>
+</a>
+</li>
+</ul>
+<div class="mt-auto px-2 pb-6 flex flex-col gap-1 border-t border-outline-variant/30 pt-4 mx-4">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant rounded-lg hover:bg-surface-container-low dark:hover:bg-primary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-label-md font-label-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant rounded-lg hover:bg-surface-container-low dark:hover:bg-primary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="text-label-md font-label-md">Support</span>
+</a>
+<div class="flex items-center gap-3 px-4 pt-4 mt-2">
+<img class="w-10 h-10 rounded-full object-cover border border-outline-variant" data-alt="A professional headshot of a female clinic administrator in her 30s. Soft, natural lighting. Shallow depth of field with a subtly blurred clinical background. The mood is approachable yet highly professional, fitting a luxury medical context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYburxzaojnwbT_Icvz1vhD0MznteENx_P1sDkwR5o1vrW-TKUuuwohrA-cI6BsIBjiiHNNkJxEFE1zvVx_BzA12e6dF_DDrCaFU_9B9VzVwj-ppjanhXLZ5-x-rtNtDqT9moxetsiQvqjAKd0vmTMyzRJzTmWJomJVfAW-lfrErZdL5xXqD89Dv58JnqN-OYgyjg3OL3TqRZ4hyOeAnwa_PatUsruo50vicdlK0VZc0zBKFXXhhN3kG5S1itfZKcJAd4pU4-s4F_p"/>
+<div>
+<p class="text-label-md font-label-md text-on-surface">Admin User</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Administrator</p>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 ml-0 md:ml-64 flex flex-col h-screen overflow-hidden">
+<!-- TopAppBar (JSON Component) -->
+<header class="flex justify-between items-center w-full h-16 px-6 border-b border-outline-variant dark:border-outline bg-surface dark:bg-surface-dim z-40 shrink-0">
+<div class="flex items-center gap-4">
+<button class="md:hidden text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="relative hidden sm:block w-64">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span>
+<input class="w-full bg-surface-container-low border-b border-outline-variant focus:border-secondary-container focus:rounded-lg focus:ring-0 focus:outline-none pl-10 pr-4 py-2 text-label-md font-label-md text-on-surface placeholder:text-on-surface-variant transition-all duration-300" placeholder="Search patients, appointments..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<h2 class="hidden lg:block text-headline-md font-headline-md text-primary dark:text-on-surface mr-6 font-bold tracking-tight">Clinical Operations Hub</h2>
+<button class="p-2 text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-inverse-primary transition-colors rounded-full hover:bg-surface-container-low">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-inverse-primary transition-colors rounded-full hover:bg-surface-container-low">
+<span class="material-symbols-outlined">history</span>
+</button>
+<button class="p-2 text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-inverse-primary transition-colors rounded-full hover:bg-surface-container-low">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Calendar View (Main Canvas) -->
+<main class="flex-1 overflow-auto p-4 md:p-margin-desktop lg:p-8 bg-background relative">
+<!-- Background Decorative Element -->
+<div class="absolute inset-0 pointer-events-none overflow-hidden z-0">
+<div class="absolute -top-[20%] -right-[10%] w-[50%] h-[50%] rounded-full bg-primary-container/20 blur-[120px]"></div>
+<div class="absolute bottom-[10%] -left-[10%] w-[40%] h-[40%] rounded-full bg-secondary-container/10 blur-[100px]"></div>
+</div>
+<div class="relative z-10 h-full flex flex-col gap-6 max-w-container-max-width mx-auto">
+<!-- Calendar Header -->
+<div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+<div>
+<h1 class="text-headline-lg font-headline-lg text-on-surface font-bold">Octubre 2023</h1>
+<p class="text-body-md font-body-md text-on-surface-variant mt-1">Vista Mensual de Citas</p>
+</div>
+<div class="flex items-center gap-4 bg-surface-container-low rounded-full p-1 border border-outline-variant/30">
+<button class="p-2 rounded-full hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<span class="text-label-md font-label-md text-on-surface font-semibold px-2">Hoy</span>
+<button class="p-2 rounded-full hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Filters / Legend (Glassmorphic) -->
+<div class="glass-panel rounded-xl p-4 flex flex-wrap gap-4 items-center justify-between">
+<div class="flex gap-4 items-center">
+<span class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Filtros:</span>
+<button class="px-4 py-1.5 rounded-full bg-primary-container border border-primary/20 text-primary text-label-md font-label-md hover:bg-primary-container/80 transition-colors">Todos los Doctores</button>
+<button class="px-4 py-1.5 rounded-full border border-outline-variant/50 text-on-surface-variant text-label-md font-label-md hover:border-outline-variant transition-colors">Dra. Silva</button>
+<button class="px-4 py-1.5 rounded-full border border-outline-variant/50 text-on-surface-variant text-label-md font-label-md hover:border-outline-variant transition-colors">Dr. Torres</button>
+</div>
+<div class="flex gap-4 items-center text-label-sm font-label-sm">
+<div class="flex items-center gap-1.5"><div class="w-2 h-2 rounded-full bg-secondary-container"></div> Confirmada</div>
+<div class="flex items-center gap-1.5"><div class="w-2 h-2 rounded-full bg-tertiary"></div> Pendiente</div>
+<div class="flex items-center gap-1.5"><div class="w-2 h-2 rounded-full bg-error"></div> Cancelada</div>
+</div>
+</div>
+<!-- Calendar Grid -->
+<div class="flex-1 glass-panel rounded-2xl overflow-hidden flex flex-col">
+<!-- Days of Week Header -->
+<div class="grid grid-cols-7 border-b border-outline-variant/30 bg-surface-container/50">
+<div class="py-3 text-center text-label-sm font-label-sm text-on-surface-variant font-bold">LUN</div>
+<div class="py-3 text-center text-label-sm font-label-sm text-on-surface-variant font-bold">MAR</div>
+<div class="py-3 text-center text-label-sm font-label-sm text-on-surface-variant font-bold">MIE</div>
+<div class="py-3 text-center text-label-sm font-label-sm text-on-surface-variant font-bold">JUE</div>
+<div class="py-3 text-center text-label-sm font-label-sm text-on-surface-variant font-bold">VIE</div>
+<div class="py-3 text-center text-label-sm font-label-sm text-on-surface-variant/50">SAB</div>
+<div class="py-3 text-center text-label-sm font-label-sm text-on-surface-variant/50">DOM</div>
+</div>
+<!-- Grid Cells -->
+<div class="grid grid-cols-7 grid-rows-5 flex-1 bg-outline-variant/10 gap-[1px]">
+<!-- Row 1 -->
+<!-- Prev Month Days -->
+<div class="bg-surface-dim/80 p-2 min-h-[100px] flex flex-col gap-1 transition-colors hover:bg-surface-container-low cursor-pointer">
+<span class="text-label-md font-label-md text-on-surface-variant/30 self-end">25</span>
+</div>
+<div class="bg-surface-dim/80 p-2 min-h-[100px] flex flex-col gap-1 transition-colors hover:bg-surface-container-low cursor-pointer">
+<span class="text-label-md font-label-md text-on-surface-variant/30 self-end">26</span>
+</div>
+<div class="bg-surface-dim/80 p-2 min-h-[100px] flex flex-col gap-1 transition-colors hover:bg-surface-container-low cursor-pointer">
+<span class="text-label-md font-label-md text-on-surface-variant/30 self-end">27</span>
+</div>
+<div class="bg-surface-dim/80 p-2 min-h-[100px] flex flex-col gap-1 transition-colors hover:bg-surface-container-low cursor-pointer">
+<span class="text-label-md font-label-md text-on-surface-variant/30 self-end">28</span>
+</div>
+<div class="bg-surface-dim/80 p-2 min-h-[100px] flex flex-col gap-1 transition-colors hover:bg-surface-container-low cursor-pointer">
+<span class="text-label-md font-label-md text-on-surface-variant/30 self-end">29</span>
+</div>
+<div class="bg-surface-dim/80 p-2 min-h-[100px] flex flex-col gap-1 transition-colors hover:bg-surface-container-low cursor-pointer">
+<span class="text-label-md font-label-md text-on-surface-variant/30 self-end">30</span>
+</div>
+<!-- Current Month Day 1 -->
+<div class="bg-surface/60 p-2 min-h-[100px] flex flex-col gap-1 transition-colors hover:bg-surface-container-low cursor-pointer relative group">
+<span class="text-label-md font-label-md text-on-surface self-end">1</span>
+<div class="mt-1 flex flex-col gap-1 overflow-y-auto max-h-[80px] scrollbar-hide">
+<div class="bg-secondary-container/20 border border-secondary-container/30 px-2 py-1 rounded text-label-sm font-label-sm text-secondary truncate" title="09:00 - Limpieza">09:00 Limpieza</div>
+<div class="bg-tertiary/20 border border-tertiary/30 px-2 py-1 rounded text-label-sm font-label-sm text-tertiary truncate" title="11:30 - Consulta">11:30 Consulta</div>
+</div>
+</div>
+<!-- Row 2 -->
+<div class="bg-surface/60 p-2 min-h-[100px] flex flex-col gap-1 transition-colors hover:bg-surface-container-low cursor-pointer">
+<span class="text-label-md font-label-md text-on-surface self-end">2</span>
+</div>
+<div class="bg-surface/60 p-2 min-h-[100px] flex flex-col gap-1 transition-colors hover:bg-surface-container-low cursor-pointer relative">
+<!-- Today indicator -->
+<div class="self-end w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center -mr-1 -mt-1 shadow-[0_0_15px_rgba(0,223,154,0.3)]">
+<span class="text-label-md font-label-md text-on-secondary-container font-bold">3</span>
+</div>
+<div class="mt-1 flex flex-col gap-1 overflow-y-auto max-h-[80px]">
+<div class="bg-secondary-container/20 border border-secondary-container/30 px-2 py-1 rounded text-label-sm font-label-sm text-secondary truncate">08:00 Extracción</div>
+<div class="bg-secondary-container/20 border border-secondary-container/30 px-2 py-1 rounded text-label-sm font-label-sm text-secondary truncate">10:00 Revisión</div>
+<div class="bg-error/20 border border-error/30 px-2 py-1 rounded text-label-sm font-label-sm text-error truncate">14:00 Endodoncia</div>
+</div>
+</div>
+<div class="bg-surface/60 p-2 min-h-[100px] flex flex-col gap-1 transition-colors hover:bg-surface-container-low cursor-pointer">
+<span class="text-label-md font-label-md text-on-surface self-end">4</span>
+<div class="mt-1 flex flex-col gap-1">
+<div class="bg-tertiary/20 border border-tertiary/30 px-2 py-1 rounded text-label-sm font-label-sm text-tertiary truncate">16:30 Blanqueamiento</div>
+</div>
+</div>
+<div class="bg-surface/60 p-2 min-h-[100px] flex flex-col gap-1 transition-colors hover:bg-surface-container-low cursor-pointer">
+<span class="text-label-md font-label-md text-on-surface self-end">5</span>
+</div>
+<div class="bg-surface/60 p-2 min-h-[100px] flex flex-col gap-1 transition-colors hover:bg-surface-container-low cursor-pointer">
+<span class="text-label-md font-label-md text-on-surface self-end">6</span>
+<div class="mt-1 flex flex-col gap-1">
+<div class="bg-secondary-container/20 border border-secondary-container/30 px-2 py-1 rounded text-label-sm font-label-sm text-secondary truncate">09:00 Implante</div>
+</div>
+</div>
+<div class="bg-surface-dim/40 p-2 min-h-[100px] flex flex-col gap-1 transition-colors hover:bg-surface-container-low cursor-pointer">
+<span class="text-label-md font-label-md text-on-surface-variant self-end">7</span>
+</div>
+<div class="bg-surface-dim/40 p-2 min-h-[100px] flex flex-col gap-1 transition-colors hover:bg-surface-container-low cursor-pointer">
+<span class="text-label-md font-label-md text-on-surface-variant self-end">8</span>
+</div>
+<!-- Just adding a few more rows to fill grid roughly, keeping it light for effort 0.25 -->
+<!-- Row 3 -->
+<div class="bg-surface/60 p-2 min-h-[100px] flex flex-col gap-1 transition-colors hover:bg-surface-container-low cursor-pointer"><span class="text-label-md font-label-md text-on-surface self-end">9</span></div>
+<div class="bg-surface/60 p-2 min-h-[100px] flex flex-col gap-1 transition-colors hover:bg-surface-container-low cursor-pointer"><span class="text-label-md font-label-md text-on-surface self-end">10</span></div>
+<div class="bg-surface/60 p-2 min-h-[100px] flex flex-col gap-1 transition-colors hover:bg-surface-container-low cursor-pointer"><span class="text-label-md font-label-md text-on-surface self-end">11</span></div>
+<div class="bg-surface/60 p-2 min-h-[100px] flex flex-col gap-1 transition-colors hover:bg-surface-container-low cursor-pointer"><span class="text-label-md font-label-md text-on-surface self-end">12</span></div>
+<div class="bg-surface/60 p-2 min-h-[100px] flex flex-col gap-1 transition-colors hover:bg-surface-container-low cursor-pointer"><span class="text-label-md font-label-md text-on-surface self-end">13</span></div>
+<div class="bg-surface-dim/40 p-2 min-h-[100px] flex flex-col gap-1 transition-colors hover:bg-surface-container-low cursor-pointer"><span class="text-label-md font-label-md text-on-surface-variant self-end">14</span></div>
+<div class="bg-surface-dim/40 p-2 min-h-[100px] flex flex-col gap-1 transition-colors hover:bg-surface-container-low cursor-pointer"><span class="text-label-md font-label-md text-on-surface-variant self-end">15</span></div>
+<!-- Row 4 -->
+<div class="bg-surface/60 p-2 min-h-[100px] flex flex-col gap-1 transition-colors hover:bg-surface-container-low cursor-pointer"><span class="text-label-md font-label-md text-on-surface self-end">16</span></div>
+<div class="bg-surface/60 p-2 min-h-[100px] flex flex-col gap-1 transition-colors hover:bg-surface-container-low cursor-pointer"><span class="text-label-md font-label-md text-on-surface self-end">17</span></div>
+<div class="bg-surface/60 p-2 min-h-[100px] flex flex-col gap-1 transition-colors hover:bg-surface-container-low cursor-pointer"><span class="text-label-md font-label-md text-on-surface self-end">18</span></div>
+<div class="bg-surface/60 p-2 min-h-[100px] flex flex-col gap-1 transition-colors hover:bg-surface-container-low cursor-pointer"><span class="text-label-md font-label-md text-on-surface self-end">19</span></div>
+<div class="bg-surface/60 p-2 min-h-[100px] flex flex-col gap-1 transition-colors hover:bg-surface-container-low cursor-pointer"><span class="text-label-md font-label-md text-on-surface self-end">20</span></div>
+<div class="bg-surface-dim/40 p-2 min-h-[100px] flex flex-col gap-1 transition-colors hover:bg-surface-container-low cursor-pointer"><span class="text-label-md font-label-md text-on-surface-variant self-end">21</span></div>
+<div class="bg-surface-dim/40 p-2 min-h-[100px] flex flex-col gap-1 transition-colors hover:bg-surface-container-low cursor-pointer"><span class="text-label-md font-label-md text-on-surface-variant self-end">22</span></div>
+<!-- Row 5 -->
+<div class="bg-surface/60 p-2 min-h-[100px] flex flex-col gap-1 transition-colors hover:bg-surface-container-low cursor-pointer"><span class="text-label-md font-label-md text-on-surface self-end">23</span></div>
+<div class="bg-surface/60 p-2 min-h-[100px] flex flex-col gap-1 transition-colors hover:bg-surface-container-low cursor-pointer"><span class="text-label-md font-label-md text-on-surface self-end">24</span></div>
+<div class="bg-surface/60 p-2 min-h-[100px] flex flex-col gap-1 transition-colors hover:bg-surface-container-low cursor-pointer"><span class="text-label-md font-label-md text-on-surface self-end">25</span></div>
+<div class="bg-surface/60 p-2 min-h-[100px] flex flex-col gap-1 transition-colors hover:bg-surface-container-low cursor-pointer"><span class="text-label-md font-label-md text-on-surface self-end">26</span></div>
+<div class="bg-surface/60 p-2 min-h-[100px] flex flex-col gap-1 transition-colors hover:bg-surface-container-low cursor-pointer"><span class="text-label-md font-label-md text-on-surface self-end">27</span></div>
+<div class="bg-surface-dim/40 p-2 min-h-[100px] flex flex-col gap-1 transition-colors hover:bg-surface-container-low cursor-pointer"><span class="text-label-md font-label-md text-on-surface-variant self-end">28</span></div>
+<div class="bg-surface-dim/40 p-2 min-h-[100px] flex flex-col gap-1 transition-colors hover:bg-surface-container-low cursor-pointer"><span class="text-label-md font-label-md text-on-surface-variant self-end">29</span></div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- BottomNavBar (Mobile Only) - Semantic mapping: hidden on desktop, shows calendar as active -->
+<nav class="md:hidden fixed bottom-0 w-full glass-panel border-t border-outline-variant z-50 flex justify-around items-center h-16 pb-safe">
+<a class="flex flex-col items-center gap-1 p-2 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px] font-label-sm font-medium">Dashboard</span>
+</a>
+<a class="flex flex-col items-center gap-1 p-2 text-secondary-container transition-colors relative" href="#">
+<!-- Active Indicator dot -->
+<div class="absolute top-1 right-2 w-1.5 h-1.5 rounded-full bg-secondary-container"></div>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">calendar_month</span>
+<span class="text-[10px] font-label-sm font-bold">Calendar</span>
+</a>
+<!-- Center FAB alternative for mobile -->
+<div class="relative -top-5">
+<button class="w-12 h-12 bg-secondary-container rounded-full flex items-center justify-center soft-deep-shadow text-on-secondary-container border-2 border-surface">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+<a class="flex flex-col items-center gap-1 p-2 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">medical_services</span>
+<span class="text-[10px] font-label-sm font-medium">Specialists</span>
+</a>
+<a class="flex flex-col items-center gap-1 p-2 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-[10px] font-label-sm font-medium">Patients</span>
+</a>
+</nav>
+<style>
+        /* Hide scrollbar for neatness in appointment lists */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        @supports (padding-bottom: env(safe-area-inset-bottom)) {
+            .pb-safe {
+                padding-bottom: env(safe-area-inset-bottom);
+            }
+        }
+    </style>
+
+
+
+
+<script>
+(function() {
+  document.addEventListener('DOMContentLoaded', () => {
+    const loc = window.location.pathname;
+    const isPublic = loc.includes('/public/');
+    const isPatient = loc.includes('/patient/');
+    const prefix = isPublic || isPatient ? '../' : './';
+
+    // Intercept all clicks on links and buttons
+    document.querySelectorAll('a, button, [onclick]').forEach(el => {
+      const text = (el.innerText || el.getAttribute('aria-label') || '').toLowerCase().trim();
+      const currentHref = el.getAttribute('href');
+
+      if (!currentHref || currentHref === '#' || currentHref === '') {
+        if (text.includes('portal del paciente') || text.includes('paciente') || text.includes('mi cuenta') || text.includes('mis citas')) {
+          el.setAttribute('href', prefix + 'patient/index.html');
+        } else if (text.includes('consola de administración') || text.includes('dashboard') || text.includes('administración')) {
+          el.setAttribute('href', prefix + 'staff/dashboard.html');
+        } else if (text.includes('portales') || text.includes('seleccione su portal') || text.includes('admin')) {
+          el.setAttribute('href', prefix + 'staff/admin.html');
+        } else if (text.includes('agendar') || text.includes('reservar') || text.includes('nueva cita')) {
+          el.setAttribute('href', prefix + 'public/reservar.html');
+        } else if (text.includes('agenda semanal') || text.includes('semanal')) {
+          el.setAttribute('href', prefix + 'staff/agenda-semanal.html');
+        } else if (text.includes('calendario') || text.includes('mensual')) {
+          el.setAttribute('href', prefix + 'staff/calendario-mensual.html');
+        } else if (text.includes('citas')) {
+          el.setAttribute('href', prefix + (isPatient ? 'patient/citas.html' : 'staff/citas.html'));
+        } else if (text.includes('consulta') || text.includes('odontograma')) {
+          el.setAttribute('href', prefix + 'staff/consulta.html');
+        } else if (text.includes('ortodoncia')) {
+          el.setAttribute('href', prefix + 'staff/ortodoncia.html');
+        } else if (text.includes('cirugía') || text.includes('implantología')) {
+          el.setAttribute('href', prefix + 'staff/cirugia.html');
+        } else if (text.includes('endodoncia') || text.includes('operatoria')) {
+          el.setAttribute('href', prefix + 'staff/endodoncia.html');
+        } else if (text.includes('rehabilitación') || text.includes('periodoncia')) {
+          el.setAttribute('href', prefix + 'staff/rehabilitacion.html');
+        } else if (text.includes('inventario') || text.includes('insumos')) {
+          el.setAttribute('href', prefix + 'staff/inventario.html');
+        } else if (text.includes('usuarios') || text.includes('personal')) {
+          el.setAttribute('href', prefix + 'staff/usuarios.html');
+        } else if (text.includes('cerrar sesión') || text.includes('salir')) {
+          el.setAttribute('href', prefix + 'patient/login.html');
+        } else if (text.includes('inicio') || text.includes('home')) {
+          el.setAttribute('href', prefix + 'public/index.html');
+        }
+      }
+    });
+  });
+})();
+</script>
+
+
+
+
+
+<!-- Root-Relative Bulletproof Navigation Script -->
+<script>
+(function() {
+  function applyRootLinks() {
+    const loc = window.location.pathname;
+
+    document.querySelectorAll('a, button').forEach(el => {
+      const target = el.tagName === 'A' ? el : el.closest('a');
+      if (!target) return;
+
+      const text = (target.textContent || target.getAttribute('aria-label') || '').toLowerCase().trim();
+
+      // Patient Portal Card or Nav Link
+      if (text.includes('portal del paciente') || (text.includes('paciente') && !text.includes('doctor') && !text.includes('historial'))) {
+        target.href = '/patient/index.html';
+      }
+      // Consola de Administración Card
+      else if (text.includes('consola de administración') || text.includes('dashboard principal')) {
+        target.href = '/staff/dashboard.html';
+      }
+      // Admin Gateway Selector
+      else if (text.includes('seleccione su portal') || text.includes('portales admin')) {
+        target.href = '/staff/admin.html';
+      }
+      // Public / Landing
+      else if (text.includes('sillar dental') && (text.includes('inicio') || text.includes('home'))) {
+        target.href = '/public/index.html';
+      } else if (text.includes('agendar') || text.includes('reservar')) {
+        target.href = '/public/reservar.html';
+      }
+      // Subviews
+      else if (text.includes('agenda semanal') || text.includes('semanal')) {
+        target.href = '/staff/agenda-semanal.html';
+      } else if (text.includes('calendario mensual') || text.includes('mensual')) {
+        target.href = '/staff/calendario-mensual.html';
+      } else if (text.includes('mis citas') || text.includes('citas paciente')) {
+        target.href = '/patient/citas.html';
+      } else if (text.includes('citas') || text.includes('agenda')) {
+        target.href = '/staff/citas.html';
+      } else if (text.includes('consulta') || text.includes('odontograma')) {
+        target.href = '/staff/consulta.html';
+      } else if (text.includes('ortodoncia')) {
+        target.href = '/staff/ortodoncia.html';
+      } else if (text.includes('cirugía') || text.includes('implantología')) {
+        target.href = '/staff/cirugia.html';
+      } else if (text.includes('endodoncia') || text.includes('operatoria')) {
+        target.href = '/staff/endodoncia.html';
+      } else if (text.includes('rehabilitación') || text.includes('periodoncia')) {
+        target.href = '/staff/rehabilitacion.html';
+      } else if (text.includes('inventario') || text.includes('insumos')) {
+        target.href = '/staff/inventario.html';
+      } else if (text.includes('usuarios') || text.includes('personal')) {
+        target.href = '/staff/usuarios.html';
+      } else if (text.includes('cerrar sesión') || text.includes('salir')) {
+        target.href = '/patient/login.html';
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', applyRootLinks);
+  window.addEventListener('load', applyRootLinks);
+})();
+</script>
+
+
+<!-- Persistent Collapsible Sidebar Engine -->
+<script>
+(function() {
+  document.addEventListener('DOMContentLoaded', () => {
+    // Only run on staff pages (excluding admin gateway selector)
+    if (window.location.pathname.includes('/staff/admin')) return;
+
+    const savedState = localStorage.getItem('sd-sidebar-collapsed') === 'true';
+
+    const sidebar = document.createElement('aside');
+    sidebar.id = 'sd-unified-sidebar';
+    sidebar.className = 'fixed top-0 left-0 h-screen z-50 transition-all duration-300 flex flex-col border-r border-white/10 shadow-2xl';
+    sidebar.style.cssText = 'width: ' + (savedState ? '76px' : '260px') + '; background: rgba(5,20,36,0.95); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);';
+
+    const currentPath = window.location.pathname;
+
+    const menuData = [
+      { category: 'Principal' },
+      { title: 'Dashboard Principal', icon: 'dashboard', href: '/staff/dashboard.html' },
+      { title: 'Gestión de Citas', icon: 'calendar_month', href: '/staff/citas.html' },
+      { title: 'Agenda Semanal', icon: 'view_week', href: '/staff/agenda-semanal.html', sub: true },
+      { title: 'Calendario Mensual', icon: 'calendar_view_month', href: '/staff/calendario-mensual.html', sub: true },
+      
+      { category: 'Clínica & Odontograma' },
+      { title: 'Odontograma 52P', icon: 'medical_services', href: '/staff/consulta.html' },
+      { title: 'Odontograma Drag&Drop', icon: 'drag_pan', href: '/staff/odontograma-dragdrop.html', sub: true },
+      
+      { category: 'Especialidades' },
+      { title: 'Ortodoncia', icon: 'orthodontics', href: '/staff/ortodoncia.html' },
+      { title: 'Cirugía e Implantes', icon: 'biomedical', href: '/staff/cirugia.html' },
+      { title: 'Endodoncia & Resinas', icon: 'dentistry', href: '/staff/endodoncia.html' },
+      { title: 'Periodoncia & Prótesis', icon: 'health_and_safety', href: '/staff/rehabilitacion.html' },
+      
+      { category: 'Administración' },
+      { title: 'Inventario & Stock', icon: 'inventory_2', href: '/staff/inventario.html' },
+      { title: 'Usuarios & Personal', icon: 'group', href: '/staff/usuarios.html' }
+    ];
+
+    let itemsHtml = '';
+    menuData.forEach(item => {
+      if (item.category) {
+        itemsHtml += `<div class="sd-sidebar-cat text-[10px] font-bold text-on-surface-variant/50 uppercase tracking-widest px-3 mt-4 mb-1 whitespace-nowrap ${savedState ? 'hidden' : 'block'}">${item.category}</div>`;
+      } else {
+        const isActive = currentPath.includes(item.href.replace('.html', ''));
+        itemsHtml += `
+          <a href="${item.href}" title="${item.title}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all font-label-md text-xs ${item.sub ? 'pl-5 opacity-90' : ''} ${isActive ? 'bg-secondary/15 text-secondary border border-secondary/30 font-bold shadow-[0_0_15px_rgba(70,252,180,0.15)]' : 'text-on-surface-variant hover:bg-white/10 hover:text-on-surface'}">
+            <span class="material-symbols-outlined text-lg shrink-0 ${isActive ? 'text-secondary' : 'opacity-80'}">${item.icon}</span>
+            <span class="sd-sidebar-text whitespace-nowrap font-medium transition-opacity duration-200 ${savedState ? 'hidden' : 'inline'}">${item.title}</span>
+          </a>
+        `;
+      }
+    });
+
+    sidebar.innerHTML = `
+      <!-- Header -->
+      <div class="h-16 px-4 flex items-center justify-between border-b border-white/10 shrink-0">
+        <a href="/staff/admin.html" class="flex items-center gap-2.5 overflow-hidden text-decoration-none">
+          <span class="material-symbols-outlined text-secondary text-2xl shrink-0">diamond</span>
+          <span id="sd-logo-text" class="font-headline-md text-sm text-primary font-bold whitespace-nowrap ${savedState ? 'hidden' : 'inline'}">Sillar Dental</span>
+        </a>
+        <button id="sd-sidebar-toggle" title="Contraer / Expandir Menú" class="p-1.5 rounded-lg text-on-surface-variant hover:bg-white/10 transition-colors flex items-center justify-center">
+          <span id="sd-toggle-icon" class="material-symbols-outlined text-lg">${savedState ? 'chevron_right' : 'chevron_left'}</span>
+        </button>
+      </div>
+
+      <!-- Menu Items -->
+      <div class="flex-1 overflow-y-auto py-3 px-2 space-y-1" style="scrollbar-width: thin;">
+        ${itemsHtml}
+      </div>
+
+      <!-- Footer Switcher -->
+      <div class="p-2 border-t border-white/10 space-y-1 shrink-0">
+        <a href="/patient/index.html" title="Portal Paciente" class="flex items-center gap-2.5 px-3 py-2 rounded-xl bg-secondary/10 text-secondary hover:bg-secondary/20 transition-all font-label-md font-bold text-xs">
+          <span class="material-symbols-outlined text-base shrink-0">person</span>
+          <span class="sd-sidebar-text whitespace-nowrap ${savedState ? 'hidden' : 'inline'}">Portal Paciente</span>
+        </a>
+        <a href="/staff/admin.html" title="Cambiar de Portal" class="flex items-center gap-2.5 px-3 py-2 rounded-xl bg-white/5 text-on-surface-variant hover:bg-white/10 transition-all font-label-md text-xs">
+          <span class="material-symbols-outlined text-base shrink-0">grid_view</span>
+          <span class="sd-sidebar-text whitespace-nowrap ${savedState ? 'hidden' : 'inline'}">Seleccionar Portal</span>
+        </a>
+      </div>
+    `;
+
+    document.body.appendChild(sidebar);
+
+    // Adjust body margin to make room for fixed sidebar
+    function updateBodyMargin(collapsed) {
+      document.body.style.transition = 'padding-left 0.3s ease';
+      document.body.style.paddingLeft = collapsed ? '76px' : '260px';
+    }
+
+    updateBodyMargin(savedState);
+
+    // Toggle Sidebar collapse / expand
+    const toggleBtn = document.getElementById('sd-sidebar-toggle');
+    const toggleIcon = document.getElementById('sd-toggle-icon');
+    const logoText = document.getElementById('sd-logo-text');
+
+    toggleBtn.addEventListener('click', () => {
+      const currentlyCollapsed = sidebar.style.width === '76px';
+      const nextCollapsed = !currentlyCollapsed;
+
+      sidebar.style.width = nextCollapsed ? '76px' : '260px';
+      toggleIcon.textContent = nextCollapsed ? 'chevron_right' : 'chevron_left';
+
+      document.querySelectorAll('.sd-sidebar-text').forEach(el => {
+        el.style.display = nextCollapsed ? 'none' : 'inline';
+      });
+
+      document.querySelectorAll('.sd-sidebar-cat').forEach(el => {
+        el.style.display = nextCollapsed ? 'none' : 'block';
+      });
+
+      if (logoText) logoText.style.display = nextCollapsed ? 'none' : 'inline';
+
+      updateBodyMargin(nextCollapsed);
+      localStorage.setItem('sd-sidebar-collapsed', nextCollapsed);
+    });
+  });
+})();
+</script>
+
+</body></html>

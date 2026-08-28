@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sillar Dental - Agenda Semanal Detallada</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#003256",
+                        "primary-fixed": "#d6e3ff",
+                        "secondary-fixed": "#4affb7",
+                        "on-surface-variant": "#c5c6cd",
+                        "on-primary": "#233148",
+                        "on-secondary-fixed-variant": "#005236",
+                        "surface-container-highest": "#273647",
+                        "tertiary-container": "#001a30",
+                        "on-tertiary-fixed-variant": "#004a7a",
+                        "on-secondary-container": "#005d3e",
+                        "surface-bright": "#2c3a4c",
+                        "on-tertiary-container": "#1286d6",
+                        "on-error": "#690005",
+                        "on-background": "#d4e4fa",
+                        "secondary-container": "#00df9a",
+                        "surface-container-high": "#1c2b3c",
+                        "tertiary-fixed-dim": "#9bcbff",
+                        "secondary": "#46fcb4",
+                        "primary": "#b9c7e4",
+                        "inverse-on-surface": "#233143",
+                        "on-tertiary-fixed": "#001d34",
+                        "on-secondary": "#003824",
+                        "on-primary-fixed": "#0d1c32",
+                        "background": "#051424",
+                        "error": "#ffb4ab",
+                        "surface": "#051424",
+                        "inverse-primary": "#515f78",
+                        "surface-variant": "#273647",
+                        "on-primary-container": "#74829d",
+                        "on-primary-fixed-variant": "#39475f",
+                        "error-container": "#93000a",
+                        "surface-container-low": "#0d1c2d",
+                        "outline-variant": "#44474d",
+                        "inverse-surface": "#d4e4fa",
+                        "tertiary": "#9bcbff",
+                        "secondary-fixed-dim": "#0fe29c",
+                        "surface-container": "#122131",
+                        "primary-container": "#0a192f",
+                        "on-error-container": "#ffdad6",
+                        "surface-dim": "#051424",
+                        "surface-container-lowest": "#010f1f",
+                        "on-surface": "#d4e4fa",
+                        "primary-fixed-dim": "#b9c7e4",
+                        "outline": "#8f9097",
+                        "tertiary-fixed": "#d0e4ff",
+                        "on-secondary-fixed": "#002113",
+                        "surface-tint": "#b9c7e4"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "margin-desktop": "64px",
+                        "margin-mobile": "20px",
+                        "gutter": "24px",
+                        "container-max-width": "1280px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Manrope"],
+                        "display-lg-mobile": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "label-md": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "display-lg": ["Manrope"],
+                        "body-md": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "display-lg-mobile": ["40px", { "lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "800" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-md": ["14px", { "lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400" }],
+                        "display-lg": ["64px", { "lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.background'); color: theme('colors.on-background'); }
+        
+        .glass-panel {
+            background: rgba(10, 25, 47, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .deep-shadow {
+            box-shadow: 0 20px 40px -15px rgba(10, 25, 47, 0.8);
+        }
+
+        .sillar-arch {
+            border-top-left-radius: 64px;
+            border-top-right-radius: 64px;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+        }
+
+        /* Hide scrollbar for clean look */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: theme('colors.surface-container-low');
+        }
+        ::-webkit-scrollbar-thumb {
+            background: theme('colors.surface-variant');
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: theme('colors.outline');
+        }
+    </style>
+  <link href="/styles/unified-upgrade.css" rel="stylesheet"/>
+</head>
+<body class="font-body-md text-body-md overflow-x-hidden antialiased">
+<!-- App Container -->
+<div class="flex h-screen w-full">
+<!-- SideNavBar Component -->
+<nav class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 border-r border-outline dark:border-outline bg-surface dark:bg-inverse-surface z-40">
+<!-- Header -->
+<div class="p-6">
+<div class="flex items-center gap-4 mb-8">
+<img class="w-10 h-10 rounded-full object-cover shadow-sm" data-alt="A macro shot of a sleek, minimalist metallic dental mirror resting on a pristine, glowing blue-tinted glass surface. The lighting is soft and cinematic, highlighting the clinical precision and luxury feel of the brand. Deep shadows contrast with bright, sterile highlights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkA_ZrJPqTNWnl01Zbb-wmOG133S6TMeVuicevsDxT-X3XAaALELrxdAWHcjYlF620N6qUDz628Aew0HF_kCIL52bniwqjOPKqL1aMmW4VscV4k9l2cvsA4SEpQgELQbGoo7uVACzBqOvXB31f0wA2H_9ghOdXmw9EdQt8ezMVMGwxAbBlz9D0mpHCk8IDpr7TO4bvxCdRFVc_tB45BeWxAi2c2Pllam07fmOXK7KxxWEfpaaj017BwCIMJug0DhYdJQisRT0iNhQH"/>
+<div>
+<h1 class="text-headline-md font-headline-md font-bold text-primary dark:text-inverse-primary">Sillar Dental</h1>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Administrative Panel</p>
+</div>
+</div>
+<button class="w-full bg-secondary-container text-on-secondary-container hover:bg-secondary transition-colors duration-300 py-3 rounded-lg text-label-md font-label-md font-bold deep-shadow flex items-center justify-center gap-2" onclick="openModal()">
+<span class="material-symbols-outlined">add</span>
+                    New Appointment
+                </button>
+</div>
+<!-- Main Tabs -->
+<div class="flex-1 overflow-y-auto py-4">
+<ul class="space-y-1">
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-low dark:hover:bg-primary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">dashboard</span>
+<span class="text-label-md font-label-md">Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 border-l-4 border-on-secondary-container bg-surface-container-high dark:bg-secondary text-primary dark:text-on-secondary font-bold hover:bg-surface-container-low dark:hover:bg-primary-container transition-colors duration-200 active:scale-[0.99] transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">calendar_month</span>
+<span class="text-label-md font-label-md">Calendar</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-low dark:hover:bg-primary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">event_note</span>
+<span class="text-label-md font-label-md">Appointments</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-low dark:hover:bg-primary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">medical_services</span>
+<span class="text-label-md font-label-md">Specialists</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-low dark:hover:bg-primary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">group</span>
+<span class="text-label-md font-label-md">Patient Registry</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-low dark:hover:bg-primary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">chat</span>
+<span class="text-label-md font-label-md">Communications</span>
+</a>
+</li>
+</ul>
+</div>
+<!-- Footer Tabs -->
+<div class="p-4 border-t border-outline-variant dark:border-outline">
+<ul class="space-y-1">
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-low dark:hover:bg-primary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-label-md font-label-md">Settings</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-low dark:hover:bg-primary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="text-label-md font-label-md">Support</span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col md:ml-64 w-full min-h-screen bg-background relative overflow-hidden">
+<!-- Ambient Background Gradients -->
+<div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary-container rounded-full blur-[120px] opacity-40 z-0 pointer-events-none"></div>
+<div class="absolute bottom-[-10%] right-[-10%] w-[30%] h-[30%] bg-tertiary-container rounded-full blur-[100px] opacity-30 z-0 pointer-events-none"></div>
+<!-- TopAppBar Component -->
+<header class="flex justify-between items-center w-full h-16 px-6 border-b border-outline dark:border-outline bg-surface dark:bg-surface-dim z-30 sticky top-0">
+<div class="flex items-center gap-4 w-1/3">
+<!-- Mobile Menu Trigger -->
+<button class="md:hidden text-on-surface-variant">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<!-- Search Bar (on_left as per JSON) -->
+<div class="relative w-full max-w-md hidden sm:block glass-panel rounded-full overflow-hidden transition-all focus-within:ring-2 focus-within:ring-primary">
+<div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+<span class="material-symbols-outlined text-on-surface-variant">search</span>
+</div>
+<input class="w-full bg-transparent border-none py-2 pl-10 pr-4 text-body-md font-body-md text-on-surface placeholder:text-on-surface-variant focus:ring-0 focus:outline-none" placeholder="Buscar paciente o cita..." type="text"/>
+</div>
+</div>
+<div class="flex-1 flex justify-center">
+<span class="text-headline-md font-headline-md text-primary dark:text-on-surface font-extrabold tracking-tight hidden lg:block">Clinical Operations Hub</span>
+</div>
+<div class="flex items-center justify-end gap-4 w-1/3 text-on-surface-variant dark:text-surface-variant">
+<button class="hover:text-primary dark:hover:text-inverse-primary transition-colors hover:opacity-80 relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="hover:text-primary dark:hover:text-inverse-primary transition-colors hover:opacity-80">
+<span class="material-symbols-outlined">history</span>
+</button>
+<button class="hover:text-primary dark:hover:text-inverse-primary transition-colors hover:opacity-80">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Page Content -->
+<div class="flex-1 overflow-y-auto p-4 md:p-[var(--margin-desktop)] z-10 relative">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
+<div>
+<h2 class="text-display-lg-mobile md:text-headline-lg font-headline-lg font-bold text-on-surface tracking-tight mb-2">Agenda Semanal</h2>
+<p class="text-body-lg font-body-lg text-primary-fixed-dim">Oct 16 - Oct 22, 2023</p>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex items-center glass-panel rounded-lg overflow-hidden">
+<button class="px-3 py-2 text-on-surface hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined">chevron_left</span></button>
+<span class="px-4 py-2 text-label-md font-label-md border-x border-outline-variant/30">Semana Actual</span>
+<button class="px-3 py-2 text-on-surface hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined">chevron_right</span></button>
+</div>
+<button class="bg-secondary-container text-on-secondary-container hover:bg-secondary px-6 py-2 rounded-lg text-label-md font-label-md font-bold deep-shadow flex items-center gap-2 transition-all active:scale-95" onclick="openModal()">
+<span class="material-symbols-outlined">add</span>
+                            Programar Cita
+                        </button>
+</div>
+</div>
+<!-- Calendar Grid Container (Glassmorphism) -->
+<div class="glass-panel rounded-xl flex flex-col h-[800px] overflow-hidden border border-outline-variant/20 shadow-2xl">
+<!-- Days Header -->
+<div class="grid grid-cols-8 border-b border-outline-variant/30 bg-surface-container-low/50 sticky top-0 z-20">
+<div class="p-4 border-r border-outline-variant/20 flex items-center justify-center text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Hora</div>
+<!-- Days -->
+<div class="p-4 border-r border-outline-variant/20 flex flex-col items-center justify-center gap-1 hover:bg-surface-container-high/30 transition-colors cursor-pointer">
+<span class="text-label-sm font-label-sm text-on-surface-variant">Lunes</span>
+<span class="text-headline-md font-headline-md font-bold text-on-surface">16</span>
+</div>
+<div class="p-4 border-r border-outline-variant/20 flex flex-col items-center justify-center gap-1 hover:bg-surface-container-high/30 transition-colors cursor-pointer">
+<span class="text-label-sm font-label-sm text-on-surface-variant">Martes</span>
+<span class="text-headline-md font-headline-md font-bold text-on-surface">17</span>
+</div>
+<div class="p-4 border-r border-outline-variant/20 flex flex-col items-center justify-center gap-1 hover:bg-surface-container-high/30 transition-colors cursor-pointer bg-primary-container/20 border-b-2 border-primary">
+<span class="text-label-sm font-label-sm text-primary">Miércoles</span>
+<span class="text-headline-md font-headline-md font-bold text-primary">18</span>
+</div>
+<div class="p-4 border-r border-outline-variant/20 flex flex-col items-center justify-center gap-1 hover:bg-surface-container-high/30 transition-colors cursor-pointer">
+<span class="text-label-sm font-label-sm text-on-surface-variant">Jueves</span>
+<span class="text-headline-md font-headline-md font-bold text-on-surface">19</span>
+</div>
+<div class="p-4 border-r border-outline-variant/20 flex flex-col items-center justify-center gap-1 hover:bg-surface-container-high/30 transition-colors cursor-pointer">
+<span class="text-label-sm font-label-sm text-on-surface-variant">Viernes</span>
+<span class="text-headline-md font-headline-md font-bold text-on-surface">20</span>
+</div>
+<div class="p-4 border-r border-outline-variant/20 flex flex-col items-center justify-center gap-1 hover:bg-surface-container-high/30 transition-colors cursor-pointer opacity-60">
+<span class="text-label-sm font-label-sm text-on-surface-variant">Sábado</span>
+<span class="text-headline-md font-headline-md font-bold text-on-surface">21</span>
+</div>
+<div class="p-4 flex flex-col items-center justify-center gap-1 hover:bg-surface-container-high/30 transition-colors cursor-pointer opacity-60">
+<span class="text-label-sm font-label-sm text-on-surface-variant">Domingo</span>
+<span class="text-headline-md font-headline-md font-bold text-on-surface">22</span>
+</div>
+</div>
+<!-- Time Slots & Appointments -->
+<div class="flex-1 overflow-y-auto relative">
+<div class="grid grid-cols-8 relative min-h-[1200px]">
+<!-- Background Grid Lines -->
+<div class="col-span-8 absolute inset-0 pointer-events-none flex flex-col">
+<!-- Generate 13 rows for 08:00 to 20:00 -->
+<div class="flex-1 border-b border-outline-variant/10"></div>
+<div class="flex-1 border-b border-outline-variant/10"></div>
+<div class="flex-1 border-b border-outline-variant/10"></div>
+<div class="flex-1 border-b border-outline-variant/10"></div>
+<div class="flex-1 border-b border-outline-variant/10"></div>
+<div class="flex-1 border-b border-outline-variant/10"></div>
+<div class="flex-1 border-b border-outline-variant/10"></div>
+<div class="flex-1 border-b border-outline-variant/10"></div>
+<div class="flex-1 border-b border-outline-variant/10"></div>
+<div class="flex-1 border-b border-outline-variant/10"></div>
+<div class="flex-1 border-b border-outline-variant/10"></div>
+<div class="flex-1 border-b border-outline-variant/10"></div>
+</div>
+<!-- Column separators -->
+<div class="col-start-2 col-span-1 border-l border-outline-variant/20 absolute inset-y-0 left-[12.5%]"></div>
+<div class="col-start-3 col-span-1 border-l border-outline-variant/20 absolute inset-y-0 left-[25%] bg-primary-container/5"></div> <!-- Today highlight -->
+<div class="col-start-4 col-span-1 border-l border-outline-variant/20 absolute inset-y-0 left-[37.5%]"></div>
+<div class="col-start-5 col-span-1 border-l border-outline-variant/20 absolute inset-y-0 left-[50%]"></div>
+<div class="col-start-6 col-span-1 border-l border-outline-variant/20 absolute inset-y-0 left-[62.5%]"></div>
+<div class="col-start-7 col-span-1 border-l border-outline-variant/20 absolute inset-y-0 left-[75%]"></div>
+<div class="col-start-8 col-span-1 border-l border-outline-variant/20 absolute inset-y-0 left-[87.5%]"></div>
+<!-- Time Column -->
+<div class="col-span-1 flex flex-col z-10 bg-surface-dim/80 backdrop-blur-md">
+<div class="h-[100px] flex items-start justify-center pt-2 text-label-sm font-label-sm text-on-surface-variant">08:00</div>
+<div class="h-[100px] flex items-start justify-center pt-2 text-label-sm font-label-sm text-on-surface-variant">09:00</div>
+<div class="h-[100px] flex items-start justify-center pt-2 text-label-sm font-label-sm text-on-surface-variant">10:00</div>
+<div class="h-[100px] flex items-start justify-center pt-2 text-label-sm font-label-sm text-on-surface-variant">11:00</div>
+<div class="h-[100px] flex items-start justify-center pt-2 text-label-sm font-label-sm text-on-surface-variant">12:00</div>
+<div class="h-[100px] flex items-start justify-center pt-2 text-label-sm font-label-sm text-on-surface-variant">13:00</div>
+<div class="h-[100px] flex items-start justify-center pt-2 text-label-sm font-label-sm text-on-surface-variant">14:00</div>
+<div class="h-[100px] flex items-start justify-center pt-2 text-label-sm font-label-sm text-on-surface-variant">15:00</div>
+<div class="h-[100px] flex items-start justify-center pt-2 text-label-sm font-label-sm text-on-surface-variant">16:00</div>
+<div class="h-[100px] flex items-start justify-center pt-2 text-label-sm font-label-sm text-on-surface-variant">17:00</div>
+<div class="h-[100px] flex items-start justify-center pt-2 text-label-sm font-label-sm text-on-surface-variant">18:00</div>
+<div class="h-[100px] flex items-start justify-center pt-2 text-label-sm font-label-sm text-on-surface-variant">19:00</div>
+</div>
+<!-- Actual Appointment Blocks Layer -->
+<div class="col-start-2 col-span-7 relative">
+<!-- Current Time Indicator (e.g., Wed 10:30) -->
+<div class="absolute w-[14.28%] left-[14.28%] top-[250px] border-t-2 border-secondary z-20 flex items-center">
+<div class="w-2 h-2 rounded-full bg-secondary -ml-1"></div>
+</div>
+<!-- Appointment 1: Lunes 09:00 - 10:30 -->
+<div class="absolute left-0 w-[14.28%] top-[100px] h-[150px] p-1 z-10 group cursor-pointer transition-transform hover:scale-[1.02] hover:z-30">
+<div class="w-full h-full bg-tertiary-container/80 border border-tertiary/30 rounded-lg p-2 flex flex-col justify-between shadow-lg overflow-hidden relative">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-tertiary"></div>
+<div>
+<div class="flex justify-between items-start mb-1">
+<span class="text-label-sm font-label-sm font-bold text-on-surface truncate">Carlos Mendoza</span>
+<span class="material-symbols-outlined text-[16px] text-tertiary">check_circle</span>
+</div>
+<p class="text-[10px] text-on-surface-variant truncate">Dr. Silva • Endodoncia</p>
+</div>
+<div class="inline-flex items-center px-1.5 py-0.5 rounded-full bg-tertiary/20 text-tertiary text-[9px] font-bold w-max">Confirmada</div>
+</div>
+</div>
+<!-- Appointment 2: Martes 11:00 - 12:00 -->
+<div class="absolute left-[14.28%] w-[14.28%] top-[300px] h-[100px] p-1 z-10 group cursor-pointer transition-transform hover:scale-[1.02] hover:z-30">
+<div class="w-full h-full bg-surface-container-highest/80 border border-outline-variant/50 rounded-lg p-2 flex flex-col justify-between shadow-lg overflow-hidden relative">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-outline"></div>
+<div>
+<div class="flex justify-between items-start mb-1">
+<span class="text-label-sm font-label-sm font-bold text-on-surface truncate">Ana Ruiz</span>
+<span class="material-symbols-outlined text-[16px] text-outline">schedule</span>
+</div>
+<p class="text-[10px] text-on-surface-variant truncate">Dra. Vega • Limpieza</p>
+</div>
+<div class="inline-flex items-center px-1.5 py-0.5 rounded-full bg-surface-variant text-on-surface-variant text-[9px] font-bold w-max">Pendiente</div>
+</div>
+</div>
+<!-- Appointment 3: Miercoles 08:30 - 10:00 -->
+<div class="absolute left-[28.56%] w-[14.28%] top-[50px] h-[150px] p-1 z-10 group cursor-pointer transition-transform hover:scale-[1.02] hover:z-30">
+<div class="w-full h-full bg-secondary-container/20 border border-secondary/40 rounded-lg p-2 flex flex-col justify-between shadow-lg overflow-hidden relative">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-secondary"></div>
+<div>
+<div class="flex justify-between items-start mb-1">
+<span class="text-label-sm font-label-sm font-bold text-secondary-fixed-dim truncate">Luis Ortiz</span>
+<span class="material-symbols-outlined text-[16px] text-secondary">check_circle</span>
+</div>
+<p class="text-[10px] text-on-surface-variant truncate">Dr. Silva • Implante</p>
+</div>
+<div class="inline-flex items-center px-1.5 py-0.5 rounded-full bg-secondary/20 text-secondary text-[9px] font-bold w-max">Confirmada</div>
+</div>
+</div>
+<!-- Appointment 4: Jueves 14:00 - 15:30 (Error/Urgent state) -->
+<div class="absolute left-[42.84%] w-[14.28%] top-[600px] h-[150px] p-1 z-10 group cursor-pointer transition-transform hover:scale-[1.02] hover:z-30">
+<div class="w-full h-full bg-error-container/20 border border-error/30 rounded-lg p-2 flex flex-col justify-between shadow-lg overflow-hidden relative">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-error"></div>
+<div>
+<div class="flex justify-between items-start mb-1">
+<span class="text-label-sm font-label-sm font-bold text-error truncate">Urgencia: María</span>
+<span class="material-symbols-outlined text-[16px] text-error">warning</span>
+</div>
+<p class="text-[10px] text-on-surface-variant truncate">Dr. Rios • Extracción</p>
+</div>
+<div class="inline-flex items-center px-1.5 py-0.5 rounded-full bg-error/20 text-error text-[9px] font-bold w-max">Atención Requerida</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Modal Form (Hidden by default) -->
+<div class="fixed inset-0 z-50 hidden flex items-center justify-center p-4" id="appointmentModal">
+<!-- Backdrop -->
+<div class="absolute inset-0 bg-background/80 backdrop-blur-sm transition-opacity" onclick="closeModal()"></div>
+<!-- Modal Content -->
+<div class="relative bg-surface-container-low border border-outline-variant/30 rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden flex flex-col sillar-arch transform scale-95 opacity-0 transition-all duration-300" id="modalPanel">
+<div class="px-6 py-4 border-b border-outline-variant/30 flex justify-between items-center bg-surface-dim">
+<h3 class="text-headline-md font-headline-md font-bold text-primary">Programar Nueva Cita</h3>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors" onclick="closeModal()">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="p-6 space-y-6 flex-1 overflow-y-auto">
+<!-- Patient Name -->
+<div>
+<label class="block text-label-md font-label-md text-on-surface-variant mb-2">Nombre del Paciente</label>
+<input class="w-full bg-surface border-b border-outline-variant focus:border-primary focus:bg-surface-container focus:rounded-t-md px-4 py-2 text-on-surface transition-all outline-none" placeholder="Ej. Juan Pérez" type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<!-- Specialist -->
+<div>
+<label class="block text-label-md font-label-md text-on-surface-variant mb-2">Especialista</label>
+<select class="w-full bg-surface border-b border-outline-variant focus:border-primary focus:bg-surface-container focus:rounded-t-md px-4 py-2 text-on-surface transition-all outline-none appearance-none">
+<option value="">Seleccionar...</option>
+<option>Dr. Silva</option>
+<option>Dra. Vega</option>
+<option>Dr. Rios</option>
+</select>
+</div>
+<!-- Specialty -->
+<div>
+<label class="block text-label-md font-label-md text-on-surface-variant mb-2">Especialidad</label>
+<select class="w-full bg-surface border-b border-outline-variant focus:border-primary focus:bg-surface-container focus:rounded-t-md px-4 py-2 text-on-surface transition-all outline-none appearance-none">
+<option value="">Seleccionar...</option>
+<option>Endodoncia</option>
+<option>Ortodoncia</option>
+<option>Limpieza General</option>
+<option>Cirugía</option>
+</select>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<!-- Date -->
+<div>
+<label class="block text-label-md font-label-md text-on-surface-variant mb-2">Fecha</label>
+<input class="w-full bg-surface border-b border-outline-variant focus:border-primary focus:bg-surface-container focus:rounded-t-md px-4 py-2 text-on-surface transition-all outline-none [color-scheme:dark]" type="date"/>
+</div>
+<!-- Time -->
+<div>
+<label class="block text-label-md font-label-md text-on-surface-variant mb-2">Hora</label>
+<input class="w-full bg-surface border-b border-outline-variant focus:border-primary focus:bg-surface-container focus:rounded-t-md px-4 py-2 text-on-surface transition-all outline-none [color-scheme:dark]" type="time"/>
+</div>
+</div>
+<!-- Status -->
+<div>
+<label class="block text-label-md font-label-md text-on-surface-variant mb-2">Estado Inicial</label>
+<div class="flex gap-4">
+<label class="flex items-center gap-2 cursor-pointer">
+<input checked="" class="text-secondary bg-surface border-outline-variant focus:ring-secondary focus:ring-offset-background" name="status" type="radio"/>
+<span class="text-body-md text-on-surface">Confirmada</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="text-surface-variant bg-surface border-outline-variant focus:ring-outline focus:ring-offset-background" name="status" type="radio"/>
+<span class="text-body-md text-on-surface">Pendiente</span>
+</label>
+</div>
+</div>
+</div>
+<div class="px-6 py-4 bg-surface-dim border-t border-outline-variant/30 flex justify-end gap-3">
+<button class="px-6 py-2 rounded-lg text-label-md font-label-md font-bold text-on-surface-variant hover:bg-surface-container-highest transition-colors" onclick="closeModal()">Cancelar</button>
+<button class="bg-secondary-container text-on-secondary-container hover:bg-secondary px-6 py-2 rounded-lg text-label-md font-label-md font-bold deep-shadow transition-colors" onclick="closeModal()">Guardar Cita</button>
+</div>
+</div>
+</div>
+<script>
+        function openModal() {
+            const modal = document.getElementById('appointmentModal');
+            const panel = document.getElementById('modalPanel');
+            modal.classList.remove('hidden');
+            // Small delay to allow display block to apply before animating opacity/transform
+            setTimeout(() => {
+                panel.classList.remove('scale-95', 'opacity-0');
+                panel.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('appointmentModal');
+            const panel = document.getElementById('modalPanel');
+            
+            panel.classList.remove('scale-100', 'opacity-100');
+            panel.classList.add('scale-95', 'opacity-0');
+            
+            // Wait for animation to finish before hiding
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+    </script>
+
+
+
+
+<script>
+(function() {
+  document.addEventListener('DOMContentLoaded', () => {
+    const loc = window.location.pathname;
+    const isPublic = loc.includes('/public/');
+    const isPatient = loc.includes('/patient/');
+    const prefix = isPublic || isPatient ? '../' : './';
+
+    // Intercept all clicks on links and buttons
+    document.querySelectorAll('a, button, [onclick]').forEach(el => {
+      const text = (el.innerText || el.getAttribute('aria-label') || '').toLowerCase().trim();
+      const currentHref = el.getAttribute('href');
+
+      if (!currentHref || currentHref === '#' || currentHref === '') {
+        if (text.includes('portal del paciente') || text.includes('paciente') || text.includes('mi cuenta') || text.includes('mis citas')) {
+          el.setAttribute('href', prefix + 'patient/index.html');
+        } else if (text.includes('consola de administración') || text.includes('dashboard') || text.includes('administración')) {
+          el.setAttribute('href', prefix + 'staff/dashboard.html');
+        } else if (text.includes('portales') || text.includes('seleccione su portal') || text.includes('admin')) {
+          el.setAttribute('href', prefix + 'staff/admin.html');
+        } else if (text.includes('agendar') || text.includes('reservar') || text.includes('nueva cita')) {
+          el.setAttribute('href', prefix + 'public/reservar.html');
+        } else if (text.includes('agenda semanal') || text.includes('semanal')) {
+          el.setAttribute('href', prefix + 'staff/agenda-semanal.html');
+        } else if (text.includes('calendario') || text.includes('mensual')) {
+          el.setAttribute('href', prefix + 'staff/calendario-mensual.html');
+        } else if (text.includes('citas')) {
+          el.setAttribute('href', prefix + (isPatient ? 'patient/citas.html' : 'staff/citas.html'));
+        } else if (text.includes('consulta') || text.includes('odontograma')) {
+          el.setAttribute('href', prefix + 'staff/consulta.html');
+        } else if (text.includes('ortodoncia')) {
+          el.setAttribute('href', prefix + 'staff/ortodoncia.html');
+        } else if (text.includes('cirugía') || text.includes('implantología')) {
+          el.setAttribute('href', prefix + 'staff/cirugia.html');
+        } else if (text.includes('endodoncia') || text.includes('operatoria')) {
+          el.setAttribute('href', prefix + 'staff/endodoncia.html');
+        } else if (text.includes('rehabilitación') || text.includes('periodoncia')) {
+          el.setAttribute('href', prefix + 'staff/rehabilitacion.html');
+        } else if (text.includes('inventario') || text.includes('insumos')) {
+          el.setAttribute('href', prefix + 'staff/inventario.html');
+        } else if (text.includes('usuarios') || text.includes('personal')) {
+          el.setAttribute('href', prefix + 'staff/usuarios.html');
+        } else if (text.includes('cerrar sesión') || text.includes('salir')) {
+          el.setAttribute('href', prefix + 'patient/login.html');
+        } else if (text.includes('inicio') || text.includes('home')) {
+          el.setAttribute('href', prefix + 'public/index.html');
+        }
+      }
+    });
+  });
+})();
+</script>
+
+
+
+
+
+<!-- Root-Relative Bulletproof Navigation Script -->
+<script>
+(function() {
+  function applyRootLinks() {
+    const loc = window.location.pathname;
+
+    document.querySelectorAll('a, button').forEach(el => {
+      const target = el.tagName === 'A' ? el : el.closest('a');
+      if (!target) return;
+
+      const text = (target.textContent || target.getAttribute('aria-label') || '').toLowerCase().trim();
+
+      // Patient Portal Card or Nav Link
+      if (text.includes('portal del paciente') || (text.includes('paciente') && !text.includes('doctor') && !text.includes('historial'))) {
+        target.href = '/patient/index.html';
+      }
+      // Consola de Administración Card
+      else if (text.includes('consola de administración') || text.includes('dashboard principal')) {
+        target.href = '/staff/dashboard.html';
+      }
+      // Admin Gateway Selector
+      else if (text.includes('seleccione su portal') || text.includes('portales admin')) {
+        target.href = '/staff/admin.html';
+      }
+      // Public / Landing
+      else if (text.includes('sillar dental') && (text.includes('inicio') || text.includes('home'))) {
+        target.href = '/public/index.html';
+      } else if (text.includes('agendar') || text.includes('reservar')) {
+        target.href = '/public/reservar.html';
+      }
+      // Subviews
+      else if (text.includes('agenda semanal') || text.includes('semanal')) {
+        target.href = '/staff/agenda-semanal.html';
+      } else if (text.includes('calendario mensual') || text.includes('mensual')) {
+        target.href = '/staff/calendario-mensual.html';
+      } else if (text.includes('mis citas') || text.includes('citas paciente')) {
+        target.href = '/patient/citas.html';
+      } else if (text.includes('citas') || text.includes('agenda')) {
+        target.href = '/staff/citas.html';
+      } else if (text.includes('consulta') || text.includes('odontograma')) {
+        target.href = '/staff/consulta.html';
+      } else if (text.includes('ortodoncia')) {
+        target.href = '/staff/ortodoncia.html';
+      } else if (text.includes('cirugía') || text.includes('implantología')) {
+        target.href = '/staff/cirugia.html';
+      } else if (text.includes('endodoncia') || text.includes('operatoria')) {
+        target.href = '/staff/endodoncia.html';
+      } else if (text.includes('rehabilitación') || text.includes('periodoncia')) {
+        target.href = '/staff/rehabilitacion.html';
+      } else if (text.includes('inventario') || text.includes('insumos')) {
+        target.href = '/staff/inventario.html';
+      } else if (text.includes('usuarios') || text.includes('personal')) {
+        target.href = '/staff/usuarios.html';
+      } else if (text.includes('cerrar sesión') || text.includes('salir')) {
+        target.href = '/patient/login.html';
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', applyRootLinks);
+  window.addEventListener('load', applyRootLinks);
+})();
+</script>
+
+
+<!-- Persistent Collapsible Sidebar Engine -->
+<script>
+(function() {
+  document.addEventListener('DOMContentLoaded', () => {
+    // Only run on staff pages (excluding admin gateway selector)
+    if (window.location.pathname.includes('/staff/admin')) return;
+
+    const savedState = localStorage.getItem('sd-sidebar-collapsed') === 'true';
+
+    const sidebar = document.createElement('aside');
+    sidebar.id = 'sd-unified-sidebar';
+    sidebar.className = 'fixed top-0 left-0 h-screen z-50 transition-all duration-300 flex flex-col border-r border-white/10 shadow-2xl';
+    sidebar.style.cssText = 'width: ' + (savedState ? '76px' : '260px') + '; background: rgba(5,20,36,0.95); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);';
+
+    const currentPath = window.location.pathname;
+
+    const menuData = [
+      { category: 'Principal' },
+      { title: 'Dashboard Principal', icon: 'dashboard', href: '/staff/dashboard.html' },
+      { title: 'Gestión de Citas', icon: 'calendar_month', href: '/staff/citas.html' },
+      { title: 'Agenda Semanal', icon: 'view_week', href: '/staff/agenda-semanal.html', sub: true },
+      { title: 'Calendario Mensual', icon: 'calendar_view_month', href: '/staff/calendario-mensual.html', sub: true },
+      
+      { category: 'Clínica & Odontograma' },
+      { title: 'Odontograma 52P', icon: 'medical_services', href: '/staff/consulta.html' },
+      { title: 'Odontograma Drag&Drop', icon: 'drag_pan', href: '/staff/odontograma-dragdrop.html', sub: true },
+      
+      { category: 'Especialidades' },
+      { title: 'Ortodoncia', icon: 'orthodontics', href: '/staff/ortodoncia.html' },
+      { title: 'Cirugía e Implantes', icon: 'biomedical', href: '/staff/cirugia.html' },
+      { title: 'Endodoncia & Resinas', icon: 'dentistry', href: '/staff/endodoncia.html' },
+      { title: 'Periodoncia & Prótesis', icon: 'health_and_safety', href: '/staff/rehabilitacion.html' },
+      
+      { category: 'Administración' },
+      { title: 'Inventario & Stock', icon: 'inventory_2', href: '/staff/inventario.html' },
+      { title: 'Usuarios & Personal', icon: 'group', href: '/staff/usuarios.html' }
+    ];
+
+    let itemsHtml = '';
+    menuData.forEach(item => {
+      if (item.category) {
+        itemsHtml += `<div class="sd-sidebar-cat text-[10px] font-bold text-on-surface-variant/50 uppercase tracking-widest px-3 mt-4 mb-1 whitespace-nowrap ${savedState ? 'hidden' : 'block'}">${item.category}</div>`;
+      } else {
+        const isActive = currentPath.includes(item.href.replace('.html', ''));
+        itemsHtml += `
+          <a href="${item.href}" title="${item.title}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all font-label-md text-xs ${item.sub ? 'pl-5 opacity-90' : ''} ${isActive ? 'bg-secondary/15 text-secondary border border-secondary/30 font-bold shadow-[0_0_15px_rgba(70,252,180,0.15)]' : 'text-on-surface-variant hover:bg-white/10 hover:text-on-surface'}">
+            <span class="material-symbols-outlined text-lg shrink-0 ${isActive ? 'text-secondary' : 'opacity-80'}">${item.icon}</span>
+            <span class="sd-sidebar-text whitespace-nowrap font-medium transition-opacity duration-200 ${savedState ? 'hidden' : 'inline'}">${item.title}</span>
+          </a>
+        `;
+      }
+    });
+
+    sidebar.innerHTML = `
+      <!-- Header -->
+      <div class="h-16 px-4 flex items-center justify-between border-b border-white/10 shrink-0">
+        <a href="/staff/admin.html" class="flex items-center gap-2.5 overflow-hidden text-decoration-none">
+          <span class="material-symbols-outlined text-secondary text-2xl shrink-0">diamond</span>
+          <span id="sd-logo-text" class="font-headline-md text-sm text-primary font-bold whitespace-nowrap ${savedState ? 'hidden' : 'inline'}">Sillar Dental</span>
+        </a>
+        <button id="sd-sidebar-toggle" title="Contraer / Expandir Menú" class="p-1.5 rounded-lg text-on-surface-variant hover:bg-white/10 transition-colors flex items-center justify-center">
+          <span id="sd-toggle-icon" class="material-symbols-outlined text-lg">${savedState ? 'chevron_right' : 'chevron_left'}</span>
+        </button>
+      </div>
+
+      <!-- Menu Items -->
+      <div class="flex-1 overflow-y-auto py-3 px-2 space-y-1" style="scrollbar-width: thin;">
+        ${itemsHtml}
+      </div>
+
+      <!-- Footer Switcher -->
+      <div class="p-2 border-t border-white/10 space-y-1 shrink-0">
+        <a href="/patient/index.html" title="Portal Paciente" class="flex items-center gap-2.5 px-3 py-2 rounded-xl bg-secondary/10 text-secondary hover:bg-secondary/20 transition-all font-label-md font-bold text-xs">
+          <span class="material-symbols-outlined text-base shrink-0">person</span>
+          <span class="sd-sidebar-text whitespace-nowrap ${savedState ? 'hidden' : 'inline'}">Portal Paciente</span>
+        </a>
+        <a href="/staff/admin.html" title="Cambiar de Portal" class="flex items-center gap-2.5 px-3 py-2 rounded-xl bg-white/5 text-on-surface-variant hover:bg-white/10 transition-all font-label-md text-xs">
+          <span class="material-symbols-outlined text-base shrink-0">grid_view</span>
+          <span class="sd-sidebar-text whitespace-nowrap ${savedState ? 'hidden' : 'inline'}">Seleccionar Portal</span>
+        </a>
+      </div>
+    `;
+
+    document.body.appendChild(sidebar);
+
+    // Adjust body margin to make room for fixed sidebar
+    function updateBodyMargin(collapsed) {
+      document.body.style.transition = 'padding-left 0.3s ease';
+      document.body.style.paddingLeft = collapsed ? '76px' : '260px';
+    }
+
+    updateBodyMargin(savedState);
+
+    // Toggle Sidebar collapse / expand
+    const toggleBtn = document.getElementById('sd-sidebar-toggle');
+    const toggleIcon = document.getElementById('sd-toggle-icon');
+    const logoText = document.getElementById('sd-logo-text');
+
+    toggleBtn.addEventListener('click', () => {
+      const currentlyCollapsed = sidebar.style.width === '76px';
+      const nextCollapsed = !currentlyCollapsed;
+
+      sidebar.style.width = nextCollapsed ? '76px' : '260px';
+      toggleIcon.textContent = nextCollapsed ? 'chevron_right' : 'chevron_left';
+
+      document.querySelectorAll('.sd-sidebar-text').forEach(el => {
+        el.style.display = nextCollapsed ? 'none' : 'inline';
+      });
+
+      document.querySelectorAll('.sd-sidebar-cat').forEach(el => {
+        el.style.display = nextCollapsed ? 'none' : 'block';
+      });
+
+      if (logoText) logoText.style.display = nextCollapsed ? 'none' : 'inline';
+
+      updateBodyMargin(nextCollapsed);
+      localStorage.setItem('sd-sidebar-collapsed', nextCollapsed);
+    });
+  });
+})();
+</script>
+
+</body></html>

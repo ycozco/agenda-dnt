@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dashboard de Citas - Sillar Dental</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary": "#003256",
+                      "primary-fixed": "#d6e3ff",
+                      "outline-variant": "#44474d",
+                      "surface-variant": "#273647",
+                      "surface-dim": "#051424",
+                      "tertiary-fixed": "#d0e4ff",
+                      "surface-bright": "#2c3a4c",
+                      "surface-container-highest": "#273647",
+                      "surface-container-high": "#1c2b3c",
+                      "on-tertiary-fixed": "#001d34",
+                      "on-surface": "#d4e4fa",
+                      "surface-container": "#122131",
+                      "background": "#051424",
+                      "on-primary-fixed-variant": "#39475f",
+                      "inverse-surface": "#d4e4fa",
+                      "on-secondary-container": "#005d3e",
+                      "secondary-fixed": "#4affb7",
+                      "on-primary": "#233148",
+                      "secondary-container": "#00df9a",
+                      "on-tertiary-fixed-variant": "#004a7a",
+                      "on-surface-variant": "#c5c6cd",
+                      "on-tertiary-container": "#1286d6",
+                      "secondary-fixed-dim": "#0fe29c",
+                      "tertiary-fixed-dim": "#9bcbff",
+                      "primary": "#b9c7e4",
+                      "on-secondary": "#003824",
+                      "inverse-on-surface": "#233143",
+                      "surface-tint": "#b9c7e4",
+                      "surface-container-low": "#0d1c2d",
+                      "on-primary-container": "#74829d",
+                      "primary-container": "#0a192f",
+                      "inverse-primary": "#515f78",
+                      "on-error": "#690005",
+                      "surface": "#051424",
+                      "secondary": "#46fcb4",
+                      "error": "#ffb4ab",
+                      "outline": "#8f9097",
+                      "on-error-container": "#ffdad6",
+                      "on-secondary-fixed": "#002113",
+                      "surface-container-lowest": "#010f1f",
+                      "primary-fixed-dim": "#b9c7e4",
+                      "error-container": "#93000a",
+                      "tertiary-container": "#001a30",
+                      "on-secondary-fixed-variant": "#005236",
+                      "on-primary-fixed": "#0d1c32",
+                      "on-background": "#d4e4fa",
+                      "tertiary": "#9bcbff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "gutter": "24px",
+                      "container-max-width": "1280px",
+                      "unit": "8px",
+                      "margin-mobile": "20px",
+                      "margin-desktop": "64px"
+              },
+              "fontFamily": {
+                      "label-sm": ["Manrope"],
+                      "headline-md": ["Manrope"],
+                      "headline-lg": ["Manrope"],
+                      "display-lg-mobile": ["Manrope"],
+                      "body-lg": ["Manrope"],
+                      "label-md": ["Manrope"],
+                      "display-lg": ["Manrope"],
+                      "body-md": ["Manrope"]
+              },
+              "fontSize": {
+                      "label-sm": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                      "headline-md": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "display-lg-mobile": ["40px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "800"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                      "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                      "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                      "body-md": ["16px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}]
+              }
+            }
+          }
+        }
+      </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        
+        .glass-panel {
+            background: rgba(10, 25, 47, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .soft-deep-shadow {
+            box-shadow: 0 20px 40px rgba(10, 25, 47, 0.15);
+        }
+        
+        .sillar-arch {
+            border-top-left-radius: 40px;
+            border-top-right-radius: 40px;
+        }
+
+        /* Chart placeholder styling for visual representation without complex libraries */
+        .chart-bar-bg { background-color: theme('colors.surface-container-high'); }
+        .chart-bar-fill-1 { background-color: theme('colors.secondary-container'); }
+        .chart-bar-fill-2 { background-color: theme('colors.tertiary'); }
+        .chart-bar-fill-3 { background-color: theme('colors.primary'); }
+        
+        .glow-text-secondary {
+            text-shadow: 0 0 10px rgba(0, 223, 154, 0.5);
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- SideNavBar (Shared Component) -->
+<nav class="hidden md:flex flex-col h-full h-screen w-64 fixed left-0 top-0 border-r border-outline-variant bg-surface z-50">
+<div class="p-6">
+<h1 class="text-headline-md font-headline-md font-bold text-primary mb-1 truncate">Sillar Dental</h1>
+<p class="text-label-md font-label-md text-on-surface-variant truncate">Administrative Panel</p>
+</div>
+<div class="px-4 pb-6">
+<button class="w-full flex items-center justify-center gap-2 bg-secondary-container text-on-secondary-container hover:bg-secondary transition-colors duration-200 py-3 rounded-lg soft-deep-shadow">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add</span>
+<span class="text-label-md font-label-md">New Appointment</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto py-2">
+<!-- Active Tab: Dashboard -->
+<a class="flex items-center gap-3 px-4 py-3 border-l-4 border-on-secondary-container bg-surface-container-high text-primary font-bold active:scale-[0.99] transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-label-md font-label-md">Dashboard</span>
+</a>
+<!-- Inactive Tabs -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-primary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
+<span class="text-label-md font-label-md">Calendar</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-primary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="event_note">event_note</span>
+<span class="text-label-md font-label-md">Appointments</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-primary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="medical_services">medical_services</span>
+<span class="text-label-md font-label-md">Specialists</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-primary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="text-label-md font-label-md">Patient Registry</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-primary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+<span class="text-label-md font-label-md">Communications</span>
+</a>
+</div>
+<div class="mt-auto py-4 border-t border-outline-variant">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-primary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-label-md font-label-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-primary-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="text-label-md font-label-md">Support</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 md:ml-64 flex flex-col min-h-screen">
+<!-- TopAppBar (Shared Component) -->
+<header class="flex justify-between items-center w-full h-16 px-6 border-b border-outline-variant bg-surface sticky top-0 z-40">
+<div class="flex items-center gap-4">
+<h2 class="text-headline-md font-headline-md text-primary truncate hidden sm:block">Clinical Operations Hub</h2>
+</div>
+<div class="flex-1 max-w-md mx-4 hidden md:block">
+<!-- Search Bar logic 'on_left' implied positioning -->
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-high border-b border-outline-variant focus:border-primary-container focus:rounded-lg focus:ring-0 text-on-surface pl-10 py-2 transition-all duration-300" placeholder="Search records..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-inverse-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-inverse-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+</button>
+<button class="text-on-surface-variant hover:text-inverse-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 p-margin-mobile md:p-gutter xl:p-margin-desktop overflow-y-auto">
+<!-- Header Section -->
+<div class="mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
+<div>
+<h1 class="text-display-lg-mobile md:text-headline-lg font-display-lg-mobile md:font-headline-lg text-primary mb-2">Análisis de Citas</h1>
+<p class="text-body-md font-body-md text-on-surface-variant">Métricas de ocupación y asistencia clínica.</p>
+</div>
+<div class="flex gap-3">
+<select class="bg-surface-container-high border border-outline-variant text-on-surface rounded-lg py-2 pl-4 pr-10 focus:ring-primary focus:border-primary text-label-md font-label-md">
+<option>Esta Semana</option>
+<option>Este Mes</option>
+<option>Último Trimestre</option>
+</select>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-min">
+<!-- KPI 1: Ocupación General (Large Card) -->
+<div class="glass-panel rounded-2xl p-6 md:col-span-8 flex flex-col justify-between soft-deep-shadow relative overflow-hidden">
+<div class="absolute top-0 right-0 p-6 opacity-10">
+<span class="material-symbols-outlined text-[120px]">calendar_today</span>
+</div>
+<div>
+<h3 class="text-label-md font-label-md text-on-surface-variant uppercase tracking-wider mb-1">Ocupación General</h3>
+<div class="flex items-baseline gap-4 mt-2">
+<span class="text-display-lg-mobile font-display-lg-mobile text-on-surface glow-text-secondary">82%</span>
+<span class="text-label-md font-label-md text-secondary-container flex items-center">
+<span class="material-symbols-outlined text-sm mr-1">trending_up</span> +5.2%
+                            </span>
+</div>
+</div>
+<!-- Simulated Area Chart -->
+<div class="mt-8 h-32 flex items-end gap-2 w-full">
+<div class="w-full bg-surface-container h-full relative rounded-lg overflow-hidden border border-outline-variant/30">
+<!-- SVG Placeholder for real chart -->
+<svg class="absolute inset-0 w-full h-full text-secondary-container/20" preserveaspectratio="none" viewbox="0 0 100 100">
+<path d="M0 100 L0 60 Q 25 40 50 70 T 100 30 L100 100 Z" fill="currentColor"></path>
+<path d="M0 60 Q 25 40 50 70 T 100 30" fill="none" stroke="theme('colors.secondary-container')" stroke-width="2"></path>
+</svg>
+<div class="absolute bottom-0 left-0 w-full flex justify-between px-4 py-2 text-label-sm font-label-sm text-on-surface-variant">
+<span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span>
+</div>
+</div>
+</div>
+</div>
+<!-- KPI 2: Tasa de Asistencia -->
+<div class="glass-panel rounded-2xl p-6 md:col-span-4 flex flex-col justify-between soft-deep-shadow">
+<div>
+<h3 class="text-label-md font-label-md text-on-surface-variant uppercase tracking-wider mb-1">Asistencia (Show Rate)</h3>
+<div class="mt-2">
+<span class="text-headline-lg font-headline-lg text-tertiary">94.5%</span>
+</div>
+<p class="text-label-sm font-label-sm text-on-surface-variant mt-2">Promedio semanal superado.</p>
+</div>
+<!-- Circular Progress Visual -->
+<div class="mt-6 flex justify-center">
+<div class="relative w-32 h-32 rounded-full border-8 border-surface-container flex items-center justify-center">
+<div class="absolute inset-0 rounded-full border-8 border-tertiary" style="clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); transform: rotate(45deg);"></div>
+<span class="material-symbols-outlined text-tertiary text-4xl">check_circle</span>
+</div>
+</div>
+</div>
+<!-- Specialties Breakdown (Horizontal Bars) -->
+<div class="glass-panel rounded-2xl p-6 md:col-span-6 flex flex-col soft-deep-shadow">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-label-md font-label-md text-on-surface-variant uppercase tracking-wider">Citas por Especialidad</h3>
+<button class="text-primary hover:text-primary-fixed transition-colors">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<div class="space-y-5">
+<!-- Bar 1 -->
+<div>
+<div class="flex justify-between text-label-sm font-label-sm mb-1">
+<span class="text-on-surface">Odontología General</span>
+<span class="text-on-surface-variant">124 citas</span>
+</div>
+<div class="w-full chart-bar-bg h-2 rounded-full overflow-hidden">
+<div class="chart-bar-fill-1 h-full rounded-full" style="width: 65%"></div>
+</div>
+</div>
+<!-- Bar 2 -->
+<div>
+<div class="flex justify-between text-label-sm font-label-sm mb-1">
+<span class="text-on-surface">Ortodoncia</span>
+<span class="text-on-surface-variant">86 citas</span>
+</div>
+<div class="w-full chart-bar-bg h-2 rounded-full overflow-hidden">
+<div class="chart-bar-fill-2 h-full rounded-full" style="width: 45%"></div>
+</div>
+</div>
+<!-- Bar 3 -->
+<div>
+<div class="flex justify-between text-label-sm font-label-sm mb-1">
+<span class="text-on-surface">Endodoncia</span>
+<span class="text-on-surface-variant">42 citas</span>
+</div>
+<div class="w-full chart-bar-bg h-2 rounded-full overflow-hidden">
+<div class="chart-bar-fill-3 h-full rounded-full" style="width: 25%"></div>
+</div>
+</div>
+<!-- Bar 4 -->
+<div>
+<div class="flex justify-between text-label-sm font-label-sm mb-1">
+<span class="text-on-surface">Cirugía Maxilofacial</span>
+<span class="text-on-surface-variant">18 citas</span>
+</div>
+<div class="w-full chart-bar-bg h-2 rounded-full overflow-hidden">
+<div class="bg-error h-full rounded-full" style="width: 10%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Activity List -->
+<div class="glass-panel rounded-2xl p-6 md:col-span-6 flex flex-col soft-deep-shadow">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-label-md font-label-md text-on-surface-variant uppercase tracking-wider">Actividad Reciente</h3>
+</div>
+<div class="space-y-4">
+<!-- Item 1 -->
+<div class="flex items-center gap-4 p-3 rounded-xl hover:bg-surface-container-high transition-colors">
+<div class="w-10 h-10 rounded-full bg-secondary-container/20 flex items-center justify-center text-secondary-container">
+<span class="material-symbols-outlined text-sm">person_add</span>
+</div>
+<div class="flex-1">
+<p class="text-label-md font-label-md text-on-surface">Nueva cita reservada</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Paciente: Elena Rojas - Limpieza</p>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Hace 10m</span>
+</div>
+<!-- Item 2 -->
+<div class="flex items-center gap-4 p-3 rounded-xl hover:bg-surface-container-high transition-colors">
+<div class="w-10 h-10 rounded-full bg-error/20 flex items-center justify-center text-error">
+<span class="material-symbols-outlined text-sm">cancel</span>
+</div>
+<div class="flex-1">
+<p class="text-label-md font-label-md text-on-surface">Cita cancelada</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Paciente: Carlos Mendoza - Revisión</p>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Hace 45m</span>
+</div>
+<!-- Item 3 -->
+<div class="flex items-center gap-4 p-3 rounded-xl hover:bg-surface-container-high transition-colors">
+<div class="w-10 h-10 rounded-full bg-tertiary/20 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-sm">update</span>
+</div>
+<div class="flex-1">
+<p class="text-label-md font-label-md text-on-surface">Cita reprogramada</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Paciente: Luis Silva - Ortodoncia</p>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Hace 2h</span>
+</div>
+</div>
+<button class="mt-auto pt-4 text-label-md font-label-md text-primary text-center hover:text-primary-fixed transition-colors">Ver todo el registro</button>
+</div>
+</div>
+</main>
+</div>
+</body></html>

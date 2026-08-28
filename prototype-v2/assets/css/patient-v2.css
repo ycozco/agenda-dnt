@@ -1,0 +1,56 @@
+/* Portal paciente: lectura tranquila, navegación numerada y documentos como expediente. */
+.patient-shell {
+  grid-template-columns: 272px minmax(0, 1fr);
+  background: var(--paper);
+}
+.patient-sidebar {
+  background: var(--surface);
+  border-right: 1px solid var(--line);
+  padding: 28px 18px 20px;
+}
+.patient-sidebar .brand-lockup { padding: 0 8px; }
+.patient-sidebar .brand-logo { background: var(--blue-deep); color: #fff; border-radius: 8px; font-family: var(--mono); }
+.patient-sidebar > div:first-child > div:nth-of-type(1) {
+  box-shadow: none !important;
+  border: 1px solid var(--line);
+  background: var(--blue-soft) !important;
+}
+.patient-menu { gap: 6px; margin-top: 22px; }
+.patient-menu-clean { display: grid; }
+#patientMenu { display: none; }
+.menu-item {
+  min-height: 44px;
+  border-radius: 8px;
+  padding: 8px 10px;
+  gap: 10px;
+  color: var(--ink-soft);
+  font-size: .86rem;
+}
+.menu-item:hover, .menu-item.active { background: var(--blue-soft); color: var(--blue-deep); }
+.nav-mark {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  color: var(--blue-deep);
+  font: 600 .64rem/1 var(--mono);
+  flex: 0 0 auto;
+}
+.menu-item.active .nav-mark,
+.menu-item:hover .nav-mark { background: var(--blue); color: #fff; border-color: var(--blue); }
+.patient-content { min-width: 0; padding: clamp(24px, 4vw, 56px); }
+.patient-content > div:first-child { max-width: 1440px; margin-inline: auto; }
+.patient-content h1 { font-size: clamp(2rem, 3vw, 3.3rem); letter-spacing: -.045em; }
+.patient-content .card { box-shadow: 0 1px 2px rgba(12,74,110,.04); }
+.patient-content table th { font-family: var(--mono); font-size: .68rem; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-faint); }
+@media (max-width: 900px) {
+  .patient-shell { grid-template-columns: 1fr; }
+  .patient-sidebar { border-right: 0; border-bottom: 1px solid var(--line); padding: 16px; }
+  .patient-menu-clean { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .patient-content { padding: 24px 16px 40px; }
+}
+@media (max-width: 560px) {
+  .patient-menu-clean { grid-template-columns: 1fr; }
+}

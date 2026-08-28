@@ -1,0 +1,135 @@
+/* ==========================================================================
+   SILLAR DENTAL PROTOTYPE V2 - UNIFIED THEME TOKENS
+   Incorpora las especificaciones Stitch (Sillar Clinical & Mineral Deep)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+:root, [data-theme="light"] {
+  /* Surfaces */
+  --sd-surface: #f8f9ff;
+  --sd-surface-dim: #cbdbf5;
+  --sd-surface-bright: #ffffff;
+  --sd-surface-card: #ffffff;
+  --sd-surface-card-hover: #f0f4fd;
+  --sd-surface-container-low: #eff4ff;
+  --sd-surface-container: #e5eeff;
+  --sd-surface-container-high: #dce9ff;
+  
+  /* Text */
+  --sd-on-surface: #0b1c30;
+  --sd-on-surface-variant: #44474e;
+  --sd-text-muted: #64748b;
+
+  /* Primary Brand - Azul Mineral Sillar */
+  --sd-primary: #002046;
+  --sd-on-primary: #ffffff;
+  --sd-primary-container: #1c365d;
+  --sd-on-primary-container: #879fcc;
+  --sd-primary-hover: #00336e;
+
+  /* Secondary Brand - Verde Sillar Acción */
+  --sd-secondary: #006c49;
+  --sd-on-secondary: #ffffff;
+  --sd-secondary-container: #6cf8bb;
+  --sd-on-secondary-container: #00714d;
+  --sd-secondary-hover: #00885c;
+  --sd-accent-green: #10b981;
+
+  /* Status Colors */
+  --sd-success: #006c49;
+  --sd-success-bg: #e6f9f1;
+  --sd-warning: #b45309;
+  --sd-warning-bg: #fef3c7;
+  --sd-danger: #ba1a1a;
+  --sd-danger-bg: #ffdad6;
+  --sd-info: #0284c7;
+  --sd-info-bg: #e0f2fe;
+
+  /* Borders & Glass */
+  --sd-border: rgba(0, 32, 70, 0.12);
+  --sd-glass-bg: rgba(255, 255, 255, 0.85);
+  --sd-glass-border: rgba(0, 32, 70, 0.08);
+
+  /* Typography */
+  --sd-font-heading: 'Manrope', -apple-system, sans-serif;
+  --sd-font-body: 'Source Sans 3', 'Plus Jakarta Sans', sans-serif;
+
+  /* Radii & Shadows */
+  --sd-radius-sm: 8px;
+  --sd-radius-md: 12px;
+  --sd-radius-lg: 16px;
+  --sd-radius-xl: 24px;
+  --sd-shadow-sm: 0 2px 4px rgba(0, 32, 70, 0.05);
+  --sd-shadow-md: 0 8px 16px rgba(0, 32, 70, 0.08);
+  --sd-shadow-lg: 0 16px 32px rgba(0, 32, 70, 0.12);
+}
+
+[data-theme="dark"] {
+  /* Surfaces */
+  --sd-surface: #051424;
+  --sd-surface-dim: #051424;
+  --sd-surface-bright: #1c2b3c;
+  --sd-surface-card: #0d1c2d;
+  --sd-surface-card-hover: #16283d;
+  --sd-surface-container-low: #081829;
+  --sd-surface-container: #122131;
+  --sd-surface-container-high: #1c2b3c;
+
+  /* Text */
+  --sd-on-surface: #d4e4fa;
+  --sd-on-surface-variant: #c5c6cd;
+  --sd-text-muted: #94a3b8;
+
+  /* Primary Brand */
+  --sd-primary: #b9c7e4;
+  --sd-on-primary: #233148;
+  --sd-primary-container: #0a192f;
+  --sd-on-primary-container: #74829d;
+  --sd-primary-hover: #d3e0fa;
+
+  /* Secondary Brand - Verde Neón Clínico */
+  --sd-secondary: #46fcb4;
+  --sd-on-secondary: #003824;
+  --sd-secondary-container: #00df9a;
+  --sd-on-secondary-container: #005d3e;
+  --sd-secondary-hover: #75ffcb;
+  --sd-accent-green: #46fcb4;
+
+  /* Status Colors */
+  --sd-success: #46fcb4;
+  --sd-success-bg: rgba(70, 252, 180, 0.12);
+  --sd-warning: #fbbf24;
+  --sd-warning-bg: rgba(251, 191, 36, 0.12);
+  --sd-danger: #f87171;
+  --sd-danger-bg: rgba(248, 113, 113, 0.15);
+  --sd-info: #38bdf8;
+  --sd-info-bg: rgba(56, 189, 248, 0.12);
+
+  /* Borders & Glass */
+  --sd-border: rgba(212, 228, 250, 0.12);
+  --sd-glass-bg: rgba(13, 28, 45, 0.85);
+  --sd-glass-border: rgba(212, 228, 250, 0.1);
+
+  /* Shadows */
+  --sd-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --sd-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --sd-shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* Base Body Styles */
+body {
+  font-family: var(--sd-font-body);
+  background-color: var(--sd-surface);
+  color: var(--sd-on-surface);
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--sd-font-heading);
+  color: var(--sd-on-surface);
+  margin-top: 0;
+}

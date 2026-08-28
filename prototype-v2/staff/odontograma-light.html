@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sillar Dental - Odontograma</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-primary": "#515f78",
+                    "on-secondary-fixed-variant": "#005236",
+                    "background": "#051424",
+                    "on-tertiary": "#003256",
+                    "inverse-on-surface": "#233143",
+                    "secondary-fixed": "#4affb7",
+                    "tertiary-fixed-dim": "#9bcbff",
+                    "on-tertiary-fixed": "#001d34",
+                    "on-secondary-fixed": "#002113",
+                    "on-tertiary-fixed-variant": "#004a7a",
+                    "error-container": "#93000a",
+                    "on-surface": "#d4e4fa",
+                    "primary-fixed": "#d6e3ff",
+                    "surface-container-low": "#0d1c2d",
+                    "on-secondary": "#003824",
+                    "on-primary-container": "#74829d",
+                    "surface-variant": "#273647",
+                    "surface-container-lowest": "#010f1f",
+                    "tertiary": "#9bcbff",
+                    "secondary-container": "#00df9a",
+                    "secondary": "#46fcb4",
+                    "outline": "#8f9097",
+                    "on-primary-fixed-variant": "#39475f",
+                    "on-error": "#690005",
+                    "tertiary-container": "#001a30",
+                    "on-primary": "#233148",
+                    "surface-tint": "#b9c7e4",
+                    "on-error-container": "#ffdad6",
+                    "error": "#ffb4ab",
+                    "primary-container": "#0a192f",
+                    "surface-dim": "#051424",
+                    "on-surface-variant": "#c5c6cd",
+                    "surface-container": "#122131",
+                    "on-tertiary-container": "#1286d6",
+                    "surface-container-highest": "#273647",
+                    "tertiary-fixed": "#d0e4ff",
+                    "on-background": "#d4e4fa",
+                    "surface-container-high": "#1c2b3c",
+                    "inverse-surface": "#d4e4fa",
+                    "on-primary-fixed": "#0d1c32",
+                    "surface-bright": "#2c3a4c",
+                    "primary-fixed-dim": "#b9c7e4",
+                    "primary": "#b9c7e4",
+                    "outline-variant": "#44474d",
+                    "secondary-fixed-dim": "#0fe29c",
+                    "on-secondary-container": "#005d3e",
+                    "surface": "#051424"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "8px",
+                    "margin-desktop": "64px",
+                    "margin-mobile": "20px",
+                    "gutter": "24px",
+                    "container-max-width": "1280px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Manrope"],
+                    "body-lg": ["Manrope"],
+                    "headline-lg": ["Manrope"],
+                    "body-md": ["Manrope"],
+                    "label-md": ["Manrope"],
+                    "display-lg": ["Manrope"],
+                    "label-sm": ["Manrope"],
+                    "display-lg-mobile": ["Manrope"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                    "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                    "label-sm": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "display-lg-mobile": ["40px", {"lineHeight": "1.1", "letterSpacing": "-0.03em", "fontWeight": "800"}]
+            }
+          },
+        }
+      }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+        
+        .glass-panel {
+            background: rgba(13, 28, 45, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .sillar-arch {
+            border-top-left-radius: theme('borderRadius.full');
+            border-top-right-radius: theme('borderRadius.full');
+        }
+        
+        .floating-action {
+            box-shadow: 0 20px 40px -10px rgba(10, 25, 47, 0.5);
+        }
+
+        /* Custom Scrollbar for dark theme */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: theme('colors.surface-container-lowest'); 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: theme('colors.surface-variant'); 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: theme('colors.outline'); 
+        }
+    </style>
+</head>
+<body class="flex flex-col md:flex-row min-h-screen overflow-x-hidden">
+<!-- SideNavBar (Desktop) -->
+<nav class="hidden md:flex flex-col h-screen fixed left-0 py-8 bg-surface-container-low dark:bg-surface-container-lowest text-primary dark:text-primary-fixed-dim docked left-0 h-full w-64 border-r border-white/10 shadow-xl z-40">
+<!-- Brand (Hidden as per JSON, but we keep structure if needed, or omit based on 'hidden') -->
+<div class="hidden font-headline-lg text-headline-lg font-bold tracking-tight text-secondary dark:text-secondary-fixed mb-8 px-8">
+            Sillar Dental
+        </div>
+<!-- Header Info -->
+<div class="px-6 mb-8 flex flex-col items-center">
+<div class="w-20 h-20 rounded-full mb-4 overflow-hidden border-2 border-secondary/20">
+<img alt="Foto de perfil del paciente" class="w-full h-full object-cover" data-alt="A professional, softly lit studio portrait of a patient, Juan Pérez. He has a warm, confident smile, set against a deep navy background. High-key clinical lighting creates a luxurious, high-end hospitality feel, maintaining a sleek dark-mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKybzUjRMe1p0XucX-i6GRuc2Ies3jnUd18dEauiLYzh7DUTNqFo-MJkwDRw3kjCbqtKC2vOcus0EMw8geSefZfpS3UmFYfZxvfWyNwhVgfft9sFpwZO80xmeWYeIoiGxuPg_4KBkQw3q6_xsWscvjt3lo3hhvPwRCVGp-CEbMWyvFtgqyyYhw1aEKA3YPec6JxIhtpl6PvZg66Mai90YgHa_u-CGFDaStflXmojLYz-b8ExB6Yh_-O6m5wgNX0pLVNvRPDGsCd8Gl"/>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface text-center">Juan Pérez</h2>
+<p class="font-label-md text-label-md text-on-surface-variant text-center mt-1">ID: 28492 - Plan Premium</p>
+</div>
+<!-- Navigation Links -->
+<div class="flex-1 overflow-y-auto px-4 space-y-2">
+<!-- Active: Odontograma -->
+<a class="flex items-center gap-3 bg-secondary/10 text-secondary dark:text-secondary-fixed border-r-4 border-secondary p-4 rounded-l-lg hover:bg-white/5 transition-colors group" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dentistry</span>
+<span class="font-label-md text-label-md">Odontograma</span>
+</a>
+<!-- Inactive Links -->
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant p-4 rounded-l-lg hover:bg-white/5 hover:text-on-surface transition-colors group" href="#">
+<span class="material-symbols-outlined">healing</span>
+<span class="font-label-md text-label-md">Operatoria</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant p-4 rounded-l-lg hover:bg-white/5 hover:text-on-surface transition-colors group" href="#">
+<span class="material-symbols-outlined">biotech</span>
+<span class="font-label-md text-label-md">Endodoncia</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant p-4 rounded-l-lg hover:bg-white/5 hover:text-on-surface transition-colors group" href="#">
+<span class="material-symbols-outlined">rebase</span>
+<span class="font-label-md text-label-md">Rehabilitación</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant p-4 rounded-l-lg hover:bg-white/5 hover:text-on-surface transition-colors group" href="#">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="font-label-md text-label-md">Periodoncia</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant p-4 rounded-l-lg hover:bg-white/5 hover:text-on-surface transition-colors group" href="#">
+<span class="material-symbols-outlined">medical_services</span>
+<span class="font-label-md text-label-md">Cirugía</span>
+</a>
+</div>
+<!-- CTA -->
+<div class="px-6 mt-6 mb-4">
+<button class="w-full bg-secondary-container hover:bg-secondary text-on-secondary-fixed-variant font-label-md text-label-md py-3 rounded-lg transition-colors floating-action flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add</span>
+                Nuevo Diagnóstico
+            </button>
+</div>
+<!-- Footer -->
+<div class="px-4 mt-auto">
+<a class="flex items-center gap-3 text-on-surface-variant dark:text-on-surface-variant p-4 rounded-l-lg hover:bg-white/5 hover:text-on-surface transition-colors group" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Cerrar Sesión</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-1 md:ml-64 flex flex-col min-h-screen">
+<!-- TopNavBar (Responsive adaptation - Desktop mostly shown, mobile has bottom bar, but we use TopApp for structural canvas here) -->
+<header class="bg-surface/80 dark:bg-surface-container/80 backdrop-blur-xl text-primary dark:text-primary-fixed-dim docked full-width top-0 z-30 border-b border-white/10 shadow-[0_20px_40px_rgba(10,25,47,0.15)] sticky">
+<div class="flex justify-between items-center h-16 px-margin-mobile md:px-margin-desktop w-full max-w-container-max-width mx-auto">
+<!-- Mobile Menu Button (Visible only on mobile) -->
+<button class="md:hidden text-on-surface-variant hover:text-on-surface p-2">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<!-- Brand (Visible here for desktop anchor as per styles) -->
+<div class="font-headline-lg text-headline-lg-mobile md:text-headline-lg font-bold tracking-tight text-secondary dark:text-secondary-fixed">
+                    Sillar Dental
+                </div>
+<!-- Desktop Navigation Links (Contextual top level if needed, but suppressed here to focus on SideNav as primary context for Patient view) -->
+<!-- Actions -->
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-on-surface p-2 rounded-full hover:bg-white/5 transition-all duration-300 transform hover:scale-95">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-on-surface p-2 rounded-full hover:bg-white/5 transition-all duration-300 transform hover:scale-95">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="hidden md:flex items-center gap-2 border border-secondary/50 text-secondary hover:bg-secondary/10 font-label-md text-label-md px-4 py-2 rounded-lg transition-colors">
+                        Finalizar Consulta
+                    </button>
+</div>
+</div>
+</header>
+<!-- Canvas Area -->
+<main class="flex-1 p-margin-mobile md:p-margin-desktop max-w-container-max-width mx-auto w-full flex flex-col gap-gutter">
+<!-- Context Header -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-4">
+<div>
+<h1 class="font-display-lg-mobile md:font-display-lg text-on-surface mb-2">Odontograma</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Consulta Clínica - Fase Diagnóstica</p>
+</div>
+<div class="mt-4 md:mt-0 flex gap-3">
+<span class="px-4 py-2 rounded-full bg-secondary-container/20 text-secondary font-label-md text-label-md border border-secondary/30">
+                        Adulto
+                    </span>
+<span class="px-4 py-2 rounded-full bg-surface-variant text-on-surface-variant font-label-md text-label-md border border-outline-variant">
+                        FDI System
+                    </span>
+</div>
+</div>
+<!-- Main Layout: 2 Columns on Desktop -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Column: Odontogram Interaction Area -->
+<div class="lg:col-span-8 flex flex-col gap-gutter">
+<!-- The Odontogram Visual Container -->
+<div class="glass-panel rounded-2xl p-6 relative flex flex-col items-center">
+<!-- Reference Image Implementation -->
+<div class="w-full max-w-2xl aspect-[3/4] relative overflow-hidden rounded-xl bg-surface-container mb-6 border border-white/5">
+<img alt="Odontograma Digital Estructura" class="w-full h-full object-contain opacity-80 mix-blend-screen p-4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCG8Nrfjl6XIFdLBcS8YAPBIeD1RpG-C8Szyy2Emd27m2Z5ep04_CmUeONYIw4UAegdHNCDgnu7AmZIAs5XCCdDgtOD3h020LPr1_p36Q8Jo9Cj0DVTQInS5RFnms-iunQb9N-_Zb-o-lKdRyAXPLSDaIPEuzE-G49uomT3aswHZJGslcwgCALH0P61ncClTAqwESA_IVbki8LasNYcuiD-n8noZg2T_ZWhCvTdwfJLqyDioLDCcLQOQ7OCoc49yK6JjUpjNiY8kMmw"/>
+<!-- Interactive Overlay Example (Simulated clickable teeth over the image) -->
+<div class="absolute inset-0 grid grid-cols-2 gap-4 p-8 pointer-events-none">
+<!-- Top Right Quadrant (11-18) -->
+<div class="grid grid-cols-8 gap-1 pt-12 pl-4 pointer-events-auto group">
+<!-- Tooth 18 -->
+<button aria-label="Pieza 18" class="w-full h-24 hover:bg-secondary/20 rounded border border-transparent hover:border-secondary transition-all flex flex-col items-center justify-end pb-1">
+<span class="text-xs text-on-surface-variant group-hover:text-secondary font-mono">18</span>
+</button>
+<button aria-label="Pieza 17" class="w-full h-24 hover:bg-secondary/20 rounded border border-transparent hover:border-secondary transition-all flex flex-col items-center justify-end pb-1">
+<span class="text-xs text-on-surface-variant group-hover:text-secondary font-mono">17</span>
+</button>
+<!-- ... other teeth would be generated here ... -->
+</div>
+</div>
+</div>
+<!-- Technical Legend -->
+<div class="w-full bg-surface-container-highest rounded-xl p-4 border border-outline-variant/30 flex flex-wrap gap-4 justify-center">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-error"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Caries</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-secondary"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Obturación</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full border-2 border-outline"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Ausente</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-sm bg-tertiary"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Corona</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-sm border-2 border-error"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Endodoncia Req.</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Contextual Action Panel -->
+<div class="lg:col-span-4 flex flex-col gap-gutter">
+<!-- Selected Tooth Details Card -->
+<div class="glass-panel rounded-2xl p-6 border-t-4 border-t-secondary relative overflow-hidden">
+<div class="absolute -right-12 -top-12 opacity-10">
+<span class="material-symbols-outlined text-[120px]">dentistry</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-1">Pieza 46</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">Primer Molar Inferior Derecho</p>
+<div class="space-y-4">
+<!-- Action 1 -->
+<button class="w-full flex items-center justify-between p-4 rounded-xl bg-surface-container hover:bg-white/5 border border-white/5 transition-colors group">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">healing</span>
+</div>
+<div class="text-left">
+<span class="block font-label-md text-label-md text-on-surface">Tratamiento</span>
+<span class="block font-label-sm text-label-sm text-on-surface-variant">Registrar intervención</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">chevron_right</span>
+</button>
+<!-- Action 2 -->
+<button class="w-full flex items-center justify-between p-4 rounded-xl bg-surface-container hover:bg-white/5 border border-white/5 transition-colors group">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-tertiary/10 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">science</span>
+</div>
+<div class="text-left">
+<span class="block font-label-md text-label-md text-on-surface">Análisis</span>
+<span class="block font-label-sm text-label-sm text-on-surface-variant">Evaluar estado pulpar</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-tertiary transition-colors">chevron_right</span>
+</button>
+<!-- Action 3 -->
+<button class="w-full flex items-center justify-between p-4 rounded-xl bg-surface-container hover:bg-white/5 border border-white/5 transition-colors group">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">radiology</span>
+</div>
+<div class="text-left">
+<span class="block font-label-md text-label-md text-on-surface">Estudios</span>
+<span class="block font-label-sm text-label-sm text-on-surface-variant">Vincular Rx Periapical</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-secondary transition-colors">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Specifications / Notes -->
+<div class="glass-panel rounded-2xl p-6 flex-1 flex flex-col">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">edit_note</span>
+                            Especificaciones
+                        </h3>
+<textarea class="w-full flex-1 bg-surface-container border-b border-outline-variant focus:border-secondary focus:ring-0 rounded-t-lg p-4 font-body-md text-body-md text-on-surface resize-none placeholder-on-surface-variant/50" placeholder="Añadir notas clínicas generales sobre el odontograma actual..."></textarea>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+
+
+
+<script>
+(function() {
+  document.addEventListener('DOMContentLoaded', () => {
+    const loc = window.location.pathname;
+    const isPublic = loc.includes('/public/');
+    const isPatient = loc.includes('/patient/');
+    const prefix = isPublic || isPatient ? '../' : './';
+
+    // Intercept all clicks on links and buttons
+    document.querySelectorAll('a, button, [onclick]').forEach(el => {
+      const text = (el.innerText || el.getAttribute('aria-label') || '').toLowerCase().trim();
+      const currentHref = el.getAttribute('href');
+
+      if (!currentHref || currentHref === '#' || currentHref === '') {
+        if (text.includes('portal del paciente') || text.includes('paciente') || text.includes('mi cuenta') || text.includes('mis citas')) {
+          el.setAttribute('href', prefix + 'patient/index.html');
+        } else if (text.includes('consola de administración') || text.includes('dashboard') || text.includes('administración')) {
+          el.setAttribute('href', prefix + 'staff/dashboard.html');
+        } else if (text.includes('portales') || text.includes('seleccione su portal') || text.includes('admin')) {
+          el.setAttribute('href', prefix + 'staff/admin.html');
+        } else if (text.includes('agendar') || text.includes('reservar') || text.includes('nueva cita')) {
+          el.setAttribute('href', prefix + 'public/reservar.html');
+        } else if (text.includes('agenda semanal') || text.includes('semanal')) {
+          el.setAttribute('href', prefix + 'staff/agenda-semanal.html');
+        } else if (text.includes('calendario') || text.includes('mensual')) {
+          el.setAttribute('href', prefix + 'staff/calendario-mensual.html');
+        } else if (text.includes('citas')) {
+          el.setAttribute('href', prefix + (isPatient ? 'patient/citas.html' : 'staff/citas.html'));
+        } else if (text.includes('consulta') || text.includes('odontograma')) {
+          el.setAttribute('href', prefix + 'staff/consulta.html');
+        } else if (text.includes('ortodoncia')) {
+          el.setAttribute('href', prefix + 'staff/ortodoncia.html');
+        } else if (text.includes('cirugía') || text.includes('implantología')) {
+          el.setAttribute('href', prefix + 'staff/cirugia.html');
+        } else if (text.includes('endodoncia') || text.includes('operatoria')) {
+          el.setAttribute('href', prefix + 'staff/endodoncia.html');
+        } else if (text.includes('rehabilitación') || text.includes('periodoncia')) {
+          el.setAttribute('href', prefix + 'staff/rehabilitacion.html');
+        } else if (text.includes('inventario') || text.includes('insumos')) {
+          el.setAttribute('href', prefix + 'staff/inventario.html');
+        } else if (text.includes('usuarios') || text.includes('personal')) {
+          el.setAttribute('href', prefix + 'staff/usuarios.html');
+        } else if (text.includes('cerrar sesión') || text.includes('salir')) {
+          el.setAttribute('href', prefix + 'patient/login.html');
+        } else if (text.includes('inicio') || text.includes('home')) {
+          el.setAttribute('href', prefix + 'public/index.html');
+        }
+      }
+    });
+  });
+})();
+</script>
+
+
+
+
+
+<!-- Root-Relative Bulletproof Navigation Script -->
+<script>
+(function() {
+  function applyRootLinks() {
+    const loc = window.location.pathname;
+
+    document.querySelectorAll('a, button').forEach(el => {
+      const target = el.tagName === 'A' ? el : el.closest('a');
+      if (!target) return;
+
+      const text = (target.textContent || target.getAttribute('aria-label') || '').toLowerCase().trim();
+
+      // Patient Portal Card or Nav Link
+      if (text.includes('portal del paciente') || (text.includes('paciente') && !text.includes('doctor') && !text.includes('historial'))) {
+        target.href = '/patient/index.html';
+      }
+      // Consola de Administración Card
+      else if (text.includes('consola de administración') || text.includes('dashboard principal')) {
+        target.href = '/staff/dashboard.html';
+      }
+      // Admin Gateway Selector
+      else if (text.includes('seleccione su portal') || text.includes('portales admin')) {
+        target.href = '/staff/admin.html';
+      }
+      // Public / Landing
+      else if (text.includes('sillar dental') && (text.includes('inicio') || text.includes('home'))) {
+        target.href = '/public/index.html';
+      } else if (text.includes('agendar') || text.includes('reservar')) {
+        target.href = '/public/reservar.html';
+      }
+      // Subviews
+      else if (text.includes('agenda semanal') || text.includes('semanal')) {
+        target.href = '/staff/agenda-semanal.html';
+      } else if (text.includes('calendario mensual') || text.includes('mensual')) {
+        target.href = '/staff/calendario-mensual.html';
+      } else if (text.includes('mis citas') || text.includes('citas paciente')) {
+        target.href = '/patient/citas.html';
+      } else if (text.includes('citas') || text.includes('agenda')) {
+        target.href = '/staff/citas.html';
+      } else if (text.includes('consulta') || text.includes('odontograma')) {
+        target.href = '/staff/consulta.html';
+      } else if (text.includes('ortodoncia')) {
+        target.href = '/staff/ortodoncia.html';
+      } else if (text.includes('cirugía') || text.includes('implantología')) {
+        target.href = '/staff/cirugia.html';
+      } else if (text.includes('endodoncia') || text.includes('operatoria')) {
+        target.href = '/staff/endodoncia.html';
+      } else if (text.includes('rehabilitación') || text.includes('periodoncia')) {
+        target.href = '/staff/rehabilitacion.html';
+      } else if (text.includes('inventario') || text.includes('insumos')) {
+        target.href = '/staff/inventario.html';
+      } else if (text.includes('usuarios') || text.includes('personal')) {
+        target.href = '/staff/usuarios.html';
+      } else if (text.includes('cerrar sesión') || text.includes('salir')) {
+        target.href = '/patient/login.html';
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', applyRootLinks);
+  window.addEventListener('load', applyRootLinks);
+})();
+</script>
+
+
+<!-- Persistent Collapsible Sidebar Engine -->
+<script>
+(function() {
+  document.addEventListener('DOMContentLoaded', () => {
+    // Only run on staff pages (excluding admin gateway selector)
+    if (window.location.pathname.includes('/staff/admin')) return;
+
+    const savedState = localStorage.getItem('sd-sidebar-collapsed') === 'true';
+
+    const sidebar = document.createElement('aside');
+    sidebar.id = 'sd-unified-sidebar';
+    sidebar.className = 'fixed top-0 left-0 h-screen z-50 transition-all duration-300 flex flex-col border-r border-white/10 shadow-2xl';
+    sidebar.style.cssText = 'width: ' + (savedState ? '76px' : '260px') + '; background: rgba(5,20,36,0.95); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);';
+
+    const currentPath = window.location.pathname;
+
+    const menuData = [
+      { category: 'Principal' },
+      { title: 'Dashboard Principal', icon: 'dashboard', href: '/staff/dashboard.html' },
+      { title: 'Gestión de Citas', icon: 'calendar_month', href: '/staff/citas.html' },
+      { title: 'Agenda Semanal', icon: 'view_week', href: '/staff/agenda-semanal.html', sub: true },
+      { title: 'Calendario Mensual', icon: 'calendar_view_month', href: '/staff/calendario-mensual.html', sub: true },
+      
+      { category: 'Clínica & Odontograma' },
+      { title: 'Odontograma 52P', icon: 'medical_services', href: '/staff/consulta.html' },
+      { title: 'Odontograma Drag&Drop', icon: 'drag_pan', href: '/staff/odontograma-dragdrop.html', sub: true },
+      
+      { category: 'Especialidades' },
+      { title: 'Ortodoncia', icon: 'orthodontics', href: '/staff/ortodoncia.html' },
+      { title: 'Cirugía e Implantes', icon: 'biomedical', href: '/staff/cirugia.html' },
+      { title: 'Endodoncia & Resinas', icon: 'dentistry', href: '/staff/endodoncia.html' },
+      { title: 'Periodoncia & Prótesis', icon: 'health_and_safety', href: '/staff/rehabilitacion.html' },
+      
+      { category: 'Administración' },
+      { title: 'Inventario & Stock', icon: 'inventory_2', href: '/staff/inventario.html' },
+      { title: 'Usuarios & Personal', icon: 'group', href: '/staff/usuarios.html' }
+    ];
+
+    let itemsHtml = '';
+    menuData.forEach(item => {
+      if (item.category) {
+        itemsHtml += `<div class="sd-sidebar-cat text-[10px] font-bold text-on-surface-variant/50 uppercase tracking-widest px-3 mt-4 mb-1 whitespace-nowrap ${savedState ? 'hidden' : 'block'}">${item.category}</div>`;
+      } else {
+        const isActive = currentPath.includes(item.href.replace('.html', ''));
+        itemsHtml += `
+          <a href="${item.href}" title="${item.title}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all font-label-md text-xs ${item.sub ? 'pl-5 opacity-90' : ''} ${isActive ? 'bg-secondary/15 text-secondary border border-secondary/30 font-bold shadow-[0_0_15px_rgba(70,252,180,0.15)]' : 'text-on-surface-variant hover:bg-white/10 hover:text-on-surface'}">
+            <span class="material-symbols-outlined text-lg shrink-0 ${isActive ? 'text-secondary' : 'opacity-80'}">${item.icon}</span>
+            <span class="sd-sidebar-text whitespace-nowrap font-medium transition-opacity duration-200 ${savedState ? 'hidden' : 'inline'}">${item.title}</span>
+          </a>
+        `;
+      }
+    });
+
+    sidebar.innerHTML = `
+      <!-- Header -->
+      <div class="h-16 px-4 flex items-center justify-between border-b border-white/10 shrink-0">
+        <a href="/staff/admin.html" class="flex items-center gap-2.5 overflow-hidden text-decoration-none">
+          <span class="material-symbols-outlined text-secondary text-2xl shrink-0">diamond</span>
+          <span id="sd-logo-text" class="font-headline-md text-sm text-primary font-bold whitespace-nowrap ${savedState ? 'hidden' : 'inline'}">Sillar Dental</span>
+        </a>
+        <button id="sd-sidebar-toggle" title="Contraer / Expandir Menú" class="p-1.5 rounded-lg text-on-surface-variant hover:bg-white/10 transition-colors flex items-center justify-center">
+          <span id="sd-toggle-icon" class="material-symbols-outlined text-lg">${savedState ? 'chevron_right' : 'chevron_left'}</span>
+        </button>
+      </div>
+
+      <!-- Menu Items -->
+      <div class="flex-1 overflow-y-auto py-3 px-2 space-y-1" style="scrollbar-width: thin;">
+        ${itemsHtml}
+      </div>
+
+      <!-- Footer Switcher -->
+      <div class="p-2 border-t border-white/10 space-y-1 shrink-0">
+        <a href="/patient/index.html" title="Portal Paciente" class="flex items-center gap-2.5 px-3 py-2 rounded-xl bg-secondary/10 text-secondary hover:bg-secondary/20 transition-all font-label-md font-bold text-xs">
+          <span class="material-symbols-outlined text-base shrink-0">person</span>
+          <span class="sd-sidebar-text whitespace-nowrap ${savedState ? 'hidden' : 'inline'}">Portal Paciente</span>
+        </a>
+        <a href="/staff/admin.html" title="Cambiar de Portal" class="flex items-center gap-2.5 px-3 py-2 rounded-xl bg-white/5 text-on-surface-variant hover:bg-white/10 transition-all font-label-md text-xs">
+          <span class="material-symbols-outlined text-base shrink-0">grid_view</span>
+          <span class="sd-sidebar-text whitespace-nowrap ${savedState ? 'hidden' : 'inline'}">Seleccionar Portal</span>
+        </a>
+      </div>
+    `;
+
+    document.body.appendChild(sidebar);
+
+    // Adjust body margin to make room for fixed sidebar
+    function updateBodyMargin(collapsed) {
+      document.body.style.transition = 'padding-left 0.3s ease';
+      document.body.style.paddingLeft = collapsed ? '76px' : '260px';
+    }
+
+    updateBodyMargin(savedState);
+
+    // Toggle Sidebar collapse / expand
+    const toggleBtn = document.getElementById('sd-sidebar-toggle');
+    const toggleIcon = document.getElementById('sd-toggle-icon');
+    const logoText = document.getElementById('sd-logo-text');
+
+    toggleBtn.addEventListener('click', () => {
+      const currentlyCollapsed = sidebar.style.width === '76px';
+      const nextCollapsed = !currentlyCollapsed;
+
+      sidebar.style.width = nextCollapsed ? '76px' : '260px';
+      toggleIcon.textContent = nextCollapsed ? 'chevron_right' : 'chevron_left';
+
+      document.querySelectorAll('.sd-sidebar-text').forEach(el => {
+        el.style.display = nextCollapsed ? 'none' : 'inline';
+      });
+
+      document.querySelectorAll('.sd-sidebar-cat').forEach(el => {
+        el.style.display = nextCollapsed ? 'none' : 'block';
+      });
+
+      if (logoText) logoText.style.display = nextCollapsed ? 'none' : 'inline';
+
+      updateBodyMargin(nextCollapsed);
+      localStorage.setItem('sd-sidebar-collapsed', nextCollapsed);
+    });
+  });
+})();
+</script>
+
+</body></html>

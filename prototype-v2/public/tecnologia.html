@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tecnología & Diagnóstico Digital · Sillar Dental</title>
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+</head>
+<body>
+
+  <div id="headerApp"></div>
+
+  <section style="background: var(--surface); padding: 50px 0 30px; border-bottom: 1px solid var(--line);">
+    <div class="container">
+      <span class="eyebrow">Diagnóstico por Imágenes</span>
+      <h1>Tecnología Dental de Vanguardia</h1>
+      <p class="muted" style="max-width: 640px; font-size: 1.1rem;">Nuestra sede en Yanahuara cuenta con tomografía CBCT, escaneo intraoral 3D y radiografía panorámica digitalizada.</p>
+    </div>
+  </section>
+
+  <section class="container" style="padding: 60px 0;">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; margin-bottom: 60px;">
+      <div>
+        <span class="eyebrow">Equipamiento 3D</span>
+        <h2>Tomografía Computarizada Cone Beam (CBCT)</h2>
+        <p class="muted">Permite una reconstrucción tridimensional exacta del maxilar, la mandíbula y las estructuras nerviosas previa a cualquier cirugía de implantes o extracción de muelas del juicio.</p>
+        <ul style="padding-left: 20px; color: var(--ink-soft); font-size: 0.95rem; display: grid; gap: 8px;">
+          <li>Menor dosis de radiación que una tomografía convencional.</li>
+          <li>Planificación guiada de implantes con precisión milimétrica.</li>
+          <li>Visualización inmediata en el visor del portal paciente.</li>
+        </ul>
+      </div>
+      <div>
+        <img src="../assets/images/public/technology/evaluacion-dental-digital-5622234.jpg" alt="Tomografía dental CBCT digital" style="width: 100%; border-radius: 16px; box-shadow: var(--shadow); height: 320px; object-fit: cover;">
+      </div>
+    </div>
+
+    <div class="card" style="padding: 40px; text-align: center; background: linear-gradient(135deg, var(--paper) 0%, var(--teal-soft) 100%);">
+      <h2 style="margin-bottom: 12px;">Portal de Resultados en Tiempo Real</h2>
+      <p class="muted" style="max-width: 580px; margin: 0 auto 24px;">Todos nuestros pacientes acceden a sus radiografías, informes PDF y consentimientos digitales desde cualquier dispositivo sin necesidad de carpetas impresas.</p>
+      <a href="../patient/login.html?v=3" class="btn btn-primary">Ingresar al Portal Paciente (María Quispe)</a>
+    </div>
+  </section>
+
+  <div id="footerApp"></div>
+
+  <script type="module">
+    import { renderPublicHeader, renderPublicFooter, setupHeaderInteractions } from '../assets/js/components.js';
+
+    document.getElementById("headerApp").innerHTML = renderPublicHeader("tecnologia");
+    document.getElementById("footerApp").innerHTML = renderPublicFooter();
+    setupHeaderInteractions();
+  </script>
+</body>
+</html>

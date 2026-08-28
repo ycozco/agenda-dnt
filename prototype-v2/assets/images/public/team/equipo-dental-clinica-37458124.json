@@ -1,0 +1,25 @@
+﻿{
+    "id":  "pexels-team-37458124",
+    "filename":  "equipo-dental-clinica-37458124.jpg",
+    "path":  "prototype-v2\\assets\\images\\public\\team\\equipo-dental-clinica-37458124.jpg",
+    "category":  "public-team",
+    "purpose":  "equipo y cultura clÃ­nica",
+    "sourcePage":  "https://www.pexels.com/photo/dentist-and-assistant-in-modern-dental-clinic-37458088/",
+    "downloadUrl":  "https://images.pexels.com/photos/37458124/pexels-photo-37458124.jpeg?cs=srgb\u0026dl=pexels-emily-gaibor-2161401886-37458124.jpg\u0026fm=jpg",
+    "provider":  "Pexels",
+    "author":  "Emily Gaibor",
+    "license":  "Pexels License",
+    "usage":  "Referencia de trabajo en equipo; no usar como miembros reales del staff.",
+    "alt":  "Equipo dental trabajando en una clÃ­nica moderna, imagen de referencia",
+    "tags":  [
+                 "equipo",
+                 "asistente",
+                 "colaboracion",
+                 "clinica",
+                 "referencia"
+             ],
+    "bytes":  1141731,
+    "sha256":  "327e123eeada0afd11702998fbf49356067d7af1ef9b5af66398840049f50611",
+    "downloadedAt":  "2026-07-26T00:52:29.5471678Z",
+    "status":  "reference-only"
+}

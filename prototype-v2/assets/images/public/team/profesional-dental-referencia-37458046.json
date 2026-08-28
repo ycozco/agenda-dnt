@@ -1,0 +1,25 @@
+﻿{
+    "id":  "pexels-doctor-37458046",
+    "filename":  "profesional-dental-referencia-37458046.jpg",
+    "path":  "prototype-v2\\assets\\images\\public\\team\\profesional-dental-referencia-37458046.jpg",
+    "category":  "public-team",
+    "purpose":  "equipo y cultura clÃ­nica",
+    "sourcePage":  "https://www.pexels.com/photo/confident-dentist-in-modern-dental-clinic-37458046/",
+    "downloadUrl":  "https://images.pexels.com/photos/37458046/pexels-photo-37458046.jpeg?cs=srgb\u0026dl=pexels-emily-gaibor-2161401886-37458046.jpg\u0026fm=jpg",
+    "provider":  "Pexels",
+    "author":  "Emily Gaibor",
+    "license":  "Pexels License",
+    "usage":  "Referencia de direcciÃ³n de arte; no asociar a un perfil profesional ficticio.",
+    "alt":  "Profesional dental en una clÃ­nica moderna, imagen de referencia",
+    "tags":  [
+                 "equipo",
+                 "profesional",
+                 "retrato",
+                 "clinica",
+                 "referencia"
+             ],
+    "bytes":  1010359,
+    "sha256":  "6928572f3765315604f1a0c99b25fa55604328b8202c35e8434ebb327458a521",
+    "downloadedAt":  "2026-07-26T00:52:28.0845879Z",
+    "status":  "reference-only"
+}

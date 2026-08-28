@@ -1,0 +1,628 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Gestión de Citas - DentalClinic Pro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&amp;family=Source+Sans+3:wght@400;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#e4e2df",
+                    "surface-variant": "#d3e4fe",
+                    "on-error": "#ffffff",
+                    "on-background": "#0b1c30",
+                    "tertiary": "#20211f",
+                    "surface": "#f8f9ff",
+                    "secondary-fixed": "#d5e3ff",
+                    "primary-fixed-dim": "#aec7f7",
+                    "secondary": "#4f5f7a",
+                    "on-primary": "#ffffff",
+                    "surface-dim": "#cbdbf5",
+                    "surface-container-low": "#eff4ff",
+                    "on-tertiary-fixed-variant": "#474745",
+                    "outline-variant": "#c4c6cf",
+                    "primary-container": "#1b365d",
+                    "on-error-container": "#93000a",
+                    "primary": "#002046",
+                    "tertiary-container": "#363634",
+                    "secondary-container": "#cdddfe",
+                    "secondary-fixed-dim": "#b7c7e7",
+                    "primary-fixed": "#d6e3ff",
+                    "on-secondary": "#ffffff",
+                    "on-primary-container": "#87a0cd",
+                    "error-container": "#ffdad6",
+                    "on-surface": "#0b1c30",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed-variant": "#2e476f",
+                    "inverse-surface": "#213145",
+                    "tertiary-fixed-dim": "#c8c6c4",
+                    "surface-tint": "#465f88",
+                    "surface-bright": "#f8f9ff",
+                    "error": "#ba1a1a",
+                    "surface-container-highest": "#d3e4fe",
+                    "surface-container-high": "#dce9ff",
+                    "on-secondary-container": "#52617d",
+                    "inverse-on-surface": "#eaf1ff",
+                    "on-tertiary-container": "#a09f9c",
+                    "surface-container-lowest": "#ffffff",
+                    "outline": "#74777f",
+                    "on-secondary-fixed": "#0a1c34",
+                    "surface-container": "#e5eeff",
+                    "background": "#f8f9ff",
+                    "on-tertiary-fixed": "#1b1c1a",
+                    "on-secondary-fixed-variant": "#384761",
+                    "inverse-primary": "#aec7f7",
+                    "on-surface-variant": "#44474e",
+                    "on-primary-fixed": "#001b3d"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "base": "8px",
+                    "margin-mobile": "16px",
+                    "margin-desktop": "48px",
+                    "container-max": "1280px"
+            },
+            "fontFamily": {
+                    "body-lg": ["\"Source Sans 3\""],
+                    "label-md": ["\"Source Sans 3\""],
+                    "headline-lg-mobile": ["Manrope"],
+                    "headline-xl": ["Manrope"],
+                    "headline-md": ["Manrope"],
+                    "headline-lg": ["Manrope"],
+                    "caption": ["\"Source Sans 3\""],
+                    "body-md": ["\"Source Sans 3\""]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "caption": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .arch-top {
+            border-top-left-radius: 4rem;
+            border-top-right-radius: 4rem;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased min-h-screen flex flex-col md:flex-row">
+<!-- Mobile Top Navigation (md:hidden) -->
+<nav class="md:hidden bg-surface-container/80 backdrop-blur-xl shadow-sm flex justify-between items-center px-margin-mobile w-full h-16 z-50 sticky top-0">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary font-headline-md">
+                D
+            </div>
+<span class="font-headline-md text-headline-md-mobile font-bold text-on-surface">DentalClinic Pro</span>
+</div>
+<div class="flex gap-4 items-center">
+<button class="text-on-surface-variant hover:bg-surface-bright/50 transition-colors active:scale-95 duration-200 p-2 rounded-full">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-bright/50 transition-colors active:scale-95 duration-200 p-2 rounded-full">
+<span class="material-symbols-outlined">help</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-bright/50 transition-colors active:scale-95 duration-200 p-2 rounded-full">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<img alt="Dr. Profile" class="w-8 h-8 rounded-full object-cover border border-outline-variant" data-alt="A small, professional headshot of a smiling male dentist wearing a white coat, isolated on a light blue background. The lighting is soft, natural, and flattering. The style is modern, clinical, and reassuring, suitable for a premium medical application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0sjKTvjt48WhwJdjMR-qYiEDUb0P4EHi1_AnkNIaxXdzb00P9oyFUx9S9jxMBuTijalwCNMCdPhNkCt0gUtAWIl4sbocCV5m2MiJL5U2YJN_0R294f0o-JCjA8KFURNEmf1JNwCT-wtpWFWjYpreCUUka91Yk0Oxx2q4WMULT7iHCbOCR1ozQswooWC9GtAv40PItv7esju7v6IMMS1VCZ5a7Exq-LG7vpDfxGotGLQ69x2-W6UMwL9iAnBr_WPuKPS827T_93vck">
+</div>
+</nav>
+<!-- SideNavBar (hidden md:flex) -->
+<aside class="hidden md:flex flex-col bg-surface-container-lowest backdrop-blur-lg border-r border-outline-variant/30 shadow-xl docked left-0 h-full w-64 fixed top-0 p-4 z-40 font-body-md">
+<div class="flex items-center gap-4 mb-8 px-4">
+<img alt="Clinic Logo" class="w-10 h-10 object-contain rounded-md" data-alt="A stylized logo icon featuring a modern, minimalist tooth graphic subtly integrated into an architectural arch shape, rendered in deep mineral blue against a crisp white background. The aesthetic is clean, premium, and trustworthy." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBE4IecOJsMSYdaVlBmgVlrmAi-Zob2p7kQ3lvfdN3SU_vCOtCEm5sdOHyF_vImGV3pGwuKDzbuU0Gg_0-U6xhZh2_r7Mrq2fBIu_YVVQvhTK3YhcguxGVwxHObKArXbrqcdo61kZ-yba7qkRNywxzGcL1UJsuFYVYSgKcy4LyBda5zj4shZwGsKNTUymrSxVk5_GE7UjJxhv-IVe2qIPEw9-K4q2cKIbIhjzC5MCVDLk2GN8fhATsvXmNTuU8RQBpPWnr6ByrTS4IE">
+<div>
+<h1 class="font-headline-md text-headline-md font-extrabold text-on-surface leading-tight">Dental Clinic</h1>
+<p class="font-caption text-caption text-on-surface-variant">Administración Premium</p>
+</div>
+</div>
+<button class="mb-6 w-full bg-primary-container text-on-primary py-3 rounded-lg font-label-md text-label-md font-bold hover:bg-primary transition-colors shadow-sm flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add</span>
+            Nueva Cita
+        </button>
+<nav class="flex-1 flex flex-col gap-2">
+<a class="flex items-center gap-4 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container rounded-lg transition-all active:scale-95 duration-150 font-label-md" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container rounded-lg transition-all active:scale-95 duration-150 font-label-md" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label-md text-label-md">Pacientes</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container rounded-lg transition-all active:scale-95 duration-150 font-label-md" href="#">
+<span class="material-symbols-outlined">person_add</span>
+<span class="font-label-md text-label-md">Usuarios</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container rounded-lg transition-all active:scale-95 duration-150 font-label-md" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-label-md text-label-md">Inventario</span>
+</a>
+<a class="flex items-center gap-4 bg-secondary-container text-on-secondary-container rounded-lg px-4 py-3 shadow-sm active:scale-95 duration-150 relative font-label-md" href="#">
+<div class="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-8 bg-primary rounded-r-full"></div>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">calendar_today</span>
+<span class="font-label-md text-label-md">Citas</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container rounded-lg transition-all active:scale-95 duration-150 font-label-md" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Configuración</span>
+</a>
+</nav>
+<div class="mt-auto pt-4 border-t border-outline-variant/30 flex flex-col gap-2">
+<a class="flex items-center gap-4 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container rounded-lg transition-all font-label-md" href="#">
+<span class="material-symbols-outlined">support_agent</span>
+<span class="font-label-md text-label-md">Soporte</span>
+</a>
+<a class="flex items-center gap-4 text-on-surface-variant hover:text-on-surface px-4 py-3 hover:bg-surface-container rounded-lg transition-all font-label-md" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Cerrar Sesión</span>
+</a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 md:ml-64 p-margin-mobile md:p-margin-desktop bg-surface min-h-screen">
+<!-- Header -->
+<header class="flex flex-col md:flex-row justify-between items-start md:items-center mb-gutter">
+<div>
+<h2 class="font-headline-xl text-headline-xl text-primary mb-2">Gestión de Citas</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Octubre 2023</p>
+</div>
+<!-- Desktop Top Controls -->
+<div class="hidden md:flex gap-4 items-center">
+<button class="text-on-surface-variant hover:bg-surface-container transition-colors p-2 rounded-full">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<img alt="Dr. Profile" class="w-10 h-10 rounded-full object-cover border border-outline-variant cursor-pointer" data-alt="A small, professional headshot of a smiling male dentist wearing a white coat, isolated on a light blue background. The lighting is soft, natural, and flattering. The style is modern, clinical, and reassuring, suitable for a premium medical application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCURG8MbvFNtJ0cxlZ6WbQHVAB9lenFRX5sAPDs2fSuuPjCCPTn0Kf52qyxl3uBx2B36tFhxYaunNY4OJB88S_9IDqycawxbuxyBQRpFoVGS_X61RPzcl_go9yVvJCnEZPqlaeqnvbn8myqiD0wjngeL9h3-o7bTbv0-0Qs67gW6NHiUJCjf9T7NIlTwXy-to0ruV72WaN3Uf2V-MMoIYlGW4ZMESx4-vw1_4PY8qWMdG66fQeGRKsQGgofzZacVo56PMBEHSnaTCzv">
+</div>
+</header>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Column: Calendar & Weekly List -->
+<div class="lg:col-span-8 flex flex-col gap-gutter">
+<!-- Monthly Calendar Summary (Sillar Card) -->
+<section class="bg-surface-container-lowest rounded-xl border border-surface-variant shadow-sm overflow-hidden">
+<div class="bg-surface-container-low px-6 py-4 border-b border-surface-variant flex justify-between items-center arch-top">
+<h3 class="font-headline-md text-headline-md text-primary">Resumen Mensual</h3>
+<div class="flex gap-2">
+<button class="p-1 rounded hover:bg-surface-variant text-on-surface-variant"><span class="material-symbols-outlined">chevron_left</span></button>
+<button class="p-1 rounded hover:bg-surface-variant text-on-surface-variant"><span class="material-symbols-outlined">chevron_right</span></button>
+</div>
+</div>
+<div class="p-6">
+<!-- Simplified Calendar Grid (Mockup) -->
+<div class="grid grid-cols-7 gap-2 text-center mb-2">
+<div class="font-label-md text-label-md text-on-surface-variant">Lun</div>
+<div class="font-label-md text-label-md text-on-surface-variant">Mar</div>
+<div class="font-label-md text-label-md text-on-surface-variant">Mié</div>
+<div class="font-label-md text-label-md text-on-surface-variant">Jue</div>
+<div class="font-label-md text-label-md text-on-surface-variant">Vie</div>
+<div class="font-label-md text-label-md text-on-surface-variant">Sáb</div>
+<div class="font-label-md text-label-md text-on-surface-variant">Dom</div>
+</div>
+<div class="grid grid-cols-7 gap-2 text-center font-body-md text-on-surface">
+<!-- Just showing a few days for representation -->
+<div class="p-2 rounded-full text-outline-variant">25</div>
+<div class="p-2 rounded-full text-outline-variant">26</div>
+<div class="p-2 rounded-full text-outline-variant">27</div>
+<div class="p-2 rounded-full text-outline-variant">28</div>
+<div class="p-2 rounded-full text-outline-variant">29</div>
+<div class="p-2 rounded-full text-outline-variant">30</div>
+<div class="p-2 rounded-full relative">
+                                1 <div class="absolute bottom-1 left-1/2 -translate-x-1/2 flex gap-0.5"><span class="w-1 h-1 bg-primary rounded-full"></span></div>
+</div>
+<!-- Current Week -->
+<div class="p-2 rounded-full relative">
+                                2 <div class="absolute bottom-1 left-1/2 -translate-x-1/2 flex gap-0.5"><span class="w-1 h-1 bg-primary rounded-full"></span><span class="w-1 h-1 bg-secondary rounded-full"></span></div>
+</div>
+<div class="p-2 rounded-full relative bg-primary-fixed text-on-primary-fixed font-bold">
+                                3 <div class="absolute bottom-1 left-1/2 -translate-x-1/2 flex gap-0.5"><span class="w-1 h-1 bg-primary rounded-full"></span><span class="w-1 h-1 bg-primary rounded-full"></span><span class="w-1 h-1 bg-error rounded-full"></span></div>
+</div>
+<div class="p-2 rounded-full relative">
+                                4 <div class="absolute bottom-1 left-1/2 -translate-x-1/2 flex gap-0.5"><span class="w-1 h-1 bg-primary rounded-full"></span></div>
+</div>
+<div class="p-2 rounded-full">5</div>
+<div class="p-2 rounded-full relative">
+                                6 <div class="absolute bottom-1 left-1/2 -translate-x-1/2 flex gap-0.5"><span class="w-1 h-1 bg-primary rounded-full"></span></div>
+</div>
+<div class="p-2 rounded-full">7</div>
+<div class="p-2 rounded-full">8</div>
+</div>
+</div>
+</section>
+<!-- Weekly List -->
+<section class="bg-surface-container-lowest rounded-xl border border-surface-variant shadow-sm p-6">
+<h3 class="font-headline-md text-headline-md text-primary mb-6">Lista Semanal</h3>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse min-w-[600px]">
+<thead>
+<tr class="border-b border-surface-variant text-on-surface-variant font-label-md text-label-md">
+<th class="py-3 px-2 font-normal">Paciente</th>
+<th class="py-3 px-2 font-normal">Especialista / Especialidad</th>
+<th class="py-3 px-2 font-normal">Horario</th>
+<th class="py-3 px-2 font-normal">Estado</th>
+<th class="py-3 px-2 font-normal text-right">Acciones</th>
+</tr>
+</thead>
+<tbody class="font-body-md">
+<tr class="border-b border-surface-variant hover:bg-surface/50 transition-colors">
+<td class="py-4 px-2 font-semibold text-primary">Ana García</td>
+<td class="py-4 px-2">
+<div class="text-on-surface">Dr. Mendoza</div>
+<div class="text-caption text-on-surface-variant">Ortodoncia</div>
+</td>
+<td class="py-4 px-2 text-on-surface">09:00 - 10:00</td>
+<td class="py-4 px-2">
+<span class="inline-flex items-center gap-1 bg-primary-fixed px-3 py-1 rounded-full text-on-primary-fixed text-caption font-semibold">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                                            Confirmada
+                                        </span>
+</td>
+<td class="py-4 px-2 text-right">
+<button class="text-on-surface-variant hover:text-primary p-1"><span class="material-symbols-outlined">more_vert</span></button>
+</td>
+</tr>
+<tr class="border-b border-surface-variant hover:bg-surface/50 transition-colors">
+<td class="py-4 px-2 font-semibold text-primary">Carlos Ruiz</td>
+<td class="py-4 px-2">
+<div class="text-on-surface">Dra. Silva</div>
+<div class="text-caption text-on-surface-variant">Limpieza General</div>
+</td>
+<td class="py-4 px-2 text-on-surface">11:30 - 12:15</td>
+<td class="py-4 px-2">
+<span class="inline-flex items-center gap-1 bg-surface-variant px-3 py-1 rounded-full text-on-surface-variant text-caption font-semibold">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+                                            Pendiente
+                                        </span>
+</td>
+<td class="py-4 px-2 text-right">
+<button class="text-on-surface-variant hover:text-primary p-1"><span class="material-symbols-outlined">more_vert</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+<!-- Right Column: Day View Side Panel -->
+<div class="lg:col-span-4">
+<section class="bg-surface-container-lowest rounded-xl border border-surface-variant shadow-sm h-full overflow-hidden flex flex-col">
+<div class="bg-primary px-6 py-4 arch-top">
+<h3 class="font-headline-md text-headline-md text-on-primary">Vista del Día</h3>
+<p class="font-caption text-caption text-primary-fixed-dim">Hoy, 3 de Octubre</p>
+</div>
+<div class="p-6 flex-1 overflow-y-auto flex flex-col gap-4">
+<!-- Timeline Item 1 -->
+<div class="relative pl-6 border-l-2 border-surface-variant pb-6">
+<div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-primary-container border-2 border-surface-container-lowest"></div>
+<div class="text-caption font-bold text-on-surface-variant mb-1">09:00 AM</div>
+<div class="bg-surface rounded-lg p-4 border border-surface-variant">
+<div class="flex justify-between items-start mb-2">
+<div class="font-semibold text-primary">Ana García</div>
+<span class="material-symbols-outlined text-primary text-[18px]">sms</span>
+</div>
+<div class="text-caption text-on-surface-variant mb-2">Ortodoncia • Dr. Mendoza</div>
+<span class="inline-flex items-center gap-1 bg-primary-fixed px-2 py-0.5 rounded-full text-on-primary-fixed text-[10px] font-semibold uppercase tracking-wider">
+                                    Confirmada
+                                </span>
+</div>
+</div>
+<!-- Timeline Item 2 -->
+<div class="relative pl-6 border-l-2 border-surface-variant pb-6">
+<div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-surface-variant border-2 border-surface-container-lowest"></div>
+<div class="text-caption font-bold text-on-surface-variant mb-1">11:30 AM</div>
+<div class="bg-surface rounded-lg p-4 border border-surface-variant opacity-75">
+<div class="flex justify-between items-start mb-2">
+<div class="font-semibold text-primary">Carlos Ruiz</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">mail</span>
+</div>
+<div class="text-caption text-on-surface-variant mb-2">Limpieza • Dra. Silva</div>
+<span class="inline-flex items-center gap-1 bg-surface-variant px-2 py-0.5 rounded-full text-on-surface-variant text-[10px] font-semibold uppercase tracking-wider">
+                                    Pendiente
+                                </span>
+</div>
+</div>
+<!-- Timeline Item 3 (In Progress) -->
+<div class="relative pl-6 border-l-2 border-transparent">
+<div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-secondary border-2 border-surface-container-lowest shadow-[0_0_0_2px_#cdddfe]"></div>
+<div class="text-caption font-bold text-secondary mb-1">02:00 PM (Actual)</div>
+<div class="bg-secondary-container rounded-lg p-4 border border-secondary-fixed-dim">
+<div class="flex justify-between items-start mb-2">
+<div class="font-semibold text-on-secondary-container">Elena Torres</div>
+<span class="material-symbols-outlined text-on-secondary-container text-[18px]">phone</span>
+</div>
+<div class="text-caption text-on-secondary-container mb-2">Implante • Dr. Mendoza</div>
+<span class="inline-flex items-center gap-1 bg-secondary px-2 py-0.5 rounded-full text-on-secondary text-[10px] font-semibold uppercase tracking-wider">
+                                    En Progreso
+                                </span>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+<!-- Mobile Bottom Navigation (md:hidden) -->
+<!-- Assuming this is a top-level destination on mobile as well -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full bg-surface-container/80 backdrop-blur-xl shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] z-50 flex justify-around items-center h-16 pb-safe">
+<a class="flex flex-col items-center justify-center p-2 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-caption text-[10px] mt-1">Inicio</span>
+</a>
+<a class="flex flex-col items-center justify-center p-2 text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">calendar_today</span>
+<span class="font-caption text-[10px] mt-1 font-bold">Citas</span>
+</a>
+<a class="flex flex-col items-center justify-center p-2 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-caption text-[10px] mt-1">Pacientes</span>
+</a>
+</nav>
+
+
+
+
+
+
+<script>
+(function() {
+  document.addEventListener('DOMContentLoaded', () => {
+    const loc = window.location.pathname;
+    const isPublic = loc.includes('/public/');
+    const isPatient = loc.includes('/patient/');
+    const prefix = isPublic || isPatient ? '../' : './';
+
+    // Intercept all clicks on links and buttons
+    document.querySelectorAll('a, button, [onclick]').forEach(el => {
+      const text = (el.innerText || el.getAttribute('aria-label') || '').toLowerCase().trim();
+      const currentHref = el.getAttribute('href');
+
+      if (!currentHref || currentHref === '#' || currentHref === '') {
+        if (text.includes('portal del paciente') || text.includes('paciente') || text.includes('mi cuenta') || text.includes('mis citas')) {
+          el.setAttribute('href', prefix + 'patient/index.html');
+        } else if (text.includes('consola de administración') || text.includes('dashboard') || text.includes('administración')) {
+          el.setAttribute('href', prefix + 'staff/dashboard.html');
+        } else if (text.includes('portales') || text.includes('seleccione su portal') || text.includes('admin')) {
+          el.setAttribute('href', prefix + 'staff/admin.html');
+        } else if (text.includes('agendar') || text.includes('reservar') || text.includes('nueva cita')) {
+          el.setAttribute('href', prefix + 'public/reservar.html');
+        } else if (text.includes('agenda semanal') || text.includes('semanal')) {
+          el.setAttribute('href', prefix + 'staff/agenda-semanal.html');
+        } else if (text.includes('calendario') || text.includes('mensual')) {
+          el.setAttribute('href', prefix + 'staff/calendario-mensual.html');
+        } else if (text.includes('citas')) {
+          el.setAttribute('href', prefix + (isPatient ? 'patient/citas.html' : 'staff/citas.html'));
+        } else if (text.includes('consulta') || text.includes('odontograma')) {
+          el.setAttribute('href', prefix + 'staff/consulta.html');
+        } else if (text.includes('ortodoncia')) {
+          el.setAttribute('href', prefix + 'staff/ortodoncia.html');
+        } else if (text.includes('cirugía') || text.includes('implantología')) {
+          el.setAttribute('href', prefix + 'staff/cirugia.html');
+        } else if (text.includes('endodoncia') || text.includes('operatoria')) {
+          el.setAttribute('href', prefix + 'staff/endodoncia.html');
+        } else if (text.includes('rehabilitación') || text.includes('periodoncia')) {
+          el.setAttribute('href', prefix + 'staff/rehabilitacion.html');
+        } else if (text.includes('inventario') || text.includes('insumos')) {
+          el.setAttribute('href', prefix + 'staff/inventario.html');
+        } else if (text.includes('usuarios') || text.includes('personal')) {
+          el.setAttribute('href', prefix + 'staff/usuarios.html');
+        } else if (text.includes('cerrar sesión') || text.includes('salir')) {
+          el.setAttribute('href', prefix + 'patient/login.html');
+        } else if (text.includes('inicio') || text.includes('home')) {
+          el.setAttribute('href', prefix + 'public/index.html');
+        }
+      }
+    });
+  });
+})();
+</script>
+
+
+
+
+
+<!-- Root-Relative Bulletproof Navigation Script -->
+<script>
+(function() {
+  function applyRootLinks() {
+    const loc = window.location.pathname;
+
+    document.querySelectorAll('a, button').forEach(el => {
+      const target = el.tagName === 'A' ? el : el.closest('a');
+      if (!target) return;
+
+      const text = (target.textContent || target.getAttribute('aria-label') || '').toLowerCase().trim();
+
+      // Patient Portal Card or Nav Link
+      if (text.includes('portal del paciente') || (text.includes('paciente') && !text.includes('doctor') && !text.includes('historial'))) {
+        target.href = '/patient/index.html';
+      }
+      // Consola de Administración Card
+      else if (text.includes('consola de administración') || text.includes('dashboard principal')) {
+        target.href = '/staff/dashboard.html';
+      }
+      // Admin Gateway Selector
+      else if (text.includes('seleccione su portal') || text.includes('portales admin')) {
+        target.href = '/staff/admin.html';
+      }
+      // Public / Landing
+      else if (text.includes('sillar dental') && (text.includes('inicio') || text.includes('home'))) {
+        target.href = '/public/index.html';
+      } else if (text.includes('agendar') || text.includes('reservar')) {
+        target.href = '/public/reservar.html';
+      }
+      // Subviews
+      else if (text.includes('agenda semanal') || text.includes('semanal')) {
+        target.href = '/staff/agenda-semanal.html';
+      } else if (text.includes('calendario mensual') || text.includes('mensual')) {
+        target.href = '/staff/calendario-mensual.html';
+      } else if (text.includes('mis citas') || text.includes('citas paciente')) {
+        target.href = '/patient/citas.html';
+      } else if (text.includes('citas') || text.includes('agenda')) {
+        target.href = '/staff/citas.html';
+      } else if (text.includes('consulta') || text.includes('odontograma')) {
+        target.href = '/staff/consulta.html';
+      } else if (text.includes('ortodoncia')) {
+        target.href = '/staff/ortodoncia.html';
+      } else if (text.includes('cirugía') || text.includes('implantología')) {
+        target.href = '/staff/cirugia.html';
+      } else if (text.includes('endodoncia') || text.includes('operatoria')) {
+        target.href = '/staff/endodoncia.html';
+      } else if (text.includes('rehabilitación') || text.includes('periodoncia')) {
+        target.href = '/staff/rehabilitacion.html';
+      } else if (text.includes('inventario') || text.includes('insumos')) {
+        target.href = '/staff/inventario.html';
+      } else if (text.includes('usuarios') || text.includes('personal')) {
+        target.href = '/staff/usuarios.html';
+      } else if (text.includes('cerrar sesión') || text.includes('salir')) {
+        target.href = '/patient/login.html';
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', applyRootLinks);
+  window.addEventListener('load', applyRootLinks);
+})();
+</script>
+
+
+<!-- Persistent Collapsible Sidebar Engine -->
+<script>
+(function() {
+  document.addEventListener('DOMContentLoaded', () => {
+    // Only run on staff pages (excluding admin gateway selector)
+    if (window.location.pathname.includes('/staff/admin')) return;
+
+    const savedState = localStorage.getItem('sd-sidebar-collapsed') === 'true';
+
+    const sidebar = document.createElement('aside');
+    sidebar.id = 'sd-unified-sidebar';
+    sidebar.className = 'fixed top-0 left-0 h-screen z-50 transition-all duration-300 flex flex-col border-r border-white/10 shadow-2xl';
+    sidebar.style.cssText = 'width: ' + (savedState ? '76px' : '260px') + '; background: rgba(5,20,36,0.95); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);';
+
+    const currentPath = window.location.pathname;
+
+    const menuData = [
+      { category: 'Principal' },
+      { title: 'Dashboard Principal', icon: 'dashboard', href: '/staff/dashboard.html' },
+      { title: 'Gestión de Citas', icon: 'calendar_month', href: '/staff/citas.html' },
+      { title: 'Agenda Semanal', icon: 'view_week', href: '/staff/agenda-semanal.html', sub: true },
+      { title: 'Calendario Mensual', icon: 'calendar_view_month', href: '/staff/calendario-mensual.html', sub: true },
+      
+      { category: 'Clínica & Odontograma' },
+      { title: 'Odontograma 52P', icon: 'medical_services', href: '/staff/consulta.html' },
+      { title: 'Odontograma Drag&Drop', icon: 'drag_pan', href: '/staff/odontograma-dragdrop.html', sub: true },
+      
+      { category: 'Especialidades' },
+      { title: 'Ortodoncia', icon: 'orthodontics', href: '/staff/ortodoncia.html' },
+      { title: 'Cirugía e Implantes', icon: 'biomedical', href: '/staff/cirugia.html' },
+      { title: 'Endodoncia & Resinas', icon: 'dentistry', href: '/staff/endodoncia.html' },
+      { title: 'Periodoncia & Prótesis', icon: 'health_and_safety', href: '/staff/rehabilitacion.html' },
+      
+      { category: 'Administración' },
+      { title: 'Inventario & Stock', icon: 'inventory_2', href: '/staff/inventario.html' },
+      { title: 'Usuarios & Personal', icon: 'group', href: '/staff/usuarios.html' }
+    ];
+
+    let itemsHtml = '';
+    menuData.forEach(item => {
+      if (item.category) {
+        itemsHtml += `<div class="sd-sidebar-cat text-[10px] font-bold text-on-surface-variant/50 uppercase tracking-widest px-3 mt-4 mb-1 whitespace-nowrap ${savedState ? 'hidden' : 'block'}">${item.category}</div>`;
+      } else {
+        const isActive = currentPath.includes(item.href.replace('.html', ''));
+        itemsHtml += `
+          <a href="${item.href}" title="${item.title}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all font-label-md text-xs ${item.sub ? 'pl-5 opacity-90' : ''} ${isActive ? 'bg-secondary/15 text-secondary border border-secondary/30 font-bold shadow-[0_0_15px_rgba(70,252,180,0.15)]' : 'text-on-surface-variant hover:bg-white/10 hover:text-on-surface'}">
+            <span class="material-symbols-outlined text-lg shrink-0 ${isActive ? 'text-secondary' : 'opacity-80'}">${item.icon}</span>
+            <span class="sd-sidebar-text whitespace-nowrap font-medium transition-opacity duration-200 ${savedState ? 'hidden' : 'inline'}">${item.title}</span>
+          </a>
+        `;
+      }
+    });
+
+    sidebar.innerHTML = `
+      <!-- Header -->
+      <div class="h-16 px-4 flex items-center justify-between border-b border-white/10 shrink-0">
+        <a href="/staff/admin.html" class="flex items-center gap-2.5 overflow-hidden text-decoration-none">
+          <span class="material-symbols-outlined text-secondary text-2xl shrink-0">diamond</span>
+          <span id="sd-logo-text" class="font-headline-md text-sm text-primary font-bold whitespace-nowrap ${savedState ? 'hidden' : 'inline'}">Sillar Dental</span>
+        </a>
+        <button id="sd-sidebar-toggle" title="Contraer / Expandir Menú" class="p-1.5 rounded-lg text-on-surface-variant hover:bg-white/10 transition-colors flex items-center justify-center">
+          <span id="sd-toggle-icon" class="material-symbols-outlined text-lg">${savedState ? 'chevron_right' : 'chevron_left'}</span>
+        </button>
+      </div>
+
+      <!-- Menu Items -->
+      <div class="flex-1 overflow-y-auto py-3 px-2 space-y-1" style="scrollbar-width: thin;">
+        ${itemsHtml}
+      </div>
+
+      <!-- Footer Switcher -->
+      <div class="p-2 border-t border-white/10 space-y-1 shrink-0">
+        <a href="/patient/index.html" title="Portal Paciente" class="flex items-center gap-2.5 px-3 py-2 rounded-xl bg-secondary/10 text-secondary hover:bg-secondary/20 transition-all font-label-md font-bold text-xs">
+          <span class="material-symbols-outlined text-base shrink-0">person</span>
+          <span class="sd-sidebar-text whitespace-nowrap ${savedState ? 'hidden' : 'inline'}">Portal Paciente</span>
+        </a>
+        <a href="/staff/admin.html" title="Cambiar de Portal" class="flex items-center gap-2.5 px-3 py-2 rounded-xl bg-white/5 text-on-surface-variant hover:bg-white/10 transition-all font-label-md text-xs">
+          <span class="material-symbols-outlined text-base shrink-0">grid_view</span>
+          <span class="sd-sidebar-text whitespace-nowrap ${savedState ? 'hidden' : 'inline'}">Seleccionar Portal</span>
+        </a>
+      </div>
+    `;
+
+    document.body.appendChild(sidebar);
+
+    // Adjust body margin to make room for fixed sidebar
+    function updateBodyMargin(collapsed) {
+      document.body.style.transition = 'padding-left 0.3s ease';
+      document.body.style.paddingLeft = collapsed ? '76px' : '260px';
+    }
+
+    updateBodyMargin(savedState);
+
+    // Toggle Sidebar collapse / expand
+    const toggleBtn = document.getElementById('sd-sidebar-toggle');
+    const toggleIcon = document.getElementById('sd-toggle-icon');
+    const logoText = document.getElementById('sd-logo-text');
+
+    toggleBtn.addEventListener('click', () => {
+      const currentlyCollapsed = sidebar.style.width === '76px';
+      const nextCollapsed = !currentlyCollapsed;
+
+      sidebar.style.width = nextCollapsed ? '76px' : '260px';
+      toggleIcon.textContent = nextCollapsed ? 'chevron_right' : 'chevron_left';
+
+      document.querySelectorAll('.sd-sidebar-text').forEach(el => {
+        el.style.display = nextCollapsed ? 'none' : 'inline';
+      });
+
+      document.querySelectorAll('.sd-sidebar-cat').forEach(el => {
+        el.style.display = nextCollapsed ? 'none' : 'block';
+      });
+
+      if (logoText) logoText.style.display = nextCollapsed ? 'none' : 'inline';
+
+      updateBodyMargin(nextCollapsed);
+      localStorage.setItem('sd-sidebar-collapsed', nextCollapsed);
+    });
+  });
+})();
+</script>
+
+</body></html>

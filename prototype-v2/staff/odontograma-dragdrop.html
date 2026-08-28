@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html class="dark" lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Sillar Dental - Odontograma Digital Interactivo Drag & Drop</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <link href="/styles/unified-upgrade.css" rel="stylesheet"/>
+  <style>
+    .draggable-marker { cursor: grab; user-select: none; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+    .draggable-marker:active { cursor: grabbing; transform: scale(1.08); }
+    .tooth-dropzone { transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; }
+    .tooth-dropzone.drag-over { border-color: #46fcb4 !important; background: rgba(70, 252, 180, 0.15) !important; transform: scale(1.05); }
+    .surface-segment { transition: background-color 0.2s ease; }
+    .surface-segment:hover { background-color: rgba(70, 252, 180, 0.4) !important; }
+  </style>
+</head>
+<body class="min-h-screen bg-[#051424] text-[#d4e4fa] font-['Manrope'] p-6 md:p-8">
+
+  <!-- Header & Toolbar -->
+  <header class="max-w-7xl mx-auto mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 glass-card-luxury p-6 rounded-3xl">
+    <div class="flex items-center gap-4">
+      <div class="w-14 h-14 rounded-2xl bg-secondary/15 border border-secondary/30 flex items-center justify-center text-secondary">
+        <span class="material-symbols-outlined text-3xl">drag_pan</span>
+      </div>
+      <div>
+        <h1 class="text-2xl md:text-3xl font-bold text-white tracking-tight">Odontograma Interactivo Drag & Drop (52 Piezas)</h1>
+        <p class="text-xs text-[#b9c7e4]">Arrastre diagnósticos y tratamientos directamente sobre las piezas dentales del paciente</p>
+      </div>
+    </div>
+    
+    <!-- COP Real-time Index Counters -->
+    <div class="flex items-center gap-3 bg-white/5 p-3 rounded-2xl border border-white/10">
+      <div class="text-center px-3 border-r border-white/10">
+        <span class="block text-[10px] text-red-400 font-bold uppercase">Caries (C)</span>
+        <span id="cop-c-count" class="text-xl font-bold text-white">0</span>
+      </div>
+      <div class="text-center px-3 border-r border-white/10">
+        <span class="block text-[10px] text-blue-400 font-bold uppercase">Obturadas (O)</span>
+        <span id="cop-o-count" class="text-xl font-bold text-white">0</span>
+      </div>
+      <div class="text-center px-3 border-r border-white/10">
+        <span class="block text-[10px] text-purple-400 font-bold uppercase">Perdidas (P)</span>
+        <span id="cop-p-count" class="text-xl font-bold text-white">0</span>
+      </div>
+      <button id="reset-odontogram-btn" class="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-bold text-white transition-all ml-2">
+        Limpiar
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Workstation Layout -->
+  <main class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-4 gap-8">
+
+    <!-- Draggable Condition Palette (Left Sidebar) -->
+    <aside class="lg:col-span-1 glass-card-luxury p-6 rounded-3xl h-fit space-y-6">
+      <div>
+        <h2 class="text-base font-bold text-white mb-1 flex items-center gap-2">
+          <span class="material-symbols-outlined text-secondary">palette</span> Paleta de Diagnóstico
+        </h2>
+        <p class="text-[11px] text-[#b9c7e4]">Arrastre una condición hacia cualquier pieza dental para aplicarla:</p>
+      </div>
+
+      <div class="space-y-3">
+        
+        <!-- Condition 1: Caries -->
+        <div draggable="true" data-condition="caries" data-color="#ef4444" data-type="C" class="draggable-marker flex items-center justify-between p-3.5 rounded-2xl bg-red-500/15 border border-red-500/30 hover:border-red-400">
+          <div class="flex items-center gap-3">
+            <span class="w-4 h-4 rounded-full bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.5)]"></span>
+            <div>
+              <span class="block text-xs font-bold text-white">Caries Activa</span>
+              <span class="block text-[10px] text-red-300">Superficie cavitada</span>
+            </div>
+          </div>
+          <span class="material-symbols-outlined text-sm text-red-400">drag_indicator</span>
+        </div>
+
+        <!-- Condition 2: Resina / Obturación -->
+        <div draggable="true" data-condition="obturada" data-color="#3b82f6" data-type="O" class="draggable-marker flex items-center justify-between p-3.5 rounded-2xl bg-blue-500/15 border border-blue-500/30 hover:border-blue-400">
+          <div class="flex items-center gap-3">
+            <span class="w-4 h-4 rounded-full bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)]"></span>
+            <div>
+              <span class="block text-xs font-bold text-white">Resina / Obturada</span>
+              <span class="block text-[10px] text-blue-300">Restauración estética</span>
+            </div>
+          </div>
+          <span class="material-symbols-outlined text-sm text-blue-400">drag_indicator</span>
+        </div>
+
+        <!-- Condition 3: Corona -->
+        <div draggable="true" data-condition="corona" data-color="#eab308" data-type="O" class="draggable-marker flex items-center justify-between p-3.5 rounded-2xl bg-yellow-500/15 border border-yellow-500/30 hover:border-yellow-400">
+          <div class="flex items-center gap-3">
+            <span class="w-4 h-4 rounded-full bg-yellow-500 shadow-[0_0_10px_rgba(234,179,8,0.5)]"></span>
+            <div>
+              <span class="block text-xs font-bold text-white">Corona Prostética</span>
+              <span class="block text-[10px] text-yellow-300">Fija / Porcelana</span>
+            </div>
+          </div>
+          <span class="material-symbols-outlined text-sm text-yellow-400">drag_indicator</span>
+        </div>
+
+        <!-- Condition 4: Endodoncia -->
+        <div draggable="true" data-condition="endodoncia" data-color="#10b981" data-type="O" class="draggable-marker flex items-center justify-between p-3.5 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 hover:border-emerald-400">
+          <div class="flex items-center gap-3">
+            <span class="w-4 h-4 rounded-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]"></span>
+            <div>
+              <span class="block text-xs font-bold text-white">Endodoncia / Conducto</span>
+              <span class="block text-[10px] text-emerald-300">Tratamiento radicular</span>
+            </div>
+          </div>
+          <span class="material-symbols-outlined text-sm text-emerald-400">drag_indicator</span>
+        </div>
+
+        <!-- Condition 5: Extracción / Perdida -->
+        <div draggable="true" data-condition="perdida" data-color="#a855f7" data-type="P" class="draggable-marker flex items-center justify-between p-3.5 rounded-2xl bg-purple-500/15 border border-purple-500/30 hover:border-purple-400">
+          <div class="flex items-center gap-3">
+            <span class="w-4 h-4 rounded-full bg-purple-500 shadow-[0_0_10px_rgba(168,85,247,0.5)]"></span>
+            <div>
+              <span class="block text-xs font-bold text-white">Extracción / Perdida</span>
+              <span class="block text-[10px] text-purple-300">Pieza ausente</span>
+            </div>
+          </div>
+          <span class="material-symbols-outlined text-sm text-purple-400">drag_indicator</span>
+        </div>
+
+        <!-- Condition 6: Sellante -->
+        <div draggable="true" data-condition="sellante" data-color="#06b6d4" data-type="O" class="draggable-marker flex items-center justify-between p-3.5 rounded-2xl bg-cyan-500/15 border border-cyan-500/30 hover:border-cyan-400">
+          <div class="flex items-center gap-3">
+            <span class="w-4 h-4 rounded-full bg-cyan-500 shadow-[0_0_10px_rgba(6,182,212,0.5)]"></span>
+            <div>
+              <span class="block text-xs font-bold text-white">Sellante Preventivo</span>
+              <span class="block text-[10px] text-cyan-300">Fosas y fisuras</span>
+            </div>
+          </div>
+          <span class="material-symbols-outlined text-sm text-cyan-400">drag_indicator</span>
+        </div>
+
+      </div>
+    </aside>
+
+    <!-- Odontogram Interactive Canvas (Right Section) -->
+    <section class="lg:col-span-3 space-y-6">
+
+      <!-- Superior Archway (Maxilar Superior) -->
+      <div class="glass-card-luxury p-6 rounded-3xl">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-sm font-bold text-white uppercase tracking-wider text-secondary">Maxilar Superior (Piezas 18 - 28)</h3>
+          <span class="text-xs text-[#b9c7e4]">Cuadrantes 1 y 2</span>
+        </div>
+        <div id="teeth-superior-container" class="grid grid-cols-8 md:grid-cols-16 gap-2">
+          <!-- Dynamically generated teeth dropzones -->
+        </div>
+      </div>
+
+      <!-- Inferior Archway (Maxilar Inferior) -->
+      <div class="glass-card-luxury p-6 rounded-3xl">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-sm font-bold text-white uppercase tracking-wider text-secondary">Maxilar Inferior (Piezas 48 - 38)</h3>
+          <span class="text-xs text-[#b9c7e4]">Cuadrantes 4 y 3</span>
+        </div>
+        <div id="teeth-inferior-container" class="grid grid-cols-8 md:grid-cols-16 gap-2">
+          <!-- Dynamically generated teeth dropzones -->
+        </div>
+      </div>
+
+      <!-- Real-time Clinical Procedures Log -->
+      <div class="glass-card-luxury p-6 rounded-3xl">
+        <h3 class="text-base font-bold text-white mb-4 flex items-center gap-2">
+          <span class="material-symbols-outlined text-secondary">assignment</span> Historial de Hallazgos en Consulta
+        </h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs text-[#b9c7e4]">
+            <thead class="bg-white/5 text-white uppercase text-[10px] tracking-wider border-b border-white/10">
+              <tr>
+                <th class="py-2.5 px-4">Pieza</th>
+                <th class="py-2.5 px-4">Diagnóstico / Condición</th>
+                <th class="py-2.5 px-4">Código COP</th>
+                <th class="py-2.5 px-4">Fecha / Hora</th>
+                <th class="py-2.5 px-4 text-right">Acción</th>
+              </tr>
+            </thead>
+            <tbody id="procedure-log-body" class="divide-y divide-white/5">
+              <tr id="empty-log-row">
+                <td colspan="5" class="py-6 text-center text-[#b9c7e4]/60 italic">No se han registrado hallazgos. Arrastre una condición sobre una pieza dental.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Drag & Drop Engine JavaScript -->
+  <script>
+  (function() {
+    const teethSup = [18, 17, 16, 15, 14, 13, 12, 11, 21, 22, 23, 24, 25, 26, 27, 28];
+    const teethInf = [48, 47, 46, 45, 44, 43, 42, 41, 31, 32, 33, 34, 35, 36, 37, 38];
+
+    const copCounts = { C: 0, O: 0, P: 0 };
+    const toothStates = {};
+
+    function renderTeethContainer(containerId, teethList) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      container.innerHTML = '';
+
+      teethList.forEach(num => {
+        const card = document.createElement('div');
+        card.className = 'tooth-dropzone p-2.5 rounded-2xl bg-white/5 border border-white/10 text-center relative flex flex-col justify-between items-center h-28';
+        card.setAttribute('data-tooth-number', num);
+
+        card.innerHTML = `
+          <span class="text-[10px] font-bold text-[#b9c7e4] mb-1">#${num}</span>
+          
+          <!-- Tooth Surface Visual Diagram -->
+          <div class="w-10 h-10 rounded-xl border border-white/20 relative flex items-center justify-center bg-[#0d1c2d] overflow-hidden tooth-canvas-area" style="box-shadow: inset 0 0 10px rgba(0,0,0,0.5);">
+            <div class="absolute inset-1 rounded-lg border border-white/10"></div>
+            <span class="tooth-badge text-[9px] font-extrabold text-white z-10">P${num}</span>
+          </div>
+
+          <span class="tooth-status-label text-[9px] font-bold text-[#b9c7e4]/70 mt-1 truncate max-w-full">Sano</span>
+        `;
+
+        // Attach HTML5 Drag & Drop listeners
+        card.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          card.classList.add('drag-over');
+        });
+
+        card.addEventListener('dragleave', () => {
+          card.classList.remove('drag-over');
+        });
+
+        card.addEventListener('drop', (e) => {
+          e.preventDefault();
+          card.classList.remove('drag-over');
+
+          const condition = e.dataTransfer.getData('condition');
+          const color = e.dataTransfer.getData('color');
+          const type = e.dataTransfer.getData('type');
+          const conditionTitle = e.dataTransfer.getData('title');
+
+          if (condition) {
+            applyConditionToTooth(num, condition, color, type, conditionTitle, card);
+          }
+        });
+
+        container.appendChild(card);
+      });
+    }
+
+    function applyConditionToTooth(toothNum, condition, color, type, title, cardElement) {
+      const canvasArea = cardElement.querySelector('.tooth-canvas-area');
+      const statusLabel = cardElement.querySelector('.tooth-status-label');
+
+      // Previous condition type subtraction if replaced
+      if (toothStates[toothNum]) {
+        const prevType = toothStates[toothNum].type;
+        if (copCounts[prevType] > 0) copCounts[prevType]--;
+      }
+
+      toothStates[toothNum] = { condition, color, type, title };
+
+      // Add to new COP count
+      if (copCounts[type] !== undefined) copCounts[type]++;
+      updateCopCounters();
+
+      // Apply Visual styles
+      canvasArea.style.backgroundColor = color;
+      canvasArea.style.boxShadow = `0 0 15px ${color}80`;
+      statusLabel.textContent = title;
+      statusLabel.style.color = color;
+
+      // Log to clinical table
+      logClinicalProcedure(toothNum, title, type, color);
+    }
+
+    function updateCopCounters() {
+      document.getElementById('cop-c-count').textContent = copCounts.C;
+      document.getElementById('cop-o-count').textContent = copCounts.O;
+      document.getElementById('cop-p-count').textContent = copCounts.P;
+    }
+
+    function logClinicalProcedure(toothNum, title, type, color) {
+      const logBody = document.getElementById('procedure-log-body');
+      const emptyRow = document.getElementById('empty-log-row');
+      if (emptyRow) emptyRow.remove();
+
+      const tr = document.createElement('tr');
+      tr.className = 'hover:bg-white/5 transition-colors';
+      const now = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+      tr.innerHTML = `
+        <td class="py-3 px-4 font-bold text-white">Pieza #${toothNum}</td>
+        <td class="py-3 px-4 font-bold" style="color:${color};">${title}</td>
+        <td class="py-3 px-4"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase" style="background:${color}20; color:${color}; border:1px solid ${color}40;">COP-${type}</span></td>
+        <td class="py-3 px-4 text-[#b9c7e4]/70">${now}</td>
+        <td class="py-3 px-4 text-right">
+          <button onclick="this.closest('tr').remove()" class="text-red-400 hover:text-red-300 font-bold">Eliminar</button>
+        </td>
+      `;
+
+      logBody.prepend(tr);
+    }
+
+    // Attach Dragstart events to markers
+    document.addEventListener('DOMContentLoaded', () => {
+      renderTeethContainer('teeth-superior-container', teethSup);
+      renderTeethContainer('teeth-inferior-container', teethInf);
+
+      document.querySelectorAll('.draggable-marker').forEach(marker => {
+        marker.addEventListener('dragstart', (e) => {
+          e.dataTransfer.setData('condition', marker.getAttribute('data-condition'));
+          e.dataTransfer.setData('color', marker.getAttribute('data-color'));
+          e.dataTransfer.setData('type', marker.getAttribute('data-type'));
+          e.dataTransfer.setData('title', marker.querySelector('span.text-xs').textContent);
+        });
+      });
+
+      document.getElementById('reset-odontogram-btn').addEventListener('click', () => {
+        copCounts.C = 0; copCounts.O = 0; copCounts.P = 0;
+        updateCopCounters();
+        renderTeethContainer('teeth-superior-container', teethSup);
+        renderTeethContainer('teeth-inferior-container', teethInf);
+        document.getElementById('procedure-log-body').innerHTML = `
+          <tr id="empty-log-row">
+            <td colspan="5" class="py-6 text-center text-[#b9c7e4]/60 italic">No se han registrado hallazgos. Arrastre una condición sobre una pieza dental.</td>
+          </tr>
+        `;
+      });
+    });
+  })();
+  </script>
+
+</body>
+</html>

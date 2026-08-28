@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html class="dark" lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Sillar Dental - Portal del Doctor</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <link href="/styles/unified-upgrade.css" rel="stylesheet"/>
+</head>
+<body class="min-h-screen bg-[#051424] text-[#d4e4fa] font-['Manrope'] p-6 md:p-10">
+
+  <!-- Header Banner -->
+  <header class="max-w-7xl mx-auto mb-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 glass-card-luxury p-6 rounded-3xl">
+    <div class="flex items-center gap-4">
+      <div class="w-14 h-14 rounded-2xl bg-secondary/15 border border-secondary/30 flex items-center justify-center text-secondary">
+        <span class="material-symbols-outlined text-3xl">stethoscope</span>
+      </div>
+      <div>
+        <h1 class="text-2xl md:text-3xl font-bold text-white tracking-tight">Portal del Doctor & Especialista</h1>
+        <p class="text-sm text-[#b9c7e4]">Estación de trabajo clínica, gestión de citas del día y odontogramas</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-3">
+      <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-bold">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Doctor Activo
+      </span>
+      <a href="/staff/admin.html" class="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-xs font-bold text-white transition-all">Cambiar Portal</a>
+    </div>
+  </header>
+
+  <!-- Doctor Quick Action Cards -->
+  <main class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+
+    <!-- Card 1: Consulta & Odontograma -->
+    <a href="/staff/consulta.html" class="group glass-card-luxury hover-glow p-8 rounded-3xl flex flex-col justify-between transition-all duration-300">
+      <div>
+        <div class="w-12 h-12 rounded-2xl bg-blue-500/15 border border-blue-500/30 flex items-center justify-center text-blue-400 mb-6">
+          <span class="material-symbols-outlined text-2xl">medical_services</span>
+        </div>
+        <h2 class="text-xl font-bold text-white mb-2 group-hover:text-secondary transition-colors">Odontograma & Consulta 52P</h2>
+        <p class="text-xs text-[#b9c7e4] leading-relaxed">Registro clínico interactivo de 52 piezas, diagnóstico COP y plan de tratamiento.</p>
+      </div>
+      <div class="mt-8 flex items-center justify-between text-xs font-bold text-secondary uppercase tracking-wider">
+        <span>Abrir Ficha Clínica</span>
+        <span class="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward</span>
+      </div>
+    </a>
+
+    <!-- Card 2: Agenda de Citas -->
+    <a href="/staff/citas.html" class="group glass-card-luxury hover-glow p-8 rounded-3xl flex flex-col justify-between transition-all duration-300">
+      <div>
+        <div class="w-12 h-12 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mb-6">
+          <span class="material-symbols-outlined text-2xl">calendar_month</span>
+        </div>
+        <h2 class="text-xl font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">Mi Agenda del Día</h2>
+        <p class="text-xs text-[#b9c7e4] leading-relaxed">Revisión de turnos de pacientes, atención en sillón y reprogramaciones.</p>
+      </div>
+      <div class="mt-8 flex items-center justify-between text-xs font-bold text-emerald-400 uppercase tracking-wider">
+        <span>Ver Citas de Hoy</span>
+        <span class="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward</span>
+      </div>
+    </a>
+
+    <!-- Card 3: Especialidades Clínicas -->
+    <a href="/staff/ortodoncia.html" class="group glass-card-luxury hover-glow p-8 rounded-3xl flex flex-col justify-between transition-all duration-300">
+      <div>
+        <div class="w-12 h-12 rounded-2xl bg-purple-500/15 border border-purple-500/30 flex items-center justify-center text-purple-400 mb-6">
+          <span class="material-symbols-outlined text-2xl">orthodontics</span>
+        </div>
+        <h2 class="text-xl font-bold text-white mb-2 group-hover:text-purple-400 transition-colors">Especialidades Clínicas</h2>
+        <p class="text-xs text-[#b9c7e4] leading-relaxed">Módulos especializados de Ortodoncia, Cirugía, Endodoncia y Periodoncia.</p>
+      </div>
+      <div class="mt-8 flex items-center justify-between text-xs font-bold text-purple-400 uppercase tracking-wider">
+        <span>Ver Especialidades</span>
+        <span class="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward</span>
+      </div>
+    </a>
+
+  </main>
+
+  <!-- Doctor Today's Patient Quick Table -->
+  <section class="max-w-7xl mx-auto glass-card-luxury p-8 rounded-3xl">
+    <div class="flex items-center justify-between mb-6">
+      <h3 class="text-lg font-bold text-white flex items-center gap-2">
+        <span class="material-symbols-outlined text-secondary">groups</span> Pacientes Agendados para Hoy
+      </h3>
+      <a href="/staff/agenda-semanal.html" class="text-xs font-bold text-secondary hover:underline">Ver Agenda Semanal Completa →</a>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="w-full text-left text-xs text-[#b9c7e4]">
+        <thead class="bg-white/5 text-white uppercase text-[10px] tracking-wider border-b border-white/10">
+          <tr>
+            <th class="py-3 px-4">Hora</th>
+            <th class="py-3 px-4">Paciente</th>
+            <th class="py-3 px-4">Tratamiento</th>
+            <th class="py-3 px-4">Sillón / Clínica</th>
+            <th class="py-3 px-4">Estado</th>
+            <th class="py-3 px-4 text-right">Acción</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-white/5">
+          <tr class="hover:bg-white/5 transition-colors">
+            <td class="py-4 px-4 font-bold text-white">09:00 AM</td>
+            <td class="py-4 px-4 font-bold text-white">Carlos Mendoza Ruiz</td>
+            <td class="py-4 px-4">Evaluación Ortodoncia & Alineadores</td>
+            <td class="py-4 px-4">Sillón 01 (Principal)</td>
+            <td class="py-4 px-4"><span class="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-bold">Confirmada</span></td>
+            <td class="py-4 px-4 text-right"><a href="/staff/consulta.html" class="px-3 py-1.5 rounded-lg bg-secondary/15 text-secondary hover:bg-secondary/30 font-bold transition-all">Iniciar Consulta</a></td>
+          </tr>
+          <tr class="hover:bg-white/5 transition-colors">
+            <td class="py-4 px-4 font-bold text-white">10:30 AM</td>
+            <td class="py-4 px-4 font-bold text-white">María Elena Flores</td>
+            <td class="py-4 px-4">Limpieza Profunda & Profilaxis</td>
+            <td class="py-4 px-4">Sillón 02</td>
+            <td class="py-4 px-4"><span class="px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 font-bold">En Espera</span></td>
+            <td class="py-4 px-4 text-right"><a href="/staff/consulta.html" class="px-3 py-1.5 rounded-lg bg-secondary/15 text-secondary hover:bg-secondary/30 font-bold transition-all">Iniciar Consulta</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</body>
+</html>
