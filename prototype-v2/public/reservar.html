@@ -1,366 +1,405 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reserva de Cita en Línea · Sillar Dental</title>
+  <title>Agendar Evaluación 3D · Alínea Studio Yanahuara</title>
+  <meta name="description" content="Reserva tu cita de evaluación dental y escaneo 3D en Yanahuara, Arequipa. Elige especialista, fecha y hora en 4 sencillos pasos.">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
   <link rel="stylesheet" href="../assets/css/base.css">
   <link rel="stylesheet" href="../assets/css/components.css">
+  <link rel="stylesheet" href="../assets/css/tokens.css">
   <style>
-    .stepper { display: flex; justify-content: space-between; margin-bottom: 36px; position: relative; }
-    .stepper::before { content: ""; position: absolute; top: 18px; left: 0; right: 0; height: 2px; background: var(--line); z-index: 1; }
-    .step-item { position: relative; z-index: 2; background: var(--paper); padding: 0 10px; display: flex; flex-direction: column; align-items: center; gap: 6px; }
-    .step-num { width: 36px; height: 36px; border-radius: 50%; background: var(--surface); border: 2px solid var(--line); display: grid; place-items: center; font-weight: 700; font-size: 0.9rem; color: var(--ink-soft); }
-    .step-item.active .step-num { border-color: var(--blue); background: var(--blue); color: white; }
-    .step-label { font-size: 0.8rem; font-weight: 600; color: var(--ink-soft); }
-    .step-item.active .step-label { color: var(--blue-deep); }
-    .time-slot { border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; text-align: center; cursor: pointer; transition: background .15s ease, border-color .15s ease, color .15s ease; font-weight: 600; font-size: 0.88rem; }
-    .time-slot:hover { border-color: var(--blue); background: var(--blue-soft); }
-    .time-slot.selected { border-color: var(--blue); background: var(--blue); color: white; }
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'Source Sans 3', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .booking-wrapper {
+      padding: 50px 0 80px;
+    }
+    .booking-card-main {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-large);
+      padding: 36px;
+      box-shadow: var(--shadow);
+    }
+    .selection-grid {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .selection-item {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .selection-item:hover {
+      border-color: var(--action);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-small);
+    }
+    .selection-item.selected {
+      border-color: var(--action);
+      background: var(--action-soft);
+    }
+    .time-slot-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .time-slot-btn {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-family: var(--mono);
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--ink);
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .time-slot-btn:hover {
+      border-color: var(--action);
+      color: var(--action);
+    }
+    .time-slot-btn.selected {
+      background: var(--action);
+      color: white;
+      border-color: var(--action);
+    }
   </style>
-  <link href="/styles/unified-upgrade.css" rel="stylesheet"/>
 </head>
 <body>
 
   <div id="headerApp"></div>
 
-  <section class="container" style="padding: 50px 0;">
-    <div style="max-width: 800px; margin: 0 auto;">
-      <div style="text-align: center; margin-bottom: 30px;">
-        <span class="eyebrow">Reserva en 4 Pasos</span>
-        <h1>Reserva tu cita médica dental</h1>
-        <p class="muted">Selecciona la especialidad, profesional y horario de preferencia en nuestra sede Yanahuara.</p>
+  <main class="booking-wrapper">
+    <div class="container" style="max-width: 880px;">
+      <div style="text-align: center; margin-bottom: 36px;">
+        <span class="chip chip-success" style="margin-bottom: 8px;">Reserva Rápida en 4 Pasos</span>
+        <h1 style="font-family: var(--display); font-size: clamp(2rem, 3.5vw, 2.6rem); font-weight: 800; margin: 0 0 10px; color: var(--ink);">
+          Agenda tu Evaluación Clínica
+        </h1>
+        <p class="muted" style="margin: 0; font-size: 1.05rem;">
+          Selecciona tu tratamiento, doctor colegiado y horario de preferencia en nuestra sede Yanahuara.
+        </p>
       </div>
 
-      <!-- Stepper Header -->
-      <div class="stepper">
-        <div class="step-item active" id="stepIndicator1">
-          <div class="step-num">1</div>
-          <span class="step-label">Especialidad</span>
+      <!-- Stepper Nav Responsivo -->
+      <div class="stepper-nav">
+        <div class="stepper-pill active" id="stepPill1">
+          <div class="stepper-circle">1</div>
+          <div>
+            <span class="tiny muted block">Paso 1</span>
+            <span class="stepper-title">Tratamiento</span>
+          </div>
         </div>
-        <div class="step-item" id="stepIndicator2">
-          <div class="step-num">2</div>
-          <span class="step-label">Profesional</span>
+        <div class="stepper-pill" id="stepPill2">
+          <div class="stepper-circle">2</div>
+          <div>
+            <span class="tiny muted block">Paso 2</span>
+            <span class="stepper-title">Especialista</span>
+          </div>
         </div>
-        <div class="step-item" id="stepIndicator3">
-          <div class="step-num">3</div>
-          <span class="step-label">Fecha & Hora</span>
+        <div class="stepper-pill" id="stepPill3">
+          <div class="stepper-circle">3</div>
+          <div>
+            <span class="tiny muted block">Paso 3</span>
+            <span class="stepper-title">Fecha & Hora</span>
+          </div>
         </div>
-        <div class="step-item" id="stepIndicator4">
-          <div class="step-num">4</div>
-          <span class="step-label">Confirmación</span>
+        <div class="stepper-pill" id="stepPill4">
+          <div class="stepper-circle">4</div>
+          <div>
+            <span class="tiny muted block">Paso 4</span>
+            <span class="stepper-title">Confirmación</span>
+          </div>
         </div>
       </div>
 
-      <!-- Step Content Card -->
-      <div class="card" id="bookingCard" style="padding: 36px;">
-        <!-- Dynamic Step Content Rendered by JS -->
+      <!-- Card Dinámica del Formulario -->
+      <div class="booking-card-main" id="bookingCard">
+        <!-- Renderizado dinámico vía JavaScript -->
       </div>
     </div>
-  </section>
+  </main>
 
   <div id="footerApp"></div>
 
   <script type="module">
     import { renderPublicHeader, renderPublicFooter, setupHeaderInteractions, showToast } from '../assets/js/components.js';
-    import { CONTENT_V2 } from '../data/content-v2.js';
-    import { SEED_V2 } from '../data/seed-v2.js';
-    import { mockApi } from '../assets/js/mock-api-v2.js';
 
-    document.getElementById("headerApp").innerHTML = renderPublicHeader();
+    document.getElementById("headerApp").innerHTML = renderPublicHeader("reservar");
     document.getElementById("footerApp").innerHTML = renderPublicFooter();
     setupHeaderInteractions();
 
-    let currentStep = 1;
-    let selectedSpecialty = CONTENT_V2.specialties[0];
-    let selectedDoctor = SEED_V2.practitioners[0];
-    let selectedDate = "2026-07-29";
-    let selectedTime = "10:00 AM";
+    const treatments = [
+      { id: "ortodoncia", name: "Ortodoncia & Alineadores Invisibles", desc: "Corrección biomecánica sin brackets metálicos", time: "45 min", badge: "Más Solicitado", icon: "✨" },
+      { id: "implantes", name: "Implantología Dental & Cirugía 3D", desc: "Recuperación de piezas con titanio y tomografía CBCT", time: "60 min", badge: "Cirugía Guiada", icon: "🦷" },
+      { id: "estetica", name: "Diseño de Sonrisa & Carillas", desc: "Lentes de contacto cerámicos y mockup digital", time: "45 min", badge: "Estética", icon: "💎" },
+      { id: "endodoncia", name: "Endodoncia Microscópica / Urgencia", desc: "Alivio del dolor agudo y tratamiento de conductos", time: "60 min", badge: "Urgencias", icon: "⚡" },
+      { id: "ninos", name: "Odontopediatría & Manejo Sin Miedo", desc: "Atención adaptativa, fluorización y sellantes infantiles", time: "30 min", badge: "Infantil", icon: "👶" },
+      { id: "limpieza", name: "Profilaxis & Limpieza Ultrasonido", desc: "Higiene profunda y eliminación de sarro dental", time: "30 min", badge: "Preventivo", icon: "🌿" }
+    ];
 
-    function updateStepIndicators() {
+    const doctors = [
+      { id: "flores", name: "Dra. Ana Flores Vanesa", specialty: "Ortodoncia & Alineadores 3D", cop: "COP 18240", img: "/assets/images/public/team/profesional-dental-referencia-37458046.jpg" },
+      { id: "carpio", name: "Dr. Roberto Carpio Málaga", specialty: "Cirugía Oral & Implantología", cop: "COP 14920", img: "/assets/images/public/team/equipo-dental-clinica-37458124.jpg" },
+      { id: "mendoza", name: "Dra. Sofía Mendoza Salas", specialty: "Odontopediatría & Prevención", cop: "COP 22105", img: "/assets/images/public/services/explicacion-modelo-dental-6627325.jpg" },
+      { id: "any", name: "Primer Especialista Disponible", specialty: "Asignación rápida según tu turno", cop: "Sede Yanahuara", img: "/assets/images/public/technology/evaluacion-dental-digital-5622234.jpg" }
+    ];
+
+    const timeSlots = ["08:30 AM", "09:30 AM", "10:30 AM", "11:30 AM", "03:30 PM", "04:30 PM", "05:30 PM", "06:30 PM"];
+
+    // Leer parámetro URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialSpec = urlParams.get('specialty') || 'ortodoncia';
+
+    let currentStep = 1;
+    let selectedTreatment = treatments.find(t => t.id === initialSpec) || treatments[0];
+    let selectedDoctor = doctors[0];
+    let selectedDate = "2026-08-30";
+    let selectedTime = "04:30 PM";
+
+    function updatePills() {
       for (let i = 1; i <= 4; i++) {
-        const item = document.getElementById(`stepIndicator${i}`);
-        if (i <= currentStep) {
-          item.classList.add("active");
+        const pill = document.getElementById(`stepPill${i}`);
+        if (i === currentStep) {
+          pill.className = "stepper-pill active";
+        } else if (i < currentStep) {
+          pill.className = "stepper-pill active";
         } else {
-          item.classList.remove("active");
+          pill.className = "stepper-pill";
         }
       }
     }
 
     function renderStep() {
-      updateStepIndicators();
+      updatePills();
       const card = document.getElementById("bookingCard");
 
+      // PASO 1: TRATAMIENTO
       if (currentStep === 1) {
         card.innerHTML = `
-          <h3 style="margin-bottom: 20px;">Paso 1: Selecciona la Especialidad</h3>
-          <div style="display: grid; gap: 12px; margin-bottom: 24px;">
-            ${CONTENT_V2.specialties.map(s => `
-              <div class="card" style="padding: 16px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; border-color: ${selectedSpecialty.id === s.id ? 'var(--blue)' : 'var(--line)'}; background: ${selectedSpecialty.id === s.id ? 'var(--blue-soft)' : 'var(--surface)'};" onclick="window.selectSpec('${s.id}')">
-                <div style="display: flex; align-items: center; gap: 14px;">
-                  <span style="font-size: 1.8rem;">${s.icon}</span>
-                  <div>
-                    <h4 style="margin: 0; font-size: 1rem;">${s.name}</h4>
-                    <span class="tiny">${s.tech}</span>
-                  </div>
-                </div>
-                <span class="chip chip-neutral">Seleccionar</span>
-              </div>
-            `).join("")}
-          </div>
-          <div style="text-align: right;">
-            <button class="btn btn-primary" onclick="window.nextStep(2)">Continuar al Paso 2 →</button>
-          </div>
-        `;
-      } else if (currentStep === 2) {
-        card.innerHTML = `
-          <h3 style="margin-bottom: 8px;">Paso 2: Selecciona el Profesional</h3>
-          <p class="muted" style="margin-bottom: 20px;">Especialistas disponibles para ${selectedSpecialty.name}</p>
-          <div style="display: grid; gap: 12px; margin-bottom: 24px;">
-            ${SEED_V2.practitioners.map(d => `
-              <div class="card" style="padding: 16px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; border-color: ${selectedDoctor.id === d.id ? 'var(--blue)' : 'var(--line)'}; background: ${selectedDoctor.id === d.id ? 'var(--blue-soft)' : 'var(--surface)'};" onclick="window.selectDoc('${d.id}')">
-                <div style="display: flex; align-items: center; gap: 14px;">
-                  <img src="${d.photo}" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;">
-                  <div>
-                    <h4 style="margin: 0; font-size: 1rem;">${d.name}</h4>
-                    <span class="tiny">${d.specialty} · ${d.cmp}</span>
-                  </div>
-                </div>
-                <span class="chip chip-neutral">Seleccionar</span>
-              </div>
-            `).join("")}
-          </div>
-          <div style="display: flex; justify-content: space-between;">
-            <button class="btn btn-secondary" onclick="window.nextStep(1)">← Volver</button>
-            <button class="btn btn-primary" onclick="window.nextStep(3)">Continuar a Fecha & Hora →</button>
-          </div>
-        `;
-      } else if (currentStep === 3) {
-        card.innerHTML = `
-          <h3 style="margin-bottom: 8px;">Paso 3: Selecciona Fecha & Hora</h3>
-          <p class="muted" style="margin-bottom: 20px;">Turnos disponibles en Sede Principal Yanahuara con ${selectedDoctor.name}</p>
+          <h2 style="font-family: var(--display); font-size: 1.4rem; margin: 0 0 8px;">Paso 1: Selecciona el Tratamiento</h2>
+          <p class="muted" style="margin-bottom: 24px;">Elige el motivo de tu consulta médica.</p>
 
-          <label class="form-label" style="margin-bottom: 20px;">
-            Fecha de Atención
-            <input type="date" class="form-control" value="${selectedDate}" min="2026-07-26" onchange="window.selectedDate = this.value">
-          </label>
+          <div class="selection-grid">
+            ${treatments.map(t => `
+              <div class="selection-item ${selectedTreatment.id === t.id ? 'selected' : ''}" onclick="window.setTreatment('${t.id}')">
+                <div style="display: flex; align-items: center; gap: 14px;">
+                  <span style="font-size: 1.5rem;">${t.icon}</span>
+                  <div>
+                    <strong style="font-family: var(--display); font-size: 1.05rem; display: block; color: var(--ink);">${t.name}</strong>
+                    <span class="muted" style="font-size: 0.85rem;">${t.desc}</span>
+                  </div>
+                </div>
+                <div style="text-align: right;">
+                  <span class="chip chip-neutral" style="font-size: 0.72rem;">${t.badge}</span>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+
+          <div style="display: flex; justify-content: flex-end; margin-top: 24px;">
+            <button class="btn btn-primary" onclick="window.nextStep()">
+              Continuar al Paso 2 →
+            </button>
+          </div>
+        `;
+      }
+      // PASO 2: ESPECIALISTA
+      else if (currentStep === 2) {
+        card.innerHTML = `
+          <h2 style="font-family: var(--display); font-size: 1.4rem; margin: 0 0 8px;">Paso 2: Elige a tu Especialista</h2>
+          <p class="muted" style="margin-bottom: 24px;">Todos nuestros doctores cuentan con número de colegiatura COP verificado.</p>
+
+          <div class="selection-grid">
+            ${doctors.map(d => `
+              <div class="selection-item ${selectedDoctor.id === d.id ? 'selected' : ''}" onclick="window.setDoctor('${d.id}')">
+                <div style="display: flex; align-items: center; gap: 16px;">
+                  <img src="${d.img}" style="width: 52px; height: 52px; border-radius: 12px; object-fit: cover;">
+                  <div>
+                    <strong style="font-family: var(--display); font-size: 1.05rem; display: block; color: var(--ink);">${d.name}</strong>
+                    <span style="color: var(--action); font-size: 0.85rem; font-weight: 600;">${d.specialty}</span>
+                  </div>
+                </div>
+                <span class="chip chip-success" style="font-family: var(--mono); font-size: 0.72rem;">${d.cop}</span>
+              </div>
+            `).join('')}
+          </div>
+
+          <div style="display: flex; justify-content: space-between; margin-top: 24px;">
+            <button class="btn btn-secondary" onclick="window.prevStep()">← Volver</button>
+            <button class="btn btn-primary" onclick="window.nextStep()">Continuar a Fecha y Hora →</button>
+          </div>
+        `;
+      }
+      // PASO 3: FECHA & HORA
+      else if (currentStep === 3) {
+        card.innerHTML = `
+          <h2 style="font-family: var(--display); font-size: 1.4rem; margin: 0 0 8px;">Paso 3: Selecciona Fecha y Horario</h2>
+          <p class="muted" style="margin-bottom: 24px;">Atención continua de Lunes a Sábado de 8:00 AM a 8:00 PM.</p>
 
           <div style="margin-bottom: 24px;">
-            <label class="form-label" style="margin-bottom: 10px;">Horarios Disponibles</label>
-            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 10px;">
-              ${["08:30 AM", "09:15 AM", "10:00 AM", "11:30 AM", "03:00 PM", "04:30 PM", "05:15 PM"].map(t => `
-                <div class="time-slot ${selectedTime === t ? 'selected' : ''}" onclick="window.selectTime('${t}')">${t}</div>
-              `).join("")}
+            <label style="font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 8px;">Fecha de la Consulta:</label>
+            <input type="date" id="bookingDateInput" value="${selectedDate}" class="form-control" style="font-weight: 600;" onchange="window.setDate(this.value)">
+          </div>
+
+          <div>
+            <label style="font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 8px;">Turnos Disponibles para esta Fecha:</label>
+            <div class="time-slot-grid">
+              ${timeSlots.map(t => `
+                <div class="time-slot-btn ${selectedTime === t ? 'selected' : ''}" onclick="window.setTime('${t}')">
+                  ${t}
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; margin-top: 36px;">
+            <button class="btn btn-secondary" onclick="window.prevStep()">← Volver</button>
+            <button class="btn btn-primary" onclick="window.nextStep()">Continuar a Confirmación →</button>
+          </div>
+        `;
+      }
+      // PASO 4: CONFIRMACIÓN
+      else if (currentStep === 4) {
+        card.innerHTML = `
+          <div style="text-align: center; margin-bottom: 28px;">
+            <div style="width: 56px; height: 56px; background: var(--action-soft); color: var(--action); border-radius: 50%; display: grid; place-items: center; font-size: 1.8rem; margin: 0 auto 14px;">
+              ✓
+            </div>
+            <h2 style="font-family: var(--display); font-size: 1.5rem; margin: 0 0 6px;">Confirma tus Datos de Reserva</h2>
+            <p class="muted" style="font-size: 0.95rem;">Te enviaremos la confirmación instantánea por WhatsApp y correo.</p>
+          </div>
+
+          <div style="background: var(--paper); border: 1px solid var(--line); border-radius: 16px; padding: 24px; margin-bottom: 28px;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+              <div>
+                <span class="tiny muted block">Tratamiento Seleccionado</span>
+                <strong style="color: var(--ink); font-size: 1.05rem;">${selectedTreatment.name}</strong>
+              </div>
+              <div>
+                <span class="tiny muted block">Especialista Asignado</span>
+                <strong style="color: var(--ink); font-size: 1.05rem;">${selectedDoctor.name}</strong>
+              </div>
+              <div>
+                <span class="tiny muted block">Fecha & Turno</span>
+                <strong style="color: var(--action); font-size: 1.05rem;">${selectedDate} · ${selectedTime}</strong>
+              </div>
+              <div>
+                <span class="tiny muted block">Ubicación</span>
+                <strong style="color: var(--ink); font-size: 1.05rem;">Sede Yanahuara (Av. Ejército 712)</strong>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: grid; gap: 16px; margin-bottom: 28px;">
+            <div>
+              <label style="font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 6px;">Nombre y Apellidos:</label>
+              <input type="text" class="form-control" placeholder="Ej. Carlos Mendoza" required id="patientName">
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+              <div>
+                <label style="font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 6px;">WhatsApp / Teléfono:</label>
+                <input type="tel" class="form-control" placeholder="954 123 456" required id="patientPhone">
+              </div>
+              <div>
+                <label style="font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 6px;">Correo Electrónico:</label>
+                <input type="email" class="form-control" placeholder="carlos@email.com" required id="patientEmail">
+              </div>
             </div>
           </div>
 
           <div style="display: flex; justify-content: space-between;">
-            <button class="btn btn-secondary" onclick="window.nextStep(2)">← Volver</button>
-            <button class="btn btn-primary" onclick="window.nextStep(4)">Revisar & Confirmar →</button>
+            <button class="btn btn-secondary" onclick="window.prevStep()">← Modificar Datos</button>
+            <button class="btn btn-primary" onclick="window.confirmBooking()">
+              Confirmar Cita Médica
+            </button>
           </div>
         `;
-      } else if (currentStep === 4) {
-        card.innerHTML = `
-          <h3 style="margin-bottom: 8px;">Paso 4: Confirmación de Cita</h3>
-          <p class="muted" style="margin-bottom: 20px;">Revisa los datos de tu reserva antes de confirmar.</p>
-
-          <div style="background: var(--paper); padding: 20px; border-radius: 12px; margin-bottom: 24px; display: grid; gap: 10px;">
-            <div>🏥 <strong>Sede:</strong> Sillar Dental Yanahuara (Av. Ejército 712)</div>
-            <div>🦷 <strong>Especialidad:</strong> ${selectedSpecialty.name}</div>
-            <div>👨‍⚕️ <strong>Profesional:</strong> ${selectedDoctor.name}</div>
-            <div>📅 <strong>Fecha & Hora:</strong> ${selectedDate} a las ${selectedTime}</div>
-          </div>
-
-          <form id="bookingForm" style="display: grid; gap: 14px; margin-bottom: 24px;">
-            <label class="form-label">
-              Nombre Completo del Paciente *
-              <input type="text" class="form-control" required value="María Quispe Condori">
-            </label>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
-              <label class="form-label">
-                DNI *
-                <input type="text" class="form-control" required value="45892104">
-              </label>
-              <label class="form-label">
-                Teléfono / WhatsApp *
-                <input type="tel" class="form-control" required value="954892104">
-              </label>
-            </div>
-            <button type="submit" class="btn btn-primary" style="width: 100%; min-height: 48px; font-size: 1rem;">Confirmar Reserva de Cita</button>
-          </form>
-
-          <button class="btn btn-secondary" onclick="window.nextStep(3)">← Modificar selección</button>
-        `;
-
-        document.getElementById("bookingForm").addEventListener("submit", (e) => {
-          e.preventDefault();
-          mockApi.updateAppointment("apt_101", {
-            date: selectedDate,
-            time: selectedTime,
-            practitionerName: selectedDoctor.name,
-            reason: selectedSpecialty.name,
-            status: "CONFIRMED"
-          });
-          showToast("Cita reservada correctamente. Se ha actualizado en la cuenta demo.", "success");
-          card.innerHTML = `
-            <div style="text-align: center; padding: 30px 0;">
-              <div style="font-size: 3.5rem; color: var(--green); margin-bottom: 16px;">✓</div>
-              <h2>¡Reserva Confirmada con Éxito!</h2>
-              <p class="muted" style="max-width: 500px; margin: 0 auto 24px;">Tu cita para <strong>${selectedSpecialty.name}</strong> ha sido agendada para el <strong>${selectedDate} a las ${selectedTime}</strong> en la sede Yanahuara.</p>
-              <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-                <a href="../patient/index.html?view=appointments" class="btn btn-primary">Ver cita en Portal Paciente</a>
-                <a href="index.html" class="btn btn-secondary">Volver al Inicio</a>
-              </div>
-            </div>
-          `;
-        });
       }
     }
 
-    window.selectSpec = (id) => {
-      selectedSpecialty = CONTENT_V2.specialties.find(s => s.id === id);
+    window.setTreatment = function(id) {
+      selectedTreatment = treatments.find(t => t.id === id);
       renderStep();
     };
 
-    window.selectDoc = (id) => {
-      selectedDoctor = SEED_V2.practitioners.find(d => d.id === id);
+    window.setDoctor = function(id) {
+      selectedDoctor = doctors.find(d => d.id === id);
       renderStep();
     };
 
-    window.selectTime = (t) => {
-      selectedTime = t;
+    window.setDate = function(date) {
+      selectedDate = date;
+    };
+
+    window.setTime = function(time) {
+      selectedTime = time;
       renderStep();
     };
 
-    window.nextStep = (step) => {
-      currentStep = step;
-      renderStep();
+    window.nextStep = function() {
+      if (currentStep < 4) {
+        currentStep++;
+        renderStep();
+        window.scrollTo({ top: 120, behavior: 'smooth' });
+      }
+    };
+
+    window.prevStep = function() {
+      if (currentStep > 1) {
+        currentStep--;
+        renderStep();
+        window.scrollTo({ top: 120, behavior: 'smooth' });
+      }
+    };
+
+    window.confirmBooking = function() {
+      const name = document.getElementById("patientName")?.value || "Paciente";
+      const card = document.getElementById("bookingCard");
+      card.innerHTML = `
+        <div style="text-align: center; padding: 40px 20px;">
+          <div style="width: 72px; height: 72px; background: var(--action-soft); color: var(--action); border-radius: 50%; display: grid; place-items: center; font-size: 2.2rem; margin: 0 auto 20px;">
+            🎉
+          </div>
+          <h2 style="font-family: var(--display); font-size: 1.8rem; margin: 0 0 10px; color: var(--ink);">
+            ¡Cita Confirmada con Éxito!
+          </h2>
+          <p class="muted" style="max-width: 500px; margin: 0 auto 24px; font-size: 1.05rem;">
+            Gracias, <strong>${name}</strong>. Hemos agendado tu evaluación de <strong>${selectedTreatment.name}</strong> para el <strong>${selectedDate} a las ${selectedTime}</strong> con <strong>${selectedDoctor.name}</strong>.
+          </p>
+          <div style="display: flex; justify-content: center; gap: 14px;">
+            <a href="index.html" class="btn btn-secondary">Volver al Inicio</a>
+            <a href="/patient/index.html" class="btn btn-primary">Ver en Portal Paciente</a>
+          </div>
+        </div>
+      `;
+      showToast("Cita médica agendada correctamente", "success");
     };
 
     renderStep();
   </script>
-
-<script>
-(function() {
-  document.addEventListener('DOMContentLoaded', () => {
-    const loc = window.location.pathname;
-    const isPublic = loc.includes('/public/');
-    const isPatient = loc.includes('/patient/');
-    const prefix = isPublic || isPatient ? '../' : './';
-
-    // Intercept all clicks on links and buttons
-    document.querySelectorAll('a, button, [onclick]').forEach(el => {
-      const text = (el.innerText || el.getAttribute('aria-label') || '').toLowerCase().trim();
-      const currentHref = el.getAttribute('href');
-
-      if (!currentHref || currentHref === '#' || currentHref === '') {
-        if (text.includes('portal del paciente') || text.includes('paciente') || text.includes('mi cuenta') || text.includes('mis citas')) {
-          el.setAttribute('href', prefix + 'patient/index.html');
-        } else if (text.includes('consola de administración') || text.includes('dashboard') || text.includes('administración')) {
-          el.setAttribute('href', prefix + 'staff/dashboard.html');
-        } else if (text.includes('portales') || text.includes('seleccione su portal') || text.includes('admin')) {
-          el.setAttribute('href', prefix + 'staff/admin.html');
-        } else if (text.includes('agendar') || text.includes('reservar') || text.includes('nueva cita')) {
-          el.setAttribute('href', prefix + 'public/reservar.html');
-        } else if (text.includes('agenda semanal') || text.includes('semanal')) {
-          el.setAttribute('href', prefix + 'staff/agenda-semanal.html');
-        } else if (text.includes('calendario') || text.includes('mensual')) {
-          el.setAttribute('href', prefix + 'staff/calendario-mensual.html');
-        } else if (text.includes('citas')) {
-          el.setAttribute('href', prefix + (isPatient ? 'patient/citas.html' : 'staff/citas.html'));
-        } else if (text.includes('consulta') || text.includes('odontograma')) {
-          el.setAttribute('href', prefix + 'staff/consulta.html');
-        } else if (text.includes('ortodoncia')) {
-          el.setAttribute('href', prefix + 'staff/ortodoncia.html');
-        } else if (text.includes('cirugía') || text.includes('implantología')) {
-          el.setAttribute('href', prefix + 'staff/cirugia.html');
-        } else if (text.includes('endodoncia') || text.includes('operatoria')) {
-          el.setAttribute('href', prefix + 'staff/endodoncia.html');
-        } else if (text.includes('rehabilitación') || text.includes('periodoncia')) {
-          el.setAttribute('href', prefix + 'staff/rehabilitacion.html');
-        } else if (text.includes('inventario') || text.includes('insumos')) {
-          el.setAttribute('href', prefix + 'staff/inventario.html');
-        } else if (text.includes('usuarios') || text.includes('personal')) {
-          el.setAttribute('href', prefix + 'staff/usuarios.html');
-        } else if (text.includes('cerrar sesión') || text.includes('salir')) {
-          el.setAttribute('href', prefix + 'patient/login.html');
-        } else if (text.includes('inicio') || text.includes('home')) {
-          el.setAttribute('href', prefix + 'public/index.html');
-        }
-      }
-    });
-  });
-})();
-</script>
-
-
-
-
-
-<!-- Root-Relative Bulletproof Navigation Script -->
-<script>
-(function() {
-  function applyRootLinks() {
-    const loc = window.location.pathname;
-
-    document.querySelectorAll('a, button').forEach(el => {
-      const target = el.tagName === 'A' ? el : el.closest('a');
-      if (!target) return;
-
-      const text = (target.textContent || target.getAttribute('aria-label') || '').toLowerCase().trim();
-
-      // Patient Portal Card or Nav Link
-      if (text.includes('portal del paciente') || (text.includes('paciente') && !text.includes('doctor') && !text.includes('historial'))) {
-        target.href = '/patient/index.html';
-      }
-      // Consola de Administración Card
-      else if (text.includes('consola de administración') || text.includes('dashboard principal')) {
-        target.href = '/staff/dashboard.html';
-      }
-      // Admin Gateway Selector
-      else if (text.includes('seleccione su portal') || text.includes('portales admin')) {
-        target.href = '/staff/admin.html';
-      }
-      // Public / Landing
-      else if (text.includes('sillar dental') && (text.includes('inicio') || text.includes('home'))) {
-        target.href = '/public/index.html';
-      } else if (text.includes('agendar') || text.includes('reservar')) {
-        target.href = '/public/reservar.html';
-      }
-      // Subviews
-      else if (text.includes('agenda semanal') || text.includes('semanal')) {
-        target.href = '/staff/agenda-semanal.html';
-      } else if (text.includes('calendario mensual') || text.includes('mensual')) {
-        target.href = '/staff/calendario-mensual.html';
-      } else if (text.includes('mis citas') || text.includes('citas paciente')) {
-        target.href = '/patient/citas.html';
-      } else if (text.includes('citas') || text.includes('agenda')) {
-        target.href = '/staff/citas.html';
-      } else if (text.includes('consulta') || text.includes('odontograma')) {
-        target.href = '/staff/consulta.html';
-      } else if (text.includes('ortodoncia')) {
-        target.href = '/staff/ortodoncia.html';
-      } else if (text.includes('cirugía') || text.includes('implantología')) {
-        target.href = '/staff/cirugia.html';
-      } else if (text.includes('endodoncia') || text.includes('operatoria')) {
-        target.href = '/staff/endodoncia.html';
-      } else if (text.includes('rehabilitación') || text.includes('periodoncia')) {
-        target.href = '/staff/rehabilitacion.html';
-      } else if (text.includes('inventario') || text.includes('insumos')) {
-        target.href = '/staff/inventario.html';
-      } else if (text.includes('usuarios') || text.includes('personal')) {
-        target.href = '/staff/usuarios.html';
-      } else if (text.includes('cerrar sesión') || text.includes('salir')) {
-        target.href = '/patient/login.html';
-      }
-    });
-  }
-
-  document.addEventListener('DOMContentLoaded', applyRootLinks);
-  window.addEventListener('load', applyRootLinks);
-})();
-</script>
-
 </body>
 </html>

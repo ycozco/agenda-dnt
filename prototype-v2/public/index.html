@@ -4,14 +4,13 @@
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
   
-  <title>Alínea Studio · Clínica de Corrección Dental y Alineadores Invisibles en Yanahuara, Arequipa</title>
+  <title>Alínea Studio · Clínica de Corrección Dental & Alineadores en Yanahuara, Arequipa</title>
   <meta name="description" content="Especialistas en corrección dental, ortodoncia invisible y diseño de sonrisa en Yanahuara, Arequipa. Simula tu sonrisa en 3D antes de empezar. Cuotas sin intereses."/>
   <meta name="keywords" content="alineadores invisibles arequipa, ortodoncia arequipa, clinica dental yanahuara, correccion dental, brackets esteticos, brackets zafiro arequipa, diseño de sonrisa arequipa"/>
   <meta name="author" content="Alínea Studio Dental"/>
   <meta name="robots" content="index, follow"/>
   <link rel="canonical" href="http://localhost:8085/public/index.html"/>
 
-  <!-- Google Fonts: Manrope + Source Sans 3 + Fira Code -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -21,146 +20,19 @@
   <link rel="stylesheet" href="../assets/css/tokens.css">
 
   <style>
-    :root {
-      --brand-primary: #007A55;
-      --brand-primary-light: #E6F6F0;
-      --brand-primary-hover: #005F42;
-      --brand-navy: #0A2540;
-      --brand-paper: #FAF9F6;
-      --brand-surface: #FFFFFF;
-      --brand-surface-dim: #F4F3EE;
-      --brand-border: rgba(10, 37, 64, 0.1);
-      --brand-radius: 20px;
-    }
-
-    [data-theme="dark"] {
-      --brand-primary: #10B981;
-      --brand-primary-light: rgba(16, 185, 129, 0.15);
-      --brand-primary-hover: #059669;
-      --brand-navy: #FAF9F6;
-      --brand-paper: #07131F;
-      --brand-surface: #0C1E30;
-      --brand-surface-dim: #051424;
-      --brand-border: rgba(255, 255, 255, 0.1);
-    }
-
-    body {
-      background-color: var(--brand-paper);
-      color: var(--ink);
-      font-family: 'Source Sans 3', sans-serif;
-      margin: 0;
-      padding: 0;
-      line-height: 1.6;
-    }
-
-    /* Barra Superior de Sede Yanahuara */
-    .top-promo-bar {
-      background: var(--brand-navy);
-      color: #ffffff;
-      font-size: 0.84rem;
-      padding: 9px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-family: 'Manrope', sans-serif;
-    }
-    .top-promo-bar a {
-      color: #38bdf8;
-      text-decoration: none;
-      font-weight: 700;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    /* Navegación Clínica Dental */
-    .clinic-nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(250, 249, 246, 0.95);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--brand-border);
-      transition: background 0.2s;
-    }
-    [data-theme="dark"] .clinic-nav {
-      background: rgba(7, 19, 31, 0.95);
-    }
-    .nav-inner {
-      max-width: 1240px;
-      margin: 0 auto;
-      padding: 0 24px;
-      height: 78px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-      color: var(--ink);
-    }
-    .logo-badge {
-      width: 42px;
-      height: 42px;
-      background: var(--brand-primary);
-      color: white;
-      border-radius: 12px;
-      display: grid;
-      place-items: center;
-      font-size: 1.3rem;
-      box-shadow: 0 4px 12px rgba(0, 122, 85, 0.25);
-    }
-    .logo-text-wrap strong {
-      font-family: 'Manrope', sans-serif;
-      font-weight: 800;
-      font-size: 1.25rem;
-      letter-spacing: -0.03em;
-      display: block;
-      line-height: 1.1;
-    }
-    .logo-text-wrap span {
-      font-size: 0.72rem;
-      font-weight: 600;
-      color: var(--ink-soft);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-    .nav-links a {
-      color: var(--ink-soft);
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.94rem;
-      transition: color 0.15s ease;
-    }
-    .nav-links a:hover {
-      color: var(--brand-primary);
-    }
-
     /* Hero Principal de Corrección Dental */
     .hero-correction {
-      padding: 70px 0 80px;
-      background: radial-gradient(circle at 85% 20%, var(--brand-primary-light) 0%, transparent 60%);
-      border-bottom: 1px solid var(--brand-border);
+      padding: 60px 0 70px;
+      background: radial-gradient(circle at 85% 20%, var(--action-soft) 0%, transparent 60%);
+      border-bottom: 1px solid var(--line);
     }
     .hero-container {
-      max-width: 1240px;
+      max-width: 1280px;
       margin: 0 auto;
       padding: 0 24px;
       display: grid;
       grid-template-columns: 1.15fr 0.85fr;
-      gap: 50px;
+      gap: 48px;
       align-items: center;
     }
     .hero-badge-tag {
@@ -168,86 +40,49 @@
       align-items: center;
       gap: 8px;
       padding: 6px 14px;
-      background: var(--brand-surface);
-      border: 1px solid var(--brand-border);
+      background: var(--surface);
+      border: 1px solid var(--line);
       border-radius: 999px;
       font-size: 0.82rem;
       font-weight: 700;
-      color: var(--brand-primary);
-      margin-bottom: 20px;
+      color: var(--action);
+      margin-bottom: 18px;
       box-shadow: var(--shadow-small);
     }
     .hero-heading {
-      font-family: 'Manrope', sans-serif;
-      font-size: clamp(2.4rem, 4.2vw, 3.6rem);
+      font-family: var(--display);
+      font-size: clamp(2.3rem, 4vw, 3.5rem);
       font-weight: 800;
       line-height: 1.12;
       letter-spacing: -0.03em;
-      margin: 0 0 20px;
+      margin: 0 0 18px;
       color: var(--ink);
     }
     .hero-heading span.gradient-text {
-      color: var(--brand-primary);
+      color: var(--action);
     }
     .hero-paragraph {
       font-size: 1.15rem;
       line-height: 1.6;
       color: var(--ink-soft);
-      margin: 0 0 32px;
+      margin: 0 0 30px;
       max-width: 560px;
     }
     .hero-cta-group {
       display: flex;
       flex-wrap: wrap;
-      gap: 16px;
+      gap: 14px;
       align-items: center;
-      margin-bottom: 36px;
-    }
-    .btn-hero-primary {
-      background: var(--brand-primary);
-      color: white;
-      text-decoration: none;
-      padding: 16px 32px;
-      border-radius: 999px;
-      font-weight: 700;
-      font-size: 1rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      box-shadow: 0 8px 24px rgba(0, 122, 85, 0.28);
-      transition: all 0.2s ease;
-    }
-    .btn-hero-primary:hover {
-      background: var(--brand-primary-hover);
-      transform: translateY(-2px);
-      box-shadow: 0 12px 30px rgba(0, 122, 85, 0.35);
-    }
-    .btn-hero-secondary {
-      background: var(--brand-surface);
-      color: var(--ink);
-      text-decoration: none;
-      padding: 16px 26px;
-      border-radius: 999px;
-      font-weight: 700;
-      font-size: 0.95rem;
-      border: 1px solid var(--brand-border);
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.2s ease;
-    }
-    .btn-hero-secondary:hover {
-      border-color: var(--brand-primary);
-      color: var(--brand-primary);
+      margin-bottom: 32px;
     }
 
     /* Tarjeta Interactiva del Hero (Simulador 3D) */
     .hero-interactive-card {
-      background: var(--brand-surface);
-      border: 1px solid var(--brand-border);
+      background: var(--surface);
+      border: 1px solid var(--line);
       border-radius: 28px;
       padding: 24px;
-      box-shadow: 0 20px 48px rgba(10, 37, 64, 0.08);
+      box-shadow: var(--shadow);
       position: relative;
     }
     .card-media-box {
@@ -267,7 +102,7 @@
       bottom: 16px;
       left: 16px;
       right: 16px;
-      background: rgba(10, 37, 64, 0.88);
+      background: rgba(10, 37, 64, 0.9);
       backdrop-filter: blur(12px);
       color: white;
       padding: 12px 18px;
@@ -280,57 +115,40 @@
 
     /* Secciones */
     .clinic-section {
-      padding: 90px 0;
-      border-bottom: 1px solid var(--brand-border);
+      padding: 85px 0;
+      border-bottom: 1px solid var(--line);
     }
     .section-bg-dim {
-      background: var(--brand-surface-dim);
+      background: var(--surface-dim);
     }
     .sec-container {
-      max-width: 1240px;
+      max-width: 1280px;
       margin: 0 auto;
       padding: 0 24px;
     }
     .sec-header {
       text-align: center;
       max-width: 680px;
-      margin: 0 auto 56px;
-    }
-    .sec-tag {
-      display: inline-block;
-      padding: 4px 12px;
-      border-radius: 999px;
-      font-size: 0.76rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      background: var(--brand-primary-light);
-      color: var(--brand-primary);
-      margin-bottom: 12px;
+      margin: 0 auto 50px;
     }
     .sec-title {
-      font-family: 'Manrope', sans-serif;
+      font-family: var(--display);
       font-size: clamp(2rem, 3.2vw, 2.5rem);
       font-weight: 800;
       letter-spacing: -0.02em;
-      margin: 0 0 14px;
+      margin: 10px 0 14px;
       color: var(--ink);
-    }
-    .sec-subtitle {
-      font-size: 1.05rem;
-      color: var(--ink-soft);
-      margin: 0;
     }
 
     /* 1. Selector de Problema / Caso a Corregir */
     .cases-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 22px;
+      gap: 20px;
     }
     .case-card {
-      background: var(--brand-surface);
-      border: 1px solid var(--brand-border);
+      background: var(--surface);
+      border: 1px solid var(--line);
       border-radius: 20px;
       padding: 24px;
       text-decoration: none;
@@ -343,14 +161,14 @@
     .case-card:hover {
       transform: translateY(-4px);
       box-shadow: var(--shadow);
-      border-color: var(--brand-primary);
+      border-color: var(--action);
     }
     .case-icon {
       width: 44px;
       height: 44px;
       border-radius: 12px;
-      background: var(--brand-primary-light);
-      color: var(--brand-primary);
+      background: var(--action-soft);
+      color: var(--action);
       display: grid;
       place-items: center;
       font-size: 1.4rem;
@@ -364,8 +182,8 @@
       gap: 28px;
     }
     .compare-card {
-      background: var(--brand-surface);
-      border: 1px solid var(--brand-border);
+      background: var(--surface);
+      border: 1px solid var(--line);
       border-radius: 24px;
       padding: 32px;
       display: flex;
@@ -374,14 +192,14 @@
       position: relative;
     }
     .compare-card.highlight {
-      border: 2px solid var(--brand-primary);
-      box-shadow: 0 16px 40px rgba(0, 122, 85, 0.12);
+      border: 2px solid var(--action);
+      box-shadow: var(--shadow-elevated);
     }
     .compare-tag {
       position: absolute;
       top: -13px;
       left: 32px;
-      background: var(--brand-primary);
+      background: var(--action);
       color: white;
       font-size: 0.72rem;
       font-weight: 800;
@@ -393,8 +211,8 @@
 
     /* 3. Precios y Cuotas Transparentes */
     .fee-simulator-box {
-      background: var(--brand-surface);
-      border: 1px solid var(--brand-border);
+      background: var(--surface);
+      border: 1px solid var(--line);
       border-radius: 28px;
       padding: 40px;
       box-shadow: var(--shadow);
@@ -411,8 +229,8 @@
       gap: 28px;
     }
     .doc-box {
-      background: var(--brand-surface);
-      border: 1px solid var(--brand-border);
+      background: var(--surface);
+      border: 1px solid var(--line);
       border-radius: 20px;
       overflow: hidden;
       box-shadow: var(--shadow-small);
@@ -430,67 +248,17 @@
       object-fit: cover;
     }
 
-    /* Footer */
-    .clinic-footer {
-      background: var(--brand-navy);
-      color: #ffffff;
-      padding: 60px 0 30px;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    @media (max-width: 960px) {
+    @media (max-width: 980px) {
       .hero-container, .cases-grid, .compare-grid, .fee-simulator-box, .doctors-layout {
         grid-template-columns: 1fr;
-      }
-      .nav-links {
-        display: none;
+        gap: 24px;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Barra Superior de Sede -->
-  <div class="top-promo-bar">
-    <div>
-      📍 <strong>Sede Yanahuara:</strong> Av. Ejército 712 · Abierto hoy hasta las 8:00 PM
-    </div>
-    <div style="display: flex; gap: 20px; align-items: center;">
-      <span>📞 Central: (054) 283-910</span>
-      <a href="saas.html">💼 ¿Eres odontólogo? Ver Software SaaS →</a>
-    </div>
-  </div>
-
-  <!-- Navegación Principal de la Clínica Dental -->
-  <header class="clinic-nav">
-    <div class="nav-inner">
-      <a href="index.html" class="nav-logo">
-        <div class="logo-badge">🦷</div>
-        <div class="logo-text-wrap">
-          <strong>Alínea Studio</strong>
-          <span>Corrección Dental & Alineadores</span>
-        </div>
-      </a>
-
-      <ul class="nav-links">
-        <li><a href="#alineadores">Alineadores Invisibles</a></li>
-        <li><a href="#comparador">Métodos de Corrección</a></li>
-        <li><a href="#precios">Precios & Cuotas</a></li>
-        <li><a href="#especialistas">Ortodoncistas COP</a></li>
-        <li><a href="contacto.html">Sede Yanahuara</a></li>
-        <li><a href="/patient/index.html" style="color: var(--brand-primary); font-weight: 700;">Portal Paciente ↗</a></li>
-      </ul>
-
-      <div style="display: flex; align-items: center; gap: 12px;">
-        <button id="themeToggleBtn" class="btn btn-secondary btn-small" style="border-radius: 999px;">
-          🌓 Modo
-        </button>
-        <a href="reservar.html?specialty=ortodoncia" class="btn btn-primary btn-small" style="font-weight: 700; border-radius: 999px; padding: 0 20px;">
-          Agendar Evaluación 3D
-        </a>
-      </div>
-    </div>
-  </header>
+  <div id="headerApp"></div>
 
   <main>
     <!-- HERO PRINCIPAL B2C -->
@@ -508,10 +276,10 @@
           </p>
 
           <div class="hero-cta-group">
-            <a href="reservar.html?specialty=ortodoncia" class="btn-hero-primary">
+            <a href="reservar.html?specialty=ortodoncia" class="btn btn-primary" style="padding: 16px 32px; font-size: 1rem; border-radius: 999px;">
               <span>🗓️ Agendar Evaluación + Escaneo 3D</span>
             </a>
-            <a href="https://wa.me/51954123456" target="_blank" class="btn-hero-secondary">
+            <a href="https://wa.me/51954123456" target="_blank" class="btn btn-secondary" style="padding: 16px 26px; font-size: 0.95rem; border-radius: 999px;">
               <span>💬 WhatsApp Yanahuara</span>
             </a>
           </div>
@@ -526,7 +294,7 @@
         <!-- Tarjeta Interactiva del Hero -->
         <div class="hero-interactive-card">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
-            <span style="font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 0.95rem;">Simulación Digital iTero 3D</span>
+            <span style="font-family: var(--display); font-weight: 800; font-size: 0.95rem;">Simulación Digital iTero 3D</span>
             <span class="chip chip-success" style="font-size: 0.72rem;">Caso Real</span>
           </div>
 
@@ -537,13 +305,13 @@
                 <strong style="display: block;">Corrección en 12 Meses</strong>
                 <span style="font-size: 0.75rem; opacity: 0.8;">Sin alambres · Removibles para comer</span>
               </div>
-              <span style="font-family: 'Fira Code', monospace; font-size: 0.8rem; color: #10B981;">100% DISCRETO</span>
+              <span style="font-family: var(--mono); font-size: 0.8rem; color: #10B981;">100% DISCRETO</span>
             </div>
           </div>
 
           <div style="margin-top: 16px; display: flex; justify-content: space-between; align-items: center;">
             <span class="muted" style="font-size: 0.84rem;">Diagnóstico con tomografía computarizada</span>
-            <a href="reservar.html?specialty=ortodoncia" style="color: var(--brand-primary); font-weight: 700; font-size: 0.88rem; text-decoration: none;">
+            <a href="reservar.html?specialty=ortodoncia" style="color: var(--action); font-weight: 700; font-size: 0.88rem; text-decoration: none;">
               Simular mi sonrisa →
             </a>
           </div>
@@ -555,74 +323,74 @@
     <section class="clinic-section">
       <div class="sec-container">
         <div class="sec-header">
-          <span class="sec-tag">Diagnóstico Personalizado</span>
+          <span class="chip chip-success" style="margin-bottom: 8px;">Diagnóstico Personalizado</span>
           <h2 class="sec-title">¿Qué deseas corregir en tu sonrisa?</h2>
-          <p class="sec-subtitle">Nuestros especialistas corrigen cada caso con biomecánica digital de máxima precisión.</p>
+          <p class="muted">Nuestros especialistas corrigen cada caso con biomecánica digital de máxima precisión.</p>
         </div>
 
         <div class="cases-grid">
           <div class="case-card">
             <div>
               <div class="case-icon">🦷</div>
-              <h3 style="font-size: 1.15rem; margin: 0 0 8px; font-family: 'Manrope', sans-serif;">Dientes Apiñados o Chuecos</h3>
+              <h3 style="font-size: 1.15rem; margin: 0 0 8px; font-family: var(--display);">Dientes Apiñados o Chuecos</h3>
               <p class="muted" style="font-size: 0.88rem; margin: 0 0 16px;">Falta de espacio y dientes montados que dificultan la higiene y estética.</p>
             </div>
-            <span style="color: var(--brand-primary); font-weight: 700; font-size: 0.84rem;">Alineadores o Brackets →</span>
+            <a href="reservar.html?specialty=ortodoncia" style="color: var(--action); font-weight: 700; font-size: 0.84rem;">Alineadores o Brackets →</a>
           </div>
 
           <div class="case-card">
             <div>
               <div class="case-icon">↔️</div>
-              <h3 style="font-size: 1.15rem; margin: 0 0 8px; font-family: 'Manrope', sans-serif;">Dientes Separados (Diastemas)</h3>
+              <h3 style="font-size: 1.15rem; margin: 0 0 8px; font-family: var(--display);">Dientes Separados (Diastemas)</h3>
               <p class="muted" style="font-size: 0.88rem; margin: 0 0 16px;">Espacios visibles entre los dientes frontales que afectan la simetría.</p>
             </div>
-            <span style="color: var(--brand-primary); font-weight: 700; font-size: 0.84rem;">Cierre de Espacios 3D →</span>
+            <a href="reservar.html?specialty=ortodoncia" style="color: var(--action); font-weight: 700; font-size: 0.84rem;">Cierre de Espacios 3D →</a>
           </div>
 
           <div class="case-card">
             <div>
               <div class="case-icon">⚡</div>
-              <h3 style="font-size: 1.15rem; margin: 0 0 8px; font-family: 'Manrope', sans-serif;">Mordida Cruzada o Abierta</h3>
+              <h3 style="font-size: 1.15rem; margin: 0 0 8px; font-family: var(--display);">Mordida Cruzada o Abierta</h3>
               <p class="muted" style="font-size: 0.88rem; margin: 0 0 16px;">Dificultad para masticar o desgaste prematuro por mal encaje de maxilares.</p>
             </div>
-            <span style="color: var(--brand-primary); font-weight: 700; font-size: 0.84rem;">Ortopedia & Alineación →</span>
+            <a href="reservar.html?specialty=ortodoncia" style="color: var(--action); font-weight: 700; font-size: 0.84rem;">Ortopedia & Alineación →</a>
           </div>
 
           <div class="case-card">
             <div>
               <div class="case-icon">✨</div>
-              <h3 style="font-size: 1.15rem; margin: 0 0 8px; font-family: 'Manrope', sans-serif;">Sonrisa y Piezas Ausentes</h3>
+              <h3 style="font-size: 1.15rem; margin: 0 0 8px; font-family: var(--display);">Sonrisa y Piezas Ausentes</h3>
               <p class="muted" style="font-size: 0.88rem; margin: 0 0 16px;">Combinación de alineación con implantes guiados de titanio y carillas.</p>
             </div>
-            <span style="color: var(--brand-primary); font-weight: 700; font-size: 0.84rem;">Rehabilitación Integral →</span>
+            <a href="reservar.html?specialty=implantes" style="color: var(--action); font-weight: 700; font-size: 0.84rem;">Rehabilitación Integral →</a>
           </div>
         </div>
       </div>
     </section>
 
     <!-- 2. COMPARADOR DE MÉTODOS DE CORRECCIÓN DENTAL -->
-    <section class="clinic-section section-bg-dim" id="comparador">
+    <section class="clinic-section section-bg-dim" id="alineadores">
       <div class="sec-container">
         <div class="sec-header">
-          <span class="sec-tag">Opciones de Tratamiento</span>
+          <span class="chip chip-neutral" style="margin-bottom: 8px;">Opciones de Tratamiento</span>
           <h2 class="sec-title">Encuentra el método ideal para ti</h2>
-          <p class="sec-subtitle">Comparamos transparencia, comodidad y tiempos de cada alternativa clínica.</p>
+          <p class="muted">Comparamos transparencia, comodidad y tiempos de cada alternativa clínica.</p>
         </div>
 
         <div class="compare-grid">
           <!-- Opción 1: Alineadores -->
-          <div class="compare-card highlight" id="alineadores">
+          <div class="compare-card highlight">
             <span class="compare-tag">MÁS POPULAR</span>
             <div>
-              <h3 style="font-family: 'Manrope', sans-serif; font-size: 1.35rem; margin: 0 0 6px;">Alineadores Invisibles</h3>
+              <h3 style="font-family: var(--display); font-size: 1.35rem; margin: 0 0 6px;">Alineadores Invisibles</h3>
               <p class="muted" style="font-size: 0.88rem; margin: 0 0 20px;">Placas transparentes termoformadas que mueven tus dientes gradualmente.</p>
 
-              <div style="font-family: 'Manrope', sans-serif; font-size: 2.2rem; font-weight: 800; color: var(--brand-primary); margin-bottom: 4px;">
+              <div style="font-family: var(--display); font-size: 2.2rem; font-weight: 800; color: var(--action); margin-bottom: 4px;">
                 S/ 170 <span style="font-size: 0.95rem; font-weight: 600; color: var(--ink-soft);">/ mes</span>
               </div>
               <span class="tiny muted">Plan 18 cuotas mensuales sin intereses</span>
 
-              <hr style="border: none; border-top: 1px solid var(--brand-border); margin: 20px 0;">
+              <hr style="border: none; border-top: 1px solid var(--line); margin: 20px 0;">
 
               <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.9rem; display: grid; gap: 10px; color: var(--ink-soft);">
                 <li>✔ <strong>100% Discretos:</strong> Casi invisibles al hablar</li>
@@ -639,15 +407,15 @@
           <!-- Opción 2: Brackets de Zafiro -->
           <div class="compare-card">
             <div>
-              <h3 style="font-family: 'Manrope', sans-serif; font-size: 1.35rem; margin: 0 0 6px;">Brackets de Zafiro / Cerámicos</h3>
+              <h3 style="font-family: var(--display); font-size: 1.35rem; margin: 0 0 6px;">Brackets de Zafiro / Cerámicos</h3>
               <p class="muted" style="font-size: 0.88rem; margin: 0 0 20px;">Brackets transparentes de cristal de zafiro de alta estética y fijación.</p>
 
-              <div style="font-family: 'Manrope', sans-serif; font-size: 2.2rem; font-weight: 800; color: var(--ink); margin-bottom: 4px;">
+              <div style="font-family: var(--display); font-size: 2.2rem; font-weight: 800; color: var(--ink); margin-bottom: 4px;">
                 S/ 140 <span style="font-size: 0.95rem; font-weight: 600; color: var(--ink-soft);">/ mes</span>
               </div>
               <span class="tiny muted">Plan 18 cuotas mensuales</span>
 
-              <hr style="border: none; border-top: 1px solid var(--brand-border); margin: 20px 0;">
+              <hr style="border: none; border-top: 1px solid var(--line); margin: 20px 0;">
 
               <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.9rem; display: grid; gap: 10px; color: var(--ink-soft);">
                 <li>✔ <strong>Estética cristalina:</strong> Se mimetizan con el diente</li>
@@ -664,15 +432,15 @@
           <!-- Opción 3: Brackets Autoligados -->
           <div class="compare-card">
             <div>
-              <h3 style="font-family: 'Manrope', sans-serif; font-size: 1.35rem; margin: 0 0 6px;">Brackets Autoligados</h3>
+              <h3 style="font-family: var(--display); font-size: 1.35rem; margin: 0 0 6px;">Brackets Autoligados</h3>
               <p class="muted" style="font-size: 0.88rem; margin: 0 0 20px;">Tecnología sin ligas elásticas que reduce la fricción y acelera el movimiento.</p>
 
-              <div style="font-family: 'Manrope', sans-serif; font-size: 2.2rem; font-weight: 800; color: var(--ink); margin-bottom: 4px;">
+              <div style="font-family: var(--display); font-size: 2.2rem; font-weight: 800; color: var(--ink); margin-bottom: 4px;">
                 S/ 120 <span style="font-size: 0.95rem; font-weight: 600; color: var(--ink-soft);">/ mes</span>
               </div>
               <span class="tiny muted">Plan 18 cuotas mensuales</span>
 
-              <hr style="border: none; border-top: 1px solid var(--brand-border); margin: 20px 0;">
+              <hr style="border: none; border-top: 1px solid var(--line); margin: 20px 0;">
 
               <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.9rem; display: grid; gap: 10px; color: var(--ink-soft);">
                 <li>✔ <strong>Mayor rapidez:</strong> Movimiento continuo eficiente</li>
@@ -694,8 +462,8 @@
       <div class="sec-container">
         <div class="fee-simulator-box">
           <div>
-            <span class="sec-tag">Transparencia Financiera</span>
-            <h2 style="font-family: 'Manrope', sans-serif; font-size: 2.2rem; font-weight: 800; margin: 8px 0 16px; line-height: 1.2;">
+            <span class="chip chip-success" style="margin-bottom: 8px;">Transparencia Financiera</span>
+            <h2 style="font-family: var(--display); font-size: 2.2rem; font-weight: 800; margin: 8px 0 16px; line-height: 1.2;">
               Calcula tu cuota mensual sin sorpresas ni letra chica.
             </h2>
             <p class="muted" style="margin-bottom: 20px; font-size: 1.05rem;">
@@ -708,7 +476,7 @@
             </ul>
           </div>
 
-          <div style="background: var(--brand-surface-dim); border: 1px solid var(--brand-border); border-radius: 20px; padding: 28px;">
+          <div style="background: var(--surface-dim); border: 1px solid var(--line); border-radius: 20px; padding: 28px;">
             <label style="font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 8px;">Tratamiento Seleccionado:</label>
             <select id="calcTreatment" class="form-select" style="font-weight: 600; margin-bottom: 18px;">
               <option value="alineadores" data-total="3600" data-months="18">Alineadores Invisibles Completos (18 cuotas)</option>
@@ -719,14 +487,14 @@
 
             <div style="display: flex; justify-content: space-between; font-size: 0.88rem; font-weight: 700; margin-bottom: 6px;">
               <span>Cuota Inicial (Opcional):</span>
-              <span id="initialDisplay" style="color: var(--brand-primary); font-family: 'Fira Code', monospace;">S/ 500</span>
+              <span id="initialDisplay" style="color: var(--action); font-family: var(--mono);">S/ 500</span>
             </div>
-            <input type="range" id="calcInitial" min="0" max="2000" step="100" value="500" style="width: 100%; accent-color: var(--brand-primary); margin-bottom: 20px;">
+            <input type="range" id="calcInitial" min="0" max="2000" step="100" value="500" style="width: 100%; accent-color: var(--action); margin-bottom: 20px;">
 
-            <div style="background: var(--brand-surface); border: 2px dashed var(--brand-primary); padding: 18px; border-radius: 16px; display: flex; justify-content: space-between; align-items: center;">
+            <div style="background: var(--surface); border: 2px dashed var(--action); padding: 18px; border-radius: 16px; display: flex; justify-content: space-between; align-items: center;">
               <div>
-                <span class="tiny block">Tu Cuota Mensual Estimada:</span>
-                <div id="monthlyDisplay" style="font-family: 'Manrope', sans-serif; font-size: 2rem; font-weight: 800; color: var(--brand-primary); line-height: 1;">
+                <span class="tiny muted block">Tu Cuota Mensual Estimada:</span>
+                <div id="monthlyDisplay" style="font-family: var(--display); font-size: 2rem; font-weight: 800; color: var(--action); line-height: 1;">
                   S/ 172 /mes
                 </div>
                 <span id="monthsDisplay" class="tiny muted">en 18 cuotas fijas</span>
@@ -747,12 +515,12 @@
       <div class="sec-container">
         <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 44px; flex-wrap: wrap; gap: 16px;">
           <div>
-            <span class="sec-tag">Cuerpo Médico Especializado</span>
-            <h2 style="font-family: 'Manrope', sans-serif; font-size: 2.2rem; font-weight: 800; margin: 0;">
+            <span class="chip chip-neutral" style="margin-bottom: 8px;">Cuerpo Médico Especializado</span>
+            <h2 style="font-family: var(--display); font-size: 2.2rem; font-weight: 800; margin: 0;">
               Nuestros Especialistas Colegiados COP
             </h2>
           </div>
-          <a href="equipo.html" style="color: var(--brand-primary); font-weight: 700; text-decoration: none;">
+          <a href="equipo.html" style="color: var(--action); font-weight: 700; text-decoration: none;">
             Ver todo el equipo clínico (8 doctores) →
           </a>
         </div>
@@ -765,9 +533,9 @@
                 <img src="/assets/images/public/team/profesional-dental-referencia-37458046.jpg" alt="Dra. Ana Flores Vanesa - Ortodoncista">
               </div>
               <div style="padding: 24px;">
-                <span class="chip chip-success" style="font-family: 'Fira Code', monospace; font-size: 0.72rem; margin-bottom: 8px;">COP 18240</span>
-                <h3 style="font-family: 'Manrope', sans-serif; font-size: 1.25rem; margin: 0 0 4px;">Dra. Ana Flores Vanesa</h3>
-                <p style="color: var(--brand-primary); font-weight: 700; font-size: 0.88rem; margin: 0 0 8px;">Especialista en Ortodoncia & Alineadores</p>
+                <span class="chip chip-success" style="font-family: var(--mono); font-size: 0.72rem; margin-bottom: 8px;">COP 18240</span>
+                <h3 style="font-family: var(--display); font-size: 1.25rem; margin: 0 0 4px;">Dra. Ana Flores Vanesa</h3>
+                <p style="color: var(--action); font-weight: 700; font-size: 0.88rem; margin: 0 0 8px;">Especialista en Ortodoncia & Alineadores</p>
                 <p class="muted" style="font-size: 0.84rem; margin: 0; line-height: 1.5;">Certificada en biomecánica con alineadores transparentes y tomografía 3D en Arequipa.</p>
               </div>
             </div>
@@ -783,9 +551,9 @@
                 <img src="/assets/images/public/team/equipo-dental-clinica-37458124.jpg" alt="Dr. Roberto Carpio Málaga">
               </div>
               <div style="padding: 24px;">
-                <span class="chip chip-success" style="font-family: 'Fira Code', monospace; font-size: 0.72rem; margin-bottom: 8px;">COP 14920</span>
-                <h3 style="font-family: 'Manrope', sans-serif; font-size: 1.25rem; margin: 0 0 4px;">Dr. Roberto Carpio Málaga</h3>
-                <p style="color: var(--brand-primary); font-weight: 700; font-size: 0.88rem; margin: 0 0 8px;">Cirugía Oral & Implantología 3D</p>
+                <span class="chip chip-success" style="font-family: var(--mono); font-size: 0.72rem; margin-bottom: 8px;">COP 14920</span>
+                <h3 style="font-family: var(--display); font-size: 1.25rem; margin: 0 0 4px;">Dr. Roberto Carpio Málaga</h3>
+                <p style="color: var(--action); font-weight: 700; font-size: 0.88rem; margin: 0 0 8px;">Cirugía Oral & Implantología 3D</p>
                 <p class="muted" style="font-size: 0.84rem; margin: 0; line-height: 1.5;">Especialista en carga inmediata de implantes y rehabilitación estética coordinada.</p>
               </div>
             </div>
@@ -801,9 +569,9 @@
                 <img src="/assets/images/public/services/explicacion-modelo-dental-6627325.jpg" alt="Dra. Sofía Mendoza Salas">
               </div>
               <div style="padding: 24px;">
-                <span class="chip chip-success" style="font-family: 'Fira Code', monospace; font-size: 0.72rem; margin-bottom: 8px;">COP 22105</span>
-                <h3 style="font-family: 'Manrope', sans-serif; font-size: 1.25rem; margin: 0 0 4px;">Dra. Sofía Mendoza Salas</h3>
-                <p style="color: var(--brand-primary); font-weight: 700; font-size: 0.88rem; margin: 0 0 8px;">Odontopediatría & Ortopedia Infantil</p>
+                <span class="chip chip-success" style="font-family: var(--mono); font-size: 0.72rem; margin-bottom: 8px;">COP 22105</span>
+                <h3 style="font-family: var(--display); font-size: 1.25rem; margin: 0 0 4px;">Dra. Sofía Mendoza Salas</h3>
+                <p style="color: var(--action); font-weight: 700; font-size: 0.88rem; margin: 0 0 8px;">Odontopediatría & Ortopedia Infantil</p>
                 <p class="muted" style="font-size: 0.84rem; margin: 0; line-height: 1.5;">Atención temprana de mordidas en niños con manejo lúdico y sin ansiedad.</p>
               </div>
             </div>
@@ -816,68 +584,15 @@
     </section>
   </main>
 
-  <!-- Pie de Página Institucional -->
-  <footer class="clinic-footer">
-    <div class="sec-container">
-      <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 40px; margin-bottom: 40px;">
-        <div>
-          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 14px;">
-            <div class="logo-badge" style="width: 36px; height: 36px; font-size: 1.1rem;">🦷</div>
-            <strong style="font-size: 1.2rem; font-family: 'Manrope', sans-serif;">Alínea Studio</strong>
-          </div>
-          <p style="color: #94a3b8; font-size: 0.88rem; max-width: 320px; line-height: 1.6;">
-            Centro odontológico de precisión y corrección dental digital en Arequipa. Conforme a la norma técnica NTS N.° 188-MINSA.
-          </p>
-          <div style="color: #64748b; font-size: 0.8rem; margin-top: 10px;">
-            RUC: 20601234567 · Alínea Dental E.I.R.L.
-          </div>
-        </div>
+  <div id="footerApp"></div>
 
-        <div>
-          <strong style="display: block; margin-bottom: 12px; font-size: 0.92rem; color: #f1f5f9;">Tratamientos</strong>
-          <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.86rem; display: grid; gap: 8px; color: #94a3b8;">
-            <li><a href="#alineadores" style="color: inherit; text-decoration: none;">Alineadores Invisibles</a></li>
-            <li><a href="#comparador" style="color: inherit; text-decoration: none;">Brackets de Zafiro</a></li>
-            <li><a href="#comparador" style="color: inherit; text-decoration: none;">Brackets Autoligados</a></li>
-            <li><a href="especialidades.html" style="color: inherit; text-decoration: none;">Implantes Dentales 3D</a></li>
-            <li><a href="especialidades.html" style="color: inherit; text-decoration: none;">Diseño de Sonrisa</a></li>
-          </ul>
-        </div>
+  <script type="module">
+    import { renderPublicHeader, renderPublicFooter, setupHeaderInteractions } from '../assets/js/components.js';
 
-        <div>
-          <strong style="display: block; margin-bottom: 12px; font-size: 0.92rem; color: #f1f5f9;">Accesos</strong>
-          <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.86rem; display: grid; gap: 8px; color: #94a3b8;">
-            <li><a href="/patient/index.html" style="color: #10B981; font-weight: 700; text-decoration: none;">Portal Paciente (María Q.)</a></li>
-            <li><a href="saas.html" style="color: #38bdf8; font-weight: 700; text-decoration: none;">Software para Clínicas (SaaS)</a></li>
-            <li><a href="/selector.html" style="color: inherit; text-decoration: none;">Hub de Portales (Selector)</a></li>
-            <li><a href="reservar.html" style="color: inherit; text-decoration: none;">Agendar Cita en Línea</a></li>
-          </ul>
-        </div>
+    document.getElementById("headerApp").innerHTML = renderPublicHeader("inicio");
+    document.getElementById("footerApp").innerHTML = renderPublicFooter();
+    setupHeaderInteractions();
 
-        <div>
-          <strong style="display: block; margin-bottom: 12px; font-size: 0.92rem; color: #f1f5f9;">Sede Yanahuara</strong>
-          <div style="font-size: 0.86rem; color: #94a3b8; display: grid; gap: 6px;">
-            <div>📍 Av. Ejército 712, Yanahuara, Arequipa</div>
-            <div>📞 (054) 283-910</div>
-            <div>💬 +51 954 123 456</div>
-            <div>🕒 Lun - Sáb: 8:00 AM a 8:00 PM</div>
-          </div>
-        </div>
-      </div>
-
-      <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; font-size: 0.8rem; color: #64748b;">
-        <div>© 2026 Alínea Studio Dental. Todos los derechos reservados.</div>
-        <div style="display: flex; gap: 16px;">
-          <span>Boletas Electrónicas Serie B001</span>
-          <span>NTS N.° 188-MINSA</span>
-          <span>Ley N.° 29733 (LPDP)</span>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Script del Simulador de Cuotas y Tema -->
-  <script>
     const calcSelect = document.getElementById('calcTreatment');
     const calcInitial = document.getElementById('calcInitial');
     const initialDisplay = document.getElementById('initialDisplay');
@@ -903,16 +618,6 @@
       calcSelect.addEventListener('change', updateCalculator);
       calcInitial.addEventListener('input', updateCalculator);
       updateCalculator();
-    }
-
-    const themeBtn = document.getElementById('themeToggleBtn');
-    if (themeBtn) {
-      themeBtn.addEventListener('click', () => {
-        const cur = document.documentElement.getAttribute('data-theme') || 'light';
-        const next = cur === 'light' ? 'dark' : 'light';
-        document.documentElement.setAttribute('data-theme', next);
-        localStorage.setItem('sd-theme', next);
-      });
     }
   </script>
 </body>

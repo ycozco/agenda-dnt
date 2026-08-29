@@ -1,36 +1,77 @@
 /**
- * Generadores de componentes reutilizables UI para Sillar Dental v2.
- * Exporta funciones de renderizado HTML puro y helpers de interacción.
+ * Generadores de componentes UI universales para Alínea Studio & Sillar Dental Ecosystem
  */
 
 export function renderBrandLockup(compact = false) {
   return `
-    <a href="../public/index.html" class="brand-lockup" aria-label="Sillar Dental Especialidades">
-      <img class="brand-logo-image" src="../assets/brand/sillar-dental-mark.svg" width="44" height="44" alt="">
-      <div class="brand-text">
-        <span class="brand-name">Sillar Dental</span>
-        ${!compact ? `<span class="brand-sub">Odontología Especializada</span>` : ''}
+    <a href="index.html" class="nav-brand" aria-label="Alínea Studio">
+      <div class="nav-brand-badge">🦷</div>
+      <div class="nav-brand-text">
+        <span class="nav-brand-title">Alínea Studio</span>
+        ${!compact ? `<span class="nav-brand-sub">Corrección Dental & Especialidades</span>` : ''}
       </div>
     </a>
   `;
 }
 
 export function renderPublicHeader(activeNav = "inicio") {
+  const currentTheme = (typeof localStorage !== 'undefined' && localStorage.getItem('sd-theme')) || 'light';
   return `
-    <header class="public-header" id="header">
-      <div class="container public-header-inner">
+    <!-- Top Bar de Sede Yanahuara -->
+    <div class="top-clinic-bar">
+      <div class="container top-clinic-inner">
+        <div class="top-clinic-info">
+          <span>📍 <strong>Sede Yanahuara:</strong> Av. Ejército 712 · Abierto hoy hasta 8:00 PM</span>
+        </div>
+        <div class="top-clinic-actions">
+          <span>📞 (054) 283-910</span>
+          <a href="saas.html" class="top-saas-link">💼 Software SaaS Clínicas →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navegación Principal Responsiva -->
+    <header class="main-header" id="mainHeader">
+      <div class="container main-header-inner">
         ${renderBrandLockup()}
-        <nav class="public-nav" id="publicNav" aria-label="Navegación principal">
-          <a href="index.html" class="public-nav-link ${activeNav === 'inicio' ? 'active' : ''}">Inicio</a>
-          <a href="especialidades.html" class="public-nav-link ${activeNav === 'especialidades' ? 'active' : ''}">Especialidades</a>
-          <a href="equipo.html" class="public-nav-link ${activeNav === 'equipo' ? 'active' : ''}">Equipo médico</a>
-          <a href="tecnologia.html" class="public-nav-link ${activeNav === 'tecnologia' ? 'active' : ''}">Tecnología</a>
-          <a href="contacto.html" class="public-nav-link ${activeNav === 'contacto' ? 'active' : ''}">Contacto</a>
+
+        <nav class="main-nav" id="mainNav" aria-label="Navegación principal">
+          <a href="index.html" class="nav-item ${activeNav === 'inicio' ? 'active' : ''}">Inicio</a>
+          <a href="index.html#alineadores" class="nav-item">Alineadores 3D</a>
+          <a href="especialidades.html" class="nav-item ${activeNav === 'especialidades' ? 'active' : ''}">Tratamientos</a>
+          <a href="equipo.html" class="nav-item ${activeNav === 'equipo' ? 'active' : ''}">Especialistas COP</a>
+          <a href="tecnologia.html" class="nav-item ${activeNav === 'tecnologia' ? 'active' : ''}">Tecnología 3D</a>
+          <a href="contacto.html" class="nav-item ${activeNav === 'contacto' ? 'active' : ''}">Sede Yanahuara</a>
         </nav>
-        <div class="public-header-actions">
-          <a href="../patient/login.html?v=3" class="header-portal-link">Portal Paciente</a>
-          <a href="reservar.html" class="btn btn-primary btn-small">Reservar evaluación</a>
-          <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Abrir menú">☰</button>
+
+        <div class="main-header-cta">
+          <button id="themeToggleGlobalBtn" class="theme-toggle-pill" aria-label="Cambiar Tema">
+            🌓 <span class="theme-label">${currentTheme === 'dark' ? 'Oscuro' : 'Claro'}</span>
+          </button>
+          <a href="/patient/index.html" class="portal-patient-link">Portal Paciente ↗</a>
+          <a href="reservar.html" class="btn btn-primary btn-small header-book-btn">Agendar Evaluación 3D</a>
+          <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir Menú Móvil">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Menú Móvil Desplegable -->
+      <div class="mobile-drawer" id="mobileDrawer">
+        <a href="index.html" class="mobile-drawer-link">🏠 Inicio</a>
+        <a href="index.html#alineadores" class="mobile-drawer-link">✨ Alineadores Invisibles</a>
+        <a href="especialidades.html" class="mobile-drawer-link">🩺 Catálogo de Tratamientos</a>
+        <a href="equipo.html" class="mobile-drawer-link">👨‍⚕️ Especialistas Colegiados COP</a>
+        <a href="tecnologia.html" class="mobile-drawer-link">🔬 Tecnología 3D & Tomografía</a>
+        <a href="contacto.html" class="mobile-drawer-link">📍 Sede Yanahuara & Mapa</a>
+        <a href="/patient/index.html" class="mobile-drawer-link" style="color: var(--action); font-weight: 700;">👤 Portal Paciente</a>
+        <a href="saas.html" class="mobile-drawer-link" style="color: #0284c7; font-weight: 700;">💼 Software SaaS para Clínicas</a>
+        <div style="padding: 16px;">
+          <a href="reservar.html" class="btn btn-primary" style="width: 100%; text-align: center; justify-content: center; border-radius: 999px;">
+            Agendar Evaluación 3D
+          </a>
         </div>
       </div>
     </header>
@@ -39,37 +80,60 @@ export function renderPublicHeader(activeNav = "inicio") {
 
 export function renderPublicFooter() {
   return `
-    <footer style="background: var(--ink); color: white; padding: 60px 0 30px; margin-top: 80px;">
-      <div class="container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 40px;">
+    <footer class="universal-footer">
+      <div class="container footer-grid">
         <div>
-          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
-            <img src="../assets/brand/sillar-dental-mark.svg" width="40" height="40" alt="">
-            <span style="font-family: var(--display); font-size: 1.3rem; font-weight: 600;">Sillar Dental</span>
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 14px;">
+            <div style="width: 38px; height: 38px; background: var(--action); color: white; border-radius: 10px; display: grid; place-items: center; font-size: 1.2rem;">🦷</div>
+            <span style="font-family: var(--display); font-size: 1.25rem; font-weight: 800; color: white;">Alínea Studio</span>
           </div>
-          <p style="color: var(--ink-faint); font-size: 0.88rem; line-height: 1.6;">Atención odontológica integral de alta precisión en Arequipa. Diagnóstico digital y tratamientos multidisciplinarios.</p>
+          <p style="color: #94a3b8; font-size: 0.88rem; line-height: 1.6; max-width: 320px;">
+            Centro odontológico boutique de corrección dental y estética en Yanahuara, Arequipa. Conforme a la norma NTS N.° 188-MINSA.
+          </p>
+          <div style="color: #64748b; font-size: 0.8rem; margin-top: 10px;">
+            RUC: 20601234567 · Alínea Dental E.I.R.L.
+          </div>
         </div>
+
         <div>
-          <h4 style="color: white; margin-bottom: 16px; font-size: 0.95rem;">Sede Arequipa</h4>
-          <p style="color: var(--ink-faint); font-size: 0.88rem; margin-bottom: 8px;">📍 Av. Ejército 712, Yanahuara</p>
-          <p style="color: var(--ink-faint); font-size: 0.88rem; margin-bottom: 8px;">📞 (054) 283-910 / +51 954 123 456</p>
-          <p style="color: var(--ink-faint); font-size: 0.88rem;">🕒 Lun - Sáb: 8:00 AM - 8:00 PM</p>
-        </div>
-        <div>
-          <h4 style="color: white; margin-bottom: 16px; font-size: 0.95rem;">Accesos Rápidos</h4>
-          <ul style="list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; font-size: 0.88rem; color: var(--ink-faint);">
-            <li><a href="especialidades.html">Nuestras Especialidades</a></li>
-            <li><a href="equipo.html">Plana Docente & Médica</a></li>
-            <li><a href="reservar.html">Reserva tu Cita</a></li>
-            <li><a href="../patient/login.html?v=3">Portal de Paciente (María Quispe)</a></li>
-            <li><a href="../staff/login.html">Consola administrativa</a></li>
-            <li><a href="../mobile/patient-flows.html#home">Aplicación móvil paciente</a></li>
-            <li><a href="../mobile/control.html">Control móvil / carga de resultados</a></li>
+          <h4 style="color: white; margin: 0 0 14px; font-size: 0.95rem;">Corrección Dental</h4>
+          <ul style="list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; font-size: 0.86rem; color: #94a3b8;">
+            <li><a href="index.html#alineadores">Alineadores Invisibles</a></li>
+            <li><a href="especialidades.html">Brackets de Zafiro</a></li>
+            <li><a href="especialidades.html">Brackets Autoligados</a></li>
+            <li><a href="especialidades.html">Implantes Dentales 3D</a></li>
+            <li><a href="especialidades.html">Diseño Digital de Sonrisa</a></li>
           </ul>
         </div>
+
+        <div>
+          <h4 style="color: white; margin: 0 0 14px; font-size: 0.95rem;">Accesos Directos</h4>
+          <ul style="list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; font-size: 0.86rem; color: #94a3b8;">
+            <li><a href="/patient/index.html" style="color: #10B981; font-weight: 700;">Portal Paciente (María Q.)</a></li>
+            <li><a href="saas.html" style="color: #38bdf8; font-weight: 700;">Software SaaS para Clínicas</a></li>
+            <li><a href="reservar.html">Agendar Cita en Línea</a></li>
+            <li><a href="/selector.html">Hub de Vistas (Selector)</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 style="color: white; margin: 0 0 14px; font-size: 0.95rem;">Sede Yanahuara</h4>
+          <div style="font-size: 0.86rem; color: #94a3b8; display: grid; gap: 6px;">
+            <div>📍 Av. Ejército 712, Yanahuara, Arequipa</div>
+            <div>📞 (054) 283-910</div>
+            <div>💬 +51 954 123 456</div>
+            <div>🕒 Lun - Sáb: 8:00 AM a 8:00 PM</div>
+          </div>
+        </div>
       </div>
-      <div class="container" style="border-top: 1px solid rgba(255,255,255,0.1); margin-top: 40px; padding-top: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; font-size: 0.78rem; color: var(--ink-faint);">
-        <div>© 2026 Sillar Dental Especialidades · Arequipa, Perú. Prototipo v2 Demostrativo.</div>
-        <div>Fotos e identidades son referencias ficticias.</div>
+
+      <div class="container footer-bottom">
+        <div>© 2026 Alínea Studio Dental. Todos los derechos reservados.</div>
+        <div style="display: flex; gap: 16px;">
+          <span>Boletas Electrónicas Serie B001</span>
+          <span>NTS N.° 188-MINSA</span>
+          <span>Ley N.° 29733 (LPDP)</span>
+        </div>
       </div>
     </footer>
   `;
@@ -81,8 +145,6 @@ export function showToast(message, type = "info") {
     container = document.createElement("div");
     container.id = "toastContainer";
     container.className = "toast-container";
-    container.setAttribute("aria-live", "polite");
-    container.setAttribute("aria-atomic", "true");
     document.body.appendChild(container);
   }
   const toast = document.createElement("div");
@@ -91,35 +153,31 @@ export function showToast(message, type = "info") {
   container.appendChild(toast);
   setTimeout(() => {
     toast.style.opacity = '0';
-    toast.style.transform = 'translateY(10px)';
     setTimeout(() => toast.remove(), 250);
   }, 3200);
 }
 
 export function setupHeaderInteractions() {
-  const toggleBtn = document.getElementById("mobileNavToggle");
-  const nav = document.getElementById("publicNav");
-  if (toggleBtn && nav) {
-    toggleBtn.addEventListener("click", () => {
-      nav.classList.toggle("open");
+  // Mobile drawer toggle
+  const menuBtn = document.getElementById("mobileMenuBtn");
+  const drawer = document.getElementById("mobileDrawer");
+  if (menuBtn && drawer) {
+    menuBtn.addEventListener("click", () => {
+      drawer.classList.toggle("active");
+      menuBtn.classList.toggle("open");
     });
   }
-}
 
-// El sistema visual usa marcadores SVG/textuales consistentes; limpia iconos emoji
-// que hayan quedado en datos demo o copy antiguo sin modificar el contenido clínico.
-export function sanitizeDecorativeIcons(root = document) {
-  root.querySelectorAll("body *").forEach((element) => {
-    if (element.children.length === 0 && element.textContent) {
-      element.textContent = element.textContent
-        .replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/gu, "")
-        .replace(/^\s*[·•]\s*/u, "")
-        .replace(/\s{2,}/g, " ")
-        .trim();
-    }
-  });
-}
-
-if (typeof document !== "undefined") {
-  window.setTimeout(() => sanitizeDecorativeIcons(), 80);
+  // Theme toggle button
+  const themeBtn = document.getElementById("themeToggleGlobalBtn");
+  if (themeBtn) {
+    themeBtn.addEventListener("click", () => {
+      const cur = document.documentElement.getAttribute("data-theme") || "light";
+      const next = cur === "light" ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", next);
+      localStorage.setItem("sd-theme", next);
+      const label = themeBtn.querySelector(".theme-label");
+      if (label) label.textContent = next === "dark" ? "Oscuro" : "Claro";
+    });
+  }
 }
