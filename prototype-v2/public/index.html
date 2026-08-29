@@ -22,7 +22,7 @@
   <style>
     
 /* ==========================================================================
-   ALÍNEA STUDIO - SISTEMA DE DISEÑO BLINDADO (TOKENS + BASE + NAVBAR + GRID)
+   ALÍNEA STUDIO - SISTEMA DE DISEÑO RESPONSIVO, CARROUSEL & DRAWER MÓVIL
    ========================================================================== */
 
 :root, [data-theme="light"] {
@@ -152,14 +152,14 @@ h1, h2, h3 {
 }
 
 h1 {
-  font-size: clamp(2.4rem, 4.4vw, 3.8rem);
+  font-size: clamp(2rem, 5.2vw, 3.8rem);
   line-height: 1.12;
   font-weight: 800;
 }
 
 h2 {
-  font-size: clamp(1.8rem, 3vw, 2.6rem);
-  line-height: 1.15;
+  font-size: clamp(1.7rem, 3.2vw, 2.6rem);
+  line-height: 1.18;
   font-weight: 800;
 }
 
@@ -168,11 +168,10 @@ h3 {
   font-weight: 700;
 }
 
-/* Contenedor 100% Fluido con Paddings Fluidos */
 .container-fluid {
   width: 100%;
-  padding-left: clamp(24px, 4vw, 72px);
-  padding-right: clamp(24px, 4vw, 72px);
+  padding-left: clamp(16px, 4vw, 64px);
+  padding-right: clamp(16px, 4vw, 64px);
   margin-left: auto;
   margin-right: auto;
 }
@@ -180,27 +179,48 @@ h3 {
 .muted { color: var(--ink-soft); }
 .tiny { color: var(--ink-faint); font-size: 0.82rem; }
 
-/* 1. Top Bar Yanahuara */
-.top-clinic-bar {
+/* 1. Panel Publicitario Carrusel Superior (Delgado & Auto-Avanzable) */
+.promo-carousel-bar {
   background: var(--ink);
   color: #FFFFFF;
-  font-size: 0.85rem;
+  font-size: 0.84rem;
   font-family: var(--display);
-  padding: 9px 0;
+  height: 38px;
+  overflow: hidden;
+  position: relative;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
-[data-theme="dark"] .top-clinic-bar {
+[data-theme="dark"] .promo-carousel-bar {
   background: #02070F;
 }
-.top-clinic-flex {
+.promo-slides-wrapper {
+  height: 100%;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.promo-slide {
+  height: 38px;
+  min-height: 38px;
+  display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
+  justify-content: center;
+  text-align: center;
+  padding: 0 16px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.promo-slide a {
+  color: #38bdf8;
+  font-weight: 700;
+  margin-left: 8px;
+}
+.promo-slide a:hover {
+  text-decoration: underline;
 }
 
-/* 2. Navbar Moderno de 3 Zonas */
+/* 2. Navbar Moderno con Soporte Móvil y Desktop */
 .main-header {
   position: sticky;
   top: 0;
@@ -219,24 +239,23 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 82px;
-  gap: 20px;
+  height: 76px;
+  gap: 16px;
 }
 
-/* Zona 1: Marca */
+/* Zona Marca */
 .nav-brand-zone {
   display: flex;
   align-items: center;
   gap: 12px;
   flex-shrink: 0;
   text-decoration: none;
-  min-width: 240px;
 }
 .nav-brand-svg {
-  width: 44px;
-  height: 44px;
-  min-width: 44px;
-  min-height: 44px;
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  min-height: 42px;
   background: var(--action);
   color: white;
   border-radius: 12px;
@@ -247,8 +266,6 @@ h3 {
 .nav-brand-svg svg {
   width: 24px;
   height: 24px;
-  max-width: 24px;
-  max-height: 24px;
   fill: none;
   stroke: currentColor;
   stroke-width: 2;
@@ -261,30 +278,30 @@ h3 {
 .nav-brand-title {
   font-family: var(--display);
   font-weight: 800;
-  font-size: 1.28rem;
+  font-size: 1.25rem;
   letter-spacing: -0.02em;
   color: var(--ink);
 }
 .nav-brand-sub {
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 600;
   color: var(--ink-soft);
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
 
-/* Zona 2: Enlaces Centrales */
+/* Zona Central: Enlaces Desktop */
 .nav-center-zone {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 28px;
+  gap: 24px;
   flex: 1;
 }
 .nav-link-item {
   color: var(--ink-soft);
   font-weight: 600;
-  font-size: 0.94rem;
+  font-size: 0.92rem;
   padding: 8px 12px;
   border-radius: var(--radius-pill);
   transition: all 0.18s ease;
@@ -295,22 +312,21 @@ h3 {
   background: var(--action-soft);
 }
 
-/* Zona 3: Acciones */
+/* Zona Derecha: Acciones Desktop */
 .nav-action-zone {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 14px;
+  gap: 12px;
   flex-shrink: 0;
-  min-width: 320px;
 }
 .theme-pill-btn {
-  padding: 8px 16px;
+  padding: 8px 14px;
   border-radius: var(--radius-pill);
   background: var(--surface);
   border: 1px solid var(--line);
   color: var(--ink);
-  font-size: 0.85rem;
+  font-size: 0.84rem;
   font-weight: 700;
   cursor: pointer;
   display: inline-flex;
@@ -320,14 +336,83 @@ h3 {
 }
 .theme-pill-btn:hover {
   border-color: var(--action);
-  transform: translateY(-1px);
 }
 .portal-btn {
   color: var(--action);
   font-weight: 700;
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   padding: 8px 12px;
   white-space: nowrap;
+}
+
+/* Botón Hamburguesa Móvil */
+.mobile-menu-btn {
+  display: none;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.mobile-menu-btn:hover {
+  border-color: var(--action);
+}
+.mobile-menu-btn svg {
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;
+  stroke-width: 2.2;
+}
+
+/* Drawer Móvil Desplegable */
+.mobile-drawer-overlay {
+  display: none;
+  position: fixed;
+  top: 114px; /* justo debajo de la barra y header */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(5, 13, 23, 0.65);
+  backdrop-filter: blur(8px);
+  z-index: 99;
+}
+.mobile-drawer-overlay.active {
+  display: block;
+}
+.mobile-drawer-content {
+  background: var(--surface);
+  border-bottom: 2px solid var(--action);
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: var(--shadow-lg);
+  animation: slideDown 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.mobile-nav-link {
+  font-family: var(--display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink);
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.15s ease;
+}
+.mobile-nav-link:hover {
+  background: var(--action-soft);
+  color: var(--action);
 }
 
 /* 3. Botones y Chips */
@@ -398,11 +483,6 @@ h3 {
   box-shadow: var(--shadow-sm);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.card-box:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow);
-  border-color: var(--action);
-}
 
 /* 5. Stepper Clínico */
 .stepper-nav {
@@ -467,7 +547,7 @@ h3 {
 .universal-footer {
   background: var(--ink);
   color: #FFFFFF;
-  padding: 80px 0 35px;
+  padding: 70px 0 35px;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 [data-theme="dark"] .universal-footer {
@@ -480,42 +560,69 @@ h3 {
   margin-bottom: 50px;
 }
 
-/* Responsive */
-@media (max-width: 1180px) {
+/* ==========================================================================
+   MEDIA QUERIES DE RESPONSIVIDAD PRECISA (MOBILE / TABLET / DESKTOP)
+   ========================================================================== */
+@media (max-width: 1024px) {
   .nav-center-zone {
     display: none;
   }
-}
-@media (max-width: 768px) {
-  .top-clinic-bar {
+  .portal-btn, .header-cta-btn {
     display: none;
+  }
+  .mobile-menu-btn {
+    display: flex;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+  }
+}
+
+@media (max-width: 640px) {
+  .promo-carousel-bar {
+    font-size: 0.76rem;
+  }
+  .nav-brand-title {
+    font-size: 1.15rem;
+  }
+  .nav-brand-sub {
+    display: none;
+  }
+  .theme-pill-btn span {
+    display: none;
+  }
+  .theme-pill-btn {
+    padding: 8px 10px;
   }
   .stepper-nav {
     grid-template-columns: 1fr;
+    gap: 10px;
   }
-  .nav-action-zone {
-    min-width: auto;
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
   }
 }
 
 
-    /* Hero 60/40 Fluido */
+    /* Hero Fluido */
     .hero-section {
-      padding: 70px 0 90px;
+      padding: clamp(40px, 6vw, 85px) 0 clamp(50px, 7vw, 95px);
       background: radial-gradient(circle at 85% 20%, var(--action-soft) 0%, transparent 60%);
       border-bottom: 1px solid var(--line);
     }
     .hero-grid {
       display: grid;
       grid-template-columns: 1.25fr 0.95fr;
-      gap: 50px;
+      gap: 40px;
       align-items: center;
     }
     .hero-title {
-      font-size: clamp(2.4rem, 4.4vw, 3.8rem);
+      font-size: clamp(2.1rem, 4.8vw, 3.8rem);
       font-weight: 800;
       line-height: 1.12;
-      margin: 0 0 20px;
+      margin: 0 0 18px;
       color: var(--ink);
     }
     .hero-title .highlight {
@@ -523,18 +630,18 @@ h3 {
       display: inline;
     }
     .hero-lead {
-      font-size: 1.2rem;
+      font-size: clamp(1.05rem, 2vw, 1.22rem);
       line-height: 1.6;
       color: var(--ink-soft);
-      margin: 0 0 36px;
+      margin: 0 0 32px;
       max-width: 680px;
     }
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 16px;
+      gap: 14px;
       align-items: center;
-      margin-bottom: 36px;
+      margin-bottom: 32px;
     }
 
     /* Tarjeta Visor 3D */
@@ -542,13 +649,13 @@ h3 {
       background: var(--surface);
       border: 1px solid var(--line);
       border-radius: var(--radius-lg);
-      padding: 26px;
+      padding: clamp(16px, 3vw, 26px);
       box-shadow: var(--shadow-lg);
     }
     .media-viewport {
       border-radius: var(--radius-md);
       overflow: hidden;
-      height: 360px;
+      height: clamp(240px, 35vw, 360px);
       position: relative;
       background: #020810;
     }
@@ -560,24 +667,24 @@ h3 {
     }
     .floating-case-pill {
       position: absolute;
-      bottom: 16px;
-      left: 16px;
-      right: 16px;
+      bottom: 12px;
+      left: 12px;
+      right: 12px;
       background: rgba(10, 24, 40, 0.92);
       backdrop-filter: blur(14px);
       color: white;
-      padding: 14px 20px;
+      padding: 10px 16px;
       border-radius: var(--radius-md);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 0.88rem;
+      font-size: 0.84rem;
       border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     /* Secciones Fluidas */
     .section-block {
-      padding: 95px 0;
+      padding: clamp(60px, 8vw, 95px) 0;
       border-bottom: 1px solid var(--line);
     }
     .section-dim {
@@ -586,24 +693,24 @@ h3 {
     .section-header-center {
       text-align: center;
       max-width: 760px;
-      margin: 0 auto 55px;
+      margin: 0 auto clamp(36px, 5vw, 55px);
     }
     .section-header-center h2 {
-      font-size: clamp(2rem, 3.2vw, 2.6rem);
-      margin: 10px 0 14px;
+      font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+      margin: 8px 0 12px;
     }
 
     /* 4 Casos Clínicos Grid */
     .cases-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
+      gap: 20px;
     }
     .case-card {
       background: var(--surface);
       border: 1px solid var(--line);
       border-radius: var(--radius-md);
-      padding: 28px;
+      padding: 24px;
       text-decoration: none;
       color: var(--ink);
       display: flex;
@@ -617,31 +724,27 @@ h3 {
       border-color: var(--action);
     }
     .case-icon-box {
-      width: 52px;
-      height: 52px;
-      border-radius: 14px;
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
       background: var(--action-soft);
       color: var(--action);
       display: grid;
       place-items: center;
-      margin-bottom: 20px;
-    }
-    .case-icon-box svg {
-      width: 28px;
-      height: 28px;
+      margin-bottom: 18px;
     }
 
     /* Comparador de Métodos */
     .compare-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
+      gap: 28px;
     }
     .compare-card {
       background: var(--surface);
       border: 1px solid var(--line);
       border-radius: var(--radius-lg);
-      padding: 36px;
+      padding: clamp(24px, 4vw, 36px);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -653,15 +756,15 @@ h3 {
     }
     .badge-featured {
       position: absolute;
-      top: -14px;
-      left: 36px;
+      top: -13px;
+      left: 28px;
       background: var(--action);
       color: white;
-      font-size: 0.74rem;
+      font-size: 0.72rem;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.06em;
-      padding: 4px 14px;
+      padding: 4px 12px;
       border-radius: var(--radius-pill);
       box-shadow: 0 4px 12px var(--action-glow);
     }
@@ -671,11 +774,11 @@ h3 {
       background: var(--surface);
       border: 1px solid var(--line);
       border-radius: var(--radius-lg);
-      padding: 48px;
+      padding: clamp(24px, 4vw, 48px);
       box-shadow: var(--shadow);
       display: grid;
       grid-template-columns: 1fr 1.15fr;
-      gap: 50px;
+      gap: 40px;
       align-items: center;
     }
 
@@ -683,7 +786,7 @@ h3 {
     .doctors-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
+      gap: 28px;
     }
     .doctor-card {
       background: var(--surface);
@@ -696,7 +799,7 @@ h3 {
       justify-content: space-between;
     }
     .doctor-img-box {
-      height: 270px;
+      height: 250px;
       overflow: hidden;
     }
     .doctor-img-box img {
@@ -719,36 +822,43 @@ h3 {
       .compare-grid, .doctors-grid {
         grid-template-columns: 1fr;
       }
-      .footer-grid {
-        grid-template-columns: 1fr 1fr;
-      }
     }
     @media (max-width: 640px) {
-      .cases-grid, .footer-grid {
+      .cases-grid {
         grid-template-columns: 1fr;
+      }
+      .hero-actions .btn {
+        width: 100%;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Bar Yanahuara -->
-  <div class="top-clinic-bar">
-    <div class="container-fluid top-clinic-flex">
-      <div>
-        📍 <strong>Sede Yanahuara:</strong> Av. Ejército 712 · Abierto hoy hasta las 8:00 PM
-      </div>
-      <div style="display: flex; gap: 24px; align-items: center;">
-        <span>📞 Central: (054) 283-910</span>
-        <a href="saas.html" style="color: #38bdf8; text-decoration: none; font-weight: 700;">💼 ¿Eres odontólogo? Ver Software SaaS →</a>
+  <!-- 1. PANEL PUBLICITARIO CARRUSEL SUPERIOR (AUTO-AVANZABLE) -->
+  <div class="promo-carousel-bar">
+    <div class="container-fluid" style="height: 100%;">
+      <div class="promo-slides-wrapper" id="promoCarouselWrapper">
+        <div class="promo-slide">
+          📍 <strong>Sede Yanahuara:</strong> Av. Ejército 712 · Abierto hoy hasta 8:00 PM · 📞 Central: (054) 283-910
+        </div>
+        <div class="promo-slide">
+          ✨ <strong>Promo Apertura:</strong> Escaneo Intraoral 3D + Simulación Digital GRATIS este mes <a href="reservar.html?specialty=ortodoncia">¡Agendar Ahora! →</a>
+        </div>
+        <div class="promo-slide">
+          💳 <strong>Financiamiento Directo:</strong> Tratamientos desde S/ 170/mes en 18 cuotas fijas sin intereses · Boleta B001
+        </div>
+        <div class="promo-slide">
+          💼 <strong>¿Eres odontólogo o clínica?</strong> Conoce el Software SaaS Sillar Dental OS <a href="saas.html">Ver Planes →</a>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- Header y Navbar Fluido (3 Zonas Desacopladas) -->
+  <!-- 2. NAVBAR MODERNO DE 3 ZONAS CON MENÚ HAMBURGUESA MÓVIL -->
   <header class="main-header" id="mainHeader">
     <div class="container-fluid main-header-row">
-      <!-- 1. Zona Marca -->
+      <!-- Zona 1: Marca -->
       <a href="index.html" class="nav-brand-zone">
         <div class="nav-brand-svg">
           <svg width="24" height="24" viewBox="0 0 24 24">
@@ -761,7 +871,7 @@ h3 {
         </div>
       </a>
 
-      <!-- 2. Zona Enlaces Centrales -->
+      <!-- Zona 2: Enlaces Centrales Desktop -->
       <nav class="nav-center-zone" aria-label="Navegación principal">
         <a href="#alineadores" class="nav-link-item">Alineadores Invisibles</a>
         <a href="#comparador" class="nav-link-item">Métodos de Corrección</a>
@@ -770,25 +880,66 @@ h3 {
         <a href="contacto.html" class="nav-link-item">Sede Yanahuara</a>
       </nav>
 
-      <!-- 3. Zona Acciones Derecha -->
+      <!-- Zona 3: Acciones & Menú Móvil -->
       <div class="nav-action-zone">
         <button id="themeToggleBtn" class="theme-pill-btn" title="Cambiar Tema">
           🌓 <span id="themeLabel">Modo</span>
         </button>
         <a href="/patient/index.html" class="portal-btn">Portal Paciente ↗</a>
-        <a href="reservar.html?specialty=ortodoncia" class="btn btn-primary btn-small">
+        <a href="reservar.html?specialty=ortodoncia" class="btn btn-primary btn-small header-cta-btn">
           Agendar Evaluación 3D
         </a>
+        <button class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Abrir Menú">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/>
+          </svg>
+        </button>
       </div>
     </div>
   </header>
+
+  <!-- DRAWER DESPLEGABLE MÓVIL INTERACTIVO -->
+  <div class="mobile-drawer-overlay" id="mobileDrawerOverlay">
+    <div class="mobile-drawer-content">
+      <a href="#alineadores" class="mobile-nav-link" onclick="window.closeMobileMenu()">
+        <span>✨ Alineadores Invisibles 3D</span> <span>→</span>
+      </a>
+      <a href="#comparador" class="mobile-nav-link" onclick="window.closeMobileMenu()">
+        <span>⚖️ Comparador de Métodos</span> <span>→</span>
+      </a>
+      <a href="#precios" class="mobile-nav-link" onclick="window.closeMobileMenu()">
+        <span>💳 Simulador de Cuotas</span> <span>→</span>
+      </a>
+      <a href="#especialistas" class="mobile-nav-link" onclick="window.closeMobileMenu()">
+        <span>👨‍⚕️ Ortodoncistas Colegiados COP</span> <span>→</span>
+      </a>
+      <a href="contacto.html" class="mobile-nav-link" onclick="window.closeMobileMenu()">
+        <span>📍 Sede Yanahuara (Mapa & Horarios)</span> <span>→</span>
+      </a>
+      <a href="/patient/index.html" class="mobile-nav-link" style="color: var(--action);">
+        <span>👤 Portal Paciente (María Q.)</span> <span>↗</span>
+      </a>
+      <a href="saas.html" class="mobile-nav-link" style="color: #38bdf8;">
+        <span>💼 Software SaaS Clínicas Dental OS</span> <span>↗</span>
+      </a>
+
+      <div style="display: grid; gap: 10px; margin-top: 10px;">
+        <a href="reservar.html?specialty=ortodoncia" class="btn btn-primary" style="width: 100%;">
+          🗓️ Agendar Evaluación 3D
+        </a>
+        <a href="https://wa.me/51954123456" target="_blank" class="btn btn-secondary" style="width: 100%;">
+          💬 WhatsApp Yanahuara
+        </a>
+      </div>
+    </div>
+  </div>
 
   <main>
     <!-- HERO PRINCIPAL B2C -->
     <section class="hero-section">
       <div class="container-fluid hero-grid">
         <div>
-          <div class="chip chip-neutral" style="margin-bottom: 20px;">
+          <div class="chip chip-neutral" style="margin-bottom: 18px;">
             ✨ Especialistas en Corrección Dental & Alineación Invisible
           </div>
 
@@ -801,15 +952,15 @@ h3 {
           </p>
 
           <div class="hero-actions">
-            <a href="reservar.html?specialty=ortodoncia" class="btn btn-primary" style="padding: 16px 32px; font-size: 1rem;">
+            <a href="reservar.html?specialty=ortodoncia" class="btn btn-primary" style="padding: 15px 30px; font-size: 1rem;">
               🗓️ Agendar Evaluación + Escaneo 3D
             </a>
-            <a href="https://wa.me/51954123456" target="_blank" class="btn btn-secondary" style="padding: 16px 26px; font-size: 0.95rem;">
+            <a href="https://wa.me/51954123456" target="_blank" class="btn btn-secondary" style="padding: 15px 24px; font-size: 0.95rem;">
               💬 WhatsApp Yanahuara
             </a>
           </div>
 
-          <div style="display: flex; flex-wrap: wrap; gap: 28px; font-size: 0.92rem; color: var(--ink-soft); font-weight: 600;">
+          <div style="display: flex; flex-wrap: wrap; gap: 24px; font-size: 0.9rem; color: var(--ink-soft); font-weight: 600;">
             <div><strong style="color: var(--ink);">★ 4.9</strong> en Google (148 reseñas)</div>
             <div><strong style="color: var(--ink);">✔</strong> Simulación 3D en Pantalla</div>
             <div><strong style="color: var(--ink);">✔</strong> Cuotas desde S/ 170 /mes</div>
@@ -818,12 +969,12 @@ h3 {
 
         <!-- Tarjeta Visor 3D -->
         <div class="hero-3d-card">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
             <div style="display: inline-flex; padding: 4px; background: var(--surface-dim); border: 1px solid var(--line); border-radius: var(--radius-pill); gap: 4px;">
-              <button id="btnBefore" class="btn btn-small btn-secondary" style="padding: 6px 14px; font-size: 0.8rem;" onclick="window.switchSimulation('before')">Inicio (Apiñado)</button>
-              <button id="btnAfter" class="btn btn-small btn-primary" style="padding: 6px 14px; font-size: 0.8rem;" onclick="window.switchSimulation('after')">Mes 12 (Alineado)</button>
+              <button id="btnBefore" class="btn btn-small btn-secondary" style="padding: 5px 12px; font-size: 0.78rem;" onclick="window.switchSimulation('before')">Inicio (Apiñado)</button>
+              <button id="btnAfter" class="btn btn-small btn-primary" style="padding: 5px 12px; font-size: 0.78rem;" onclick="window.switchSimulation('after')">Mes 12 (Alineado)</button>
             </div>
-            <span class="chip chip-success" style="font-size: 0.72rem;">Simulación iTero 3D</span>
+            <span class="chip chip-success" style="font-size: 0.7rem;">Simulación iTero 3D</span>
           </div>
 
           <div class="media-viewport">
@@ -831,15 +982,15 @@ h3 {
             <div class="floating-case-pill">
               <div>
                 <strong id="simTitle" style="display: block;">Resultado Final: Sonrisa Perfecta</strong>
-                <span id="simSubtitle" style="font-size: 0.75rem; opacity: 0.85;">18 Placas transparentes · Sin alambres metálicos</span>
+                <span id="simSubtitle" style="font-size: 0.72rem; opacity: 0.85;">18 Placas transparentes · Sin alambres</span>
               </div>
-              <span id="simStatus" style="font-family: var(--mono); font-size: 0.8rem; color: #10B981; font-weight: 700;">100% DISCRETO</span>
+              <span id="simStatus" style="font-family: var(--mono); font-size: 0.78rem; color: #10B981; font-weight: 700;">100% DISCRETO</span>
             </div>
           </div>
 
-          <div style="margin-top: 18px; display: flex; justify-content: space-between; align-items: center;">
-            <span class="muted" style="font-size: 0.85rem;">Diagnóstico con tomografía computarizada CBCT</span>
-            <a href="reservar.html?specialty=ortodoncia" style="color: var(--action); font-weight: 700; font-size: 0.9rem;">
+          <div style="margin-top: 16px; display: flex; justify-content: space-between; align-items: center;">
+            <span class="muted" style="font-size: 0.82rem;">Diagnóstico con tomografía computarizada CBCT</span>
+            <a href="reservar.html?specialty=ortodoncia" style="color: var(--action); font-weight: 700; font-size: 0.88rem;">
               Simular mi sonrisa →
             </a>
           </div>
@@ -860,53 +1011,53 @@ h3 {
           <a href="reservar.html?specialty=ortodoncia" class="case-card">
             <div>
               <div class="case-icon-box">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M4 7h16M4 17h16M7 4v16M17 4v16M12 7v10"/>
                 </svg>
               </div>
-              <h3 style="margin: 0 0 8px;">Dientes Apiñados o Chuecos</h3>
-              <p class="muted" style="font-size: 0.9rem; margin: 0 0 16px;">Falta de espacio y piezas montadas que dificultan la higiene y estética dental.</p>
+              <h3 style="margin: 0 0 8px; font-size: 1.15rem;">Dientes Apiñados o Chuecos</h3>
+              <p class="muted" style="font-size: 0.88rem; margin: 0 0 16px;">Falta de espacio y piezas montadas que dificultan la higiene y estética dental.</p>
             </div>
-            <span style="color: var(--action); font-weight: 700; font-size: 0.88rem;">Alineadores o Brackets →</span>
+            <span style="color: var(--action); font-weight: 700; font-size: 0.86rem;">Alineadores o Brackets →</span>
           </a>
 
           <a href="reservar.html?specialty=ortodoncia" class="case-card">
             <div>
               <div class="case-icon-box">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M8 12h8M8 12l3-3M8 12l3 3M16 12l-3-3M16 12l3 3M3 6v12M21 6v12"/>
                 </svg>
               </div>
-              <h3 style="margin: 0 0 8px;">Espacios Separados (Diastemas)</h3>
-              <p class="muted" style="font-size: 0.9rem; margin: 0 0 16px;">Espacios visibles entre los dientes frontales que afectan la simetría y pronunciación.</p>
+              <h3 style="margin: 0 0 8px; font-size: 1.15rem;">Espacios Separados (Diastemas)</h3>
+              <p class="muted" style="font-size: 0.88rem; margin: 0 0 16px;">Espacios visibles entre los dientes frontales que afectan la simetría y pronunciación.</p>
             </div>
-            <span style="color: var(--action); font-weight: 700; font-size: 0.88rem;">Cierre de Espacios 3D →</span>
+            <span style="color: var(--action); font-weight: 700; font-size: 0.86rem;">Cierre de Espacios 3D →</span>
           </a>
 
           <a href="reservar.html?specialty=ortodoncia" class="case-card">
             <div>
               <div class="case-icon-box">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M12 3v18M3 9l9-6 9 6M3 15l9 6 9-6"/>
                 </svg>
               </div>
-              <h3 style="margin: 0 0 8px;">Mordida Cruzada o Abierta</h3>
-              <p class="muted" style="font-size: 0.9rem; margin: 0 0 16px;">Dificultad para masticar o desgaste prematuro por mal encaje de los maxilares.</p>
+              <h3 style="margin: 0 0 8px; font-size: 1.15rem;">Mordida Cruzada o Abierta</h3>
+              <p class="muted" style="font-size: 0.88rem; margin: 0 0 16px;">Dificultad para masticar o desgaste prematuro por mal encaje de los maxilares.</p>
             </div>
-            <span style="color: var(--action); font-weight: 700; font-size: 0.88rem;">Ortopedia & Alineación →</span>
+            <span style="color: var(--action); font-weight: 700; font-size: 0.86rem;">Ortopedia & Alineación →</span>
           </a>
 
           <a href="reservar.html?specialty=implantes" class="case-card">
             <div>
               <div class="case-icon-box">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M12 2v6M9 8h6M10 12h4M11 16h2M12 16v6"/>
                 </svg>
               </div>
-              <h3 style="margin: 0 0 8px;">Piezas Ausentes & Desgaste</h3>
-              <p class="muted" style="font-size: 0.9rem; margin: 0 0 16px;">Combinación de alineadores con implantes guiados por tomografía 3D y carillas.</p>
+              <h3 style="margin: 0 0 8px; font-size: 1.15rem;">Piezas Ausentes & Desgaste</h3>
+              <p class="muted" style="font-size: 0.88rem; margin: 0 0 16px;">Combinación de alineadores con implantes guiados por tomografía 3D y carillas.</p>
             </div>
-            <span style="color: var(--action); font-weight: 700; font-size: 0.88rem;">Rehabilitación Integral →</span>
+            <span style="color: var(--action); font-weight: 700; font-size: 0.86rem;">Rehabilitación Integral →</span>
           </a>
         </div>
       </div>
@@ -925,72 +1076,72 @@ h3 {
           <div class="compare-card featured">
             <span class="badge-featured">MÁS POPULAR</span>
             <div>
-              <h3 style="font-size: 1.4rem; margin: 0 0 6px;">Alineadores Invisibles</h3>
-              <p class="muted" style="font-size: 0.9rem; margin: 0 0 20px;">Placas transparentes termoformadas que mueven tus dientes gradualmente.</p>
+              <h3 style="font-size: 1.35rem; margin: 0 0 6px;">Alineadores Invisibles</h3>
+              <p class="muted" style="font-size: 0.88rem; margin: 0 0 18px;">Placas transparentes termoformadas que mueven tus dientes gradualmente.</p>
 
-              <div style="font-family: var(--display); font-size: 2.3rem; font-weight: 800; color: var(--action); margin-bottom: 4px;">
-                S/ 170 <span style="font-size: 0.95rem; font-weight: 600; color: var(--ink-soft);">/ mes</span>
+              <div style="font-family: var(--display); font-size: 2.2rem; font-weight: 800; color: var(--action); margin-bottom: 4px;">
+                S/ 170 <span style="font-size: 0.92rem; font-weight: 600; color: var(--ink-soft);">/ mes</span>
               </div>
               <span class="tiny muted">Plan 18 cuotas mensuales sin intereses</span>
 
-              <hr style="border: none; border-top: 1px solid var(--line); margin: 24px 0;">
+              <hr style="border: none; border-top: 1px solid var(--line); margin: 20px 0;">
 
-              <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.92rem; display: grid; gap: 12px; color: var(--ink-soft);">
+              <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.9rem; display: grid; gap: 10px; color: var(--ink-soft);">
                 <li>✔ <strong>100% Discretos:</strong> Casi imperceptibles al hablar</li>
                 <li>✔ <strong>Removibles:</strong> Comes y te cepillas sin molestias</li>
                 <li>✔ <strong>Cero llagas:</strong> Sin alambres metálicos cortantes</li>
                 <li>✔ <strong>Menos visitas:</strong> Controles cada 6 a 8 semanas</li>
               </ul>
             </div>
-            <a href="reservar.html?specialty=ortodoncia" class="btn btn-primary" style="width: 100%; margin-top: 28px;">
+            <a href="reservar.html?specialty=ortodoncia" class="btn btn-primary" style="width: 100%; margin-top: 24px;">
               Elegir Alineadores Invisibles
             </a>
           </div>
 
           <div class="compare-card">
             <div>
-              <h3 style="font-size: 1.4rem; margin: 0 0 6px;">Brackets de Zafiro / Cerámicos</h3>
-              <p class="muted" style="font-size: 0.9rem; margin: 0 0 20px;">Brackets transparentes de cristal de zafiro de alta estética y fijación.</p>
+              <h3 style="font-size: 1.35rem; margin: 0 0 6px;">Brackets de Zafiro / Cerámicos</h3>
+              <p class="muted" style="font-size: 0.88rem; margin: 0 0 18px;">Brackets transparentes de cristal de zafiro de alta estética y fijación.</p>
 
-              <div style="font-family: var(--display); font-size: 2.3rem; font-weight: 800; color: var(--ink); margin-bottom: 4px;">
-                S/ 140 <span style="font-size: 0.95rem; font-weight: 600; color: var(--ink-soft);">/ mes</span>
+              <div style="font-family: var(--display); font-size: 2.2rem; font-weight: 800; color: var(--ink); margin-bottom: 4px;">
+                S/ 140 <span style="font-size: 0.92rem; font-weight: 600; color: var(--ink-soft);">/ mes</span>
               </div>
               <span class="tiny muted">Plan 18 cuotas mensuales</span>
 
-              <hr style="border: none; border-top: 1px solid var(--line); margin: 24px 0;">
+              <hr style="border: none; border-top: 1px solid var(--line); margin: 20px 0;">
 
-              <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.92rem; display: grid; gap: 12px; color: var(--ink-soft);">
+              <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.9rem; display: grid; gap: 10px; color: var(--ink-soft);">
                 <li>✔ <strong>Estética cristalina:</strong> Se mimetizan con el diente</li>
                 <li>✔ <strong>No se manchan:</strong> Resisten café y bebidas</li>
                 <li>✔ <strong>Alta resistencia:</strong> Ideales para rotaciones complejas</li>
                 <li>✔ Controles mensuales presenciales en Yanahuara</li>
               </ul>
             </div>
-            <a href="reservar.html?specialty=ortodoncia" class="btn btn-secondary" style="width: 100%; margin-top: 28px;">
+            <a href="reservar.html?specialty=ortodoncia" class="btn btn-secondary" style="width: 100%; margin-top: 24px;">
               Consultar Brackets Estéticos
             </a>
           </div>
 
           <div class="compare-card">
             <div>
-              <h3 style="font-size: 1.4rem; margin: 0 0 6px;">Brackets Autoligados</h3>
-              <p class="muted" style="font-size: 0.9rem; margin: 0 0 20px;">Tecnología sin ligas elásticas que reduce la fricción y acelera el movimiento.</p>
+              <h3 style="font-size: 1.35rem; margin: 0 0 6px;">Brackets Autoligados</h3>
+              <p class="muted" style="font-size: 0.88rem; margin: 0 0 18px;">Tecnología sin ligas elásticas que reduce la fricción y acelera el movimiento.</p>
 
-              <div style="font-family: var(--display); font-size: 2.3rem; font-weight: 800; color: var(--ink); margin-bottom: 4px;">
-                S/ 120 <span style="font-size: 0.95rem; font-weight: 600; color: var(--ink-soft);">/ mes</span>
+              <div style="font-family: var(--display); font-size: 2.2rem; font-weight: 800; color: var(--ink); margin-bottom: 4px;">
+                S/ 120 <span style="font-size: 0.92rem; font-weight: 600; color: var(--ink-soft);">/ mes</span>
               </div>
               <span class="tiny muted">Plan 18 cuotas mensuales</span>
 
-              <hr style="border: none; border-top: 1px solid var(--line); margin: 24px 0;">
+              <hr style="border: none; border-top: 1px solid var(--line); margin: 20px 0;">
 
-              <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.92rem; display: grid; gap: 12px; color: var(--ink-soft);">
+              <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.9rem; display: grid; gap: 10px; color: var(--ink-soft);">
                 <li>✔ <strong>Mayor rapidez:</strong> Movimiento continuo eficiente</li>
                 <li>✔ <strong>Higiene más fácil:</strong> Sin gomitas acumuladoras</li>
                 <li>✔ Máxima durabilidad mecánica</li>
                 <li>✔ Opción más económica de ortodoncia avanzada</li>
               </ul>
             </div>
-            <a href="reservar.html?specialty=ortodoncia" class="btn btn-secondary" style="width: 100%; margin-top: 28px;">
+            <a href="reservar.html?specialty=ortodoncia" class="btn btn-secondary" style="width: 100%; margin-top: 24px;">
               Consultar Autoligados
             </a>
           </div>
@@ -1004,38 +1155,38 @@ h3 {
         <div class="fee-box-layout">
           <div>
             <span class="chip chip-success" style="margin-bottom: 8px;">Transparencia Financiera</span>
-            <h2 style="font-size: 2.2rem; font-weight: 800; margin: 8px 0 16px; line-height: 1.2;">
+            <h2 style="font-size: 2.1rem; font-weight: 800; margin: 6px 0 14px; line-height: 1.2;">
               Calcula tu cuota mensual sin sorpresas ni letra chica.
             </h2>
-            <p class="muted" style="margin-bottom: 24px; font-size: 1.05rem;">
+            <p class="muted" style="margin-bottom: 20px; font-size: 1rem;">
               En Alínea Studio financiamos tu tratamiento en cuotas fijas en Soles (PEN). Emitimos boletas electrónicas oficiales (serie B001) para tu tranquilidad fiscal.
             </p>
-            <ul style="padding-left: 20px; color: var(--ink-soft); font-size: 0.94rem; display: grid; gap: 10px;">
+            <ul style="padding-left: 20px; color: var(--ink-soft); font-size: 0.92rem; display: grid; gap: 8px;">
               <li>Aceptamos Yape, Plin, POS Niubiz (Visa/Mastercard) y transferencias BCP.</li>
               <li>Sin intereses bancarios por financiamiento directo de la clínica.</li>
               <li>Seguimiento de cuotas pagadas y pendientes desde tu Portal Paciente.</li>
             </ul>
           </div>
 
-          <div style="background: var(--surface-dim); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 32px;">
+          <div style="background: var(--surface-dim); border: 1px solid var(--line); border-radius: var(--radius-md); padding: clamp(20px, 3vw, 32px);">
             <label style="font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 8px;">Tratamiento Seleccionado:</label>
-            <select id="calcTreatment" class="form-select" style="font-weight: 600; margin-bottom: 20px;">
+            <select id="calcTreatment" class="form-select" style="font-weight: 600; margin-bottom: 18px;">
               <option value="alineadores" data-total="3600" data-months="18">Alineadores Invisibles Completos (18 cuotas)</option>
               <option value="zafiro" data-total="2800" data-months="18">Brackets Estéticos de Zafiro (18 cuotas)</option>
               <option value="autoligado" data-total="2400" data-months="18">Brackets Autoligados de Precisión (18 cuotas)</option>
               <option value="implante" data-total="2800" data-months="6">Implante Dental Guiado 3D (6 cuotas)</option>
             </select>
 
-            <div style="display: flex; justify-content: space-between; font-size: 0.88rem; font-weight: 700; margin-bottom: 8px;">
+            <div style="display: flex; justify-content: space-between; font-size: 0.88rem; font-weight: 700; margin-bottom: 6px;">
               <span>Cuota Inicial (Opcional):</span>
               <span id="initialDisplay" style="color: var(--action); font-family: var(--mono);">S/ 500</span>
             </div>
-            <input type="range" id="calcInitial" min="0" max="2000" step="100" value="500" style="width: 100%; margin-bottom: 22px;">
+            <input type="range" id="calcInitial" min="0" max="2000" step="100" value="500" style="width: 100%; margin-bottom: 20px;">
 
-            <div style="background: var(--surface); border: 2px dashed var(--action); padding: 20px; border-radius: var(--radius-md); display: flex; justify-content: space-between; align-items: center;">
+            <div style="background: var(--surface); border: 2px dashed var(--action); padding: 18px; border-radius: var(--radius-md); display: flex; justify-content: space-between; align-items: center;">
               <div>
                 <span class="tiny muted block">Tu Cuota Mensual Estimada:</span>
-                <div id="monthlyDisplay" style="font-family: var(--display); font-size: 2.2rem; font-weight: 800; color: var(--action); line-height: 1;">
+                <div id="monthlyDisplay" style="font-family: var(--display); font-size: 2.1rem; font-weight: 800; color: var(--action); line-height: 1;">
                   S/ 172 /mes
                 </div>
                 <span id="monthsDisplay" class="tiny muted">en 18 cuotas fijas</span>
@@ -1043,7 +1194,7 @@ h3 {
               <span class="chip chip-success">Sin Intereses</span>
             </div>
 
-            <a href="reservar.html?specialty=ortodoncia" class="btn btn-primary" style="width: 100%; margin-top: 22px; padding: 14px 0;">
+            <a href="reservar.html?specialty=ortodoncia" class="btn btn-primary" style="width: 100%; margin-top: 20px; padding: 14px 0;">
               Confirmar Evaluación en Yanahuara
             </a>
           </div>
@@ -1054,10 +1205,10 @@ h3 {
     <!-- 4. ORTODONCISTAS COP -->
     <section class="section-block section-dim" id="especialistas">
       <div class="container-fluid">
-        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; flex-wrap: wrap; gap: 16px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; flex-wrap: wrap; gap: 16px;">
           <div>
             <span class="chip chip-neutral" style="margin-bottom: 8px;">Cuerpo Médico Especializado</span>
-            <h2 style="font-size: 2.3rem; font-weight: 800; margin: 0;">
+            <h2 style="font-size: 2.2rem; font-weight: 800; margin: 0;">
               Nuestros Especialistas Colegiados COP
             </h2>
           </div>
@@ -1072,14 +1223,14 @@ h3 {
               <div class="doctor-img-box">
                 <img src="../assets/images/public/team/profesional-dental-referencia-37458046.jpg" alt="Dra. Ana Flores Vanesa">
               </div>
-              <div style="padding: 26px;">
+              <div style="padding: 24px;">
                 <span class="chip chip-success" style="font-family: var(--mono); font-size: 0.72rem; margin-bottom: 8px;">COP 18240</span>
-                <h3 style="font-size: 1.3rem; margin: 0 0 4px;">Dra. Ana Flores Vanesa</h3>
+                <h3 style="font-size: 1.25rem; margin: 0 0 4px;">Dra. Ana Flores Vanesa</h3>
                 <p style="color: var(--action); font-weight: 700; font-size: 0.88rem; margin: 0 0 8px;">Especialista en Ortodoncia & Alineadores</p>
-                <p class="muted" style="font-size: 0.85rem; margin: 0; line-height: 1.5;">Certificada en biomecánica con alineadores transparentes y tomografía 3D en Arequipa.</p>
+                <p class="muted" style="font-size: 0.84rem; margin: 0; line-height: 1.5;">Certificada en biomecánica con alineadores transparentes y tomografía 3D en Arequipa.</p>
               </div>
             </div>
-            <div style="padding: 0 26px 26px;">
+            <div style="padding: 0 24px 24px;">
               <a href="reservar.html?specialty=ortodoncia" class="btn btn-secondary btn-small" style="width: 100%;">Agendar con Dra. Flores</a>
             </div>
           </div>
@@ -1089,14 +1240,14 @@ h3 {
               <div class="doctor-img-box">
                 <img src="../assets/images/public/team/equipo-dental-clinica-37458124.jpg" alt="Dr. Roberto Carpio Málaga">
               </div>
-              <div style="padding: 26px;">
+              <div style="padding: 24px;">
                 <span class="chip chip-success" style="font-family: var(--mono); font-size: 0.72rem; margin-bottom: 8px;">COP 14920</span>
-                <h3 style="font-size: 1.3rem; margin: 0 0 4px;">Dr. Roberto Carpio Málaga</h3>
+                <h3 style="font-size: 1.25rem; margin: 0 0 4px;">Dr. Roberto Carpio Málaga</h3>
                 <p style="color: var(--action); font-weight: 700; font-size: 0.88rem; margin: 0 0 8px;">Cirugía Oral & Implantología 3D</p>
-                <p class="muted" style="font-size: 0.85rem; margin: 0; line-height: 1.5;">Especialista en carga inmediata de implantes y rehabilitación estética coordinada.</p>
+                <p class="muted" style="font-size: 0.84rem; margin: 0; line-height: 1.5;">Especialista en carga inmediata de implantes y rehabilitación estética coordinada.</p>
               </div>
             </div>
-            <div style="padding: 0 26px 26px;">
+            <div style="padding: 0 24px 24px;">
               <a href="reservar.html?specialty=implantes" class="btn btn-secondary btn-small" style="width: 100%;">Agendar con Dr. Carpio</a>
             </div>
           </div>
@@ -1106,14 +1257,14 @@ h3 {
               <div class="doctor-img-box">
                 <img src="../assets/images/public/services/explicacion-modelo-dental-6627325.jpg" alt="Dra. Sofía Mendoza Salas">
               </div>
-              <div style="padding: 26px;">
+              <div style="padding: 24px;">
                 <span class="chip chip-success" style="font-family: var(--mono); font-size: 0.72rem; margin-bottom: 8px;">COP 22105</span>
-                <h3 style="font-size: 1.3rem; margin: 0 0 4px;">Dra. Sofía Mendoza Salas</h3>
+                <h3 style="font-size: 1.25rem; margin: 0 0 4px;">Dra. Sofía Mendoza Salas</h3>
                 <p style="color: var(--action); font-weight: 700; font-size: 0.88rem; margin: 0 0 8px;">Odontopediatría & Ortopedia Infantil</p>
-                <p class="muted" style="font-size: 0.85rem; margin: 0; line-height: 1.5;">Atención temprana de mordidas en niños con manejo lúdico y sin ansiedad.</p>
+                <p class="muted" style="font-size: 0.84rem; margin: 0; line-height: 1.5;">Atención temprana de mordidas en niños con manejo lúdico y sin ansiedad.</p>
               </div>
             </div>
-            <div style="padding: 0 26px 26px;">
+            <div style="padding: 0 24px 24px;">
               <a href="reservar.html?specialty=ninos" class="btn btn-secondary btn-small" style="width: 100%;">Agendar con Dra. Mendoza</a>
             </div>
           </div>
@@ -1187,6 +1338,7 @@ h3 {
   </footer>
 
   <script>
+    // 1. Selector y Persistencia de Tema
     const savedTheme = localStorage.getItem('sd-theme') || 'light';
     document.documentElement.setAttribute('data-theme', savedTheme);
     const themeLabel = document.getElementById('themeLabel');
@@ -1203,6 +1355,36 @@ h3 {
       });
     }
 
+    // 2. Control del Carrusel Superior Auto-Avanzable (cada 4.5 segundos)
+    const carouselWrapper = document.getElementById('promoCarouselWrapper');
+    let currentSlide = 0;
+    const totalSlides = 4;
+    function advanceCarousel() {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      if (carouselWrapper) {
+        carouselWrapper.style.transform = `translateY(-${currentSlide * 38}px)`;
+      }
+    }
+    setInterval(advanceCarousel, 4500);
+
+    // 3. Menú Móvil Desplegable (Drawer)
+    const menuToggle = document.getElementById('mobileMenuToggle');
+    const drawerOverlay = document.getElementById('mobileDrawerOverlay');
+    if (menuToggle && drawerOverlay) {
+      menuToggle.addEventListener('click', () => {
+        drawerOverlay.classList.toggle('active');
+      });
+      drawerOverlay.addEventListener('click', (e) => {
+        if (e.target === drawerOverlay) {
+          drawerOverlay.classList.remove('active');
+        }
+      });
+    }
+    window.closeMobileMenu = function() {
+      if (drawerOverlay) drawerOverlay.classList.remove('active');
+    };
+
+    // 4. Sticky Header
     const header = document.getElementById('mainHeader');
     window.addEventListener('scroll', () => {
       if (window.scrollY > 20) {
@@ -1212,6 +1394,7 @@ h3 {
       }
     });
 
+    // 5. Simulación 3D Antes / Después
     window.switchSimulation = function(state) {
       const btnBefore = document.getElementById('btnBefore');
       const btnAfter = document.getElementById('btnAfter');
@@ -1247,6 +1430,7 @@ h3 {
       }
     };
 
+    // 6. Simulador Financiero
     const calcSelect = document.getElementById('calcTreatment');
     const calcInitial = document.getElementById('calcInitial');
     const initialDisplay = document.getElementById('initialDisplay');
