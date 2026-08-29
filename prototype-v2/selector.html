@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>Selector de Portales y Vistas · Sillar Dental & Alínea Studio</title>
+  <title>Selector de Portales y Vistas · Ecosistema Odontológico</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Manrope:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -23,24 +23,22 @@
       margin: 0;
     }
     .selector-hero {
-      padding: 60px 24px 30px;
+      padding: 70px 0 40px;
       text-align: center;
       background: radial-gradient(circle at top, var(--action-soft) 0%, transparent 70%);
       border-bottom: 1px solid var(--line);
     }
     .selector-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 24px;
-      max-width: 1240px;
-      margin: 40px auto;
-      padding: 0 24px;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 28px;
+      margin: 50px auto 80px;
     }
     .portal-card {
       background: var(--surface);
       border: 1px solid var(--line);
-      border-radius: 20px;
-      padding: 28px;
+      border-radius: var(--radius-lg);
+      padding: 32px;
       box-shadow: var(--shadow-small);
       transition: all 0.2s ease;
       display: flex;
@@ -50,140 +48,191 @@
       color: var(--ink);
     }
     .portal-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-elevated);
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
       border-color: var(--action);
     }
-    .portal-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
+    .portal-icon-svg {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
       background: var(--action-soft);
       color: var(--action);
       display: grid;
       place-items: center;
-      font-size: 1.5rem;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
+    }
+    .portal-icon-svg svg {
+      width: 28px;
+      height: 28px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
     .badge-live {
       display: inline-block;
-      padding: 4px 10px;
-      border-radius: 999px;
-      font-size: 0.72rem;
-      font-weight: 700;
-      background: rgba(0, 122, 85, 0.1);
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      font-size: 0.74rem;
+      font-weight: 800;
+      background: var(--action-soft);
       color: var(--action);
       font-family: var(--mono);
+      letter-spacing: 0.05em;
     }
   </style>
 </head>
 <body>
   <div class="selector-hero">
-    <div style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; font-size: 0.8rem; font-weight: 700; color: var(--action); margin-bottom: 16px;">
-      ⚡ Ecosistema Dental · Hub de Portales
+    <div class="container">
+      <div style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-full); font-size: 0.82rem; font-weight: 700; color: var(--action); margin-bottom: 20px;">
+        ⚡ Ecosistema Clínico & SaaS Odontológico
+      </div>
+      <h1 style="font-family: var(--display); font-size: clamp(2.2rem, 4vw, 3.2rem); margin: 0 0 16px; font-weight: 800; color: var(--ink);">
+        Navegador de Portales y Módulos Clínicos
+      </h1>
+      <p class="muted" style="max-width: 700px; margin: 0 auto; font-size: 1.15rem;">
+        Acceso segmentado: Web directa para pacientes (Corrección Dental) y Plataforma de Gestión para Clínicas (SaaS).
+      </p>
+
+      <div style="margin-top: 24px;">
+        <button id="selectorThemeBtn" class="theme-toggle-btn" style="border-radius: var(--radius-full);">
+          🌓 <span id="selectorThemeLabel">Modo</span>
+        </button>
+      </div>
     </div>
-    <h1 style="font-family: var(--display); font-size: clamp(2rem, 3.5vw, 2.8rem); margin: 0 0 12px; font-weight: 800;">
-      Navegador de Vistas Clínicas & SaaS
-    </h1>
-    <p class="muted" style="max-width: 650px; margin: 0 auto; font-size: 1.05rem;">
-      Acceso segmentado: Web directa para pacientes (Corrección Dental) y Plataforma de Gestión para Clínicas (SaaS).
-    </p>
   </div>
 
-  <main class="selector-grid">
-    <!-- 1. Web de la Clínica (B2C Pacientes) -->
-    <a href="/public/index.html" class="portal-card" style="border: 2px solid var(--action);">
-      <div>
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <div class="portal-icon">🦷</div>
-          <span class="badge-live">B2C PACIENTES</span>
+  <main class="container">
+    <div class="selector-grid">
+      <!-- 1. Web de la Clínica (B2C Pacientes) -->
+      <a href="/public/index.html" class="portal-card" style="border: 2px solid var(--action);">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="portal-icon-svg">
+              <svg viewBox="0 0 24 24"><path d="M7 20c-1.5 0-3-1-3-3.5 0-2.5 1-4 2-6 1-2 1-3.5 1-4.5 0-2 1.5-3 3-3s2 1 2 1 1-1 2-1 3 1 3 3c0 1 0 2.5 1 4.5 1 2 2 3.5 2 6 0 2.5-1.5 3.5-3 3.5-1.5 0-2.5-1-3-2.5-.5 1.5-1.5 2.5-3 2.5z"/></svg>
+            </div>
+            <span class="badge-live">B2C PACIENTES</span>
+          </div>
+          <h2 style="font-size: 1.4rem; margin: 0 0 8px; font-family: var(--display);">Alínea Studio (Clínica)</h2>
+          <p class="muted" style="font-size: 0.92rem; margin: 0 0 20px; line-height: 1.6;">
+            Landing orientada a pacientes: alineadores invisibles, brackets estéticos, simulador de cuotas en Soles y agendamiento directo.
+          </p>
         </div>
-        <h2 style="font-size: 1.35rem; margin: 0 0 8px; font-family: var(--display);">Alínea Studio (Clínica)</h2>
-        <p class="muted" style="font-size: 0.9rem; margin: 0 0 16px;">
-          Landing orientada a pacientes: alineadores invisibles, brackets estéticos, simulador de cuotas en Soles y agendamiento directo.
-        </p>
-      </div>
-      <div style="color: var(--action); font-weight: 700; font-size: 0.9rem;">Abrir Web de la Clínica →</div>
-    </a>
+        <div style="color: var(--action); font-weight: 700; font-size: 0.95rem;">Abrir Web de la Clínica →</div>
+      </a>
 
-    <!-- 2. Software Dental SaaS (B2B Clínicas) -->
-    <a href="/public/saas.html" class="portal-card" style="border: 2px solid #0284c7;">
-      <div>
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <div class="portal-icon" style="background: rgba(2, 132, 199, 0.1); color: #0284c7;">💼</div>
-          <span class="badge-live" style="background: rgba(2, 132, 199, 0.1); color: #0284c7;">B2B SAAS CLÍNICAS</span>
+      <!-- 2. Software Dental SaaS (B2B Clínicas) -->
+      <a href="/public/saas.html" class="portal-card" style="border: 2px solid var(--blue);">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="portal-icon-svg" style="background: var(--blue-soft); color: var(--blue);">
+              <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            </div>
+            <span class="badge-live" style="background: var(--blue-soft); color: var(--blue);">B2B SAAS CLÍNICAS</span>
+          </div>
+          <h2 style="font-size: 1.4rem; margin: 0 0 8px; font-family: var(--display);">Sillar Dental OS (SaaS)</h2>
+          <p class="muted" style="font-size: 0.92rem; margin: 0 0 20px; line-height: 1.6;">
+            Página de venta del software con planes de membresía mensual (S/ 149, S/ 289, S/ 590), odontograma 52P y facturación SUNAT.
+          </p>
         </div>
-        <h2 style="font-size: 1.35rem; margin: 0 0 8px; font-family: var(--display);">Sillar Dental OS (SaaS)</h2>
-        <p class="muted" style="font-size: 0.9rem; margin: 0 0 16px;">
-          Página de venta del software con planes de membresía mensual (S/ 149, S/ 289, S/ 590), odontograma 52P y facturación SUNAT.
-        </p>
-      </div>
-      <div style="color: #0284c7; font-weight: 700; font-size: 0.9rem;">Ver Planes SaaS & Membresías →</div>
-    </a>
+        <div style="color: var(--blue); font-weight: 700; font-size: 0.95rem;">Ver Planes SaaS & Membresías →</div>
+      </a>
 
-    <!-- 3. Portal del Paciente -->
-    <a href="/patient/index.html" class="portal-card">
-      <div>
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <div class="portal-icon">👤</div>
-          <span class="badge-live">PACIENTE: MARÍA Q.</span>
+      <!-- 3. Portal del Paciente -->
+      <a href="/patient/index.html" class="portal-card">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="portal-icon-svg">
+              <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <span class="badge-live">PACIENTE: MARÍA Q.</span>
+          </div>
+          <h2 style="font-size: 1.4rem; margin: 0 0 8px; font-family: var(--display);">Portal del Paciente</h2>
+          <p class="muted" style="font-size: 0.92rem; margin: 0 0 20px; line-height: 1.6;">
+            Ficha del paciente, visor de tomografías 3D CBCT, recetas médicas, cuotas y próximos controles.
+          </p>
         </div>
-        <h2 style="font-size: 1.3rem; margin: 0 0 8px; font-family: var(--display);">Portal del Paciente</h2>
-        <p class="muted" style="font-size: 0.9rem; margin: 0 0 16px;">
-          Ficha del paciente, visor de tomografías 3D CBCT, recetas médicas, cuotas y próximos controles.
-        </p>
-      </div>
-      <div style="color: var(--action); font-weight: 700; font-size: 0.9rem;">Ingresar al Portal Paciente →</div>
-    </a>
+        <div style="color: var(--action); font-weight: 700; font-size: 0.95rem;">Ingresar al Portal Paciente →</div>
+      </a>
 
-    <!-- 4. Recepción & Agenda Multi-Sillón -->
-    <a href="/staff/index.html?view=agenda" class="portal-card">
-      <div>
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <div class="portal-icon">🗓️</div>
-          <span class="badge-live">MULTI-SILLÓN</span>
+      <!-- 4. Recepción & Agenda Multi-Sillón -->
+      <a href="/staff/index.html?view=agenda" class="portal-card">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="portal-icon-svg">
+              <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+            <span class="badge-live">MULTI-SILLÓN</span>
+          </div>
+          <h2 style="font-size: 1.4rem; margin: 0 0 8px; font-family: var(--display);">Recepción & Citas</h2>
+          <p class="muted" style="font-size: 0.92rem; margin: 0 0 20px; line-height: 1.6;">
+            Agenda semanal y diaria con 3 sillones en paralelo, filtros por doctor y estados de cita en tiempo real.
+          </p>
         </div>
-        <h2 style="font-size: 1.3rem; margin: 0 0 8px; font-family: var(--display);">Recepción & Citas</h2>
-        <p class="muted" style="font-size: 0.9rem; margin: 0 0 16px;">
-          Agenda semanal y diaria con 3 sillones en paralelo, filtros por doctor y estados de cita en tiempo real.
-        </p>
-      </div>
-      <div style="color: var(--action); font-weight: 700; font-size: 0.9rem;">Abrir Agenda de Citas →</div>
-    </a>
+        <div style="color: var(--action); font-weight: 700; font-size: 0.95rem;">Abrir Agenda de Citas →</div>
+      </a>
 
-    <!-- 5. Consulta & Odontograma 52 Piezas COP -->
-    <a href="/staff/index.html?view=patient" class="portal-card">
-      <div>
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <div class="portal-icon">🩺</div>
-          <span class="badge-live">NTS 188-MINSA</span>
+      <!-- 5. Consulta & Odontograma 52 Piezas COP -->
+      <a href="/staff/index.html?view=patient" class="portal-card">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="portal-icon-svg">
+              <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </div>
+            <span class="badge-live">NTS 188-MINSA</span>
+          </div>
+          <h2 style="font-size: 1.4rem; margin: 0 0 8px; font-family: var(--display);">Consulta & Odontograma</h2>
+          <p class="muted" style="font-size: 0.92rem; margin: 0 0 20px; line-height: 1.6;">
+            Odontograma interactivo de 52 piezas (32 permanentes + 20 deciduas), 5 caras por pieza y plan de tratamiento.
+          </p>
         </div>
-        <h2 style="font-size: 1.3rem; margin: 0 0 8px; font-family: var(--display);">Consulta & Odontograma</h2>
-        <p class="muted" style="font-size: 0.9rem; margin: 0 0 16px;">
-          Odontograma interactivo de 52 piezas (32 permanentes + 20 deciduas), 5 caras por pieza y plan de tratamiento.
-        </p>
-      </div>
-      <div style="color: var(--action); font-weight: 700; font-size: 0.9rem;">Abrir Odontograma 52P →</div>
-    </a>
+        <div style="color: var(--action); font-weight: 700; font-size: 0.95rem;">Abrir Odontograma 52P →</div>
+      </a>
 
-    <!-- 6. Centro de Administración -->
-    <a href="/staff/index.html?view=dashboard" class="portal-card">
-      <div>
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <div class="portal-icon">⚙️</div>
-          <span class="badge-live">KPI & SUNAT</span>
+      <!-- 6. Centro de Administración -->
+      <a href="/staff/index.html?view=dashboard" class="portal-card">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="portal-icon-svg">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            </div>
+            <span class="badge-live">KPI & SUNAT</span>
+          </div>
+          <h2 style="font-size: 1.4rem; margin: 0 0 8px; font-family: var(--display);">Centro de Administración</h2>
+          <p class="muted" style="font-size: 0.92rem; margin: 0 0 20px; line-height: 1.6;">
+            Dashboard de métricas clínicas, ingresos del mes, ocupación de sillones y emisión de comprobantes.
+          </p>
         </div>
-        <h2 style="font-size: 1.3rem; margin: 0 0 8px; font-family: var(--display);">Centro de Administración</h2>
-        <p class="muted" style="font-size: 0.9rem; margin: 0 0 16px;">
-          Dashboard de métricas clínicas, ingresos del mes, ocupación de sillones y emisión de comprobantes.
-        </p>
-      </div>
-      <div style="color: var(--action); font-weight: 700; font-size: 0.9rem;">Abrir Dashboard Admin →</div>
-    </a>
+        <div style="color: var(--action); font-weight: 700; font-size: 0.95rem;">Abrir Dashboard Admin →</div>
+      </a>
+    </div>
   </main>
 
   <footer style="text-align: center; padding: 24px; border-top: 1px solid var(--line); font-size: 0.85rem; color: var(--ink-faint);">
-    Sillar Dental Ecosystem · Alínea Studio · Arequipa, Perú · Prototipo V2.0
+    <div class="container">
+      Ecosistema Odontológico · Alínea Studio & Sillar Dental OS · Arequipa, Perú
+    </div>
   </footer>
+
+  <script>
+    const savedTheme = localStorage.getItem('sd-theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    const themeLabel = document.getElementById('selectorThemeLabel');
+    if (themeLabel) themeLabel.textContent = savedTheme === 'dark' ? 'Oscuro' : 'Claro';
+
+    const selectorThemeBtn = document.getElementById('selectorThemeBtn');
+    if (selectorThemeBtn) {
+      selectorThemeBtn.addEventListener('click', () => {
+        const cur = document.documentElement.getAttribute('data-theme') || 'light';
+        const next = cur === 'light' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('sd-theme', next);
+        if (themeLabel) themeLabel.textContent = next === 'dark' ? 'Oscuro' : 'Claro';
+      });
+    }
+  </script>
 </body>
 </html>

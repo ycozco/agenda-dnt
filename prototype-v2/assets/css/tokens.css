@@ -1,111 +1,79 @@
 /* ==========================================================================
-   SILLAR DENTAL PROTOTYPE V2 - SISTEMA DE COLORIMETRÍA Y TOKENS MAESTROS
-   Regla 60-30-10:
-   - 60% Dominante : Blanco Sillar Cálido / Basalto Profundo (Superficie y Papel)
-   - 30% Estructura : Azul Marino Mineral / Titanio Grafito (Texto y Retículas)
-   - 10% Acento     : Verde Quirúrgico Esmeralda / Terracota Volcánica (Acciones)
+   SILLAR DENTAL & ALÍNEA STUDIO - MASTER COLOR & FLUID TOKENS
    ========================================================================== */
 
 :root, [data-theme="light"] {
-  /* 60% Dominante: Sillar Arequipeño (Base mineral natural) */
-  --paper: #faf9f6;          /* Sillar blanco natural cálido */
-  --surface: #ffffff;        /* Tarjetas y módulos */
-  --surface-dim: #f1f4f9;    /* Paneles secundarios y fondos de sección */
-  --surface-elevated: #ffffff;
-  --line: #d8e2ea;           /* Bordes nítidos de 1px */
-  --line-soft: rgba(10, 37, 64, 0.08);
+  --paper: #FAF9F6;              /* Blanco sillar cálido */
+  --surface: #FFFFFF;            /* Tarjetas y contenedores */
+  --surface-dim: #F2F1EB;        /* Secciones alternadas */
+  --surface-elevated: #FFFFFF;
+  --surface-glass: rgba(250, 249, 246, 0.95);
+  --line: rgba(10, 37, 64, 0.09);
+  --line-soft: rgba(10, 37, 64, 0.05);
 
-  /* 30% Estructura y Lectura: Azul Marino Mineral (Alto contraste WCAG AAA) */
-  --ink: #0a2540;            /* Tinta principal (Contraste 13.8:1 sobre blanco) */
-  --ink-soft: #334e68;       /* Texto secundario y párrafos (7.2:1) */
-  --ink-faint: #627d98;      /* Metadatos y etiquetas (4.8:1) */
-  --ink-inverse: #ffffff;
+  --ink: #0A2540;                /* Azul marino mineral oscuro (14.2:1) */
+  --ink-soft: #475569;           /* Texto secundario (7.5:1) */
+  --ink-faint: #64748B;          /* Metadatos y etiquetas */
+  --ink-inverse: #FFFFFF;
 
-  /* 10% Acento & Acción: Esmeralda Clínico y Terracota Volcánica */
-  --action: #007a55;         /* CTA Principal: Verde esmeralda de confianza */
-  --action-hover: #005e41;
-  --action-soft: #e6f7f2;
-  --blue: #0284c7;           /* Precisión tecnológica y diagnóstico 3D */
-  --blue-deep: #0a2540;
-  --blue-soft: #e0f2fe;
-  --teal: #007a55;
-  --teal-soft: #e6f7f2;
-  --terracotta: #c25438;     /* Acento volcánico (Yanahuara / Misti) */
-  --terracotta-soft: #fdf2ef;
-  --amber: #b45309;
-  --amber-soft: #fef3c7;
-  --green: #007a55;
-  --green-soft: #e6f7f2;
-  --danger: #dc2626;
-  --danger-soft: #fee2e2;
+  --action: #007A55;             /* Esmeralda clínico principal */
+  --action-hover: #005F42;
+  --action-soft: #E6F7F2;
+  --action-glow: rgba(0, 122, 85, 0.2);
 
-  /* Elevación y Sombras */
-  --shadow: 0 16px 36px rgba(10, 37, 64, 0.07);
-  --shadow-small: 0 4px 14px rgba(10, 37, 64, 0.05);
-  --shadow-elevated: 0 24px 48px rgba(10, 37, 64, 0.12);
-  --radius: 12px;
-  --radius-small: 8px;
-  --radius-large: 18px;
+  --blue: #0284C7;               /* Diagnóstico digital 3D */
+  --blue-soft: #E0F2FE;
+  --terracotta: #C25438;         /* Acento volcánico Arequipa */
+  --terracotta-soft: #FDF2EF;
+  --amber: #D97706;
+  --amber-soft: #FEF3C7;
+  --danger: #DC2626;
+  --danger-soft: #FEE2E2;
 
-  /* Tipografía Editorial */
-  --font: 'Source Sans 3', system-ui, -apple-system, sans-serif;
-  --display: 'Manrope', system-ui, sans-serif;
-  --mono: 'Fira Code', ui-monospace, monospace;
+  --shadow-small: 0 4px 14px rgba(10, 37, 64, 0.04);
+  --shadow: 0 16px 36px rgba(10, 37, 64, 0.06);
+  --shadow-elevated: 0 24px 50px rgba(10, 37, 64, 0.1);
 
-  /* Compatibilidad con variables Stitch --sd-* */
-  --sd-surface: #faf9f6;
-  --sd-surface-card: #ffffff;
-  --sd-on-surface: #0a2540;
-  --sd-primary: #0a2540;
-  --sd-secondary: #007a55;
-  --sd-accent-green: #007a55;
-  --sd-border: rgba(10, 37, 64, 0.12);
+  --container-max: 1560px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 999px;
+
+  --font: 'Source Sans 3', -apple-system, sans-serif;
+  --display: 'Manrope', -apple-system, sans-serif;
+  --mono: 'Fira Code', monospace;
 }
 
-[data-theme="dark"], .dark {
-  /* 60% Dominante: Basalto Profundo (Mineral nocturno) */
-  --paper: #07131f;          /* Fondo basalto mineral */
-  --surface: #0c1e30;        /* Superficie de tarjetas */
-  --surface-dim: #050e18;    /* Paneles profundos */
-  --surface-elevated: #11273e;
-  --line: #1c354e;
-  --line-soft: rgba(212, 228, 250, 0.1);
+[data-theme="dark"] {
+  --paper: #050D17;              /* Obsidiana mineral profunda */
+  --surface: #0A1828;            /* Tarjetas elevadas */
+  --surface-dim: #071320;        /* Secciones alternadas */
+  --surface-elevated: #0F2236;
+  --surface-glass: rgba(5, 13, 23, 0.96);
+  --line: rgba(255, 255, 255, 0.08);
+  --line-soft: rgba(255, 255, 255, 0.04);
 
-  /* 30% Estructura y Lectura: Titanio Claro (Alto contraste WCAG AAA) */
-  --ink: #e2e8f0;            /* Tinta principal (Contraste 14.1:1 sobre basalto) */
-  --ink-soft: #94a3b8;       /* Texto secundario (7.5:1) */
-  --ink-faint: #64748b;      /* Metadatos (4.6:1) */
-  --ink-inverse: #07131f;
+  --ink: #F8FAFC;                /* Blanco nítido */
+  --ink-soft: #94A3B8;           /* Texto secundario claro */
+  --ink-faint: #64748B;
+  --ink-inverse: #050D17;
 
-  /* 10% Acento & Acción: Verde Neón Quirúrgico y Acento Cálido */
-  --action: #10b981;         /* CTA Principal: Verde brillante en modo oscuro */
+  --action: #10B981;             /* Esmeralda vibrante */
   --action-hover: #059669;
-  --action-soft: rgba(16, 185, 129, 0.15);
-  --blue: #38bdf8;
-  --blue-deep: #b9c7e4;
-  --blue-soft: #0c2742;
-  --teal: #10b981;
-  --teal-soft: rgba(16, 185, 129, 0.15);
-  --terracotta: #fb7185;
+  --action-soft: rgba(16, 185, 129, 0.14);
+  --action-glow: rgba(16, 185, 129, 0.3);
+
+  --blue: #38BDF8;               /* Cyan brillante */
+  --blue-soft: rgba(56, 189, 248, 0.15);
+  --terracotta: #FB7185;
   --terracotta-soft: rgba(251, 113, 133, 0.15);
-  --amber: #fbbf24;
-  --amber-soft: rgba(251, 191, 36, 0.12);
-  --green: #10b981;
-  --green-soft: rgba(16, 185, 129, 0.15);
-  --danger: #f87171;
-  --danger-soft: rgba(248, 113, 113, 0.2);
+  --amber: #FBBF24;
+  --amber-soft: rgba(251, 191, 36, 0.15);
+  --danger: #F87171;
+  --danger-soft: rgba(248, 113, 113, 0.15);
 
-  /* Elevación y Sombras */
-  --shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
-  --shadow-small: 0 4px 14px rgba(0, 0, 0, 0.4);
-  --shadow-elevated: 0 24px 48px rgba(0, 0, 0, 0.8);
-
-  /* Compatibilidad con variables Stitch --sd-* */
-  --sd-surface: #07131f;
-  --sd-surface-card: #0c1e30;
-  --sd-on-surface: #e2e8f0;
-  --sd-primary: #b9c7e4;
-  --sd-secondary: #10b981;
-  --sd-accent-green: #10b981;
-  --sd-border: rgba(212, 228, 250, 0.12);
+  --shadow-small: 0 4px 16px rgba(0, 0, 0, 0.3);
+  --shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+  --shadow-elevated: 0 24px 60px rgba(0, 0, 0, 0.7);
 }
