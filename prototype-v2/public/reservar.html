@@ -614,9 +614,53 @@ h3 {
           🌓 <span id="themeLabel">Modo</span>
         </button>
         <a href="/patient/index.html" class="portal-btn">Portal Paciente ↗</a>
+      
+        <button class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Abrir Menú" onclick="window.openMobileDrawer()">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/>
+          </svg>
+        </button>
+  
       </div>
     </div>
   </header>
+
+  <!-- DRAWER OFF-CANVAS -->
+  <div class="drawer-backdrop" id="mobileDrawerBackdrop" onclick="window.handleBackdropClick(event)">
+    <div class="drawer-panel" id="mobileDrawerPanel">
+      <div>
+        <div class="drawer-header">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div class="nav-brand-svg" style="width: 38px; height: 38px; min-width: 38px; min-height: 38px;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <path d="M7 20c-1.5 0-3-1-3-3.5 0-2.5 1-4 2-6 1-2 1-3.5 1-4.5 0-2 1.5-3 3-3s2 1 2 1 1-1 2-1 3 1 3 3c0 1 0 2.5 1 4.5 1 2 2 3.5 2 6 0 2.5-1.5 3.5-3 3.5-1.5 0-2.5-1-3-2.5-.5 1.5-1.5 2.5-3 2.5z"/>
+              </svg>
+            </div>
+            <div>
+              <strong style="font-family: var(--display); font-size: 1.15rem; color: var(--ink); display: block;">Alínea Studio</strong>
+              <span class="tiny muted">Yanahuara, Arequipa</span>
+            </div>
+          </div>
+          <button class="drawer-close-btn" aria-label="Cerrar Menú" onclick="window.closeMobileDrawer()">✕</button>
+        </div>
+
+        <nav class="drawer-links-list">
+          <a href="index.html" class="drawer-link-item"><span>🏠 Inicio Alínea Studio</span> <span>→</span></a>
+          <a href="index.html#alineadores" class="drawer-link-item"><span>✨ Alineadores Invisibles 3D</span> <span>→</span></a>
+          <a href="especialidades.html" class="drawer-link-item"><span>🦷 Especialidades Clínicas</span> <span>→</span></a>
+          <a href="equipo.html" class="drawer-link-item"><span>👨‍⚕️ Ortodoncistas COP</span> <span>→</span></a>
+          <a href="contacto.html" class="drawer-link-item"><span>📍 Sede Yanahuara</span> <span>→</span></a>
+          <a href="/patient/index.html" class="drawer-link-item" style="color: var(--action);"><span>👤 Portal Paciente</span> <span>↗</span></a>
+          <a href="saas.html" class="drawer-link-item" style="color: #0284C7;"><span>💼 Software SaaS Clínicas</span> <span>↗</span></a>
+        </nav>
+      </div>
+
+      <div style="display: grid; gap: 12px; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--line);">
+        <a href="https://wa.me/51954123456" target="_blank" class="btn btn-secondary" style="width: 100%;">💬 WhatsApp Yanahuara</a>
+      </div>
+    </div>
+  </div>
+  
 
   <main class="booking-wrapper">
     <div class="container-fluid" style="max-width: 980px;">
@@ -940,6 +984,24 @@ h3 {
     };
 
     renderStep();
+  
+    const drawerBackdrop = document.getElementById('mobileDrawerBackdrop');
+    window.openMobileDrawer = function() {
+      if (drawerBackdrop) {
+        drawerBackdrop.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    };
+    window.closeMobileDrawer = function() {
+      if (drawerBackdrop) {
+        drawerBackdrop.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    };
+    window.handleBackdropClick = function(e) {
+      if (e.target === drawerBackdrop) window.closeMobileDrawer();
+    };
+  
   </script>
 </body>
 </html>
