@@ -1,398 +1,204 @@
 /* ==========================================================================
-   ALÍNEA STUDIO & SILLAR DENTAL ECOSYSTEM - UNIVERSAL COMPONENTS
+   ALÍNEA STUDIO & SILLAR DENTAL - ANIMATIONS & POLISHED MICRO-INTERACTIONS
    ========================================================================== */
 
-/* 1. Top Bar de Sede Yanahuara */
-.top-clinic-bar {
-  background: var(--ink);
-  color: #ffffff;
-  font-size: 0.82rem;
-  font-family: var(--display);
-  padding: 8px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  transition: background 0.2s ease;
-}
-.top-clinic-inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-.top-clinic-info {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.top-clinic-actions {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-.top-saas-link {
-  color: #38bdf8;
-  font-weight: 700;
-  text-decoration: none;
-}
-.top-saas-link:hover {
-  text-decoration: underline;
+/* 1. Keyframes de Animación */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* 2. Cabecera Principal y Navbar Responsivo */
-.main-header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: rgba(250, 249, 246, 0.96);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--line);
-  transition: background-color 0.2s ease, border-color 0.2s ease;
-}
-[data-theme="dark"] .main-header {
-  background: rgba(7, 19, 31, 0.96);
-}
-.main-header-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 76px;
-  max-width: 1280px;
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-/* Brand Lockup */
-.nav-brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  text-decoration: none;
-  color: var(--ink);
-  flex-shrink: 0;
-}
-.nav-brand-badge {
-  width: 42px;
-  height: 42px;
-  background: var(--action);
-  color: white;
-  border-radius: 12px;
-  display: grid;
-  place-items: center;
-  font-size: 1.3rem;
-  box-shadow: 0 4px 12px rgba(0, 122, 85, 0.25);
-}
-.nav-brand-text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.15;
-}
-.nav-brand-title {
-  font-family: var(--display);
-  font-weight: 800;
-  font-size: 1.22rem;
-  letter-spacing: -0.02em;
-  color: var(--ink);
-}
-.nav-brand-sub {
-  font-size: 0.72rem;
-  font-weight: 600;
-  color: var(--ink-soft);
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+@keyframes floatBadge {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
 }
 
-/* Nav Menu Desktop */
-.main-nav {
-  display: flex;
-  align-items: center;
-  gap: 24px;
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 var(--action-glow);
+  }
+  50% {
+    box-shadow: 0 0 20px 4px var(--action-glow);
+  }
 }
-.nav-item {
-  color: var(--ink-soft);
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 0.92rem;
-  transition: color 0.15s ease;
-  padding: 6px 0;
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* 2. Clases de Utilidad de Animación */
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-float {
+  animation: floatBadge 4s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 3s infinite;
+}
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 3. Sticky Header con Elevación Dinámica */
+.main-header.is-scrolled {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  background: var(--surface-glass);
+}
+[data-theme="dark"] .main-header.is-scrolled {
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
+}
+
+/* 4. Botones y Microinteracciones */
+.btn {
   position: relative;
+  overflow: hidden;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.nav-item:hover, .nav-item.active {
-  color: var(--action);
-}
-.nav-item.active::after {
+
+.btn::after {
   content: '';
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: var(--action);
-  border-radius: 2px;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transform: skewX(-20deg);
+  transition: none;
 }
 
-/* Acciones en Navbar */
-.main-header-cta {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-.portal-patient-link {
-  color: var(--action);
-  font-weight: 700;
-  font-size: 0.88rem;
-  text-decoration: none;
-}
-.theme-toggle-pill {
-  padding: 6px 14px;
-  border-radius: 999px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  color: var(--ink);
-  font-size: 0.82rem;
-  font-weight: 700;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  transition: all 0.15s ease;
-}
-.theme-toggle-pill:hover {
-  border-color: var(--action);
-  transform: translateY(-1px);
+.btn:hover::after {
+  left: 150%;
+  transition: left 0.65s ease-in-out;
 }
 
-/* Botón Hamburguesa Móvil */
-.mobile-menu-btn {
-  display: none;
-  width: 42px;
-  height: 42px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 5px;
-  cursor: pointer;
-}
-.mobile-menu-btn .bar {
-  width: 20px;
-  height: 2px;
-  background: var(--ink);
-  border-radius: 2px;
-  transition: all 0.2s ease;
-}
-
-/* Mobile Drawer */
-.mobile-drawer {
-  display: none;
-  background: var(--surface);
-  border-bottom: 1px solid var(--line);
-  padding: 16px 24px;
-  box-shadow: var(--shadow);
-}
-.mobile-drawer.active {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-.mobile-drawer-link {
-  color: var(--ink);
-  font-weight: 600;
-  font-size: 0.95rem;
-  text-decoration: none;
-  padding: 8px 0;
-  border-bottom: 1px solid var(--line-soft);
-}
-
-/* 3. Stepper Clínico Responsivo (reservar.html) */
-.stepper-nav {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  margin-bottom: 36px;
-}
-.stepper-pill {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  padding: 14px 16px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  transition: all 0.2s ease;
-}
-.stepper-pill.active {
-  border-color: var(--action);
-  background: var(--action-soft);
-}
-.stepper-circle {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: var(--paper);
-  border: 2px solid var(--line);
-  color: var(--ink-soft);
-  display: grid;
-  place-items: center;
-  font-weight: 800;
-  font-size: 0.88rem;
-  font-family: var(--mono);
-}
-.stepper-pill.active .stepper-circle {
-  background: var(--action);
-  border-color: var(--action);
-  color: white;
-}
-.stepper-title {
-  font-family: var(--display);
-  font-size: 0.88rem;
-  font-weight: 700;
-  color: var(--ink);
-}
-
-/* 4. Footer Universal */
-.universal-footer {
-  background: var(--ink);
-  color: #ffffff;
-  padding: 70px 0 30px;
-  margin-top: 80px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-.footer-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1.5fr;
-  gap: 40px;
-  margin-bottom: 40px;
-}
-.footer-bottom {
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding-top: 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 14px;
-  font-size: 0.8rem;
-  color: #94a3b8;
-}
-
-/* Botones y Chips Estándar */
-.btn {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  min-height: 44px;
-  border: 1px solid transparent;
-  border-radius: 12px;
-  padding: 0 22px;
-  font-weight: 700;
-  font-size: 0.92rem;
-  transition: all 0.18s ease;
-  cursor: pointer;
-  text-decoration: none;
-  font-family: var(--display);
-}
-.btn-primary {
-  background: var(--action);
-  color: white;
-  box-shadow: 0 6px 18px rgba(0, 122, 85, 0.24);
-}
 .btn-primary:hover {
-  background: var(--action-hover);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px var(--action-glow);
 }
-.btn-secondary {
-  background: var(--surface);
-  border-color: var(--line);
-  color: var(--ink);
-}
+
 .btn-secondary:hover {
-  background: var(--paper);
+  transform: translateY(-2px);
   border-color: var(--action);
 }
-.btn-small {
-  min-height: 36px;
-  padding: 0 16px;
-  font-size: 0.84rem;
+
+/* 5. Tarjetas con Borde Resplandeciente (Glow Border) */
+.card, .case-card, .compare-card, .price-card, .doctor-card {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.chip {
+.case-card:hover, .compare-card:hover, .price-card:hover, .doctor-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-elevated);
+}
+
+[data-theme="dark"] .case-card:hover,
+[data-theme="dark"] .compare-card:hover,
+[data-theme="dark"] .price-card:hover,
+[data-theme="dark"] .doctor-card:hover {
+  border-color: rgba(16, 185, 129, 0.4);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6), 0 0 20px rgba(16, 185, 129, 0.1);
+}
+
+/* 6. Custom Interactive Slider */
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 8px;
+  background: var(--line);
+  border-radius: 4px;
+  outline: none;
+  transition: background 0.2s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--action);
+  cursor: pointer;
+  box-shadow: 0 2px 8px var(--action-glow);
+  border: 3px solid var(--surface);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: 0 4px 14px var(--action-glow);
+}
+
+/* 7. Comparador Interactivo Antes / Después */
+.interactive-toggle-group {
   display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  border-radius: 999px;
-  padding: 4px 12px;
-  font-size: 0.76rem;
-  font-weight: 700;
-  background: var(--blue-soft);
-  color: var(--blue);
-}
-.chip-success {
-  background: var(--action-soft);
-  color: var(--action);
-}
-.chip-neutral {
-  background: var(--surface);
-  color: var(--ink-soft);
+  padding: 4px;
+  background: var(--surface-dim);
   border: 1px solid var(--line);
+  border-radius: var(--radius-full);
+  gap: 4px;
 }
 
-.card {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-large);
-  padding: 28px;
-  box-shadow: var(--shadow-small);
+.interactive-toggle-btn {
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+  cursor: pointer;
   transition: all 0.2s ease;
 }
 
-/* Forms & Inputs */
-.form-control, .form-select, .form-textarea {
-  width: 100%;
-  padding: 12px 14px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-small);
-  background: var(--surface);
-  color: var(--ink);
-  font-family: var(--font);
-  font-size: 0.92rem;
-  transition: border-color .15s ease, box-shadow .15s ease;
-  box-sizing: border-box;
-}
-.form-control:focus, .form-select:focus, .form-textarea:focus {
-  border-color: var(--action);
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(0, 122, 85, 0.18);
+.interactive-toggle-btn.active {
+  background: var(--action);
+  color: white;
+  box-shadow: 0 2px 8px var(--action-glow);
 }
 
-/* Media Queries de Resize */
-@media (max-width: 1024px) {
-  .main-nav {
-    display: none;
-  }
-  .mobile-menu-btn {
-    display: flex;
-  }
-  .header-book-btn {
-    display: none;
-  }
-  .footer-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-  .stepper-nav {
-    grid-template-columns: repeat(2, 1fr);
-  }
+/* 8. Stepper Dinámico con Transiciones Suaves */
+.step-content-anim {
+  animation: fadeInUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-@media (max-width: 640px) {
-  .top-clinic-bar {
-    display: none;
+/* 9. Accesibilidad: Reducción de Movimiento */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.001s !important;
+    transition-duration: 0.001s !important;
   }
-  .footer-grid {
-    grid-template-columns: 1fr;
-  }
-  .stepper-nav {
-    grid-template-columns: 1fr;
+  .reveal-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }

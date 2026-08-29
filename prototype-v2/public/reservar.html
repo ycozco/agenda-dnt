@@ -29,72 +29,118 @@
     .booking-card-main {
       background: var(--surface);
       border: 1px solid var(--line);
-      border-radius: var(--radius-large);
-      padding: 36px;
-      box-shadow: var(--shadow);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      box-shadow: var(--shadow-elevated);
+      transition: all 0.25s ease;
     }
     .selection-grid {
       display: grid;
-      gap: 12px;
+      gap: 14px;
       margin-bottom: 28px;
     }
     .selection-item {
       background: var(--surface);
       border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 16px 20px;
+      border-radius: var(--radius-md);
+      padding: 18px 24px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       cursor: pointer;
-      transition: all 0.15s ease;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .selection-item:hover {
       border-color: var(--action);
-      transform: translateY(-2px);
+      transform: translateY(-3px);
       box-shadow: var(--shadow-small);
     }
     .selection-item.selected {
       border-color: var(--action);
       background: var(--action-soft);
+      box-shadow: 0 0 0 2px var(--action-glow);
     }
     .time-slot-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-      gap: 10px;
-      margin-top: 14px;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
     }
     .time-slot-btn {
       background: var(--surface);
       border: 1px solid var(--line);
-      border-radius: 10px;
-      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
       font-family: var(--mono);
-      font-size: 0.9rem;
+      font-size: 0.92rem;
       font-weight: 700;
       color: var(--ink);
       text-align: center;
       cursor: pointer;
-      transition: all 0.15s ease;
+      transition: all 0.18s ease;
     }
     .time-slot-btn:hover {
       border-color: var(--action);
       color: var(--action);
+      transform: translateY(-2px);
     }
     .time-slot-btn.selected {
       background: var(--action);
       color: white;
       border-color: var(--action);
+      box-shadow: 0 4px 12px var(--action-glow);
     }
   </style>
 </head>
 <body>
 
-  <div id="headerApp"></div>
+  <!-- Top Bar -->
+  <div class="top-clinic-bar">
+    <div class="container top-clinic-inner">
+      <div>
+        📍 <strong>Sede Yanahuara:</strong> Av. Ejército 712 · Abierto hoy hasta las 8:00 PM
+      </div>
+      <div style="display: flex; gap: 24px; align-items: center;">
+        <span>📞 Central: (054) 283-910</span>
+        <a href="saas.html" style="color: #38bdf8; text-decoration: none; font-weight: 700;">💼 ¿Eres odontólogo? Ver Software SaaS →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="main-header" id="mainHeader">
+    <div class="container main-header-inner">
+      <a href="index.html" class="nav-brand">
+        <div class="nav-brand-svg">
+          <svg viewBox="0 0 24 24">
+            <path d="M7 20c-1.5 0-3-1-3-3.5 0-2.5 1-4 2-6 1-2 1-3.5 1-4.5 0-2 1.5-3 3-3s2 1 2 1 1-1 2-1 3 1 3 3c0 1 0 2.5 1 4.5 1 2 2 3.5 2 6 0 2.5-1.5 3.5-3 3.5-1.5 0-2.5-1-3-2.5-.5 1.5-1.5 2.5-3 2.5z"/>
+          </svg>
+        </div>
+        <div class="nav-brand-text">
+          <span class="nav-brand-title">Alínea Studio</span>
+          <span class="nav-brand-sub">Corrección Dental & Especialidades</span>
+        </div>
+      </a>
+
+      <nav class="main-nav">
+        <a href="index.html" class="nav-item">← Volver al Inicio</a>
+        <a href="index.html#alineadores" class="nav-item">Alineadores 3D</a>
+        <a href="index.html#precios" class="nav-item">Precios & Cuotas</a>
+        <a href="contacto.html" class="nav-item">Sede Yanahuara</a>
+      </nav>
+
+      <div class="main-header-cta">
+        <button id="themeToggleBtn" class="theme-toggle-btn">
+          🌓 <span id="themeLabel">Modo</span>
+        </button>
+        <a href="/patient/index.html" class="portal-link-btn">Portal Paciente ↗</a>
+      </div>
+    </div>
+  </header>
 
   <main class="booking-wrapper">
-    <div class="container" style="max-width: 880px;">
-      <div style="text-align: center; margin-bottom: 36px;">
+    <div class="container" style="max-width: 960px;">
+      <div style="text-align: center; margin-bottom: 36px;" class="animate-fade-in-up">
         <span class="chip chip-success" style="margin-bottom: 8px;">Reserva Rápida en 4 Pasos</span>
         <h1 style="font-family: var(--display); font-size: clamp(2rem, 3.5vw, 2.6rem); font-weight: 800; margin: 0 0 10px; color: var(--ink);">
           Agenda tu Evaluación Clínica
@@ -105,7 +151,7 @@
       </div>
 
       <!-- Stepper Nav Responsivo -->
-      <div class="stepper-nav">
+      <div class="stepper-nav animate-fade-in-up" style="animation-delay: 0.1s;">
         <div class="stepper-pill active" id="stepPill1">
           <div class="stepper-circle">1</div>
           <div>
@@ -137,20 +183,35 @@
       </div>
 
       <!-- Card Dinámica del Formulario -->
-      <div class="booking-card-main" id="bookingCard">
+      <div class="booking-card-main animate-fade-in-up" style="animation-delay: 0.15s;" id="bookingCard">
         <!-- Renderizado dinámico vía JavaScript -->
       </div>
     </div>
   </main>
 
-  <div id="footerApp"></div>
+  <footer class="universal-footer">
+    <div class="container" style="text-align: center; font-size: 0.85rem; color: #94a3b8;">
+      © 2026 Alínea Studio Dental · Av. Ejército 712, Yanahuara, Arequipa · Central (054) 283-910
+    </div>
+  </footer>
 
-  <script type="module">
-    import { renderPublicHeader, renderPublicFooter, setupHeaderInteractions, showToast } from '../assets/js/components.js';
+  <script>
+    // Inicializar Tema
+    const savedTheme = localStorage.getItem('sd-theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    const themeLabel = document.getElementById('themeLabel');
+    if (themeLabel) themeLabel.textContent = savedTheme === 'dark' ? 'Oscuro' : 'Claro';
 
-    document.getElementById("headerApp").innerHTML = renderPublicHeader("reservar");
-    document.getElementById("footerApp").innerHTML = renderPublicFooter();
-    setupHeaderInteractions();
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    if (themeToggleBtn) {
+      themeToggleBtn.addEventListener('click', () => {
+        const cur = document.documentElement.getAttribute('data-theme') || 'light';
+        const next = cur === 'light' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('sd-theme', next);
+        if (themeLabel) themeLabel.textContent = next === 'dark' ? 'Oscuro' : 'Claro';
+      });
+    }
 
     const treatments = [
       { id: "ortodoncia", name: "Ortodoncia & Alineadores Invisibles", desc: "Corrección biomecánica sin brackets metálicos", time: "45 min", badge: "Más Solicitado", icon: "✨" },
@@ -170,7 +231,6 @@
 
     const timeSlots = ["08:30 AM", "09:30 AM", "10:30 AM", "11:30 AM", "03:30 PM", "04:30 PM", "05:30 PM", "06:30 PM"];
 
-    // Leer parámetro URL
     const urlParams = new URLSearchParams(window.location.search);
     const initialSpec = urlParams.get('specialty') || 'ortodoncia';
 
@@ -184,7 +244,7 @@
       for (let i = 1; i <= 4; i++) {
         const pill = document.getElementById(`stepPill${i}`);
         if (i === currentStep) {
-          pill.className = "stepper-pill active";
+          pill.className = "stepper-pill active animate-pulse-glow";
         } else if (i < currentStep) {
           pill.className = "stepper-pill active";
         } else {
@@ -197,145 +257,153 @@
       updatePills();
       const card = document.getElementById("bookingCard");
 
-      // PASO 1: TRATAMIENTO
+      // PASO 1
       if (currentStep === 1) {
         card.innerHTML = `
-          <h2 style="font-family: var(--display); font-size: 1.4rem; margin: 0 0 8px;">Paso 1: Selecciona el Tratamiento</h2>
-          <p class="muted" style="margin-bottom: 24px;">Elige el motivo de tu consulta médica.</p>
+          <div class="step-content-anim">
+            <h2 style="font-family: var(--display); font-size: 1.4rem; margin: 0 0 8px;">Paso 1: Selecciona el Tratamiento</h2>
+            <p class="muted" style="margin-bottom: 24px;">Elige el motivo de tu consulta médica.</p>
 
-          <div class="selection-grid">
-            ${treatments.map(t => `
-              <div class="selection-item ${selectedTreatment.id === t.id ? 'selected' : ''}" onclick="window.setTreatment('${t.id}')">
-                <div style="display: flex; align-items: center; gap: 14px;">
-                  <span style="font-size: 1.5rem;">${t.icon}</span>
-                  <div>
-                    <strong style="font-family: var(--display); font-size: 1.05rem; display: block; color: var(--ink);">${t.name}</strong>
-                    <span class="muted" style="font-size: 0.85rem;">${t.desc}</span>
+            <div class="selection-grid">
+              ${treatments.map(t => `
+                <div class="selection-item ${selectedTreatment.id === t.id ? 'selected' : ''}" onclick="window.setTreatment('${t.id}')">
+                  <div style="display: flex; align-items: center; gap: 14px;">
+                    <span style="font-size: 1.5rem;">${t.icon}</span>
+                    <div>
+                      <strong style="font-family: var(--display); font-size: 1.05rem; display: block; color: var(--ink);">${t.name}</strong>
+                      <span class="muted" style="font-size: 0.85rem;">${t.desc}</span>
+                    </div>
                   </div>
-                </div>
-                <div style="text-align: right;">
-                  <span class="chip chip-neutral" style="font-size: 0.72rem;">${t.badge}</span>
-                </div>
-              </div>
-            `).join('')}
-          </div>
-
-          <div style="display: flex; justify-content: flex-end; margin-top: 24px;">
-            <button class="btn btn-primary" onclick="window.nextStep()">
-              Continuar al Paso 2 →
-            </button>
-          </div>
-        `;
-      }
-      // PASO 2: ESPECIALISTA
-      else if (currentStep === 2) {
-        card.innerHTML = `
-          <h2 style="font-family: var(--display); font-size: 1.4rem; margin: 0 0 8px;">Paso 2: Elige a tu Especialista</h2>
-          <p class="muted" style="margin-bottom: 24px;">Todos nuestros doctores cuentan con número de colegiatura COP verificado.</p>
-
-          <div class="selection-grid">
-            ${doctors.map(d => `
-              <div class="selection-item ${selectedDoctor.id === d.id ? 'selected' : ''}" onclick="window.setDoctor('${d.id}')">
-                <div style="display: flex; align-items: center; gap: 16px;">
-                  <img src="${d.img}" style="width: 52px; height: 52px; border-radius: 12px; object-fit: cover;">
-                  <div>
-                    <strong style="font-family: var(--display); font-size: 1.05rem; display: block; color: var(--ink);">${d.name}</strong>
-                    <span style="color: var(--action); font-size: 0.85rem; font-weight: 600;">${d.specialty}</span>
+                  <div style="text-align: right;">
+                    <span class="chip chip-neutral" style="font-size: 0.72rem;">${t.badge}</span>
                   </div>
-                </div>
-                <span class="chip chip-success" style="font-family: var(--mono); font-size: 0.72rem;">${d.cop}</span>
-              </div>
-            `).join('')}
-          </div>
-
-          <div style="display: flex; justify-content: space-between; margin-top: 24px;">
-            <button class="btn btn-secondary" onclick="window.prevStep()">← Volver</button>
-            <button class="btn btn-primary" onclick="window.nextStep()">Continuar a Fecha y Hora →</button>
-          </div>
-        `;
-      }
-      // PASO 3: FECHA & HORA
-      else if (currentStep === 3) {
-        card.innerHTML = `
-          <h2 style="font-family: var(--display); font-size: 1.4rem; margin: 0 0 8px;">Paso 3: Selecciona Fecha y Horario</h2>
-          <p class="muted" style="margin-bottom: 24px;">Atención continua de Lunes a Sábado de 8:00 AM a 8:00 PM.</p>
-
-          <div style="margin-bottom: 24px;">
-            <label style="font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 8px;">Fecha de la Consulta:</label>
-            <input type="date" id="bookingDateInput" value="${selectedDate}" class="form-control" style="font-weight: 600;" onchange="window.setDate(this.value)">
-          </div>
-
-          <div>
-            <label style="font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 8px;">Turnos Disponibles para esta Fecha:</label>
-            <div class="time-slot-grid">
-              ${timeSlots.map(t => `
-                <div class="time-slot-btn ${selectedTime === t ? 'selected' : ''}" onclick="window.setTime('${t}')">
-                  ${t}
                 </div>
               `).join('')}
             </div>
-          </div>
 
-          <div style="display: flex; justify-content: space-between; margin-top: 36px;">
-            <button class="btn btn-secondary" onclick="window.prevStep()">← Volver</button>
-            <button class="btn btn-primary" onclick="window.nextStep()">Continuar a Confirmación →</button>
+            <div style="display: flex; justify-content: flex-end; margin-top: 24px;">
+              <button class="btn btn-primary" onclick="window.nextStep()" style="border-radius: var(--radius-full); padding: 14px 28px;">
+                Continuar al Paso 2 →
+              </button>
+            </div>
           </div>
         `;
       }
-      // PASO 4: CONFIRMACIÓN
+      // PASO 2
+      else if (currentStep === 2) {
+        card.innerHTML = `
+          <div class="step-content-anim">
+            <h2 style="font-family: var(--display); font-size: 1.4rem; margin: 0 0 8px;">Paso 2: Elige a tu Especialista</h2>
+            <p class="muted" style="margin-bottom: 24px;">Todos nuestros doctores cuentan con número de colegiatura COP verificado.</p>
+
+            <div class="selection-grid">
+              ${doctors.map(d => `
+                <div class="selection-item ${selectedDoctor.id === d.id ? 'selected' : ''}" onclick="window.setDoctor('${d.id}')">
+                  <div style="display: flex; align-items: center; gap: 16px;">
+                    <img src="${d.img}" style="width: 52px; height: 52px; border-radius: 12px; object-fit: cover;">
+                    <div>
+                      <strong style="font-family: var(--display); font-size: 1.05rem; display: block; color: var(--ink);">${d.name}</strong>
+                      <span style="color: var(--action); font-size: 0.85rem; font-weight: 600;">${d.specialty}</span>
+                    </div>
+                  </div>
+                  <span class="chip chip-success" style="font-family: var(--mono); font-size: 0.72rem;">${d.cop}</span>
+                </div>
+              `).join('')}
+            </div>
+
+            <div style="display: flex; justify-content: space-between; margin-top: 24px;">
+              <button class="btn btn-secondary" onclick="window.prevStep()" style="border-radius: var(--radius-full);">← Volver</button>
+              <button class="btn btn-primary" onclick="window.nextStep()" style="border-radius: var(--radius-full); padding: 14px 28px;">Continuar a Fecha y Hora →</button>
+            </div>
+          </div>
+        `;
+      }
+      // PASO 3
+      else if (currentStep === 3) {
+        card.innerHTML = `
+          <div class="step-content-anim">
+            <h2 style="font-family: var(--display); font-size: 1.4rem; margin: 0 0 8px;">Paso 3: Selecciona Fecha y Horario</h2>
+            <p class="muted" style="margin-bottom: 24px;">Atención continua de Lunes a Sábado de 8:00 AM a 8:00 PM.</p>
+
+            <div style="margin-bottom: 24px;">
+              <label style="font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 8px;">Fecha de la Consulta:</label>
+              <input type="date" id="bookingDateInput" value="${selectedDate}" class="form-control" style="font-weight: 600;" onchange="window.setDate(this.value)">
+            </div>
+
+            <div>
+              <label style="font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 8px;">Turnos Disponibles para esta Fecha:</label>
+              <div class="time-slot-grid">
+                ${timeSlots.map(t => `
+                  <div class="time-slot-btn ${selectedTime === t ? 'selected' : ''}" onclick="window.setTime('${t}')">
+                    ${t}
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; margin-top: 36px;">
+              <button class="btn btn-secondary" onclick="window.prevStep()" style="border-radius: var(--radius-full);">← Volver</button>
+              <button class="btn btn-primary" onclick="window.nextStep()" style="border-radius: var(--radius-full); padding: 14px 28px;">Continuar a Confirmación →</button>
+            </div>
+          </div>
+        `;
+      }
+      // PASO 4
       else if (currentStep === 4) {
         card.innerHTML = `
-          <div style="text-align: center; margin-bottom: 28px;">
-            <div style="width: 56px; height: 56px; background: var(--action-soft); color: var(--action); border-radius: 50%; display: grid; place-items: center; font-size: 1.8rem; margin: 0 auto 14px;">
-              ✓
+          <div class="step-content-anim">
+            <div style="text-align: center; margin-bottom: 28px;">
+              <div style="width: 60px; height: 60px; background: var(--action-soft); color: var(--action); border-radius: 50%; display: grid; place-items: center; font-size: 1.8rem; margin: 0 auto 14px;" class="animate-float">
+                ✓
+              </div>
+              <h2 style="font-family: var(--display); font-size: 1.5rem; margin: 0 0 6px;">Confirma tus Datos de Reserva</h2>
+              <p class="muted" style="font-size: 0.95rem;">Te enviaremos la confirmación instantánea por WhatsApp y correo.</p>
             </div>
-            <h2 style="font-family: var(--display); font-size: 1.5rem; margin: 0 0 6px;">Confirma tus Datos de Reserva</h2>
-            <p class="muted" style="font-size: 0.95rem;">Te enviaremos la confirmación instantánea por WhatsApp y correo.</p>
-          </div>
 
-          <div style="background: var(--paper); border: 1px solid var(--line); border-radius: 16px; padding: 24px; margin-bottom: 28px;">
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-              <div>
-                <span class="tiny muted block">Tratamiento Seleccionado</span>
-                <strong style="color: var(--ink); font-size: 1.05rem;">${selectedTreatment.name}</strong>
-              </div>
-              <div>
-                <span class="tiny muted block">Especialista Asignado</span>
-                <strong style="color: var(--ink); font-size: 1.05rem;">${selectedDoctor.name}</strong>
-              </div>
-              <div>
-                <span class="tiny muted block">Fecha & Turno</span>
-                <strong style="color: var(--action); font-size: 1.05rem;">${selectedDate} · ${selectedTime}</strong>
-              </div>
-              <div>
-                <span class="tiny muted block">Ubicación</span>
-                <strong style="color: var(--ink); font-size: 1.05rem;">Sede Yanahuara (Av. Ejército 712)</strong>
+            <div style="background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 24px; margin-bottom: 28px;">
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                <div>
+                  <span class="tiny muted block">Tratamiento Seleccionado</span>
+                  <strong style="color: var(--ink); font-size: 1.05rem;">${selectedTreatment.name}</strong>
+                </div>
+                <div>
+                  <span class="tiny muted block">Especialista Asignado</span>
+                  <strong style="color: var(--ink); font-size: 1.05rem;">${selectedDoctor.name}</strong>
+                </div>
+                <div>
+                  <span class="tiny muted block">Fecha & Turno</span>
+                  <strong style="color: var(--action); font-size: 1.05rem;">${selectedDate} · ${selectedTime}</strong>
+                </div>
+                <div>
+                  <span class="tiny muted block">Ubicación</span>
+                  <strong style="color: var(--ink); font-size: 1.05rem;">Sede Yanahuara (Av. Ejército 712)</strong>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div style="display: grid; gap: 16px; margin-bottom: 28px;">
-            <div>
-              <label style="font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 6px;">Nombre y Apellidos:</label>
-              <input type="text" class="form-control" placeholder="Ej. Carlos Mendoza" required id="patientName">
-            </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div style="display: grid; gap: 16px; margin-bottom: 28px;">
               <div>
-                <label style="font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 6px;">WhatsApp / Teléfono:</label>
-                <input type="tel" class="form-control" placeholder="954 123 456" required id="patientPhone">
+                <label style="font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 6px;">Nombre y Apellidos:</label>
+                <input type="text" class="form-control" placeholder="Ej. Carlos Mendoza" required id="patientName">
               </div>
-              <div>
-                <label style="font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 6px;">Correo Electrónico:</label>
-                <input type="email" class="form-control" placeholder="carlos@email.com" required id="patientEmail">
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                <div>
+                  <label style="font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 6px;">WhatsApp / Teléfono:</label>
+                  <input type="tel" class="form-control" placeholder="954 123 456" required id="patientPhone">
+                </div>
+                <div>
+                  <label style="font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 6px;">Correo Electrónico:</label>
+                  <input type="email" class="form-control" placeholder="carlos@email.com" required id="patientEmail">
+                </div>
               </div>
             </div>
-          </div>
 
-          <div style="display: flex; justify-content: space-between;">
-            <button class="btn btn-secondary" onclick="window.prevStep()">← Modificar Datos</button>
-            <button class="btn btn-primary" onclick="window.confirmBooking()">
-              Confirmar Cita Médica
-            </button>
+            <div style="display: flex; justify-content: space-between;">
+              <button class="btn btn-secondary" onclick="window.prevStep()" style="border-radius: var(--radius-full);">← Modificar Datos</button>
+              <button class="btn btn-primary" onclick="window.confirmBooking()" style="border-radius: var(--radius-full); padding: 14px 28px;">
+                Confirmar Cita Médica
+              </button>
+            </div>
           </div>
         `;
       }
@@ -380,8 +448,8 @@
       const name = document.getElementById("patientName")?.value || "Paciente";
       const card = document.getElementById("bookingCard");
       card.innerHTML = `
-        <div style="text-align: center; padding: 40px 20px;">
-          <div style="width: 72px; height: 72px; background: var(--action-soft); color: var(--action); border-radius: 50%; display: grid; place-items: center; font-size: 2.2rem; margin: 0 auto 20px;">
+        <div class="step-content-anim" style="text-align: center; padding: 40px 20px;">
+          <div style="width: 72px; height: 72px; background: var(--action-soft); color: var(--action); border-radius: 50%; display: grid; place-items: center; font-size: 2.2rem; margin: 0 auto 20px;" class="animate-float">
             🎉
           </div>
           <h2 style="font-family: var(--display); font-size: 1.8rem; margin: 0 0 10px; color: var(--ink);">
@@ -391,12 +459,11 @@
             Gracias, <strong>${name}</strong>. Hemos agendado tu evaluación de <strong>${selectedTreatment.name}</strong> para el <strong>${selectedDate} a las ${selectedTime}</strong> con <strong>${selectedDoctor.name}</strong>.
           </p>
           <div style="display: flex; justify-content: center; gap: 14px;">
-            <a href="index.html" class="btn btn-secondary">Volver al Inicio</a>
-            <a href="/patient/index.html" class="btn btn-primary">Ver en Portal Paciente</a>
+            <a href="index.html" class="btn btn-secondary" style="border-radius: var(--radius-full);">Volver al Inicio</a>
+            <a href="/patient/index.html" class="btn btn-primary" style="border-radius: var(--radius-full);">Ver en Portal Paciente</a>
           </div>
         </div>
       `;
-      showToast("Cita médica agendada correctamente", "success");
     };
 
     renderStep();
