@@ -1,204 +1,304 @@
 /* ==========================================================================
-   ALÍNEA STUDIO & SILLAR DENTAL - ANIMATIONS & POLISHED MICRO-INTERACTIONS
+   ALÍNEA STUDIO - COMPONENTS & NAVBAR
    ========================================================================== */
 
-/* 1. Keyframes de Animación */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* 1. Top Bar Yanahuara */
+.top-clinic-bar {
+  background: var(--ink);
+  color: #FFFFFF;
+  font-size: 0.85rem;
+  font-family: var(--display);
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+[data-theme="dark"] .top-clinic-bar {
+  background: #02070F;
+}
+.top-clinic-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes floatBadge {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-6px);
-  }
-}
-
-@keyframes pulseGlow {
-  0%, 100% {
-    box-shadow: 0 0 0 0 var(--action-glow);
-  }
-  50% {
-    box-shadow: 0 0 20px 4px var(--action-glow);
-  }
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-/* 2. Clases de Utilidad de Animación */
-.animate-fade-in-up {
-  animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.animate-float {
-  animation: floatBadge 4s ease-in-out infinite;
-}
-
-.animate-pulse-glow {
-  animation: pulseGlow 3s infinite;
-}
-
-.reveal-on-scroll {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
-}
-
-.reveal-on-scroll.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* 3. Sticky Header con Elevación Dinámica */
-.main-header.is-scrolled {
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  background: var(--surface-glass);
-}
-[data-theme="dark"] .main-header.is-scrolled {
-  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
-}
-
-/* 4. Botones y Microinteracciones */
-.btn {
-  position: relative;
-  overflow: hidden;
-  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.btn::after {
-  content: '';
-  position: absolute;
+/* 2. Navbar Moderno de 3 Zonas (Sin Solapamientos) */
+.main-header {
+  position: sticky;
   top: 0;
-  left: -100%;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transform: skewX(-20deg);
-  transition: none;
+  z-index: 100;
+  background: var(--surface-glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--line);
+  width: 100%;
+  transition: all 0.2s ease;
+}
+.main-header.is-scrolled {
+  box-shadow: var(--shadow);
+}
+.main-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 82px;
+  gap: 20px;
 }
 
-.btn:hover::after {
-  left: 150%;
-  transition: left 0.65s ease-in-out;
+/* Zona Izquierda: Logo y Marca */
+.nav-brand-zone {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+  text-decoration: none;
+  min-width: 240px;
+}
+.nav-brand-svg {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  background: var(--action);
+  color: white;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 4px 14px var(--action-glow);
+}
+.nav-brand-svg svg {
+  width: 24px;
+  height: 24px;
+  max-width: 24px;
+  max-height: 24px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+}
+.nav-brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+.nav-brand-title {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 1.28rem;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.nav-brand-sub {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
+/* Zona Central: Enlaces de Navegación */
+.nav-center-zone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  flex: 1;
+}
+.nav-link-item {
+  color: var(--ink-soft);
+  font-weight: 600;
+  font-size: 0.94rem;
+  padding: 8px 12px;
+  border-radius: var(--radius-pill);
+  transition: all 0.18s ease;
+  white-space: nowrap;
+}
+.nav-link-item:hover {
+  color: var(--action);
+  background: var(--action-soft);
+}
+
+/* Zona Derecha: Acciones y Botones */
+.nav-action-zone {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+  flex-shrink: 0;
+  min-width: 320px;
+}
+.theme-pill-btn {
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.15s ease;
+}
+.theme-pill-btn:hover {
+  border-color: var(--action);
+  transform: translateY(-1px);
+}
+.portal-btn {
+  color: var(--action);
+  font-weight: 700;
+  font-size: 0.92rem;
+  padding: 8px 12px;
+  white-space: nowrap;
+}
+
+/* 3. Botones y Chips */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  font-family: var(--display);
+  font-size: 0.94rem;
+  font-weight: 700;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+.btn-primary {
+  background: var(--action);
+  color: #FFFFFF;
+  box-shadow: 0 4px 16px var(--action-glow);
+}
 .btn-primary:hover {
+  background: var(--action-hover);
   transform: translateY(-2px);
-  box-shadow: 0 10px 24px var(--action-glow);
+  box-shadow: 0 8px 24px var(--action-glow);
+}
+.btn-secondary {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--ink);
+}
+.btn-secondary:hover {
+  border-color: var(--action);
+  transform: translateY(-2px);
+}
+.btn-small {
+  padding: 8px 18px;
+  font-size: 0.86rem;
 }
 
-.btn-secondary:hover {
-  transform: translateY(-2px);
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+.chip-success {
+  background: var(--action-soft);
+  color: var(--action);
+}
+.chip-neutral {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+}
+
+/* 4. Tarjetas y Módulos */
+.card-box {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card-box:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow);
   border-color: var(--action);
 }
 
-/* 5. Tarjetas con Borde Resplandeciente (Glow Border) */
-.card, .case-card, .compare-card, .price-card, .doctor-card {
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+/* 5. Stepper Clínico */
+.stepper-nav {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 36px;
 }
-
-.case-card:hover, .compare-card:hover, .price-card:hover, .doctor-card:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-elevated);
-}
-
-[data-theme="dark"] .case-card:hover,
-[data-theme="dark"] .compare-card:hover,
-[data-theme="dark"] .price-card:hover,
-[data-theme="dark"] .doctor-card:hover {
-  border-color: rgba(16, 185, 129, 0.4);
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6), 0 0 20px rgba(16, 185, 129, 0.1);
-}
-
-/* 6. Custom Interactive Slider */
-input[type="range"] {
-  -webkit-appearance: none;
-  width: 100%;
-  height: 8px;
-  background: var(--line);
-  border-radius: 4px;
-  outline: none;
-  transition: background 0.2s ease;
-}
-
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: var(--action);
-  cursor: pointer;
-  box-shadow: 0 2px 8px var(--action-glow);
-  border: 3px solid var(--surface);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-input[type="range"]::-webkit-slider-thumb:hover {
-  transform: scale(1.15);
-  box-shadow: 0 4px 14px var(--action-glow);
-}
-
-/* 7. Comparador Interactivo Antes / Después */
-.interactive-toggle-group {
-  display: inline-flex;
-  padding: 4px;
-  background: var(--surface-dim);
+.stepper-pill {
+  background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: var(--radius-full);
-  gap: 4px;
-}
-
-.interactive-toggle-btn {
-  padding: 8px 18px;
-  border-radius: var(--radius-full);
-  font-size: 0.84rem;
-  font-weight: 700;
-  color: var(--ink-soft);
-  cursor: pointer;
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
   transition: all 0.2s ease;
 }
-
-.interactive-toggle-btn.active {
+.stepper-pill.active {
+  border-color: var(--action);
+  background: var(--action-soft);
+}
+.stepper-circle {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  min-height: 34px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 2px solid var(--line);
+  color: var(--ink-soft);
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 0.9rem;
+  font-family: var(--mono);
+}
+.stepper-pill.active .stepper-circle {
   background: var(--action);
-  color: white;
-  box-shadow: 0 2px 8px var(--action-glow);
+  border-color: var(--action);
+  color: #FFFFFF;
 }
 
-/* 8. Stepper Dinámico con Transiciones Suaves */
-.step-content-anim {
-  animation: fadeInUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+/* 6. Form Controls */
+.form-control, .form-select {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.form-control:focus, .form-select:focus {
+  border-color: var(--action);
+  box-shadow: 0 0 0 3px var(--action-glow);
 }
 
-/* 9. Accesibilidad: Reducción de Movimiento */
-@media (prefers-reduced-motion: reduce) {
-  *, ::before, ::after {
-    animation-duration: 0.001s !important;
-    transition-duration: 0.001s !important;
+/* Responsive */
+@media (max-width: 1180px) {
+  .nav-center-zone {
+    display: none;
   }
-  .reveal-on-scroll {
-    opacity: 1 !important;
-    transform: none !important;
+}
+@media (max-width: 768px) {
+  .top-clinic-bar {
+    display: none;
+  }
+  .stepper-nav {
+    grid-template-columns: 1fr;
+  }
+  .nav-action-zone {
+    min-width: auto;
   }
 }
