@@ -314,6 +314,177 @@
       margin-top: 14px;
     }
   
+  
+    /* ==========================================================================
+       ESTILOS DEL DOSSIER CLÍNICO Y FORMULARIOS SEGMENTADOS
+       ========================================================================== */
+    .segmented-form-section {
+      background: var(--surface-dim);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    .segmented-section-title {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 800;
+      color: var(--ink-soft);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    /* Stepper de Estado Clínico en Detalle */
+    .status-stepper-track {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+      background: var(--surface-dim);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-pill);
+      padding: 6px;
+      margin-bottom: 20px;
+    }
+    .status-step-node {
+      text-align: center;
+      padding: 8px 4px;
+      border-radius: var(--radius-pill);
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--ink-faint);
+      cursor: pointer;
+      transition: all 0.18s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      user-select: none;
+    }
+    .status-step-node:hover {
+      background: var(--surface);
+      color: var(--ink);
+    }
+    .status-step-node.active {
+      background: var(--action);
+      color: #FFFFFF;
+      box-shadow: 0 2px 8px var(--action-glow);
+    }
+    .status-step-node.completed {
+      background: var(--action-soft);
+      color: var(--action);
+    }
+
+    /* Radio Cards para Selección de Sillón & Doctor */
+    .radio-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .radio-card-option {
+      background: var(--surface);
+      border: 2px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-align: left;
+    }
+    .radio-card-option:hover {
+      border-color: var(--action);
+      transform: translateY(-2px);
+    }
+    .radio-card-option.selected {
+      border-color: var(--action);
+      background: var(--action-soft);
+      box-shadow: 0 0 0 2px var(--action-glow);
+    }
+
+    /* Duración Segmentada */
+    .segmented-duration-group {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+    .duration-pill-btn {
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      background: var(--surface);
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--ink);
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .duration-pill-btn:hover {
+      border-color: var(--action);
+    }
+    .duration-pill-btn.selected {
+      background: var(--action);
+      color: white;
+      border-color: var(--action);
+    }
+
+    /* Time Slot Pills */
+    .time-slot-pills-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .time-pill-btn {
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      background: var(--surface);
+      font-family: var(--mono);
+      font-size: 0.84rem;
+      font-weight: 700;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .time-pill-btn:hover {
+      border-color: var(--action);
+      color: var(--action);
+    }
+    .time-pill-btn.selected {
+      background: var(--action);
+      color: white;
+      border-color: var(--action);
+    }
+
+    /* Paciente Dossier Header */
+    .patient-dossier-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px;
+      background: var(--surface-dim);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      margin-bottom: 16px;
+    }
+    .patient-avatar-badge {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--action);
+      color: white;
+      display: grid;
+      place-items: center;
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 12px var(--action-glow);
+    }
+
   </style>
 </head>
 <body>
@@ -1147,35 +1318,91 @@
   </script>
   <script src="../components/prototype-switcher.js"></script>
 
-  <!-- MODAL: DETALLE Y GESTIÓN DE CITA CLÍNICA -->
+  
+  <!-- MODAL: DETALLE Y GESTIÓN DE CITA CLÍNICA (DOSSIER SEGMENTADO) -->
   <div class="drawer-modal-overlay" id="appointmentDetailModal" onclick="window.handleDetailBackdrop(event)">
-    <div class="drawer-modal-card">
+    <div class="drawer-modal-card" style="width: min(640px, 95vw);">
+      <!-- Cabecera Dossier -->
       <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; border-bottom: 1px solid var(--line); padding-bottom: 14px;">
-        <div>
-          <span id="detailAptStatusBadge" class="chip chip-neutral" style="margin-bottom: 6px;">Estado</span>
-          <h2 id="detailPatientName" style="margin: 0; font-size: 1.4rem;">Nombre Paciente</h2>
-          <div id="detailAptTime" class="tiny" style="color: var(--ink-soft); font-weight: 600;">Fecha y Hora</div>
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <div class="patient-avatar-badge" id="detailPatientAvatar">M</div>
+          <div>
+            <h2 id="detailPatientName" style="margin: 0; font-size: 1.35rem; color: var(--ink);">Nombre Paciente</h2>
+            <div id="detailAptTime" class="tiny" style="color: var(--ink-soft); font-weight: 600;">Fecha y Hora</div>
+          </div>
         </div>
         <button class="btn btn-secondary btn-small" onclick="window.closeDetailModal()">✕ Cerrar</button>
       </div>
 
-      <div style="display: grid; gap: 14px; margin-bottom: 22px;">
-        <div style="background: var(--surface-dim); border: 1px solid var(--line); padding: 12px 16px; border-radius: var(--radius-sm);">
-          <div style="font-size: 0.78rem; text-transform: uppercase; color: var(--ink-soft); font-weight: 700; margin-bottom: 4px;">Profesional & Sillón Asignado</div>
-          <div id="detailPractitioner" style="font-weight: 700; color: var(--ink);">Dra. Ana Flores</div>
-          <div id="detailChair" class="tiny" style="color: var(--action); font-weight: 600;">Sillón 1 (Ortodoncia)</div>
+      <!-- STEPPER DE ESTADO CLÍNICO -->
+      <div class="status-stepper-track" id="detailStatusStepper">
+        <div class="status-step-node" id="stepNode_SCHEDULED" onclick="window.updateCurrentAptStatus('SCHEDULED')">
+          <span>1. Programada</span>
         </div>
-
-        <div>
-          <label style="font-weight: 700; font-size: 0.85rem; display: block; margin-bottom: 4px;">Motivo Clínico / Procedimiento:</label>
-          <div id="detailReason" style="font-size: 0.95rem; color: var(--ink); background: var(--surface); padding: 10px 14px; border: 1px solid var(--line); border-radius: 6px;">-</div>
+        <div class="status-step-node" id="stepNode_CONFIRMED" onclick="window.updateCurrentAptStatus('CONFIRMED')">
+          <span>2. Confirmada</span>
         </div>
-
-        <div>
-          <label style="font-weight: 700; font-size: 0.85rem; display: block; margin-bottom: 4px;">Anotaciones Internas:</label>
-          <div id="detailNotes" style="font-size: 0.9rem; color: var(--ink-soft); background: var(--surface); padding: 10px 14px; border: 1px solid var(--line); border-radius: 6px;">-</div>
+        <div class="status-step-node" id="stepNode_IN_WAITING_ROOM" onclick="window.updateCurrentAptStatus('IN_WAITING_ROOM')">
+          <span>3. En Sala</span>
+        </div>
+        <div class="status-step-node" id="stepNode_IN_CHAIR" onclick="window.updateCurrentAptStatus('IN_CHAIR')">
+          <span>4. En Sillón</span>
+        </div>
+        <div class="status-step-node" id="stepNode_COMPLETED" onclick="window.updateCurrentAptStatus('COMPLETED')">
+          <span>5. Atendida</span>
         </div>
       </div>
+
+      <!-- SECCIÓN 1: DATOS CLÍNICOS & SILLÓN -->
+      <div class="segmented-form-section">
+        <div class="segmented-section-title">
+          <span>💺 Asignación Quirúrgica & Especialista</span>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+          <div>
+            <span class="tiny muted">Sillón Asignado:</span>
+            <div id="detailChair" style="font-weight: 700; color: var(--action); font-size: 0.98rem;">Sillón 1 (Ortodoncia)</div>
+          </div>
+          <div>
+            <span class="tiny muted">Doctor COP:</span>
+            <div id="detailPractitioner" style="font-weight: 700; color: var(--ink); font-size: 0.98rem;">Dra. Ana Flores</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 2: MOTIVO Y ANOTACIONES -->
+      <div class="segmented-form-section">
+        <div class="segmented-section-title">
+          <span>📋 Motivo Clínico y Diagnóstico Previo</span>
+        </div>
+        <div id="detailReason" style="font-size: 0.95rem; color: var(--ink); margin-bottom: 10px; font-weight: 600;">-</div>
+        <div class="tiny muted" style="font-weight: 700; text-transform: uppercase; margin-bottom: 4px;">Anotaciones de Recepción / Turno:</div>
+        <div id="detailNotes" style="font-size: 0.88rem; color: var(--ink-soft); line-height: 1.45;">-</div>
+      </div>
+
+      <!-- SECCIÓN 3: BARRA DE ACCIONES INMEDIATAS -->
+      <div style="border-top: 1px solid var(--line); padding-top: 18px;">
+        <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 10px; margin-bottom: 12px;">
+          <button id="btnActionConfirmWa" class="btn btn-primary btn-small" onclick="window.triggerWhatsAppConfirm()">
+            💬 Disparar Recordatorio WhatsApp
+          </button>
+          <button class="btn btn-secondary btn-small" onclick="window.updateCurrentAptStatus('IN_WAITING_ROOM')">
+            🚪 Marcar Llegada ("En Sala")
+          </button>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <a id="btnLinkOdontogram" href="#" class="btn btn-secondary btn-small">
+            🦷 Abrir Odontograma / SOAP
+          </a>
+          <a href="?view=finance" class="btn btn-secondary btn-small">
+            🧾 Emitir Boleta B001 en Caja
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
       <!-- MÁQUINA DE ACCIONES DE ESTADO -->
       <div style="border-top: 1px solid var(--line); padding-top: 18px;">
@@ -1207,81 +1434,115 @@
     </div>
   </div>
 
-  <!-- MODAL: AGENDAR NUEVA CITA RÁPIDA -->
+  
+  <!-- MODAL: AGENDAR NUEVA CITA RÁPIDA (SEGMENTADO Y VISUAL) -->
   <div class="drawer-modal-overlay" id="newAppointmentModal" onclick="window.handleNewBackdrop(event)">
-    <div class="drawer-modal-card">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 1px solid var(--line); padding-bottom: 12px;">
-        <h3 style="margin: 0; font-size: 1.3rem;">🗓️ Agendar Nueva Cita Clínica</h3>
+    <div class="drawer-modal-card" style="width: min(650px, 95vw);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; border-bottom: 1px solid var(--line); padding-bottom: 12px;">
+        <div>
+          <h3 style="margin: 0; font-size: 1.35rem; color: var(--ink);">🗓️ Agendar Cita Clínica</h3>
+          <span class="tiny muted">Sede Yanahuara · Programación Directa</span>
+        </div>
         <button class="btn btn-secondary btn-small" onclick="window.closeNewAptModal()">✕</button>
       </div>
 
-      <form id="newAptForm" onsubmit="window.handleNewAptSubmit(event)" style="display: grid; gap: 14px;">
-        <div>
-          <label style="font-weight: 700; font-size: 0.85rem; display: block; margin-bottom: 6px;">Paciente *</label>
+      <form id="newAptForm" onsubmit="window.handleNewAptSubmit(event)">
+        <!-- PASO 1: PACIENTE -->
+        <div class="segmented-form-section">
+          <div class="segmented-section-title">
+            <span>👤 1. Paciente Registrado</span>
+          </div>
           <select id="newAptPatient" class="form-select" required>
-            <option value="pat_maria">María Quispe Condori (DNI: 45892104)</option>
-            <option value="pat_carlos">Carlos Ramos Delgado (DNI: 29481023)</option>
-            <option value="pat_ana">Ana Beltrán Valdivia (DNI: 72109845)</option>
-            <option value="pat_jorge">Jorge Medina Paz (DNI: 41829012)</option>
-            <option value="pat_elena">Elena Cáceres Zúñiga (DNI: 48910293)</option>
-            <option value="pat_nuevo">+ Registrar Nuevo Paciente...</option>
+            <option value="pat_maria">María Quispe Condori (DNI: 45892104 · Ortodoncia)</option>
+            <option value="pat_carlos">Carlos Ramos Delgado (DNI: 29481023 · Implantes)</option>
+            <option value="pat_ana">Ana Beltrán Valdivia (DNI: 72109845 · Pediatría)</option>
+            <option value="pat_jorge">Jorge Medina Paz (DNI: 41829012 · Endodoncia)</option>
+            <option value="pat_elena">Elena Cáceres Zúñiga (DNI: 48910293 · Rehabilitación)</option>
           </select>
         </div>
 
-        <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 12px;">
-          <div>
-            <label style="font-weight: 700; font-size: 0.85rem; display: block; margin-bottom: 6px;">Fecha *</label>
-            <input type="date" id="newAptDate" class="form-control" required>
+        <!-- PASO 2: SILLÓN CLÍNICO & DOCTOR (RADIO CARDS) -->
+        <div class="segmented-form-section">
+          <div class="segmented-section-title">
+            <span>💺 2. Sillón Físico & Especialista COP</span>
           </div>
-          <div>
-            <label style="font-weight: 700; font-size: 0.85rem; display: block; margin-bottom: 6px;">Hora de Inicio *</label>
-            <input type="time" id="newAptTime" class="form-control" value="10:00" required>
+          <div class="radio-cards-grid">
+            <div class="radio-card-option selected" id="cardChair1" onclick="window.selectChairOption('chair_1', 'pro_ana')">
+              <strong style="font-size: 0.92rem; display: block; color: var(--action);">Sillón 1</strong>
+              <span style="font-size: 0.8rem; font-weight: 700; color: var(--ink);">Ortodoncia 3D</span>
+              <span class="tiny muted" style="display: block; font-size: 0.74rem;">Dra. Ana Flores (COP 18240)</span>
+            </div>
+            <div class="radio-card-option" id="cardChair2" onclick="window.selectChairOption('chair_2', 'pro_carlos')">
+              <strong style="font-size: 0.92rem; display: block; color: var(--blue);">Sillón 2</strong>
+              <span style="font-size: 0.8rem; font-weight: 700; color: var(--ink);">Cirugía / Rehab</span>
+              <span class="tiny muted" style="display: block; font-size: 0.74rem;">Dr. Carlos Mendoza</span>
+            </div>
+            <div class="radio-card-option" id="cardChair3" onclick="window.selectChairOption('chair_3', 'pro_sofia')">
+              <strong style="font-size: 0.92rem; display: block; color: var(--terracotta);">Sillón 3</strong>
+              <span style="font-size: 0.8rem; font-weight: 700; color: var(--ink);">Pediatría / Integ</span>
+              <span class="tiny muted" style="display: block; font-size: 0.74rem;">Dra. Sofía Gutiérrez</span>
+            </div>
           </div>
+          <input type="hidden" id="newAptChair" value="chair_1">
+          <input type="hidden" id="newAptDoctor" value="pro_ana">
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-          <div>
-            <label style="font-weight: 700; font-size: 0.85rem; display: block; margin-bottom: 6px;">Sillón Dental *</label>
-            <select id="newAptChair" class="form-select" required>
-              <option value="chair_1">Sillón 1 (Ortodoncia)</option>
-              <option value="chair_2">Sillón 2 (Cirugía/Rehab)</option>
-              <option value="chair_3">Sillón 3 (Pediatría/Integral)</option>
-            </select>
+        <!-- PASO 3: FECHA, HORARIO & DURACIÓN (SLOT PILLS) -->
+        <div class="segmented-form-section">
+          <div class="segmented-section-title">
+            <span>⏱️ 3. Fecha, Franja Horaria & Duración</span>
           </div>
-          <div>
-            <label style="font-weight: 700; font-size: 0.85rem; display: block; margin-bottom: 6px;">Duración Estimada</label>
-            <select id="newAptDuration" class="form-select">
-              <option value="30">30 min (Control rápido)</option>
-              <option value="45" selected>45 min (Estándar)</option>
-              <option value="60">60 min (Procedimiento)</option>
-              <option value="90">90 min (Cirugía/Implante)</option>
-            </select>
+          <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 12px; margin-bottom: 12px;">
+            <div>
+              <label class="tiny muted" style="font-weight: 700; display: block; margin-bottom: 4px;">Fecha de Atención:</label>
+              <input type="date" id="newAptDate" class="form-control" required>
+            </div>
+            <div>
+              <label class="tiny muted" style="font-weight: 700; display: block; margin-bottom: 4px;">Hora de Inicio:</label>
+              <input type="time" id="newAptTime" class="form-control" value="09:00" required>
+            </div>
           </div>
+
+          <!-- Slots Rápidos -->
+          <div class="tiny muted" style="font-weight: 700; margin-bottom: 6px;">O elige un turno libre rápido:</div>
+          <div class="time-slot-pills-row" style="margin-bottom: 14px;">
+            <div class="time-pill-btn" onclick="window.pickQuickTime('08:30')">08:30 AM</div>
+            <div class="time-pill-btn selected" onclick="window.pickQuickTime('09:00')">09:00 AM</div>
+            <div class="time-pill-btn" onclick="window.pickQuickTime('10:30')">10:30 AM</div>
+            <div class="time-pill-btn" onclick="window.pickQuickTime('11:15')">11:15 AM</div>
+            <div class="time-pill-btn" onclick="window.pickQuickTime('15:00')">03:00 PM</div>
+            <div class="time-pill-btn" onclick="window.pickQuickTime('16:30')">04:30 PM</div>
+            <div class="time-pill-btn" onclick="window.pickQuickTime('17:30')">05:30 PM</div>
+            <div class="time-pill-btn" onclick="window.pickQuickTime('18:30')">06:30 PM</div>
+          </div>
+
+          <!-- Duración Segmentada -->
+          <div class="tiny muted" style="font-weight: 700; margin-bottom: 6px;">Duración estimada del turno:</div>
+          <div class="segmented-duration-group">
+            <div class="duration-pill-btn" id="dur_30" onclick="window.pickDuration(30)">30 min</div>
+            <div class="duration-pill-btn selected" id="dur_45" onclick="window.pickDuration(45)">45 min</div>
+            <div class="duration-pill-btn" id="dur_60" onclick="window.pickDuration(60)">60 min</div>
+            <div class="duration-pill-btn" id="dur_90" onclick="window.pickDuration(90)">90 min</div>
+          </div>
+          <input type="hidden" id="newAptDuration" value="45">
         </div>
 
-        <div>
-          <label style="font-weight: 700; font-size: 0.85rem; display: block; margin-bottom: 6px;">Especialista COP *</label>
-          <select id="newAptDoctor" class="form-select" required>
-            <option value="pro_ana">Dra. Ana Flores Vanesa (Ortodoncia)</option>
-            <option value="pro_carlos">Dr. Carlos Mendoza Ramos (Cirugía/Implantes)</option>
-            <option value="pro_sofia">Dra. Sofía Gutiérrez Medina (Odontopediatría)</option>
-            <option value="pro_diego">Dr. Diego Torres Vizcarra (Rehabilitación Oral)</option>
-            <option value="pro_lucia">Dra. Lucía Paredes Soto (Endodoncia)</option>
-          </select>
+        <!-- PASO 4: PROCEDIMIENTO / MOTIVO -->
+        <div class="segmented-form-section">
+          <div class="segmented-section-title">
+            <span>🩺 4. Procedimiento / Motivo Clínico</span>
+          </div>
+          <input type="text" id="newAptReason" class="form-control" placeholder="Ej. Control de alineadores o escaneo intraoral 3D" required>
         </div>
 
-        <div>
-          <label style="font-weight: 700; font-size: 0.85rem; display: block; margin-bottom: 6px;">Motivo de Consulta / Tratamiento</label>
-          <input type="text" id="newAptReason" class="form-control" placeholder="Ej. Instalación de brackets o escaneo 3D" required>
-        </div>
-
-        <div style="display: flex; gap: 10px; margin-top: 10px;">
-          <button type="submit" class="btn btn-primary" style="flex: 1;">Guardar y Programar Cita</button>
+        <div style="display: flex; gap: 10px; margin-top: 16px;">
+          <button type="submit" class="btn btn-primary" style="flex: 1; padding: 14px;">✓ Guardar y Confirmar en Agenda</button>
           <button type="button" class="btn btn-secondary" onclick="window.closeNewAptModal()">Cancelar</button>
         </div>
       </form>
     </div>
   </div>
+
 
 </body>
 </html>
