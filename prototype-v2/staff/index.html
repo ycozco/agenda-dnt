@@ -725,9 +725,9 @@
         <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.1);">
           <div style="font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255,255,255,0.5); margin-bottom: 8px; padding-left: 8px;">Vistas Especializadas</div>
           <div style="display: grid; gap: 4px;">
-            <a href="citas.html" class="staff-menu-item" style="font-size: 0.8rem; padding: 7px 12px;"><span>📅 Agenda Semanal Completa</span></a>
-            <a href="odontograma-cop52.html" class="staff-menu-item" style="font-size: 0.8rem; padding: 7px 12px;"><span>🩺 Odontograma Táctil COP</span></a>
-            <a href="usuarios.html" class="staff-menu-item" style="font-size: 0.8rem; padding: 7px 12px;"><span>👥 Personal & Roles COP</span></a>
+            <a href="?view=agenda" class="staff-menu-item" id="nav-agenda-spec" style="font-size: 0.8rem; padding: 7px 12px;"><span>📅 Agenda Semanal & Multi-Sillón</span></a>
+            <a href="?view=patient&patient=pat_maria" class="staff-menu-item" id="nav-odonto-spec" style="font-size: 0.8rem; padding: 7px 12px;"><span>🩺 Odontograma FDI (Drag & Drop)</span></a>
+            <a href="?view=users" class="staff-menu-item" id="nav-users" style="font-size: 0.8rem; padding: 7px 12px;"><span>👥 Personal & Roles COP</span></a>
           </div>
         </div>
       </div>
@@ -1315,7 +1315,7 @@
               </p>
             </div>
             <div style="display: flex; gap: 10px; align-items: center;">
-              <a href="odontograma-cop52.html" class="btn btn-secondary btn-small">Modo COP Táctil</a>
+              <button class="btn btn-secondary btn-small" onclick="window.resetOdontogramFindings()">Limpiar Odontograma</button>
               <button class="btn btn-primary btn-small" id="signOdontogramBtn">Firmar Odontograma (COP 18240)</button>
             </div>
           </div>
@@ -2009,6 +2009,132 @@
     }
 
     // =========================================================================
+    
+    // =========================================================================
+    // VISTA 8: PERSONAL & ROLES COP (RBAC & DIRECTORIO CLÍNICO)
+    // =========================================================================
+    } else if (view === "users") {
+      const practitioners = seed.practitioners || [];
+      const currentRole = mockApi.getActiveRole();
+      const roleProfile = mockApi.getRoleProfile(currentRole);
+
+      main.innerHTML = `
+        <div class="staff-container">
+          <!-- CABECERA DE GESTIÓN DE USUARIOS -->
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; flex-wrap: wrap; gap: 14px;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <h1 style="margin: 0; font-size: 1.85rem; font-weight: 800; color: var(--ink);">Directorio de Personal & Roles COP</h1>
+                <span class="chip chip-success" style="font-size: 0.75rem; padding: 3px 10px;">RBAC Activo</span>
+              </div>
+              <p class="muted" style="margin: 4px 0 0; color: var(--ink-soft); font-weight: 500;">
+                Administración de accesos, credenciales colegiadas COP y asignación de sillones quirúrgicos.
+              </p>
+            </div>
+            <button class="btn btn-primary btn-small" onclick="alert('Formulario de alta de profesional colegiado abierto')">
+              + Añadir Profesional
+            </button>
+          </div>
+
+          <!-- SELECTOR DINÁMICO DE ROL DE SESIÓN (SIMULADOR DE PERMISOS) -->
+          <div class="card" style="margin-bottom: 24px; border-left: 5px solid var(--action);">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+              <div>
+                <span class="eyebrow" style="margin-bottom: 2px;">Simulador de Rol Activo</span>
+                <div style="font-weight: 800; font-size: 1.1rem; color: var(--ink);">
+                  Sesión actual: <span style="color: var(--action);">${roleProfile.title}</span> (${roleProfile.badge})
+                </div>
+                <div class="tiny" style="color: var(--ink-soft);">Permisos: ${roleProfile.permissions.join(' · ')}</div>
+              </div>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 0.85rem; font-weight: 700; color: var(--ink);">Cambiar Rol:</span>
+                <select id="roleSelectorStaff" class="form-select" style="width: auto; padding: 6px 14px; font-weight: 700;" onchange="window.switchActiveRole(this.value)">
+                  <option value="ADMIN" ${currentRole === 'ADMIN' ? 'selected' : ''}>👑 Administrador General</option>
+                  <option value="DENTIST" ${currentRole === 'DENTIST' ? 'selected' : ''}>🦷 Dra. Ana Flores (Doctor / Sillón 1)</option>
+                  <option value="RECEPTION" ${currentRole === 'RECEPTION' ? 'selected' : ''}>📋 Recepción & Admisión</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- MÉTRICAS DE PERSONAL -->
+          <div class="grid-4" style="margin-bottom: 24px;">
+            <div class="card">
+              <span class="eyebrow">Personal Total</span>
+              <div style="font-family: var(--display); font-size: 2rem; font-weight: 800; color: var(--ink); margin: 6px 0 4px;">${practitioners.length + 3} Colaboradores</div>
+              <span class="tiny">8 Médicos · 2 Admin · 1 Recepción</span>
+            </div>
+            <div class="card">
+              <span class="eyebrow">Doctores Colegiados</span>
+              <div style="font-family: var(--display); font-size: 2rem; font-weight: 800; color: var(--action); margin: 6px 0 4px;">${practitioners.length} COP Activos</div>
+              <span class="tiny">Habilitados en Colegio Odontológico</span>
+            </div>
+            <div class="card">
+              <span class="eyebrow">Sillones Asignados</span>
+              <div style="font-family: var(--display); font-size: 2rem; font-weight: 800; color: var(--blue); margin: 6px 0 4px;">3 Quirófanos</div>
+              <span class="tiny">Ortodoncia, Cirugía e Integral</span>
+            </div>
+            <div class="card">
+              <span class="eyebrow">Turnos Clínicos Hoy</span>
+              <div style="font-family: var(--display); font-size: 2rem; font-weight: 800; color: var(--ink); margin: 6px 0 4px;">6 Especialistas</div>
+              <span class="tiny">Mañana y tarde programados</span>
+            </div>
+          </div>
+
+          <!-- TABLA DE USUARIOS Y ROLES -->
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+              <h3 style="margin: 0; font-size: 1.15rem; color: var(--ink);">Cuerpo Médico & Personal Asistencial</h3>
+              <span class="chip chip-neutral" style="font-size: 0.72rem; padding: 3px 8px;">Conforme Ley N.º 27878 de Trabajo del Cirujano Dentista</span>
+            </div>
+
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Profesional</th>
+                    <th>Especialidad Médica</th>
+                    <th>Registro COP</th>
+                    <th>Sillón / Área</th>
+                    <th>Calificación</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${practitioners.map((p, idx) => {
+                    const chairs = ['Sillón 1 (Ortodoncia)', 'Sillón 2 (Cirugía)', 'Sillón 3 (Pediatría/Integral)'];
+                    const chairAssigned = chairs[idx % 3];
+                    return `
+                      <tr>
+                        <td>
+                          <div style="display: flex; align-items: center; gap: 10px;">
+                            <div class="patient-avatar-badge" style="width: 36px; height: 36px; font-size: 0.95rem;">${p.name.charAt(4) || 'D'}</div>
+                            <div>
+                              <strong style="color: var(--ink); font-size: 0.92rem;">${p.name}</strong>
+                              <div class="tiny" style="color: var(--ink-soft);">${p.specialty}</div>
+                            </div>
+                          </div>
+                        </td>
+                        <td><span class="chip chip-neutral" style="font-size: 0.75rem; padding: 2px 8px;">${p.specialty}</span></td>
+                        <td><code style="font-family: var(--mono); font-weight: 700; color: var(--action);">${p.cmp}</code></td>
+                        <td><strong style="color: var(--ink); font-size: 0.85rem;">${chairAssigned}</strong></td>
+                        <td><span style="color: var(--amber); font-weight: 700;">★ ${p.rating}</span></td>
+                        <td><span class="chip chip-success" style="font-size: 0.7rem; padding: 2px 8px;">Habilitado COP</span></td>
+                        <td>
+                          <button class="btn btn-secondary btn-small" style="padding: 4px 10px; font-size: 0.75rem;" onclick="alert('Expediente profesional de ${p.name} abierto')">Ver Perfil</button>
+                        </td>
+                      </tr>
+                    `;
+                  }).join('')}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
     // CONTROLADORES GLOBALES DE MODALES Y ACCIONES
     // =========================================================================
     let currentSelectedAptId = null;
