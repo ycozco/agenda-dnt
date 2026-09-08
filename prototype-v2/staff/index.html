@@ -509,9 +509,9 @@
             <span id="sidebarRoleBadge" class="chip chip-success" style="font-size: 0.65rem; padding: 1px 6px;">Acceso Total</span>
           </div>
           <select id="roleSelector" class="role-select-styled" onchange="window.switchActiveRole(this.value)">
-            <option value="ADMIN">👑 Administrador General</option>
-            <option value="DENTIST">🦷 Dra. Ana Flores (Doctor)</option>
-            <option value="RECEPTION">📋 Recepción Yanahuara</option>
+            <option value="ADMIN">Administrador General</option>
+            <option value="DENTIST">Dra. Ana Flores (Odontólogo COP)</option>
+            <option value="RECEPTION">Recepción Sede Yanahuara</option>
           </select>
           <div id="roleSubtitleText" style="font-size: 0.72rem; opacity: 0.7; margin-top: 6px;">Director Clínico & Gerencia</div>
         </div>
@@ -734,7 +734,7 @@
           
           <div style="display: flex; gap: 10px; align-items: center;">
             <button class="btn btn-primary" onclick="window.openNewAptModal()">
-              ➕ Nueva Cita Clínica
+              + Nueva Cita Clínica
             </button>
           </div>
         </div>
@@ -772,7 +772,7 @@
               <span class="tiny muted" style="font-weight: 700; text-transform: uppercase;">Total Agendadas</span>
               <div class="metric-pill-val" style="color: var(--ink);">${totalCount}</div>
             </div>
-            <span style="font-size: 1.6rem;">📅</span>
+            <span style="font-family: var(--mono); font-size: 1rem; color: var(--ink-faint);">[REG]</span>
           </div>
 
           <div class="metric-pill-card">
@@ -780,7 +780,7 @@
               <span class="tiny muted" style="font-weight: 700; text-transform: uppercase;">Confirmadas</span>
               <div class="metric-pill-val" style="color: var(--blue);">${confirmedCount}</div>
             </div>
-            <span style="font-size: 1.6rem;">🔵</span>
+            <span style="font-family: var(--mono); font-size: 1rem; color: var(--blue);">[OK]</span>
           </div>
 
           <div class="metric-pill-card">
@@ -788,7 +788,7 @@
               <span class="tiny muted" style="font-weight: 700; text-transform: uppercase;">En Sala / Espera</span>
               <div class="metric-pill-val" style="color: var(--terracotta);">${waitingCount}</div>
             </div>
-            <span style="font-size: 1.6rem;">🚪</span>
+            <span style="font-family: var(--mono); font-size: 1rem; color: var(--amber);">[SALA]</span>
           </div>
 
           <div class="metric-pill-card">
@@ -796,7 +796,7 @@
               <span class="tiny muted" style="font-weight: 700; text-transform: uppercase;">En Sillón (Atención)</span>
               <div class="metric-pill-val" style="color: var(--action);">${inChairCount}</div>
             </div>
-            <span style="font-size: 1.6rem;">💺</span>
+            <span style="font-family: var(--mono); font-size: 1rem; color: var(--action);">[ACT]</span>
           </div>
         </div>
 
@@ -875,11 +875,11 @@
 
       function renderAppointmentCard(a) {
         const statusMap = {
-          SCHEDULED: { label: "🟡 Programada", chip: "chip-neutral" },
-          CONFIRMED: { label: "🔵 Confirmada WhatsApp", chip: "chip-success" },
-          IN_WAITING_ROOM: { label: "🚪 En Sala de Espera", chip: "chip-warning" },
-          IN_CHAIR: { label: "💺 En Sillón (Atención)", chip: "chip-success" },
-          COMPLETED: { label: "✓ Atendida / Concluida", chip: "chip-neutral" }
+          SCHEDULED: { label: "Programada", chip: "chip-neutral" },
+          CONFIRMED: { label: "Confirmada (WhatsApp)", chip: "chip-success" },
+          IN_WAITING_ROOM: { label: "En Sala de Espera", chip: "chip-warning" },
+          IN_CHAIR: { label: "En Atención Clínica", chip: "chip-success" },
+          COMPLETED: { label: "Atendida", chip: "chip-neutral" }
         };
         const sInfo = statusMap[a.status] || { label: a.status, chip: "chip-neutral" };
 
@@ -1384,19 +1384,19 @@
       <div style="border-top: 1px solid var(--line); padding-top: 18px;">
         <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 10px; margin-bottom: 12px;">
           <button id="btnActionConfirmWa" class="btn btn-primary btn-small" onclick="window.triggerWhatsAppConfirm()">
-            💬 Disparar Recordatorio WhatsApp
+            Confirmar Vía WhatsApp
           </button>
           <button class="btn btn-secondary btn-small" onclick="window.updateCurrentAptStatus('IN_WAITING_ROOM')">
-            🚪 Marcar Llegada ("En Sala")
+            Marcar Llegada (En Sala)
           </button>
         </div>
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
           <a id="btnLinkOdontogram" href="#" class="btn btn-secondary btn-small">
-            🦷 Abrir Odontograma / SOAP
+            Odontograma FDI & SOAP
           </a>
           <a href="?view=finance" class="btn btn-secondary btn-small">
-            🧾 Emitir Boleta B001 en Caja
+            Emitir Boleta B001
           </a>
         </div>
       </div>
@@ -1409,25 +1409,25 @@
         <label style="font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 10px;">Transición de Estado Clínico:</label>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px;">
           <button id="btnActionConfirmWa" class="btn btn-secondary btn-small" onclick="window.triggerWhatsAppConfirm()">
-            💬 Confirmar WhatsApp
+            Confirmar WhatsApp
           </button>
           <button id="btnActionWaiting" class="btn btn-secondary btn-small" onclick="window.updateCurrentAptStatus('IN_WAITING_ROOM')">
-            🚪 Marcar "En Sala"
+            Marcar Llegada (En Sala)
           </button>
           <button id="btnActionChair" class="btn btn-primary btn-small" onclick="window.updateCurrentAptStatus('IN_CHAIR')">
-            💺 Iniciar Atención en Sillón
+            Iniciar Atención en Sillón
           </button>
           <button id="btnActionComplete" class="btn btn-secondary btn-small" onclick="window.updateCurrentAptStatus('COMPLETED')">
-            ✓ Finalizar Tratamiento
+            Finalizar Tratamiento
           </button>
         </div>
 
         <div style="display: flex; gap: 10px; margin-top: 10px;">
           <a id="btnLinkOdontogram" href="#" class="btn btn-secondary btn-small" style="flex: 1;">
-            🦷 Abrir Odontograma / SOAP
+            Odontograma FDI & SOAP
           </a>
           <a href="?view=finance" class="btn btn-secondary btn-small" style="flex: 1;">
-            🧾 Emitir Boleta B001
+            Emitir Boleta B001
           </a>
         </div>
       </div>
@@ -1440,7 +1440,7 @@
     <div class="drawer-modal-card" style="width: min(650px, 95vw);">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; border-bottom: 1px solid var(--line); padding-bottom: 12px;">
         <div>
-          <h3 style="margin: 0; font-size: 1.35rem; color: var(--ink);">🗓️ Agendar Cita Clínica</h3>
+          <h3 style="margin: 0; font-size: 1.35rem; color: var(--ink);">Agendar Cita Clínica</h3>
           <span class="tiny muted">Sede Yanahuara · Programación Directa</span>
         </div>
         <button class="btn btn-secondary btn-small" onclick="window.closeNewAptModal()">✕</button>
