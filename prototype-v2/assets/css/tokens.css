@@ -3,6 +3,16 @@
    ========================================================================== */
 
 :root, [data-theme="light"] {
+
+  /* Compatibilidad y Aliases Clave */
+  --blue-deep: #0A2540;
+  --teal: #007A55;
+  --green: #007A55;
+  --green-soft: #E6F7F2;
+  --shadow-small: 0 2px 8px rgba(10, 37, 64, 0.04);
+  --radius: 12px;
+  --radius-full: 999px;
+
   --paper: #FAF9F6;              /* Sillar cálido */
   --surface: #FFFFFF;            /* Blanco puro para tarjetas */
   --surface-dim: #F3F2EB;        /* Secciones alternadas */
@@ -44,6 +54,16 @@
 }
 
 [data-theme="dark"] {
+
+  /* Compatibilidad y Aliases Clave Dark */
+  --blue-deep: #050D17;
+  --teal: #10B981;
+  --green: #10B981;
+  --green-soft: rgba(16, 185, 129, 0.16);
+  --shadow-small: 0 4px 14px rgba(0, 0, 0, 0.45);
+  --radius: 12px;
+  --radius-full: 999px;
+
   --paper: #050D17;              /* Obsidiana basalto */
   --surface: #0B192A;            /* Tarjetas oscuras elevadas */
   --surface-dim: #081320;        /* Secciones alternadas */

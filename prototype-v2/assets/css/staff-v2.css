@@ -16,12 +16,12 @@
 .staff-sidebar .brand-mark,
 .staff-sidebar > div:first-child > div:first-child > div:first-child {
   border-radius: 8px !important;
-  background: var(--teal) !important;
+  background: var(--action) !important;
   font-family: var(--mono) !important;
 }
 .staff-menu { gap: 6px; margin-top: 22px; }
 .staff-menu-clean { display: grid; }
-#staffNav { display: none; }
+#staffNav { display: grid !important; }
 .staff-menu-item {
   min-height: 44px;
   border-radius: 8px;
@@ -49,9 +49,9 @@
 }
 .staff-menu-item.active .nav-mark,
 .staff-menu-item:hover .nav-mark {
-  background: var(--teal);
+  background: var(--action);
   color: #fff;
-  border-color: var(--teal);
+  border-color: var(--action);
 }
 .staff-content {
   min-width: 0;
@@ -85,7 +85,7 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--green);
+  background: var(--action);
   margin-right: 7px;
 }
 @media (max-width: 900px) {
