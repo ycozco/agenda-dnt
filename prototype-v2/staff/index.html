@@ -9,54 +9,179 @@
   <link rel="stylesheet" href="../assets/css/components.css">
   <link rel="stylesheet" href="../assets/css/staff-v2.css">
   <style>
-    .staff-shell { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; }
-    .staff-sidebar { background: var(--blue-deep); color: white; padding: 24px 16px; display: flex; flex-direction: column; justify-content: space-between; border-right: 1px solid var(--line-soft); }
-    .staff-menu { display: grid; gap: 4px; margin-top: 24px; }
-    .staff-menu-item { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border-radius: 8px; color: rgba(255,255,255,0.75); font-weight: 500; font-size: 0.88rem; text-decoration: none; transition: background .15s ease, color .15s ease; }
-    .staff-menu-item:hover, .staff-menu-item.active { background: rgba(255,255,255,0.14); color: white; font-weight: 600; }
-    .staff-menu-item .nav-num { font-family: var(--mono); font-size: 0.75rem; opacity: 0.7; }
-    .staff-content { padding: 32px; background: var(--paper); overflow-y: auto; }
-    .tooth-box { border: 1px solid var(--line); border-radius: 8px; padding: 8px 6px; text-align: center; cursor: pointer; transition: border-color .15s ease, background .15s ease, transform .15s ease; background: var(--surface); user-select: none; }
-    .tooth-box:hover { border-color: var(--blue); transform: scale(1.06); }
+    /* ==========================================================================
+       DISCIPLINA ARQUITECTÓNICA & PROPORCIONES DE CONSOLA CLÍNICA
+       ========================================================================== */
+    .staff-shell {
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+      min-height: 100vh;
+      background: var(--paper);
+    }
+    .staff-sidebar {
+      background: var(--blue-deep);
+      color: white;
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .staff-menu {
+      display: grid;
+      gap: 4px;
+      margin-top: 18px;
+    }
+    .staff-menu-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      color: rgba(255, 255, 255, 0.75);
+      font-weight: 500;
+      font-size: 0.88rem;
+      text-decoration: none;
+      transition: background .15s ease, color .15s ease;
+    }
+    .staff-menu-item:hover, .staff-menu-item.active {
+      background: rgba(255, 255, 255, 0.14);
+      color: white;
+      font-weight: 600;
+    }
+    .staff-menu-item .nav-num {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      opacity: 0.7;
+    }
+    .staff-content {
+      padding: 32px;
+      background: var(--paper);
+      overflow-y: auto;
+      min-width: 0;
+    }
+    .staff-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* Grids Operativos Universales */
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    @media (max-width: 1200px) {
+      .grid-4 { grid-template-columns: repeat(2, 1fr); }
+      .grid-3 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .grid-4, .grid-3, .grid-2 { grid-template-columns: 1fr; }
+      .staff-shell { grid-template-columns: 1fr; }
+      .staff-sidebar { padding: 16px; }
+      .staff-content { padding: 20px 16px; }
+    }
+
+    /* Tarjetas Proporcionales */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 22px 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Odontograma Proporcional & Táctil */
+    .arch-container {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-sm);
+    }
+    .teeth-row {
+      display: grid;
+      grid-template-columns: repeat(16, minmax(46px, 1fr));
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+    }
+    .teeth-row-pediatric {
+      display: grid;
+      grid-template-columns: repeat(10, minmax(46px, 1fr));
+      gap: 8px;
+      max-width: 680px;
+      margin: 0 auto;
+      overflow-x: auto;
+      padding-bottom: 6px;
+    }
+    .tooth-box {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 8px 4px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      background: var(--surface);
+      user-select: none;
+      min-width: 44px;
+    }
+    .tooth-box:hover {
+      border-color: var(--action);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
     .tooth-box.has-caries { border-color: var(--danger); background: var(--danger-soft); color: var(--danger); font-weight: 700; }
     .tooth-box.has-restored { border-color: var(--blue); background: var(--blue-soft); color: var(--blue-deep); font-weight: 700; }
     .tooth-box.has-endodontic { border-color: var(--amber); background: var(--amber-soft); color: var(--amber); font-weight: 700; }
-    .tooth-box.has-implant { border-color: var(--green); background: var(--green-soft); color: var(--green); font-weight: 700; }
+    .tooth-box.has-implant { border-color: var(--action); background: var(--action-soft); color: var(--action); font-weight: 700; }
     .tooth-box.has-absent { border-color: var(--line); background: var(--paper); opacity: 0.5; text-decoration: line-through; }
-    .arch-container { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; margin-bottom: 20px; }
-    .teeth-row { display: grid; grid-template-columns: repeat(16, minmax(0, 1fr)); gap: 6px; }
-    .teeth-row-pediatric { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 8px; max-width: 650px; margin: 0 auto; }
-    .table-responsive { width: 100%; overflow-x: auto; background: var(--surface); border-radius: var(--radius); border: 1px solid var(--line); }
-    table.data-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.88rem; }
-    table.data-table th { background: var(--surface-dim); padding: 12px 16px; font-weight: 600; color: var(--ink-soft); border-bottom: 1px solid var(--line); }
-    table.data-table td { padding: 12px 16px; border-bottom: 1px solid var(--line); color: var(--ink); }
-    table.data-table tr:hover td { background: var(--paper); }
-  
-    /* ==========================================================================
-       ESTILOS DEL PROGRAMADOR MULTI-SILLÓN, TIMELINE Y ROLES RBAC
-       ========================================================================== */
-    .role-badge-box {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: var(--radius-sm);
-      padding: 12px;
-      margin-bottom: 16px;
-    }
-    .role-select-styled {
+
+    /* Tablas de Gestión */
+    .table-responsive {
       width: 100%;
-      background: rgba(0, 0, 0, 0.35);
-      color: white;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      border-radius: 6px;
-      padding: 8px 10px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      outline: none;
-      cursor: pointer;
+      overflow-x: auto;
+      background: var(--surface);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--line);
     }
-    .role-select-styled option {
+    table.data-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.88rem;
+    }
+    table.data-table th {
       background: var(--surface-dim);
+      padding: 12px 16px;
+      font-weight: 600;
+      color: var(--ink-soft);
+      border-bottom: 1px solid var(--line);
+      font-size: 0.82rem;
+      letter-spacing: 0.03em;
+    }
+    table.data-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--line-soft);
       color: var(--ink);
+    }
+    table.data-table tr:last-child td {
+      border-bottom: none;
+    }
+    table.data-table tr:hover td {
+      background: var(--surface-dim);
     }
 
     /* Barra Superior de Control de Agenda */
@@ -64,7 +189,7 @@
       background: var(--surface);
       border: 1px solid var(--line);
       border-radius: var(--radius-md);
-      padding: 16px 20px;
+      padding: 14px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -79,13 +204,13 @@
       gap: 8px;
     }
     .date-input-styled {
-      padding: 8px 14px;
+      padding: 7px 14px;
       border: 1px solid var(--line);
-      border-radius: var(--radius-pill);
+      border-radius: var(--radius-sm);
       background: var(--surface-dim);
       color: var(--ink);
       font-family: var(--mono);
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       font-weight: 700;
       outline: none;
       cursor: pointer;
@@ -113,30 +238,30 @@
     }
     .metric-pill-val {
       font-family: var(--display);
-      font-size: 1.8rem;
+      font-size: 1.7rem;
       font-weight: 800;
-      line-height: 1;
+      line-height: 1.1;
+      margin-top: 4px;
     }
 
-    /* Pestañas de Filtro por Sillón */
+    /* Filtro de Sillones */
     .chair-filter-tabs {
       display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
+      gap: 8px;
       flex-wrap: wrap;
     }
     .chair-tab-btn {
-      padding: 10px 18px;
+      padding: 8px 16px;
       border-radius: var(--radius-pill);
       border: 1px solid var(--line);
       background: var(--surface);
       color: var(--ink-soft);
-      font-weight: 700;
-      font-size: 0.88rem;
+      font-weight: 600;
+      font-size: 0.84rem;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       transition: all 0.15s ease;
     }
     .chair-tab-btn:hover {
@@ -147,10 +272,10 @@
       background: var(--action);
       color: white;
       border-color: var(--action);
-      box-shadow: 0 4px 14px var(--action-glow);
+      font-weight: 700;
     }
 
-    /* Grid Multi-Sillón (3 Columnas) */
+    /* Grid Multi-Sillón (3 Columnas Proporcionales) */
     .multi-chair-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -175,7 +300,7 @@
     }
     .chair-column-title {
       font-family: var(--display);
-      font-size: 1.05rem;
+      font-size: 1rem;
       font-weight: 800;
       margin: 0;
       color: var(--ink);
@@ -185,61 +310,42 @@
       color: var(--ink-soft);
       font-weight: 600;
       display: block;
+      margin-top: 2px;
     }
     .chair-slots-list {
       padding: 16px;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 12px;
       min-height: 420px;
       background: var(--paper);
     }
 
-    /* Tarjeta de Cita Individual en Sillón */
+    /* Tarjeta de Cita Individual */
     .appointment-slot-card {
       background: var(--surface);
       border: 1px solid var(--line);
-      border-left: 5px solid var(--line);
+      border-left: 4px solid var(--line);
       border-radius: var(--radius-sm);
       padding: 14px 16px;
       box-shadow: var(--shadow-sm);
-      transition: all 0.18s ease;
+      transition: all 0.15s ease;
       cursor: pointer;
-      position: relative;
     }
     .appointment-slot-card:hover {
       transform: translateY(-2px);
       box-shadow: var(--shadow);
       border-color: var(--action);
     }
-    .appointment-slot-card.status-SCHEDULED {
-      border-left-color: var(--amber);
-    }
-    .appointment-slot-card.status-CONFIRMED {
-      border-left-color: var(--blue);
-    }
-    .appointment-slot-card.status-IN_WAITING_ROOM {
-      border-left-color: var(--terracotta);
-      background: var(--terracotta-soft);
-    }
-    .appointment-slot-card.status-IN_CHAIR {
-      border-left-color: var(--action);
-      background: var(--action-soft);
-      animation: pulse-chair 2s infinite ease-in-out;
-    }
-    .appointment-slot-card.status-COMPLETED {
-      border-left-color: var(--ink-faint);
-      opacity: 0.85;
-    }
-
-    @keyframes pulse-chair {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(0, 122, 85, 0.3); }
-      50% { box-shadow: 0 0 0 6px rgba(0, 122, 85, 0.1); }
-    }
+    .appointment-slot-card.status-SCHEDULED { border-left-color: var(--amber); }
+    .appointment-slot-card.status-CONFIRMED { border-left-color: var(--blue); }
+    .appointment-slot-card.status-IN_WAITING_ROOM { border-left-color: var(--terracotta); background: var(--terracotta-soft); }
+    .appointment-slot-card.status-IN_CHAIR { border-left-color: var(--action); background: var(--action-soft); }
+    .appointment-slot-card.status-COMPLETED { border-left-color: var(--ink-faint); opacity: 0.85; }
 
     .apt-time-badge {
       font-family: var(--mono);
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       font-weight: 700;
       color: var(--ink);
       display: inline-flex;
@@ -247,97 +353,84 @@
       gap: 6px;
       background: var(--surface-dim);
       padding: 3px 8px;
-      border-radius: 6px;
+      border-radius: 4px;
     }
     .apt-patient-title {
       font-family: var(--display);
       font-weight: 700;
-      font-size: 1rem;
+      font-size: 0.96rem;
       margin: 8px 0 4px;
       color: var(--ink);
     }
     .apt-reason-text {
-      font-size: 0.86rem;
+      font-size: 0.84rem;
       color: var(--ink-soft);
       line-height: 1.4;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
-    /* Modal de Gestión de Citas */
+    /* ==========================================================================
+       MODALES Y DRAWERS: AISLAMIENTO ABSOLUTO (OCULTOS POR DEFECTO)
+       ========================================================================== */
+    .modal-overlay,
     .drawer-modal-overlay {
-      display: none;
+      display: none !important;
       position: fixed;
       inset: 0;
-      background: rgba(10, 24, 40, 0.65);
-      backdrop-filter: blur(8px);
+      background: rgba(15, 23, 42, 0.72);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
       z-index: 10000;
       align-items: center;
       justify-content: center;
       padding: 20px;
     }
+    .modal-overlay.open,
+    .modal-overlay.active,
+    .drawer-modal-overlay.open,
     .drawer-modal-overlay.active {
-      display: flex;
+      display: flex !important;
+    }
+    .modal-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      width: min(540px, 95vw);
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 26px;
+      box-shadow: var(--shadow-lg);
     }
     .drawer-modal-card {
       background: var(--surface);
       border: 1px solid var(--line);
       border-radius: var(--radius-md);
-      width: min(580px, 95vw);
+      width: min(620px, 95vw);
       max-height: 90vh;
       overflow-y: auto;
-      padding: 28px;
+      padding: 26px;
       box-shadow: var(--shadow-lg);
     }
 
-    @media (max-width: 1100px) {
-      .multi-chair-grid {
-        grid-template-columns: 1fr;
-      }
-      .scheduler-metrics-ribbon {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-    @media (max-width: 640px) {
-      .scheduler-metrics-ribbon {
-        grid-template-columns: 1fr;
-      }
-      .scheduler-controls-bar {
-        flex-direction: column;
-        align-items: stretch;
-      }
-    }
-
-  
-    #staffNav {
-      display: grid !important;
-      gap: 6px;
-      margin-top: 14px;
-    }
-  
-  
-    /* ==========================================================================
-       ESTILOS DEL DOSSIER CLÍNICO Y FORMULARIOS SEGMENTADOS
-       ========================================================================== */
+    /* Secciones y Formularios Segmentados */
     .segmented-form-section {
       background: var(--surface-dim);
       border: 1px solid var(--line);
       border-radius: var(--radius-sm);
-      padding: 16px;
-      margin-bottom: 16px;
+      padding: 14px 16px;
+      margin-bottom: 14px;
     }
     .segmented-section-title {
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       text-transform: uppercase;
       letter-spacing: 0.06em;
       font-weight: 800;
       color: var(--ink-soft);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       display: flex;
       align-items: center;
       gap: 8px;
     }
-    
-    /* Stepper de Estado Clínico en Detalle */
     .status-stepper-track {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -345,80 +438,95 @@
       background: var(--surface-dim);
       border: 1px solid var(--line);
       border-radius: var(--radius-pill);
-      padding: 6px;
-      margin-bottom: 20px;
+      padding: 4px;
+      margin-bottom: 18px;
     }
     .status-step-node {
       text-align: center;
-      padding: 8px 4px;
+      padding: 6px 2px;
       border-radius: var(--radius-pill);
-      font-size: 0.76rem;
+      font-size: 0.72rem;
       font-weight: 700;
       color: var(--ink-faint);
       cursor: pointer;
-      transition: all 0.18s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 4px;
-      user-select: none;
+      transition: all 0.15s ease;
     }
     .status-step-node:hover {
-      background: var(--surface);
       color: var(--ink);
     }
     .status-step-node.active {
       background: var(--action);
-      color: #FFFFFF;
-      box-shadow: 0 2px 8px var(--action-glow);
+      color: white;
     }
-    .status-step-node.completed {
+    .patient-avatar-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
       background: var(--action-soft);
       color: var(--action);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.1rem;
     }
-
-    /* Radio Cards para Selección de Sillón & Doctor */
     .radio-cards-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 10px;
-      margin-bottom: 14px;
+      margin-bottom: 10px;
     }
     .radio-card-option {
-      background: var(--surface);
-      border: 2px solid var(--line);
+      border: 1px solid var(--line);
       border-radius: var(--radius-sm);
-      padding: 12px 14px;
+      padding: 10px;
       cursor: pointer;
+      background: var(--surface);
       transition: all 0.15s ease;
-      text-align: left;
     }
     .radio-card-option:hover {
       border-color: var(--action);
-      transform: translateY(-2px);
     }
     .radio-card-option.selected {
       border-color: var(--action);
       background: var(--action-soft);
-      box-shadow: 0 0 0 2px var(--action-glow);
+      box-shadow: 0 0 0 1px var(--action);
     }
-
-    /* Duración Segmentada */
-    .segmented-duration-group {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
+    .time-slot-pills-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
     }
-    .duration-pill-btn {
-      padding: 9px 12px;
+    .time-pill-btn {
+      padding: 5px 10px;
       border: 1px solid var(--line);
-      border-radius: var(--radius-sm);
+      border-radius: var(--radius-pill);
       background: var(--surface);
       font-family: var(--mono);
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--ink);
-      text-align: center;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .time-pill-btn:hover {
+      border-color: var(--action);
+    }
+    .time-pill-btn.selected {
+      background: var(--action);
+      color: white;
+      border-color: var(--action);
+    }
+    .segmented-duration-group {
+      display: flex;
+      gap: 6px;
+    }
+    .duration-pill-btn {
+      padding: 5px 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-pill);
+      background: var(--surface);
+      font-size: 0.8rem;
+      font-weight: 600;
       cursor: pointer;
       transition: all 0.15s ease;
     }
@@ -430,93 +538,35 @@
       color: white;
       border-color: var(--action);
     }
-
-    /* Time Slot Pills */
-    .time-slot-pills-row {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
-      margin-top: 8px;
-    }
-    .time-pill-btn {
-      padding: 8px 10px;
+    .form-control, .form-select {
+      width: 100%;
+      padding: 8px 12px;
       border: 1px solid var(--line);
       border-radius: var(--radius-sm);
       background: var(--surface);
-      font-family: var(--mono);
-      font-size: 0.84rem;
-      font-weight: 700;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.15s ease;
+      color: var(--ink);
+      font-size: 0.88rem;
+      outline: none;
+      box-sizing: border-box;
     }
-    .time-pill-btn:hover {
-      border-color: var(--action);
-      color: var(--action);
-    }
-    .time-pill-btn.selected {
-      background: var(--action);
-      color: white;
+    .form-control:focus, .form-select:focus {
       border-color: var(--action);
     }
-
-    /* Paciente Dossier Header */
-    .patient-dossier-card {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 16px;
-      background: var(--surface-dim);
-      border: 1px solid var(--line);
-      border-radius: var(--radius-sm);
-      margin-bottom: 16px;
-    }
-    .patient-avatar-badge {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: var(--action);
-      color: white;
-      display: grid;
-      place-items: center;
-      font-family: var(--display);
-      font-weight: 800;
-      font-size: 1.2rem;
-      box-shadow: 0 4px 12px var(--action-glow);
-    }
-
   </style>
 </head>
 <body>
-  <a class="skip-link" href="#staffMain">Saltar al contenido</a>
-
   <div class="staff-shell">
     <aside class="staff-sidebar">
-      
       <div>
-        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px; padding: 0 8px;">
-          <div style="width: 38px; height: 38px; background: var(--action); color: white; border-radius: 10px; display: grid; place-items: center; font-family: var(--display); font-weight: 700; font-size: 1.2rem;">S</div>
+        <div style="display: flex; align-items: center; gap: 10px; padding: 0 4px 16px; border-bottom: 1px solid rgba(255,255,255,0.12);">
+          <div style="width: 32px; height: 32px; background: var(--action); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.05rem;">S</div>
           <div>
-            <div style="font-family: var(--display); font-weight: 700; font-size: 1.05rem;">Alínea & Sillar OS</div>
-            <div style="font-size: 0.72rem; opacity: 0.75;">Sede Yanahuara · Arequipa</div>
+            <div style="font-weight: 800; font-size: 0.95rem; letter-spacing: -0.01em;">SILLAR DENTAL</div>
+            <div style="font-size: 0.7rem; opacity: 0.65; letter-spacing: 0.05em; text-transform: uppercase;">Consola Privada</div>
           </div>
         </div>
 
-        <!-- SELECTOR DE ROL ACTIVO (RBAC) -->
-        <div class="role-badge-box">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-            <span style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.8;">Perfil Activo</span>
-            <span id="sidebarRoleBadge" class="chip chip-success" style="font-size: 0.65rem; padding: 1px 6px;">Acceso Total</span>
-          </div>
-          <select id="roleSelector" class="role-select-styled" onchange="window.switchActiveRole(this.value)">
-            <option value="ADMIN">Administrador General</option>
-            <option value="DENTIST">Dra. Ana Flores (Odontólogo COP)</option>
-            <option value="RECEPTION">Recepción Sede Yanahuara</option>
-          </select>
-          <div id="roleSubtitleText" style="font-size: 0.72rem; opacity: 0.7; margin-top: 6px;">Director Clínico & Gerencia</div>
-        </div>
-
-        <nav class="staff-menu" id="staffNav" aria-label="Navegación principal de la consola clínica">
+        <nav class="staff-menu" id="staffNav">
           <a href="?view=dashboard" class="staff-menu-item" id="nav-dashboard"><span class="nav-num">01</span><span>Dashboard General</span></a>
           <a href="?view=agenda" class="staff-menu-item" id="nav-agenda"><span class="nav-num">02</span><span>Agenda & Sillones</span></a>
           <a href="?view=patient&patient=pat_maria" class="staff-menu-item" id="nav-patient"><span class="nav-num">03</span><span>Odontograma FDI (52P)</span></a>
@@ -526,20 +576,19 @@
           <a href="?view=audit" class="staff-menu-item" id="nav-audit"><span class="nav-num">07</span><span>Auditoría Inmutable</span></a>
         </nav>
 
-
         <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.1);">
-          <div style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; color: rgba(255,255,255,0.5); margin-bottom: 8px; padding-left: 8px;">Vistas Especializadas</div>
+          <div style="font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255,255,255,0.5); margin-bottom: 8px; padding-left: 8px;">Vistas Especializadas</div>
           <div style="display: grid; gap: 4px;">
-            <a href="citas.html" class="staff-menu-item" style="font-size: 0.8rem; padding: 6px 12px;"><span>📅 Agenda Semanal Completa</span></a>
-            <a href="odontograma-cop52.html" class="staff-menu-item" style="font-size: 0.8rem; padding: 6px 12px;"><span>🩺 Odontograma Táctil COP</span></a>
-            <a href="usuarios.html" class="staff-menu-item" style="font-size: 0.8rem; padding: 6px 12px;"><span>👥 Personal & Roles COP</span></a>
+            <a href="citas.html" class="staff-menu-item" style="font-size: 0.8rem; padding: 7px 12px;"><span>📅 Agenda Semanal Completa</span></a>
+            <a href="odontograma-cop52.html" class="staff-menu-item" style="font-size: 0.8rem; padding: 7px 12px;"><span>🩺 Odontograma Táctil COP</span></a>
+            <a href="usuarios.html" class="staff-menu-item" style="font-size: 0.8rem; padding: 7px 12px;"><span>👥 Personal & Roles COP</span></a>
           </div>
         </div>
       </div>
 
       <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 16px;">
         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; font-size: 0.8rem;">
-          <span style="opacity: 0.7;">Dra. Ana Flores</span>
+          <span style="opacity: 0.75; font-weight: 600;">Dra. Ana Flores</span>
           <span class="chip chip-success" style="font-size: 0.65rem; padding: 2px 6px;">COP 18240</span>
         </div>
         <a href="login.html" class="btn btn-secondary btn-small" style="width: 100%; color: white; border-color: rgba(255,255,255,0.25); background: transparent;">Cerrar Sesión</a>
@@ -551,14 +600,18 @@
     </main>
   </div>
 
+  <!-- MODAL 1: REGISTRAR HALLAZGO EN PIEZA DENTAL -->
   <div class="modal-overlay" id="findingModal">
     <div class="modal-card">
-      <h3 id="modalTitle" style="margin-bottom: 12px;">Registrar Hallazgo en Pieza Dental</h3>
-      <p class="muted" id="modalSub">Selecciona el tipo de condición clínica y la superficie según normativa NTS-188 MINSA.</p>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; border-bottom: 1px solid var(--line); padding-bottom: 10px;">
+        <h3 id="modalTitle" style="margin: 0; font-size: 1.15rem; color: var(--ink);">Registrar Hallazgo en Pieza Dental</h3>
+        <button class="btn btn-secondary btn-small" id="closeModalBtnHeader" style="padding: 4px 10px;" onclick="window.closeToothModal()">✕</button>
+      </div>
+      <p class="muted" id="modalSub" style="font-size: 0.86rem; margin-bottom: 16px;">Selecciona la condición clínica y la superficie según normativa NTS-188 MINSA.</p>
       
-      <div style="margin-bottom: 16px;">
-        <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Condición / Diagnóstico</label>
-        <select id="modalFindingType" class="btn btn-secondary" style="width: 100%; text-align: left;">
+      <div style="margin-bottom: 14px;">
+        <label style="display: block; font-size: 0.84rem; font-weight: 700; margin-bottom: 6px;">Condición / Diagnóstico</label>
+        <select id="modalFindingType" class="form-select">
           <option value="CARIES_DRAFT">🔴 Caries Dental (Borrador)</option>
           <option value="RESTORED">🔵 Restauración en Buen Estado (Resina)</option>
           <option value="ENDODONTIC">🟡 Tratamiento de Conducto (Endodoncia)</option>
@@ -568,9 +621,9 @@
         </select>
       </div>
 
-      <div style="margin-bottom: 16px;">
-        <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Superficie Afectada</label>
-        <select id="modalFindingSurface" class="btn btn-secondary" style="width: 100%; text-align: left;">
+      <div style="margin-bottom: 14px;">
+        <label style="display: block; font-size: 0.84rem; font-weight: 700; margin-bottom: 6px;">Superficie Afectada</label>
+        <select id="modalFindingSurface" class="form-select">
           <option value="Oclusal">Oclusal (O)</option>
           <option value="Mesial">Mesial (M)</option>
           <option value="Distal">Distal (D)</option>
@@ -581,753 +634,26 @@
       </div>
 
       <div style="margin-bottom: 20px;">
-        <label style="display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px;">Nota Clínica / Procedimiento Propuesto</label>
-        <input type="text" id="modalFindingNote" class="btn btn-secondary" style="width: 100%; text-align: left; background: var(--surface);" placeholder="Ej. Resina compuesta 3M en esmalte">
+        <label style="display: block; font-size: 0.84rem; font-weight: 700; margin-bottom: 6px;">Nota Clínica / Procedimiento Propuesto</label>
+        <input type="text" id="modalFindingNote" class="form-control" placeholder="Ej. Resina compuesta 3M en esmalte">
       </div>
 
       <div style="display: flex; justify-content: flex-end; gap: 10px;">
-        <button class="btn btn-secondary btn-small" id="closeModalBtn">Cancelar</button>
+        <button class="btn btn-secondary btn-small" id="closeModalBtn" onclick="window.closeToothModal()">Cancelar</button>
         <button class="btn btn-primary btn-small" id="confirmFindingBtn">Guardar en Ficha</button>
       </div>
     </div>
   </div>
 
-  <script type="module">
-    import { mockApi } from '../assets/js/mock-api-v2.js';
-    import { showToast } from '../assets/js/components.js';
-
-    const params = new URLSearchParams(window.location.search);
-    const view = params.get("view") || "dashboard";
-
-    document.querySelectorAll(".staff-menu-item").forEach(el => el.classList.remove("active"));
-    const activeNav = document.getElementById(`nav-${view}`);
-    if (activeNav) activeNav.classList.add("active");
-
-    const main = document.getElementById("staffMain");
-    const seed = mockApi.getSeed();
-
-    if (view === "dashboard") {
-      const appts = mockApi.getAppointmentsToday();
-      const cash = mockApi.getCashRegister();
-      const inv = mockApi.getInventory();
-
-      main.innerHTML = `
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
-          <div>
-            <h1>Dashboard Operativo</h1>
-            <p class="muted">Centro de Control Clínico · Sede Yanahuara (Arequipa)</p>
-          </div>
-          <div style="display: flex; gap: 8px;">
-            <span class="chip chip-success">🟢 Sillón 1: En Atención</span>
-            <span class="chip chip-warning">🟡 Sillón 2: Preparación</span>
-            <span class="chip chip-neutral">⚪ Sillón 3: Disponible</span>
-          </div>
-        </div>
-
-        <div class="grid-4" style="margin-bottom: 30px;">
-          <div class="card">
-            <span class="eyebrow">Citas Programadas Hoy</span>
-            <h2>${appts.length} Atenciones</h2>
-            <span class="tiny">${appts.filter(a => a.status === 'CONFIRMED').length} confirmadas · ${appts.filter(a => a.status === 'IN_WAITING_ROOM').length} en espera</span>
-          </div>
-          <div class="card">
-            <span class="eyebrow">Recaudación del Día</span>
-            <h2>S/ ${cash.currentCash.toFixed(2)}</h2>
-            <span class="tiny">Caja + POS Niubiz + Yape</span>
-          </div>
-          <div class="card">
-            <span class="eyebrow">Pacientes Activos</span>
-            <h2>3 Expedientes</h2>
-            <span class="tiny">Ortodoncia, Cirugía y Pediatría</span>
-          </div>
-          <div class="card">
-            <span class="eyebrow">Alertas de Stock</span>
-            <h2 style="color: ${inv.some(i => i.status === 'CRITICAL') ? 'var(--danger)' : 'var(--ink)'};">${inv.filter(i => i.status !== 'OPTIMAL').length} Insumos</h2>
-            <span class="tiny">Lidocaína y Neodent Helix</span>
-          </div>
-        </div>
-
-        <div class="grid-2" style="margin-bottom: 30px;">
-          <div class="card">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-              <h3>Cola de Atención & Sillones</h3>
-              <a href="?view=agenda" class="btn btn-soft btn-small">Ver Agenda</a>
-            </div>
-            <div style="display: grid; gap: 10px;">
-              ${appts.map(a => `
-                <div style="padding: 12px; border: 1px solid var(--line); border-radius: 8px; display: flex; justify-content: space-between; align-items: center; background: var(--surface);">
-                  <div>
-                    <div style="font-weight: 700; font-size: 0.92rem;">${a.time} — ${a.patientName}</div>
-                    <div class="tiny">${a.practitioner} · ${a.chair}</div>
-                  </div>
-                  <span class="chip ${a.status === 'IN_CHAIR' ? 'chip-success' : a.status === 'IN_WAITING_ROOM' ? 'chip-warning' : 'chip-neutral'}">${a.status}</span>
-                </div>
-              `).join("")}
-            </div>
-          </div>
-
-          <div class="card">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-              <h3>Acciones Clínicas Inmediatas</h3>
-              <span class="tiny">Dra. Ana Flores (COP 18240)</span>
-            </div>
-            <div style="display: grid; gap: 12px;">
-              <a href="?view=patient&patient=pat_maria" class="btn btn-secondary" style="justify-content: flex-start; padding: 14px 16px;">
-                <span>🦷</span>
-                <div style="text-align: left;">
-                  <div style="font-weight: 700;">Abrir Odontograma María Quispe</div>
-                  <div class="tiny">Control ortodóntico y actualización de piezas</div>
-                </div>
-              </a>
-              <a href="?view=finance" class="btn btn-secondary" style="justify-content: flex-start; padding: 14px 16px;">
-                <span>💳</span>
-                <div style="text-align: left;">
-                  <div style="font-weight: 700;">Registrar Cobro / Boleta Electrónica</div>
-                  <div class="tiny">Caja Yanahuara · POS y billeteras digitales</div>
-                </div>
-              </a>
-              <a href="?view=inventory" class="btn btn-secondary" style="justify-content: flex-start; padding: 14px 16px;">
-                <span>📦</span>
-                <div style="text-align: left;">
-                  <div style="font-weight: 700;">Revisar Inventario y Lotes</div>
-                  <div class="tiny">Reposición de anestésicos y brackets Roth</div>
-                </div>
-              </a>
-            </div>
-          </div>
-        </div>
-      `;
-    
-    } else if (view === "agenda") {
-      // FECHA SELECCIONADA (POR DEFECTO HOY)
-      const urlParams = new URLSearchParams(window.location.search);
-      const todayStr = new Date().toISOString().split('T')[0];
-      let selectedDate = urlParams.get('date') || todayStr;
-      let activeChairFilter = urlParams.get('chair') || 'ALL'; // 'ALL' | 'chair_1' | 'chair_2' | 'chair_3'
-
-      const allApts = mockApi.getAppointmentsByDate(selectedDate);
-      const activeRole = mockApi.getActiveRole();
-      const roleProfile = mockApi.getRoleProfile(activeRole);
-
-      // MÉTRICAS DE LA FECHA
-      const totalCount = allApts.length;
-      const confirmedCount = allApts.filter(a => a.status === 'CONFIRMED').length;
-      const inChairCount = allApts.filter(a => a.status === 'IN_CHAIR').length;
-      const waitingCount = allApts.filter(a => a.status === 'IN_WAITING_ROOM').length;
-      const scheduledCount = allApts.filter(a => a.status === 'SCHEDULED').length;
-
-      // FILTRAR POR SILLONES
-      const chair1Apts = allApts.filter(a => a.chairId === 'chair_1');
-      const chair2Apts = allApts.filter(a => a.chairId === 'chair_2');
-      const chair3Apts = allApts.filter(a => a.chairId === 'chair_3');
-
-      main.innerHTML = `
-        <!-- ENCABEZADO Y SELECTOR DE FECHA -->
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; flex-wrap: wrap; gap: 14px;">
-          <div>
-            <div style="display: flex; align-items: center; gap: 10px;">
-              <h1 style="margin: 0;">Agenda Multi-Sillón</h1>
-              <span class="chip chip-success" style="font-size: 0.78rem;">${roleProfile.title}</span>
-            </div>
-            <p class="muted" style="margin: 4px 0 0;">Programación quirúrgica y de sillones de la Sede Yanahuara.</p>
-          </div>
-          
-          <div style="display: flex; gap: 10px; align-items: center;">
-            <button class="btn btn-primary" onclick="window.openNewAptModal()">
-              + Nueva Cita Clínica
-            </button>
-          </div>
-        </div>
-
-        <!-- BARRA DE CONTROL TEMPORAL (FECHA) -->
-        <div class="scheduler-controls-bar">
-          <div class="date-nav-group">
-            <button class="btn btn-secondary btn-small" onclick="window.navigateDate(-1)">◀ Día Anterior</button>
-            <input type="date" id="schedulerDateInput" class="date-input-styled" value="${selectedDate}" onchange="window.changeSchedulerDate(this.value)">
-            <button class="btn btn-secondary btn-small" onclick="window.changeSchedulerDate('${todayStr}')">Hoy</button>
-            <button class="btn btn-secondary btn-small" onclick="window.navigateDate(1)">Día Siguiente ▶</button>
-          </div>
-
-          <!-- BOTONES DE VISTA DE SILLÓN -->
-          <div class="chair-filter-tabs" style="margin-bottom: 0;">
-            <button class="chair-tab-btn ${activeChairFilter === 'ALL' ? 'active' : ''}" onclick="window.filterChairView('ALL')">
-              🏢 Todos los Sillones (3)
-            </button>
-            <button class="chair-tab-btn ${activeChairFilter === 'chair_1' ? 'active' : ''}" onclick="window.filterChairView('chair_1')">
-              🦷 Sillón 1 (Ortodoncia)
-            </button>
-            <button class="chair-tab-btn ${activeChairFilter === 'chair_2' ? 'active' : ''}" onclick="window.filterChairView('chair_2')">
-              🔬 Sillón 2 (Cirugía/Rehab)
-            </button>
-            <button class="chair-tab-btn ${activeChairFilter === 'chair_3' ? 'active' : ''}" onclick="window.filterChairView('chair_3')">
-              👶 Sillón 3 (Pediatría/Integral)
-            </button>
-          </div>
-        </div>
-
-        <!-- RIBBON DE MÉTRICAS DEL DÍA -->
-        <div class="scheduler-metrics-ribbon">
-          <div class="metric-pill-card">
-            <div>
-              <span class="tiny muted" style="font-weight: 700; text-transform: uppercase;">Total Agendadas</span>
-              <div class="metric-pill-val" style="color: var(--ink);">${totalCount}</div>
-            </div>
-            <span style="font-family: var(--mono); font-size: 1rem; color: var(--ink-faint);">[REG]</span>
-          </div>
-
-          <div class="metric-pill-card">
-            <div>
-              <span class="tiny muted" style="font-weight: 700; text-transform: uppercase;">Confirmadas</span>
-              <div class="metric-pill-val" style="color: var(--blue);">${confirmedCount}</div>
-            </div>
-            <span style="font-family: var(--mono); font-size: 1rem; color: var(--blue);">[OK]</span>
-          </div>
-
-          <div class="metric-pill-card">
-            <div>
-              <span class="tiny muted" style="font-weight: 700; text-transform: uppercase;">En Sala / Espera</span>
-              <div class="metric-pill-val" style="color: var(--terracotta);">${waitingCount}</div>
-            </div>
-            <span style="font-family: var(--mono); font-size: 1rem; color: var(--amber);">[SALA]</span>
-          </div>
-
-          <div class="metric-pill-card">
-            <div>
-              <span class="tiny muted" style="font-weight: 700; text-transform: uppercase;">En Sillón (Atención)</span>
-              <div class="metric-pill-val" style="color: var(--action);">${inChairCount}</div>
-            </div>
-            <span style="font-family: var(--mono); font-size: 1rem; color: var(--action);">[ACT]</span>
-          </div>
-        </div>
-
-        <!-- LIENZO DE SILLONES -->
-        <div class="multi-chair-grid" id="multiChairGrid">
-          <!-- COLUMNA 1: SILLÓN 1 (ORTODONCIA) -->
-          ${(activeChairFilter === 'ALL' || activeChairFilter === 'chair_1') ? `
-            <div class="chair-column-card">
-              <div class="chair-column-header">
-                <div>
-                  <h3 class="chair-column-title">Sillón 1 · Ortodoncia 3D</h3>
-                  <span class="chair-doctor-sub">Dra. Ana Flores Vanesa (COP 18240)</span>
-                </div>
-                <span class="chip chip-success" style="font-size: 0.72rem;">${chair1Apts.length} Citas</span>
-              </div>
-              <div class="chair-slots-list">
-                ${chair1Apts.length > 0 ? chair1Apts.map(a => renderAppointmentCard(a)).join('') : `
-                  <div style="text-align: center; padding: 40px 10px; color: var(--ink-soft);">
-                    <span style="font-size: 2rem; display: block; margin-bottom: 8px;">🛋️</span>
-                    <strong>Sillón Disponible</strong>
-                    <div class="tiny">Sin citas agendadas para esta fecha.</div>
-                    <button class="btn btn-secondary btn-small" style="margin-top: 14px;" onclick="window.openNewAptModal('chair_1')">+ Agendar aquí</button>
-                  </div>
-                `}
-              </div>
-            </div>
-          ` : ''}
-
-          <!-- COLUMNA 2: SILLÓN 2 (CIRUGÍA / REHAB) -->
-          ${(activeChairFilter === 'ALL' || activeChairFilter === 'chair_2') ? `
-            <div class="chair-column-card">
-              <div class="chair-column-header">
-                <div>
-                  <h3 class="chair-column-title">Sillón 2 · Cirugía & Rehab</h3>
-                  <span class="chair-doctor-sub">Dr. Carlos Mendoza / Dr. Diego Torres</span>
-                </div>
-                <span class="chip chip-success" style="font-size: 0.72rem;">${chair2Apts.length} Citas</span>
-              </div>
-              <div class="chair-slots-list">
-                ${chair2Apts.length > 0 ? chair2Apts.map(a => renderAppointmentCard(a)).join('') : `
-                  <div style="text-align: center; padding: 40px 10px; color: var(--ink-soft);">
-                    <span style="font-size: 2rem; display: block; margin-bottom: 8px;">🛋️</span>
-                    <strong>Sillón Disponible</strong>
-                    <div class="tiny">Sin citas agendadas para esta fecha.</div>
-                    <button class="btn btn-secondary btn-small" style="margin-top: 14px;" onclick="window.openNewAptModal('chair_2')">+ Agendar aquí</button>
-                  </div>
-                `}
-              </div>
-            </div>
-          ` : ''}
-
-          <!-- COLUMNA 3: SILLÓN 3 (PEDIATRÍA / INTEGRAL) -->
-          ${(activeChairFilter === 'ALL' || activeChairFilter === 'chair_3') ? `
-            <div class="chair-column-card">
-              <div class="chair-column-header">
-                <div>
-                  <h3 class="chair-column-title">Sillón 3 · Pediatría & Integral</h3>
-                  <span class="chair-doctor-sub">Dra. Sofía Gutiérrez / Dra. Lucía Paredes</span>
-                </div>
-                <span class="chip chip-success" style="font-size: 0.72rem;">${chair3Apts.length} Citas</span>
-              </div>
-              <div class="chair-slots-list">
-                ${chair3Apts.length > 0 ? chair3Apts.map(a => renderAppointmentCard(a)).join('') : `
-                  <div style="text-align: center; padding: 40px 10px; color: var(--ink-soft);">
-                    <span style="font-size: 2rem; display: block; margin-bottom: 8px;">🛋️</span>
-                    <strong>Sillón Disponible</strong>
-                    <div class="tiny">Sin citas agendadas para esta fecha.</div>
-                    <button class="btn btn-secondary btn-small" style="margin-top: 14px;" onclick="window.openNewAptModal('chair_3')">+ Agendar aquí</button>
-                  </div>
-                `}
-              </div>
-            </div>
-          ` : ''}
-        </div>
-      `;
-
-      function renderAppointmentCard(a) {
-        const statusMap = {
-          SCHEDULED: { label: "Programada", chip: "chip-neutral" },
-          CONFIRMED: { label: "Confirmada (WhatsApp)", chip: "chip-success" },
-          IN_WAITING_ROOM: { label: "En Sala de Espera", chip: "chip-warning" },
-          IN_CHAIR: { label: "En Atención Clínica", chip: "chip-success" },
-          COMPLETED: { label: "Atendida", chip: "chip-neutral" }
-        };
-        const sInfo = statusMap[a.status] || { label: a.status, chip: "chip-neutral" };
-
-        return `
-          <div class="appointment-slot-card status-${a.status}" onclick="window.openAptDetail('${a.id}')">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <span class="apt-time-badge">⏱️ ${a.time} (${a.duration})</span>
-              <span class="chip ${sInfo.chip}" style="font-size: 0.68rem; padding: 2px 8px;">${sInfo.label}</span>
-            </div>
-            <div class="apt-patient-title">${a.patientName}</div>
-            <div class="apt-reason-text">${a.reason}</div>
-            <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 8px; border-top: 1px solid var(--line-soft);">
-              <span class="tiny muted">${a.practitioner}</span>
-              <span style="font-size: 0.78rem; color: var(--action); font-weight: 700;">Gestionar →</span>
-            </div>
-          </div>
-        `;
-      }
-
-    } else if (view === "patient") {
-      const odontogram = mockApi.getOdontogram();
-      let selectedToothNum = 21;
-
-      main.innerHTML = `
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
-          <div>
-            <h1>Odontograma Digital Interactivo (52 Piezas FDI)</h1>
-            <p class="muted">Paciente: <strong>María Quispe Condori</strong> (DNI: 45892104) · Conforme NTS N.º 188-MINSA/DGIESP-2022</p>
-          </div>
-          <div style="display: flex; gap: 10px;">
-            <a href="odontograma-cop52.html" class="btn btn-secondary btn-small">Modo Táctil Extendido</a>
-            <button class="btn btn-primary btn-small" id="signOdontogramBtn">Firmar Odontograma (Dra. Ana Flores)</button>
-          </div>
-        </div>
-
-        <!-- Arcada Superior Permanente -->
-        <div class="arch-container">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-            <h4 style="font-size: 0.9rem; text-transform: uppercase; color: var(--blue-deep);">Arcada Superior Permanente (Cuadrantes 1 y 2)</h4>
-            <span class="tiny">Piezas 18 a 11 y 21 a 28</span>
-          </div>
-          <div class="teeth-row">
-            ${[18, 17, 16, 15, 14, 13, 12, 11, 21, 22, 23, 24, 25, 26, 27, 28].map(n => {
-              const finding = odontogram.teeth.find(t => t.number === n);
-              const cls = finding ? (finding.status === 'CARIES_DRAFT' ? 'has-caries' : finding.status === 'RESTORED' ? 'has-restored' : finding.status === 'ENDODONTIC' ? 'has-endodontic' : finding.status === 'IMPLANT_PLANNED' ? 'has-implant' : finding.status === 'ABSENT' ? 'has-absent' : '') : '';
-              return `
-                <div class="tooth-box ${cls}" onclick="window.openToothModal(${n})">
-                  <div style="font-size: 0.72rem; font-weight: 700;">#${n}</div>
-                  <div style="font-size: 1.1rem; margin: 2px 0;">🦷</div>
-                  <div class="tiny" style="font-size: 0.65rem;">${finding ? finding.status.substring(0,6) : 'Sano'}</div>
-                </div>
-              `;
-            }).join("")}
-          </div>
-        </div>
-
-        <!-- Arcada Temporal (Pediátrica / Decidua) -->
-        <div class="arch-container" style="background: var(--surface-dim);">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-            <h4 style="font-size: 0.85rem; text-transform: uppercase; color: var(--teal);">Dentición Temporal / Decidua (Cuadrantes 5, 6, 7 y 8)</h4>
-            <span class="tiny">Piezas 55 a 51, 61 a 65, 85 a 81, 71 a 75</span>
-          </div>
-          <div class="teeth-row-pediatric" style="margin-bottom: 12px;">
-            ${[55, 54, 53, 52, 51, 61, 62, 63, 64, 65].map(n => `
-              <div class="tooth-box" onclick="window.openToothModal(${n})">
-                <div style="font-size: 0.7rem; font-weight: 700;">#${n}</div>
-                <div style="font-size: 0.9rem;">🦷</div>
-                <div class="tiny" style="font-size: 0.6rem;">Temporal</div>
-              </div>
-            `).join("")}
-          </div>
-          <div class="teeth-row-pediatric">
-            ${[85, 84, 83, 82, 81, 71, 72, 73, 74, 75].map(n => `
-              <div class="tooth-box" onclick="window.openToothModal(${n})">
-                <div style="font-size: 0.7rem; font-weight: 700;">#${n}</div>
-                <div style="font-size: 0.9rem;">🦷</div>
-                <div class="tiny" style="font-size: 0.6rem;">Temporal</div>
-              </div>
-            `).join("")}
-          </div>
-        </div>
-
-        <!-- Arcada Inferior Permanente -->
-        <div class="arch-container">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-            <h4 style="font-size: 0.9rem; text-transform: uppercase; color: var(--blue-deep);">Arcada Inferior Permanente (Cuadrantes 4 y 3)</h4>
-            <span class="tiny">Piezas 48 a 41 y 31 a 38</span>
-          </div>
-          <div class="teeth-row">
-            ${[48, 47, 46, 45, 44, 43, 42, 41, 31, 32, 33, 34, 35, 36, 37, 38].map(n => {
-              const finding = odontogram.teeth.find(t => t.number === n);
-              const cls = finding ? (finding.status === 'CARIES_DRAFT' ? 'has-caries' : finding.status === 'RESTORED' ? 'has-restored' : finding.status === 'ENDODONTIC' ? 'has-endodontic' : finding.status === 'IMPLANT_PLANNED' ? 'has-implant' : finding.status === 'ABSENT' ? 'has-absent' : '') : '';
-              return `
-                <div class="tooth-box ${cls}" onclick="window.openToothModal(${n})">
-                  <div style="font-size: 0.72rem; font-weight: 700;">#${n}</div>
-                  <div style="font-size: 1.1rem; margin: 2px 0;">🦷</div>
-                  <div class="tiny" style="font-size: 0.65rem;">${finding ? finding.status.substring(0,6) : 'Sano'}</div>
-                </div>
-              `;
-            }).join("")}
-          </div>
-        </div>
-
-        <!-- Tabla de Hallazgos y Plan Clínico -->
-        <div class="card">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-            <h3>Registro de Hallazgos & Procedimientos Propuestos</h3>
-            <span class="chip chip-neutral">${odontogram.teeth.length} registros clínicos</span>
-          </div>
-
-          <div class="table-responsive">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>Pieza FDI</th>
-                  <th>Superficie</th>
-                  <th>Diagnóstico / Estado</th>
-                  <th>Tratamiento Propuesto</th>
-                  <th>Tipo Registro</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${odontogram.teeth.map(t => `
-                  <tr>
-                    <td><strong>Pieza #${t.number}</strong></td>
-                    <td>${t.surface || 'Total'}</td>
-                    <td><span class="chip ${t.status === 'CARIES_DRAFT' ? 'chip-danger' : t.status === 'RESTORED' ? 'chip-neutral' : t.status === 'IMPLANT_PLANNED' ? 'chip-success' : 'chip-warning'}">${t.status}</span></td>
-                    <td>${t.treatmentProposed || t.treatment || t.note}</td>
-                    <td><span class="chip chip-neutral">NTS-188</span></td>
-                  </tr>
-                `).join("")}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      `;
-
-      window.openToothModal = (num) => {
-        selectedToothNum = num;
-        document.getElementById("modalTitle").textContent = `Registrar Hallazgo en Pieza #${num} (FDI)`;
-        document.getElementById("findingModal").classList.add("open");
-      };
-
-      document.getElementById("closeModalBtn")?.addEventListener("click", () => {
-        document.getElementById("findingModal").classList.remove("open");
-      });
-
-      document.getElementById("confirmFindingBtn")?.addEventListener("click", () => {
-        const type = document.getElementById("modalFindingType").value;
-        const surface = document.getElementById("modalFindingSurface").value;
-        const note = document.getElementById("modalFindingNote").value || "Tratamiento regular";
-
-        mockApi.addOdontogramFinding({
-          number: selectedToothNum,
-          status: type,
-          surface: surface,
-          finding: note,
-          treatmentProposed: note
-        });
-
-        document.getElementById("findingModal").classList.remove("open");
-        showToast(`Hallazgo en Pieza #${selectedToothNum} registrado en ficha`, "success");
-        window.location.reload();
-      });
-
-      document.getElementById("signOdontogramBtn")?.addEventListener("click", () => {
-        mockApi.logAuditEvent("FIRMA_ODONTOGRAMA", "Firma digital del odontograma inicial por Dra. Ana Flores (COP 18240)");
-        showToast("Odontograma inicial firmado digitalmente conforme a NTS 188-MINSA", "success");
-      });
-    } else if (view === "patients") {
-      const patients = mockApi.getPatients();
-      main.innerHTML = `
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
-          <div>
-            <h1>Directorio de Pacientes & Historias Clínicas</h1>
-            <p class="muted">Gestión de filiación, antecedentes y planes de tratamiento.</p>
-          </div>
-          <button class="btn btn-primary btn-small" onclick="alert('Formulario de admisión de nuevo paciente abierto')">Nuevo Paciente</button>
-        </div>
-
-        <div class="card">
-          <div class="table-responsive">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>Documento / DNI</th>
-                  <th>Nombres y Apellidos</th>
-                  <th>Teléfono / Contacto</th>
-                  <th>Alergias</th>
-                  <th>Saldo Pendiente</th>
-                  <th>Estado</th>
-                  <th>Acción</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${patients.map(p => `
-                  <tr>
-                    <td><strong>${p.documentType}: ${p.documentNumber}</strong></td>
-                    <td><strong>${p.name}</strong><div class="tiny">${p.email}</div></td>
-                    <td>${p.phone}</td>
-                    <td><span class="chip ${p.allergies.includes('Ninguna') ? 'chip-neutral' : 'chip-danger'}">${p.allergies.join(', ')}</span></td>
-                    <td>S/ ${p.balanceDue.toFixed(2)}</td>
-                    <td><span class="chip ${p.status === 'IN_CHAIR' ? 'chip-success' : p.status === 'WAITING' ? 'chip-warning' : 'chip-neutral'}">${p.status}</span></td>
-                    <td>
-                      <a href="?view=patient&patient=${p.id}" class="btn btn-secondary btn-small">Ver Odontograma</a>
-                    </td>
-                  </tr>
-                `).join("")}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      `;
-    } else if (view === "finance") {
-      const cash = mockApi.getCashRegister();
-      const payments = mockApi.getPayments();
-
-      main.innerHTML = `
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
-          <div>
-            <h1>Caja & Cobranza · Sede Yanahuara</h1>
-            <p class="muted">Emisión de Boletas Electrónicas B001 y control de medios de pago locales.</p>
-          </div>
-          <button class="btn btn-primary btn-small" id="openCashBtn">Registrar Ingreso / Cobro</button>
-        </div>
-
-        <div class="grid-3" style="margin-bottom: 24px;">
-          <div class="card">
-            <span class="eyebrow">Saldo Actual en Caja</span>
-            <h2>S/ ${cash.currentCash.toFixed(2)}</h2>
-            <span class="tiny">Apertura: S/ ${cash.openingBalance.toFixed(2)}</span>
-          </div>
-          <div class="card">
-            <span class="eyebrow">Ingresos del Día</span>
-            <h2 style="color: var(--green);">+ S/ ${cash.totalIncomeToday.toFixed(2)}</h2>
-            <span class="tiny">POS Niubiz + Yape + BCP</span>
-          </div>
-          <div class="card">
-            <span class="eyebrow">Egresos / Gastos</span>
-            <h2 style="color: var(--danger);">- S/ ${cash.totalExpenseToday.toFixed(2)}</h2>
-            <span class="tiny">Insumos urgentes farmacia</span>
-          </div>
-        </div>
-
-        <div class="card" style="margin-bottom: 24px;">
-          <h3 style="margin-bottom: 16px;">Movimientos Contables de Caja</h3>
-          <div class="table-responsive">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>Hora</th>
-                  <th>Concepto / Comprobante</th>
-                  <th>Paciente</th>
-                  <th>Medio de Pago</th>
-                  <th>Monto</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${cash.transactions.map(t => `
-                  <tr>
-                    <td>${t.time}</td>
-                    <td><strong>${t.concept}</strong></td>
-                    <td>${t.patient}</td>
-                    <td><span class="chip chip-neutral">${t.method}</span></td>
-                    <td style="font-weight: 700; color: ${t.type === 'INCOME' ? 'var(--green)' : 'var(--danger)'};">
-                      ${t.type === 'INCOME' ? '+' : ''} S/ ${t.amount.toFixed(2)}
-                    </td>
-                  </tr>
-                `).join("")}
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div class="card">
-          <h3 style="margin-bottom: 16px;">Plan de Cuotas & Financiamiento María Quispe</h3>
-          <div class="table-responsive">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>Concepto</th>
-                  <th>Vencimiento</th>
-                  <th>Importe</th>
-                  <th>Comprobante</th>
-                  <th>Estado</th>
-                  <th>Acción</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${payments.map(p => `
-                  <tr>
-                    <td><strong>${p.concept}</strong></td>
-                    <td>${p.dueDate}</td>
-                    <td>S/ ${p.amount.toFixed(2)}</td>
-                    <td>${p.receiptNumber || '—'}</td>
-                    <td><span class="chip ${p.status === 'PAID' ? 'chip-success' : 'chip-warning'}">${p.status === 'PAID' ? 'PAGADO' : 'PENDIENTE'}</span></td>
-                    <td>
-                      ${p.status === 'PENDING' ? `
-                        <button class="btn btn-primary btn-small" onclick="window.payCuota('${p.id}')">Cobrar con POS / Yape</button>
-                      ` : `
-                        <span class="tiny">Pagado el ${p.paidDate}</span>
-                      `}
-                    </td>
-                  </tr>
-                `).join("")}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      `;
-
-      window.payCuota = (id) => {
-        mockApi.updatePayment(id, {
-          status: "PAID",
-          paidDate: "2026-07-28",
-          receiptNumber: `B001-${Math.floor(100000 + Math.random() * 900000)}`,
-          method: "POS Niubiz"
-        });
-        showToast("Cuota cobrada exitosamente. Boleta electrónica emitida.", "success");
-        window.location.reload();
-      };
-
-      document.getElementById("openCashBtn")?.addEventListener("click", () => {
-        const monto = parseFloat(prompt("Ingrese monto a registrar en caja (S/):", "350.00"));
-        if (monto) {
-          mockApi.addCashTransaction({
-            id: `tx_${Date.now()}`,
-            time: new Date().toLocaleTimeString("es-PE", { hour: '2-digit', minute: '2-digit' }),
-            concept: "Cobro Consulta / Procedimiento Clínico",
-            patient: "Paciente Presencial",
-            amount: monto,
-            method: "Yape",
-            type: "INCOME"
-          });
-          showToast(`Ingreso de S/ ${monto.toFixed(2)} registrado en caja`, "success");
-          window.location.reload();
-        }
-      });
-    } else if (view === "inventory") {
-      const inv = mockApi.getInventory();
-      main.innerHTML = `
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
-          <div>
-            <h1>Inventario Clínico & Material Dental</h1>
-            <p class="muted">Control de stock de resinas, anestésicos, biomateriales e implantes.</p>
-          </div>
-          <button class="btn btn-primary btn-small" id="addItemBtn">Registrar Ingreso Stock</button>
-        </div>
-
-        <div class="card">
-          <div class="table-responsive">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>Código</th>
-                  <th>Descripción del Insumo</th>
-                  <th>Categoría</th>
-                  <th>Stock Actual</th>
-                  <th>Stock Mínimo</th>
-                  <th>Presentación</th>
-                  <th>Estado</th>
-                  <th>Ajuste Rápido</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${inv.map(i => `
-                  <tr>
-                    <td><code>${i.code}</code></td>
-                    <td><strong>${i.name}</strong></td>
-                    <td>${i.category}</td>
-                    <td style="font-weight: 700; font-size: 1rem;">${i.stock}</td>
-                    <td>${i.minStock}</td>
-                    <td>${i.unit}</td>
-                    <td>
-                      <span class="chip ${i.status === 'OPTIMAL' ? 'chip-success' : i.status === 'LOW_STOCK' ? 'chip-warning' : 'chip-danger'}">
-                        ${i.status === 'OPTIMAL' ? 'ÓPTIMO' : i.status === 'LOW_STOCK' ? 'BAJO' : 'CRÍTICO'}
-                      </span>
-                    </td>
-                    <td>
-                      <button class="btn btn-secondary btn-small" onclick="window.adjustStock('${i.id}', ${i.stock})">Ajustar (+/-)</button>
-                    </td>
-                  </tr>
-                `).join("")}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      `;
-
-      window.adjustStock = (id, current) => {
-        const val = prompt(`Ajustar cantidad en almacén (Actual: ${current}):`, current + 5);
-        if (val !== null && !isNaN(val)) {
-          mockApi.updateInventoryStock(id, parseInt(val, 10));
-          showToast("Stock de insumo actualizado", "success");
-          window.location.reload();
-        }
-      };
-
-      document.getElementById("addItemBtn")?.addEventListener("click", () => {
-        showToast("Formulario de recepción de lote de proveedor abierto", "info");
-      });
-    } else if (view === "audit") {
-      const events = seed.auditEvents;
-      main.innerHTML = `
-        <div style="margin-bottom: 24px;">
-          <h1>Bitácora de Auditoría Inmutable</h1>
-          <p class="muted">Trazabilidad completa de mutaciones clínicas, pagos y consentimientos (NTS-188 & LPDP).</p>
-        </div>
-
-        <div class="card">
-          <div class="table-responsive">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>Fecha & Hora</th>
-                  <th>Actor</th>
-                  <th>Tipo Acción</th>
-                  <th>Detalle del Evento</th>
-                </tr>
-              </thead>
-              <tbody>
-                ${events.map(e => `
-                  <tr>
-                    <td style="font-family: var(--mono); font-size: 0.8rem;">${e.timestamp}</td>
-                    <td><strong>${e.actor}</strong></td>
-                    <td><span class="chip chip-neutral">${e.action}</span></td>
-                    <td>${e.detail}</td>
-                  </tr>
-                `).join("")}
-              </tbody>
-            </table>
-          </div>
-        </div>
-      `;
-    }
-  </script>
-  <script src="../components/prototype-switcher.js"></script>
-
-  
-  <!-- MODAL: DETALLE Y GESTIÓN DE CITA CLÍNICA (DOSSIER SEGMENTADO) -->
+  <!-- MODAL 2: DETALLE Y GESTIÓN DE CITA CLÍNICA (DOSSIER SEGMENTADO) -->
   <div class="drawer-modal-overlay" id="appointmentDetailModal" onclick="window.handleDetailBackdrop(event)">
-    <div class="drawer-modal-card" style="width: min(640px, 95vw);">
+    <div class="drawer-modal-card">
       <!-- Cabecera Dossier -->
       <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; border-bottom: 1px solid var(--line); padding-bottom: 14px;">
         <div style="display: flex; align-items: center; gap: 14px;">
           <div class="patient-avatar-badge" id="detailPatientAvatar">M</div>
           <div>
-            <h2 id="detailPatientName" style="margin: 0; font-size: 1.35rem; color: var(--ink);">Nombre Paciente</h2>
+            <h2 id="detailPatientName" style="margin: 0; font-size: 1.25rem; color: var(--ink);">Nombre Paciente</h2>
             <div id="detailAptTime" class="tiny" style="color: var(--ink-soft); font-weight: 600;">Fecha y Hora</div>
           </div>
         </div>
@@ -1361,11 +687,11 @@
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
           <div>
             <span class="tiny muted">Sillón Asignado:</span>
-            <div id="detailChair" style="font-weight: 700; color: var(--action); font-size: 0.98rem;">Sillón 1 (Ortodoncia)</div>
+            <div id="detailChair" style="font-weight: 700; color: var(--action); font-size: 0.94rem;">Sillón 1 (Ortodoncia)</div>
           </div>
           <div>
             <span class="tiny muted">Doctor COP:</span>
-            <div id="detailPractitioner" style="font-weight: 700; color: var(--ink); font-size: 0.98rem;">Dra. Ana Flores</div>
+            <div id="detailPractitioner" style="font-weight: 700; color: var(--ink); font-size: 0.94rem;">Dra. Ana Flores</div>
           </div>
         </div>
       </div>
@@ -1375,39 +701,15 @@
         <div class="segmented-section-title">
           <span>📋 Motivo Clínico y Diagnóstico Previo</span>
         </div>
-        <div id="detailReason" style="font-size: 0.95rem; color: var(--ink); margin-bottom: 10px; font-weight: 600;">-</div>
-        <div class="tiny muted" style="font-weight: 700; text-transform: uppercase; margin-bottom: 4px;">Anotaciones de Recepción / Turno:</div>
-        <div id="detailNotes" style="font-size: 0.88rem; color: var(--ink-soft); line-height: 1.45;">-</div>
+        <div id="detailReason" style="font-size: 0.92rem; color: var(--ink); margin-bottom: 8px; font-weight: 600;">-</div>
+        <div class="tiny muted" style="font-weight: 700; text-transform: uppercase; margin-bottom: 2px;">Anotaciones de Recepción / Turno:</div>
+        <div id="detailNotes" style="font-size: 0.86rem; color: var(--ink-soft); line-height: 1.4;">-</div>
       </div>
 
-      <!-- SECCIÓN 3: BARRA DE ACCIONES INMEDIATAS -->
-      <div style="border-top: 1px solid var(--line); padding-top: 18px;">
-        <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 10px; margin-bottom: 12px;">
-          <button id="btnActionConfirmWa" class="btn btn-primary btn-small" onclick="window.triggerWhatsAppConfirm()">
-            Confirmar Vía WhatsApp
-          </button>
-          <button class="btn btn-secondary btn-small" onclick="window.updateCurrentAptStatus('IN_WAITING_ROOM')">
-            Marcar Llegada (En Sala)
-          </button>
-        </div>
-
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-          <a id="btnLinkOdontogram" href="#" class="btn btn-secondary btn-small">
-            Odontograma FDI & SOAP
-          </a>
-          <a href="?view=finance" class="btn btn-secondary btn-small">
-            Emitir Boleta B001
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-      <!-- MÁQUINA DE ACCIONES DE ESTADO -->
-      <div style="border-top: 1px solid var(--line); padding-top: 18px;">
-        <label style="font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 10px;">Transición de Estado Clínico:</label>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px;">
+      <!-- SECCIÓN 3: MÁQUINA DE ACCIONES DE ESTADO -->
+      <div style="border-top: 1px solid var(--line); padding-top: 16px;">
+        <label style="font-weight: 700; font-size: 0.84rem; display: block; margin-bottom: 8px;">Transición de Estado Clínico:</label>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px;">
           <button id="btnActionConfirmWa" class="btn btn-secondary btn-small" onclick="window.triggerWhatsAppConfirm()">
             Confirmar WhatsApp
           </button>
@@ -1422,7 +724,7 @@
           </button>
         </div>
 
-        <div style="display: flex; gap: 10px; margin-top: 10px;">
+        <div style="display: flex; gap: 8px; margin-top: 8px;">
           <a id="btnLinkOdontogram" href="#" class="btn btn-secondary btn-small" style="flex: 1;">
             Odontograma FDI & SOAP
           </a>
@@ -1434,14 +736,13 @@
     </div>
   </div>
 
-  
-  <!-- MODAL: AGENDAR NUEVA CITA RÁPIDA (SEGMENTADO Y VISUAL) -->
+  <!-- MODAL 3: AGENDAR NUEVA CITA RÁPIDA -->
   <div class="drawer-modal-overlay" id="newAppointmentModal" onclick="window.handleNewBackdrop(event)">
-    <div class="drawer-modal-card" style="width: min(650px, 95vw);">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; border-bottom: 1px solid var(--line); padding-bottom: 12px;">
+    <div class="drawer-modal-card" style="width: min(640px, 95vw);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 1px solid var(--line); padding-bottom: 12px;">
         <div>
-          <h3 style="margin: 0; font-size: 1.35rem; color: var(--ink);">Agendar Cita Clínica</h3>
-          <span class="tiny muted">Sede Yanahuara · Programación Directa</span>
+          <h3 style="margin: 0; font-size: 1.25rem; color: var(--ink);">Agendar Cita Clínica</h3>
+          <span class="tiny muted">Sede Yanahuara · Programación Directa de Sillón</span>
         </div>
         <button class="btn btn-secondary btn-small" onclick="window.closeNewAptModal()">✕</button>
       </div>
@@ -1461,33 +762,33 @@
           </select>
         </div>
 
-        <!-- PASO 2: SILLÓN CLÍNICO & DOCTOR (RADIO CARDS) -->
+        <!-- PASO 2: SILLÓN CLÍNICO & DOCTOR -->
         <div class="segmented-form-section">
           <div class="segmented-section-title">
-            <span>💺 2. Sillón Físico & Especialista COP</span>
+            <span>💺 2. Sillón Quirúrgico & Especialista</span>
           </div>
           <div class="radio-cards-grid">
             <div class="radio-card-option selected" id="cardChair1" onclick="window.selectChairOption('chair_1', 'pro_ana')">
-              <strong style="font-size: 0.92rem; display: block; color: var(--action);">Sillón 1</strong>
-              <span style="font-size: 0.8rem; font-weight: 700; color: var(--ink);">Ortodoncia 3D</span>
-              <span class="tiny muted" style="display: block; font-size: 0.74rem;">Dra. Ana Flores (COP 18240)</span>
+              <strong style="font-size: 0.88rem; display: block; color: var(--action);">Sillón 1</strong>
+              <span style="font-size: 0.78rem; font-weight: 700; color: var(--ink);">Ortodoncia 3D</span>
+              <span class="tiny muted" style="display: block; font-size: 0.72rem;">Dra. Ana Flores</span>
             </div>
             <div class="radio-card-option" id="cardChair2" onclick="window.selectChairOption('chair_2', 'pro_carlos')">
-              <strong style="font-size: 0.92rem; display: block; color: var(--blue);">Sillón 2</strong>
-              <span style="font-size: 0.8rem; font-weight: 700; color: var(--ink);">Cirugía / Rehab</span>
-              <span class="tiny muted" style="display: block; font-size: 0.74rem;">Dr. Carlos Mendoza</span>
+              <strong style="font-size: 0.88rem; display: block; color: var(--blue);">Sillón 2</strong>
+              <span style="font-size: 0.78rem; font-weight: 700; color: var(--ink);">Cirugía / Rehab</span>
+              <span class="tiny muted" style="display: block; font-size: 0.72rem;">Dr. Carlos Mendoza</span>
             </div>
             <div class="radio-card-option" id="cardChair3" onclick="window.selectChairOption('chair_3', 'pro_sofia')">
-              <strong style="font-size: 0.92rem; display: block; color: var(--terracotta);">Sillón 3</strong>
-              <span style="font-size: 0.8rem; font-weight: 700; color: var(--ink);">Pediatría / Integ</span>
-              <span class="tiny muted" style="display: block; font-size: 0.74rem;">Dra. Sofía Gutiérrez</span>
+              <strong style="font-size: 0.88rem; display: block; color: var(--terracotta);">Sillón 3</strong>
+              <span style="font-size: 0.78rem; font-weight: 700; color: var(--ink);">Pediatría / Integ</span>
+              <span class="tiny muted" style="display: block; font-size: 0.72rem;">Dra. Sofía Gutiérrez</span>
             </div>
           </div>
           <input type="hidden" id="newAptChair" value="chair_1">
           <input type="hidden" id="newAptDoctor" value="pro_ana">
         </div>
 
-        <!-- PASO 3: FECHA, HORARIO & DURACIÓN (SLOT PILLS) -->
+        <!-- PASO 3: FECHA, HORARIO & DURACIÓN -->
         <div class="segmented-form-section">
           <div class="segmented-section-title">
             <span>⏱️ 3. Fecha, Franja Horaria & Duración</span>
@@ -1505,15 +806,13 @@
 
           <!-- Slots Rápidos -->
           <div class="tiny muted" style="font-weight: 700; margin-bottom: 6px;">O elige un turno libre rápido:</div>
-          <div class="time-slot-pills-row" style="margin-bottom: 14px;">
+          <div class="time-slot-pills-row" style="margin-bottom: 12px;">
             <div class="time-pill-btn" onclick="window.pickQuickTime('08:30')">08:30 AM</div>
             <div class="time-pill-btn selected" onclick="window.pickQuickTime('09:00')">09:00 AM</div>
             <div class="time-pill-btn" onclick="window.pickQuickTime('10:30')">10:30 AM</div>
             <div class="time-pill-btn" onclick="window.pickQuickTime('11:15')">11:15 AM</div>
             <div class="time-pill-btn" onclick="window.pickQuickTime('15:00')">03:00 PM</div>
             <div class="time-pill-btn" onclick="window.pickQuickTime('16:30')">04:30 PM</div>
-            <div class="time-pill-btn" onclick="window.pickQuickTime('17:30')">05:30 PM</div>
-            <div class="time-pill-btn" onclick="window.pickQuickTime('18:30')">06:30 PM</div>
           </div>
 
           <!-- Duración Segmentada -->
@@ -1535,14 +834,968 @@
           <input type="text" id="newAptReason" class="form-control" placeholder="Ej. Control de alineadores o escaneo intraoral 3D" required>
         </div>
 
-        <div style="display: flex; gap: 10px; margin-top: 16px;">
-          <button type="submit" class="btn btn-primary" style="flex: 1; padding: 14px;">✓ Guardar y Confirmar en Agenda</button>
+        <div style="display: flex; gap: 10px; margin-top: 14px;">
+          <button type="submit" class="btn btn-primary" style="flex: 1; padding: 12px;">✓ Guardar y Agendar Cita</button>
           <button type="button" class="btn btn-secondary" onclick="window.closeNewAptModal()">Cancelar</button>
         </div>
       </form>
     </div>
   </div>
 
+  <!-- SCRIPT CENTRAL DE LA CONSOLA -->
+  <script type="module">
+    import { mockApi } from '../assets/js/mock-api-v2.js';
+    import { showToast } from '../assets/js/components.js';
 
+    // 1. LEER VISTA DE PARÁMETROS URL
+    const params = new URLSearchParams(window.location.search);
+    const view = params.get("view") || "dashboard";
+
+    document.querySelectorAll(".staff-menu-item").forEach(el => el.classList.remove("active"));
+    const activeNav = document.getElementById('nav-' + view);
+    if (activeNav) activeNav.classList.add("active");
+
+    const main = document.getElementById("staffMain");
+    const seed = mockApi.getSeed();
+
+    // =========================================================================
+    // VISTA 1: DASHBOARD OPERATIVO (BALANCEADO 4-KPI + SPLIT 2-COLUMNAS)
+    // =========================================================================
+    if (view === "dashboard") {
+      const appts = mockApi.getAppointmentsToday();
+      const cash = mockApi.getCashRegister();
+      const inv = mockApi.getInventory();
+
+      main.innerHTML = `
+        <div class="staff-container">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
+            <div>
+              <h1 style="margin: 0; font-size: 1.85rem; font-weight: 800;">Dashboard Operativo</h1>
+              <p class="muted" style="margin: 4px 0 0;">Centro de Control Clínico · Sede Yanahuara (Arequipa)</p>
+            </div>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <span class="chip chip-success" style="font-size: 0.78rem;">🟢 Sillón 1: En Atención</span>
+              <span class="chip chip-warning" style="font-size: 0.78rem;">🟡 Sillón 2: Preparación</span>
+              <span class="chip chip-neutral" style="font-size: 0.78rem;">⚪ Sillón 3: Disponible</span>
+            </div>
+          </div>
+
+          <!-- GRID 4: KPIS PRINCIPALES HORIZONTALES -->
+          <div class="grid-4" style="margin-bottom: 24px;">
+            <div class="card">
+              <span class="eyebrow">Citas de Hoy</span>
+              <div style="font-family: var(--display); font-size: 2rem; font-weight: 800; color: var(--ink); margin: 6px 0 4px;">${appts.length} Citas</div>
+              <span class="tiny">${appts.filter(a => a.status === 'CONFIRMED').length} confirmadas · ${appts.filter(a => a.status === 'IN_WAITING_ROOM').length} en espera</span>
+            </div>
+            <div class="card">
+              <span class="eyebrow">Recaudación del Día</span>
+              <div style="font-family: var(--display); font-size: 2rem; font-weight: 800; color: var(--action); margin: 6px 0 4px;">S/ ${cash.currentCash ? cash.currentCash.toFixed(2) : '2,230.00'}</div>
+              <span class="tiny">Caja + POS Niubiz + Yape</span>
+            </div>
+            <div class="card">
+              <span class="eyebrow">Pacientes Activos</span>
+              <div style="font-family: var(--display); font-size: 2rem; font-weight: 800; color: var(--blue); margin: 6px 0 4px;">3 Expedientes</div>
+              <span class="tiny">Ortodoncia, Cirugía y Pediatría</span>
+            </div>
+            <div class="card">
+              <span class="eyebrow">Alertas de Stock</span>
+              <div style="font-family: var(--display); font-size: 2rem; font-weight: 800; color: ${inv.some(i => i.status === 'CRITICAL') ? 'var(--danger)' : 'var(--ink)'}; margin: 6px 0 4px;">${inv.filter(i => i.status !== 'OPTIMAL').length} Insumos</div>
+              <span class="tiny">Lidocaína y Neodent Helix</span>
+            </div>
+          </div>
+
+          <!-- GRID 2: COLA DE ATENCIÓN Y ACCIONES CLÍNICAS -->
+          <div class="grid-2" style="margin-bottom: 30px;">
+            <div class="card">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h3 style="margin: 0;">Cola de Atención en Sillones</h3>
+                <a href="?view=agenda" class="btn btn-secondary btn-small">Ver Agenda Multi-Sillón →</a>
+              </div>
+              <div style="display: grid; gap: 10px;">
+                ${appts.map(a => `
+                  <div style="padding: 12px 16px; border: 1px solid var(--line); border-radius: var(--radius-sm); display: flex; justify-content: space-between; align-items: center; background: var(--surface-dim); cursor: pointer;" onclick="window.openAptDetail('${a.id}')">
+                    <div>
+                      <div style="font-weight: 700; font-size: 0.92rem; color: var(--ink);">${a.time} — ${a.patientName}</div>
+                      <div class="tiny" style="color: var(--ink-soft);">${a.practitioner} · ${a.chair}</div>
+                    </div>
+                    <span class="chip ${a.status === 'IN_CHAIR' ? 'chip-success' : a.status === 'IN_WAITING_ROOM' ? 'chip-warning' : 'chip-neutral'}" style="font-size: 0.72rem; padding: 4px 10px;">${a.status}</span>
+                  </div>
+                `).join("")}
+              </div>
+            </div>
+
+            <div class="card">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h3 style="margin: 0;">Acciones Clínicas Inmediatas</h3>
+                <span class="tiny">Dra. Ana Flores (COP 18240)</span>
+              </div>
+              <div style="display: grid; gap: 10px;">
+                <a href="?view=patient&patient=pat_maria" class="btn btn-secondary" style="justify-content: flex-start; padding: 12px 16px; border-radius: var(--radius-sm);">
+                  <span style="font-size: 1.2rem;">🦷</span>
+                  <div style="text-align: left;">
+                    <div style="font-weight: 700; font-size: 0.9rem;">Abrir Odontograma María Quispe</div>
+                    <div class="tiny">Control ortodóntico y actualización de 52 piezas FDI</div>
+                  </div>
+                </a>
+                <a href="?view=agenda" class="btn btn-secondary" style="justify-content: flex-start; padding: 12px 16px; border-radius: var(--radius-sm);">
+                  <span style="font-size: 1.2rem;">📅</span>
+                  <div style="text-align: left;">
+                    <div style="font-weight: 700; font-size: 0.9rem;">Programar Citas en Sillones</div>
+                    <div class="tiny">Gestión de turnos de 3 sillones simultáneos</div>
+                  </div>
+                </a>
+                <a href="?view=finance" class="btn btn-secondary" style="justify-content: flex-start; padding: 12px 16px; border-radius: var(--radius-sm);">
+                  <span style="font-size: 1.2rem;">💳</span>
+                  <div style="text-align: left;">
+                    <div style="font-weight: 700; font-size: 0.9rem;">Registrar Cobro / Boleta B001</div>
+                    <div class="tiny">Caja Yanahuara · POS Niubiz y billeteras digitales</div>
+                  </div>
+                </a>
+                <a href="?view=inventory" class="btn btn-secondary" style="justify-content: flex-start; padding: 12px 16px; border-radius: var(--radius-sm);">
+                  <span style="font-size: 1.2rem;">📦</span>
+                  <div style="text-align: left;">
+                    <div style="font-weight: 700; font-size: 0.9rem;">Revisar Inventario y Lotes</div>
+                    <div class="tiny">Reposición de anestésicos y brackets Roth</div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+    // =========================================================================
+    // VISTA 2: AGENDA MULTI-SILLÓN
+    // =========================================================================
+    } else if (view === "agenda") {
+      const urlParams = new URLSearchParams(window.location.search);
+      const todayStr = "2026-09-08";
+      let selectedDate = urlParams.get('date') || todayStr;
+      let activeChairFilter = urlParams.get('chair') || 'ALL';
+
+      const allApts = mockApi.getAppointmentsByDate(selectedDate);
+      const activeRole = mockApi.getActiveRole();
+      const roleProfile = mockApi.getRoleProfile(activeRole);
+
+      const totalCount = allApts.length;
+      const confirmedCount = allApts.filter(a => a.status === 'CONFIRMED').length;
+      const inChairCount = allApts.filter(a => a.status === 'IN_CHAIR').length;
+      const waitingCount = allApts.filter(a => a.status === 'IN_WAITING_ROOM').length;
+
+      const chair1Apts = allApts.filter(a => a.chairId === 'chair_1');
+      const chair2Apts = allApts.filter(a => a.chairId === 'chair_2');
+      const chair3Apts = allApts.filter(a => a.chairId === 'chair_3');
+
+      main.innerHTML = `
+        <div class="staff-container">
+          <!-- ENCABEZADO -->
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; flex-wrap: wrap; gap: 14px;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <h1 style="margin: 0; font-size: 1.85rem; font-weight: 800;">Agenda Multi-Sillón</h1>
+                <span class="chip chip-success" style="font-size: 0.78rem;">${roleProfile.title}</span>
+              </div>
+              <p class="muted" style="margin: 4px 0 0;">Programación quirúrgica y de sillones de la Sede Yanahuara.</p>
+            </div>
+            
+            <div style="display: flex; gap: 10px; align-items: center;">
+              <button class="btn btn-primary" onclick="window.openNewAptModal()">
+                + Agendar Cita
+              </button>
+            </div>
+          </div>
+
+          <!-- BARRA DE CONTROL TEMPORAL & FILTROS -->
+          <div class="scheduler-controls-bar">
+            <div class="date-nav-group">
+              <button class="btn btn-secondary btn-small" onclick="window.navigateDate(-1)">◀ Anterior</button>
+              <input type="date" id="schedulerDateInput" class="date-input-styled" value="${selectedDate}" onchange="window.changeSchedulerDate(this.value)">
+              <button class="btn btn-secondary btn-small" onclick="window.changeSchedulerDate('${todayStr}')">Hoy</button>
+              <button class="btn btn-secondary btn-small" onclick="window.navigateDate(1)">Siguiente ▶</button>
+            </div>
+
+            <div class="chair-filter-tabs">
+              <button class="chair-tab-btn ${activeChairFilter === 'ALL' ? 'active' : ''}" onclick="window.filterChairView('ALL')">
+                🏢 Todos los Sillones (3)
+              </button>
+              <button class="chair-tab-btn ${activeChairFilter === 'chair_1' ? 'active' : ''}" onclick="window.filterChairView('chair_1')">
+                🦷 Sillón 1 (Ortodoncia)
+              </button>
+              <button class="chair-tab-btn ${activeChairFilter === 'chair_2' ? 'active' : ''}" onclick="window.filterChairView('chair_2')">
+                🔬 Sillón 2 (Cirugía/Rehab)
+              </button>
+              <button class="chair-tab-btn ${activeChairFilter === 'chair_3' ? 'active' : ''}" onclick="window.filterChairView('chair_3')">
+                👶 Sillón 3 (Pediatría/Integral)
+              </button>
+            </div>
+          </div>
+
+          <!-- MÉTRICAS DE LA AGENDA -->
+          <div class="scheduler-metrics-ribbon">
+            <div class="metric-pill-card">
+              <div>
+                <span class="tiny muted" style="font-weight: 700; text-transform: uppercase;">Total Agendadas</span>
+                <div class="metric-pill-val" style="color: var(--ink);">${totalCount}</div>
+              </div>
+              <span style="font-family: var(--mono); font-size: 0.9rem; color: var(--ink-faint);">[REG]</span>
+            </div>
+            <div class="metric-pill-card">
+              <div>
+                <span class="tiny muted" style="font-weight: 700; text-transform: uppercase;">Confirmadas</span>
+                <div class="metric-pill-val" style="color: var(--blue);">${confirmedCount}</div>
+              </div>
+              <span style="font-family: var(--mono); font-size: 0.9rem; color: var(--blue);">[OK]</span>
+            </div>
+            <div class="metric-pill-card">
+              <div>
+                <span class="tiny muted" style="font-weight: 700; text-transform: uppercase;">En Sala / Espera</span>
+                <div class="metric-pill-val" style="color: var(--terracotta);">${waitingCount}</div>
+              </div>
+              <span style="font-family: var(--mono); font-size: 0.9rem; color: var(--amber);">[SALA]</span>
+            </div>
+            <div class="metric-pill-card">
+              <div>
+                <span class="tiny muted" style="font-weight: 700; text-transform: uppercase;">En Sillón</span>
+                <div class="metric-pill-val" style="color: var(--action);">${inChairCount}</div>
+              </div>
+              <span style="font-family: var(--mono); font-size: 0.9rem; color: var(--action);">[ACT]</span>
+            </div>
+          </div>
+
+          <!-- GRID DE 3 SILLONES EQUILIBRADOS -->
+          <div class="multi-chair-grid" id="multiChairGrid">
+            <!-- SILLÓN 1 -->
+            ${(activeChairFilter === 'ALL' || activeChairFilter === 'chair_1') ? `
+              <div class="chair-column-card">
+                <div class="chair-column-header">
+                  <div>
+                    <h3 class="chair-column-title">Sillón 1 · Ortodoncia 3D</h3>
+                    <span class="chair-doctor-sub">Dra. Ana Flores (COP 18240)</span>
+                  </div>
+                  <span class="chip chip-success" style="font-size: 0.72rem; padding: 2px 8px;">${chair1Apts.length} Citas</span>
+                </div>
+                <div class="chair-slots-list">
+                  ${chair1Apts.length > 0 ? chair1Apts.map(a => renderAppointmentCard(a)).join('') : `
+                    <div style="text-align: center; padding: 40px 10px; color: var(--ink-soft);">
+                      <div style="font-size: 2rem; margin-bottom: 8px;">🛋️</div>
+                      <strong>Sillón Libre</strong>
+                      <div class="tiny">Sin citas agendadas en esta franja.</div>
+                      <button class="btn btn-secondary btn-small" style="margin-top: 14px;" onclick="window.openNewAptModal('chair_1')">+ Agendar aquí</button>
+                    </div>
+                  `}
+                </div>
+              </div>
+            ` : ''}
+
+            <!-- SILLÓN 2 -->
+            ${(activeChairFilter === 'ALL' || activeChairFilter === 'chair_2') ? `
+              <div class="chair-column-card">
+                <div class="chair-column-header">
+                  <div>
+                    <h3 class="chair-column-title">Sillón 2 · Cirugía & Rehab</h3>
+                    <span class="chair-doctor-sub">Dr. Carlos Mendoza / Dr. Diego Torres</span>
+                  </div>
+                  <span class="chip chip-success" style="font-size: 0.72rem; padding: 2px 8px;">${chair2Apts.length} Citas</span>
+                </div>
+                <div class="chair-slots-list">
+                  ${chair2Apts.length > 0 ? chair2Apts.map(a => renderAppointmentCard(a)).join('') : `
+                    <div style="text-align: center; padding: 40px 10px; color: var(--ink-soft);">
+                      <div style="font-size: 2rem; margin-bottom: 8px;">🛋️</div>
+                      <strong>Sillón Libre</strong>
+                      <div class="tiny">Sin citas agendadas en esta franja.</div>
+                      <button class="btn btn-secondary btn-small" style="margin-top: 14px;" onclick="window.openNewAptModal('chair_2')">+ Agendar aquí</button>
+                    </div>
+                  `}
+                </div>
+              </div>
+            ` : ''}
+
+            <!-- SILLÓN 3 -->
+            ${(activeChairFilter === 'ALL' || activeChairFilter === 'chair_3') ? `
+              <div class="chair-column-card">
+                <div class="chair-column-header">
+                  <div>
+                    <h3 class="chair-column-title">Sillón 3 · Pediatría & Integral</h3>
+                    <span class="chair-doctor-sub">Dra. Sofía Gutiérrez / Dra. Lucía Paredes</span>
+                  </div>
+                  <span class="chip chip-success" style="font-size: 0.72rem; padding: 2px 8px;">${chair3Apts.length} Citas</span>
+                </div>
+                <div class="chair-slots-list">
+                  ${chair3Apts.length > 0 ? chair3Apts.map(a => renderAppointmentCard(a)).join('') : `
+                    <div style="text-align: center; padding: 40px 10px; color: var(--ink-soft);">
+                      <div style="font-size: 2rem; margin-bottom: 8px;">🛋️</div>
+                      <strong>Sillón Libre</strong>
+                      <div class="tiny">Sin citas agendadas en esta franja.</div>
+                      <button class="btn btn-secondary btn-small" style="margin-top: 14px;" onclick="window.openNewAptModal('chair_3')">+ Agendar aquí</button>
+                    </div>
+                  `}
+                </div>
+              </div>
+            ` : ''}
+          </div>
+        </div>
+      `;
+
+      function renderAppointmentCard(a) {
+        const statusMap = {
+          SCHEDULED: { label: "Programada", chip: "chip-neutral" },
+          CONFIRMED: { label: "Confirmada (WA)", chip: "chip-success" },
+          IN_WAITING_ROOM: { label: "En Sala Espera", chip: "chip-warning" },
+          IN_CHAIR: { label: "En Sillón", chip: "chip-success" },
+          COMPLETED: { label: "Atendida", chip: "chip-neutral" }
+        };
+        const sInfo = statusMap[a.status] || { label: a.status, chip: "chip-neutral" };
+
+        return `
+          <div class="appointment-slot-card status-${a.status}" onclick="window.openAptDetail('${a.id}')">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span class="apt-time-badge">⏱️ ${a.time} (${a.duration})</span>
+              <span class="chip ${sInfo.chip}" style="font-size: 0.68rem; padding: 2px 8px;">${sInfo.label}</span>
+            </div>
+            <div class="apt-patient-title">${a.patientName}</div>
+            <div class="apt-reason-text">${a.reason}</div>
+            <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 8px; border-top: 1px solid var(--line-soft);">
+              <span class="tiny muted">${a.practitioner}</span>
+              <span style="font-size: 0.78rem; color: var(--action); font-weight: 700;">Gestionar →</span>
+            </div>
+          </div>
+        `;
+      }
+
+    // =========================================================================
+    // VISTA 3: ODONTOGRAMA DIGITAL FDI 52 PIEZAS
+    // =========================================================================
+    } else if (view === "patient") {
+      const odontogram = mockApi.getOdontogram();
+      let selectedToothNum = 21;
+
+      main.innerHTML = `
+        <div class="staff-container">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
+            <div>
+              <h1 style="margin: 0; font-size: 1.85rem; font-weight: 800;">Odontograma Digital FDI (52 Piezas)</h1>
+              <p class="muted" style="margin: 4px 0 0;">Paciente: <strong>María Quispe Condori</strong> (DNI: 45892104) · Conforme NTS N.º 188-MINSA/DGIESP-2022</p>
+            </div>
+            <div style="display: flex; gap: 10px;">
+              <a href="odontograma-cop52.html" class="btn btn-secondary btn-small">Modo Táctil Extendido</a>
+              <button class="btn btn-primary btn-small" id="signOdontogramBtn">Firmar Odontograma (Dra. Ana Flores)</button>
+            </div>
+          </div>
+
+          <!-- Arcada Superior Permanente -->
+          <div class="arch-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <h4 style="font-size: 0.88rem; text-transform: uppercase; color: var(--blue-deep); margin: 0; font-weight: 700;">Arcada Superior Permanente (Cuadrantes 1 y 2)</h4>
+              <span class="tiny">Piezas 18 a 11 y 21 a 28</span>
+            </div>
+            <div class="teeth-row">
+              ${[18, 17, 16, 15, 14, 13, 12, 11, 21, 22, 23, 24, 25, 26, 27, 28].map(n => {
+                const finding = odontogram.teeth.find(t => t.number === n);
+                const cls = finding ? (finding.status === 'CARIES_DRAFT' ? 'has-caries' : finding.status === 'RESTORED' ? 'has-restored' : finding.status === 'ENDODONTIC' ? 'has-endodontic' : finding.status === 'IMPLANT_PLANNED' ? 'has-implant' : finding.status === 'ABSENT' ? 'has-absent' : '') : '';
+                return `
+                  <div class="tooth-box ${cls}" onclick="window.openToothModal(${n})">
+                    <div style="font-size: 0.72rem; font-weight: 700;">#${n}</div>
+                    <div style="font-size: 1.1rem; margin: 2px 0;">🦷</div>
+                    <div class="tiny" style="font-size: 0.65rem;">${finding ? finding.status.substring(0,6) : 'Sano'}</div>
+                  </div>
+                `;
+              }).join("")}
+            </div>
+          </div>
+
+          <!-- Arcada Temporal (Pediátrica / Decidua) -->
+          <div class="arch-container" style="background: var(--surface-dim);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <h4 style="font-size: 0.85rem; text-transform: uppercase; color: var(--action); margin: 0; font-weight: 700;">Dentición Temporal / Decidua (Cuadrantes 5, 6, 7 y 8)</h4>
+              <span class="tiny">Piezas 55 a 51, 61 a 65, 85 a 81, 71 a 75</span>
+            </div>
+            <div class="teeth-row-pediatric" style="margin-bottom: 12px;">
+              ${[55, 54, 53, 52, 51, 61, 62, 63, 64, 65].map(n => `
+                <div class="tooth-box" onclick="window.openToothModal(${n})">
+                  <div style="font-size: 0.7rem; font-weight: 700;">#${n}</div>
+                  <div style="font-size: 0.9rem;">🦷</div>
+                  <div class="tiny" style="font-size: 0.6rem;">Temporal</div>
+                </div>
+              `).join("")}
+            </div>
+            <div class="teeth-row-pediatric">
+              ${[85, 84, 83, 82, 81, 71, 72, 73, 74, 75].map(n => `
+                <div class="tooth-box" onclick="window.openToothModal(${n})">
+                  <div style="font-size: 0.7rem; font-weight: 700;">#${n}</div>
+                  <div style="font-size: 0.9rem;">🦷</div>
+                  <div class="tiny" style="font-size: 0.6rem;">Temporal</div>
+                </div>
+              `).join("")}
+            </div>
+          </div>
+
+          <!-- Arcada Inferior Permanente -->
+          <div class="arch-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <h4 style="font-size: 0.88rem; text-transform: uppercase; color: var(--blue-deep); margin: 0; font-weight: 700;">Arcada Inferior Permanente (Cuadrantes 4 y 3)</h4>
+              <span class="tiny">Piezas 48 a 41 y 31 a 38</span>
+            </div>
+            <div class="teeth-row">
+              ${[48, 47, 46, 45, 44, 43, 42, 41, 31, 32, 33, 34, 35, 36, 37, 38].map(n => {
+                const finding = odontogram.teeth.find(t => t.number === n);
+                const cls = finding ? (finding.status === 'CARIES_DRAFT' ? 'has-caries' : finding.status === 'RESTORED' ? 'has-restored' : finding.status === 'ENDODONTIC' ? 'has-endodontic' : finding.status === 'IMPLANT_PLANNED' ? 'has-implant' : finding.status === 'ABSENT' ? 'has-absent' : '') : '';
+                return `
+                  <div class="tooth-box ${cls}" onclick="window.openToothModal(${n})">
+                    <div style="font-size: 0.72rem; font-weight: 700;">#${n}</div>
+                    <div style="font-size: 1.1rem; margin: 2px 0;">🦷</div>
+                    <div class="tiny" style="font-size: 0.65rem;">${finding ? finding.status.substring(0,6) : 'Sano'}</div>
+                  </div>
+                `;
+              }).join("")}
+            </div>
+          </div>
+
+          <!-- Tabla de Hallazgos y Plan Clínico -->
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+              <h3 style="margin: 0;">Registro de Hallazgos & Procedimientos Propuestos</h3>
+              <span class="chip chip-neutral" style="font-size: 0.75rem;">${odontogram.teeth.length} registros clínicos</span>
+            </div>
+
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Pieza FDI</th>
+                    <th>Superficie</th>
+                    <th>Diagnóstico / Estado</th>
+                    <th>Tratamiento Propuesto</th>
+                    <th>Norma Técnica</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${odontogram.teeth.map(t => `
+                    <tr>
+                      <td><strong>Pieza #${t.number}</strong></td>
+                      <td>${t.surface || 'Total'}</td>
+                      <td><span class="chip ${t.status === 'CARIES_DRAFT' ? 'chip-danger' : t.status === 'RESTORED' ? 'chip-neutral' : t.status === 'IMPLANT_PLANNED' ? 'chip-success' : 'chip-warning'}" style="font-size: 0.72rem; padding: 2px 8px;">${t.status}</span></td>
+                      <td>${t.treatmentProposed || t.treatment || t.note || '-'}</td>
+                      <td><span class="chip chip-neutral" style="font-size: 0.68rem;">NTS-188</span></td>
+                    </tr>
+                  `).join("")}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      `;
+
+      window.openToothModal = (num) => {
+        selectedToothNum = num;
+        document.getElementById("modalTitle").textContent = `Registrar Hallazgo en Pieza #${num} (FDI)`;
+        document.getElementById("findingModal").classList.add("open");
+      };
+
+      window.closeToothModal = () => {
+        document.getElementById("findingModal").classList.remove("open");
+      };
+
+      document.getElementById("confirmFindingBtn")?.addEventListener("click", () => {
+        const type = document.getElementById("modalFindingType").value;
+        const surface = document.getElementById("modalFindingSurface").value;
+        const note = document.getElementById("modalFindingNote").value || "Tratamiento regular";
+
+        mockApi.addOdontogramFinding({
+          number: selectedToothNum,
+          status: type,
+          surface: surface,
+          finding: note,
+          treatmentProposed: note
+        });
+
+        window.closeToothModal();
+        showToast(`Hallazgo en Pieza #${selectedToothNum} registrado en ficha`, "success");
+        window.location.reload();
+      });
+
+      document.getElementById("signOdontogramBtn")?.addEventListener("click", () => {
+        mockApi.logAuditEvent("FIRMA_ODONTOGRAMA", "Firma digital del odontograma inicial por Dra. Ana Flores (COP 18240)");
+        showToast("Odontograma firmado conforme a NTS 188-MINSA", "success");
+      });
+
+    // =========================================================================
+    // VISTA 4: DIRECTORIO DE PACIENTES
+    // =========================================================================
+    } else if (view === "patients") {
+      const patients = mockApi.getPatients();
+      main.innerHTML = `
+        <div class="staff-container">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
+            <div>
+              <h1 style="margin: 0; font-size: 1.85rem; font-weight: 800;">Directorio de Pacientes & Historias Clínicas</h1>
+              <p class="muted" style="margin: 4px 0 0;">Gestión de filiación, antecedentes y planes de tratamiento.</p>
+            </div>
+            <button class="btn btn-primary btn-small" onclick="alert('Formulario de admisión de nuevo paciente abierto')">Nuevo Paciente</button>
+          </div>
+
+          <div class="card">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Documento / DNI</th>
+                    <th>Nombres y Apellidos</th>
+                    <th>Teléfono / Contacto</th>
+                    <th>Alergias</th>
+                    <th>Saldo Pendiente</th>
+                    <th>Estado</th>
+                    <th>Acción</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${patients.map(p => `
+                    <tr>
+                      <td><strong>${p.documentType}: ${p.documentNumber}</strong></td>
+                      <td><strong>${p.name}</strong><div class="tiny">${p.email}</div></td>
+                      <td>${p.phone}</td>
+                      <td><span class="chip ${p.allergies.includes('Ninguna') ? 'chip-neutral' : 'chip-danger'}" style="font-size: 0.72rem; padding: 2px 8px;">${p.allergies.join(', ')}</span></td>
+                      <td style="font-weight: 700;">S/ ${p.balanceDue.toFixed(2)}</td>
+                      <td><span class="chip ${p.status === 'IN_CHAIR' ? 'chip-success' : p.status === 'WAITING' ? 'chip-warning' : 'chip-neutral'}" style="font-size: 0.72rem; padding: 2px 8px;">${p.status}</span></td>
+                      <td>
+                        <a href="?view=patient&patient=${p.id}" class="btn btn-secondary btn-small">Ver Odontograma</a>
+                      </td>
+                    </tr>
+                  `).join("")}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      `;
+
+    // =========================================================================
+    // VISTA 5: CAJA & COBRANZA
+    // =========================================================================
+    } else if (view === "finance") {
+      const cash = mockApi.getCashRegister();
+      const payments = mockApi.getPayments();
+
+      main.innerHTML = `
+        <div class="staff-container">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
+            <div>
+              <h1 style="margin: 0; font-size: 1.85rem; font-weight: 800;">Caja & Cobranza · Sede Yanahuara</h1>
+              <p class="muted" style="margin: 4px 0 0;">Emisión de Boletas Electrónicas B001 y control de medios de pago locales.</p>
+            </div>
+            <button class="btn btn-primary btn-small" id="openCashBtn">Registrar Ingreso / Cobro</button>
+          </div>
+
+          <div class="grid-3" style="margin-bottom: 24px;">
+            <div class="card">
+              <span class="eyebrow">Saldo Actual en Caja</span>
+              <div style="font-family: var(--display); font-size: 2rem; font-weight: 800; color: var(--ink); margin: 6px 0 4px;">S/ ${cash.currentCash ? cash.currentCash.toFixed(2) : '2,230.00'}</div>
+              <span class="tiny">Apertura: S/ ${cash.openingBalance ? cash.openingBalance.toFixed(2) : '500.00'}</span>
+            </div>
+            <div class="card">
+              <span class="eyebrow">Ingresos del Día</span>
+              <div style="font-family: var(--display); font-size: 2rem; font-weight: 800; color: var(--action); margin: 6px 0 4px;">+ S/ ${cash.totalIncomeToday ? cash.totalIncomeToday.toFixed(2) : '1,730.00'}</div>
+              <span class="tiny">POS Niubiz + Yape + BCP</span>
+            </div>
+            <div class="card">
+              <span class="eyebrow">Egresos / Gastos</span>
+              <div style="font-family: var(--display); font-size: 2rem; font-weight: 800; color: var(--danger); margin: 6px 0 4px;">- S/ ${cash.totalExpenseToday ? cash.totalExpenseToday.toFixed(2) : '0.00'}</div>
+              <span class="tiny">Insumos urgentes farmacia</span>
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom: 24px;">
+            <h3 style="margin: 0 0 16px;">Movimientos Contables de Caja</h3>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Hora</th>
+                    <th>Concepto / Comprobante</th>
+                    <th>Paciente</th>
+                    <th>Medio de Pago</th>
+                    <th>Monto</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${cash.transactions.map(t => `
+                    <tr>
+                      <td style="font-family: var(--mono); font-size: 0.82rem;">${t.time}</td>
+                      <td><strong>${t.concept}</strong></td>
+                      <td>${t.patient}</td>
+                      <td><span class="chip chip-neutral" style="font-size: 0.72rem; padding: 2px 8px;">${t.method}</span></td>
+                      <td style="font-weight: 700; color: ${t.type === 'INCOME' ? 'var(--action)' : 'var(--danger)'};">
+                        ${t.type === 'INCOME' ? '+' : ''} S/ ${t.amount.toFixed(2)}
+                      </td>
+                    </tr>
+                  `).join("")}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 style="margin: 0 0 16px;">Plan de Cuotas & Financiamiento María Quispe</h3>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Concepto</th>
+                    <th>Vencimiento</th>
+                    <th>Importe</th>
+                    <th>Comprobante</th>
+                    <th>Estado</th>
+                    <th>Acción</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${payments.map(p => `
+                    <tr>
+                      <td><strong>${p.concept}</strong></td>
+                      <td style="font-family: var(--mono); font-size: 0.82rem;">${p.dueDate}</td>
+                      <td style="font-weight: 700;">S/ ${p.amount.toFixed(2)}</td>
+                      <td>${p.receiptNumber || '—'}</td>
+                      <td><span class="chip ${p.status === 'PAID' ? 'chip-success' : 'chip-warning'}" style="font-size: 0.72rem; padding: 2px 8px;">${p.status === 'PAID' ? 'PAGADO' : 'PENDIENTE'}</span></td>
+                      <td>
+                        ${p.status === 'PENDING' ? `
+                          <button class="btn btn-primary btn-small" onclick="window.payCuota('${p.id}')">Cobrar con POS</button>
+                        ` : `
+                          <span class="tiny">Pagado el ${p.paidDate}</span>
+                        `}
+                      </td>
+                    </tr>
+                  `).join("")}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      `;
+
+      window.payCuota = (id) => {
+        mockApi.updatePayment(id, {
+          status: "PAID",
+          paidDate: "2026-09-08",
+          receiptNumber: 'B001-' + Math.floor(100000 + Math.random() * 900000),
+          method: "POS Niubiz"
+        });
+        showToast("Cuota cobrada exitosamente. Boleta electrónica emitida.", "success");
+        window.location.reload();
+      };
+
+      document.getElementById("openCashBtn")?.addEventListener("click", () => {
+        const monto = parseFloat(prompt("Ingrese monto a registrar en caja (S/):", "350.00"));
+        if (monto) {
+          mockApi.addCashTransaction({
+            id: 'tx_' + Date.now(),
+            time: new Date().toLocaleTimeString("es-PE", { hour: '2-digit', minute: '2-digit' }),
+            concept: "Cobro Consulta / Procedimiento Clínico",
+            patient: "Paciente Presencial",
+            amount: monto,
+            method: "Yape",
+            type: "INCOME"
+          });
+          showToast(`Ingreso de S/ ${monto.toFixed(2)} registrado en caja`, "success");
+          window.location.reload();
+        }
+      });
+
+    // =========================================================================
+    // VISTA 6: INVENTARIO CLÍNICO
+    // =========================================================================
+    } else if (view === "inventory") {
+      const inv = mockApi.getInventory();
+      main.innerHTML = `
+        <div class="staff-container">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
+            <div>
+              <h1 style="margin: 0; font-size: 1.85rem; font-weight: 800;">Inventario Clínico & Material Dental</h1>
+              <p class="muted" style="margin: 4px 0 0;">Control de stock de resinas, anestésicos, biomateriales e implantes.</p>
+            </div>
+            <button class="btn btn-primary btn-small" id="addItemBtn">Registrar Ingreso Stock</button>
+          </div>
+
+          <div class="card">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Código</th>
+                    <th>Descripción del Insumo</th>
+                    <th>Categoría</th>
+                    <th>Stock Actual</th>
+                    <th>Stock Mínimo</th>
+                    <th>Presentación</th>
+                    <th>Estado</th>
+                    <th>Ajuste Rápido</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${inv.map(i => `
+                    <tr>
+                      <td><code style="font-family: var(--mono); font-size: 0.8rem;">${i.code}</code></td>
+                      <td><strong>${i.name}</strong></td>
+                      <td>${i.category}</td>
+                      <td style="font-weight: 700; font-size: 0.96rem;">${i.stock}</td>
+                      <td>${i.minStock}</td>
+                      <td>${i.unit}</td>
+                      <td>
+                        <span class="chip ${i.status === 'OPTIMAL' ? 'chip-success' : i.status === 'LOW_STOCK' ? 'chip-warning' : 'chip-danger'}" style="font-size: 0.72rem; padding: 2px 8px;">
+                          ${i.status === 'OPTIMAL' ? 'ÓPTIMO' : i.status === 'LOW_STOCK' ? 'BAJO' : 'CRÍTICO'}
+                        </span>
+                      </td>
+                      <td>
+                        <button class="btn btn-secondary btn-small" onclick="window.adjustStock('${i.id}', ${i.stock})">Ajustar</button>
+                      </td>
+                    </tr>
+                  `).join("")}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      `;
+
+      window.adjustStock = (id, current) => {
+        const val = prompt(`Ajustar cantidad en almacén (Actual: ${current}):`, current + 5);
+        if (val !== null && !isNaN(val)) {
+          mockApi.updateInventoryStock(id, parseInt(val, 10));
+          showToast("Stock de insumo actualizado", "success");
+          window.location.reload();
+        }
+      };
+
+      document.getElementById("addItemBtn")?.addEventListener("click", () => {
+        showToast("Formulario de recepción de lote de proveedor abierto", "info");
+      });
+
+    // =========================================================================
+    // VISTA 7: AUDITORÍA INMUTABLE
+    // =========================================================================
+    } else if (view === "audit") {
+      const events = seed.auditEvents || [];
+      main.innerHTML = `
+        <div class="staff-container">
+          <div style="margin-bottom: 24px;">
+            <h1 style="margin: 0; font-size: 1.85rem; font-weight: 800;">Bitácora de Auditoría Inmutable</h1>
+            <p class="muted" style="margin: 4px 0 0;">Trazabilidad completa de mutaciones clínicas, pagos y consentimientos (NTS-188 & LPDP).</p>
+          </div>
+
+          <div class="card">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Fecha & Hora</th>
+                    <th>Actor</th>
+                    <th>Tipo Acción</th>
+                    <th>Detalle del Evento</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${events.map(e => `
+                    <tr>
+                      <td style="font-family: var(--mono); font-size: 0.78rem;">${e.timestamp}</td>
+                      <td><strong>${e.actor}</strong></td>
+                      <td><span class="chip chip-neutral" style="font-size: 0.7rem; padding: 2px 8px;">${e.action}</span></td>
+                      <td style="font-size: 0.86rem;">${e.detail}</td>
+                    </tr>
+                  `).join("")}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // CONTROLADORES GLOBALES DE MODALES Y ACCIONES
+    // =========================================================================
+    let currentSelectedAptId = null;
+
+    // NAVEGACIÓN TEMPORAL DE AGENDA
+    window.changeSchedulerDate = function(newDate) {
+      const url = new URL(window.location.href);
+      url.searchParams.set('view', 'agenda');
+      url.searchParams.set('date', newDate);
+      window.location.href = url.toString();
+    };
+
+    window.navigateDate = function(deltaDays) {
+      const input = document.getElementById('schedulerDateInput');
+      const curDate = input ? new Date(input.value + 'T00:00:00') : new Date('2026-09-08T00:00:00');
+      curDate.setDate(curDate.getDate() + deltaDays);
+      window.changeSchedulerDate(curDate.toISOString().split('T')[0]);
+    };
+
+    window.filterChairView = function(chairId) {
+      const url = new URL(window.location.href);
+      url.searchParams.set('view', 'agenda');
+      url.searchParams.set('chair', chairId);
+      window.location.href = url.toString();
+    };
+
+    // MODAL DETALLE DE CITA
+    window.openAptDetail = function(aptId) {
+      currentSelectedAptId = aptId;
+      const all = mockApi.getAllAppointments();
+      const apt = all.find(a => a.id === aptId);
+      if (!apt) return;
+
+      document.getElementById('detailPatientName').textContent = apt.patientName;
+      document.getElementById('detailAptTime').textContent = '🗓️ ' + apt.date + ' · ' + apt.time + ' (' + apt.duration + ')';
+      document.getElementById('detailPractitioner').textContent = apt.practitioner;
+      document.getElementById('detailChair').textContent = apt.chair;
+      document.getElementById('detailReason').textContent = apt.reason;
+      document.getElementById('detailNotes').textContent = apt.notes || 'Sin anotaciones previas.';
+      document.getElementById('detailPatientAvatar').textContent = apt.patientName.charAt(0);
+
+      const linkOdonto = document.getElementById('btnLinkOdontogram');
+      if (linkOdonto) {
+        linkOdonto.href = '?view=patient&patient=' + (apt.patientId || 'pat_maria');
+      }
+
+      // Actualizar nodos del stepper
+      const steps = ['SCHEDULED', 'CONFIRMED', 'IN_WAITING_ROOM', 'IN_CHAIR', 'COMPLETED'];
+      steps.forEach(st => {
+        const node = document.getElementById('stepNode_' + st);
+        if (node) {
+          if (st === apt.status) {
+            node.classList.add('active');
+          } else {
+            node.classList.remove('active');
+          }
+        }
+      });
+
+      const modal = document.getElementById('appointmentDetailModal');
+      if (modal) modal.classList.add('active');
+    };
+
+    window.closeDetailModal = function() {
+      const modal = document.getElementById('appointmentDetailModal');
+      if (modal) modal.classList.remove('active');
+      currentSelectedAptId = null;
+    };
+
+    window.handleDetailBackdrop = function(e) {
+      if (e.target.id === 'appointmentDetailModal') window.closeDetailModal();
+    };
+
+    window.updateCurrentAptStatus = function(newStatus) {
+      if (!currentSelectedAptId) return;
+      mockApi.updateAppointmentStatus(currentSelectedAptId, newStatus);
+      showToast('Cita actualizada a: ' + newStatus, 'success');
+      window.closeDetailModal();
+      window.location.reload();
+    };
+
+    window.triggerWhatsAppConfirm = function() {
+      if (!currentSelectedAptId) return;
+      mockApi.confirmAppointmentWhatsApp(currentSelectedAptId);
+      showToast('✓ Confirmación enviada vía WhatsApp institucional.', 'success');
+      window.closeDetailModal();
+      window.location.reload();
+    };
+
+    // MODAL NUEVA CITA RÁPIDA
+    window.openNewAptModal = function(preferredChair) {
+      const inputDate = document.getElementById('schedulerDateInput');
+      const targetDate = inputDate ? inputDate.value : '2026-09-08';
+      const modalDateInput = document.getElementById('newAptDate');
+      if (modalDateInput) modalDateInput.value = targetDate;
+
+      if (preferredChair) {
+        window.selectChairOption(preferredChair, preferredChair === 'chair_1' ? 'pro_ana' : preferredChair === 'chair_2' ? 'pro_carlos' : 'pro_sofia');
+      }
+
+      const modal = document.getElementById('newAppointmentModal');
+      if (modal) modal.classList.add('active');
+    };
+
+    window.closeNewAptModal = function() {
+      const modal = document.getElementById('newAppointmentModal');
+      if (modal) modal.classList.remove('active');
+    };
+
+    window.handleNewBackdrop = function(e) {
+      if (e.target.id === 'newAppointmentModal') window.closeNewAptModal();
+    };
+
+    window.selectChairOption = function(chairId, doctorId) {
+      document.getElementById('newAptChair').value = chairId;
+      document.getElementById('newAptDoctor').value = doctorId;
+      document.querySelectorAll('.radio-card-option').forEach(el => el.classList.remove('selected'));
+      const cardMap = { chair_1: 'cardChair1', chair_2: 'cardChair2', chair_3: 'cardChair3' };
+      const card = document.getElementById(cardMap[chairId]);
+      if (card) card.classList.add('selected');
+    };
+
+    window.pickQuickTime = function(timeStr) {
+      const input = document.getElementById('newAptTime');
+      if (input) input.value = timeStr;
+      document.querySelectorAll('.time-pill-btn').forEach(el => el.classList.remove('selected'));
+      event.target.classList.add('selected');
+    };
+
+    window.pickDuration = function(mins) {
+      const input = document.getElementById('newAptDuration');
+      if (input) input.value = mins;
+      document.querySelectorAll('.duration-pill-btn').forEach(el => el.classList.remove('selected'));
+      const pill = document.getElementById('dur_' + mins);
+      if (pill) pill.classList.add('selected');
+    };
+
+    window.handleNewAptSubmit = function(e) {
+      e.preventDefault();
+      const patientSelect = document.getElementById('newAptPatient');
+      const patientName = patientSelect.options[patientSelect.selectedIndex].text.split(' (')[0];
+      const patientId = patientSelect.value;
+      const date = document.getElementById('newAptDate').value;
+      const timeRaw = document.getElementById('newAptTime').value;
+      const chairId = document.getElementById('newAptChair').value;
+      const duration = document.getElementById('newAptDuration').value;
+      const reason = document.getElementById('newAptReason').value;
+
+      const chairNames = {
+        chair_1: "Sillón 1 (Ortodoncia)",
+        chair_2: "Sillón 2 (Cirugía/Rehab)",
+        chair_3: "Sillón 3 (Pediatría/Integral)"
+      };
+
+      const docNames = {
+        chair_1: "Dra. Ana Flores Vanesa",
+        chair_2: "Dr. Carlos Mendoza Ramos",
+        chair_3: "Dra. Sofía Gutiérrez Medina"
+      };
+
+      // Convertir 24h a 12h para display
+      const [h, m] = timeRaw.split(':');
+      const hNum = parseInt(h, 10);
+      const ampm = hNum >= 12 ? 'PM' : 'AM';
+      const h12 = hNum % 12 || 12;
+      const timeFmt = (h12 < 10 ? '0' : '') + h12 + ':' + m + ' ' + ampm;
+
+      mockApi.createAppointment({
+        date: date,
+        startTime: timeRaw,
+        time: timeFmt,
+        durationMinutes: parseInt(duration, 10),
+        duration: duration + ' min',
+        patientId: patientId,
+        patientName: patientName,
+        practitioner: docNames[chairId],
+        chairId: chairId,
+        chair: chairNames[chairId],
+        reason: reason,
+        notes: "Agendado por Dra. Ana Flores en consola staff."
+      });
+
+      showToast('✓ Cita agendada correctamente para ' + patientName, 'success');
+      window.closeNewAptModal();
+      window.location.reload();
+    };
+  </script>
+  <script src="../components/prototype-switcher.js"></script>
 </body>
 </html>
