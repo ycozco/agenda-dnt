@@ -102,7 +102,66 @@
       box-shadow: var(--shadow-sm);
     }
 
-    /* Odontograma Proporcional & Táctil */
+    /* ==========================================================================
+       PALETA DE DIAGNÓSTICO & DRAG AND DROP
+       ========================================================================== */
+    .odontology-palette-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+    .odontology-palette-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .palette-condition-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      background: var(--surface-dim);
+      cursor: grab;
+      user-select: none;
+      transition: all 0.15s ease;
+    }
+    .palette-condition-item:hover {
+      border-color: var(--action);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-sm);
+    }
+    .palette-condition-item:active {
+      cursor: grabbing;
+      transform: scale(0.98);
+    }
+    .palette-condition-item.active {
+      border-color: var(--action);
+      background: var(--action-soft);
+      box-shadow: 0 0 0 2px var(--action-glow);
+    }
+    .cond-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .cond-caries { background: #DC2626; box-shadow: 0 0 8px rgba(220, 38, 38, 0.4); }
+    .cond-restored { background: #0284C7; box-shadow: 0 0 8px rgba(2, 132, 199, 0.4); }
+    .cond-endodontic { background: #D97706; box-shadow: 0 0 8px rgba(217, 119, 6, 0.4); }
+    .cond-implant { background: #059669; box-shadow: 0 0 8px rgba(5, 150, 105, 0.4); }
+    .cond-absent { background: #64748B; opacity: 0.8; }
+    .cond-crown { background: #9333EA; box-shadow: 0 0 8px rgba(147, 51, 234, 0.4); }
+    .cond-healthy { background: #10B981; }
+
+    /* ==========================================================================
+       ODONTOGRAMA PROPORCIONAL, TÁCTIL & ALTO CONTRASTE
+       ========================================================================== */
     .arch-container {
       background: var(--surface);
       border: 1px solid var(--line);
@@ -110,6 +169,30 @@
       padding: 20px 24px;
       margin-bottom: 20px;
       box-shadow: var(--shadow-sm);
+    }
+    .arch-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line-soft);
+    }
+    .arch-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--ink);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .arch-subtitle {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--ink-soft);
     }
     .teeth-row {
       display: grid;
@@ -137,17 +220,56 @@
       background: var(--surface);
       user-select: none;
       min-width: 44px;
+      position: relative;
     }
     .tooth-box:hover {
       border-color: var(--action);
       transform: translateY(-2px);
       box-shadow: var(--shadow-sm);
     }
-    .tooth-box.has-caries { border-color: var(--danger); background: var(--danger-soft); color: var(--danger); font-weight: 700; }
-    .tooth-box.has-restored { border-color: var(--blue); background: var(--blue-soft); color: var(--blue-deep); font-weight: 700; }
-    .tooth-box.has-endodontic { border-color: var(--amber); background: var(--amber-soft); color: var(--amber); font-weight: 700; }
-    .tooth-box.has-implant { border-color: var(--action); background: var(--action-soft); color: var(--action); font-weight: 700; }
-    .tooth-box.has-absent { border-color: var(--line); background: var(--paper); opacity: 0.5; text-decoration: line-through; }
+    .tooth-box.drag-over {
+      border-color: var(--action) !important;
+      background: var(--action-soft) !important;
+      transform: scale(1.1) !important;
+      box-shadow: 0 0 16px var(--action-glow) !important;
+      z-index: 10;
+    }
+    .tooth-num {
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      font-weight: 800;
+      color: var(--ink);
+    }
+    .tooth-icon {
+      font-size: 1.15rem;
+      margin: 2px 0;
+    }
+    .tooth-status-tag {
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--ink-soft);
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .tooth-box.has-caries { border-color: #DC2626; background: rgba(220, 38, 38, 0.12); }
+    .tooth-box.has-caries .tooth-num, .tooth-box.has-caries .tooth-status-tag { color: #EF4444; font-weight: 800; }
+    
+    .tooth-box.has-restored { border-color: #0284C7; background: rgba(2, 132, 199, 0.12); }
+    .tooth-box.has-restored .tooth-num, .tooth-box.has-restored .tooth-status-tag { color: #38BDF8; font-weight: 800; }
+    
+    .tooth-box.has-endodontic { border-color: #D97706; background: rgba(217, 119, 6, 0.12); }
+    .tooth-box.has-endodontic .tooth-num, .tooth-box.has-endodontic .tooth-status-tag { color: #FBBF24; font-weight: 800; }
+    
+    .tooth-box.has-implant { border-color: #059669; background: rgba(5, 150, 105, 0.12); }
+    .tooth-box.has-implant .tooth-num, .tooth-box.has-implant .tooth-status-tag { color: #34D399; font-weight: 800; }
+    
+    .tooth-box.has-crown { border-color: #9333EA; background: rgba(147, 51, 234, 0.12); }
+    .tooth-box.has-crown .tooth-num, .tooth-box.has-crown .tooth-status-tag { color: #C084FC; font-weight: 800; }
+    
+    .tooth-box.has-absent { border-color: var(--line); background: var(--surface-dim); opacity: 0.5; text-decoration: line-through; }
+    .tooth-box.has-absent .tooth-num, .tooth-box.has-absent .tooth-status-tag { color: var(--ink-faint); }
 
     /* Tablas de Gestión */
     .table-responsive {
@@ -395,7 +517,7 @@
       background: var(--surface);
       border: 1px solid var(--line);
       border-radius: var(--radius-md);
-      width: min(540px, 95vw);
+      width: min(560px, 95vw);
       max-height: 90vh;
       overflow-y: auto;
       padding: 26px;
@@ -538,6 +660,30 @@
       color: white;
       border-color: var(--action);
     }
+    .surface-pills-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .surface-pill-btn {
+      padding: 6px 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      background: var(--surface);
+      color: var(--ink);
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .surface-pill-btn:hover {
+      border-color: var(--action);
+    }
+    .surface-pill-btn.selected {
+      background: var(--action);
+      color: white;
+      border-color: var(--action);
+    }
     .form-control, .form-select {
       width: 100%;
       padding: 8px 12px;
@@ -600,47 +746,53 @@
     </main>
   </div>
 
-  <!-- MODAL 1: REGISTRAR HALLAZGO EN PIEZA DENTAL -->
+  <!-- MODAL 1: REGISTRAR O EDITAR DETALLES DE PIEZA DENTAL -->
   <div class="modal-overlay" id="findingModal">
     <div class="modal-card">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; border-bottom: 1px solid var(--line); padding-bottom: 10px;">
-        <h3 id="modalTitle" style="margin: 0; font-size: 1.15rem; color: var(--ink);">Registrar Hallazgo en Pieza Dental</h3>
+        <h3 id="modalTitle" style="margin: 0; font-size: 1.15rem; color: var(--ink);">Detalles Clínicos Pieza Dental</h3>
         <button class="btn btn-secondary btn-small" id="closeModalBtnHeader" style="padding: 4px 10px;" onclick="window.closeToothModal()">✕</button>
       </div>
-      <p class="muted" id="modalSub" style="font-size: 0.86rem; margin-bottom: 16px;">Selecciona la condición clínica y la superficie según normativa NTS-188 MINSA.</p>
+      <p class="muted" id="modalSub" style="font-size: 0.86rem; margin-bottom: 16px;">Selecciona el diagnóstico, las caras dentales afectadas y los procedimientos a realizar.</p>
       
       <div style="margin-bottom: 14px;">
-        <label style="display: block; font-size: 0.84rem; font-weight: 700; margin-bottom: 6px;">Condición / Diagnóstico</label>
+        <label style="display: block; font-size: 0.84rem; font-weight: 700; margin-bottom: 6px;">Condición / Diagnóstico Clínico</label>
         <select id="modalFindingType" class="form-select">
-          <option value="CARIES_DRAFT">🔴 Caries Dental (Borrador)</option>
-          <option value="RESTORED">🔵 Restauración en Buen Estado (Resina)</option>
+          <option value="CARIES_DRAFT">🔴 Caries Dental (Cavidad activa)</option>
+          <option value="RESTORED">🔵 Restauración en Buen Estado (Resina / Amalgama)</option>
           <option value="ENDODONTIC">🟡 Tratamiento de Conducto (Endodoncia)</option>
           <option value="IMPLANT_PLANNED">🟢 Implante Planificado</option>
+          <option value="CROWN">👑 Corona Protésica (Zirconio / Porcelana)</option>
           <option value="ABSENT">⚪ Pieza Ausente / Exodoncia</option>
-          <option value="CROWN">👑 Corona Protésica</option>
+          <option value="HEALTHY">🧼 Sano / Sin hallazgo patológico</option>
         </select>
       </div>
 
+      <!-- Selector de Superficies Anatómicas -->
       <div style="margin-bottom: 14px;">
-        <label style="display: block; font-size: 0.84rem; font-weight: 700; margin-bottom: 6px;">Superficie Afectada</label>
-        <select id="modalFindingSurface" class="form-select">
-          <option value="Oclusal">Oclusal (O)</option>
-          <option value="Mesial">Mesial (M)</option>
-          <option value="Distal">Distal (D)</option>
-          <option value="Vestibular">Vestibular (V)</option>
-          <option value="Palatino/Lingual">Palatino / Lingual (P/L)</option>
-          <option value="Total">Total / Raíz / Corona completa</option>
-        </select>
+        <label style="display: block; font-size: 0.84rem; font-weight: 700; margin-bottom: 6px;">Superficie(s) Afectada(s)</label>
+        <div class="surface-pills-row" id="modalSurfacePills">
+          <div class="surface-pill-btn selected" data-surface="Oclusal" onclick="window.toggleSurfacePill(this)">Oclusal (O)</div>
+          <div class="surface-pill-btn" data-surface="Mesial" onclick="window.toggleSurfacePill(this)">Mesial (M)</div>
+          <div class="surface-pill-btn" data-surface="Distal" onclick="window.toggleSurfacePill(this)">Distal (D)</div>
+          <div class="surface-pill-btn" data-surface="Vestibular" onclick="window.toggleSurfacePill(this)">Vestibular (V)</div>
+          <div class="surface-pill-btn" data-surface="Palatino/Lingual" onclick="window.toggleSurfacePill(this)">Palatino/Lingual (P/L)</div>
+          <div class="surface-pill-btn" data-surface="Total" onclick="window.toggleSurfacePill(this)">Total / Raíz</div>
+        </div>
+        <input type="hidden" id="modalFindingSurface" value="Oclusal">
       </div>
 
       <div style="margin-bottom: 20px;">
-        <label style="display: block; font-size: 0.84rem; font-weight: 700; margin-bottom: 6px;">Nota Clínica / Procedimiento Propuesto</label>
-        <input type="text" id="modalFindingNote" class="form-control" placeholder="Ej. Resina compuesta 3M en esmalte">
+        <label style="display: block; font-size: 0.84rem; font-weight: 700; margin-bottom: 6px;">Tratamiento Propuesto / Nota Clínica</label>
+        <input type="text" id="modalFindingNote" class="form-control" placeholder="Ej. Resina Filtek Z350 XT en cara oclusal">
       </div>
 
-      <div style="display: flex; justify-content: flex-end; gap: 10px;">
-        <button class="btn btn-secondary btn-small" id="closeModalBtn" onclick="window.closeToothModal()">Cancelar</button>
-        <button class="btn btn-primary btn-small" id="confirmFindingBtn">Guardar en Ficha</button>
+      <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+        <button class="btn btn-secondary btn-small" id="btnDeleteFinding" style="color: var(--danger); border-color: rgba(220, 38, 38, 0.3);" onclick="window.removeCurrentToothFinding()">Eliminar Hallazgo</button>
+        <div style="display: flex; gap: 10px;">
+          <button class="btn btn-secondary btn-small" onclick="window.closeToothModal()">Cancelar</button>
+          <button class="btn btn-primary btn-small" id="confirmFindingBtn">Guardar en Ficha</button>
+        </div>
       </div>
     </div>
   </div>
@@ -648,7 +800,6 @@
   <!-- MODAL 2: DETALLE Y GESTIÓN DE CITA CLÍNICA (DOSSIER SEGMENTADO) -->
   <div class="drawer-modal-overlay" id="appointmentDetailModal" onclick="window.handleDetailBackdrop(event)">
     <div class="drawer-modal-card">
-      <!-- Cabecera Dossier -->
       <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; border-bottom: 1px solid var(--line); padding-bottom: 14px;">
         <div style="display: flex; align-items: center; gap: 14px;">
           <div class="patient-avatar-badge" id="detailPatientAvatar">M</div>
@@ -660,7 +811,6 @@
         <button class="btn btn-secondary btn-small" onclick="window.closeDetailModal()">✕ Cerrar</button>
       </div>
 
-      <!-- STEPPER DE ESTADO CLÍNICO -->
       <div class="status-stepper-track" id="detailStatusStepper">
         <div class="status-step-node" id="stepNode_SCHEDULED" onclick="window.updateCurrentAptStatus('SCHEDULED')">
           <span>1. Programada</span>
@@ -679,7 +829,6 @@
         </div>
       </div>
 
-      <!-- SECCIÓN 1: DATOS CLÍNICOS & SILLÓN -->
       <div class="segmented-form-section">
         <div class="segmented-section-title">
           <span>💺 Asignación Quirúrgica & Especialista</span>
@@ -696,7 +845,6 @@
         </div>
       </div>
 
-      <!-- SECCIÓN 2: MOTIVO Y ANOTACIONES -->
       <div class="segmented-form-section">
         <div class="segmented-section-title">
           <span>📋 Motivo Clínico y Diagnóstico Previo</span>
@@ -706,7 +854,6 @@
         <div id="detailNotes" style="font-size: 0.86rem; color: var(--ink-soft); line-height: 1.4;">-</div>
       </div>
 
-      <!-- SECCIÓN 3: MÁQUINA DE ACCIONES DE ESTADO -->
       <div style="border-top: 1px solid var(--line); padding-top: 16px;">
         <label style="font-weight: 700; font-size: 0.84rem; display: block; margin-bottom: 8px;">Transición de Estado Clínico:</label>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px;">
@@ -748,7 +895,6 @@
       </div>
 
       <form id="newAptForm" onsubmit="window.handleNewAptSubmit(event)">
-        <!-- PASO 1: PACIENTE -->
         <div class="segmented-form-section">
           <div class="segmented-section-title">
             <span>👤 1. Paciente Registrado</span>
@@ -762,7 +908,6 @@
           </select>
         </div>
 
-        <!-- PASO 2: SILLÓN CLÍNICO & DOCTOR -->
         <div class="segmented-form-section">
           <div class="segmented-section-title">
             <span>💺 2. Sillón Quirúrgico & Especialista</span>
@@ -788,7 +933,6 @@
           <input type="hidden" id="newAptDoctor" value="pro_ana">
         </div>
 
-        <!-- PASO 3: FECHA, HORARIO & DURACIÓN -->
         <div class="segmented-form-section">
           <div class="segmented-section-title">
             <span>⏱️ 3. Fecha, Franja Horaria & Duración</span>
@@ -804,7 +948,6 @@
             </div>
           </div>
 
-          <!-- Slots Rápidos -->
           <div class="tiny muted" style="font-weight: 700; margin-bottom: 6px;">O elige un turno libre rápido:</div>
           <div class="time-slot-pills-row" style="margin-bottom: 12px;">
             <div class="time-pill-btn" onclick="window.pickQuickTime('08:30')">08:30 AM</div>
@@ -815,7 +958,6 @@
             <div class="time-pill-btn" onclick="window.pickQuickTime('16:30')">04:30 PM</div>
           </div>
 
-          <!-- Duración Segmentada -->
           <div class="tiny muted" style="font-weight: 700; margin-bottom: 6px;">Duración estimada del turno:</div>
           <div class="segmented-duration-group">
             <div class="duration-pill-btn" id="dur_30" onclick="window.pickDuration(30)">30 min</div>
@@ -826,7 +968,6 @@
           <input type="hidden" id="newAptDuration" value="45">
         </div>
 
-        <!-- PASO 4: PROCEDIMIENTO / MOTIVO -->
         <div class="segmented-form-section">
           <div class="segmented-section-title">
             <span>🩺 4. Procedimiento / Motivo Clínico</span>
@@ -859,7 +1000,7 @@
     const seed = mockApi.getSeed();
 
     // =========================================================================
-    // VISTA 1: DASHBOARD OPERATIVO (BALANCEADO 4-KPI + SPLIT 2-COLUMNAS)
+    // VISTA 1: DASHBOARD OPERATIVO
     // =========================================================================
     if (view === "dashboard") {
       const appts = mockApi.getAppointmentsToday();
@@ -880,7 +1021,6 @@
             </div>
           </div>
 
-          <!-- GRID 4: KPIS PRINCIPALES HORIZONTALES -->
           <div class="grid-4" style="margin-bottom: 24px;">
             <div class="card">
               <span class="eyebrow">Citas de Hoy</span>
@@ -904,7 +1044,6 @@
             </div>
           </div>
 
-          <!-- GRID 2: COLA DE ATENCIÓN Y ACCIONES CLÍNICAS -->
           <div class="grid-2" style="margin-bottom: 30px;">
             <div class="card">
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
@@ -988,7 +1127,6 @@
 
       main.innerHTML = `
         <div class="staff-container">
-          <!-- ENCABEZADO -->
           <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; flex-wrap: wrap; gap: 14px;">
             <div>
               <div style="display: flex; align-items: center; gap: 10px;">
@@ -1005,7 +1143,6 @@
             </div>
           </div>
 
-          <!-- BARRA DE CONTROL TEMPORAL & FILTROS -->
           <div class="scheduler-controls-bar">
             <div class="date-nav-group">
               <button class="btn btn-secondary btn-small" onclick="window.navigateDate(-1)">◀ Anterior</button>
@@ -1030,7 +1167,6 @@
             </div>
           </div>
 
-          <!-- MÉTRICAS DE LA AGENDA -->
           <div class="scheduler-metrics-ribbon">
             <div class="metric-pill-card">
               <div>
@@ -1062,9 +1198,7 @@
             </div>
           </div>
 
-          <!-- GRID DE 3 SILLONES EQUILIBRADOS -->
           <div class="multi-chair-grid" id="multiChairGrid">
-            <!-- SILLÓN 1 -->
             ${(activeChairFilter === 'ALL' || activeChairFilter === 'chair_1') ? `
               <div class="chair-column-card">
                 <div class="chair-column-header">
@@ -1087,7 +1221,6 @@
               </div>
             ` : ''}
 
-            <!-- SILLÓN 2 -->
             ${(activeChairFilter === 'ALL' || activeChairFilter === 'chair_2') ? `
               <div class="chair-column-card">
                 <div class="chair-column-header">
@@ -1110,7 +1243,6 @@
               </div>
             ` : ''}
 
-            <!-- SILLÓN 3 -->
             ${(activeChairFilter === 'ALL' || activeChairFilter === 'chair_3') ? `
               <div class="chair-column-card">
                 <div class="chair-column-header">
@@ -1163,7 +1295,7 @@
       }
 
     // =========================================================================
-    // VISTA 3: ODONTOGRAMA DIGITAL FDI 52 PIEZAS
+    // VISTA 3: ODONTOGRAMA DIGITAL FDI 52 PIEZAS (CON SELECTOR & DRAG AND DROP)
     // =========================================================================
     } else if (view === "patient") {
       const odontogram = mockApi.getOdontogram();
@@ -1171,113 +1303,176 @@
 
       main.innerHTML = `
         <div class="staff-container">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
+          <!-- CABECERA DE FICHA ODONTOLÓGICA -->
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
             <div>
-              <h1 style="margin: 0; font-size: 1.85rem; font-weight: 800;">Odontograma Digital FDI (52 Piezas)</h1>
-              <p class="muted" style="margin: 4px 0 0;">Paciente: <strong>María Quispe Condori</strong> (DNI: 45892104) · Conforme NTS N.º 188-MINSA/DGIESP-2022</p>
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <h1 style="margin: 0; font-size: 1.85rem; font-weight: 800; color: var(--ink);">Odontograma Digital FDI (52 Piezas)</h1>
+                <span class="chip chip-success" style="font-size: 0.75rem; padding: 3px 10px;">NTS-188 MINSA</span>
+              </div>
+              <p class="muted" style="margin: 4px 0 0; color: var(--ink-soft); font-weight: 500;">
+                Paciente: <strong style="color: var(--ink);">María Quispe Condori</strong> (DNI: 45892104) · Odontograma Interactivo con Arrastre Rápido (Drag & Drop)
+              </p>
             </div>
-            <div style="display: flex; gap: 10px;">
-              <a href="odontograma-cop52.html" class="btn btn-secondary btn-small">Modo Táctil Extendido</a>
-              <button class="btn btn-primary btn-small" id="signOdontogramBtn">Firmar Odontograma (Dra. Ana Flores)</button>
-            </div>
-          </div>
-
-          <!-- Arcada Superior Permanente -->
-          <div class="arch-container">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-              <h4 style="font-size: 0.88rem; text-transform: uppercase; color: var(--blue-deep); margin: 0; font-weight: 700;">Arcada Superior Permanente (Cuadrantes 1 y 2)</h4>
-              <span class="tiny">Piezas 18 a 11 y 21 a 28</span>
-            </div>
-            <div class="teeth-row">
-              ${[18, 17, 16, 15, 14, 13, 12, 11, 21, 22, 23, 24, 25, 26, 27, 28].map(n => {
-                const finding = odontogram.teeth.find(t => t.number === n);
-                const cls = finding ? (finding.status === 'CARIES_DRAFT' ? 'has-caries' : finding.status === 'RESTORED' ? 'has-restored' : finding.status === 'ENDODONTIC' ? 'has-endodontic' : finding.status === 'IMPLANT_PLANNED' ? 'has-implant' : finding.status === 'ABSENT' ? 'has-absent' : '') : '';
-                return `
-                  <div class="tooth-box ${cls}" onclick="window.openToothModal(${n})">
-                    <div style="font-size: 0.72rem; font-weight: 700;">#${n}</div>
-                    <div style="font-size: 1.1rem; margin: 2px 0;">🦷</div>
-                    <div class="tiny" style="font-size: 0.65rem;">${finding ? finding.status.substring(0,6) : 'Sano'}</div>
-                  </div>
-                `;
-              }).join("")}
+            <div style="display: flex; gap: 10px; align-items: center;">
+              <a href="odontograma-cop52.html" class="btn btn-secondary btn-small">Modo COP Táctil</a>
+              <button class="btn btn-primary btn-small" id="signOdontogramBtn">Firmar Odontograma (COP 18240)</button>
             </div>
           </div>
 
-          <!-- Arcada Temporal (Pediátrica / Decidua) -->
-          <div class="arch-container" style="background: var(--surface-dim);">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-              <h4 style="font-size: 0.85rem; text-transform: uppercase; color: var(--action); margin: 0; font-weight: 700;">Dentición Temporal / Decidua (Cuadrantes 5, 6, 7 y 8)</h4>
-              <span class="tiny">Piezas 55 a 51, 61 a 65, 85 a 81, 71 a 75</span>
+          <!-- PALETA DE HERRAMIENTAS: SELECTOR Y CONDICIONES DRAG & DROP -->
+          <div class="odontology-palette-card">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+              <div>
+                <span class="eyebrow" style="margin-bottom: 2px;">Paleta de Diagnóstico Rápido</span>
+                <h3 style="margin: 0; font-size: 1.05rem; color: var(--ink); font-weight: 800;">Arrastra una condición sobre cualquier pieza dental o haz clic para seleccionarla:</h3>
+              </div>
+              <div class="tiny" style="color: var(--ink-soft); font-weight: 700; background: var(--surface-dim); padding: 4px 10px; border-radius: 6px;">
+                💡 Arrastra la etiqueta o haz clic en la pieza para editar caras y notas
+              </div>
             </div>
-            <div class="teeth-row-pediatric" style="margin-bottom: 12px;">
-              ${[55, 54, 53, 52, 51, 61, 62, 63, 64, 65].map(n => `
-                <div class="tooth-box" onclick="window.openToothModal(${n})">
-                  <div style="font-size: 0.7rem; font-weight: 700;">#${n}</div>
-                  <div style="font-size: 0.9rem;">🦷</div>
-                  <div class="tiny" style="font-size: 0.6rem;">Temporal</div>
+
+            <div class="odontology-palette-row" id="paletteConditionsBar">
+              <!-- Caries -->
+              <div class="palette-condition-item active" draggable="true" data-status="CARIES_DRAFT" data-name="Caries Dental" onclick="window.selectPaletteCondition(this, 'CARIES_DRAFT')">
+                <span class="cond-dot cond-caries"></span>
+                <div>
+                  <strong style="color: var(--ink); font-size: 0.84rem; display: block;">Caries Dental</strong>
+                  <span class="tiny" style="color: var(--ink-soft); font-size: 0.7rem;">Cavidad activa</span>
                 </div>
-              `).join("")}
+                <span style="color: var(--ink-faint); font-size: 0.8rem; margin-left: 4px;">⋮⋮</span>
+              </div>
+
+              <!-- Restauración / Resina -->
+              <div class="palette-condition-item" draggable="true" data-status="RESTORED" data-name="Restauración (Resina)" onclick="window.selectPaletteCondition(this, 'RESTORED')">
+                <span class="cond-dot cond-restored"></span>
+                <div>
+                  <strong style="color: var(--ink); font-size: 0.84rem; display: block;">Restauración</strong>
+                  <span class="tiny" style="color: var(--ink-soft); font-size: 0.7rem;">Resina / Obturada</span>
+                </div>
+                <span style="color: var(--ink-faint); font-size: 0.8rem; margin-left: 4px;">⋮⋮</span>
+              </div>
+
+              <!-- Endodoncia -->
+              <div class="palette-condition-item" draggable="true" data-status="ENDODONTIC" data-name="Endodoncia" onclick="window.selectPaletteCondition(this, 'ENDODONTIC')">
+                <span class="cond-dot cond-endodontic"></span>
+                <div>
+                  <strong style="color: var(--ink); font-size: 0.84rem; display: block;">Endodoncia</strong>
+                  <span class="tiny" style="color: var(--ink-soft); font-size: 0.7rem;">Tto. de conductos</span>
+                </div>
+                <span style="color: var(--ink-faint); font-size: 0.8rem; margin-left: 4px;">⋮⋮</span>
+              </div>
+
+              <!-- Implante -->
+              <div class="palette-condition-item" draggable="true" data-status="IMPLANT_PLANNED" data-name="Implante Planificado" onclick="window.selectPaletteCondition(this, 'IMPLANT_PLANNED')">
+                <span class="cond-dot cond-implant"></span>
+                <div>
+                  <strong style="color: var(--ink); font-size: 0.84rem; display: block;">Implante</strong>
+                  <span class="tiny" style="color: var(--ink-soft); font-size: 0.7rem;">Quirúrgico</span>
+                </div>
+                <span style="color: var(--ink-faint); font-size: 0.8rem; margin-left: 4px;">⋮⋮</span>
+              </div>
+
+              <!-- Corona Protésica -->
+              <div class="palette-condition-item" draggable="true" data-status="CROWN" data-name="Corona Protésica" onclick="window.selectPaletteCondition(this, 'CROWN')">
+                <span class="cond-dot cond-crown"></span>
+                <div>
+                  <strong style="color: var(--ink); font-size: 0.84rem; display: block;">Corona</strong>
+                  <span class="tiny" style="color: var(--ink-soft); font-size: 0.7rem;">Zirconio / Metal</span>
+                </div>
+                <span style="color: var(--ink-faint); font-size: 0.8rem; margin-left: 4px;">⋮⋮</span>
+              </div>
+
+              <!-- Pieza Ausente -->
+              <div class="palette-condition-item" draggable="true" data-status="ABSENT" data-name="Pieza Ausente" onclick="window.selectPaletteCondition(this, 'ABSENT')">
+                <span class="cond-dot cond-absent"></span>
+                <div>
+                  <strong style="color: var(--ink); font-size: 0.84rem; display: block;">Ausente</strong>
+                  <span class="tiny" style="color: var(--ink-soft); font-size: 0.7rem;">Exodoncia</span>
+                </div>
+                <span style="color: var(--ink-faint); font-size: 0.8rem; margin-left: 4px;">⋮⋮</span>
+              </div>
+
+              <!-- Pieza Sana -->
+              <div class="palette-condition-item" draggable="true" data-status="HEALTHY" data-name="Pieza Sana" onclick="window.selectPaletteCondition(this, 'HEALTHY')">
+                <span class="cond-dot cond-healthy"></span>
+                <div>
+                  <strong style="color: var(--ink); font-size: 0.84rem; display: block;">Sano / Limpiar</strong>
+                  <span class="tiny" style="color: var(--ink-soft); font-size: 0.7rem;">Sin lesión</span>
+                </div>
+                <span style="color: var(--ink-faint); font-size: 0.8rem; margin-left: 4px;">⋮⋮</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ARCADA SUPERIOR PERMANENTE (CUADRANTES 1 Y 2) -->
+          <div class="arch-container">
+            <div class="arch-header">
+              <div class="arch-title">
+                <span class="chip chip-success" style="font-size: 0.72rem; padding: 2px 8px; font-weight: 800;">MAXILAR SUPERIOR</span>
+                <span>Arcada Superior Permanente (Cuadrantes 1 y 2)</span>
+              </div>
+              <span class="arch-subtitle">Piezas 18 a 11 y 21 a 28</span>
+            </div>
+            <div class="teeth-row" id="rowArchSuperior">
+              ${renderTeethBoxes([18, 17, 16, 15, 14, 13, 12, 11, 21, 22, 23, 24, 25, 26, 27, 28])}
+            </div>
+          </div>
+
+          <!-- DENTICIÓN TEMPORAL / DECIDUA (PEDIÁTRICA) -->
+          <div class="arch-container" style="background: var(--surface-dim);">
+            <div class="arch-header">
+              <div class="arch-title">
+                <span class="chip chip-warning" style="font-size: 0.72rem; padding: 2px 8px; font-weight: 800;">DENTICIÓN DECIDUA</span>
+                <span>Dentición Temporal / Infantil (Cuadrantes 5, 6, 7 y 8)</span>
+              </div>
+              <span class="arch-subtitle">Piezas 55-51, 61-65 y 85-81, 71-75</span>
+            </div>
+            <div class="teeth-row-pediatric" style="margin-bottom: 10px;">
+              ${renderTeethBoxes([55, 54, 53, 52, 51, 61, 62, 63, 64, 65], true)}
             </div>
             <div class="teeth-row-pediatric">
-              ${[85, 84, 83, 82, 81, 71, 72, 73, 74, 75].map(n => `
-                <div class="tooth-box" onclick="window.openToothModal(${n})">
-                  <div style="font-size: 0.7rem; font-weight: 700;">#${n}</div>
-                  <div style="font-size: 0.9rem;">🦷</div>
-                  <div class="tiny" style="font-size: 0.6rem;">Temporal</div>
-                </div>
-              `).join("")}
+              ${renderTeethBoxes([85, 84, 83, 82, 81, 71, 72, 73, 74, 75], true)}
             </div>
           </div>
 
-          <!-- Arcada Inferior Permanente -->
+          <!-- ARCADA INFERIOR PERMANENTE (CUADRANTES 4 Y 3) -->
           <div class="arch-container">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-              <h4 style="font-size: 0.88rem; text-transform: uppercase; color: var(--blue-deep); margin: 0; font-weight: 700;">Arcada Inferior Permanente (Cuadrantes 4 y 3)</h4>
-              <span class="tiny">Piezas 48 a 41 y 31 a 38</span>
+            <div class="arch-header">
+              <div class="arch-title">
+                <span class="chip chip-success" style="font-size: 0.72rem; padding: 2px 8px; font-weight: 800;">MAXILAR INFERIOR</span>
+                <span>Arcada Inferior Permanente (Cuadrantes 4 y 3)</span>
+              </div>
+              <span class="arch-subtitle">Piezas 48 a 41 y 31 a 38</span>
             </div>
-            <div class="teeth-row">
-              ${[48, 47, 46, 45, 44, 43, 42, 41, 31, 32, 33, 34, 35, 36, 37, 38].map(n => {
-                const finding = odontogram.teeth.find(t => t.number === n);
-                const cls = finding ? (finding.status === 'CARIES_DRAFT' ? 'has-caries' : finding.status === 'RESTORED' ? 'has-restored' : finding.status === 'ENDODONTIC' ? 'has-endodontic' : finding.status === 'IMPLANT_PLANNED' ? 'has-implant' : finding.status === 'ABSENT' ? 'has-absent' : '') : '';
-                return `
-                  <div class="tooth-box ${cls}" onclick="window.openToothModal(${n})">
-                    <div style="font-size: 0.72rem; font-weight: 700;">#${n}</div>
-                    <div style="font-size: 1.1rem; margin: 2px 0;">🦷</div>
-                    <div class="tiny" style="font-size: 0.65rem;">${finding ? finding.status.substring(0,6) : 'Sano'}</div>
-                  </div>
-                `;
-              }).join("")}
+            <div class="teeth-row" id="rowArchInferior">
+              ${renderTeethBoxes([48, 47, 46, 45, 44, 43, 42, 41, 31, 32, 33, 34, 35, 36, 37, 38])}
             </div>
           </div>
 
-          <!-- Tabla de Hallazgos y Plan Clínico -->
+          <!-- TABLA DETALLADA DE HALLAZGOS CLÍNICOS -->
           <div class="card">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-              <h3 style="margin: 0;">Registro de Hallazgos & Procedimientos Propuestos</h3>
-              <span class="chip chip-neutral" style="font-size: 0.75rem;">${odontogram.teeth.length} registros clínicos</span>
+              <div>
+                <h3 style="margin: 0; font-size: 1.15rem; color: var(--ink);">Registro de Hallazgos & Procedimientos Propuestos</h3>
+                <span class="tiny" style="color: var(--ink-soft);">Conforme a la Norma Técnica de Salud NTS N.º 188-MINSA/DGIESP-2022</span>
+              </div>
+              <span class="chip chip-neutral" id="findingsCountBadge" style="font-size: 0.75rem; font-weight: 700;">${odontogram.teeth.length} registros clínicos</span>
             </div>
 
             <div class="table-responsive">
-              <table class="data-table">
+              <table class="data-table" id="odontogramFindingsTable">
                 <thead>
                   <tr>
                     <th>Pieza FDI</th>
                     <th>Superficie</th>
-                    <th>Diagnóstico / Estado</th>
+                    <th>Diagnóstico Clínico</th>
                     <th>Tratamiento Propuesto</th>
-                    <th>Norma Técnica</th>
+                    <th>Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
-                  ${odontogram.teeth.map(t => `
-                    <tr>
-                      <td><strong>Pieza #${t.number}</strong></td>
-                      <td>${t.surface || 'Total'}</td>
-                      <td><span class="chip ${t.status === 'CARIES_DRAFT' ? 'chip-danger' : t.status === 'RESTORED' ? 'chip-neutral' : t.status === 'IMPLANT_PLANNED' ? 'chip-success' : 'chip-warning'}" style="font-size: 0.72rem; padding: 2px 8px;">${t.status}</span></td>
-                      <td>${t.treatmentProposed || t.treatment || t.note || '-'}</td>
-                      <td><span class="chip chip-neutral" style="font-size: 0.68rem;">NTS-188</span></td>
-                    </tr>
-                  `).join("")}
+                  ${renderFindingsTableRows(odontogram.teeth)}
                 </tbody>
               </table>
             </div>
@@ -1285,9 +1480,211 @@
         </div>
       `;
 
+      function renderTeethBoxes(numbersArray, isPediatric = false) {
+        return numbersArray.map(n => {
+          const finding = odontogram.teeth.find(t => t.number === n);
+          let cls = '';
+          let statusLabel = isPediatric ? 'Temporal' : 'Sano';
+
+          if (finding) {
+            if (finding.status === 'CARIES_DRAFT') { cls = 'has-caries'; statusLabel = 'Caries'; }
+            else if (finding.status === 'RESTORED') { cls = 'has-restored'; statusLabel = 'Resina'; }
+            else if (finding.status === 'ENDODONTIC') { cls = 'has-endodontic'; statusLabel = 'Endo'; }
+            else if (finding.status === 'IMPLANT_PLANNED') { cls = 'has-implant'; statusLabel = 'Implante'; }
+            else if (finding.status === 'CROWN') { cls = 'has-crown'; statusLabel = 'Corona'; }
+            else if (finding.status === 'ABSENT') { cls = 'has-absent'; statusLabel = 'Ausente'; }
+          }
+
+          return `
+            <div class="tooth-box ${cls}" id="toothBox_${n}" 
+                 data-tooth="${n}"
+                 ondragover="window.handleToothDragOver(event)"
+                 ondragleave="window.handleToothDragLeave(event)"
+                 ondrop="window.handleToothDrop(event, ${n})"
+                 onclick="window.handleToothClick(${n})"
+                 title="Pieza #${n} - Haz clic para editar detalles o arrastra una condición">
+              <div class="tooth-num">#${n}</div>
+              <div class="tooth-icon">🦷</div>
+              <div class="tooth-status-tag" id="toothTag_${n}">${statusLabel}</div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      function renderFindingsTableRows(teeth) {
+        if (!teeth || teeth.length === 0) {
+          return '<tr><td colspan="5" style="text-align: center; color: var(--ink-soft); padding: 24px;">Sin hallazgos patológicos registrados. Arrastra una condición para registrar.</td></tr>';
+        }
+        return teeth.map(t => `
+          <tr id="findingRow_${t.number}">
+            <td><strong style="color: var(--ink);">Pieza #${t.number}</strong></td>
+            <td><span class="chip chip-neutral" style="font-size: 0.72rem; padding: 2px 8px;">${t.surface || 'Total'}</span></td>
+            <td>
+              <span class="chip ${t.status === 'CARIES_DRAFT' ? 'chip-danger' : t.status === 'RESTORED' ? 'chip-neutral' : t.status === 'IMPLANT_PLANNED' ? 'chip-success' : 'chip-warning'}" style="font-size: 0.72rem; padding: 2px 8px;">
+                ${t.status}
+              </span>
+            </td>
+            <td style="color: var(--ink); font-weight: 500;">${t.treatmentProposed || t.treatment || t.note || t.finding || 'Sin especificar'}</td>
+            <td>
+              <div style="display: flex; gap: 6px;">
+                <button class="btn btn-secondary btn-small" style="padding: 4px 10px; font-size: 0.75rem;" onclick="window.openToothModal(${t.number})">Editar</button>
+                <button class="btn btn-secondary btn-small" style="padding: 4px 8px; font-size: 0.75rem; color: var(--danger);" onclick="window.removeToothFindingDirect(${t.number})">✕</button>
+              </div>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      // =======================================================================
+      // DRAG AND DROP & PALETTE STATE
+      // =======================================================================
+      let activeSelectedCondition = 'CARIES_DRAFT';
+
+      // Dragstart en los badges de la paleta
+      document.querySelectorAll('.palette-condition-item').forEach(item => {
+        item.addEventListener('dragstart', (e) => {
+          const status = item.getAttribute('data-status');
+          const name = item.getAttribute('data-name');
+          e.dataTransfer.setData('text/plain', JSON.stringify({ status, name }));
+          e.dataTransfer.effectAllowed = 'copy';
+        });
+      });
+
+      window.selectPaletteCondition = function(el, status) {
+        document.querySelectorAll('.palette-condition-item').forEach(i => i.classList.remove('active'));
+        el.classList.add('active');
+        activeSelectedCondition = status;
+        showToast('Condición activa: ' + el.getAttribute('data-name') + '. Haz clic sobre cualquier pieza para aplicarla.', 'info');
+      };
+
+      window.handleToothDragOver = function(e) {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'copy';
+        e.currentTarget.classList.add('drag-over');
+      };
+
+      window.handleToothDragLeave = function(e) {
+        e.currentTarget.classList.remove('drag-over');
+      };
+
+      window.handleToothDrop = function(e, toothNum) {
+        e.preventDefault();
+        e.currentTarget.classList.remove('drag-over');
+        try {
+          const data = JSON.parse(e.dataTransfer.getData('text/plain'));
+          if (data && data.status) {
+            applyConditionToTooth(toothNum, data.status, 'Oclusal', data.name);
+          }
+        } catch(err) {
+          console.error(err);
+        }
+      };
+
+      window.handleToothClick = function(toothNum) {
+        // Al hacer clic sobre una pieza: si ya hay una condición activa seleccionada y se desea aplicar rápido o abrir modal
+        window.openToothModal(toothNum);
+      };
+
+      function applyConditionToTooth(toothNum, status, surface = 'Oclusal', noteText = '') {
+        if (status === 'HEALTHY') {
+          // Limpiar hallazgo de la pieza
+          mockApi.state.odontogram.teeth = mockApi.state.odontogram.teeth.filter(t => t.number !== toothNum);
+          mockApi.saveState();
+          mockApi.logAuditEvent("ODONTOGRAMA_LIMPIEZA", "Pieza #" + toothNum + " marcada como Sana.");
+          showToast('Pieza #' + toothNum + ' restablecida a estado Sano', 'success');
+        } else {
+          // Remover si existía para actualizar
+          mockApi.state.odontogram.teeth = mockApi.state.odontogram.teeth.filter(t => t.number !== toothNum);
+          const defaultNotes = {
+            CARIES_DRAFT: 'Lesión cariosa en esmalte/dentina. Requiere restauración estética.',
+            RESTORED: 'Restauración en buen estado funcional.',
+            ENDODONTIC: 'Tratamiento de conducto radicular terminado.',
+            IMPLANT_PLANNED: 'Implante osteointegrado planificado.',
+            CROWN: 'Corona fija en zirconio monolítico.',
+            ABSENT: 'Pieza ausente / exodoncia previa.'
+          };
+          const finding = {
+            number: toothNum,
+            status: status,
+            surface: surface,
+            finding: noteText || defaultNotes[status] || 'Tratamiento programado',
+            treatmentProposed: noteText || defaultNotes[status] || 'Tratamiento programado'
+          };
+          mockApi.state.odontogram.teeth.push(finding);
+          mockApi.saveState();
+          mockApi.logAuditEvent("ODONTOGRAMA_HALLAZGO", "Pieza #" + toothNum + " (" + status + ") superficie " + surface);
+          showToast('✓ Pieza #' + toothNum + ' actualizada a ' + status + ' (' + surface + ')', 'success');
+        }
+
+        // Actualizar visualmente la pieza
+        updateToothElement(toothNum, status);
+        // Actualizar tabla
+        updateFindingsTable();
+      }
+
+      function updateToothElement(toothNum, status) {
+        const box = document.getElementById('toothBox_' + toothNum);
+        const tag = document.getElementById('toothTag_' + toothNum);
+        if (!box) return;
+
+        box.className = 'tooth-box';
+        if (status === 'CARIES_DRAFT') { box.classList.add('has-caries'); if (tag) tag.textContent = 'Caries'; }
+        else if (status === 'RESTORED') { box.classList.add('has-restored'); if (tag) tag.textContent = 'Resina'; }
+        else if (status === 'ENDODONTIC') { box.classList.add('has-endodontic'); if (tag) tag.textContent = 'Endo'; }
+        else if (status === 'IMPLANT_PLANNED') { box.classList.add('has-implant'); if (tag) tag.textContent = 'Implante'; }
+        else if (status === 'CROWN') { box.classList.add('has-crown'); if (tag) tag.textContent = 'Corona'; }
+        else if (status === 'ABSENT') { box.classList.add('has-absent'); if (tag) tag.textContent = 'Ausente'; }
+        else { if (tag) tag.textContent = 'Sano'; }
+      }
+
+      function updateFindingsTable() {
+        const teeth = mockApi.getOdontogram().teeth;
+        const tbody = document.querySelector('#odontogramFindingsTable tbody');
+        if (tbody) tbody.innerHTML = renderFindingsTableRows(teeth);
+        const countBadge = document.getElementById('findingsCountBadge');
+        if (countBadge) countBadge.textContent = teeth.length + ' registros clínicos';
+      }
+
+      window.removeToothFindingDirect = function(toothNum) {
+        applyConditionToTooth(toothNum, 'HEALTHY');
+      };
+
+      // =======================================================================
+      // MODAL DETALLE DE PIEZA DENTAL
+      // =======================================================================
       window.openToothModal = (num) => {
         selectedToothNum = num;
-        document.getElementById("modalTitle").textContent = `Registrar Hallazgo en Pieza #${num} (FDI)`;
+        document.getElementById("modalTitle").textContent = "Detalles Clínicos Pieza #" + num + " (FDI)";
+        
+        // Buscar si ya tiene hallazgo
+        const currentFinding = mockApi.getOdontogram().teeth.find(t => t.number === num);
+        const typeSelect = document.getElementById("modalFindingType");
+        const noteInput = document.getElementById("modalFindingNote");
+        const deleteBtn = document.getElementById("btnDeleteFinding");
+
+        if (currentFinding) {
+          typeSelect.value = currentFinding.status;
+          noteInput.value = currentFinding.treatmentProposed || currentFinding.finding || '';
+          if (deleteBtn) deleteBtn.style.display = 'inline-flex';
+          
+          // Seleccionar superficies
+          document.querySelectorAll('.surface-pill-btn').forEach(btn => {
+            if (currentFinding.surface && currentFinding.surface.includes(btn.getAttribute('data-surface'))) {
+              btn.classList.add('selected');
+            } else {
+              btn.classList.remove('selected');
+            }
+          });
+        } else {
+          typeSelect.value = activeSelectedCondition || 'CARIES_DRAFT';
+          noteInput.value = '';
+          if (deleteBtn) deleteBtn.style.display = 'none';
+          document.querySelectorAll('.surface-pill-btn').forEach(btn => {
+            if (btn.getAttribute('data-surface') === 'Oclusal') btn.classList.add('selected');
+            else btn.classList.remove('selected');
+          });
+        }
+
         document.getElementById("findingModal").classList.add("open");
       };
 
@@ -1295,27 +1692,30 @@
         document.getElementById("findingModal").classList.remove("open");
       };
 
+      window.toggleSurfacePill = function(btn) {
+        btn.classList.toggle('selected');
+        const selected = Array.from(document.querySelectorAll('.surface-pill-btn.selected')).map(b => b.getAttribute('data-surface'));
+        document.getElementById("modalFindingSurface").value = selected.length > 0 ? selected.join(', ') : 'Oclusal';
+      };
+
+      window.removeCurrentToothFinding = function() {
+        if (!selectedToothNum) return;
+        applyConditionToTooth(selectedToothNum, 'HEALTHY');
+        window.closeToothModal();
+      };
+
       document.getElementById("confirmFindingBtn")?.addEventListener("click", () => {
         const type = document.getElementById("modalFindingType").value;
-        const surface = document.getElementById("modalFindingSurface").value;
+        const selectedSurfaces = Array.from(document.querySelectorAll('.surface-pill-btn.selected')).map(b => b.getAttribute('data-surface')).join(', ') || 'Oclusal';
         const note = document.getElementById("modalFindingNote").value || "Tratamiento regular";
 
-        mockApi.addOdontogramFinding({
-          number: selectedToothNum,
-          status: type,
-          surface: surface,
-          finding: note,
-          treatmentProposed: note
-        });
-
+        applyConditionToTooth(selectedToothNum, type, selectedSurfaces, note);
         window.closeToothModal();
-        showToast(`Hallazgo en Pieza #${selectedToothNum} registrado en ficha`, "success");
-        window.location.reload();
       });
 
       document.getElementById("signOdontogramBtn")?.addEventListener("click", () => {
         mockApi.logAuditEvent("FIRMA_ODONTOGRAMA", "Firma digital del odontograma inicial por Dra. Ana Flores (COP 18240)");
-        showToast("Odontograma firmado conforme a NTS 188-MINSA", "success");
+        showToast("✓ Odontograma firmado conforme a NTS 188-MINSA", "success");
       });
 
     // =========================================================================
@@ -1613,7 +2013,6 @@
     // =========================================================================
     let currentSelectedAptId = null;
 
-    // NAVEGACIÓN TEMPORAL DE AGENDA
     window.changeSchedulerDate = function(newDate) {
       const url = new URL(window.location.href);
       url.searchParams.set('view', 'agenda');
@@ -1635,7 +2034,6 @@
       window.location.href = url.toString();
     };
 
-    // MODAL DETALLE DE CITA
     window.openAptDetail = function(aptId) {
       currentSelectedAptId = aptId;
       const all = mockApi.getAllAppointments();
@@ -1655,7 +2053,6 @@
         linkOdonto.href = '?view=patient&patient=' + (apt.patientId || 'pat_maria');
       }
 
-      // Actualizar nodos del stepper
       const steps = ['SCHEDULED', 'CONFIRMED', 'IN_WAITING_ROOM', 'IN_CHAIR', 'COMPLETED'];
       steps.forEach(st => {
         const node = document.getElementById('stepNode_' + st);
@@ -1698,7 +2095,6 @@
       window.location.reload();
     };
 
-    // MODAL NUEVA CITA RÁPIDA
     window.openNewAptModal = function(preferredChair) {
       const inputDate = document.getElementById('schedulerDateInput');
       const targetDate = inputDate ? inputDate.value : '2026-09-08';
@@ -1769,7 +2165,6 @@
         chair_3: "Dra. Sofía Gutiérrez Medina"
       };
 
-      // Convertir 24h a 12h para display
       const [h, m] = timeRaw.split(':');
       const hNum = parseInt(h, 10);
       const ampm = hNum >= 12 ? 'PM' : 'AM';

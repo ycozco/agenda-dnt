@@ -1,5 +1,5 @@
 /* ==========================================================================
-   SILLAR DENTAL / ALÍNEA STUDIO - THEMED COMPATIBILITY LAYER
+   SILLAR DENTAL / ALÍNEA STUDIO - THEMED COMPATIBILITY & CONTRAST UPGRADE
    ========================================================================== */
 html, body {
   background-color: var(--paper) !important;
@@ -11,32 +11,100 @@ html, body {
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-[data-theme="dark"] .bg-white, 
-[data-theme="dark"] [class*="bg-white"], 
-[data-theme="dark"] .bg-slate-50, 
-[data-theme="dark"] .bg-gray-50, 
-[data-theme="dark"] .bg-gray-100 {
-  background-color: rgba(12, 30, 48, 0.9) !important;
-  color: #FAF9F6 !important;
+/* Modo Claro: Alto contraste, textos oscuros y nítidos */
+:root, [data-theme="light"], html:not(.dark) {
+  --paper: #F8FAFC;
+  --surface: #FFFFFF;
+  --surface-dim: #F1F5F9;
+  --line: #CBD5E1;
+  --line-soft: #E2E8F0;
+  --ink: #0F172A;
+  --ink-soft: #475569;
+  --ink-faint: #64748B;
+  --action: #0E7060;
+  --action-hover: #0A5347;
+  --action-soft: #E8F4F2;
 }
 
-[data-theme="light"] .bg-white, 
-[data-theme="light"] [class*="bg-white"] {
+[data-theme="light"] .text-on-surface,
+html:not(.dark) .text-on-surface,
+[data-theme="light"] h1, [data-theme="light"] h2, [data-theme="light"] h3,
+html:not(.dark) h1, html:not(.dark) h2, html:not(.dark) h3 {
+  color: #0F172A !important;
+}
+
+[data-theme="light"] .text-on-surface-variant,
+html:not(.dark) .text-on-surface-variant {
+  color: #475569 !important;
+}
+
+[data-theme="light"] .text-secondary,
+html:not(.dark) .text-secondary {
+  color: #0E7060 !important;
+}
+
+[data-theme="light"] .bg-surface-container,
+[data-theme="light"] .bg-surface-container-high,
+[data-theme="light"] .bg-surface-container-highest,
+html:not(.dark) .bg-surface-container,
+html:not(.dark) .bg-surface-container-high,
+html:not(.dark) .bg-surface-container-highest {
+  background-color: #F1F5F9 !important;
+  color: #0F172A !important;
+  border-color: #CBD5E1 !important;
+}
+
+[data-theme="light"] .glass,
+[data-theme="light"] .glass-panel,
+[data-theme="light"] .glass-card-luxury,
+html:not(.dark) .glass,
+html:not(.dark) .glass-panel,
+html:not(.dark) .glass-card-luxury {
   background-color: #FFFFFF !important;
-  color: #0A2540 !important;
+  border: 1px solid #CBD5E1 !important;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06) !important;
 }
 
-/* Glassmorphism Dinámico */
-.glass-panel-luxury {
-  background: var(--surface) !important;
+/* Modo Oscuro: Textos brillantes, contraste estricto */
+[data-theme="dark"], html.dark {
+  --paper: #090E17;
+  --surface: #0F172A;
+  --surface-dim: #0B1322;
+  --line: #1E293B;
+  --line-soft: rgba(255, 255, 255, 0.08);
+  --ink: #F8FAFC;
+  --ink-soft: #94A3B8;
+  --ink-faint: #64748B;
+  --action: #14B8A6;
+  --action-soft: rgba(20, 184, 166, 0.16);
+}
+
+[data-theme="dark"] .text-on-surface,
+html.dark .text-on-surface,
+[data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3,
+html.dark h1, html.dark h2, html.dark h3 {
+  color: #F8FAFC !important;
+}
+
+[data-theme="dark"] .text-on-surface-variant,
+html.dark .text-on-surface-variant {
+  color: #94A3B8 !important;
+}
+
+[data-theme="dark"] .text-secondary,
+html.dark .text-secondary {
+  color: #2DD4BF !important;
+}
+
+[data-theme="dark"] .glass,
+[data-theme="dark"] .glass-panel,
+[data-theme="dark"] .glass-card-luxury,
+html.dark .glass,
+html.dark .glass-panel,
+html.dark .glass-card-luxury {
+  background-color: rgba(15, 23, 42, 0.85) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
   backdrop-filter: blur(16px) !important;
-  border: 1px solid var(--line) !important;
-}
-
-.glass-card-luxury {
-  background: var(--surface) !important;
-  border: 1px solid var(--line) !important;
-  box-shadow: var(--shadow) !important;
 }
 
 ::-webkit-scrollbar {
