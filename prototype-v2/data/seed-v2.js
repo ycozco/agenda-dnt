@@ -3117,5 +3117,38 @@ export const SEED_V2 = {
     ]
   }
 ]
+,
+  waitlist: [
+  {
+    "id": "wait_01",
+    "patientName": "Gonzalo Vargas Llosa",
+    "phone": "+51 954 112 334",
+    "preferredSpecialty": "Periodoncia",
+    "preferredTime": "Tardes (A partir de 3:00 PM)",
+    "urgency": "MODERATE",
+    "notes": "Paciente con disponibilidad inmediata si se cancela un turno de periodoncia o limpieza.",
+    "registeredAt": "2026-09-07 10:00"
+  },
+  {
+    "id": "wait_02",
+    "patientName": "Valeria Cornejo Bedregal",
+    "phone": "+51 954 667 889",
+    "preferredSpecialty": "Ortodoncia",
+    "preferredTime": "Cualquier horario mañana",
+    "urgency": "LOW",
+    "notes": "Desea adelantar control de brackets programado para la próxima semana.",
+    "registeredAt": "2026-09-08 08:30"
+  },
+  {
+    "id": "wait_03",
+    "patientName": "Mateo Bustamante Polar",
+    "phone": "+51 954 998 221",
+    "preferredSpecialty": "Cirugía / Implantes",
+    "preferredTime": "Mañanas",
+    "urgency": "HIGH",
+    "notes": "Urgencia por molestia en tercer molar inferior.",
+    "registeredAt": "2026-09-08 09:15"
+  }
+]
 };
 

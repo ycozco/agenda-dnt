@@ -925,3 +925,426 @@ html.dark .glass-card-luxury {
   margin-bottom: 6px;
   height: 40px;
 }
+
+/* ==========================================================================
+   SALA DE ESPERA, TRIAJE Y CONTROL DE FLUJO EN RECEPCIÓN
+   ========================================================================== */
+.wr-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.wr-header-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.wr-stat-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+}
+
+.wr-stat-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+}
+
+.wr-stat-icon.waiting { background: #FEF3C7; color: #D97706; }
+.wr-stat-icon.chair { background: #CCFBF1; color: #0D9488; }
+.wr-stat-icon.completed { background: #E0E7FF; color: #4338CA; }
+.wr-stat-icon.waitlist { background: #FEE2E2; color: #DC2626; }
+
+.wr-stat-val {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #0F172A;
+  line-height: 1.1;
+}
+
+.wr-stat-lbl {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #64748B;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+/* Tablero de Flujo Kanban */
+.wr-flow-board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  align-items: flex-start;
+}
+
+@media (max-width: 1200px) {
+  .wr-flow-board {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .wr-flow-board {
+    grid-template-columns: 1fr;
+  }
+}
+
+.wr-column {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  min-height: 480px;
+  overflow: hidden;
+}
+
+.wr-column-header {
+  padding: 14px 16px;
+  border-bottom: 2px solid #CBD5E1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #FFFFFF;
+}
+
+.wr-col-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #1E293B;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.wr-badge-count {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #E2E8F0;
+  color: #475569;
+}
+
+.wr-col-scheduled { border-top: 4px solid #3B82F6; }
+.wr-col-waiting { border-top: 4px solid #F59E0B; }
+.wr-col-chair { border-top: 4px solid #14B8A6; }
+.wr-col-completed { border-top: 4px solid #10B981; }
+
+.wr-cards-container {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-grow: 1;
+}
+
+/* Tarjetas de Paciente */
+.wr-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  padding: 14px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.wr-card:hover {
+  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+  border-color: #CBD5E1;
+}
+
+.wr-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.wr-card-patient {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #0F172A;
+}
+
+.wr-card-time {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #475569;
+  background: #F1F5F9;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.wr-card-specialty {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #0E7060;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.wr-card-doctor {
+  font-size: 0.75rem;
+  color: #64748B;
+}
+
+.wr-card-chair-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #0369A1;
+  background: #E0F2FE;
+  padding: 3px 8px;
+  border-radius: 6px;
+  display: inline-block;
+  align-self: flex-start;
+}
+
+/* Pills de Espera */
+.wr-wait-pill {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.wr-wait-pill.ok {
+  background: #ECFDF5;
+  color: #065F46;
+  border: 1px solid #A7F3D0;
+}
+
+.wr-wait-pill.warn {
+  background: #FFFBEB;
+  color: #92400E;
+  border: 1px solid #FDE68A;
+}
+
+.wr-wait-pill.alert {
+  background: #FEF2F2;
+  color: #991B1B;
+  border: 1px solid #FECACA;
+  animation: pulseWait 2s infinite ease-in-out;
+}
+
+@keyframes pulseWait {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.wr-card-triage {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: 0.72rem;
+  color: #334155;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+}
+
+.wr-card-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+  padding-top: 8px;
+  border-top: 1px solid #F1F5F9;
+  flex-wrap: wrap;
+}
+
+.wr-btn-action {
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.wr-btn-action.checkin {
+  background: #0E7060;
+  color: #FFFFFF;
+}
+.wr-btn-action.checkin:hover {
+  background: #0B584B;
+}
+
+.wr-btn-action.call {
+  background: #0284C7;
+  color: #FFFFFF;
+}
+.wr-btn-action.call:hover {
+  background: #0369A1;
+}
+
+.wr-btn-action.finish {
+  background: #10B981;
+  color: #FFFFFF;
+}
+.wr-btn-action.finish:hover {
+  background: #059669;
+}
+
+.wr-btn-action.secondary {
+  background: #F1F5F9;
+  color: #475569;
+  border-color: #CBD5E1;
+}
+.wr-btn-action.secondary:hover {
+  background: #E2E8F0;
+}
+
+.wr-btn-action.danger {
+  background: #FEF2F2;
+  color: #DC2626;
+  border-color: #FECACA;
+}
+.wr-btn-action.danger:hover {
+  background: #FEE2E2;
+}
+
+/* Sección Lista de Espera */
+.wr-waitlist-section {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 18px 22px;
+}
+
+.wr-waitlist-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.wr-waitlist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
+}
+
+.wr-waitlist-item {
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  padding: 12px 14px;
+  background: #F8FAFC;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+}
+
+.wr-urgency-badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+.wr-urgency-badge.HIGH { background: #FEE2E2; color: #DC2626; }
+.wr-urgency-badge.MODERATE { background: #FEF3C7; color: #D97706; }
+.wr-urgency-badge.LOW { background: #E0E7FF; color: #4338CA; }
+
+/* Modal de Triaje Rápido */
+.wr-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 16px;
+}
+
+.wr-modal-card {
+  background: #FFFFFF;
+  border-radius: 16px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  width: 100%;
+  max-width: 540px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.wr-modal-header {
+  padding: 18px 24px;
+  background: #0E7060;
+  color: #FFFFFF;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.wr-modal-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-height: 75vh;
+  overflow-y: auto;
+}
+
+.wr-triage-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.wr-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.wr-input-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.wr-input-field {
+  padding: 8px 12px;
+  border: 1px solid #CBD5E1;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  color: #0F172A;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.wr-input-field:focus {
+  border-color: #0E7060;
+  box-shadow: 0 0 0 2px rgba(14, 112, 96, 0.15);
+}

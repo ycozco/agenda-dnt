@@ -715,19 +715,21 @@
         <nav class="staff-menu" id="staffNav">
           <a href="?view=dashboard" class="staff-menu-item" id="nav-dashboard"><span class="nav-num">01</span><span>Dashboard General</span></a>
           <a href="?view=agenda" class="staff-menu-item" id="nav-agenda"><span class="nav-num">02</span><span>Agenda & Sillones</span></a>
-          <a href="?view=patient&patient=pat_maria" class="staff-menu-item" id="nav-patient"><span class="nav-num">03</span><span>Odontograma & Evolución</span></a>
-          <a href="?view=perio" class="staff-menu-item" id="nav-perio"><span class="nav-num">04</span><span>Periodontograma (6 Sitios)</span></a>
-          <a href="?view=imaging" class="staff-menu-item" id="nav-imaging"><span class="nav-num">05</span><span>Radiología & PACS</span></a>
-          <a href="?view=documents" class="staff-menu-item" id="nav-documents"><span class="nav-num">06</span><span>Documentos & PDFs</span></a>
-          <a href="?view=patients" class="staff-menu-item" id="nav-patients"><span class="nav-num">07</span><span>Directorio Pacientes</span></a>
-          <a href="?view=finance" class="staff-menu-item" id="nav-finance"><span class="nav-num">08</span><span>Caja & Cobranza</span></a>
-          <a href="?view=inventory" class="staff-menu-item" id="nav-inventory"><span class="nav-num">09</span><span>Inventario Clínico</span></a>
-          <a href="?view=audit" class="staff-menu-item" id="nav-audit"><span class="nav-num">10</span><span>Auditoría Inmutable</span></a>
+          <a href="?view=waiting_room" class="staff-menu-item" id="nav-waiting_room"><span class="nav-num">03</span><span>Control Sala de Espera</span></a>
+          <a href="?view=patient&patient=pat_maria" class="staff-menu-item" id="nav-patient"><span class="nav-num">04</span><span>Odontograma & Evolución</span></a>
+          <a href="?view=perio" class="staff-menu-item" id="nav-perio"><span class="nav-num">05</span><span>Periodontograma (6 Sitios)</span></a>
+          <a href="?view=imaging" class="staff-menu-item" id="nav-imaging"><span class="nav-num">06</span><span>Radiología & PACS</span></a>
+          <a href="?view=documents" class="staff-menu-item" id="nav-documents"><span class="nav-num">07</span><span>Documentos & PDFs</span></a>
+          <a href="?view=patients" class="staff-menu-item" id="nav-patients"><span class="nav-num">08</span><span>Directorio Pacientes</span></a>
+          <a href="?view=finance" class="staff-menu-item" id="nav-finance"><span class="nav-num">09</span><span>Caja & Cobranza</span></a>
+          <a href="?view=inventory" class="staff-menu-item" id="nav-inventory"><span class="nav-num">10</span><span>Inventario Clínico</span></a>
+          <a href="?view=audit" class="staff-menu-item" id="nav-audit"><span class="nav-num">11</span><span>Auditoría Inmutable</span></a>
         </nav>
 
         <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.1);">
           <div style="font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255,255,255,0.5); margin-bottom: 8px; padding-left: 8px;">Vistas Especializadas</div>
           <div style="display: grid; gap: 4px;">
+            <a href="?view=waiting_room" class="staff-menu-item" id="nav-waiting_room-spec" style="font-size: 0.8rem; padding: 7px 12px;"><span>🛋️ Sala de Espera & Triaje</span></a>
             <a href="?view=agenda" class="staff-menu-item" id="nav-agenda-spec" style="font-size: 0.8rem; padding: 7px 12px;"><span>📅 Agenda Semanal & Multi-Sillón</span></a>
             <a href="?view=patient&patient=pat_maria" class="staff-menu-item" id="nav-odonto-spec" style="font-size: 0.8rem; padding: 7px 12px;"><span>🩺 Odontograma FDI & Evolución</span></a>
             <a href="?view=perio" class="staff-menu-item" id="nav-perio-spec" style="font-size: 0.8rem; padding: 7px 12px;"><span>🦷 Periodontograma (6 Sitios)</span></a>
@@ -993,6 +995,7 @@
   <script type="module">
     import { mockApi } from '../assets/js/mock-api-v2.js';
     import { showToast } from '../assets/js/components.js';
+    import { renderWaitingRoom } from './waiting-room.js';
 
     // 1. LEER VISTA DE PARÁMETROS URL
     const params = new URLSearchParams(window.location.search);
@@ -1001,6 +1004,8 @@
     document.querySelectorAll(".staff-menu-item").forEach(el => el.classList.remove("active"));
     const activeNav = document.getElementById('nav-' + view);
     if (activeNav) activeNav.classList.add("active");
+    const activeNavSpec = document.getElementById('nav-' + view + '-spec');
+    if (activeNavSpec) activeNavSpec.classList.add("active");
 
     const main = document.getElementById("staffMain");
     const seed = mockApi.getSeed();
@@ -1301,10 +1306,13 @@
       }
 
     // =========================================================================
-    // VISTA 3: ODONTOGRAMA DIGITAL FDI 52 PIEZAS (CON SELECTOR & DRAG AND DROP)
+    // VISTA 3: SALA DE ESPERA, TRIAJE & CONTROL DE FLUJO EN RECEPCIÓN
     // =========================================================================
-// =========================================================================
-    // VISTA 3: ODONTOGRAMA FDI & EVOLUCIÓN (NTS 188-MINSA) / PERIODONTOGRAMA (6 SITIOS)
+    } else if (view === "waiting_room") {
+      renderWaitingRoom(main, mockApi, showToast);
+
+    // =========================================================================
+    // VISTA 4: ODONTOGRAMA FDI & EVOLUCIÓN (NTS 188-MINSA) / PERIODONTOGRAMA (6 SITIOS)
     // =========================================================================
     } else if (view === "patient" || view === "perio") {
       const activeTab = view === "perio" ? "perio" : (params.get("tab") || "evolution");

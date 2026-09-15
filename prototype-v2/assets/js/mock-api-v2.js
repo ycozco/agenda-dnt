@@ -489,6 +489,112 @@ class MockApiV2 {
     return newDoc;
   }
 
+
+  // =========================================================================
+  // SALA DE ESPERA, TRIAJE & CONTROL DE FLUJO EN RECEPCIÓN
+  // =========================================================================
+  getWaitlist() {
+    if (!this.state.waitlist) {
+      this.state.waitlist = JSON.parse(JSON.stringify(this.getSeed().waitlist || []));
+    }
+    return this.state.waitlist;
+  }
+
+  checkInPatient(aptId, triageData = {}) {
+    const all = this.getAllAppointments();
+    const appt = all.find(a => a.id === aptId);
+    if (appt) {
+      appt.status = "IN_WAITING_ROOM";
+      appt.checkedInAt = new Date().toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit' });
+      appt.checkedInTimestamp = Date.now();
+      appt.triage = {
+        bloodPressure: triageData.bloodPressure || "120/80 mmHg",
+        heartRate: triageData.heartRate || 72,
+        spO2: triageData.spO2 || 98,
+        temperature: triageData.temperature || 36.5,
+        alerts: triageData.alerts || [],
+        notes: triageData.notes || "Paciente ingresó a sala de espera sin síntomas agudos."
+      };
+      this.logAuditEvent("CHECKIN_PACIENTE", "Check-in registrado: " + appt.patientName + " en Sala de Espera (PA: " + appt.triage.bloodPressure + ")");
+      this.saveState();
+    }
+    return appt;
+  }
+
+  callPatientToChair(aptId, chairId = "chair_1") {
+    const all = this.getAllAppointments();
+    const appt = all.find(a => a.id === aptId);
+    if (appt) {
+      const chairs = {
+        chair_1: "Sillón 1 (Ortodoncia)",
+        chair_2: "Sillón 2 (Cirugía/Rehab)",
+        chair_3: "Sillón 3 (Pediatría/Integral)"
+      };
+      appt.status = "IN_CHAIR";
+      appt.chairId = chairId;
+      appt.chair = chairs[chairId] || chairs.chair_1;
+      appt.calledInAt = new Date().toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit' });
+      appt.calledInTimestamp = Date.now();
+      this.logAuditEvent("LLAMADO_SILLON", appt.patientName + " trasladado a " + appt.chair);
+      this.saveState();
+    }
+    return appt;
+  }
+
+  completeAppointmentSession(aptId, notes = "") {
+    const all = this.getAllAppointments();
+    const appt = all.find(a => a.id === aptId);
+    if (appt) {
+      appt.status = "COMPLETED";
+      appt.completedAt = new Date().toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit' });
+      appt.clinicalNotes = notes || "Atención clínica finalizada conforme al plan.";
+      this.logAuditEvent("CITA_CONCLUIDA", "Atención finalizada para " + appt.patientName + " (" + appt.chair + ")");
+      this.saveState();
+    }
+    return appt;
+  }
+
+  markNoShow(aptId, reason = "Paciente no se presentó a su turno") {
+    const all = this.getAllAppointments();
+    const appt = all.find(a => a.id === aptId);
+    if (appt) {
+      appt.status = "NO_SHOW";
+      appt.noShowReason = reason;
+      this.logAuditEvent("INASISTENCIA_NO_SHOW", "Inasistencia registrada para cita " + aptId + " (" + appt.patientName + ")");
+      this.saveState();
+    }
+    return appt;
+  }
+
+  assignWaitlistToAppointment(waitlistId, targetSlot = {}) {
+    const waitlist = this.getWaitlist();
+    const idx = waitlist.findIndex(w => w.id === waitlistId);
+    if (idx !== -1) {
+      const wPatient = waitlist[idx];
+      const newApt = this.createAppointment({
+        patientName: wPatient.patientName,
+        patientPhone: wPatient.phone,
+        specialty: wPatient.preferredSpecialty,
+        reason: "Relleno de cancelación desde Lista de Espera (" + wPatient.notes + ")",
+        time: targetSlot.time || "11:15 AM",
+        startTime: targetSlot.startTime || "11:15",
+        duration: "45 min",
+        durationMinutes: 45,
+        date: "2026-09-08",
+        chairId: targetSlot.chairId || "chair_1",
+        chair: targetSlot.chair || "Sillón 1 (Ortodoncia)",
+        practitioner: "Dra. Ana Flores (Ortodoncia)",
+        status: "CONFIRMED"
+      });
+      // Remover de lista de espera
+      waitlist.splice(idx, 1);
+      this.logAuditEvent("RELLENO_CANCELACION", wPatient.patientName + " asignado desde Lista de Espera a turno " + newApt.time);
+      this.saveState();
+      return newApt;
+    }
+    return null;
+  }
+
   // =========================================================================
   // AUDITORÍA
   // =========================================================================
