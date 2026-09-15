@@ -717,10 +717,11 @@
           <a href="?view=agenda" class="staff-menu-item" id="nav-agenda"><span class="nav-num">02</span><span>Agenda & Sillones</span></a>
           <a href="?view=patient&patient=pat_maria" class="staff-menu-item" id="nav-patient"><span class="nav-num">03</span><span>Odontograma & Evolución</span></a>
           <a href="?view=perio" class="staff-menu-item" id="nav-perio"><span class="nav-num">04</span><span>Periodontograma (6 Sitios)</span></a>
-          <a href="?view=patients" class="staff-menu-item" id="nav-patients"><span class="nav-num">05</span><span>Directorio Pacientes</span></a>
-          <a href="?view=finance" class="staff-menu-item" id="nav-finance"><span class="nav-num">06</span><span>Caja & Cobranza</span></a>
-          <a href="?view=inventory" class="staff-menu-item" id="nav-inventory"><span class="nav-num">07</span><span>Inventario Clínico</span></a>
-          <a href="?view=audit" class="staff-menu-item" id="nav-audit"><span class="nav-num">08</span><span>Auditoría Inmutable</span></a>
+          <a href="?view=imaging" class="staff-menu-item" id="nav-imaging"><span class="nav-num">05</span><span>Radiología & PACS</span></a>
+          <a href="?view=patients" class="staff-menu-item" id="nav-patients"><span class="nav-num">06</span><span>Directorio Pacientes</span></a>
+          <a href="?view=finance" class="staff-menu-item" id="nav-finance"><span class="nav-num">07</span><span>Caja & Cobranza</span></a>
+          <a href="?view=inventory" class="staff-menu-item" id="nav-inventory"><span class="nav-num">08</span><span>Inventario Clínico</span></a>
+          <a href="?view=audit" class="staff-menu-item" id="nav-audit"><span class="nav-num">09</span><span>Auditoría Inmutable</span></a>
         </nav>
 
         <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.1);">
@@ -728,7 +729,8 @@
           <div style="display: grid; gap: 4px;">
             <a href="?view=agenda" class="staff-menu-item" id="nav-agenda-spec" style="font-size: 0.8rem; padding: 7px 12px;"><span>📅 Agenda Semanal & Multi-Sillón</span></a>
             <a href="?view=patient&patient=pat_maria" class="staff-menu-item" id="nav-odonto-spec" style="font-size: 0.8rem; padding: 7px 12px;"><span>🩺 Odontograma FDI & Evolución</span></a>
-            <a href="?view=perio" class="staff-menu-item" id="nav-perio-spec" style="font-size: 0.8rem; padding: 7px 12px;"><span>🦷 Periodontograma Digital (6 Sitios)</span></a>
+            <a href="?view=perio" class="staff-menu-item" id="nav-perio-spec" style="font-size: 0.8rem; padding: 7px 12px;"><span>🦷 Periodontograma (6 Sitios)</span></a>
+            <a href="?view=imaging" class="staff-menu-item" id="nav-imaging-spec" style="font-size: 0.8rem; padding: 7px 12px;"><span>📸 Visor Radiológico PACS (W/L)</span></a>
             <a href="?view=users" class="staff-menu-item" id="nav-users" style="font-size: 0.8rem; padding: 7px 12px;"><span>👥 Personal & Roles COP</span></a>
           </div>
         </div>
@@ -2241,6 +2243,390 @@
       window.removeToothFindingDirect = function(toothNum) {
         applyConditionToTooth(toothNum, 'HEALTHY');
       };
+    // =========================================================================
+    // VISTA 5: VISOR RADIOLÓGICO DIGITAL PACS / DICOM
+    // =========================================================================
+    } else if (view === "imaging") {
+      const studies = mockApi.getImagingStudies();
+      const currentStudyId = params.get("study") || (studies[0] ? studies[0].id : "rad_01");
+      const currentStudy = mockApi.getImagingStudyById(currentStudyId) || studies[0];
+
+      main.innerHTML = `
+        <div class="staff-container">
+          <!-- CABECERA DE IMAGENOLOGÍA & PACS -->
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <h1 style="margin: 0; font-size: 1.85rem; font-weight: 800; color: var(--ink);">Visor Radiológico Digital PACS / DICOM</h1>
+                <span class="chip chip-success" style="font-size: 0.75rem; padding: 3px 10px;">DICOMweb / Calibrado</span>
+              </div>
+              <p class="muted" style="margin: 4px 0 0; color: var(--ink-soft); font-weight: 500;">
+                Paciente: <strong style="color: var(--ink);">María Quispe Condori</strong> (DNI: 45892104) · Estudio Activo: <span style="color: var(--action); font-weight: 700;">${currentStudy.title}</span>
+              </p>
+            </div>
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+              <a href="?view=patient&tab=evolution" class="btn btn-secondary btn-small" style="font-weight: 700;">🦷 Ver Odontograma</a>
+              <button class="btn btn-primary btn-small" id="btnPublishReport" onclick="window.publishCurrentStudyReport('${currentStudy.id}')">
+                ✓ Publicar al Portal del Paciente
+              </button>
+            </div>
+          </div>
+
+          <!-- MESA DE TRABAJO RADIOLÓGICA (PACS WORKSPACE) -->
+          <div class="pacs-workspace">
+            <!-- SELECTOR DE ESTUDIOS RADIOLÓGICOS (CAROUSEL SUPERIOR) -->
+            <div class="pacs-study-tabs">
+              ${studies.map(s => `
+                <div class="pacs-study-thumb-btn ${s.id === currentStudy.id ? 'active' : ''}" onclick="window.selectImagingStudy('${s.id}')">
+                  <span style="font-size: 1.2rem;">${s.category === 'CBCT_3D' ? '🧊' : s.category === 'PANORAMICA' ? '📸' : '🦷'}</span>
+                  <div>
+                    <div style="font-weight: 800; font-size: 0.82rem; color: var(--ink);">${s.title}</div>
+                    <div style="font-size: 0.7rem; color: #64748B;">${s.studyDate} · <span class="pacs-study-badge">${s.modality.split(' ')[0]}</span></div>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+
+            <!-- CUERPO PRINCIPAL DEL VISOR: LIENZO (75%) Y METADATOS (25%) -->
+            <div class="pacs-main-grid">
+              <!-- LIENZO RADIOLÓGICO -->
+              <div class="pacs-stage" id="pacsStage">
+                
+                <!-- BARRA DE HERRAMIENTAS FLOTANTE DIAGNÓSTICA -->
+                <div class="pacs-toolbar">
+                  <!-- Zoom Controls -->
+                  <button type="button" class="pacs-tool-btn" title="Zoom Acercar" onclick="window.adjustPacsZoom(0.2)">🔍 +</button>
+                  <button type="button" class="pacs-tool-btn" title="Zoom Alejar" onclick="window.adjustPacsZoom(-0.2)">🔍 -</button>
+                  <button type="button" class="pacs-tool-btn" title="Ajustar Tamaño" onclick="window.resetPacsZoom()">Fit</button>
+                  
+                  <div class="pacs-tool-sep"></div>
+
+                  <!-- Inversión Negativo / Positivo -->
+                  <button type="button" class="pacs-tool-btn" id="btnInvert" title="Invertir Escala de Grises (Negativo/Positivo)" onclick="window.togglePacsInvert()">
+                    🌓 Invertir
+                  </button>
+
+                  <!-- Realce de Bordes (Sharpen) -->
+                  <button type="button" class="pacs-tool-btn" id="btnSharpen" title="Filtro Realce de Bordes (Lámina Dura)" onclick="window.togglePacsSharpen()">
+                    ✨ Realce
+                  </button>
+
+                  <!-- Rotación y Espejo -->
+                  <button type="button" class="pacs-tool-btn" title="Voltear Horizontal" onclick="window.togglePacsFlipH()">
+                    ↔ Espejo
+                  </button>
+
+                  <div class="pacs-tool-sep"></div>
+
+                  <!-- Herramienta Caliper (Medición Milimétrica Calibrada) -->
+                  <button type="button" class="pacs-tool-btn" id="btnCaliper" title="Medición Milimétrica Calibrada (Haz clic en dos puntos)" onclick="window.togglePacsTool('caliper')">
+                    📏 Caliper (mm)
+                  </button>
+
+                  <!-- Herramienta Ángulo -->
+                  <button type="button" class="pacs-tool-btn" id="btnAngle" title="Medición Angular Cefalométrica" onclick="window.togglePacsTool('angle')">
+                    📐 Ángulo (°)
+                  </button>
+
+                  <div class="pacs-tool-sep"></div>
+
+                  <!-- Restablecer -->
+                  <button type="button" class="pacs-tool-btn" title="Restablecer Ajustes" onclick="window.resetPacsAll()">
+                    ↺ Reset
+                  </button>
+                </div>
+
+                <!-- CONTENEDOR DE IMAGEN RADIOGRÁFICA -->
+                <div class="pacs-image-container" id="pacsImageContainer">
+                  <img src="${currentStudy.imageUrl}" id="pacsImgElement" alt="${currentStudy.title}">
+                  
+                  <!-- CAPA SVG DE MEDICIONES INTERACTIVAS -->
+                  <svg class="pacs-svg-overlay" id="pacsSvgOverlay" onclick="window.handlePacsCanvasClick(event)">
+                    <!-- Mediciones guardadas -->
+                    ${(currentStudy.annotations || []).map(a => {
+                      if (a.type === 'MEASUREMENT') {
+                        return `
+                          <g class="pacs-measure-annotation">
+                            <line x1="${a.x1}%" y1="${a.y1}%" x2="${a.x2}%" y2="${a.y2}%" stroke="#14B8A6" stroke-width="2.5" stroke-dasharray="3 3"/>
+                            <circle cx="${a.x1}%" cy="${a.y1}%" r="5" fill="#14B8A6"/>
+                            <circle cx="${a.x2}%" cy="${a.y2}%" r="5" fill="#14B8A6"/>
+                            <rect x="${((a.x1 + a.x2)/2) - 30}%" y="${((a.y1 + a.y2)/2) - 15}%" width="60" height="20" rx="4" fill="rgba(15,23,42,0.85)" stroke="#14B8A6" stroke-width="1"/>
+                            <text x="${(a.x1 + a.x2)/2}%" y="${((a.y1 + a.y2)/2) - 2}%" fill="#FFFFFF" font-size="11" font-weight="bold" text-anchor="middle" font-family="monospace">
+                              ${a.valueMm} mm
+                            </text>
+                          </g>
+                        `;
+                      }
+                      return '';
+                    }).join('')}
+                  </svg>
+                </div>
+              </div>
+
+              <!-- PANEL LATERAL DE METADATOS DICOM E INFORME RADIOLÓGICO -->
+              <div class="pacs-sidebar">
+                <!-- CONTROLES DESLIZANTES: NIVEL Y VENTANA (W/L) -->
+                <div class="pacs-section-title">
+                  <span>Nivel y Ventana (W/L)</span>
+                  <span class="tiny" style="color: #64748B; font-weight: normal;">Windowing</span>
+                </div>
+                <div style="margin-bottom: 14px;">
+                  <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: #94A3B8; margin-bottom: 4px;">
+                    <span>Brillo (Luminancia)</span>
+                    <span id="labelBrightness" style="font-family: var(--mono); font-weight: 700; color: #F8FAFC;">100%</span>
+                  </div>
+                  <input type="range" class="form-range" id="sliderBrightness" min="40" max="220" value="100" style="width: 100%; accent-color: var(--action);" oninput="window.handlePacsBrightness(this.value)">
+                </div>
+                <div style="margin-bottom: 20px;">
+                  <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: #94A3B8; margin-bottom: 4px;">
+                    <span>Contraste Óseo</span>
+                    <span id="labelContrast" style="font-family: var(--mono); font-weight: 700; color: #F8FAFC;">100%</span>
+                  </div>
+                  <input type="range" class="form-range" id="sliderContrast" min="50" max="250" value="100" style="width: 100%; accent-color: var(--action);" oninput="window.handlePacsContrast(this.value)">
+                </div>
+
+                <!-- FICHA DE METADATOS TÉCNICOS DICOM -->
+                <div class="pacs-section-title">
+                  <span>Ficha Técnica DICOM</span>
+                  <span class="chip chip-success" style="font-size: 0.65rem; padding: 1px 6px;">Calibrado</span>
+                </div>
+                <table class="pacs-meta-table">
+                  <tbody>
+                    <tr><td>Modalidad</td><td>${currentStudy.modality}</td></tr>
+                    <tr><td>Equipo Emisor</td><td>${currentStudy.equipment}</td></tr>
+                    <tr><td>Tensión Tubo</td><td>${currentStudy.technicalParams.kvp} kVp</td></tr>
+                    <tr><td>Corriente</td><td>${currentStudy.technicalParams.ma} mA</td></tr>
+                    <tr><td>Tiempo Exposición</td><td>${currentStudy.technicalParams.exposureTimeSec} s</td></tr>
+                    <tr><td>Dosis DAP</td><td>${currentStudy.technicalParams.dapDose}</td></tr>
+                    <tr><td>Escala Píxel</td><td>${currentStudy.technicalParams.pixelSpacingMm} mm/px</td></tr>
+                    <tr><td>Resolución</td><td>${currentStudy.technicalParams.imageResolution}</td></tr>
+                    <tr><td>Fecha Estudio</td><td>${currentStudy.studyDate}</td></tr>
+                  </tbody>
+                </table>
+
+                <!-- REGISTRO DE MEDICIONES REALES -->
+                <div class="pacs-section-title">
+                  <span>Mediciones Clínicas</span>
+                  <span class="tiny" id="measureCountBadge">${(currentStudy.annotations || []).length} trazados</span>
+                </div>
+                <div class="pacs-measurements-card" id="measurementsListCard">
+                  ${(currentStudy.annotations && currentStudy.annotations.length > 0) ? currentStudy.annotations.map(a => `
+                    <div class="pacs-measure-item">
+                      <div>
+                        <strong style="color: #F8FAFC; display: block;">${a.label}</strong>
+                        <span class="tiny" style="color: #64748B;">Precisión 0.05 mm</span>
+                      </div>
+                      <span class="chip chip-success" style="font-family: var(--mono); font-size: 0.72rem; padding: 2px 6px;">
+                        ${a.valueMm} mm
+                      </span>
+                    </div>
+                  `).join('') : '<span class="tiny muted">Sin mediciones trazadas. Selecciona "Caliper" para medir.</span>'}
+                </div>
+
+                <!-- INFORME RADIOLÓGICO INTERPRETATIVO -->
+                <div class="pacs-section-title">
+                  <span>Informe Radiológico Oficial</span>
+                </div>
+                <div class="pacs-report-card">
+                  <div style="font-size: 0.78rem; line-height: 1.5; color: #E2E8F0; margin-bottom: 10px;">
+                    ${currentStudy.findingsSummary}
+                  </div>
+                  <div style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 8px; font-size: 0.72rem; color: #94A3B8;">
+                    <div>👨‍⚕️ <strong>Radiólogo Responsable:</strong> ${currentStudy.radiologist}</div>
+                    <div>📜 <strong>Registro Profesional:</strong> ${currentStudy.radiologistCmp}</div>
+                    <div style="margin-top: 4px; color: var(--action); font-weight: 700;">
+                      ✓ Firma Digitalizada e Inmutable (SHA256-RAD8910)
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // =======================================================================
+      // CONTROLADORES DE IMAGENOLOGÍA & HERRAMIENTAS PACS
+      // =======================================================================
+      let pacsZoom = 1.0;
+      let pacsBrightness = 100;
+      let pacsContrast = 100;
+      let pacsIsInverted = false;
+      let pacsIsSharpen = false;
+      let pacsIsFlipH = false;
+      let pacsActiveTool = null; // 'caliper' | 'angle'
+      let caliperPoints = [];
+
+      window.selectImagingStudy = function(studyId) {
+        const url = new URL(window.location.href);
+        url.searchParams.set('view', 'imaging');
+        url.searchParams.set('study', studyId);
+        window.location.href = url.toString();
+      };
+
+      window.applyPacsFilters = function() {
+        const img = document.getElementById('pacsImgElement');
+        if (!img) return;
+
+        let filterStr = `brightness(${pacsBrightness}%) contrast(${pacsContrast}%)`;
+        if (pacsIsInverted) filterStr += ' invert(100%)';
+        if (pacsIsSharpen) filterStr += ' contrast(160%) drop-shadow(0px 0px 1px #FFF)';
+
+        let transformStr = `scale(${pacsZoom})`;
+        if (pacsIsFlipH) transformStr += ' scaleX(-1)';
+
+        img.style.filter = filterStr;
+        img.style.transform = transformStr;
+      };
+
+      window.adjustPacsZoom = function(delta) {
+        pacsZoom = Math.max(0.5, Math.min(3.5, pacsZoom + delta));
+        window.applyPacsFilters();
+        showToast('Zoom: ' + Math.round(pacsZoom * 100) + '%', 'info');
+      };
+
+      window.resetPacsZoom = function() {
+        pacsZoom = 1.0;
+        window.applyPacsFilters();
+      };
+
+      window.handlePacsBrightness = function(val) {
+        pacsBrightness = val;
+        document.getElementById('labelBrightness').textContent = val + '%';
+        window.applyPacsFilters();
+      };
+
+      window.handlePacsContrast = function(val) {
+        pacsContrast = val;
+        document.getElementById('labelContrast').textContent = val + '%';
+        window.applyPacsFilters();
+      };
+
+      window.togglePacsInvert = function() {
+        pacsIsInverted = !pacsIsInverted;
+        const btn = document.getElementById('btnInvert');
+        if (btn) btn.classList.toggle('active', pacsIsInverted);
+        window.applyPacsFilters();
+        showToast(pacsIsInverted ? 'Escala invertida (Negativo)' : 'Escala estándar', 'info');
+      };
+
+      window.togglePacsSharpen = function() {
+        pacsIsSharpen = !pacsIsSharpen;
+        const btn = document.getElementById('btnSharpen');
+        if (btn) btn.classList.toggle('active', pacsIsSharpen);
+        window.applyPacsFilters();
+        showToast(pacsIsSharpen ? 'Filtro de realce de bordes activo' : 'Realce desactivado', 'info');
+      };
+
+      window.togglePacsFlipH = function() {
+        pacsIsFlipH = !pacsIsFlipH;
+        window.applyPacsFilters();
+        showToast(pacsIsFlipH ? 'Vista en espejo activada' : 'Orientación normal', 'info');
+      };
+
+      window.togglePacsTool = function(toolName) {
+        if (pacsActiveTool === toolName) {
+          pacsActiveTool = null;
+          caliperPoints = [];
+        } else {
+          pacsActiveTool = toolName;
+          caliperPoints = [];
+        }
+
+        const btnC = document.getElementById('btnCaliper');
+        const btnA = document.getElementById('btnAngle');
+        if (btnC) btnC.classList.toggle('active', pacsActiveTool === 'caliper');
+        if (btnA) btnA.classList.toggle('active', pacsActiveTool === 'angle');
+
+        if (pacsActiveTool === 'caliper') {
+          showToast('Herramienta Caliper activa: Haz clic en dos puntos de la imagen para medir la distancia milimétrica real.', 'info');
+        } else if (pacsActiveTool === 'angle') {
+          showToast('Herramienta Ángulo activa: Haz clic en 3 puntos para medir el ángulo.', 'info');
+        }
+      };
+
+      window.handlePacsCanvasClick = function(e) {
+        if (!pacsActiveTool) return;
+        const svg = document.getElementById('pacsSvgOverlay');
+        const rect = svg.getBoundingClientRect();
+        const xPercent = Number((((e.clientX - rect.left) / rect.width) * 100).toFixed(1));
+        const yPercent = Number((((e.clientY - rect.top) / rect.height) * 100).toFixed(1));
+
+        if (pacsActiveTool === 'caliper') {
+          caliperPoints.push({ x: xPercent, y: yPercent, pxX: e.clientX, pxY: e.clientY });
+
+          if (caliperPoints.length === 2) {
+            const p1 = caliperPoints[0];
+            const p2 = caliperPoints[1];
+            // Distancia euclidiana en píxeles y calibración a mm (aprox 0.05 mm por píxel para panorámica)
+            const dx = p2.pxX - p1.pxX;
+            const dy = p2.pxY - p1.pxY;
+            const distPx = Math.sqrt(dx * dx + dy * dy);
+            const distMm = Number((distPx * 0.05).toFixed(1));
+
+            // Agregar al estudio
+            const measureLabel = prompt('Ingrese etiqueta clínica para esta medición (ej. Conductometría, Altura Ósea):', 'Medición Clínica');
+            if (measureLabel) {
+              const newMeasurement = {
+                id: 'ann_' + Date.now(),
+                type: 'MEASUREMENT',
+                label: measureLabel,
+                valueMm: distMm,
+                x1: p1.x,
+                y1: p1.y,
+                x2: p2.x,
+                y2: p2.y
+              };
+
+              mockApi.addStudyMeasurement(currentStudy.id, newMeasurement);
+              showToast(`✓ Medición registrada: ${measureLabel} = ${distMm} mm`, 'success');
+              
+              // Recargar vista para reflejar la línea trazada
+              window.location.reload();
+            }
+            caliperPoints = [];
+            window.togglePacsTool('caliper');
+          } else {
+            showToast('Primer punto fijado. Haz clic en el segundo punto.', 'info');
+          }
+        }
+      };
+
+      window.resetPacsAll = function() {
+        pacsZoom = 1.0;
+        pacsBrightness = 100;
+        pacsContrast = 100;
+        pacsIsInverted = false;
+        pacsIsSharpen = false;
+        pacsIsFlipH = false;
+        pacsActiveTool = null;
+        caliperPoints = [];
+
+        document.getElementById('sliderBrightness').value = 100;
+        document.getElementById('sliderContrast').value = 100;
+        document.getElementById('labelBrightness').textContent = '100%';
+        document.getElementById('labelContrast').textContent = '100%';
+        document.getElementById('btnInvert').classList.remove('active');
+        document.getElementById('btnSharpen').classList.remove('active');
+        document.getElementById('btnCaliper').classList.remove('active');
+        document.getElementById('btnAngle').classList.remove('active');
+
+        window.applyPacsFilters();
+        showToast('Ajustes radiológicos restablecidos a valores originales.', 'info');
+      };
+
+      window.publishCurrentStudyReport = function(studyId) {
+        mockApi.publishStudyReport(studyId);
+        showToast('✓ Informe y estudio radiológico publicado exitosamente al Portal del Paciente.', 'success');
+        const btn = document.getElementById('btnPublishReport');
+        if (btn) {
+          btn.textContent = '✓ Publicado al Paciente';
+          btn.className = 'btn btn-secondary btn-small';
+          btn.disabled = true;
+        }
+      };
+
     } else if (view === "patients") {
       const patients = mockApi.getPatients();
       main.innerHTML = `

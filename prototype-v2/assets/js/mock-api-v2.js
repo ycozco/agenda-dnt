@@ -408,6 +408,43 @@ class MockApiV2 {
     return { evolution: evo, plan: plan };
   }
 
+
+  // =========================================================================
+  // IMAGENOLOGÍA & RADIOLOGÍA CLÍNICA (PACS / DICOM)
+  // =========================================================================
+  getImagingStudies(patientId = "pat_maria") {
+    if (!this.state.imagingStudies) {
+      this.state.imagingStudies = JSON.parse(JSON.stringify(this.getSeed().imagingStudies || []));
+    }
+    return this.state.imagingStudies;
+  }
+
+  getImagingStudyById(studyId) {
+    return this.getImagingStudies().find(s => s.id === studyId) || this.getImagingStudies()[0];
+  }
+
+  addStudyMeasurement(studyId, measurement) {
+    const study = this.getImagingStudyById(studyId);
+    if (study) {
+      if (!study.annotations) study.annotations = [];
+      study.annotations.push(measurement);
+      this.logAuditEvent("MEDICION_RADIOLOGICA", "Medición en " + study.title + ": " + measurement.label + " (" + measurement.valueMm + " mm)");
+      this.saveState();
+    }
+    return study;
+  }
+
+  publishStudyReport(studyId) {
+    const study = this.getImagingStudyById(studyId);
+    if (study) {
+      study.status = "VALIDATED_PUBLISHED";
+      study.publishedAt = new Date().toLocaleString("es-PE");
+      this.logAuditEvent("PUBLICACION_ESTUDIO_PACS", "Informe radiológico " + study.id + " (" + study.title + ") publicado al Portal del Paciente");
+      this.saveState();
+    }
+    return study;
+  }
+
   // =========================================================================
   // AUDITORÍA
   // =========================================================================

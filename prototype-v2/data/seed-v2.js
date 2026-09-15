@@ -2847,5 +2847,174 @@ export const SEED_V2 = {
     }
   ]
 }
+,
+  imagingStudies: [
+  {
+    "id": "rad_01",
+    "patientId": "pat_maria",
+    "title": "Ortopantomografía Panorámica Digital (OPG)",
+    "modality": "DX (Digital Radiography)",
+    "category": "PANORAMICA",
+    "studyDate": "2026-07-10",
+    "time": "09:30 AM",
+    "equipment": "Carestream CS 8100 3D Extraoral",
+    "stationName": "Sede Yanahuara · Quirófano Radiológico",
+    "radiologist": "Dr. Roberto Salas Delgado",
+    "radiologistCmp": "COP 14980 · RNE 0812",
+    "requestedBy": "Dra. Ana Flores Vanesa (COP 18240)",
+    "technicalParams": {
+      "kvp": 73,
+      "ma": 10,
+      "exposureTimeSec": 12.5,
+      "dapDose": "88 mGy·cm²",
+      "pixelSpacingMm": 0.05,
+      "imageResolution": "2400 x 1200 px"
+    },
+    "imageUrl": "../assets/images/reference/dental/panoramic-xray-public-domain.jpg",
+    "status": "VALIDATED_PUBLISHED",
+    "findingsSummary": "Arcadas dentarias completas en adulto con ausencia quirúrgica de terceras molares 18 y 48. Restauración oclusal radiopaca en pieza 16. Área radiolúcida proximal en cara mesial de pieza 21 compatible con caries en esmalte/dentina sin compromiso del conducto pulpar. Pieza 36 con obturación endodóntica densa hasta tercio apical. Pieza 46 con reborde alveolar cicatrizado y altura ósea residual de 11.4 mm respecto al canal mandibular.",
+    "annotations": [
+      {
+        "id": "ann_01",
+        "type": "MEASUREMENT",
+        "label": "Altura Ósea Pieza 46 al Canal",
+        "valueMm": 11.4,
+        "x1": 72,
+        "y1": 65,
+        "x2": 72,
+        "y2": 78
+      },
+      {
+        "id": "ann_02",
+        "type": "MARKER",
+        "label": "Caries Mesial #21",
+        "x": 52,
+        "y": 38
+      }
+    ]
+  },
+  {
+    "id": "rad_02",
+    "patientId": "pat_maria",
+    "title": "Radiografía Periapical Digital — Pieza #21 (Incisivo Central)",
+    "modality": "IO (Intraoral Radiography)",
+    "category": "PERIAPICAL",
+    "studyDate": "2026-07-15",
+    "time": "10:15 AM",
+    "equipment": "Sensor Digital Intraoral Carestream RVG 6200",
+    "stationName": "Sillón 1 (Ortodoncia)",
+    "radiologist": "Dr. Roberto Salas Delgado",
+    "radiologistCmp": "COP 14980 · RNE 0812",
+    "requestedBy": "Dra. Ana Flores Vanesa (COP 18240)",
+    "technicalParams": {
+      "kvp": 65,
+      "ma": 7,
+      "exposureTimeSec": 0.18,
+      "dapDose": "14 mGy·cm²",
+      "pixelSpacingMm": 0.019,
+      "imageResolution": "1600 x 1200 px"
+    },
+    "imageUrl": "../assets/images/reference/dental/panoramic-xray-public-domain.jpg",
+    "status": "VALIDATED_PUBLISHED",
+    "findingsSummary": "Pieza 21: Corona íntegra excepto lesión radiolúcida mesial circunscrita a esmalte y tercio externo de dentina. Cámara pulpar amplia, conducto radicular único permeable. Ápice radicular completamente formado con lámina dura intacta, sin ensanchamiento del ligamento periodontal ni radiolucidez periapical.",
+    "annotations": [
+      {
+        "id": "ann_03",
+        "type": "MEASUREMENT",
+        "label": "Conductometría Estimada",
+        "valueMm": 21.8,
+        "x1": 50,
+        "y1": 20,
+        "x2": 50,
+        "y2": 80
+      }
+    ]
+  },
+  {
+    "id": "rad_03",
+    "patientId": "pat_maria",
+    "title": "Radiografía Periapical Digital — Pieza #36 (Control Endodoncia)",
+    "modality": "IO (Intraoral Radiography)",
+    "category": "PERIAPICAL",
+    "studyDate": "2026-06-05",
+    "time": "11:40 AM",
+    "equipment": "Sensor Digital Intraoral Carestream RVG 6200",
+    "stationName": "Sillón 2 (Cirugía & Endo)",
+    "radiologist": "Dr. Roberto Salas Delgado",
+    "radiologistCmp": "COP 14980",
+    "requestedBy": "Dra. Lucía Paredes Soto (COP 21090)",
+    "technicalParams": {
+      "kvp": 65,
+      "ma": 7,
+      "exposureTimeSec": 0.2,
+      "dapDose": "16 mGy·cm²",
+      "pixelSpacingMm": 0.019,
+      "imageResolution": "1600 x 1200 px"
+    },
+    "imageUrl": "../assets/images/reference/dental/panoramic-xray-public-domain.jpg",
+    "status": "VALIDATED_PUBLISHED",
+    "findingsSummary": "Pieza 36: Control post-tratamiento de conductos. Material obturador radiopaco homogéneo y bien condensado en conductos mesiovestibular, mesiolingual y distal, a 0.8 mm del ápice anatómico. Espacio periodontal apical en fase de remodelación normal.",
+    "annotations": [
+      {
+        "id": "ann_04",
+        "type": "MEASUREMENT",
+        "label": "Distancia al Ápice Distal",
+        "valueMm": 0.8,
+        "x1": 52,
+        "y1": 72,
+        "x2": 52,
+        "y2": 76
+      }
+    ]
+  },
+  {
+    "id": "rad_04",
+    "patientId": "pat_maria",
+    "title": "Tomografía Computarizada Cone Beam 3D (CBCT Mandibular)",
+    "modality": "CT (Cone Beam Computed Tomography)",
+    "category": "CBCT_3D",
+    "studyDate": "2026-07-10",
+    "time": "09:45 AM",
+    "equipment": "Carestream CS 8100 3D (FOV 8x9 cm)",
+    "stationName": "Sede Yanahuara · Unidad Tomográfica 3D",
+    "radiologist": "Dr. Roberto Salas Delgado",
+    "radiologistCmp": "COP 14980 · RNE 0812",
+    "requestedBy": "Dr. Carlos Mendoza Ramos (COP 15420 - Cirugía)",
+    "technicalParams": {
+      "kvp": 84,
+      "ma": 5,
+      "exposureTimeSec": 15,
+      "dapDose": "320 mGy·cm²",
+      "pixelSpacingMm": 0.075,
+      "voxelSize": "75 µm",
+      "imageResolution": "1920 x 1080 px"
+    },
+    "imageUrl": "../assets/images/public/technology/evaluacion-dental-digital-5622234.jpg",
+    "status": "VALIDATED_PUBLISHED",
+    "findingsSummary": "Cortes tomográficos parasagitales en zona edéntula #46. Ancho de cresta ósea vestibular-lingual: 6.8 mm. Altura disponible desde cresta hasta techo del conducto dentario inferior: 11.6 mm. Densidad ósea tipo II según Misch (apta para implante cónico autorroscante de 3.75 x 10 mm con estabilidad primaria prevista > 35 N.cm).",
+    "annotations": [
+      {
+        "id": "ann_05",
+        "type": "MEASUREMENT",
+        "label": "Ancho de Cresta Ósea",
+        "valueMm": 6.8,
+        "x1": 40,
+        "y1": 50,
+        "x2": 60,
+        "y2": 50
+      },
+      {
+        "id": "ann_06",
+        "type": "MEASUREMENT",
+        "label": "Distancia al Techo del Canal Mandibular",
+        "valueMm": 11.6,
+        "x1": 50,
+        "y1": 45,
+        "x2": 50,
+        "y2": 78
+      }
+    ]
+  }
+]
 };
 

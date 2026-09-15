@@ -424,3 +424,247 @@ html.dark .glass-card-luxury {
   gap: 12px;
   flex-wrap: wrap;
 }
+
+/* ==========================================================================
+   VISOR RADIOLÓGICO DIGITAL PACS / DICOM
+   ========================================================================== */
+
+.pacs-workspace {
+  background: #06090F;
+  border: 1px solid #1E293B;
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+  margin-bottom: 24px;
+}
+
+/* Selector de Estudios Radiográficos (Miniaturas Superiores) */
+.pacs-study-tabs {
+  display: flex;
+  gap: 8px;
+  background: #0B121E;
+  padding: 10px 16px;
+  border-bottom: 1px solid #1E293B;
+  overflow-x: auto;
+}
+
+.pacs-study-thumb-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #111A29;
+  border: 1px solid #1E293B;
+  border-radius: 8px;
+  padding: 8px 12px;
+  color: #94A3B8;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.pacs-study-thumb-btn:hover {
+  background: #182338;
+  border-color: #334155;
+  color: #F8FAFC;
+}
+
+.pacs-study-thumb-btn.active {
+  background: rgba(14, 112, 96, 0.25);
+  border-color: var(--action);
+  color: #F8FAFC;
+}
+
+.pacs-study-badge {
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Cuerpo Principal: Lienzo 70% / Metadatos 30% */
+.pacs-main-grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  min-height: 580px;
+}
+
+@media (max-width: 1024px) {
+  .pacs-main-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Lienzo de Visualización Radiológica */
+.pacs-stage {
+  position: relative;
+  background: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  user-select: none;
+}
+
+.pacs-image-container {
+  position: relative;
+  max-width: 100%;
+  max-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.05s ease;
+  transform-origin: center center;
+}
+
+.pacs-image-container img {
+  display: block;
+  max-width: 100%;
+  max-height: 540px;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+/* Capa de Dibujo SVG para Medición Milimétrica y Anotaciones */
+.pacs-svg-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: all;
+  cursor: crosshair;
+}
+
+/* Barra de Herramientas Flotante del Visor */
+.pacs-toolbar {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(15, 23, 42, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 30px;
+  padding: 6px 14px;
+  backdrop-filter: blur(12px);
+  z-index: 10;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  flex-wrap: wrap;
+}
+
+.pacs-tool-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 20px;
+  color: #CBD5E1;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 5px 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.pacs-tool-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+}
+
+.pacs-tool-btn.active {
+  background: var(--action);
+  color: #FFFFFF;
+  border-color: var(--action);
+  box-shadow: 0 0 10px rgba(20, 184, 166, 0.4);
+}
+
+.pacs-tool-sep {
+  width: 1px;
+  height: 18px;
+  background: rgba(255, 255, 255, 0.15);
+  margin: 0 2px;
+}
+
+/* Panel Lateral de Metadatos DICOM e Informe */
+.pacs-sidebar {
+  background: #0B121E;
+  border-left: 1px solid #1E293B;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.pacs-section-title {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 800;
+  color: var(--action);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pacs-meta-table {
+  width: 100%;
+  font-size: 0.8rem;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.pacs-meta-table td {
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.pacs-meta-table td:first-child {
+  color: #64748B;
+  font-weight: 600;
+}
+
+.pacs-meta-table td:last-child {
+  color: #F8FAFC;
+  font-weight: 700;
+  text-align: right;
+  font-family: var(--mono, monospace);
+}
+
+/* Caja de Mediciones Activas */
+.pacs-measurements-card {
+  background: #111A29;
+  border: 1px solid #1E293B;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 20px;
+}
+
+.pacs-measure-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.78rem;
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.pacs-measure-item:last-child {
+  border-bottom: none;
+}
+
+/* Caja de Informe Interpretativo */
+.pacs-report-card {
+  background: rgba(14, 112, 96, 0.1);
+  border: 1px solid rgba(20, 184, 166, 0.3);
+  border-radius: 8px;
+  padding: 14px;
+  margin-bottom: 20px;
+}
