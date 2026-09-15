@@ -445,6 +445,50 @@ class MockApiV2 {
     return study;
   }
 
+
+  // =========================================================================
+  // EXPEDIENTE DOCUMENTAL & PROCESADOR DE PDFS CLÍNICOS
+  // =========================================================================
+  getDocuments(patientId = "pat_maria") {
+    if (!this.state.documents) {
+      this.state.documents = JSON.parse(JSON.stringify(this.getSeed().documents || []));
+    }
+    return this.state.documents;
+  }
+
+  getDocumentById(docId) {
+    return this.getDocuments().find(d => d.id === docId) || this.getDocuments()[0];
+  }
+
+  uploadDocument(docData) {
+    if (!this.state.documents) {
+      this.state.documents = [];
+    }
+    const newDoc = {
+      id: "doc_" + Date.now(),
+      title: docData.title || "Documento Clínico Carga Local",
+      category: docData.category || "INFORME_PDF",
+      date: new Date().toISOString().split('T')[0],
+      time: new Date().toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit' }),
+      author: docData.author || "Usuario Demo (Sesión Activa)",
+      authorCmp: "COP 18240",
+      entity: "Sillar Dental Especialidades",
+      pages: docData.pages || 1,
+      size: docData.size || "1.2 MB",
+      sha256: docData.sha256 || "a8f5c2d" + Math.random().toString(16).substring(2, 10) + "7890abcdef1234567890",
+      status: "VALIDATED_PUBLISHED",
+      hasRadiograph: !!docData.hasRadiograph,
+      studyId: docData.studyId || null,
+      summary: docData.summary || "Documento clínico ingresado y validado en el expediente digital.",
+      notes: "Carga asistida por el Centro de Gestión Documental."
+    };
+
+    this.state.documents.unshift(newDoc);
+    this.logAuditEvent("CARGA_DOCUMENTO_PDF", "Documento ingresado al expediente: " + newDoc.title + " (Hash: " + newDoc.sha256.substring(0, 12) + "...)");
+    this.saveState();
+    return newDoc;
+  }
+
   // =========================================================================
   // AUDITORÍA
   // =========================================================================

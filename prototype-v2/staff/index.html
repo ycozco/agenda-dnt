@@ -718,10 +718,11 @@
           <a href="?view=patient&patient=pat_maria" class="staff-menu-item" id="nav-patient"><span class="nav-num">03</span><span>Odontograma & Evolución</span></a>
           <a href="?view=perio" class="staff-menu-item" id="nav-perio"><span class="nav-num">04</span><span>Periodontograma (6 Sitios)</span></a>
           <a href="?view=imaging" class="staff-menu-item" id="nav-imaging"><span class="nav-num">05</span><span>Radiología & PACS</span></a>
-          <a href="?view=patients" class="staff-menu-item" id="nav-patients"><span class="nav-num">06</span><span>Directorio Pacientes</span></a>
-          <a href="?view=finance" class="staff-menu-item" id="nav-finance"><span class="nav-num">07</span><span>Caja & Cobranza</span></a>
-          <a href="?view=inventory" class="staff-menu-item" id="nav-inventory"><span class="nav-num">08</span><span>Inventario Clínico</span></a>
-          <a href="?view=audit" class="staff-menu-item" id="nav-audit"><span class="nav-num">09</span><span>Auditoría Inmutable</span></a>
+          <a href="?view=documents" class="staff-menu-item" id="nav-documents"><span class="nav-num">06</span><span>Documentos & PDFs</span></a>
+          <a href="?view=patients" class="staff-menu-item" id="nav-patients"><span class="nav-num">07</span><span>Directorio Pacientes</span></a>
+          <a href="?view=finance" class="staff-menu-item" id="nav-finance"><span class="nav-num">08</span><span>Caja & Cobranza</span></a>
+          <a href="?view=inventory" class="staff-menu-item" id="nav-inventory"><span class="nav-num">09</span><span>Inventario Clínico</span></a>
+          <a href="?view=audit" class="staff-menu-item" id="nav-audit"><span class="nav-num">10</span><span>Auditoría Inmutable</span></a>
         </nav>
 
         <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.1);">
@@ -731,6 +732,7 @@
             <a href="?view=patient&patient=pat_maria" class="staff-menu-item" id="nav-odonto-spec" style="font-size: 0.8rem; padding: 7px 12px;"><span>🩺 Odontograma FDI & Evolución</span></a>
             <a href="?view=perio" class="staff-menu-item" id="nav-perio-spec" style="font-size: 0.8rem; padding: 7px 12px;"><span>🦷 Periodontograma (6 Sitios)</span></a>
             <a href="?view=imaging" class="staff-menu-item" id="nav-imaging-spec" style="font-size: 0.8rem; padding: 7px 12px;"><span>📸 Visor Radiológico PACS (W/L)</span></a>
+            <a href="?view=documents" class="staff-menu-item" id="nav-docs-spec" style="font-size: 0.8rem; padding: 7px 12px;"><span>📄 Expediente & Procesador PDF</span></a>
             <a href="?view=users" class="staff-menu-item" id="nav-users" style="font-size: 0.8rem; padding: 7px 12px;"><span>👥 Personal & Roles COP</span></a>
           </div>
         </div>
@@ -2625,6 +2627,340 @@
           btn.className = 'btn btn-secondary btn-small';
           btn.disabled = true;
         }
+      };
+
+    // =========================================================================
+    // VISTA 6: EXPEDIENTE DOCUMENTAL & PROCESADOR DE PDFS CLÍNICOS
+    // =========================================================================
+    } else if (view === "documents") {
+      const docs = mockApi.getDocuments();
+      const currentDocId = params.get("doc") || (docs[0] ? docs[0].id : "doc_rad_pan");
+      const currentDoc = mockApi.getDocumentById(currentDocId) || docs[0];
+      const activeCategory = params.get("category") || "ALL";
+
+      const filteredDocs = activeCategory === "ALL" 
+        ? docs 
+        : docs.filter(d => d.category.includes(activeCategory));
+
+      main.innerHTML = `
+        <div class="staff-container">
+          <!-- CABECERA DE GESTIÓN DOCUMENTAL -->
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <h1 style="margin: 0; font-size: 1.85rem; font-weight: 800; color: var(--ink);">Expediente Documental & Procesador de PDFs</h1>
+                <span class="chip chip-success" style="font-size: 0.75rem; padding: 3px 10px;">PDF/A · SHA-256 Inmutable</span>
+              </div>
+              <p class="muted" style="margin: 4px 0 0; color: var(--ink-soft); font-weight: 500;">
+                Paciente: <strong style="color: var(--ink);">María Quispe Condori</strong> (DNI: 45892104) · Ficha Documental de Historia Clínica (NTS 139-MINSA)
+              </p>
+            </div>
+            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+              <button class="btn btn-secondary btn-small" onclick="document.getElementById('fileUploadInput').click()">
+                📤 Subir Documento Externo
+              </button>
+              <button class="btn btn-primary btn-small" onclick="window.generateOfficialNtsPdf()">
+                📋 Exportar Ficha NTS-188 (PDF)
+              </button>
+              <input type="file" id="fileUploadInput" style="display: none;" accept=".pdf,.png,.jpg,.jpeg" onchange="window.handleFileUpload(event)">
+            </div>
+          </div>
+
+          <!-- LAYOUT DE 2 COLUMNAS: BANDEJA DE DOCUMENTOS (380PX) Y HOJA VISOR (1FR) -->
+          <div class="doc-center-grid">
+            
+            <!-- COLUMNA IZQUIERDA: EXPLORADOR Y FILTROS -->
+            <div class="doc-list-panel">
+              <div class="pacs-section-title">
+                <span>Documentos Clínicos</span>
+                <span class="tiny">${docs.length} archivos</span>
+              </div>
+
+              <!-- FILTROS DE CATEGORÍA -->
+              <div class="doc-filter-pills">
+                <button class="doc-filter-btn ${activeCategory === 'ALL' ? 'active' : ''}" onclick="window.filterDocCategory('ALL')">Todos (${docs.length})</button>
+                <button class="doc-filter-btn ${activeCategory === 'RADIOLOGIA' ? 'active' : ''}" onclick="window.filterDocCategory('RADIOLOGIA')">Radiología</button>
+                <button class="doc-filter-btn ${activeCategory === 'ODONTOGRAMA' ? 'active' : ''}" onclick="window.filterDocCategory('ODONTOGRAMA')">NTS-188</button>
+                <button class="doc-filter-btn ${activeCategory === 'CONSENTIMIENTO' ? 'active' : ''}" onclick="window.filterDocCategory('CONSENTIMIENTO')">Consentimientos</button>
+                <button class="doc-filter-btn ${activeCategory === 'RECETA' ? 'active' : ''}" onclick="window.filterDocCategory('RECETA')">Recetas</button>
+              </div>
+
+              <!-- LISTADO DE DOCUMENTOS -->
+              <div style="max-height: 520px; overflow-y: auto; padding-right: 4px;">
+                ${filteredDocs.map(d => `
+                  <div class="doc-item-card ${d.id === currentDoc.id ? 'active' : ''}" onclick="window.selectClinicalDoc('${d.id}')">
+                    <div class="doc-item-header">
+                      <div class="doc-item-title">${d.title}</div>
+                      <span class="chip ${d.category.includes('RADIOLOGIA') ? 'chip-warning' : d.category.includes('CONSENTIMIENTO') ? 'chip-neutral' : 'chip-success'}" style="font-size: 0.65rem; padding: 2px 6px;">
+                        ${d.category.split('_')[0]}
+                      </span>
+                    </div>
+                    <div class="doc-item-meta">
+                      <span>📅 ${d.date}</span>
+                      <span>📄 ${d.pages} pág(s)</span>
+                      <span>💾 ${d.size}</span>
+                    </div>
+                    <div class="tiny" style="color: var(--ink-soft); margin-top: 4px; font-family: var(--mono); font-size: 0.68rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                      SHA: ${d.sha256.substring(0, 18)}...
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+
+              <!-- ZONA DE CARGA DRAG & DROP -->
+              <div class="doc-dropzone" id="docDropzone" 
+                   ondragover="window.handleDocDragOver(event)" 
+                   ondragleave="window.handleDocDragLeave(event)" 
+                   ondrop="window.handleDocDrop(event)"
+                   onclick="document.getElementById('fileUploadInput').click()">
+                <div style="font-size: 1.8rem; margin-bottom: 6px;">📥</div>
+                <strong style="color: var(--ink); font-size: 0.85rem; display: block;">Arrastra aquí un archivo PDF o Imagen</strong>
+                <span class="tiny" style="color: var(--ink-soft); display: block; margin-top: 2px;">
+                  Informes CERAD, Resocentro, consentimientos escaneados (PDF, JPG, PNG)
+                </span>
+                <span class="chip chip-neutral" style="margin-top: 8px; font-size: 0.68rem;">Cálculo automático de Hash SHA-256</span>
+              </div>
+            </div>
+
+            <!-- COLUMNA DERECHA: HOJA VISOR DE DOCUMENTO CLÍNICO FORMAL -->
+            <div class="doc-viewer-container">
+              <!-- BARRA DE HERRAMIENTAS DEL VISOR -->
+              <div class="doc-viewer-toolbar">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <span style="font-size: 1.2rem;">📄</span>
+                  <div>
+                    <strong style="color: var(--ink); font-size: 0.95rem; display: block;">${currentDoc.title}</strong>
+                    <span class="tiny" style="color: var(--ink-soft);">${currentDoc.entity} · ${currentDoc.pages} página(s)</span>
+                  </div>
+                </div>
+
+                <div style="display: flex; gap: 8px; align-items: center;">
+                  ${currentDoc.hasRadiograph ? `
+                    <a href="?view=imaging&study=${currentDoc.studyId || 'rad_01'}" class="btn btn-primary btn-small" style="background: #0E7060; font-weight: 800; display: flex; align-items: center; gap: 6px;">
+                      ⚡ Analizar en Visor PACS
+                    </a>
+                  ` : ''}
+                  <button class="btn btn-secondary btn-small" onclick="window.printClinicalDoc()">🖨️ Imprimir</button>
+                  <button class="btn btn-secondary btn-small" onclick="window.downloadDocSimulated('${currentDoc.id}')">📥 Descargar</button>
+                </div>
+              </div>
+
+              <!-- HOJA DE PAPEL MÉDICO FORMAL (A4) -->
+              <div class="doc-sheet" id="clinicalDocSheet">
+                
+                <!-- CABECERA INSTITUCIONAL MEMBRETADA -->
+                <div class="doc-sheet-header">
+                  <div>
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+                      <div style="width: 28px; height: 28px; background: #0E7060; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 900; font-size: 0.85rem;">S</div>
+                      <strong style="color: #0E7060; font-size: 1.05rem; letter-spacing: 0.04em;">SILLAR DENTAL ESPECIALIDADES</strong>
+                    </div>
+                    <div class="tiny" style="color: #64748B;">Sede Yanahuara · Av. Ejército 712, Arequipa · RUC 20601234567</div>
+                  </div>
+                  <div style="text-align: right;">
+                    <span class="chip chip-success" style="font-size: 0.7rem; padding: 2px 8px; font-weight: 800;">
+                      ${currentDoc.status === 'INMUTABLE_SIGNED' ? 'DOCUMENTO INMUTABLE' : 'VALIDADO & FIRMADO'}
+                    </span>
+                    <div class="tiny" style="color: #64748B; margin-top: 4px;">Fecha: <strong>${currentDoc.date}</strong> ${currentDoc.time}</div>
+                  </div>
+                </div>
+
+                <!-- TÍTULO DEL DOCUMENTO -->
+                <h2 class="doc-sheet-title">${currentDoc.title}</h2>
+                <div class="tiny" style="color: #64748B; margin-bottom: 16px;">
+                  Expediente Clínico Digital N.º HC-2026-0414 · Emisor: <strong>${currentDoc.entity}</strong>
+                </div>
+
+                <!-- FILIACIÓN DEL PACIENTE -->
+                <div class="doc-sheet-filiation">
+                  <div><strong>Paciente:</strong> María Quispe Condori</div>
+                  <div><strong>Documento Identidad:</strong> DNI 45892104</div>
+                  <div><strong>Fecha Nacimiento:</strong> 14/04/1991 (35 años)</div>
+                  <div><strong>Historia Clínica:</strong> HC-45892104</div>
+                  <div><strong>Profesional Responsable:</strong> ${currentDoc.author}</div>
+                  <div><strong>Colegiatura:</strong> ${currentDoc.authorCmp}</div>
+                </div>
+
+                <!-- CONTENIDO CLÍNICO SEGÚN TIPO DE DOCUMENTO -->
+                <div class="doc-sheet-body">
+                  <h4 style="margin: 0 0 8px; color: #0F172A; font-size: 0.95rem;">Resumen de Evaluación & Hallazgos Diagnósticos:</h4>
+                  <p style="margin-bottom: 14px;">${currentDoc.summary}</p>
+
+                  <!-- CASO 1: SI ES INFORME RADIOLÓGICO CON RADIOGRAFÍA INCRUSTADA -->
+                  ${currentDoc.hasRadiograph ? `
+                    <div class="doc-pacs-bridge-card">
+                      <div>
+                        <div style="font-weight: 800; font-size: 0.92rem; color: #FFFFFF;">
+                          ⚡ Radiografía Panorámica Digital Incrustada (Resolución Nativa 2400 x 1200 px)
+                        </div>
+                        <div class="tiny" style="color: #94A3B8; margin-top: 2px;">
+                          El archivo contiene una ortopantomografía de alta calidad apta para medición milimétrica y diagnóstico por imagen.
+                        </div>
+                      </div>
+                      <a href="?view=imaging&study=rad_01" class="btn btn-primary btn-small" style="background: #14B8A6; color: #090E17; font-weight: 800;">
+                        Abrir en Visor PACS (Caliper & W/L) →
+                      </a>
+                    </div>
+
+                    <div class="doc-embedded-image-box">
+                      <img src="${currentDoc.radiographUrl || '../assets/images/reference/dental/panoramic-xray-public-domain.jpg'}" alt="Radiografía incrustada en el PDF">
+                      <div style="padding: 6px; font-size: 0.72rem; color: #94A3B8; background: #0B121E;">
+                        Vista previa de la radiografía extraída del documento PDF (Haga clic en el botón superior para calibrar medidas)
+                      </div>
+                    </div>
+                  ` : ''}
+
+                  <!-- CASO 2: SI ES RECETA MÉDICA (INCLUIR CÓDIGO QR Y POSOLOGÍA) -->
+                  ${currentDoc.category === 'RECETA_PDF' ? `
+                    <div style="border: 1px solid #CBD5E1; border-radius: 8px; padding: 16px; margin: 16px 0; background: #F8FAFC;">
+                      <h4 style="margin: 0 0 10px; color: #0E7060; font-size: 0.9rem;">Prescripción Farmacológica (Rp.):</h4>
+                      <ol style="margin: 0 0 14px 20px; font-size: 0.85rem; color: #0F172A;">
+                        <li style="margin-bottom: 6px;">
+                          <strong>Amoxicilina 500 mg (Cápsulas)</strong> — Cantidad: 18 cápsulas.<br>
+                          <span style="color: #475569;">Indicación: Tomar 1 cápsula por vía oral cada 8 horas durante 6 días continuos con abundante agua.</span>
+                        </li>
+                        <li>
+                          <strong>Ibuprofeno 400 mg (Tabletas recubiertas)</strong> — Cantidad: 10 tabletas.<br>
+                          <span style="color: #475569;">Indicación: Tomar 1 tableta cada 8 horas sólo en caso de dolor o inflamación moderada, después de los alimentos.</span>
+                        </li>
+                      </ol>
+
+                      <div style="display: flex; align-items: center; gap: 16px; border-top: 1px dashed #CBD5E1; padding-top: 12px;">
+                        <div style="width: 60px; height: 60px; background: #0F172A; color: white; display: flex; align-items: center; justify-content: center; font-size: 0.6rem; font-weight: bold; text-align: center; border-radius: 4px;">
+                          QR CODE<br>MINSA
+                        </div>
+                        <div class="tiny" style="color: #475569;">
+                          <strong>Código Único de Verificación Electrónica:</strong><br>
+                          <code style="font-family: var(--mono); color: #0E7060; font-weight: 700;">QR-REC-2026-0908-45892104</code><br>
+                          Válido en cualquier botica o farmacia autorizada del territorio nacional según Ley N.º 29459.
+                        </div>
+                      </div>
+                    </div>
+                  ` : ''}
+
+                  <!-- CASO 3: SI ES CONSENTIMIENTO INFORMADO -->
+                  ${currentDoc.category === 'CONSENTIMIENTO_PDF' ? `
+                    <div style="background: #F1F5F9; border-left: 4px solid #0E7060; padding: 12px 16px; margin: 16px 0; font-size: 0.82rem; line-height: 1.5;">
+                      <strong>Declaración de Consentimiento del Paciente:</strong><br>
+                      Yo, María Quispe Condori, con DNI 45892104, declaro que se me ha explicado en lenguaje claro y comprensible el procedimiento quirúrgico para la colocación de un implante osteointegrado en lecho #46, sus riesgos inherentes, alternativas terapéuticas y cuidados postoperatorios. Otorgo mi libre consentimiento conforme a la Ley General de Salud N.º 26842.
+                    </div>
+                  ` : ''}
+
+                  <!-- NOTAS ADICIONALES -->
+                  <div style="margin-top: 14px; font-size: 0.78rem; color: #64748B;">
+                    <strong>Observaciones Clínicas:</strong> ${currentDoc.notes}
+                  </div>
+                </div>
+
+                <!-- PIE DE HOJA: FIRMA MÉDICA Y HASH SHA-256 -->
+                <div class="doc-sheet-footer">
+                  <div>
+                    <div style="font-weight: 800; color: #0F172A; margin-bottom: 2px;">CERTIFICACIÓN DE INMUTABILIDAD DIGITAL</div>
+                    <div style="font-family: var(--mono); font-size: 0.7rem; color: #475569;">
+                      HASH SHA-256: <code>${currentDoc.sha256}</code>
+                    </div>
+                    <div class="tiny" style="color: #0E7060; font-weight: 700; margin-top: 2px;">
+                      ✓ Verificado conforme a la Norma Técnica de Salud NTS N.º 139-MINSA
+                    </div>
+                  </div>
+
+                  <div class="doc-signature-box">
+                    <div class="doc-signature-line"></div>
+                    <strong style="font-size: 0.82rem; color: #0F172A; display: block;">${currentDoc.author}</strong>
+                    <span style="font-size: 0.72rem; color: #475569;">Cirujano Dentista · ${currentDoc.authorCmp}</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      `;
+
+      // =======================================================================
+      // CONTROLADORES DEL GESTOR DOCUMENTAL
+      // =======================================================================
+      window.selectClinicalDoc = function(docId) {
+        const url = new URL(window.location.href);
+        url.searchParams.set('view', 'documents');
+        url.searchParams.set('doc', docId);
+        window.location.href = url.toString();
+      };
+
+      window.filterDocCategory = function(catKey) {
+        const url = new URL(window.location.href);
+        url.searchParams.set('view', 'documents');
+        url.searchParams.set('category', catKey);
+        window.location.href = url.toString();
+      };
+
+      window.printClinicalDoc = function() {
+        window.print();
+      };
+
+      window.downloadDocSimulated = function(docId) {
+        const doc = mockApi.getDocumentById(docId);
+        showToast('📥 Descargando archivo formal: ' + doc.title + ' (PDF/A)', 'success');
+      };
+
+      window.handleDocDragOver = function(e) {
+        e.preventDefault();
+        const dropzone = document.getElementById('docDropzone');
+        if (dropzone) dropzone.classList.add('drag-over');
+      };
+
+      window.handleDocDragLeave = function(e) {
+        const dropzone = document.getElementById('docDropzone');
+        if (dropzone) dropzone.classList.remove('drag-over');
+      };
+
+      window.handleDocDrop = function(e) {
+        e.preventDefault();
+        const dropzone = document.getElementById('docDropzone');
+        if (dropzone) dropzone.classList.remove('drag-over');
+
+        const files = e.dataTransfer.files;
+        if (files && files.length > 0) {
+          processSimulatedFile(files[0]);
+        }
+      };
+
+      window.handleFileUpload = function(e) {
+        const files = e.target.files;
+        if (files && files.length > 0) {
+          processSimulatedFile(files[0]);
+        }
+      };
+
+      function processSimulatedFile(file) {
+        const isPdf = file.name.toLowerCase().endsWith('.pdf');
+        const category = isPdf ? 'INFORME_EXTERNO_PDF' : 'FOTOGRAFIA_CLINICA';
+        const simulatedSize = (file.size / (1024 * 1024)).toFixed(1) + ' MB';
+
+        const newDoc = mockApi.uploadDocument({
+          title: file.name.replace(/\.[^/.]+$/, "").toUpperCase() + ' (Carga Externa)',
+          category: category,
+          author: 'Dra. Ana Flores (COP 18240)',
+          size: file.size > 0 ? simulatedSize : '1.8 MB',
+          pages: isPdf ? 2 : 1,
+          summary: 'Documento ingresado externamente al expediente digital. Procesado con verificación de integridad y hash SHA-256.',
+          hasRadiograph: file.name.toLowerCase().includes('pano') || file.name.toLowerCase().includes('radio')
+        });
+
+        showToast('✓ Documento ingresado exitosamente: ' + newDoc.title + ' (SHA-256 generado)', 'success');
+        
+        // Recargar vista para mostrar el documento activo
+        const url = new URL(window.location.href);
+        url.searchParams.set('view', 'documents');
+        url.searchParams.set('doc', newDoc.id);
+        window.location.href = url.toString();
+      }
+
+      window.generateOfficialNtsPdf = function() {
+        const doc = mockApi.getDocumentById('doc_odonto_nts');
+        window.selectClinicalDoc('doc_odonto_nts');
+        showToast('📋 Ficha Odontoestomatológica Oficial NTS 188-MINSA generada y cargada en el visor.', 'success');
       };
 
     } else if (view === "patients") {
