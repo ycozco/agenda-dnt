@@ -262,6 +262,152 @@ class MockApiV2 {
     return this.getInventory();
   }
 
+
+  // =========================================================================
+  // PERIODONTOGRAMA DIGITAL (6 SITIOS POR DIENTE - NTS 188 / AAP 2018)
+  // =========================================================================
+  getPeriodontalExam(patientId = "pat_maria") {
+    if (!this.state.periodontalExam) {
+      this.state.periodontalExam = JSON.parse(JSON.stringify(this.getSeed().periodontalExam || {}));
+    }
+    return this.state.periodontalExam;
+  }
+
+  updatePeriodontalSite(toothFdi, archSide, siteIndex, field, value) {
+    const exam = this.getPeriodontalExam();
+    if (!exam.teeth[toothFdi]) {
+      exam.teeth[toothFdi] = {
+        tooth: toothFdi,
+        mobility: 0,
+        furcation: 0,
+        vestibular: { pd: [2,2,2], gm: [0,0,0], cal: [2,2,2], bop: [false,false,false], sup: [false,false,false], plaque: [false,false,false] },
+        lingual: { pd: [2,2,2], gm: [0,0,0], cal: [2,2,2], bop: [false,false,false], sup: [false,false,false], plaque: [false,false,false] }
+      };
+    }
+    const tooth = exam.teeth[toothFdi];
+    const section = archSide === 'vestibular' ? tooth.vestibular : tooth.lingual;
+    
+    if (field === 'mobility') {
+      tooth.mobility = parseInt(value) || 0;
+    } else if (field === 'furcation') {
+      tooth.furcation = parseInt(value) || 0;
+    } else if (field === 'pd') {
+      section.pd[siteIndex] = Math.max(0, Math.min(15, parseInt(value) || 0));
+      section.cal[siteIndex] = section.pd[siteIndex] + section.gm[siteIndex];
+    } else if (field === 'gm') {
+      section.gm[siteIndex] = Math.max(-10, Math.min(15, parseInt(value) || 0));
+      section.cal[siteIndex] = section.pd[siteIndex] + section.gm[siteIndex];
+    } else if (field === 'bop') {
+      section.bop[siteIndex] = !!value;
+    } else if (field === 'sup') {
+      section.sup[siteIndex] = !!value;
+    } else if (field === 'plaque') {
+      section.plaque[siteIndex] = !!value;
+    }
+
+    // Recalcular métricas de resumen
+    this.recalculatePerioMetrics(exam);
+    this.saveState();
+    return exam;
+  }
+
+  recalculatePerioMetrics(exam) {
+    let totalSites = 0;
+    let bopSites = 0;
+    let plaqueSites = 0;
+    let deepPockets = 0;
+    let severePockets = 0;
+
+    Object.values(exam.teeth).forEach(tooth => {
+      ['vestibular', 'lingual'].forEach(side => {
+        const sec = tooth[side];
+        if (!sec) return;
+        for (let i = 0; i < 3; i++) {
+          if (sec.pd[i] > 0) {
+            totalSites++;
+            if (sec.bop[i]) bopSites++;
+            if (sec.plaque[i]) plaqueSites++;
+            if (sec.pd[i] >= 4) deepPockets++;
+            if (sec.pd[i] >= 6) severePockets++;
+          }
+        }
+      });
+    });
+
+    exam.summary.bopPercent = totalSites > 0 ? Number(((bopSites / totalSites) * 100).toFixed(1)) : 0;
+    exam.summary.plaquePercent = totalSites > 0 ? Number(((plaqueSites / totalSites) * 100).toFixed(1)) : 0;
+    exam.summary.deepPocketsCount = deepPockets;
+    exam.summary.severePocketsCount = severePockets;
+
+    // Estadificación AAP 2018
+    if (severePockets >= 4) {
+      exam.summary.aapStage = "Estadio III (Periodontitis Severa)";
+    } else if (deepPockets >= 4) {
+      exam.summary.aapStage = "Estadio II (Periodontitis Moderada)";
+    } else if (deepPockets >= 1) {
+      exam.summary.aapStage = "Estadio I (Periodontitis Leve)";
+    } else {
+      exam.summary.aapStage = "Salud Gingival / Gingivitis";
+    }
+  }
+
+  // =========================================================================
+  // PLAN DE TRATAMIENTO & ODONTOGRAMA DE EVOLUCIÓN (NTS 188-MINSA)
+  // =========================================================================
+  getTreatmentPlan(patientId = "pat_maria") {
+    if (!this.state.treatmentPlan) {
+      this.state.treatmentPlan = JSON.parse(JSON.stringify(this.getSeed().treatmentPlan || {}));
+    }
+    return this.state.treatmentPlan;
+  }
+
+  getOdontogramEvolution(patientId = "pat_maria") {
+    if (!this.state.odontogramEvolution) {
+      this.state.odontogramEvolution = JSON.parse(JSON.stringify(this.getSeed().odontogramEvolution || {}));
+    }
+    return this.state.odontogramEvolution;
+  }
+
+  // Ejecutar procedimiento en la cita actual y evolucionar pieza dental
+  executeToothProcedure(patientId = "pat_maria", toothNum = 21, procedureName = "Restauración Resina Estética Nanoparticulada") {
+    const evo = this.getOdontogramEvolution(patientId);
+    let toothRecord = evo.evolutionTeeth.find(t => t.number === toothNum);
+    
+    if (toothRecord) {
+      toothRecord.status = "RESTORED";
+      toothRecord.treatment = procedureName;
+      toothRecord.executedDate = new Date().toISOString().split('T')[0];
+      toothRecord.stage = "EVOLUCION_REALIZADA";
+      toothRecord.doctor = "Dra. Ana Flores Vanesa (COP 18240)";
+    } else {
+      toothRecord = {
+        number: toothNum,
+        status: "RESTORED",
+        surface: "Mesial",
+        treatment: procedureName,
+        executedDate: new Date().toISOString().split('T')[0],
+        stage: "EVOLUCION_REALIZADA",
+        doctor: "Dra. Ana Flores Vanesa (COP 18240)"
+      };
+      evo.evolutionTeeth.push(toothRecord);
+    }
+
+    // Actualizar estado en plan de tratamiento
+    const plan = this.getTreatmentPlan(patientId);
+    plan.phases.forEach(phase => {
+      phase.items.forEach(item => {
+        if (item.tooth === toothNum) {
+          item.status = "COMPLETED";
+          item.executedDate = new Date().toISOString().split('T')[0];
+        }
+      });
+    });
+
+    this.logAuditEvent("PROCEDIMIENTO_EVOLUCION", "Procedimiento ejecutado en Pieza #" + toothNum + ": " + procedureName + " (COP 18240)");
+    this.saveState();
+    return { evolution: evo, plan: plan };
+  }
+
   // =========================================================================
   // AUDITORÍA
   // =========================================================================

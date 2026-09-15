@@ -118,3 +118,309 @@ html.dark .glass-card-luxury {
   background: var(--line);
   border-radius: 4px;
 }
+
+/* ==========================================================================
+   PERIODONTOGRAMA DIGITAL & EVOLUCIÓN (NTS 188 / AAP 2018)
+   ========================================================================== */
+
+/* Pestañas de Navegación Clínica */
+.clinical-tab-bar {
+  display: flex;
+  gap: 8px;
+  border-bottom: 2px solid var(--line);
+  margin-bottom: 20px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+
+.clinical-tab-btn {
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+  font-weight: 700;
+  padding: 10px 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.clinical-tab-btn:hover {
+  color: var(--ink);
+  background: var(--action-soft);
+  border-radius: 6px 6px 0 0;
+}
+
+.clinical-tab-btn.active {
+  color: var(--action);
+  border-bottom-color: var(--action);
+}
+
+/* Banner de Métricas Periodontales */
+.perio-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.perio-kpi-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+/* Contenedor de Arcadas Periodontales */
+.perio-arch-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 24px;
+  overflow-x: auto;
+}
+
+.perio-arch-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+/* Grilla Horizontal de 16 Dientes por Arcada */
+.perio-teeth-grid {
+  display: grid;
+  grid-template-columns: repeat(16, minmax(68px, 1fr));
+  gap: 4px;
+  min-width: 1100px;
+}
+
+.perio-tooth-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--surface-dim);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 6px 2px;
+  font-size: 0.75rem;
+  transition: border-color 0.2s ease;
+}
+
+.perio-tooth-col:hover {
+  border-color: var(--action);
+}
+
+.perio-tooth-header {
+  font-weight: 800;
+  font-size: 0.82rem;
+  color: var(--ink);
+  margin-bottom: 4px;
+}
+
+/* Selectores de Movilidad y Furcación */
+.perio-tooth-chips {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 4px;
+}
+
+.perio-mini-chip {
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 1px 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink-soft);
+}
+
+.perio-mini-chip.active {
+  background: var(--action);
+  color: #FFFFFF;
+  border-color: var(--action);
+}
+
+/* Dibujo Gráfico de la Raíz y Corona */
+.perio-tooth-drawing {
+  width: 100%;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin: 2px 0;
+}
+
+.perio-tooth-drawing svg {
+  width: 44px;
+  height: 50px;
+}
+
+/* Filas de Celdas de 3 Sitios (D, M, M) */
+.perio-cell-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  gap: 1px;
+  margin-bottom: 3px;
+  text-align: center;
+}
+
+.perio-row-label {
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: var(--ink-faint);
+  margin-bottom: 1px;
+}
+
+/* Input de Medición Milimétrica */
+.perio-input {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--surface);
+  color: var(--ink);
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.75rem;
+  padding: 3px 0;
+  outline: none;
+  font-family: var(--mono, monospace);
+}
+
+.perio-input:focus {
+  border-color: var(--action);
+  box-shadow: 0 0 0 2px var(--action-soft);
+}
+
+/* Colores de Alerta de Bolsa Periodontal (Profundidad de Sondaje) */
+.perio-input.pocket-normal {
+  color: #10B981;
+}
+
+.perio-input.pocket-warning {
+  background: rgba(245, 158, 11, 0.15) !important;
+  color: #D97706 !important;
+  font-weight: 800;
+}
+
+.perio-input.pocket-danger {
+  background: #EF4444 !important;
+  color: #FFFFFF !important;
+  font-weight: 800;
+  border-color: #DC2626 !important;
+}
+
+/* Celda CAL Calculada */
+.perio-cal-cell {
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 2px 0;
+  border-radius: 3px;
+  background: var(--surface);
+  color: var(--ink-soft);
+}
+
+.perio-cal-cell.cal-loss {
+  color: #DC2626;
+  font-weight: 800;
+}
+
+/* Botones Circulares de Sangrado (BOP) y Supuración (SUP) */
+.perio-toggle-btn {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  cursor: pointer;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.58rem;
+  transition: all 0.15s ease;
+}
+
+.perio-toggle-btn.bop-active {
+  background: #EF4444 !important;
+  border-color: #DC2626 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 0 6px rgba(239, 68, 68, 0.6);
+}
+
+.perio-toggle-btn.sup-active {
+  background: #F59E0B !important;
+  border-color: #D97706 !important;
+  color: #FFFFFF !important;
+}
+
+.perio-toggle-btn.plaque-active {
+  background: #0284C7 !important;
+  border-color: #0369A1 !important;
+  color: #FFFFFF !important;
+}
+
+/* ==========================================================================
+   COMPARADOR SPLIT (INICIAL VS EVOLUCIÓN)
+   ========================================================================== */
+.split-comparator-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 16px;
+}
+
+@media (max-width: 1024px) {
+  .split-comparator-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.split-comparator-panel {
+  background: var(--surface);
+  border: 2px solid var(--line);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.split-comparator-panel.panel-initial {
+  border-color: #EF4444;
+}
+
+.split-comparator-panel.panel-evolution {
+  border-color: var(--action);
+}
+
+.split-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.evolution-action-card {
+  background: var(--action-soft);
+  border: 1px solid var(--action);
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}

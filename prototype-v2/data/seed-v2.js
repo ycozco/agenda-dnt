@@ -472,5 +472,2380 @@ export const SEED_V2 = {
     { id: "aud_02", timestamp: "2026-07-12 11:15", actor: "Recepción (Laura V.)", action: "REGISTRO_PAGO", detail: "Cobro B001-000510 por S/ 350.00 vía POS Niubiz" },
     { id: "aud_03", timestamp: "2026-07-10 09:00", actor: "Dr. Roberto Salas", action: "CARGA_RADIOGRAFIA", detail: "Subida de CBCT Panorámica Digital (doc_rad_01)" }
   ]
+,
+  periodontalExam: {
+  "patientId": "pat_maria",
+  "examDate": "2026-09-08",
+  "practitioner": "Dr. Jorge Benavides Zúñiga (COP 16890)",
+  "specialty": "Periodoncia & Cirugía Plástica Gingival",
+  "summary": {
+    "bopPercent": 18.5,
+    "plaquePercent": 24.2,
+    "deepPocketsCount": 6,
+    "severePocketsCount": 2,
+    "aapStage": "Estadio II (Periodontitis Moderada)",
+    "aapGrade": "Grado B (Tasa de progresión moderada)",
+    "riskClassification": "Riesgo Periodontal Moderado (PRA)",
+    "notes": "Pérdida de soporte en piezas 16, 26 y 36 con bolsas periodontales activas de hasta 6 mm. Se indica fase 1 de RAR (Raspado y Alisado Radicular) por cuadrantes bajo anestesia local."
+  },
+  "teeth": {
+    "11": {
+      "tooth": 11,
+      "mobility": 0,
+      "furcation": 0,
+      "vestibular": {
+        "pd": [
+          2,
+          2,
+          3
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          3
+        ],
+        "bop": [
+          false,
+          false,
+          true
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          true
+        ]
+      },
+      "lingual": {
+        "pd": [
+          2,
+          2,
+          3
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          3
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      }
+    },
+    "12": {
+      "tooth": 12,
+      "mobility": 0,
+      "furcation": 0,
+      "vestibular": {
+        "pd": [
+          2,
+          2,
+          2
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          2
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      },
+      "lingual": {
+        "pd": [
+          2,
+          2,
+          2
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          2
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      }
+    },
+    "13": {
+      "tooth": 13,
+      "mobility": 0,
+      "furcation": 0,
+      "vestibular": {
+        "pd": [
+          2,
+          2,
+          2
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          2
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      },
+      "lingual": {
+        "pd": [
+          2,
+          2,
+          2
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          2
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      }
+    },
+    "14": {
+      "tooth": 14,
+      "mobility": 0,
+      "furcation": 0,
+      "vestibular": {
+        "pd": [
+          2,
+          2,
+          2
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          2
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      },
+      "lingual": {
+        "pd": [
+          2,
+          2,
+          2
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          2
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      }
+    },
+    "15": {
+      "tooth": 15,
+      "mobility": 0,
+      "furcation": 0,
+      "vestibular": {
+        "pd": [
+          2,
+          2,
+          2
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          2
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      },
+      "lingual": {
+        "pd": [
+          2,
+          2,
+          2
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          2
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      }
+    },
+    "16": {
+      "tooth": 16,
+      "mobility": 1,
+      "furcation": 1,
+      "vestibular": {
+        "pd": [
+          5,
+          3,
+          4
+        ],
+        "gm": [
+          1,
+          1,
+          0
+        ],
+        "cal": [
+          6,
+          4,
+          4
+        ],
+        "bop": [
+          true,
+          false,
+          true
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          true,
+          false,
+          true
+        ]
+      },
+      "lingual": {
+        "pd": [
+          6,
+          4,
+          4
+        ],
+        "gm": [
+          2,
+          1,
+          1
+        ],
+        "cal": [
+          8,
+          5,
+          5
+        ],
+        "bop": [
+          true,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      }
+    },
+    "17": {
+      "tooth": 17,
+      "mobility": 0,
+      "furcation": 0,
+      "vestibular": {
+        "pd": [
+          2,
+          2,
+          2
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          2
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      },
+      "lingual": {
+        "pd": [
+          2,
+          2,
+          2
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          2
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      }
+    },
+    "18": {
+      "tooth": 18,
+      "mobility": 0,
+      "furcation": 0,
+      "vestibular": {
+        "pd": [
+          0,
+          0,
+          0
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          0,
+          0,
+          0
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      },
+      "lingual": {
+        "pd": [
+          0,
+          0,
+          0
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          0,
+          0,
+          0
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      }
+    },
+    "21": {
+      "tooth": 21,
+      "mobility": 0,
+      "furcation": 0,
+      "vestibular": {
+        "pd": [
+          2,
+          2,
+          3
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          3
+        ],
+        "bop": [
+          false,
+          false,
+          true
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          true
+        ]
+      },
+      "lingual": {
+        "pd": [
+          2,
+          2,
+          3
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          3
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      }
+    },
+    "22": {
+      "tooth": 22,
+      "mobility": 0,
+      "furcation": 0,
+      "vestibular": {
+        "pd": [
+          2,
+          2,
+          2
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          2
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      },
+      "lingual": {
+        "pd": [
+          2,
+          2,
+          2
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          2
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      }
+    },
+    "23": {
+      "tooth": 23,
+      "mobility": 0,
+      "furcation": 0,
+      "vestibular": {
+        "pd": [
+          2,
+          2,
+          2
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          2
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      },
+      "lingual": {
+        "pd": [
+          2,
+          2,
+          2
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          2
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      }
+    },
+    "24": {
+      "tooth": 24,
+      "mobility": 0,
+      "furcation": 0,
+      "vestibular": {
+        "pd": [
+          2,
+          2,
+          2
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          2
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      },
+      "lingual": {
+        "pd": [
+          2,
+          2,
+          2
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          2
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      }
+    },
+    "25": {
+      "tooth": 25,
+      "mobility": 0,
+      "furcation": 0,
+      "vestibular": {
+        "pd": [
+          2,
+          2,
+          2
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          2
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      },
+      "lingual": {
+        "pd": [
+          2,
+          2,
+          2
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          2
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      }
+    },
+    "26": {
+      "tooth": 26,
+      "mobility": 0,
+      "furcation": 1,
+      "vestibular": {
+        "pd": [
+          4,
+          3,
+          5
+        ],
+        "gm": [
+          1,
+          0,
+          1
+        ],
+        "cal": [
+          5,
+          3,
+          6
+        ],
+        "bop": [
+          true,
+          false,
+          true
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      },
+      "lingual": {
+        "pd": [
+          4,
+          3,
+          5
+        ],
+        "gm": [
+          1,
+          0,
+          1
+        ],
+        "cal": [
+          5,
+          3,
+          6
+        ],
+        "bop": [
+          false,
+          false,
+          true
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          true,
+          false,
+          true
+        ]
+      }
+    },
+    "27": {
+      "tooth": 27,
+      "mobility": 0,
+      "furcation": 0,
+      "vestibular": {
+        "pd": [
+          2,
+          2,
+          2
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          2
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      },
+      "lingual": {
+        "pd": [
+          2,
+          2,
+          2
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          2
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      }
+    },
+    "28": {
+      "tooth": 28,
+      "mobility": 0,
+      "furcation": 0,
+      "vestibular": {
+        "pd": [
+          2,
+          2,
+          2
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          2
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      },
+      "lingual": {
+        "pd": [
+          2,
+          2,
+          2
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          2
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      }
+    },
+    "31": {
+      "tooth": 31,
+      "mobility": 0,
+      "furcation": 0,
+      "vestibular": {
+        "pd": [
+          3,
+          3,
+          3
+        ],
+        "gm": [
+          1,
+          1,
+          1
+        ],
+        "cal": [
+          4,
+          4,
+          4
+        ],
+        "bop": [
+          true,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          true,
+          true,
+          false
+        ]
+      },
+      "lingual": {
+        "pd": [
+          3,
+          2,
+          3
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          3,
+          2,
+          3
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      }
+    },
+    "32": {
+      "tooth": 32,
+      "mobility": 0,
+      "furcation": 0,
+      "vestibular": {
+        "pd": [
+          2,
+          2,
+          2
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          2
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      },
+      "lingual": {
+        "pd": [
+          2,
+          2,
+          2
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          2
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      }
+    },
+    "33": {
+      "tooth": 33,
+      "mobility": 0,
+      "furcation": 0,
+      "vestibular": {
+        "pd": [
+          2,
+          2,
+          2
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          2
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      },
+      "lingual": {
+        "pd": [
+          2,
+          2,
+          2
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          2
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      }
+    },
+    "34": {
+      "tooth": 34,
+      "mobility": 0,
+      "furcation": 0,
+      "vestibular": {
+        "pd": [
+          2,
+          2,
+          2
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          2
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      },
+      "lingual": {
+        "pd": [
+          2,
+          2,
+          2
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          2
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      }
+    },
+    "35": {
+      "tooth": 35,
+      "mobility": 0,
+      "furcation": 0,
+      "vestibular": {
+        "pd": [
+          2,
+          2,
+          2
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          2
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      },
+      "lingual": {
+        "pd": [
+          2,
+          2,
+          2
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          2
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      }
+    },
+    "36": {
+      "tooth": 36,
+      "mobility": 1,
+      "furcation": 2,
+      "vestibular": {
+        "pd": [
+          6,
+          4,
+          5
+        ],
+        "gm": [
+          2,
+          1,
+          1
+        ],
+        "cal": [
+          8,
+          5,
+          6
+        ],
+        "bop": [
+          true,
+          true,
+          true
+        ],
+        "sup": [
+          true,
+          false,
+          false
+        ],
+        "plaque": [
+          true,
+          true,
+          true
+        ]
+      },
+      "lingual": {
+        "pd": [
+          5,
+          3,
+          4
+        ],
+        "gm": [
+          1,
+          0,
+          1
+        ],
+        "cal": [
+          6,
+          3,
+          5
+        ],
+        "bop": [
+          true,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      }
+    },
+    "37": {
+      "tooth": 37,
+      "mobility": 0,
+      "furcation": 0,
+      "vestibular": {
+        "pd": [
+          2,
+          2,
+          2
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          2
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      },
+      "lingual": {
+        "pd": [
+          2,
+          2,
+          2
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          2
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      }
+    },
+    "38": {
+      "tooth": 38,
+      "mobility": 0,
+      "furcation": 0,
+      "vestibular": {
+        "pd": [
+          2,
+          2,
+          2
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          2
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      },
+      "lingual": {
+        "pd": [
+          2,
+          2,
+          2
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          2
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      }
+    },
+    "41": {
+      "tooth": 41,
+      "mobility": 0,
+      "furcation": 0,
+      "vestibular": {
+        "pd": [
+          3,
+          3,
+          3
+        ],
+        "gm": [
+          1,
+          1,
+          1
+        ],
+        "cal": [
+          4,
+          4,
+          4
+        ],
+        "bop": [
+          true,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          true,
+          true,
+          false
+        ]
+      },
+      "lingual": {
+        "pd": [
+          3,
+          2,
+          3
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          3,
+          2,
+          3
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      }
+    },
+    "42": {
+      "tooth": 42,
+      "mobility": 0,
+      "furcation": 0,
+      "vestibular": {
+        "pd": [
+          2,
+          2,
+          2
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          2
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      },
+      "lingual": {
+        "pd": [
+          2,
+          2,
+          2
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          2
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      }
+    },
+    "43": {
+      "tooth": 43,
+      "mobility": 0,
+      "furcation": 0,
+      "vestibular": {
+        "pd": [
+          2,
+          2,
+          2
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          2
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      },
+      "lingual": {
+        "pd": [
+          2,
+          2,
+          2
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          2
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      }
+    },
+    "44": {
+      "tooth": 44,
+      "mobility": 0,
+      "furcation": 0,
+      "vestibular": {
+        "pd": [
+          2,
+          2,
+          2
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          2
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      },
+      "lingual": {
+        "pd": [
+          2,
+          2,
+          2
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          2
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      }
+    },
+    "45": {
+      "tooth": 45,
+      "mobility": 0,
+      "furcation": 0,
+      "vestibular": {
+        "pd": [
+          2,
+          2,
+          2
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          2
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      },
+      "lingual": {
+        "pd": [
+          2,
+          2,
+          2
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          2
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      }
+    },
+    "46": {
+      "tooth": 46,
+      "mobility": 0,
+      "furcation": 0,
+      "vestibular": {
+        "pd": [
+          0,
+          0,
+          0
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          0,
+          0,
+          0
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      },
+      "lingual": {
+        "pd": [
+          0,
+          0,
+          0
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          0,
+          0,
+          0
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      }
+    },
+    "47": {
+      "tooth": 47,
+      "mobility": 0,
+      "furcation": 0,
+      "vestibular": {
+        "pd": [
+          2,
+          2,
+          2
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          2
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      },
+      "lingual": {
+        "pd": [
+          2,
+          2,
+          2
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          2,
+          2,
+          2
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      }
+    },
+    "48": {
+      "tooth": 48,
+      "mobility": 0,
+      "furcation": 0,
+      "vestibular": {
+        "pd": [
+          0,
+          0,
+          0
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          0,
+          0,
+          0
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      },
+      "lingual": {
+        "pd": [
+          0,
+          0,
+          0
+        ],
+        "gm": [
+          0,
+          0,
+          0
+        ],
+        "cal": [
+          0,
+          0,
+          0
+        ],
+        "bop": [
+          false,
+          false,
+          false
+        ],
+        "sup": [
+          false,
+          false,
+          false
+        ],
+        "plaque": [
+          false,
+          false,
+          false
+        ]
+      }
+    }
+  }
+},
+  treatmentPlan: {
+  "patientId": "pat_maria",
+  "planName": "Plan Integral Ortodoncia & Rehabilitación NTS-188",
+  "version": 2,
+  "status": "IN_PROGRESS",
+  "totalCost": 3850,
+  "balanceDue": 1400,
+  "phases": [
+    {
+      "id": "phase_1",
+      "name": "Fase 1: Terapia Básica Periodontal & Higiene",
+      "status": "COMPLETED",
+      "items": [
+        {
+          "id": "tx_p1_01",
+          "tooth": "Boca completa",
+          "procedure": "Profilaxis Ultrasónica & Detartraje",
+          "fee": 150,
+          "status": "COMPLETED",
+          "executedDate": "2026-07-10",
+          "doctor": "Dr. Jorge Benavides (COP 16890)"
+        },
+        {
+          "id": "tx_p1_02",
+          "tooth": "Cuadrante 1 y 3",
+          "procedure": "Raspado y Alisado Radicular (RAR)",
+          "fee": 300,
+          "status": "COMPLETED",
+          "executedDate": "2026-07-15",
+          "doctor": "Dr. Jorge Benavides (COP 16890)"
+        }
+      ]
+    },
+    {
+      "id": "phase_2",
+      "name": "Fase 2: Operatoria & Endodoncia Restauradora",
+      "status": "IN_PROGRESS",
+      "items": [
+        {
+          "id": "tx_p2_01",
+          "tooth": 16,
+          "procedure": "Restauración Resina Fotocurable Estética (Cara Oclusal)",
+          "fee": 180,
+          "status": "COMPLETED",
+          "executedDate": "2025-11-20",
+          "doctor": "Dra. Ana Flores (COP 18240)"
+        },
+        {
+          "id": "tx_p2_02",
+          "tooth": 36,
+          "procedure": "Endodoncia Multirradicular + Sellado Termoplástico",
+          "fee": 450,
+          "status": "COMPLETED",
+          "executedDate": "2026-06-05",
+          "doctor": "Dra. Lucía Paredes (COP 21090)"
+        },
+        {
+          "id": "tx_p2_03",
+          "tooth": 21,
+          "procedure": "Restauración Estética con Resina Directa Nanoparticulada",
+          "fee": 220,
+          "status": "PENDING",
+          "executedDate": null,
+          "doctor": "Dra. Ana Flores (COP 18240)",
+          "actionKey": "EXECUTE_RESIN_21"
+        }
+      ]
+    },
+    {
+      "id": "phase_3",
+      "name": "Fase 3: Ortodoncia Activa & Alineación",
+      "status": "IN_PROGRESS",
+      "items": [
+        {
+          "id": "tx_p3_01",
+          "tooth": "Ambas Arcadas",
+          "procedure": "Tratamiento con Alineadores Invisibles (Set 1-12)",
+          "fee": 2100,
+          "status": "IN_PROGRESS",
+          "executedDate": "2026-07-28",
+          "doctor": "Dra. Ana Flores (COP 18240)"
+        }
+      ]
+    },
+    {
+      "id": "phase_4",
+      "name": "Fase 4: Implantología & Rehabilitación Final",
+      "status": "SCHEDULED",
+      "items": [
+        {
+          "id": "tx_p4_01",
+          "tooth": 46,
+          "procedure": "Colocación de Implante de Titanio Neodent Helix GM",
+          "fee": 1500,
+          "status": "PENDING",
+          "executedDate": null,
+          "doctor": "Dr. Carlos Mendoza (COP 15420)"
+        }
+      ]
+    }
+  ]
+},
+  odontogramEvolution: {
+  "patientId": "pat_maria",
+  "lastUpdated": "2026-09-08",
+  "activePhase": "Fase 2 de 4",
+  "evolutionTeeth": [
+    {
+      "number": 18,
+      "status": "ABSENT",
+      "surface": "Total",
+      "note": "Ausente confirmado",
+      "stage": "INICIAL"
+    },
+    {
+      "number": 16,
+      "status": "RESTORED",
+      "surface": "Oclusal",
+      "treatment": "Restauración Resina Oclusal",
+      "executedDate": "2025-11-20",
+      "stage": "EVOLUCION"
+    },
+    {
+      "number": 21,
+      "status": "CARIES_DRAFT",
+      "surface": "Mesial",
+      "finding": "Caries incipiente mesial",
+      "treatmentProposed": "Resina compuesta",
+      "stage": "PENDIENTE"
+    },
+    {
+      "number": 36,
+      "status": "ENDODONTIC",
+      "surface": "Conducto",
+      "treatment": "Endodoncia multirradicular completada",
+      "executedDate": "2026-06-05",
+      "stage": "EVOLUCION"
+    },
+    {
+      "number": 46,
+      "status": "IMPLANT_PLANNED",
+      "surface": "Raíz",
+      "finding": "Planificado para Fase 4",
+      "treatmentProposed": "Implante Titanio",
+      "stage": "PLANIFICADO"
+    }
+  ]
+}
 };
 
