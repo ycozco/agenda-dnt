@@ -490,6 +490,195 @@ class MockApiV2 {
   }
 
 
+
+  // =========================================================================
+  // GESTIÓN INTEGRAL DE PLANES DE TRATAMIENTO & PRESUPUESTOS DINÁMICOS
+  // =========================================================================
+  getProcedureCatalog() {
+    return [
+      { code: "PR-01", name: "Profilaxis Ultrasónica & Detartraje Supra/Subgingival", category: "Periodoncia", fee: 150, defaultDoctor: "Dr. Jorge Benavides" },
+      { code: "PR-02", name: "Raspado y Alisado Radicular (RAR) por Cuadrante", category: "Periodoncia", fee: 150, defaultDoctor: "Dr. Jorge Benavides" },
+      { code: "OP-01", name: "Restauración Resina Fotocurable Estética Nanoparticulada", category: "Operatoria", fee: 180, defaultDoctor: "Dra. Ana Flores" },
+      { code: "OP-02", name: "Incrustación Estética Inlay/Onlay en Disilicato E-Max", category: "Rehabilitación", fee: 550, defaultDoctor: "Dr. Diego Torres" },
+      { code: "EN-01", name: "Endodoncia Multirradicular + Obturación Termoplástica", category: "Endodoncia", fee: 450, defaultDoctor: "Dra. Lucía Paredes" },
+      { code: "OR-01", name: "Tratamiento Integral con Alineadores Invisibles 3D (Set 12)", category: "Ortodoncia", fee: 2100, defaultDoctor: "Dra. Ana Flores" },
+      { code: "OR-02", name: "Brackets Metálicos Prescripción Roth 0.022 (Caso Completo)", category: "Ortodoncia", fee: 1600, defaultDoctor: "Dra. Ana Flores" },
+      { code: "CX-01", name: "Exodoncia Compleja de Tercera Molar Incluida", category: "Cirugía", fee: 350, defaultDoctor: "Dr. Carlos Mendoza" },
+      { code: "IM-01", name: "Colocación de Implante de Titanio Neodent Helix GM", category: "Implantología", fee: 1500, defaultDoctor: "Dr. Carlos Mendoza" },
+      { code: "RH-01", name: "Corona sobre Implante en Zirconio Monolítico CAD/CAM", category: "Rehabilitación", fee: 850, defaultDoctor: "Dr. Diego Torres" },
+      { code: "CL-01", name: "Blanqueamiento Dental LED Clínico en Consultorio", category: "Estética", fee: 380, defaultDoctor: "Dra. Ana Flores" }
+    ];
+  }
+
+  addTreatmentPlanItem(patientId, phaseId, item) {
+    const plan = this.getTreatmentPlan(patientId);
+    const phase = plan.phases.find(p => p.id === phaseId);
+    if (phase) {
+      const newItem = {
+        id: "tx_" + Date.now().toString(36),
+        tooth: item.tooth || "General",
+        procedure: item.procedure,
+        fee: parseFloat(item.fee) || 0,
+        discountPercent: parseFloat(item.discountPercent) || 0,
+        epsCoveragePercent: parseFloat(item.epsCoveragePercent) || 0,
+        netFee: item.netFee || parseFloat(item.fee) || 0,
+        status: "PENDING",
+        executedDate: null,
+        doctor: item.doctor || "Dra. Ana Flores (COP 18240)"
+      };
+      phase.items.push(newItem);
+      this.recalculatePlanTotals(plan);
+      this.logAuditEvent("PLAN_ITEM_AGREGADO", "Procedimiento agregado a " + phase.name + ": " + newItem.procedure + " (S/ " + newItem.fee + ")");
+      this.saveState();
+      return newItem;
+    }
+    return null;
+  }
+
+  removeTreatmentPlanItem(patientId, phaseId, itemId) {
+    const plan = this.getTreatmentPlan(patientId);
+    const phase = plan.phases.find(p => p.id === phaseId);
+    if (phase) {
+      const idx = phase.items.findIndex(it => it.id === itemId);
+      if (idx !== -1) {
+        const removed = phase.items.splice(idx, 1)[0];
+        this.recalculatePlanTotals(plan);
+        this.logAuditEvent("PLAN_ITEM_ELIMINADO", "Procedimiento eliminado: " + removed.procedure);
+        this.saveState();
+        return true;
+      }
+    }
+    return false;
+  }
+
+  recalculatePlanTotals(plan) {
+    let grossTotal = 0;
+    let netTotal = 0;
+    let totalDiscount = 0;
+    let totalEps = 0;
+
+    plan.phases.forEach(ph => {
+      ph.items.forEach(it => {
+        const fee = it.fee || 0;
+        grossTotal += fee;
+        const discountAmt = fee * ((it.discountPercent || 0) / 100);
+        const epsAmt = fee * ((it.epsCoveragePercent || 0) / 100);
+        const net = Math.max(0, fee - discountAmt - epsAmt);
+        it.netFee = net;
+        totalDiscount += discountAmt;
+        totalEps += epsAmt;
+        netTotal += net;
+      });
+    });
+
+    plan.grossTotal = grossTotal;
+    plan.totalDiscount = totalDiscount;
+    plan.totalEpsCoverage = totalEps;
+    plan.totalCost = netTotal;
+    // Ajustar saldo pendiente restando pagos ya realizados
+    const paidAmount = plan.paidAmount || (3850 - 1400); // 2450 por defecto
+    plan.balanceDue = Math.max(0, netTotal - paidAmount);
+  }
+
+  acceptTreatmentPlan(patientId, acceptanceData = {}) {
+    const plan = this.getTreatmentPlan(patientId);
+    plan.status = "ACCEPTED";
+    plan.acceptedAt = new Date().toISOString().slice(0, 19).replace('T', ' ');
+    plan.acceptanceRecord = {
+      patientName: acceptanceData.patientName || "María Quispe Condori",
+      documentNumber: acceptanceData.documentNumber || "45892104",
+      signatureHash: acceptanceData.signatureHash || ("SIG-" + Math.random().toString(36).substring(2, 10).toUpperCase()),
+      signatureDataUrl: acceptanceData.signatureDataUrl || null,
+      financingModality: acceptanceData.financingModality || "CUOTAS_3",
+      treatingDoctor: "Dra. Ana Flores Vanesa (COP 18240)",
+      acceptedTerms: true,
+      timestamp: new Date().toISOString()
+    };
+    this.logAuditEvent("PLAN_TRATAMIENTO_ACEPTADO", "Plan '" + plan.planName + "' ACEPTADO formalmente por paciente (Firma: " + plan.acceptanceRecord.signatureHash + ")");
+    this.saveState();
+    return plan;
+  }
+
+  generatePaymentScheduleFromPlan(patientId, modality = "CUOTAS_3") {
+    const plan = this.getTreatmentPlan(patientId);
+    const balance = plan.balanceDue > 0 ? plan.balanceDue : plan.totalCost;
+    let installments = [];
+
+    if (modality === "CONTADO") {
+      const discounted = balance * 0.90; // 10% pronto pago
+      installments.push({
+        id: "pay_gen_" + Date.now() + "_1",
+        concept: "Pago Único al Contado — Descuento 10% Pronto Pago (" + plan.planName + ")",
+        amount: parseFloat(discounted.toFixed(2)),
+        dueDate: new Date().toISOString().slice(0, 10),
+        status: "PENDING",
+        paidDate: null,
+        receiptNumber: null,
+        method: "Efectivo / Yape / Tarjeta"
+      });
+    } else if (modality === "CUOTAS_3") {
+      const cuota1 = parseFloat((balance * 0.40).toFixed(2));
+      const cuota2 = parseFloat((balance * 0.30).toFixed(2));
+      const cuota3 = parseFloat((balance - cuota1 - cuota2).toFixed(2));
+      const d = new Date();
+      installments = [
+        {
+          id: "pay_gen_" + Date.now() + "_1",
+          concept: "Cuota 01/03 (40% Inicial) — " + plan.planName,
+          amount: cuota1,
+          dueDate: new Date(d.getFullYear(), d.getMonth(), d.getDate() + 2).toISOString().slice(0, 10),
+          status: "PENDING",
+          paidDate: null,
+          method: "POS Niubiz"
+        },
+        {
+          id: "pay_gen_" + Date.now() + "_2",
+          concept: "Cuota 02/03 (30% Avance) — " + plan.planName,
+          amount: cuota2,
+          dueDate: new Date(d.getFullYear(), d.getMonth() + 1, d.getDate()).toISOString().slice(0, 10),
+          status: "PENDING",
+          paidDate: null,
+          method: "Transferencia / Yape"
+        },
+        {
+          id: "pay_gen_" + Date.now() + "_3",
+          concept: "Cuota 03/03 (30% Final) — " + plan.planName,
+          amount: cuota3,
+          dueDate: new Date(d.getFullYear(), d.getMonth() + 2, d.getDate()).toISOString().slice(0, 10),
+          status: "PENDING",
+          paidDate: null,
+          method: "POS Niubiz"
+        }
+      ];
+    } else if (modality === "CUOTAS_6") {
+      const monthly = parseFloat((balance / 6).toFixed(2));
+      const d = new Date();
+      for (let i = 1; i <= 6; i++) {
+        const amt = (i === 6) ? parseFloat((balance - monthly * 5).toFixed(2)) : monthly;
+        installments.push({
+          id: "pay_gen_" + Date.now() + "_" + i,
+          concept: "Cuota 0" + i + "/06 (Financiamiento Dental) — " + plan.planName,
+          amount: amt,
+          dueDate: new Date(d.getFullYear(), d.getMonth() + (i - 1), d.getDate() + 5).toISOString().slice(0, 10),
+          status: i === 1 ? "PENDING" : "SCHEDULED",
+          paidDate: null,
+          method: "Débito Automático / POS"
+        });
+      }
+    }
+
+    if (!this.state.payments) {
+      this.state.payments = JSON.parse(JSON.stringify(this.getSeed().payments || []));
+    }
+    installments.forEach(inst => {
+      this.state.payments.push(inst);
+    });
+
+    this.logAuditEvent("CRONOGRAMA_PAGOS_CREADO", "Cronograma de " + installments.length + " cuotas generado desde Plan de Tratamiento (" + modality + ")");
+    this.saveState();
+    return installments;
+  }
+
   // =========================================================================
   // SALA DE ESPERA, TRIAJE & CONTROL DE FLUJO EN RECEPCIÓN
   // =========================================================================

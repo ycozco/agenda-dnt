@@ -1348,3 +1348,312 @@ html.dark .glass-card-luxury {
   border-color: #0E7060;
   box-shadow: 0 0 0 2px rgba(14, 112, 96, 0.15);
 }
+
+/* ==========================================================================
+   PLANES DE TRATAMIENTO, PRESUPUESTOS DINÁMICOS & SIMULADOR DE FINANCIAMIENTO
+   ========================================================================== */
+.tx-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+.tx-plan-summary-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.tx-plan-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tx-plan-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #0F172A;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tx-plan-meta {
+  font-size: 0.85rem;
+  color: #64748B;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.tx-plan-totals-box {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 14px 20px;
+}
+
+.tx-total-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.tx-total-lbl {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #64748B;
+  letter-spacing: 0.04em;
+}
+
+.tx-total-val {
+  font-family: var(--display, inherit);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #0F172A;
+  line-height: 1.2;
+}
+
+.tx-total-val.action {
+  color: #0E7060;
+}
+
+.tx-total-val.due {
+  color: #D97706;
+}
+
+/* Fases de Tratamiento */
+.tx-phase-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+  margin-bottom: 16px;
+  transition: border-color 0.2s ease;
+}
+
+.tx-phase-card:hover {
+  border-color: #CBD5E1;
+}
+
+.tx-phase-header {
+  padding: 16px 20px;
+  background: #F8FAFC;
+  border-bottom: 1px solid #E2E8F0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.tx-phase-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tx-phase-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #1E293B;
+  margin: 0;
+}
+
+.tx-phase-subtotal {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #334155;
+}
+
+.tx-phase-body {
+  padding: 0;
+}
+
+.tx-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.tx-table th {
+  background: #FFFFFF;
+  padding: 10px 18px;
+  text-align: left;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  color: #64748B;
+  font-weight: 700;
+  border-bottom: 1px solid #E2E8F0;
+  letter-spacing: 0.03em;
+}
+
+.tx-table td {
+  padding: 12px 18px;
+  border-bottom: 1px solid #F1F5F9;
+  color: #334155;
+}
+
+.tx-table tr:last-child td {
+  border-bottom: none;
+}
+
+.tx-table tr:hover td {
+  background: #F8FAFC;
+}
+
+.tx-tooth-badge {
+  font-family: var(--mono, monospace);
+  font-weight: 700;
+  color: #0369A1;
+  background: #E0F2FE;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+}
+
+/* Simulador de Financiamiento */
+.tx-finance-section {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 14px;
+  padding: 22px 24px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+}
+
+.tx-finance-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.tx-finance-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.tx-finance-card {
+  border: 2px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 16px 18px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #F8FAFC;
+  position: relative;
+}
+
+.tx-finance-card:hover {
+  border-color: #0E7060;
+  background: #FFFFFF;
+}
+
+.tx-finance-card.active {
+  border-color: #0E7060;
+  background: #F0FDF4;
+  box-shadow: 0 4px 12px rgba(14, 112, 96, 0.12);
+}
+
+.tx-finance-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0F172A;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tx-finance-monthly {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #0E7060;
+}
+
+.tx-finance-detail {
+  font-size: 0.78rem;
+  color: #64748B;
+  line-height: 1.4;
+}
+
+/* Canvas de Firma Digital */
+.tx-signature-section {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 14px;
+  padding: 22px 24px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+}
+
+.tx-signature-box {
+  border: 2px dashed #CBD5E1;
+  border-radius: 10px;
+  background: #F8FAFC;
+  height: 160px;
+  position: relative;
+  overflow: hidden;
+  margin: 14px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tx-canvas {
+  width: 100%;
+  height: 100%;
+  cursor: crosshair;
+}
+
+.tx-signature-guide {
+  position: absolute;
+  bottom: 25px;
+  left: 20px;
+  right: 20px;
+  border-bottom: 1px solid #CBD5E1;
+  pointer-events: none;
+}
+
+.tx-signature-placeholder {
+  position: absolute;
+  font-size: 0.85rem;
+  color: #94A3B8;
+  pointer-events: none;
+}
+
+/* Hoja de Impresión A4 Formal */
+@media print {
+  .staff-sidebar, .staff-topbar, .tx-actions-bar, .btn, .main-header {
+    display: none !important;
+  }
+  .staff-content, .staff-shell, .staff-container {
+    padding: 0 !important;
+    margin: 0 !important;
+    background: white !important;
+  }
+  .tx-phase-card, .tx-plan-summary-card, .tx-finance-section, .tx-signature-section {
+    border: 1px solid #000 !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+  }
+}

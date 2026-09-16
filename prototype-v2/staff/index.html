@@ -716,19 +716,21 @@
           <a href="?view=dashboard" class="staff-menu-item" id="nav-dashboard"><span class="nav-num">01</span><span>Dashboard General</span></a>
           <a href="?view=agenda" class="staff-menu-item" id="nav-agenda"><span class="nav-num">02</span><span>Agenda & Sillones</span></a>
           <a href="?view=waiting_room" class="staff-menu-item" id="nav-waiting_room"><span class="nav-num">03</span><span>Control Sala de Espera</span></a>
-          <a href="?view=patient&patient=pat_maria" class="staff-menu-item" id="nav-patient"><span class="nav-num">04</span><span>Odontograma & Evolución</span></a>
-          <a href="?view=perio" class="staff-menu-item" id="nav-perio"><span class="nav-num">05</span><span>Periodontograma (6 Sitios)</span></a>
-          <a href="?view=imaging" class="staff-menu-item" id="nav-imaging"><span class="nav-num">06</span><span>Radiología & PACS</span></a>
-          <a href="?view=documents" class="staff-menu-item" id="nav-documents"><span class="nav-num">07</span><span>Documentos & PDFs</span></a>
-          <a href="?view=patients" class="staff-menu-item" id="nav-patients"><span class="nav-num">08</span><span>Directorio Pacientes</span></a>
-          <a href="?view=finance" class="staff-menu-item" id="nav-finance"><span class="nav-num">09</span><span>Caja & Cobranza</span></a>
-          <a href="?view=inventory" class="staff-menu-item" id="nav-inventory"><span class="nav-num">10</span><span>Inventario Clínico</span></a>
-          <a href="?view=audit" class="staff-menu-item" id="nav-audit"><span class="nav-num">11</span><span>Auditoría Inmutable</span></a>
+          <a href="?view=treatment_plans" class="staff-menu-item" id="nav-treatment_plans"><span class="nav-num">04</span><span>Planes & Presupuestos</span></a>
+          <a href="?view=patient&patient=pat_maria" class="staff-menu-item" id="nav-patient"><span class="nav-num">05</span><span>Odontograma & Evolución</span></a>
+          <a href="?view=perio" class="staff-menu-item" id="nav-perio"><span class="nav-num">06</span><span>Periodontograma (6 Sitios)</span></a>
+          <a href="?view=imaging" class="staff-menu-item" id="nav-imaging"><span class="nav-num">07</span><span>Radiología & PACS</span></a>
+          <a href="?view=documents" class="staff-menu-item" id="nav-documents"><span class="nav-num">08</span><span>Documentos & PDFs</span></a>
+          <a href="?view=patients" class="staff-menu-item" id="nav-patients"><span class="nav-num">09</span><span>Directorio Pacientes</span></a>
+          <a href="?view=finance" class="staff-menu-item" id="nav-finance"><span class="nav-num">10</span><span>Caja & Cobranza</span></a>
+          <a href="?view=inventory" class="staff-menu-item" id="nav-inventory"><span class="nav-num">11</span><span>Inventario Clínico</span></a>
+          <a href="?view=audit" class="staff-menu-item" id="nav-audit"><span class="nav-num">12</span><span>Auditoría Inmutable</span></a>
         </nav>
 
         <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.1);">
           <div style="font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255,255,255,0.5); margin-bottom: 8px; padding-left: 8px;">Vistas Especializadas</div>
           <div style="display: grid; gap: 4px;">
+            <a href="?view=treatment_plans" class="staff-menu-item" id="nav-treatment_plans-spec" style="font-size: 0.8rem; padding: 7px 12px;"><span>💼 Planes & Presupuestos</span></a>
             <a href="?view=waiting_room" class="staff-menu-item" id="nav-waiting_room-spec" style="font-size: 0.8rem; padding: 7px 12px;"><span>🛋️ Sala de Espera & Triaje</span></a>
             <a href="?view=agenda" class="staff-menu-item" id="nav-agenda-spec" style="font-size: 0.8rem; padding: 7px 12px;"><span>📅 Agenda Semanal & Multi-Sillón</span></a>
             <a href="?view=patient&patient=pat_maria" class="staff-menu-item" id="nav-odonto-spec" style="font-size: 0.8rem; padding: 7px 12px;"><span>🩺 Odontograma FDI & Evolución</span></a>
@@ -996,6 +998,7 @@
     import { mockApi } from '../assets/js/mock-api-v2.js';
     import { showToast } from '../assets/js/components.js';
     import { renderWaitingRoom } from './waiting-room.js';
+    import { renderTreatmentPlans } from './treatment-plans.js';
 
     // 1. LEER VISTA DE PARÁMETROS URL
     const params = new URLSearchParams(window.location.search);
@@ -1312,7 +1315,14 @@
       renderWaitingRoom(main, mockApi, showToast);
 
     // =========================================================================
-    // VISTA 4: ODONTOGRAMA FDI & EVOLUCIÓN (NTS 188-MINSA) / PERIODONTOGRAMA (6 SITIOS)
+    // VISTA 4: PLANES DE TRATAMIENTO POR FASES & PRESUPUESTOS DINÁMICOS
+    // =========================================================================
+    } else if (view === "treatment_plans") {
+      const patientId = params.get("patient") || "pat_maria";
+      renderTreatmentPlans(main, mockApi, showToast, patientId);
+
+    // =========================================================================
+    // VISTA 5: ODONTOGRAMA FDI & EVOLUCIÓN (NTS 188-MINSA) / PERIODONTOGRAMA (6 SITIOS)
     // =========================================================================
     } else if (view === "patient" || view === "perio") {
       const activeTab = view === "perio" ? "perio" : (params.get("tab") || "evolution");
@@ -2010,6 +2020,10 @@
         document.getElementById('tabContentPlan').style.display = tabKey === 'plan' ? 'block' : 'none';
         document.getElementById('tabContentPerio').style.display = tabKey === 'perio' ? 'block' : 'none';
 
+        if (tabKey === 'plan') {
+          renderTreatmentPlans(document.getElementById('tabContentPlan'), mockApi, showToast, 'pat_maria');
+        }
+
         // Activar botón
         const btnIndex = tabKey === 'evolution' ? 0 : tabKey === 'initial' ? 1 : tabKey === 'split' ? 2 : tabKey === 'plan' ? 3 : 4;
         const btns = document.querySelectorAll('.clinical-tab-btn');
@@ -2253,6 +2267,10 @@
       window.removeToothFindingDirect = function(toothNum) {
         applyConditionToTooth(toothNum, 'HEALTHY');
       };
+
+      if (activeTab === 'plan') {
+        renderTreatmentPlans(document.getElementById('tabContentPlan'), mockApi, showToast, 'pat_maria');
+      }
     // =========================================================================
     // VISTA 5: VISOR RADIOLÓGICO DIGITAL PACS / DICOM
     // =========================================================================
