@@ -298,45 +298,75 @@
           </div>
         </div>
 
-        <!-- SECCIÓN 2: DOCUMENTOS & RADIOGRAFÍAS -->
-        <div id="tabDocumentos" style="margin-bottom: 36px;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px;">
-            <h3 style="font-size: 1.35rem; margin: 0;">Mis Estudios Clínicos & Radiografías</h3>
-            <span class="tiny muted">Archivos protegidos conforme a la NTS N.° 188-MINSA</span>
+        <!-- SECCIÓN 2: CITAS PROGRAMADAS & CONFIRMACIÓN DIGITAL -->
+        <div id="tabCitas" style="display: none; margin-bottom: 36px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
+            <div>
+              <h3 style="font-size: 1.45rem; margin: 0; font-family: var(--display); color: var(--ink);">Mis Citas Odontológicas</h3>
+              <span class="tiny muted">Agenda en tiempo real con confirmación digital directa a Sede Yanahuara</span>
+            </div>
+            <a href="/public/reservar.html" class="btn btn-primary btn-small" style="font-weight: 700;">
+              + Agendar Nueva Cita
+            </a>
           </div>
 
-          <div class="doc-preview-grid">
-            <div class="doc-card">
-              <div>
-                <span class="chip chip-neutral" style="font-size: 0.72rem; margin-bottom: 8px;">Tomografía 3D</span>
-                <h4 style="font-size: 1.05rem; margin: 0 0 6px;">Radiografía Panorámica Digital</h4>
-                <p class="tiny muted" style="margin-bottom: 16px;">Capturada el 10/07/2026 en equipo Green CT de baja radiación.</p>
-              </div>
-              <a href="viewers/radiografia.html" class="btn btn-secondary btn-small" style="width: 100%;">
-                Visualizar Estudio CBCT
-              </a>
-            </div>
+          <div id="patientAppointmentsList" style="display: grid; gap: 16px;">
+            <!-- Contenido dinámico generado por renderAppointments() -->
+          </div>
+        </div>
 
-            <div class="doc-card">
-              <div>
-                <span class="chip chip-success" style="font-size: 0.72rem; margin-bottom: 8px;">Documento PDF</span>
-                <h4 style="font-size: 1.05rem; margin: 0 0 6px;">Informe Clínico & Plan de Tratamiento</h4>
-                <p class="tiny muted" style="margin-bottom: 16px;">Emitido por Dra. Ana Flores Vanesa (COP 18240).</p>
-              </div>
-              <a href="viewers/pdf.html" class="btn btn-secondary btn-small" style="width: 100%;">
-                Descargar Informe Clínico
-              </a>
+        <!-- SECCIÓN 3: DOCUMENTOS, RADIOGRAFÍAS & RECETAS -->
+        <div id="tabDocumentos" style="display: none; margin-bottom: 36px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; flex-wrap: wrap; gap: 12px;">
+            <div>
+              <h3 style="font-size: 1.45rem; margin: 0; font-family: var(--display); color: var(--ink);">Mis Estudios Clínicos, Recetas & Radiografías</h3>
+              <span class="tiny muted">Archivos protegidos con verificación de integridad SHA-256 (NTS N.° 139-MINSA)</span>
             </div>
+            <span class="chip chip-success" style="font-size: 0.72rem;">Expediente Digitalizado</span>
+          </div>
 
-            <div class="doc-card">
-              <div>
-                <span class="chip chip-neutral" style="font-size: 0.72rem; margin-bottom: 8px;">Receta Médica</span>
-                <h4 style="font-size: 1.05rem; margin: 0 0 6px;">Receta & Pautas de Higiene</h4>
-                <p class="tiny muted" style="margin-bottom: 16px;">Indicaciones de uso y limpieza de placas termoformadas.</p>
-              </div>
-              <a href="viewers/pdf.html" class="btn btn-secondary btn-small" style="width: 100%;">
-                Descargar Receta Médica
-              </a>
+          <div class="doc-preview-grid" id="patientDocumentsList">
+            <!-- Contenido dinámico generado por renderDocuments() -->
+          </div>
+        </div>
+
+        <!-- SECCIÓN 4: ESTADO DE CUENTA & PLAN DE PAGOS -->
+        <div id="tabPagos" style="display: none; margin-bottom: 36px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
+            <div>
+              <h3 style="font-size: 1.45rem; margin: 0; font-family: var(--display); color: var(--ink);">Estado de Cuenta & Plan de Cuotas</h3>
+              <span class="tiny muted">Registro de boletas electrónicas B001 y cuotas de financiamiento</span>
+            </div>
+            <span class="chip chip-success" style="font-size: 0.72rem; font-weight: 800;">Convenio Alínea Care</span>
+          </div>
+
+          <div class="patient-kpi-grid" style="margin-bottom: 24px;">
+            <div class="patient-kpi-card">
+              <span class="eyebrow">Presupuesto Total</span>
+              <div class="patient-kpi-val" style="color: var(--ink);">S/ 3,850.00</div>
+              <span class="tiny">4 Fases aprobadas</span>
+            </div>
+            <div class="patient-kpi-card">
+              <span class="eyebrow">Total Abonado</span>
+              <div class="patient-kpi-val" style="color: var(--action);">S/ 950.00</div>
+              <span class="tiny">Cuotas 01 y 02 pagadas</span>
+            </div>
+            <div class="patient-kpi-card">
+              <span class="eyebrow">Saldo Pendiente</span>
+              <div class="patient-kpi-val" style="color: var(--amber);">S/ 2,900.00</div>
+              <span class="tiny">Financiado en cuotas</span>
+            </div>
+            <div class="patient-kpi-card">
+              <span class="eyebrow">Próximo Vencimiento</span>
+              <div class="patient-kpi-val" style="font-size: 1.35rem; color: var(--ink); margin-top: 8px;">15/08/2026</div>
+              <span class="tiny">Cuota 03/06 (S/ 350.00)</span>
+            </div>
+          </div>
+
+          <div class="card" style="background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 22px;">
+            <h4 style="margin: 0 0 16px; font-size: 1.1rem; color: var(--ink);">Cronograma Oficial de Pagos</h4>
+            <div id="patientPaymentsTableContainer">
+              <!-- Contenido dinámico generado por renderPayments() -->
             </div>
           </div>
         </div>
@@ -345,8 +375,11 @@
     </main>
   </div>
 
-  <script>
-    // 1. Selector y Persistencia de Tema Homogéneo
+  <script type="module">
+    import { mockApi } from '../assets/js/mock-api-v2.js';
+    import { showToast } from '../assets/js/components.js';
+
+    // 1. Selector y Persistencia de Tema
     window.toggleTheme = function() {
       const cur = document.documentElement.getAttribute('data-theme') || 'light';
       const next = cur === 'light' ? 'dark' : 'light';
@@ -361,12 +394,195 @@
     const themeLabel = document.getElementById('themeLabel');
     if (themeLabel) themeLabel.textContent = savedTheme === 'dark' ? 'Oscuro' : 'Claro';
 
-    // 2. Control de Pestañas del Paciente
+    // 2. Renderizado de Citas Programadas
+    function renderAppointments() {
+      const container = document.getElementById('patientAppointmentsList');
+      if (!container) return;
+
+      const allAppts = mockApi.getAllAppointments();
+      // Filtrar citas de la paciente María Quispe o reservas recientes
+      const myAppts = allAppts.filter(a => (a.patientName && a.patientName.toLowerCase().includes('maría')) || a.patientId === 'pat_maria' || !a.patientId);
+
+      if (myAppts.length === 0) {
+        container.innerHTML = `
+          <div style="background: var(--surface); border: 1px dashed var(--line); border-radius: var(--radius-md); padding: 36px 20px; text-align: center;">
+            <span style="font-size: 2.2rem; display: block; margin-bottom: 10px;">📅</span>
+            <strong style="color: var(--ink); font-size: 1.1rem; display: block;">No tienes citas próximas programadas</strong>
+            <p class="muted" style="max-width: 400px; margin: 6px auto 18px; font-size: 0.9rem;">
+              Puedes agendar tu próximo control de ortodoncia o evaluación clínica en 4 sencillos pasos.
+            </p>
+            <a href="/public/reservar.html" class="btn btn-primary btn-small">+ Agendar Cita Ahora</a>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = myAppts.map(apt => {
+        const isConfirmed = apt.status === 'CONFIRMED';
+        const isWaiting = apt.status === 'IN_WAITING_ROOM';
+        const isInChair = apt.status === 'IN_CHAIR';
+        const isCompleted = apt.status === 'COMPLETED';
+
+        let statusBadge = `<span class="chip chip-neutral" style="font-size: 0.72rem;">⏳ Pendiente Confirmación</span>`;
+        if (isConfirmed) statusBadge = `<span class="chip chip-success" style="font-size: 0.72rem; font-weight: 800;">✅ Asistencia Confirmada</span>`;
+        if (isWaiting) statusBadge = `<span class="chip chip-warning" style="font-size: 0.72rem; font-weight: 800;">🛋️ En Sala de Espera</span>`;
+        if (isInChair) statusBadge = `<span class="chip chip-primary" style="font-size: 0.72rem; font-weight: 800; background: #0E7060; color: white;">🩺 En Sillón Dental</span>`;
+        if (isCompleted) statusBadge = `<span class="chip chip-neutral" style="font-size: 0.72rem;">✓ Atención Concluida</span>`;
+
+        return `
+          <div class="card" style="background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 22px; box-shadow: var(--shadow-sm); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+            <div style="flex: 1; min-width: 260px;">
+              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                ${statusBadge}
+                <span class="tiny" style="font-family: var(--mono); color: var(--action); font-weight: 700;">${apt.id.toUpperCase()}</span>
+                <span class="tiny muted">· Sede Yanahuara</span>
+              </div>
+              <strong style="font-size: 1.15rem; color: var(--ink); display: block; margin-bottom: 4px;">${apt.reason || 'Consulta Odontológica'}</strong>
+              <div style="font-size: 0.88rem; color: var(--ink-soft); display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 4px;">
+                <span>🗓️ <strong>${apt.date}</strong></span>
+                <span>⏱️ <strong>${apt.time}</strong> (${apt.duration || '45 min'})</span>
+                <span>👨‍⚕️ ${apt.practitioner || 'Dra. Ana Flores (COP 18240)'}</span>
+                <span>💺 <strong style="color: var(--action);">${apt.chair || 'Sillón 1 (Ortodoncia)'}</strong></span>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+              ${!isConfirmed && !isCompleted ? `
+                <button class="btn btn-primary btn-small" onclick="window.confirmMyAppointment('${apt.id}')" style="background: #0E7060; font-weight: 700;">
+                  ✓ Confirmar Asistencia
+                </button>
+              ` : ''}
+              <button class="btn btn-secondary btn-small" onclick="window.rescheduleMyAppointment('${apt.id}')">
+                🔄 Reprogramar
+              </button>
+              <a href="https://wa.me/51954123456?text=Hola%2C%20quisiera%20consultar%20sobre%20mi%20cita%20${apt.id}" target="_blank" class="btn btn-secondary btn-small" style="color: #16A34A; border-color: #86EFAC;">
+                💬 WhatsApp
+              </a>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // 3. Renderizado de Documentos
+    function renderDocuments() {
+      const container = document.getElementById('patientDocumentsList');
+      if (!container) return;
+
+      const docs = mockApi.getDocuments('pat_maria');
+      container.innerHTML = docs.map(d => {
+        const isPhysical = d.status === 'PHYSICAL_SIGNED_DIGITIZED';
+        const isRad = d.category.includes('RADIOLOGIA');
+        return `
+          <div class="doc-card">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; gap: 6px;">
+                <span class="chip ${isPhysical ? 'chip-success' : isRad ? 'chip-warning' : 'chip-neutral'}" style="font-size: 0.68rem; font-weight: 800;">
+                  ${isPhysical ? '📱 FÍSICO SELLADO COP' : d.category.split('_')[0]}
+                </span>
+                <span class="tiny muted" style="font-family: var(--mono);">${d.date}</span>
+              </div>
+              <h4 style="font-size: 1.05rem; margin: 0 0 6px; color: var(--ink);">${d.title}</h4>
+              <p class="tiny muted" style="margin-bottom: 14px; line-height: 1.4;">${d.summary}</p>
+              <div class="tiny" style="font-family: var(--mono); color: var(--ink-faint); margin-bottom: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                SHA: ${d.sha256.substring(0, 16)}...
+              </div>
+            </div>
+            <div>
+              <a href="/staff/index.html?view=documents&doc=${d.id}" class="btn btn-secondary btn-small" style="width: 100%; text-align: center; text-decoration: none; font-weight: 700;">
+                ${isPhysical ? '🔍 Ver Foto con Sello COP' : isRad ? '⚡ Analizar en Visor PACS' : '📄 Descargar Documento'}
+              </a>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // 4. Renderizado de Pagos
+    function renderPayments() {
+      const container = document.getElementById('patientPaymentsTableContainer');
+      if (!container) return;
+
+      const payments = mockApi.getPayments();
+      container.innerHTML = `
+        <div class="table-responsive">
+          <table class="data-table" style="width: 100%; border-collapse: collapse;">
+            <thead>
+              <tr style="border-bottom: 2px solid var(--line); text-align: left; font-size: 0.82rem; color: var(--ink-soft);">
+                <th style="padding: 10px 8px;">Concepto de Tratamiento</th>
+                <th style="padding: 10px 8px;">Vencimiento</th>
+                <th style="padding: 10px 8px;">Monto</th>
+                <th style="padding: 10px 8px;">Comprobante</th>
+                <th style="padding: 10px 8px;">Método</th>
+                <th style="padding: 10px 8px;">Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${payments.map(p => `
+                <tr style="border-bottom: 1px solid var(--line-soft); font-size: 0.86rem;">
+                  <td style="padding: 12px 8px;"><strong>${p.concept}</strong></td>
+                  <td style="padding: 12px 8px; font-family: var(--mono); font-size: 0.8rem;">${p.dueDate}</td>
+                  <td style="padding: 12px 8px; font-weight: 700; color: var(--ink);">S/ ${p.amount.toFixed(2)}</td>
+                  <td style="padding: 12px 8px; font-family: var(--mono); font-size: 0.8rem;">${p.receiptNumber || '—'}</td>
+                  <td style="padding: 12px 8px;"><span class="chip chip-neutral" style="font-size: 0.7rem; padding: 2px 6px;">${p.method || 'Pendiente'}</span></td>
+                  <td style="padding: 12px 8px;">
+                    <span class="chip ${p.status === 'PAID' ? 'chip-success' : 'chip-warning'}" style="font-size: 0.72rem; padding: 2px 8px; font-weight: 800;">
+                      ${p.status === 'PAID' ? '✓ PAGADO' : 'PENDIENTE'}
+                    </span>
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    // 5. Control de Pestañas Interactivas
     window.switchTab = function(tabName) {
       document.querySelectorAll('.patient-menu-item').forEach(el => el.classList.remove('active'));
-      const target = event?.currentTarget;
-      if (target) target.classList.add('active');
+      const activeLink = document.querySelector(`.patient-menu a[href="#${tabName}"]`);
+      if (activeLink) activeLink.classList.add('active');
+
+      const tabs = ['Resumen', 'Citas', 'Documentos', 'Pagos'];
+      tabs.forEach(t => {
+        const el = document.getElementById('tab' + t);
+        if (el) el.style.display = 'none';
+      });
+
+      const currentCapitalized = tabName.charAt(0).toUpperCase() + tabName.slice(1);
+      const targetEl = document.getElementById('tab' + currentCapitalized);
+      if (targetEl) targetEl.style.display = 'block';
+
+      if (tabName === 'citas') renderAppointments();
+      if (tabName === 'documentos') renderDocuments();
+      if (tabName === 'pagos') renderPayments();
+
+      window.location.hash = tabName;
     };
+
+    // Acciones de Cita del Paciente
+    window.confirmMyAppointment = function(aptId) {
+      mockApi.updateAppointmentStatus(aptId, 'CONFIRMED');
+      showToast('✓ Asistencia confirmada con éxito. Te esperamos en Sede Yanahuara.', 'success');
+      renderAppointments();
+    };
+
+    window.rescheduleMyAppointment = function(aptId) {
+      const newDate = prompt('Ingresa la nueva fecha deseada (AAAA-MM-DD):', '2026-09-15');
+      if (newDate) {
+        const newTime = prompt('Ingresa la nueva hora (ej. 10:30 AM):', '10:30 AM');
+        if (newTime) {
+          mockApi.updateAppointment(aptId, { date: newDate, time: newTime, status: 'SCHEDULED' });
+          showToast('✓ Solicitud de reprogramación registrada para el ' + newDate + ' a las ' + newTime, 'info');
+          renderAppointments();
+        }
+      }
+    };
+
+    // 6. Carga Inicial: Respetar Hash de URL o Abrir Resumen
+    const initialTab = window.location.hash ? window.location.hash.replace('#', '') : 'resumen';
+    window.switchTab(initialTab);
   </script>
 </body>
 </html>

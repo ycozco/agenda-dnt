@@ -719,7 +719,10 @@ h3 {
     </div>
   </footer>
 
-  <script>
+  <script type="module">
+    import { mockApi } from '../assets/js/mock-api-v2.js';
+    import { showToast } from '../assets/js/components.js';
+
     const savedTheme = localStorage.getItem('sd-theme') || 'light';
     document.documentElement.setAttribute('data-theme', savedTheme);
     const themeLabel = document.getElementById('themeLabel');
@@ -962,22 +965,92 @@ h3 {
     };
 
     window.confirmBooking = function() {
-      const name = document.getElementById("patientName")?.value || "Paciente";
+      const name = document.getElementById("patientName")?.value.trim() || "María Quispe Condori";
+      const phone = document.getElementById("patientPhone")?.value.trim() || "954 123 456";
+      const email = document.getElementById("patientEmail")?.value.trim() || "maria.quispe@email.com";
+
+      let chairId = "chair_1";
+      let chairName = "Sillón 1 (Ortodoncia 3D)";
+      if (selectedDoctor.id === "carpio" || selectedTreatment.id === "implantes" || selectedTreatment.id === "endodoncia") {
+        chairId = "chair_2";
+        chairName = "Sillón 2 (Cirugía & Implantes)";
+      } else if (selectedDoctor.id === "mendoza" || selectedTreatment.id === "ninos" || selectedTreatment.id === "limpieza") {
+        chairId = "chair_3";
+        chairName = "Sillón 3 (Pediatría & Preventiva)";
+      }
+
+      // 1. Guardar la cita directamente en el motor central de estado (sessionStorage)
+      const newApt = mockApi.createAppointment({
+        date: selectedDate,
+        time: selectedTime,
+        duration: selectedTreatment.time || "45 min",
+        durationMinutes: parseInt(selectedTreatment.time, 10) || 45,
+        patientId: "pat_maria",
+        patientName: name,
+        phone: phone,
+        email: email,
+        practitioner: selectedDoctor.name,
+        practitionerCop: selectedDoctor.cop,
+        chairId: chairId,
+        chair: chairName,
+        reason: selectedTreatment.name + " (Reserva Web Online)",
+        specialty: selectedDoctor.specialty,
+        status: "CONFIRMED",
+        confirmedAt: new Date().toISOString(),
+        notes: `Reserva autogestionada desde portal web. Paciente: ${name} · Tel: ${phone} · Tratamiento: ${selectedTreatment.name}.`
+      });
+
+      // 2. Renderizar pantalla de confirmación con datos reales y enlaces de navegación
       const card = document.getElementById("bookingCard");
       card.innerHTML = `
         <div style="text-align: center; padding: 40px 20px;">
           <div style="width: 72px; height: 72px; background: var(--action-soft); color: var(--action); border-radius: 50%; display: grid; place-items: center; font-size: 2.2rem; margin: 0 auto 20px;">
             🎉
           </div>
-          <h2 style="font-family: var(--display); font-size: 1.8rem; margin: 0 0 10px; color: var(--ink);">
-            ¡Cita Confirmada con Éxito!
+          <span class="chip chip-success" style="font-size: 0.78rem; padding: 4px 12px; margin-bottom: 12px; font-weight: 800;">
+            ✓ REGISTRO EN AGENDA & SALA DE ESPERA COMPLETADO
+          </span>
+          <h2 style="font-family: var(--display); font-size: 1.8rem; margin: 10px 0 10px; color: var(--ink);">
+            ¡Cita Médica Confirmada con Éxito!
           </h2>
-          <p class="muted" style="max-width: 500px; margin: 0 auto 24px; font-size: 1.05rem;">
-            Gracias, <strong>${name}</strong>. Hemos agendado tu evaluación de <strong>${selectedTreatment.name}</strong> para el <strong>${selectedDate} a las ${selectedTime}</strong> con <strong>${selectedDoctor.name}</strong>.
+          <p class="muted" style="max-width: 520px; margin: 0 auto 20px; font-size: 1.05rem;">
+            Gracias, <strong>${name}</strong>. Tu cita para <strong>${selectedTreatment.name}</strong> ha sido agendada con la <strong>${selectedDoctor.name}</strong> en <strong>${chairName}</strong>.
           </p>
-          <div style="display: flex; justify-content: center; gap: 14px;">
-            <a href="index.html" class="btn btn-secondary">Volver al Inicio</a>
-            <a href="/patient/index.html" class="btn btn-primary">Ver en Portal Paciente</a>
+
+          <div style="background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 20px; max-width: 520px; margin: 0 auto 28px; text-align: left;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; font-size: 0.88rem;">
+              <div>
+                <span class="tiny muted" style="display: block;">Código de Cita:</span>
+                <code style="font-family: var(--mono); color: var(--action); font-weight: 700; font-size: 0.95rem;">${newApt.id.toUpperCase()}</code>
+              </div>
+              <div>
+                <span class="tiny muted" style="display: block;">Fecha y Hora:</span>
+                <strong style="color: var(--ink);">${selectedDate} · ${selectedTime}</strong>
+              </div>
+              <div>
+                <span class="tiny muted" style="display: block;">Especialista Colegiado:</span>
+                <strong style="color: var(--ink);">${selectedDoctor.name}</strong>
+              </div>
+              <div>
+                <span class="tiny muted" style="display: block;">Sillón Asignado:</span>
+                <strong style="color: var(--action);">${chairName}</strong>
+              </div>
+            </div>
+            <div style="border-top: 1px dashed var(--line); margin-top: 14px; padding-top: 12px; font-size: 0.76rem; color: var(--ink-soft);">
+              💬 Confirmación enviada al WhatsApp <strong>+51 ${phone}</strong>. Puedes visualizarla en tu Portal o presentarte directamente en Sede Yanahuara.
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
+            <a href="/patient/index.html#citas" class="btn btn-primary" style="font-weight: 700;">
+              📱 Ver en mi Portal de Paciente
+            </a>
+            <a href="/staff/index.html?view=agenda" class="btn btn-secondary" style="font-weight: 700;">
+              📅 Ver en Agenda Médica (Staff)
+            </a>
+            <a href="index.html" class="btn btn-secondary">
+              Volver al Inicio
+            </a>
           </div>
         </div>
       `;
