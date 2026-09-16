@@ -1119,6 +1119,135 @@
     </div>
   </div>
 
+  
+  <!-- MODAL 5: ALTA DE PROFESIONAL COLEGIADO COP (RBAC & SILLÓN) -->
+  <div class="drawer-modal-overlay" id="newPractitionerModal" style="display:none;" onclick="window.handlePractitionerBackdrop(event)">
+    <div class="drawer-modal-card" style="width: min(580px, 95vw); max-height: 90vh; overflow-y: auto;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 1px solid var(--line); padding-bottom: 12px;">
+        <div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <h3 style="margin: 0; font-size: 1.25rem; color: var(--ink);">🦷 Alta de Profesional Colegiado COP</h3>
+            <span class="chip chip-success" style="font-size: 0.68rem; padding: 2px 8px;">Ley N.º 27878</span>
+          </div>
+          <span class="tiny muted">Registro médico, asignación de sillón clínico y permisos en el sistema.</span>
+        </div>
+        <button class="btn btn-secondary btn-small" onclick="window.closeNewPractitionerModal()">✕</button>
+      </div>
+
+      <form id="newPractitionerForm" onsubmit="window.handlePractitionerSubmit(event)">
+        <div class="segmented-form-section">
+          <div class="segmented-section-title">
+            <span>👤 1. Datos del Cirujano Dentista</span>
+          </div>
+          <div style="margin-bottom: 10px;">
+            <label class="tiny muted" style="font-weight: 700; display: block; margin-bottom: 4px;">Nombres y Apellidos Completos:</label>
+            <input type="text" id="proName" class="form-control" placeholder="Ej. Dra. Valeria Ramos Benavides" required>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div>
+              <label class="tiny muted" style="font-weight: 700; display: block; margin-bottom: 4px;">Registro Colegio Odontológico (COP):</label>
+              <input type="text" id="proCmp" class="form-control" placeholder="Ej. COP 24190" required>
+            </div>
+            <div>
+              <label class="tiny muted" style="font-weight: 700; display: block; margin-bottom: 4px;">Reg. Nac. Especialista (RNE - Opcional):</label>
+              <input type="text" id="proRne" class="form-control" placeholder="Ej. RNE 0914">
+            </div>
+          </div>
+        </div>
+
+        <div class="segmented-form-section">
+          <div class="segmented-section-title">
+            <span>🩺 2. Especialidad & Sillón Quirúrgico</span>
+          </div>
+          <div style="margin-bottom: 10px;">
+            <label class="tiny muted" style="font-weight: 700; display: block; margin-bottom: 4px;">Especialidad Principal:</label>
+            <select id="proSpecialty" class="form-select" required>
+              <option value="Ortodoncia & Ortopedia Maxilar">Ortodoncia & Ortopedia Maxilar</option>
+              <option value="Cirugía Bucal & Maxilofacial">Cirugía Bucal & Maxilofacial</option>
+              <option value="Implantología & Oseointegración">Implantología & Oseointegración</option>
+              <option value="Endodoncia Microscópica">Endodoncia Microscópica</option>
+              <option value="Odontopediatría & Ortodoncia Preventiva">Odontopediatría & Ortodoncia Preventiva</option>
+              <option value="Periodoncia & Cirugía Plástica">Periodoncia & Cirugía Plástica</option>
+              <option value="Rehabilitación Oral & CAD/CAM">Rehabilitación Oral & CAD/CAM</option>
+              <option value="Estética Dental & DSD">Estética Dental & Diseño de Sonrisa</option>
+              <option value="Radiología Bucal & Maxilofacial">Radiología Bucal & Maxilofacial</option>
+              <option value="Odontología General & Prevención">Odontología General & Prevención</option>
+            </select>
+          </div>
+          <div>
+            <label class="tiny muted" style="font-weight: 700; display: block; margin-bottom: 4px;">Sillón Quirúrgico Asignado en Sede:</label>
+            <select id="proChair" class="form-select" required>
+              <option value="chair_1">Sillón 1 — Ortodoncia & Diagnóstico General</option>
+              <option value="chair_2">Sillón 2 — Cirugía, Implantes & Rehabilitación</option>
+              <option value="chair_3">Sillón 3 — Odontopediatría & Prevención Integral</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="segmented-form-section">
+          <div class="segmented-section-title">
+            <span>📝 3. Perfil Clínico & Reseña</span>
+          </div>
+          <textarea id="proBio" class="form-control" rows="3" placeholder="Resumen de experiencia académica y clínica, membresías y competencias..."></textarea>
+        </div>
+
+        <div style="display: flex; gap: 10px; margin-top: 14px;">
+          <button type="submit" class="btn btn-primary" style="flex: 1; padding: 12px; background: #007A55; font-weight: 800;">
+            ✓ Registrar y Habilitar Colegiado
+          </button>
+          <button type="button" class="btn btn-secondary" onclick="window.closeNewPractitionerModal()">
+            Cancelar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL 6: PERFIL / EXPEDIENTE DE PROFESIONAL COLEGIADO -->
+  <div class="drawer-modal-overlay" id="practitionerProfileModal" style="display:none;" onclick="window.handleProfileBackdrop(event)">
+    <div class="drawer-modal-card" style="width: min(540px, 95vw); max-height: 90vh; overflow-y: auto;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; border-bottom: 1px solid var(--line); padding-bottom: 12px;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div id="profAvatar" class="patient-avatar-badge" style="width: 52px; height: 52px; font-size: 1.3rem;">D</div>
+          <div>
+            <h3 id="profName" style="margin: 0; font-size: 1.2rem; color: var(--ink);">Dra. Ana Flores</h3>
+            <span id="profSpecialty" class="chip chip-neutral" style="font-size: 0.72rem; padding: 2px 8px; margin-top: 4px; display: inline-block;">Ortodoncia</span>
+          </div>
+        </div>
+        <button class="btn btn-secondary btn-small" onclick="window.closePractitionerProfileModal()">✕</button>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;">
+        <div class="card" style="padding: 12px; background: #F8FAFC;">
+          <span class="eyebrow" style="margin-bottom: 2px;">Colegiatura Oficial</span>
+          <div id="profCmp" style="font-family: var(--mono); font-weight: 800; font-size: 1rem; color: var(--action);">COP 18240</div>
+          <div id="profRne" class="tiny muted" style="margin-top: 2px;">RNE Habilitado</div>
+        </div>
+        <div class="card" style="padding: 12px; background: #F8FAFC;">
+          <span class="eyebrow" style="margin-bottom: 2px;">Sillón Asignado</span>
+          <div id="profChair" style="font-weight: 800; font-size: 0.95rem; color: var(--ink);">Sillón 1 (Ortodoncia)</div>
+          <div class="tiny" style="color: #16A34A; font-weight: 700; margin-top: 2px;">✓ En Turno Clínico</div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom: 16px; padding: 14px;">
+        <span class="eyebrow" style="margin-bottom: 4px;">Reseña y Trayectoria</span>
+        <p id="profBio" class="tiny" style="color: #334155; line-height: 1.5; margin: 0;">
+          Especialista en ortodoncia estética y alineadores invisibles con 10 años de práctica clínica.
+        </p>
+      </div>
+
+      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <button id="profBtnSimulate" class="btn btn-primary" style="flex: 1; padding: 10px; font-size: 0.85rem;">
+          🦷 Simular Sesión de este Doctor
+        </button>
+        <button class="btn btn-secondary" style="padding: 10px 16px; font-size: 0.85rem;" onclick="window.closePractitionerProfileModal()">
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- SCRIPT CENTRAL DE LA CONSOLA -->
   <script type="module">
     import { mockApi } from '../assets/js/mock-api-v2.js';
@@ -3585,7 +3714,7 @@
         </div>
       `;
     } else if (view === "users") {
-      const practitioners = seed.practitioners || [];
+      const practitioners = mockApi.getPractitioners();
       const currentRole = mockApi.getActiveRole();
       const roleProfile = mockApi.getRoleProfile(currentRole);
 
@@ -3602,7 +3731,7 @@
                 Administración de accesos, credenciales colegiadas COP y asignación de sillones quirúrgicos.
               </p>
             </div>
-            <button class="btn btn-primary btn-small" onclick="alert('Formulario de alta de profesional colegiado abierto')">
+            <button class="btn btn-primary btn-small" onclick="window.openNewPractitionerModal()">
               + Añadir Profesional
             </button>
           </div>
@@ -3675,7 +3804,7 @@
                 <tbody>
                   ${practitioners.map((p, idx) => {
                     const chairs = ['Sillón 1 (Ortodoncia)', 'Sillón 2 (Cirugía)', 'Sillón 3 (Pediatría/Integral)'];
-                    const chairAssigned = chairs[idx % 3];
+                    const chairAssigned = p.chairName || chairs[idx % 3];
                     return `
                       <tr>
                         <td>
@@ -3693,7 +3822,8 @@
                         <td><span style="color: var(--amber); font-weight: 700;">★ ${p.rating}</span></td>
                         <td><span class="chip chip-success" style="font-size: 0.7rem; padding: 2px 8px;">Habilitado COP</span></td>
                         <td>
-                          <button class="btn btn-secondary btn-small" style="padding: 4px 10px; font-size: 0.75rem;" onclick="alert('Expediente profesional de ${p.name} abierto')">Ver Perfil</button>
+                          <button class="btn btn-secondary btn-small" style="padding: 4px 10px; font-size: 0.75rem;" onclick="window.viewPractitionerProfile('${p.id}')">Ver Perfil</button>
+                          <button class="btn btn-small" style="padding: 4px 8px; font-size: 0.75rem; margin-left: 4px; color: #DC2626; border: 1px solid #FECACA; background: #FEF2F2; border-radius: 6px; cursor: pointer;" onclick="window.deletePractitioner('${p.id}')" title="Dar de baja">✕</button>
                         </td>
                       </tr>
                     `;
@@ -3888,6 +4018,99 @@
       window.location.reload();
     };
   </script>
-  <script src="../components/prototype-switcher.js"></script>
+  <script src="../components/prototype-switcher.js">
+    // CONTROLADORES DE GESTIÓN DE PROFESIONALES (MODAL & CRUD)
+    window.openNewPractitionerModal = function() {
+      const m = document.getElementById('newPractitionerModal');
+      if (m) m.style.display = 'flex';
+    };
+
+    window.closeNewPractitionerModal = function() {
+      const m = document.getElementById('newPractitionerModal');
+      if (m) m.style.display = 'none';
+    };
+
+    window.handlePractitionerBackdrop = function(e) {
+      if (e.target.id === 'newPractitionerModal') window.closeNewPractitionerModal();
+    };
+
+    window.handlePractitionerSubmit = function(e) {
+      e.preventDefault();
+      const name = document.getElementById('proName').value.trim();
+      const cmp = document.getElementById('proCmp').value.trim();
+      const rne = document.getElementById('proRne').value.trim();
+      const specialty = document.getElementById('proSpecialty').value;
+      const chairId = document.getElementById('proChair').value;
+      const bio = document.getElementById('proBio').value.trim();
+
+      const chairNames = {
+        chair_1: 'Sillón 1 (Ortodoncia)',
+        chair_2: 'Sillón 2 (Cirugía/Implantes)',
+        chair_3: 'Sillón 3 (Pediatría/Integral)'
+      };
+
+      const created = mockApi.addPractitioner({
+        name: name,
+        cmp: cmp,
+        rne: rne || null,
+        specialty: specialty,
+        chairId: chairId,
+        chairName: chairNames[chairId],
+        bio: bio || "Cirujano dentista colegiado habilitado."
+      });
+
+      showToast('✓ Profesional colegiado ' + created.name + ' registrado con éxito.', 'success');
+      window.closeNewPractitionerModal();
+      window.location.reload();
+    };
+
+    window.viewPractitionerProfile = function(proId) {
+      const p = mockApi.getPractitionerById(proId);
+      if (!p) {
+        showToast('No se encontró el expediente del profesional', 'error');
+        return;
+      }
+      document.getElementById('profName').textContent = p.name;
+      document.getElementById('profSpecialty').textContent = p.specialty;
+      document.getElementById('profCmp').textContent = p.cmp;
+      document.getElementById('profRne').textContent = p.rne ? p.rne : 'RNE General';
+      document.getElementById('profChair').textContent = p.chairName || 'Sillón asignado';
+      document.getElementById('profBio').textContent = p.bio || 'Sin reseña profesional registrada.';
+      document.getElementById('profAvatar').textContent = p.name.charAt(4) || 'D';
+
+      const btnSim = document.getElementById('profBtnSimulate');
+      if (btnSim) {
+        btnSim.onclick = function() {
+          mockApi.setActiveRole('DENTIST');
+          showToast('Sesión cambiada a rol DENTIST (' + p.name + ')', 'success');
+          window.closePractitionerProfileModal();
+          window.location.reload();
+        };
+      }
+
+      const m = document.getElementById('practitionerProfileModal');
+      if (m) m.style.display = 'flex';
+    };
+
+    window.closePractitionerProfileModal = function() {
+      const m = document.getElementById('practitionerProfileModal');
+      if (m) m.style.display = 'none';
+    };
+
+    window.handleProfileBackdrop = function(e) {
+      if (e.target.id === 'practitionerProfileModal') window.closePractitionerProfileModal();
+    };
+
+    window.deletePractitioner = function(proId) {
+      const p = mockApi.getPractitionerById(proId);
+      if (!p) return;
+      if (confirm('¿Confirma dar de baja del directorio al profesional ' + p.name + ' (' + p.cmp + ')?')) {
+        mockApi.deletePractitioner(proId);
+        showToast('Profesional dado de baja del directorio', 'success');
+        window.location.reload();
+      }
+    };
+
+  </script>
 </body>
 </html>

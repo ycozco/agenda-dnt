@@ -44,7 +44,69 @@ class MockApiV2 {
   }
 
   getPractitioners() {
-    return this.state.practitioners || [];
+    if (!this.state.practitioners || this.state.practitioners.length === 0) {
+      this.state.practitioners = JSON.parse(JSON.stringify(SEED_V2.practitioners || []));
+      this.saveState();
+    }
+    return this.state.practitioners;
+  }
+
+  getPractitionerById(id) {
+    return this.getPractitioners().find(p => p.id === id) || null;
+  }
+
+  addPractitioner(data) {
+    const practitioners = this.getPractitioners();
+    const cleanId = "pro_" + (data.name ? data.name.toLowerCase().replace(/[^a-z0-9]/g, '_').slice(0, 15) : "doc") + "_" + Math.floor(Math.random() * 900 + 100);
+    const chairNames = {
+      chair_1: "Sillón 1 (Ortodoncia)",
+      chair_2: "Sillón 2 (Cirugía/Implantes)",
+      chair_3: "Sillón 3 (Pediatría/Integral)"
+    };
+    const cId = data.chairId || "chair_1";
+    const newPro = {
+      id: cleanId,
+      name: data.name || "Nuevo Profesional",
+      specialty: data.specialty || "Odontología General",
+      cmp: data.cmp ? (data.cmp.toUpperCase().startsWith('COP') ? data.cmp.toUpperCase() : 'COP ' + data.cmp) : "COP Pendiente",
+      rne: data.rne ? (data.rne.toUpperCase().startsWith('RNE') ? data.rne.toUpperCase() : 'RNE ' + data.rne) : null,
+      chairId: cId,
+      chairName: data.chairName || chairNames[cId] || "Sillón 1 (Ortodoncia)",
+      rating: data.rating || 5.0,
+      bio: data.bio || "Cirujano Dentista colegiado en el Colegio Odontológico del Perú.",
+      photo: data.photo || "../assets/images/public/team/profesional-dental-referencia-37458046.jpg",
+      createdAt: new Date().toISOString()
+    };
+    practitioners.push(newPro);
+    this.state.practitioners = practitioners;
+    this.logAuditEvent("ALTA_PROFESIONAL", "Alta de profesional colegiado: " + newPro.name + " (" + newPro.cmp + ") asignado a " + newPro.chairName);
+    this.saveState();
+    return newPro;
+  }
+
+  updatePractitioner(id, patch) {
+    const practitioners = this.getPractitioners();
+    const idx = practitioners.findIndex(p => p.id === id);
+    if (idx !== -1) {
+      Object.assign(practitioners[idx], patch);
+      this.state.practitioners = practitioners;
+      this.logAuditEvent("MODIF_PROFESIONAL", "Modificación de expediente profesional: " + practitioners[idx].name);
+      this.saveState();
+      return practitioners[idx];
+    }
+    return null;
+  }
+
+  deletePractitioner(id) {
+    const practitioners = this.getPractitioners();
+    const target = practitioners.find(p => p.id === id);
+    if (target) {
+      this.state.practitioners = practitioners.filter(p => p.id !== id);
+      this.logAuditEvent("BAJA_PROFESIONAL", "Baja/desactivación de profesional: " + target.name + " (" + target.cmp + ")");
+      this.saveState();
+      return true;
+    }
+    return false;
   }
 
   getDocuments() {
