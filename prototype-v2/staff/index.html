@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="../assets/css/base.css">
   <link rel="stylesheet" href="../assets/css/components.css">
   <link rel="stylesheet" href="../assets/css/staff-v2.css">
+  <link rel="stylesheet" href="styles/unified-upgrade.css">
   <style>
     /* ==========================================================================
        DISCIPLINA ARQUITECTÓNICA & PROPORCIONES DE CONSOLA CLÍNICA
@@ -701,15 +702,33 @@
   </style>
 </head>
 <body>
+  <!-- BARRA SUPERIOR RESPONSIVE PARA SMARTPHONES Y TABLETS -->
+  <header class="staff-mobile-topbar" id="staffMobileTopbar">
+    <button class="staff-mobile-hamburger" id="mobileMenuToggle" onclick="window.toggleStaffSidebar()" aria-label="Abrir Menú">
+      <span>☰</span> <span>Menú</span>
+    </button>
+    <div class="staff-mobile-brand">
+      <span style="background:var(--action, #0E7060);color:white;width:24px;height:24px;border-radius:4px;display:inline-flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:900;">S</span>
+      <span>SILLAR DENTAL</span>
+    </div>
+    <div style="font-size:0.75rem;font-weight:700;color:#38BDF8;">
+      COP 18240
+    </div>
+  </header>
+  <div class="staff-sidebar-backdrop" id="staffSidebarBackdrop" onclick="window.closeStaffSidebar()"></div>
+
   <div class="staff-shell">
     <aside class="staff-sidebar">
       <div>
-        <div style="display: flex; align-items: center; gap: 10px; padding: 0 4px 16px; border-bottom: 1px solid rgba(255,255,255,0.12);">
-          <div style="width: 32px; height: 32px; background: var(--action); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.05rem;">S</div>
-          <div>
-            <div style="font-weight: 800; font-size: 0.95rem; letter-spacing: -0.01em;">SILLAR DENTAL</div>
-            <div style="font-size: 0.7rem; opacity: 0.65; letter-spacing: 0.05em; text-transform: uppercase;">Consola Privada</div>
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 0 4px 16px; border-bottom: 1px solid rgba(255,255,255,0.12);">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <div style="width: 32px; height: 32px; background: var(--action); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.05rem;">S</div>
+            <div>
+              <div style="font-weight: 800; font-size: 0.95rem; letter-spacing: -0.01em;">SILLAR DENTAL</div>
+              <div style="font-size: 0.7rem; opacity: 0.65; letter-spacing: 0.05em; text-transform: uppercase;">Consola Privada</div>
+            </div>
           </div>
+          <button class="btn btn-secondary btn-small" id="btnCloseSidebarMobile" onclick="window.closeStaffSidebar()" style="display:none;padding:4px 8px;font-size:0.8rem;color:white;border-color:rgba(255,255,255,0.3);">✕</button>
         </div>
 
         <nav class="staff-menu" id="staffNav">
@@ -993,6 +1012,113 @@
     </div>
   </div>
 
+  <!-- MODAL 4: DIGITALIZACIÓN MÓVIL DE RECETA / DOCUMENTO FÍSICO CON CÁMARA Y QR -->
+  <div class="drawer-modal-overlay" id="mobileScanModal" style="display:none;" onclick="window.handleScanBackdrop(event)">
+    <div class="drawer-modal-card" style="width: min(620px, 95vw); max-height: 90vh; overflow-y: auto;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 1px solid var(--line); padding-bottom: 12px;">
+        <div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <h3 style="margin: 0; font-size: 1.25rem; color: var(--ink);">📱 Digitalización de Documento Físico Firmado</h3>
+            <span class="chip chip-success" style="font-size: 0.68rem; padding: 2px 8px;">NTS 139-MINSA</span>
+          </div>
+          <span class="tiny muted">Digitalice recetas, consentimientos o informes firmados con bolígrafo y sello COP.</span>
+        </div>
+        <button class="btn btn-secondary btn-small" onclick="window.closeMobileScanModal()">✕</button>
+      </div>
+
+      <!-- GUÍA QR: ESCANEO DESDE SMARTPHONE DEL DOCTOR -->
+      <div class="modal-qr-guide">
+        <div class="modal-qr-img">
+          <span>QR-CODE</span>
+          <span style="font-size:0.5rem;color:#38BDF8;">SCAN-CAMERA</span>
+          <span style="font-size:1.1rem;margin:2px 0;">📷</span>
+          <span style="font-size:0.55rem;">DIRECT LINK</span>
+        </div>
+        <div style="flex: 1; min-width: 200px;">
+          <strong style="color: #0F172A; font-size: 0.88rem; display: block; margin-bottom: 4px;">Opción 1: Apunte la cámara de su celular al QR impreso</strong>
+          <p class="tiny" style="color: #475569; margin: 0 0 8px; line-height: 1.4;">
+            Abra la cámara de su teléfono personal o del consultorio y enfoque el código QR impreso en la esquina de la receta. Se abrirá la pantalla de captura instantánea vinculada a este paciente sin necesidad de loguearse de nuevo.
+          </p>
+          <div style="font-family: var(--mono); font-size: 0.72rem; color: #0E7060; font-weight: 700;">
+            URL: https://sillardental.pe/scan/rx?code=QR-SCAN-RX-45892104-01
+          </div>
+        </div>
+      </div>
+
+      <!-- FORMULARIO DE SUBIDA / CAPTURA LOCAL -->
+      <form id="mobileScanForm" onsubmit="window.handleMobileScanSubmit(event)">
+        <div class="segmented-form-section">
+          <div class="segmented-section-title">
+            <span>📄 Tipo de Documento Físico a Digitalizar</span>
+          </div>
+          <select id="scanDocType" class="form-select" required>
+            <option value="RECETA_MEDICA_FÍSICA_SELLADA">💊 Receta Médica Sellada y Firmada a Mano (Dra. Ana Flores - COP 18240)</option>
+            <option value="CONSENTIMIENTO_INFORMADO_FÍSICO">✍️ Consentimiento Informado Quirúrgico Firmado con Lapicero</option>
+            <option value="INFORME_LABORATORIO_EXTERNO">🔬 Informe de Laboratorio o Radiografía Externa</option>
+          </select>
+        </div>
+
+        <div class="segmented-form-section">
+          <div class="segmented-section-title">
+            <span>📸 Captura con Cámara Móvil o Archivo</span>
+          </div>
+          
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px;">
+            <button type="button" class="btn btn-secondary" onclick="document.getElementById('mobileCameraInput').click()" style="display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 10px;font-size:0.82rem;">
+              📷 Activar Cámara Móvil
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="document.getElementById('mobileFileInput').click()" style="display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 10px;font-size:0.82rem;">
+              📁 Seleccionar Foto / PDF
+            </button>
+          </div>
+
+          <input type="file" id="mobileCameraInput" accept="image/*" capture="environment" style="display: none;" onchange="window.handleCameraPhotoSelected(event)">
+          <input type="file" id="mobileFileInput" accept="image/*,.pdf" style="display: none;" onchange="window.handleCameraPhotoSelected(event)">
+
+          <!-- ZONA DE PREVISUALIZACIÓN -->
+          <div id="scanPhotoPreviewArea" style="background:#F8FAFC;border:2px dashed #CBD5E1;border-radius:10px;padding:16px;text-align:center;">
+            <div id="scanPreviewEmpty">
+              <span style="font-size: 2rem; display: block; margin-bottom: 6px;">📄</span>
+              <strong style="font-size: 0.85rem; color: #334155; display: block;">No se ha capturado imagen aún</strong>
+              <span class="tiny" style="color: #64748B;">Haga clic arriba o use el botón rápido de simulación inferior para probar.</span>
+            </div>
+            <div id="scanPreviewActive" style="display: none;">
+              <div style="position:relative;display:inline-block;max-width:100%;">
+                <img id="scanPreviewImg" src="" alt="Foto de receta física" style="max-height: 220px; max-width: 100%; border-radius: 6px; border: 1px solid #CBD5E1; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                <div style="position:absolute;bottom:8px;right:8px;background:rgba(15,23,42,0.85);color:white;font-size:0.65rem;padding:3px 8px;border-radius:4px;font-family:var(--mono);">
+                  ✓ Sello COP Detectado
+                </div>
+              </div>
+              <div class="tiny" style="color: #0E7060; font-weight: 700; margin-top: 8px;" id="scanPreviewHashText">
+                Hash SHA-256 Calculado en Dispositivo
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BOTÓN RÁPIDO DE SIMULACIÓN PARA DEMO -->
+        <div style="background: #FEF3C7; border: 1px solid #FCD34D; border-radius: 8px; padding: 10px 14px; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+          <div>
+            <strong style="color: #92400E; font-size: 0.82rem; display: block;">Modo Demostración / Consultorio:</strong>
+            <span class="tiny" style="color: #B45309;">Cargue directamente una fotografía de receta médica con sello físico de la Dra. Ana Flores.</span>
+          </div>
+          <button type="button" class="btn btn-small" onclick="window.simulateQuickCapture()" style="background:#D97706;color:white;font-weight:700;border:none;cursor:pointer;">
+            ⚡ Simular Foto Sellada
+          </button>
+        </div>
+
+        <div style="display: flex; gap: 10px;">
+          <button type="submit" class="btn btn-primary" id="btnConfirmUpload" style="flex: 1; padding: 12px; background: #0E7060; font-weight: 800;">
+            ✓ Confirmar y Guardar en Historia Clínica
+          </button>
+          <button type="button" class="btn btn-secondary" onclick="window.closeMobileScanModal()">
+            Cancelar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <!-- SCRIPT CENTRAL DE LA CONSOLA -->
   <script type="module">
     import { mockApi } from '../assets/js/mock-api-v2.js';
@@ -1012,6 +1138,21 @@
 
     const main = document.getElementById("staffMain");
     const seed = mockApi.getSeed();
+
+    // Responsive Mobile Sidebar Handlers
+    window.toggleStaffSidebar = function() {
+      const sidebar = document.querySelector('.staff-sidebar');
+      const backdrop = document.getElementById('staffSidebarBackdrop');
+      if (sidebar) sidebar.classList.toggle('mobile-open');
+      if (backdrop) backdrop.classList.toggle('active');
+    };
+
+    window.closeStaffSidebar = function() {
+      const sidebar = document.querySelector('.staff-sidebar');
+      const backdrop = document.getElementById('staffSidebarBackdrop');
+      if (sidebar) sidebar.classList.remove('mobile-open');
+      if (backdrop) backdrop.classList.remove('active');
+    };
 
     // =========================================================================
     // VISTA 1: DASHBOARD OPERATIVO
@@ -2666,14 +2807,14 @@
 
       const filteredDocs = activeCategory === "ALL" 
         ? docs 
-        : docs.filter(d => d.category.includes(activeCategory));
+        : docs.filter(d => (d.category || '').includes(activeCategory) || (activeCategory === 'RECETA_FISICA_SCAN' && d.status === 'PHYSICAL_SIGNED_DIGITIZED'));
 
       main.innerHTML = `
         <div class="staff-container">
           <!-- CABECERA DE GESTIÓN DOCUMENTAL -->
           <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
             <div>
-              <div style="display: flex; align-items: center; gap: 10px;">
+              <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
                 <h1 style="margin: 0; font-size: 1.85rem; font-weight: 800; color: var(--ink);">Expediente Documental & Procesador de PDFs</h1>
                 <span class="chip chip-success" style="font-size: 0.75rem; padding: 3px 10px;">PDF/A · SHA-256 Inmutable</span>
               </div>
@@ -2681,22 +2822,35 @@
                 Paciente: <strong style="color: var(--ink);">María Quispe Condori</strong> (DNI: 45892104) · Ficha Documental de Historia Clínica (NTS 139-MINSA)
               </p>
             </div>
-            <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
-              <button class="btn btn-secondary btn-small" onclick="document.getElementById('fileUploadInput').click()">
-                📤 Subir Documento Externo
+            <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+              <button class="btn btn-primary btn-small" onclick="window.openMobileScanModal()" style="background: #0E7060; font-weight: 800; display: flex; align-items: center; gap: 6px;">
+                📱 Digitalizar Físico Firmado (Móvil / QR)
               </button>
-              <button class="btn btn-primary btn-small" onclick="window.generateOfficialNtsPdf()">
-                📋 Exportar Ficha NTS-188 (PDF)
+              <button class="btn btn-secondary btn-small" onclick="document.getElementById('fileUploadInput').click()">
+                📤 Subir Archivo Externo
+              </button>
+              <button class="btn btn-secondary btn-small" onclick="window.generateOfficialNtsPdf()">
+                📋 Exportar NTS-188
               </button>
               <input type="file" id="fileUploadInput" style="display: none;" accept=".pdf,.png,.jpg,.jpeg" onchange="window.handleFileUpload(event)">
             </div>
+          </div>
+
+          <!-- PESTAÑAS RESPONSIVE PARA DISPOSITIVOS MÓVILES -->
+          <div class="doc-mobile-tabs" id="docMobileTabs">
+            <button class="doc-mobile-tab-btn active" id="btnTabDocList" onclick="window.switchDocMobileTab('list')">
+              📁 Bandeja (${filteredDocs.length})
+            </button>
+            <button class="doc-mobile-tab-btn" id="btnTabDocViewer" onclick="window.switchDocMobileTab('viewer')">
+              📄 Visor Hoja A4
+            </button>
           </div>
 
           <!-- LAYOUT DE 2 COLUMNAS: BANDEJA DE DOCUMENTOS (380PX) Y HOJA VISOR (1FR) -->
           <div class="doc-center-grid">
             
             <!-- COLUMNA IZQUIERDA: EXPLORADOR Y FILTROS -->
-            <div class="doc-list-panel">
+            <div class="doc-list-panel" id="docListPanel">
               <div class="pacs-section-title">
                 <span>Documentos Clínicos</span>
                 <span class="tiny">${docs.length} archivos</span>
@@ -2705,10 +2859,11 @@
               <!-- FILTROS DE CATEGORÍA -->
               <div class="doc-filter-pills">
                 <button class="doc-filter-btn ${activeCategory === 'ALL' ? 'active' : ''}" onclick="window.filterDocCategory('ALL')">Todos (${docs.length})</button>
+                <button class="doc-filter-btn ${activeCategory === 'RECETA_FISICA_SCAN' ? 'active' : ''}" onclick="window.filterDocCategory('RECETA_FISICA_SCAN')">📱 Físicos Sellados</button>
+                <button class="doc-filter-btn ${activeCategory === 'RECETA' ? 'active' : ''}" onclick="window.filterDocCategory('RECETA')">Recetas</button>
                 <button class="doc-filter-btn ${activeCategory === 'RADIOLOGIA' ? 'active' : ''}" onclick="window.filterDocCategory('RADIOLOGIA')">Radiología</button>
                 <button class="doc-filter-btn ${activeCategory === 'ODONTOGRAMA' ? 'active' : ''}" onclick="window.filterDocCategory('ODONTOGRAMA')">NTS-188</button>
                 <button class="doc-filter-btn ${activeCategory === 'CONSENTIMIENTO' ? 'active' : ''}" onclick="window.filterDocCategory('CONSENTIMIENTO')">Consentimientos</button>
-                <button class="doc-filter-btn ${activeCategory === 'RECETA' ? 'active' : ''}" onclick="window.filterDocCategory('RECETA')">Recetas</button>
               </div>
 
               <!-- LISTADO DE DOCUMENTOS -->
@@ -2717,8 +2872,8 @@
                   <div class="doc-item-card ${d.id === currentDoc.id ? 'active' : ''}" onclick="window.selectClinicalDoc('${d.id}')">
                     <div class="doc-item-header">
                       <div class="doc-item-title">${d.title}</div>
-                      <span class="chip ${d.category.includes('RADIOLOGIA') ? 'chip-warning' : d.category.includes('CONSENTIMIENTO') ? 'chip-neutral' : 'chip-success'}" style="font-size: 0.65rem; padding: 2px 6px;">
-                        ${d.category.split('_')[0]}
+                      <span class="chip ${d.status === 'PHYSICAL_SIGNED_DIGITIZED' ? 'chip-success' : d.category.includes('RADIOLOGIA') ? 'chip-warning' : d.category.includes('CONSENTIMIENTO') ? 'chip-neutral' : 'chip-success'}" style="font-size: 0.65rem; padding: 2px 6px;">
+                        ${d.status === 'PHYSICAL_SIGNED_DIGITIZED' ? '📱 FÍSICO DIGITALIZADO' : d.category.split('_')[0]}
                       </span>
                     </div>
                     <div class="doc-item-meta">
@@ -2738,32 +2893,32 @@
                    ondragover="window.handleDocDragOver(event)" 
                    ondragleave="window.handleDocDragLeave(event)" 
                    ondrop="window.handleDocDrop(event)"
-                   onclick="document.getElementById('fileUploadInput').click()">
+                   onclick="window.openMobileScanModal()">
                 <div style="font-size: 1.8rem; margin-bottom: 6px;">📥</div>
-                <strong style="color: var(--ink); font-size: 0.85rem; display: block;">Arrastra aquí un archivo PDF o Imagen</strong>
+                <strong style="color: var(--ink); font-size: 0.85rem; display: block;">Arrastra aquí o escanea desde tu celular</strong>
                 <span class="tiny" style="color: var(--ink-soft); display: block; margin-top: 2px;">
-                  Informes CERAD, Resocentro, consentimientos escaneados (PDF, JPG, PNG)
+                  Recetas selladas, consentimientos firmados o informes externos (JPG, PNG, PDF)
                 </span>
-                <span class="chip chip-neutral" style="margin-top: 8px; font-size: 0.68rem;">Cálculo automático de Hash SHA-256</span>
+                <span class="chip chip-neutral" style="margin-top: 8px; font-size: 0.68rem;">✓ Carga Móvil con Código QR disponible</span>
               </div>
             </div>
 
             <!-- COLUMNA DERECHA: HOJA VISOR DE DOCUMENTO CLÍNICO FORMAL -->
-            <div class="doc-viewer-container">
+            <div class="doc-viewer-container" id="docViewerContainer">
               <!-- BARRA DE HERRAMIENTAS DEL VISOR -->
               <div class="doc-viewer-toolbar">
                 <div style="display: flex; align-items: center; gap: 10px;">
-                  <span style="font-size: 1.2rem;">📄</span>
+                  <span style="font-size: 1.2rem;">${currentDoc.status === 'PHYSICAL_SIGNED_DIGITIZED' ? '📱' : '📄'}</span>
                   <div>
                     <strong style="color: var(--ink); font-size: 0.95rem; display: block;">${currentDoc.title}</strong>
                     <span class="tiny" style="color: var(--ink-soft);">${currentDoc.entity} · ${currentDoc.pages} página(s)</span>
                   </div>
                 </div>
 
-                <div style="display: flex; gap: 8px; align-items: center;">
+                <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
                   ${currentDoc.hasRadiograph ? `
                     <a href="?view=imaging&study=${currentDoc.studyId || 'rad_01'}" class="btn btn-primary btn-small" style="background: #0E7060; font-weight: 800; display: flex; align-items: center; gap: 6px;">
-                      ⚡ Analizar en Visor PACS
+                      ⚡ Analizar en PACS
                     </a>
                   ` : ''}
                   <button class="btn btn-secondary btn-small" onclick="window.printClinicalDoc()">🖨️ Imprimir</button>
@@ -2784,8 +2939,8 @@
                     <div class="tiny" style="color: #64748B;">Sede Yanahuara · Av. Ejército 712, Arequipa · RUC 20601234567</div>
                   </div>
                   <div style="text-align: right;">
-                    <span class="chip chip-success" style="font-size: 0.7rem; padding: 2px 8px; font-weight: 800;">
-                      ${currentDoc.status === 'INMUTABLE_SIGNED' ? 'DOCUMENTO INMUTABLE' : 'VALIDADO & FIRMADO'}
+                    <span class="chip ${currentDoc.status === 'PHYSICAL_SIGNED_DIGITIZED' ? 'chip-success' : currentDoc.status === 'INMUTABLE_SIGNED' ? 'chip-success' : 'chip-neutral'}" style="font-size: 0.7rem; padding: 2px 8px; font-weight: 800;">
+                      ${currentDoc.status === 'PHYSICAL_SIGNED_DIGITIZED' ? '📱 FÍSICO FIRMADO & DIGITALIZADO' : currentDoc.status === 'INMUTABLE_SIGNED' ? 'DOCUMENTO INMUTABLE' : 'VALIDADO & FIRMADO'}
                     </span>
                     <div class="tiny" style="color: #64748B; margin-top: 4px;">Fecha: <strong>${currentDoc.date}</strong> ${currentDoc.time}</div>
                   </div>
@@ -2809,35 +2964,82 @@
 
                 <!-- CONTENIDO CLÍNICO SEGÚN TIPO DE DOCUMENTO -->
                 <div class="doc-sheet-body">
-                  <h4 style="margin: 0 0 8px; color: #0F172A; font-size: 0.95rem;">Resumen de Evaluación & Hallazgos Diagnósticos:</h4>
+                  <h4 style="margin: 0 0 8px; color: #0F172A; font-size: 0.95rem;">Resumen de Evaluación & Registro Clínico:</h4>
                   <p style="margin-bottom: 14px;">${currentDoc.summary}</p>
 
-                  <!-- CASO 1: SI ES INFORME RADIOLÓGICO CON RADIOGRAFÍA INCRUSTADA -->
-                  ${currentDoc.hasRadiograph ? `
-                    <div class="doc-pacs-bridge-card">
-                      <div>
-                        <div style="font-weight: 800; font-size: 0.92rem; color: #FFFFFF;">
-                          ⚡ Radiografía Panorámica Digital Incrustada (Resolución Nativa 2400 x 1200 px)
+                  <!-- CASO A: DOCUMENTO FÍSICO FIRMADO Y SELLADO (DIGITALIZACIÓN MÓVIL) -->
+                  ${(currentDoc.status === 'PHYSICAL_SIGNED_DIGITIZED' || currentDoc.hasScannedPhysical) ? `
+                    <div class="doc-physical-preview-container">
+                      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
+                        <span class="chip chip-success" style="font-size:0.75rem;padding:4px 10px;font-weight:800;">
+                          ✓ SOPORTE FÍSICO DIGITALIZADO (CONFORME A NTS N.º 139-MINSA)
+                        </span>
+                        <span class="tiny" style="color:#64748B;">
+                          Ref: <code>${currentDoc.qrRefCode || 'QR-SCAN-RX-45892104-01'}</code>
+                        </span>
+                      </div>
+
+                      <!-- SIMULACIÓN DE FOTOGRAFÍA DE LA HOJA FÍSICA SELLADA -->
+                      <div class="doc-physical-paper">
+                        <div style="border-bottom:1px solid #CBD5E1;padding-bottom:10px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;">
+                          <div>
+                            <strong style="color:#0E7060;font-size:0.92rem;">SILLAR DENTAL ESPECIALIDADES</strong>
+                            <div class="tiny" style="color:#64748B;">Sede Yanahuara · Receta Médica Física Oficial</div>
+                          </div>
+                          <div class="tiny" style="font-family:var(--mono);color:#64748B;">Fecha: ${currentDoc.date}</div>
                         </div>
-                        <div class="tiny" style="color: #94A3B8; margin-top: 2px;">
-                          El archivo contiene una ortopantomografía de alta calidad apta para medición milimétrica y diagnóstico por imagen.
+
+                        <div style="font-size:0.82rem;margin-bottom:12px;">
+                          <strong>Paciente:</strong> María Quispe Condori (DNI 45892104)<br>
+                          <strong style="display:block;margin-top:6px;">Rp. Posología Prescrita:</strong>
+                          <ul style="margin:6px 0 0 16px;color:#334155;line-height:1.6;">
+                            <li><strong>Amoxicilina 500 mg</strong> (Cápsulas) — Cantidad: 18 cápsulas. Tomar 1 cápsula vía oral c/8h x 6 días.</li>
+                            <li><strong>Ibuprofeno 400 mg</strong> (Tabletas) — Cantidad: 10 tabletas. Tomar 1 tableta c/8h condicional al dolor.</li>
+                          </ul>
+                        </div>
+
+                        <!-- SELLO DE JEBE DEL ODONTÓLOGO Y FIRMA MANUSCRITA -->
+                        <div style="display:flex;justify-content:flex-end;align-items:center;gap:24px;margin-top:24px;padding-top:14px;border-top:1px dashed #E2E8F0;flex-wrap:wrap;">
+                          <div class="doc-rubber-stamp">
+                            <div style="font-size:0.7rem;font-weight:900;">DRA. ANA FLORES VANESA</div>
+                            <div style="font-size:0.62rem;font-weight:800;letter-spacing:0.04em;">CIRUJANO DENTISTA</div>
+                            <div style="font-size:0.7rem;font-weight:900;border-top:1px solid #1D4ED8;margin-top:2px;padding-top:2px;">COP 18240</div>
+                          </div>
+                          <div style="text-align:center;">
+                            <div class="doc-handwritten-signature">A. Flores V.</div>
+                            <div style="border-top:1px solid #0F172A;width:150px;margin:0 auto;font-size:0.68rem;color:#475569;padding-top:2px;">Firma de puño y letra</div>
+                          </div>
                         </div>
                       </div>
-                      <a href="?view=imaging&study=rad_01" class="btn btn-primary btn-small" style="background: #14B8A6; color: #090E17; font-weight: 800;">
-                        Abrir en Visor PACS (Caliper & W/L) →
-                      </a>
-                    </div>
 
-                    <div class="doc-embedded-image-box">
-                      <img src="${currentDoc.radiographUrl || '../assets/images/reference/dental/panoramic-xray-public-domain.jpg'}" alt="Radiografía incrustada en el PDF">
-                      <div style="padding: 6px; font-size: 0.72rem; color: #94A3B8; background: #0B121E;">
-                        Vista previa de la radiografía extraída del documento PDF (Haga clic en el botón superior para calibrar medidas)
+                      <div class="doc-digitized-audit-badge">
+                        <span style="font-size:1.3rem;">📱</span>
+                        <div>
+                          <strong>Digitalización Verificada:</strong> Fotografiado por <u>${currentDoc.scannedBy || 'Dra. Ana Flores (Cámara Móvil Consultorio 1)'}</u> el ${currentDoc.date} a las ${currentDoc.time}.<br>
+                          <span class="tiny">Soporte físico original en archivo pasivo Yanahuara. Hash criptográfico SHA-256 generado y verificado.</span>
+                        </div>
                       </div>
                     </div>
                   ` : ''}
 
-                  <!-- CASO 2: SI ES RECETA MÉDICA (INCLUIR CÓDIGO QR Y POSOLOGÍA) -->
-                  ${currentDoc.category === 'RECETA_PDF' ? `
+                  <!-- CASO B: SI ES RECETA MÉDICA GENERADA PARA IMPRIMIR (CON CÓDIGO QR DE DIGITALIZACIÓN) -->
+                  ${(currentDoc.category === 'RECETA_PDF' && currentDoc.status !== 'PHYSICAL_SIGNED_DIGITIZED') ? `
+                    <!-- BANNER QR DE DIGITALIZACIÓN RÁPIDA -->
+                    <div class="doc-qr-digitalize-banner">
+                      <div class="doc-qr-box">
+                        <span>QR-SCAN</span>
+                        <span style="font-size:0.48rem;color:#38BDF8;">DIGITALIZAR</span>
+                        <span>[ ▣ ]</span>
+                      </div>
+                      <div style="flex: 1; font-size: 0.75rem; color: #166534;">
+                        <strong>Código Único de Digitalización Rápida (NTS 139-MINSA):</strong><br>
+                        <code>QR-SCAN-RX-45892104-01</code> · Tras imprimir, firmar y sellar en papel con lapicero, escanee este QR desde su celular o use el botón lateral para subir la foto directamente a la historia clínica.
+                      </div>
+                      <button class="btn btn-secondary btn-small" onclick="window.openMobileScanModal()" style="font-size:0.74rem;background:white;color:#166534;border-color:#86EFAC;font-weight:700;">
+                        📱 Subir Foto Sellada
+                      </button>
+                    </div>
+
                     <div style="border: 1px solid #CBD5E1; border-radius: 8px; padding: 16px; margin: 16px 0; background: #F8FAFC;">
                       <h4 style="margin: 0 0 10px; color: #0E7060; font-size: 0.9rem;">Prescripción Farmacológica (Rp.):</h4>
                       <ol style="margin: 0 0 14px 20px; font-size: 0.85rem; color: #0F172A;">
@@ -2851,7 +3053,7 @@
                         </li>
                       </ol>
 
-                      <div style="display: flex; align-items: center; gap: 16px; border-top: 1px dashed #CBD5E1; padding-top: 12px;">
+                      <div style="display: flex; align-items: center; gap: 16px; border-top: 1px dashed #CBD5E1; padding-top: 12px; flex-wrap: wrap;">
                         <div style="width: 60px; height: 60px; background: #0F172A; color: white; display: flex; align-items: center; justify-content: center; font-size: 0.6rem; font-weight: bold; text-align: center; border-radius: 4px;">
                           QR CODE<br>MINSA
                         </div>
@@ -2864,7 +3066,28 @@
                     </div>
                   ` : ''}
 
-                  <!-- CASO 3: SI ES CONSENTIMIENTO INFORMADO -->
+                  <!-- CASO C: SI ES INFORME RADIOLÓGICO CON RADIOGRAFÍA INCRUSTADA -->
+                  ${currentDoc.hasRadiograph ? `
+                    <div class="doc-pacs-bridge-card">
+                      <div>
+                        <div style="font-weight: 800; font-size: 0.92rem; color: #FFFFFF;">
+                          ⚡ Radiografía Panorámica Digital Incrustada (Resolución Nativa 2400 x 1200 px)
+                        </div>
+                        <div class="tiny" style="color: #94A3B8; margin-top: 2px;">
+                          Ortopantomografía de alta resolución apta para calibración milimétrica y diagnóstico.
+                        </div>
+                      </div>
+                      <a href="?view=imaging&study=rad_01" class="btn btn-primary btn-small" style="background: #14B8A6; color: #090E17; font-weight: 800;">
+                        Abrir en Visor PACS →
+                      </a>
+                    </div>
+
+                    <div class="doc-embedded-image-box">
+                      <img src="${currentDoc.radiographUrl || '../assets/images/reference/dental/panoramic-xray-public-domain.jpg'}" alt="Radiografía incrustada en el PDF">
+                    </div>
+                  ` : ''}
+
+                  <!-- CASO D: SI ES CONSENTIMIENTO INFORMADO -->
                   ${currentDoc.category === 'CONSENTIMIENTO_PDF' ? `
                     <div style="background: #F1F5F9; border-left: 4px solid #0E7060; padding: 12px 16px; margin: 16px 0; font-size: 0.82rem; line-height: 1.5;">
                       <strong>Declaración de Consentimiento del Paciente:</strong><br>
@@ -2882,7 +3105,7 @@
                 <div class="doc-sheet-footer">
                   <div>
                     <div style="font-weight: 800; color: #0F172A; margin-bottom: 2px;">CERTIFICACIÓN DE INMUTABILIDAD DIGITAL</div>
-                    <div style="font-family: var(--mono); font-size: 0.7rem; color: #475569;">
+                    <div style="font-family: var(--mono); font-size: 0.7rem; color: #475569; word-break: break-all;">
                       HASH SHA-256: <code>${currentDoc.sha256}</code>
                     </div>
                     <div class="tiny" style="color: #0E7060; font-weight: 700; margin-top: 2px;">
@@ -2905,7 +3128,7 @@
       `;
 
       // =======================================================================
-      // CONTROLADORES DEL GESTOR DOCUMENTAL
+      // CONTROLADORES DEL GESTOR DOCUMENTAL Y DIGITALIZACIÓN MÓVIL
       // =======================================================================
       window.selectClinicalDoc = function(docId) {
         const url = new URL(window.location.href);
@@ -2928,6 +3151,94 @@
       window.downloadDocSimulated = function(docId) {
         const doc = mockApi.getDocumentById(docId);
         showToast('📥 Descargando archivo formal: ' + doc.title + ' (PDF/A)', 'success');
+      };
+
+      window.openMobileScanModal = function() {
+        const modal = document.getElementById('mobileScanModal');
+        if (modal) modal.style.display = 'flex';
+      };
+
+      window.closeMobileScanModal = function() {
+        const modal = document.getElementById('mobileScanModal');
+        if (modal) modal.style.display = 'none';
+      };
+
+      window.handleScanBackdrop = function(e) {
+        if (e.target.id === 'mobileScanModal') {
+          window.closeMobileScanModal();
+        }
+      };
+
+      window.switchDocMobileTab = function(tab) {
+        const listPanel = document.getElementById('docListPanel');
+        const viewerPanel = document.getElementById('docViewerContainer');
+        const btnList = document.getElementById('btnTabDocList');
+        const btnViewer = document.getElementById('btnTabDocViewer');
+
+        if (tab === 'list') {
+          if (listPanel) listPanel.classList.remove('hidden-mobile');
+          if (viewerPanel) viewerPanel.classList.add('hidden-mobile');
+          if (btnList) btnList.classList.add('active');
+          if (btnViewer) btnViewer.classList.remove('active');
+        } else {
+          if (listPanel) listPanel.classList.add('hidden-mobile');
+          if (viewerPanel) viewerPanel.classList.remove('hidden-mobile');
+          if (btnList) btnList.classList.remove('active');
+          if (btnViewer) btnViewer.classList.add('active');
+        }
+      };
+
+      window.handleCameraPhotoSelected = function(e) {
+        const files = e.target.files;
+        if (files && files.length > 0) {
+          const file = files[0];
+          const reader = new FileReader();
+          reader.onload = function(evt) {
+            const previewImg = document.getElementById('scanPreviewImg');
+            const previewActive = document.getElementById('scanPreviewActive');
+            const previewEmpty = document.getElementById('scanPreviewEmpty');
+            const previewHash = document.getElementById('scanPreviewHashText');
+            if (previewImg) previewImg.src = evt.target.result;
+            if (previewActive) previewActive.style.display = 'block';
+            if (previewEmpty) previewEmpty.style.display = 'none';
+            if (previewHash) previewHash.innerHTML = '✓ Hash SHA-256 Calculado: <code style="font-family:var(--mono);">c83b90a' + Math.random().toString(16).substring(2, 8) + '...</code>';
+          };
+          reader.readAsDataURL(file);
+        }
+      };
+
+      window.simulateQuickCapture = function() {
+        const previewImg = document.getElementById('scanPreviewImg');
+        const previewActive = document.getElementById('scanPreviewActive');
+        const previewEmpty = document.getElementById('scanPreviewEmpty');
+        const previewHash = document.getElementById('scanPreviewHashText');
+        
+        const simulatedSvg = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="260" viewBox="0 0 400 260"><rect width="400" height="260" fill="%23FFFFF6" stroke="%23CBD5E1" stroke-width="2"/><text x="20" y="30" font-family="Arial" font-size="14" font-weight="bold" fill="%230E7060">SILLAR DENTAL ESPECIALIDADES</text><text x="20" y="48" font-family="Arial" font-size="10" fill="%2364748B">Sede Yanahuara · Receta Médica Física</text><line x1="20" y1="56" x2="380" y2="56" stroke="%23CBD5E1"/><text x="20" y="80" font-family="Arial" font-size="11" font-weight="bold" fill="%231E293B">Rp. Amoxicilina 500mg (18 caps) - 1 c/8h x 6d</text><text x="20" y="100" font-family="Arial" font-size="11" font-weight="bold" fill="%231E293B">Rp. Ibuprofeno 400mg (10 tabs) - 1 c/8h condicional</text><rect x="230" y="140" width="140" height="60" rx="4" fill="none" stroke="%231D4ED8" stroke-width="2" stroke-dasharray="2,2"/><text x="300" y="160" font-family="Arial" font-size="9" font-weight="bold" fill="%231D4ED8" text-anchor="middle">DRA. ANA FLORES VANESA</text><text x="300" y="174" font-family="Arial" font-size="8" fill="%231D4ED8" text-anchor="middle">CIRUJANO DENTISTA</text><text x="300" y="188" font-family="Arial" font-size="10" font-weight="bold" fill="%231D4ED8" text-anchor="middle">COP 18240</text><path d="M 120 185 Q 160 140 210 180 T 260 170" fill="none" stroke="%231E3A8A" stroke-width="3"/></svg>`;
+        
+        if (previewImg) previewImg.src = simulatedSvg;
+        if (previewActive) previewActive.style.display = 'block';
+        if (previewEmpty) previewEmpty.style.display = 'none';
+        if (previewHash) previewHash.innerHTML = '✓ Hash SHA-256 Calculado: <code style="font-family:var(--mono);">c83b90a8849b2ef3223ea4b9762db10f...</code>';
+        showToast('Foto de receta física con sello COP 18240 simulada.', 'info');
+      };
+
+      window.handleMobileScanSubmit = function(e) {
+        e.preventDefault();
+        const newDoc = mockApi.uploadScannedPrescription({
+          title: "Receta Médica Sellada y Firmada en Físico (Digitalización Móvil)",
+          author: "Dra. Ana Flores Vanesa",
+          scannedBy: "Dra. Ana Flores (Cámara Móvil Consultorio 1)",
+          qrRefCode: "QR-SCAN-RX-45892104-01",
+          summary: "Receta física con sello y firma manuscrita de la odontóloga, impresa desde el sistema, firmada con bolígrafo y fotografiada/digitalizada desde el teléfono celular del consultorio conforme a NTS N.º 139-MINSA."
+        });
+
+        showToast('✓ Receta física sellada digitalizada y vinculada a la Historia Clínica (NTS 139-MINSA)', 'success');
+        window.closeMobileScanModal();
+
+        const url = new URL(window.location.href);
+        url.searchParams.set('view', 'documents');
+        url.searchParams.set('doc', newDoc.id);
+        window.location.href = url.toString();
       };
 
       window.handleDocDragOver = function(e) {
@@ -2976,7 +3287,6 @@
 
         showToast('✓ Documento ingresado exitosamente: ' + newDoc.title + ' (SHA-256 generado)', 'success');
         
-        // Recargar vista para mostrar el documento activo
         const url = new URL(window.location.href);
         url.searchParams.set('view', 'documents');
         url.searchParams.set('doc', newDoc.id);

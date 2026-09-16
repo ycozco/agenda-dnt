@@ -450,8 +450,18 @@ class MockApiV2 {
   // EXPEDIENTE DOCUMENTAL & PROCESADOR DE PDFS CLÍNICOS
   // =========================================================================
   getDocuments(patientId = "pat_maria") {
-    if (!this.state.documents) {
-      this.state.documents = JSON.parse(JSON.stringify(this.getSeed().documents || []));
+    if (!this.state.documents || !this.state.documents.find(d => d.id === 'doc_receta_fisica_scan')) {
+      const defaultDocs = SEED_V2.documents || [];
+      if (!this.state.documents) {
+        this.state.documents = JSON.parse(JSON.stringify(defaultDocs));
+      } else {
+        defaultDocs.forEach(sd => {
+          if (!this.state.documents.find(d => d.id === sd.id)) {
+            this.state.documents.push(JSON.parse(JSON.stringify(sd)));
+          }
+        });
+      }
+      this.saveState();
     }
     return this.state.documents;
   }
@@ -476,17 +486,36 @@ class MockApiV2 {
       pages: docData.pages || 1,
       size: docData.size || "1.2 MB",
       sha256: docData.sha256 || "a8f5c2d" + Math.random().toString(16).substring(2, 10) + "7890abcdef1234567890",
-      status: "VALIDATED_PUBLISHED",
+      status: docData.status || "VALIDATED_PUBLISHED",
       hasRadiograph: !!docData.hasRadiograph,
+      hasScannedPhysical: !!docData.hasScannedPhysical,
+      scannedBy: docData.scannedBy || null,
+      qrRefCode: docData.qrRefCode || null,
       studyId: docData.studyId || null,
       summary: docData.summary || "Documento clínico ingresado y validado en el expediente digital.",
-      notes: "Carga asistida por el Centro de Gestión Documental."
+      notes: docData.notes || "Carga asistida por el Centro de Gestión Documental."
     };
 
     this.state.documents.unshift(newDoc);
     this.logAuditEvent("CARGA_DOCUMENTO_PDF", "Documento ingresado al expediente: " + newDoc.title + " (Hash: " + newDoc.sha256.substring(0, 12) + "...)");
     this.saveState();
     return newDoc;
+  }
+
+  uploadScannedPrescription(data = {}) {
+    return this.uploadDocument({
+      title: data.title || "Receta Médica Sellada y Firmada en Físico (Digitalización Móvil)",
+      category: "RECETA_FISICA_SCAN",
+      status: "PHYSICAL_SIGNED_DIGITIZED",
+      author: data.author || "Dra. Ana Flores Vanesa",
+      size: data.size || "1.3 MB",
+      pages: 1,
+      hasScannedPhysical: true,
+      scannedBy: data.scannedBy || "Dra. Ana Flores (Cámara Móvil Consultorio)",
+      qrRefCode: data.qrRefCode || ("QR-SCAN-RX-" + Date.now().toString().slice(-6)),
+      summary: data.summary || "Receta física con sello de colegiatura COP 18240 y firma manuscrita de la profesional, fotografiada y digitalizada desde smartphone conforme a NTS N.º 139-MINSA.",
+      notes: "Soporte físico custodiado en Archivo Pasivo Clínico Yanahuara. Hash criptográfico generado y verificado."
+    });
   }
 
 

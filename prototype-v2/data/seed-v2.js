@@ -511,6 +511,26 @@ export const SEED_V2 = {
     "notes": "Código QR trazable: QR-REC-2026-0908-45892104."
   },
   {
+    "id": "doc_receta_fisica_scan",
+    "title": "Receta Médica Sellada y Firmada en Físico (Digitalización Móvil)",
+    "category": "RECETA_FISICA_SCAN",
+    "date": "2026-09-08",
+    "time": "11:45 AM",
+    "author": "Dra. Ana Flores Vanesa",
+    "authorCmp": "COP 18240",
+    "entity": "Sillar Dental Especialidades",
+    "pages": 1,
+    "size": "1.4 MB",
+    "sha256": "c83b90a8849b2ef3223ea4b9762db10f9942a42095f9c15d482023a8868df419",
+    "status": "PHYSICAL_SIGNED_DIGITIZED",
+    "hasRadiograph": false,
+    "hasScannedPhysical": true,
+    "scannedBy": "Dra. Ana Flores (Cámara Móvil Consultorio 1)",
+    "qrRefCode": "QR-SCAN-RX-45892104-01",
+    "summary": "Receta física original con sello y firma manuscrita de la odontóloga, impresa desde el sistema, firmada con bolígrafo y fotografiada/digitalizada desde el teléfono celular del consultorio conforme a NTS N.º 139-MINSA.",
+    "notes": "Soporte físico original archivado en carpeta física Yanahuara. Registro de digitalización verificado con sello criptográfico."
+  },
+  {
     "id": "doc_perio_exam",
     "title": "Ficha de Sondaje Periodontal (6 Sitios - AAP/EFP 2018)",
     "category": "PERIODONCIA_PDF",
