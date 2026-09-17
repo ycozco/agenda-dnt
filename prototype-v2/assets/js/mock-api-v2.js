@@ -113,6 +113,156 @@ class MockApiV2 {
   // =========================================================================
   // GESTIÓN DE TENANTS / CLÍNICAS (SUPER ADMIN SAAS)
   // =========================================================================
+
+  // =========================================================================
+  // SEGURIDAD AVANZADA, 2FA, SESIONES Y PRIVACIDAD LPDP
+  // =========================================================================
+  getSecurityConfig() {
+    if (!this.state.security) {
+      this.state.security = JSON.parse(JSON.stringify(SEED_V2.security || {}));
+      this.saveState();
+    }
+    return this.state.security;
+  }
+
+  getActiveSessions() {
+    return this.getSecurityConfig().activeSessions || [];
+  }
+
+  revokeSession(sessionId) {
+    const sec = this.getSecurityConfig();
+    const target = (sec.activeSessions || []).find(s => s.id === sessionId);
+    if (target) {
+      sec.activeSessions = sec.activeSessions.filter(s => s.id !== sessionId);
+      this.logAuditEvent("REVOCACION_SESION", "Sesión remota cerrada en: " + target.device + " (IP: " + target.ip + ")");
+      this.saveState();
+      return true;
+    }
+    return false;
+  }
+
+  revokeAllOtherSessions() {
+    const sec = this.getSecurityConfig();
+    sec.activeSessions = (sec.activeSessions || []).filter(s => s.isCurrent);
+    this.logAuditEvent("REVOCACION_TODAS_SESIONES", "Todas las sesiones remotas fueron cerradas preventivamente.");
+    this.saveState();
+    return sec.activeSessions;
+  }
+
+  verify2FACode(code) {
+    const cleanCode = (code || '').replace(/\s/g, '');
+    // Permite cualquier código de 6 dígitos que coincida con simulación o patrón TOTP
+    if (cleanCode.length === 6 && /^\d{6}$/.test(cleanCode)) {
+      this.logAuditEvent("VERIFICACION_2FA", "Doble factor de autenticación verificado exitosamente.");
+      return { success: true, message: "Código 2FA válido" };
+    }
+    return { success: false, message: "Código incorrecto o expirado. Ingrese los 6 dígitos de su app autenticadora." };
+  }
+
+  toggle2FA(enabled) {
+    const sec = this.getSecurityConfig();
+    if (sec.twoFactorConfig) {
+      sec.twoFactorConfig.enabled = enabled;
+      this.logAuditEvent("CONFIG_2FA", enabled ? "2FA activado para la cuenta médica" : "2FA desactivado");
+      this.saveState();
+      return sec.twoFactorConfig;
+    }
+    return null;
+  }
+
+  getSecurityIncidents() {
+    return this.getSecurityConfig().securityIncidents || [];
+  }
+
+  // PRIVACIDAD & DERECHOS ARCO (LEY 29733)
+  getPatientPrivacy() {
+    if (!this.state.patientPrivacy) {
+      this.state.patientPrivacy = JSON.parse(JSON.stringify(SEED_V2.patientPrivacy || {}));
+      this.saveState();
+    }
+    return this.state.patientPrivacy;
+  }
+
+  updateConsent(key, value) {
+    const priv = this.getPatientPrivacy();
+    priv[key] = value;
+    this.logAuditEvent("ACTUALIZACION_CONSENTIMIENTO", "Paciente modificó consentimiento LPDP: " + key + " = " + value);
+    this.saveState();
+    return priv;
+  }
+
+  requestArcoExport(type, reason) {
+    const priv = this.getPatientPrivacy();
+    const reqId = "ARCO-2026-" + Math.floor(Math.random() * 9000 + 1000);
+    const sha = Array.from({length: 64}, () => Math.floor(Math.random()*16).toString(16)).join('');
+    
+    const newReq = {
+      id: reqId,
+      type: type || "ACCESO",
+      requestDate: new Date().toISOString().split('T')[0],
+      status: "COMPLETED",
+      detail: reason || "Exportación certificada de Historia Clínica conforme a NTS 139-MINSA con marca de agua forense.",
+      sha256: sha
+    };
+    if (!priv.arcoRequests) priv.arcoRequests = [];
+    priv.arcoRequests.unshift(newReq);
+
+    this.logAuditEvent("SOLICITUD_ARCO", "Solicitud ARCO registrada (" + type + "): " + reqId + " Hash: " + sha.slice(0, 12));
+    this.saveState();
+    return newReq;
+  }
+
+  // OPTIMIZACIÓN & STORAGE PIPELINE (S3 / MINIO)
+  optimizeStorage(tenantId) {
+    const tenant = this.getTenantById(tenantId || this.state.activeTenantId);
+    if (tenant && tenant.storage) {
+      const prevMb = tenant.storage.usedMb;
+      const optimizedMb = Math.round(prevMb * 0.38); // Ahorro de 62%
+      tenant.storage.usedMb = optimizedMb;
+      tenant.storage.compressionRatio = "62% WebP Lossless / Tiling";
+      tenant.storage.lastOptimization = new Date().toLocaleString('es-PE');
+
+      this.logAuditEvent("OPTIMIZACION_STORAGE_S3", "Compresión WebP/AVIF ejecutada en S3 para: " + tenant.name + " (" + (prevMb - optimizedMb) + " MB liberados)");
+      this.saveState();
+      return tenant.storage;
+    }
+    return null;
+  }
+
+  // RESILIENCIA OFFLINE EN CONSULTORIO
+  getOfflineQueue() {
+    try {
+      const q = sessionStorage.getItem('sillar_offline_queue');
+      return q ? JSON.parse(q) : [];
+    } catch(e) {
+      return [];
+    }
+  }
+
+  enqueueOfflineMutation(type, payload) {
+    const q = this.getOfflineQueue();
+    q.push({
+      id: "offline_" + Date.now(),
+      type: type,
+      payload: payload,
+      createdAt: new Date().toISOString()
+    });
+    sessionStorage.setItem('sillar_offline_queue', JSON.stringify(q));
+    return q;
+  }
+
+  syncOfflineQueue() {
+    const q = this.getOfflineQueue();
+    if (q.length === 0) return 0;
+    
+    // Procesa mutaciones encoladas
+    q.forEach(item => {
+      this.logAuditEvent("SYNC_OFFLINE", "Mutación sincronizada desde modo consultorio offline: " + item.type);
+    });
+    sessionStorage.removeItem('sillar_offline_queue');
+    return q.length;
+  }
+
   getTenants() {
     if (!this.state.tenants || this.state.tenants.length === 0) {
       this.state.tenants = JSON.parse(JSON.stringify(SEED_V2.tenants || []));

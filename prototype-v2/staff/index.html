@@ -767,6 +767,15 @@
           <span style="opacity: 0.75; font-weight: 600;">Dra. Ana Flores</span>
           <span class="chip chip-success" style="font-size: 0.65rem; padding: 2px 6px;">COP 18240</span>
         </div>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 8px;">
+          <button type="button" class="btn btn-secondary btn-small" onclick="window.openSecurityModal()" style="font-size: 0.72rem; color: #38BDF8; border-color: rgba(56, 189, 248, 0.4); background: rgba(56, 189, 248, 0.08); padding: 5px 6px;">
+            🛡️ 2FA & Sesión
+          </button>
+          <button type="button" id="btnOfflineToggle" class="btn btn-secondary btn-small" onclick="window.toggleOfflineSimulation()" style="font-size: 0.72rem; color: #4ADE80; border-color: rgba(74, 222, 128, 0.4); background: rgba(74, 222, 128, 0.08); padding: 5px 6px;">
+            🟢 Online (18ms)
+          </button>
+        </div>
         <a href="login.html" class="btn btn-secondary btn-small" style="width: 100%; color: white; border-color: rgba(255,255,255,0.25); background: transparent;">Cerrar Sesión</a>
       </div>
     </aside>
@@ -1247,6 +1256,95 @@
         </button>
       </div>
     </div>
+  </div>
+
+  
+  <!-- MODAL 7: SEGURIDAD AVANZADA, 2FA Y SESIONES ACTIVAS (LPDP) -->
+  <div class="drawer-modal-overlay" id="securityModal" style="display:none;" onclick="window.handleSecurityBackdrop(event)">
+    <div class="drawer-modal-card" style="width: min(600px, 95vw); max-height: 90vh; overflow-y: auto;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 1px solid var(--line); padding-bottom: 12px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <div style="font-size: 1.4rem;">🛡️</div>
+          <div>
+            <h3 style="margin: 0; font-size: 1.25rem; color: var(--ink);">Seguridad de la Cuenta Médica & 2FA</h3>
+            <span class="tiny muted">Conforme a la Ley 29733 (LPDP) y control estricto de acceso a historias clínicas.</span>
+          </div>
+        </div>
+        <button class="btn btn-secondary btn-small" onclick="window.closeSecurityModal()">✕</button>
+      </div>
+
+      <!-- SECCIÓN 1: DOBLE FACTOR DE AUTENTICACIÓN (TOTP) -->
+      <div class="card" style="margin-bottom: 16px; border-left: 4px solid var(--action);">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
+          <div>
+            <strong style="color: var(--ink); font-size: 0.95rem;">Autenticación de Dos Factores (TOTP / 2FA)</strong>
+            <p class="tiny muted" style="margin: 2px 0 0;">Protege el acceso a historias clínicas y recetas con Google Authenticator o Microsoft Authenticator.</p>
+          </div>
+          <span class="chip chip-success" style="font-size: 0.72rem; padding: 2px 8px;">✓ Activo</span>
+        </div>
+
+        <div style="background: #F8FAFC; border: 1px solid var(--line); border-radius: 8px; padding: 12px; margin-bottom: 12px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+            <div style="font-family: var(--mono); font-size: 0.8rem; color: var(--action); font-weight: 700;">
+              Clave Secreta: SILLAR-COP18240-SECURE-KEY
+            </div>
+            <span class="tiny muted">Algoritmo: RFC 6238 TOTP (SHA-1, 30s)</span>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <input type="text" id="test2faInput" class="form-control" placeholder="Ingrese código de 6 dígitos (ej. 123456)" maxlength="6" style="max-width: 220px; font-family: var(--mono); letter-spacing: 2px; text-align: center; font-weight: 700;">
+          <button class="btn btn-primary btn-small" onclick="window.verifyTest2FA()" style="padding: 9px 14px; font-weight: 700;">
+            Verificar Código
+          </button>
+        </div>
+      </div>
+
+      <!-- SECCIÓN 2: SESIONES ACTIVAS Y DISPOSITIVOS -->
+      <div class="card" style="margin-bottom: 16px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <div>
+            <strong style="color: var(--ink); font-size: 0.95rem;">Sesiones y Dispositivos Conectados</strong>
+            <span class="tiny muted" style="display: block;">Detección preventiva de accesos concurrentes no autorizados.</span>
+          </div>
+          <button class="btn btn-secondary btn-small" onclick="window.revokeAllOtherSessions()" style="font-size: 0.72rem; color: #DC2626; border-color: #FECACA;">
+            Cerrar otras sesiones
+          </button>
+        </div>
+
+        <div id="activeSessionsContainer" style="display: grid; gap: 10px;">
+          <!-- Dinámico -->
+        </div>
+      </div>
+
+      <!-- SECCIÓN 3: CÓDIGOS DE RECUPERACIÓN DE EMERGENCIA -->
+      <div class="card" style="padding: 14px; background: #FFFBEB; border-color: #FDE68A;">
+        <strong style="color: #92400E; font-size: 0.86rem; display: block; margin-bottom: 4px;">🔑 Códigos de Respaldo de Emergencia</strong>
+        <p class="tiny" style="color: #B45309; margin: 0 0 10px; line-height: 1.4;">
+          Utilice estos códigos de un solo uso en caso de extravío de su dispositivo móvil con autenticador.
+        </p>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; font-family: var(--mono); font-size: 0.75rem; color: #78350F; font-weight: 700;">
+          <div style="background: white; padding: 4px 8px; border-radius: 4px; border: 1px solid #FCD34D; text-align: center;">4829-1049</div>
+          <div style="background: white; padding: 4px 8px; border-radius: 4px; border: 1px solid #FCD34D; text-align: center;">8920-5512</div>
+          <div style="background: white; padding: 4px 8px; border-radius: 4px; border: 1px solid #FCD34D; text-align: center;">7381-9921</div>
+          <div style="background: white; padding: 4px 8px; border-radius: 4px; border: 1px solid #FCD34D; text-align: center;">6190-3341</div>
+          <div style="background: white; padding: 4px 8px; border-radius: 4px; border: 1px solid #FCD34D; text-align: center;">5512-8831</div>
+          <div style="background: white; padding: 4px 8px; border-radius: 4px; border: 1px solid #FCD34D; text-align: center;">9012-4412</div>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; margin-top: 16px;">
+        <button class="btn btn-secondary" onclick="window.closeSecurityModal()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- BANNER FLOTANTE DE MODO CONSULTORIO OFFLINE -->
+  <div id="offlineFloatingBanner" style="display: none; position: fixed; top: 12px; left: 50%; transform: translateX(-50%); z-index: 9999; background: #FEF3C7; border: 2px solid #F59E0B; border-radius: 10px; padding: 10px 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); color: #92400E; font-weight: 700; font-size: 0.88rem; align-items: center; gap: 14px;">
+    <span>⚡ Consultorio en Modo Sin Conexión (Offline) — Mutaciones en cola: <span id="offlineQueueCount">0</span></span>
+    <button class="btn btn-primary btn-small" onclick="window.syncOfflineQueueNow()" style="background: #D97706; padding: 4px 10px; font-size: 0.76rem;">
+      🔄 Sincronizar Ahora
+    </button>
   </div>
 
   <!-- SCRIPT CENTRAL DE LA CONSOLA -->
@@ -4121,6 +4219,111 @@
         showToast('Profesional dado de baja del directorio', 'success');
         window.location.reload();
       }
+    };
+
+  
+    // CONTROLADORES DE SEGURIDAD, 2FA Y SESIONES
+    window.openSecurityModal = function() {
+      window.renderActiveSessionsList();
+      const m = document.getElementById('securityModal');
+      if (m) m.style.display = 'flex';
+    };
+
+    window.closeSecurityModal = function() {
+      const m = document.getElementById('securityModal');
+      if (m) m.style.display = 'none';
+    };
+
+    window.handleSecurityBackdrop = function(e) {
+      if (e.target.id === 'securityModal') window.closeSecurityModal();
+    };
+
+    window.renderActiveSessionsList = function() {
+      const container = document.getElementById('activeSessionsContainer');
+      if (!container) return;
+      const sessions = mockApi.getActiveSessions();
+      container.innerHTML = sessions.map(s => `
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; background: #F8FAFC; border: 1px solid var(--line); border-radius: 8px;">
+          <div>
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <strong style="color: var(--ink); font-size: 0.88rem;">${s.device}</strong>
+              ${s.isCurrent ? '<span class="chip chip-success" style="font-size: 0.65rem; padding: 1px 6px;">Dispositivo Actual</span>' : ''}
+            </div>
+            <div class="tiny muted">${s.browser} · IP: ${s.ip} (${s.location})</div>
+            <div class="tiny" style="color: #64748B;">Actividad: ${s.lastActive}</div>
+          </div>
+          ${!s.isCurrent ? `
+            <button class="btn btn-secondary btn-small" onclick="window.revokeSingleSession('${s.id}')" style="font-size: 0.72rem; color: #DC2626; border-color: #FECACA; padding: 3px 8px;">
+              Cerrar
+            </button>
+          ` : '<span class="tiny" style="color: #10B981; font-weight: 700;">Conectado</span>'}
+        </div>
+      `).join('');
+    };
+
+    window.revokeSingleSession = function(sessionId) {
+      mockApi.revokeSession(sessionId);
+      showToast('Sesión remota revocada exitosamente.', 'info');
+      window.renderActiveSessionsList();
+    };
+
+    window.revokeAllOtherSessions = function() {
+      mockApi.revokeAllOtherSessions();
+      showToast('Se han cerrado todas las demás sesiones remotas.', 'success');
+      window.renderActiveSessionsList();
+    };
+
+    window.verifyTest2FA = function() {
+      const input = document.getElementById('test2faInput');
+      const val = input ? input.value.trim() : '';
+      const res = mockApi.verify2FACode(val);
+      if (res.success) {
+        showToast('✓ ' + res.message, 'success');
+        if (input) input.value = '';
+      } else {
+        showToast('⚠️ ' + res.message, 'error');
+      }
+    };
+
+    // MODO CONSULTORIO OFFLINE & RESILIENCIA
+    let isOfflineSimulated = false;
+    window.toggleOfflineSimulation = function() {
+      isOfflineSimulated = !isOfflineSimulated;
+      const btn = document.getElementById('btnOfflineToggle');
+      const banner = document.getElementById('offlineFloatingBanner');
+
+      if (isOfflineSimulated) {
+        if (btn) {
+          btn.textContent = '🟡 Offline';
+          btn.style.color = '#F59E0B';
+          btn.style.borderColor = 'rgba(245, 158, 11, 0.4)';
+          btn.style.background = 'rgba(245, 158, 11, 0.12)';
+        }
+        if (banner) banner.style.display = 'flex';
+        // Encolar una mutación de prueba
+        mockApi.enqueueOfflineMutation('REGISTRO_HALLAZGO_DIENTE', { tooth: 21, note: 'Diagnóstico guardado en local IndexedDB durante corte de red.' });
+        const count = mockApi.getOfflineQueue().length;
+        const countEl = document.getElementById('offlineQueueCount');
+        if (countEl) countEl.textContent = count;
+        showToast('Consultorio en modo sin conexión. Los registros se guardan localmente.', 'info');
+      } else {
+        window.syncOfflineQueueNow();
+      }
+    };
+
+    window.syncOfflineQueueNow = function() {
+      const syncedCount = mockApi.syncOfflineQueue();
+      isOfflineSimulated = false;
+      const btn = document.getElementById('btnOfflineToggle');
+      const banner = document.getElementById('offlineFloatingBanner');
+      if (btn) {
+        btn.textContent = '🟢 Online (18ms)';
+        btn.style.color = '#4ADE80';
+        btn.style.borderColor = 'rgba(74, 222, 128, 0.4)';
+        btn.style.background = 'rgba(74, 222, 128, 0.08)';
+      }
+      if (banner) banner.style.display = 'none';
+      showToast('✓ Sincronización completada: ' + syncedCount + ' operaciones guardadas en el servidor.', 'success');
     };
 
   </script>

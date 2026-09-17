@@ -4,6 +4,96 @@
  * agenda multi-sillón, odontograma FDI de 52 piezas, documentos, caja e inventario.
  */
 export const SEED_V2 = {
+  security: {
+    twoFactorConfig: {
+      enabled: true,
+      method: "TOTP_AUTHENTICATOR",
+      issuer: "Sillar Dental OS",
+      account: "ana.flores@sillardental.pe",
+      secret: "SILLAR-COP18240-SECURE-KEY",
+      verifiedAt: "2026-09-10 09:15:00",
+      backupCodes: ["4829-1049", "8920-5512", "7381-9921", "6190-3341", "5512-8831", "9012-4412"]
+    },
+    activeSessions: [
+      {
+        id: "sess_01",
+        device: "Laptop Quirófano 1 (Dell XPS 15)",
+        browser: "Google Chrome 128 · Windows 11",
+        ip: "190.236.14.88",
+        location: "Yanahuara, Arequipa",
+        isCurrent: true,
+        lastActive: "Hace 2 minutos",
+        startedAt: "2026-09-16 08:00 AM"
+      },
+      {
+        id: "sess_02",
+        device: "iPhone 15 Pro (Móvil Dra. Ana)",
+        browser: "Safari Mobile · iOS 18",
+        ip: "181.66.19.42",
+        location: "Cayma, Arequipa",
+        isCurrent: false,
+        lastActive: "Hace 45 minutos",
+        startedAt: "2026-09-16 07:15 AM"
+      },
+      {
+        id: "sess_03",
+        device: "Tablet Clínica (iPad Air 5ta Gen)",
+        browser: "Safari · iPadOS 17.5",
+        ip: "190.236.14.88",
+        location: "Yanahuara, Arequipa",
+        isCurrent: false,
+        lastActive: "Ayer a las 18:20",
+        startedAt: "2026-09-15 14:30 PM"
+      }
+    ],
+    securityIncidents: [
+      {
+        id: "sec_01",
+        timestamp: "2026-09-16 11:24:05",
+        type: "RATE_LIMIT_BLOCKED",
+        severity: "LOW",
+        sourceIp: "45.143.200.12 (Tor Exit Node)",
+        targetEndpoint: "POST /public/reservar.html",
+        detail: "38 intentos de agendamiento en 60 segundos bloqueados por Redis sliding-window."
+      },
+      {
+        id: "sec_02",
+        timestamp: "2026-09-16 09:12:44",
+        type: "TENANT_TAMPER_BLOCKED",
+        severity: "HIGH",
+        sourceIp: "190.119.24.112",
+        targetEndpoint: "GET /api/v1/tenants/tenant_san_marcos/patients",
+        detail: "Intento de acceso cruzado entre tenants sin JWT autorizado. Bloqueado por TenantGuard."
+      },
+      {
+        id: "sec_03",
+        timestamp: "2026-09-15 17:40:19",
+        type: "ARCO_EXPORT_WATERMARK",
+        severity: "AUDIT",
+        sourceIp: "190.236.14.88",
+        targetEndpoint: "POST /patient/export-history",
+        detail: "Descarga de historia clínica completa autorizada con marca de agua forense DNI 45892104."
+      }
+    ]
+  },
+  patientPrivacy: {
+    dataProcessingConsent: true,
+    consentDate: "2026-01-15",
+    whatsappAlertsConsent: true,
+    marketingConsent: false,
+    teachingPhotosConsent: false,
+    arcoRequests: [
+      {
+        id: "ARCO-2026-0042",
+        type: "ACCESO",
+        requestDate: "2026-09-10",
+        status: "COMPLETED",
+        detail: "Copia digital certificada de historia clínica y radiografías con marca de agua forense NTS-139.",
+        sha256: "b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
+      }
+    ]
+  },
+
   activeTenantId: "tenant_sillar_yanahuara",
   tenants: [
     {
@@ -30,6 +120,15 @@ export const SEED_V2 = {
       adminPhone: "+51 954 123 456",
       city: "Arequipa",
       address: "Av. Ejército 712, Yanahuara",
+      storage: {
+        usedMb: 14850,
+        limitMb: 51200,
+        dicomCount: 48,
+        scannedRecetasCount: 124,
+        pdfCount: 230,
+        compressionRatio: "68% WebP/AVIF",
+        lastOptimization: "2026-09-15 03:00 AM"
+      },
       modules: {
         pacs3d: true,
         digitalSignature: true,
