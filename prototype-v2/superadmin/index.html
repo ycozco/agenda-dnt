@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Super Admin · Gestor Global de Tenants & Clínicas SaaS | Sillar Dental OS</title>
+  <meta name="description" content="Panel Super Administrador para aprovisionamiento, facturación, dominios SSL y gestión de clínicas odontológicas multi-tenant.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../assets/css/tokens.css">
+  <link rel="stylesheet" href="../assets/css/base.css">
+  <link rel="stylesheet" href="../assets/css/components.css">
+
+  <style>
+    :root {
+      --sa-navy: #0A192F;
+      --sa-dark: #071120;
+      --sa-surface: #0E223D;
+      --sa-cyan: #0EA5E9;
+      --sa-emerald: #10B981;
+      --sa-amber: #F59E0B;
+      --sa-rose: #F43F5E;
+    }
+
+    body {
+      background: #F8FAFC;
+      color: var(--ink);
+      font-family: 'Source Sans 3', sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    [data-theme="dark"] body {
+      background: #050E1A;
+      color: #E2E8F0;
+    }
+
+    /* TOPBAR SUPER ADMIN */
+    .sa-topbar {
+      background: var(--sa-navy);
+      color: white;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 0 24px;
+    }
+    .sa-topbar-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 68px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .sa-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: white;
+    }
+    .sa-badge {
+      background: linear-gradient(135deg, #0EA5E9, #0284C7);
+      color: white;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      padding: 3px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    /* CONTENEDOR PRINCIPAL */
+    .sa-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 28px 24px 60px;
+      width: 100%;
+      box-sizing: border-box;
+      flex: 1;
+    }
+
+    /* TARJETAS DE MÉTRICAS SAAS */
+    .sa-metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+    .sa-metric-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    [data-theme="dark"] .sa-metric-card {
+      background: #0B192C;
+      border-color: #1E293B;
+    }
+    .sa-metric-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+    .sa-metric-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .sa-metric-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--ink-soft);
+    }
+    .sa-metric-val {
+      font-family: var(--display);
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--ink);
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+    [data-theme="dark"] .sa-metric-val {
+      color: white;
+    }
+    .sa-metric-sub {
+      font-size: 0.84rem;
+      color: var(--ink-soft);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* BARRA DE FILTROS & ACCIONES */
+    .sa-toolbar {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      box-shadow: var(--shadow-sm);
+    }
+    [data-theme="dark"] .sa-toolbar {
+      background: #0B192C;
+      border-color: #1E293B;
+    }
+    .sa-search-box {
+      flex: 1;
+      min-width: 260px;
+      position: relative;
+    }
+    .sa-search-input {
+      width: 100%;
+      padding: 10px 14px 10px 38px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      font-family: inherit;
+      font-size: 0.92rem;
+      background: #F8FAFC;
+      color: var(--ink);
+      box-sizing: border-box;
+      outline: none;
+      transition: border-color 0.15s ease;
+    }
+    [data-theme="dark"] .sa-search-input {
+      background: #071220;
+      border-color: #1E293B;
+      color: white;
+    }
+    .sa-search-input:focus {
+      border-color: var(--sa-cyan);
+    }
+    .sa-search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #94A3B8;
+      font-size: 1rem;
+      pointer-events: none;
+    }
+
+    /* TABLA DE CLÍNICAS / TENANTS */
+    .sa-table-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    [data-theme="dark"] .sa-table-card {
+      background: #0B192C;
+      border-color: #1E293B;
+    }
+    .sa-table-responsive {
+      width: 100%;
+      overflow-x: auto;
+    }
+    .sa-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.92rem;
+    }
+    .sa-table th {
+      background: #F1F5F9;
+      padding: 14px 18px;
+      font-weight: 700;
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #475569;
+      border-bottom: 1px solid var(--line);
+      white-space: nowrap;
+    }
+    [data-theme="dark"] .sa-table th {
+      background: #071220;
+      color: #94A3B8;
+      border-color: #1E293B;
+    }
+    .sa-table td {
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: middle;
+    }
+    [data-theme="dark"] .sa-table td {
+      border-color: #1E293B;
+    }
+    .sa-table tr:hover {
+      background: rgba(14, 165, 233, 0.03);
+    }
+    [data-theme="dark"] .sa-table tr:hover {
+      background: rgba(14, 165, 233, 0.06);
+    }
+
+    /* AVATARES & BADGES */
+    .tenant-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #0A192F, #1E3A8A);
+      color: white;
+      font-weight: 800;
+      font-size: 1.15rem;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .badge-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 0.74rem;
+      font-weight: 700;
+    }
+    .badge-status-active {
+      background: #DCFCE7;
+      color: #166534;
+      border: 1px solid #86EFAC;
+    }
+    [data-theme="dark"] .badge-status-active {
+      background: rgba(16, 185, 129, 0.2);
+      color: #34D399;
+      border-color: rgba(52, 211, 153, 0.3);
+    }
+    .badge-status-trial {
+      background: #FEF3C7;
+      color: #92400E;
+      border: 1px solid #FCD34D;
+    }
+    [data-theme="dark"] .badge-status-trial {
+      background: rgba(245, 158, 11, 0.2);
+      color: #FBBF24;
+      border-color: rgba(251, 191, 36, 0.3);
+    }
+    .badge-status-suspended {
+      background: #FEE2E2;
+      color: #991B1B;
+      border: 1px solid #FCA5A5;
+    }
+    [data-theme="dark"] .badge-status-suspended {
+      background: rgba(239, 68, 68, 0.2);
+      color: #F87171;
+      border-color: rgba(248, 113, 113, 0.3);
+    }
+
+    .badge-plan {
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .badge-plan-starter {
+      background: #F1F5F9;
+      color: #475569;
+      border: 1px solid #CBD5E1;
+    }
+    .badge-plan-pro {
+      background: #E0F2FE;
+      color: #0369A1;
+      border: 1px solid #BAE6FD;
+    }
+    .badge-plan-enterprise {
+      background: #F3E8FF;
+      color: #6B21A8;
+      border: 1px solid #E9D5FF;
+    }
+
+    /* MODALES ESTILO DRAWER / POPUP */
+    .sa-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(7, 17, 32, 0.75);
+      backdrop-filter: blur(4px);
+      z-index: 999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .sa-modal-overlay.active {
+      display: flex;
+    }
+    .sa-modal-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      width: min(680px, 96vw);
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      border: 1px solid var(--line);
+      box-sizing: border-box;
+      padding: 28px;
+    }
+    [data-theme="dark"] .sa-modal-card {
+      background: #0B192C;
+      border-color: #1E293B;
+      color: white;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+    .form-label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+    [data-theme="dark"] .form-label {
+      color: #E2E8F0;
+    }
+    .form-input, .form-select {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      font-family: inherit;
+      font-size: 0.92rem;
+      box-sizing: border-box;
+      background: white;
+      color: var(--ink);
+    }
+    [data-theme="dark"] .form-input, [data-theme="dark"] .form-select {
+      background: #071220;
+      border-color: #1E293B;
+      color: white;
+    }
+    .form-input:focus, .form-select:focus {
+      outline: none;
+      border-color: var(--sa-cyan);
+    }
+
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 600px) {
+      .form-grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* FOOTER */
+    .sa-footer {
+      background: var(--sa-dark);
+      color: #64748B;
+      text-align: center;
+      padding: 24px;
+      font-size: 0.82rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOPBAR GLOBAL SAAS -->
+  <header class="sa-topbar">
+    <div class="sa-topbar-inner">
+      <div style="display: flex; align-items: center; gap: 18px;">
+        <a href="../selector.html" class="sa-brand">
+          <div style="width: 38px; height: 38px; border-radius: 8px; background: #0EA5E9; display: grid; place-items: center; font-size: 1.3rem;">
+            🦷
+          </div>
+          <div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-family: var(--display); font-weight: 800; font-size: 1.15rem; letter-spacing: -0.01em;">SILLAR DENTAL OS</span>
+              <span class="sa-badge">SUPER ADMIN</span>
+            </div>
+            <div style="font-size: 0.72rem; color: #94A3B8; margin-top: -2px;">Gestor Global de Red de Clínicas Odontológicas Multi-Tenant</div>
+          </div>
+        </a>
+      </div>
+
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <a href="../selector.html" class="btn btn-secondary btn-small" style="background: rgba(255,255,255,0.08); color: white; border-color: rgba(255,255,255,0.2);">
+          ← Navegador Central
+        </a>
+        <button id="themeToggleBtn" class="btn btn-secondary btn-small" onclick="window.toggleTheme()" style="background: rgba(255,255,255,0.08); color: white; border-color: rgba(255,255,255,0.2);">
+          🌓
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENIDO CENTRAL -->
+  <main class="sa-container">
+    
+    <!-- CABECERA DE SECCIÓN -->
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; flex-wrap: wrap; gap: 16px;">
+      <div>
+        <h1 style="font-family: var(--display); font-size: 1.85rem; font-weight: 800; margin: 0 0 4px; color: var(--ink);">
+          Directorio & Aprovisionamiento de Clínicas
+        </h1>
+        <p class="muted" style="margin: 0; font-size: 0.95rem;">
+          Control de suscripciones en soles (PEN), enrutamiento de subdominios, certificados SSL y aislamiento PostgreSQL RLS.
+        </p>
+      </div>
+
+      <div style="display: flex; gap: 10px;">
+        <button class="btn btn-primary" onclick="window.openNewTenantModal()" style="background: #007A55; display: flex; align-items: center; gap: 8px; font-weight: 700; box-shadow: 0 4px 14px rgba(0,122,85,0.25);">
+          <span>+</span> Registrar Nueva Clínica (Tenant)
+        </button>
+      </div>
+    </div>
+
+    <!-- TARJETAS DE MÉTRICAS GLOBALES SAAS (KPIS) -->
+    <div class="sa-metrics-grid" id="metricsGrid">
+      <div class="sa-metric-card">
+        <div class="sa-metric-header">
+          <span class="sa-metric-title">Ingresos Mensuales (MRR)</span>
+          <span style="font-size: 1.3rem;">💰</span>
+        </div>
+        <div class="sa-metric-val" id="metricMrr">S/ 0</div>
+        <div class="sa-metric-sub" style="color: #10B981;">
+          <span>↑ 18.4%</span> vs mes anterior · Pagos SUNAT
+        </div>
+      </div>
+
+      <div class="sa-metric-card">
+        <div class="sa-metric-header">
+          <span class="sa-metric-title">Clínicas Suscritas</span>
+          <span style="font-size: 1.3rem;">🏢</span>
+        </div>
+        <div class="sa-metric-val" id="metricTenants">0</div>
+        <div class="sa-metric-sub" id="metricTenantsSub">
+          3 Activas · 1 Prueba · 1 Suspendida
+        </div>
+      </div>
+
+      <div class="sa-metric-card">
+        <div class="sa-metric-header">
+          <span class="sa-metric-title">Sillones Quirúrgicos</span>
+          <span style="font-size: 1.3rem;">💺</span>
+        </div>
+        <div class="sa-metric-val" id="metricChairs">0</div>
+        <div class="sa-metric-sub">
+          Capacidad simultánea en red de sedes
+        </div>
+      </div>
+
+      <div class="sa-metric-card">
+        <div class="sa-metric-header">
+          <span class="sa-metric-title">Ecosistema Pacientes</span>
+          <span style="font-size: 1.3rem;">👥</span>
+        </div>
+        <div class="sa-metric-val" id="metricPatients">0</div>
+        <div class="sa-metric-sub" id="metricDoctorsSub">
+          Historias clínicas activas en el SaaS
+        </div>
+      </div>
+    </div>
+
+    <!-- TOOLBAR DE BÚSQUEDA Y FILTRADO -->
+    <div class="sa-toolbar">
+      <div class="sa-search-box">
+        <span class="sa-search-icon">🔍</span>
+        <input type="text" id="tenantSearchInput" class="sa-search-input" placeholder="Buscar clínica por nombre, RUC, subdominio o ciudad..." oninput="window.filterTenants()">
+      </div>
+
+      <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+        <span style="font-size: 0.82rem; font-weight: 700; color: var(--ink-soft);">Estado:</span>
+        <select id="statusFilter" class="form-select" style="width: auto; padding: 8px 12px; font-size: 0.85rem;" onchange="window.filterTenants()">
+          <option value="ALL">Todos los Estados</option>
+          <option value="ACTIVE">Activas (Suscritas)</option>
+          <option value="TRIAL">En Período de Prueba</option>
+          <option value="SUSPENDED">Suspendidas / Corte</option>
+        </select>
+
+        <span style="font-size: 0.82rem; font-weight: 700; color: var(--ink-soft); margin-left: 6px;">Plan:</span>
+        <select id="planFilter" class="form-select" style="width: auto; padding: 8px 12px; font-size: 0.85rem;" onchange="window.filterTenants()">
+          <option value="ALL">Todos los Planes</option>
+          <option value="STARTER">Starter (S/ 149)</option>
+          <option value="PRO">Clínica Pro (S/ 389)</option>
+          <option value="ENTERPRISE">Red Enterprise (S/ 799)</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- TABLA DE TENANTS -->
+    <div class="sa-table-card">
+      <div class="sa-table-responsive">
+        <table class="sa-table">
+          <thead>
+            <tr>
+              <th>Clínica & Razón Social</th>
+              <th>Enrutamiento & Dominios</th>
+              <th>Plan & Suscripción</th>
+              <th>Sillones & Doctores</th>
+              <th>Módulos Activos</th>
+              <th>Estado Operativo</th>
+              <th style="text-align: right;">Acciones Super Admin</th>
+            </tr>
+          </thead>
+          <tbody id="tenantsTableBody">
+            <!-- Renderizado dinámico vía JavaScript -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- MODAL 1: REGISTRAR NUEVA CLÍNICA / TENANT -->
+  <div class="sa-modal-overlay" id="newTenantModal" onclick="window.handleModalBackdrop(event, 'newTenantModal')">
+    <div class="sa-modal-card">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--line); padding-bottom: 14px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <div style="font-size: 1.5rem;">🏢</div>
+          <div>
+            <h3 style="margin: 0; font-size: 1.25rem;">Aprovisionar Nueva Clínica Odontológica</h3>
+            <span class="tiny muted">Creación automática de esquema o tenant_id, subdominio y límites de sillones.</span>
+          </div>
+        </div>
+        <button class="btn btn-secondary btn-small" onclick="window.closeModal('newTenantModal')">✕</button>
+      </div>
+
+      <form id="newTenantForm" onsubmit="window.handleCreateTenantSubmit(event)">
+        
+        <!-- SECCIÓN 1: DATOS FISCALES & COMERCIALES -->
+        <div style="font-weight: 800; font-size: 0.88rem; color: #0EA5E9; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.04em;">
+          1. Datos de la Clínica & Facturación SUNAT
+        </div>
+        <div class="form-group">
+          <label class="form-label">Nombre Comercial de la Clínica *</label>
+          <input type="text" id="tName" class="form-input" placeholder="Ej. Clínica Dental DentalSur" required oninput="window.autoFillSlug(this.value)">
+        </div>
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label">Razón Social *</label>
+            <input type="text" id="tLegalName" class="form-input" placeholder="Ej. DentalSur Especialistas S.A.C." required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">RUC SUNAT (11 dígitos) *</label>
+            <input type="text" id="tRuc" class="form-input" placeholder="Ej. 20609876543" maxlength="11" required>
+          </div>
+        </div>
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label">Ciudad / Región *</label>
+            <input type="text" id="tCity" class="form-input" placeholder="Ej. Arequipa, Lima, Cusco" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Dirección Sede Central</label>
+            <input type="text" id="tAddress" class="form-input" placeholder="Ej. Calle Mercaderes 210, Centro">
+          </div>
+        </div>
+
+        <!-- SECCIÓN 2: DOMINIOS Y ENRUTAMIENTO -->
+        <div style="font-weight: 800; font-size: 0.88rem; color: #0EA5E9; margin: 18px 0 12px; text-transform: uppercase; letter-spacing: 0.04em;">
+          2. Dominios & Acceso Web
+        </div>
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label">Subdominio SaaS Asignado *</label>
+            <div style="display: flex; align-items: center;">
+              <input type="text" id="tSlug" class="form-input" placeholder="dentalsur" required style="border-top-right-radius: 0; border-bottom-right-radius: 0;">
+              <span style="background: #F1F5F9; border: 1px solid var(--line); border-left: none; padding: 10px 12px; font-size: 0.82rem; color: #64748B; border-top-right-radius: 6px; border-bottom-right-radius: 6px; white-space: nowrap;">
+                .sillardental.pe
+              </span>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Dominio Personalizado (Opcional)</label>
+            <input type="text" id="tCustomDomain" class="form-input" placeholder="Ej. www.dentalsur.pe">
+          </div>
+        </div>
+
+        <!-- SECCIÓN 3: PLAN DE SUSCRIPCIÓN & RECURSOS -->
+        <div style="font-weight: 800; font-size: 0.88rem; color: #0EA5E9; margin: 18px 0 12px; text-transform: uppercase; letter-spacing: 0.04em;">
+          3. Plan de Suscripción & Sillones
+        </div>
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label">Plan Contratado *</label>
+            <select id="tPlan" class="form-select" required onchange="window.handlePlanChange(this.value)">
+              <option value="PRO" selected>Clínica Pro — S/ 389/mes (Hasta 4 sillones)</option>
+              <option value="STARTER">Consultorio Starter — S/ 149/mes (1 sillón)</option>
+              <option value="ENTERPRISE">Red Multi-Sede Enterprise — S/ 799/mes (Ilimitado)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Sillones Quirúrgicos Permitidos *</label>
+            <input type="number" id="tChairsLimit" class="form-input" min="1" max="50" value="3" required>
+          </div>
+        </div>
+
+        <!-- SECCIÓN 4: MÓDULOS ACTIVOS -->
+        <div style="font-weight: 800; font-size: 0.88rem; color: #0EA5E9; margin: 18px 0 12px; text-transform: uppercase; letter-spacing: 0.04em;">
+          4. Módulos & Feature Flags Habilitados
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; background: #F8FAFC; padding: 14px; border-radius: 8px; border: 1px solid var(--line); margin-bottom: 16px;">
+          <label style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer;">
+            <input type="checkbox" id="modPacs" checked> 🔬 Visor PACS 3D DICOM
+          </label>
+          <label style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer;">
+            <input type="checkbox" id="modSignature" checked> ✍️ Firma Digital & Sello COP
+          </label>
+          <label style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer;">
+            <input type="checkbox" id="modSunat" checked> 🧾 Facturación SUNAT UBL 2.1
+          </label>
+          <label style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer;">
+            <input type="checkbox" id="modWhatsapp" checked> 💬 WhatsApp API Recordatorios
+          </label>
+          <label style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer;">
+            <input type="checkbox" id="modInventory" checked> 📦 Control Stock & Lotes
+          </label>
+        </div>
+
+        <!-- SECCIÓN 5: ADMINISTRADOR RESPONSABLE -->
+        <div style="font-weight: 800; font-size: 0.88rem; color: #0EA5E9; margin: 18px 0 12px; text-transform: uppercase; letter-spacing: 0.04em;">
+          5. Contacto del Director Médico / Administrador
+        </div>
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label">Nombre del Director Médico</label>
+            <input type="text" id="tAdminName" class="form-input" placeholder="Dr. Juan Pérez" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Principal de Acceso *</label>
+            <input type="email" id="tAdminEmail" class="form-input" placeholder="admin@dentalsur.pe" required>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px;">
+          <button type="button" class="btn btn-secondary" onclick="window.closeModal('newTenantModal')">Cancelar</button>
+          <button type="submit" class="btn btn-primary" style="background: #007A55; font-weight: 800; padding: 10px 22px;">
+            ✓ Aprovisionar y Activar Tenant
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL 2: EDITAR SUSCRIPCIÓN & TENANT -->
+  <div class="sa-modal-overlay" id="editTenantModal" onclick="window.handleModalBackdrop(event, 'editTenantModal')">
+    <div class="sa-modal-card">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--line); padding-bottom: 14px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <div style="font-size: 1.5rem;">✏️</div>
+          <div>
+            <h3 style="margin: 0; font-size: 1.25rem;" id="editModalTitle">Editar Suscripción y Configuración</h3>
+            <span class="tiny muted" id="editModalSubtitle">Ajustes de cuotas, dominios y estado de la clínica.</span>
+          </div>
+        </div>
+        <button class="btn btn-secondary btn-small" onclick="window.closeModal('editTenantModal')">✕</button>
+      </div>
+
+      <form id="editTenantForm" onsubmit="window.handleEditTenantSubmit(event)">
+        <input type="hidden" id="editTenantId">
+
+        <div class="form-group">
+          <label class="form-label">Nombre de la Clínica</label>
+          <input type="text" id="editName" class="form-input" required>
+        </div>
+
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label">Plan de Suscripción</label>
+            <select id="editPlan" class="form-select" required>
+              <option value="STARTER">Starter — S/ 149/mes</option>
+              <option value="PRO">Clínica Pro — S/ 389/mes</option>
+              <option value="ENTERPRISE">Red Enterprise — S/ 799/mes</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Estado Operativo</label>
+            <select id="editStatus" class="form-select" required>
+              <option value="ACTIVE">✓ ACTIVO (Operación Normal)</option>
+              <option value="TRIAL">⏳ TRIAL (Período de Prueba)</option>
+              <option value="SUSPENDED">⚠️ SUSPENDIDO (Corte por Pago)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label">Sillones Quirúrgicos Permitidos</label>
+            <input type="number" id="editChairsLimit" class="form-input" min="1" max="50" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Dominio Personalizado (Custom Domain)</label>
+            <input type="text" id="editCustomDomain" class="form-input" placeholder="www.miclinica.pe">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Motivo de Suspensión (si aplica)</label>
+          <input type="text" id="editSuspendedReason" class="form-input" placeholder="Ej. Cuota vencida de agosto...">
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px;">
+          <button type="button" class="btn btn-secondary" onclick="window.closeModal('editTenantModal')">Cancelar</button>
+          <button type="submit" class="btn btn-primary" style="background: #0EA5E9; font-weight: 800; padding: 10px 22px;">
+            Guardar Cambios
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="sa-footer">
+    SILLAR DENTAL OS · ARQUITECTURA MULTI-TENANT CON AISLAMIENTO POSTGRESQL RLS & PROXY CADDY ON-DEMAND TLS
+  </footer>
+
+  <!-- SCRIPT CENTRAL SUPER ADMIN -->
+  <script type="module">
+    import { mockApi } from '../assets/js/mock-api-v2.js';
+    import { showToast } from '../assets/js/components.js';
+
+    // RENDERIZAR MÉTRICAS SAAS
+    function renderMetrics() {
+      const metrics = mockApi.getSaaSMetrics();
+      document.getElementById('metricMrr').textContent = 'S/ ' + metrics.mrr.toLocaleString('es-PE');
+      document.getElementById('metricTenants').textContent = metrics.totalTenants;
+      document.getElementById('metricTenantsSub').textContent = metrics.activeCount + ' Activas · ' + metrics.trialCount + ' Prueba · ' + metrics.suspendedCount + ' Suspendidas';
+      document.getElementById('metricChairs').textContent = metrics.totalChairs + ' Sillones';
+      document.getElementById('metricPatients').textContent = metrics.totalPatients.toLocaleString('es-PE');
+      document.getElementById('metricDoctorsSub').textContent = metrics.totalPractitioners + ' Odontólogos en ' + metrics.totalTenants + ' sedes';
+    }
+
+    // RENDERIZAR TABLA DE TENANTS
+    function renderTenantsTable() {
+      const tenants = mockApi.getTenants();
+      const q = (document.getElementById('tenantSearchInput')?.value || '').toLowerCase().trim();
+      const statusFilter = document.getElementById('statusFilter')?.value || 'ALL';
+      const planFilter = document.getElementById('planFilter')?.value || 'ALL';
+
+      const filtered = tenants.filter(t => {
+        const matchesQuery = !q || 
+          t.name.toLowerCase().includes(q) || 
+          t.ruc.toLowerCase().includes(q) || 
+          t.subdomain.toLowerCase().includes(q) || 
+          t.city.toLowerCase().includes(q) ||
+          (t.customDomain && t.customDomain.toLowerCase().includes(q));
+        
+        const matchesStatus = statusFilter === 'ALL' || t.status === statusFilter;
+        const matchesPlan = planFilter === 'ALL' || t.plan === planFilter;
+
+        return matchesQuery && matchesStatus && matchesPlan;
+      });
+
+      const tbody = document.getElementById('tenantsTableBody');
+      if (!tbody) return;
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="7" style="text-align: center; padding: 40px; color: var(--ink-soft);">
+              <div style="font-size: 2rem; margin-bottom: 8px;">🔍</div>
+              <strong>No se encontraron clínicas con los filtros seleccionados</strong>
+              <div class="tiny" style="margin-top: 4px;">Pruebe cambiando el término de búsqueda o restableciendo los filtros.</div>
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(t => {
+        const statusBadge = t.status === 'ACTIVE' 
+          ? '<span class="badge-status badge-status-active">● ACTIVO</span>'
+          : t.status === 'TRIAL'
+          ? '<span class="badge-status badge-status-trial">⏳ TRIAL (9 días)</span>'
+          : '<span class="badge-status badge-status-suspended" title="' + (t.suspendedReason || '') + '">✕ SUSPENDIDO</span>';
+
+        const planBadge = t.plan === 'ENTERPRISE'
+          ? '<span class="badge-plan badge-plan-enterprise">Red Enterprise</span>'
+          : t.plan === 'PRO'
+          ? '<span class="badge-plan badge-plan-pro">Clínica Pro</span>'
+          : '<span class="badge-plan badge-plan-starter">Starter</span>';
+
+        const sslBadge = t.customDomain
+          ? (t.sslStatus === 'ACTIVE_VALID' 
+              ? '<span class="chip chip-success" style="font-size: 0.65rem; padding: 1px 6px;">✓ SSL On-Demand</span>' 
+              : '<span class="chip chip-warning" style="font-size: 0.65rem; padding: 1px 6px;">⚠️ SSL Pendiente</span>')
+          : '<span class="chip chip-neutral" style="font-size: 0.65rem; padding: 1px 6px;">Subdominio Directo</span>';
+
+        const modulesHtml = [
+          t.modules.pacs3d ? '<span class="chip chip-neutral" style="font-size: 0.65rem; padding: 1px 6px;">PACS 3D</span>' : '',
+          t.modules.digitalSignature ? '<span class="chip chip-neutral" style="font-size: 0.65rem; padding: 1px 6px;">Firma COP</span>' : '',
+          t.modules.sunatElectronicBilling ? '<span class="chip chip-neutral" style="font-size: 0.65rem; padding: 1px 6px;">SUNAT</span>' : '',
+          t.modules.whatsappReminders ? '<span class="chip chip-neutral" style="font-size: 0.65rem; padding: 1px 6px;">WhatsApp</span>' : ''
+        ].filter(Boolean).join(' ');
+
+        return `
+          <tr>
+            <td>
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <div class="tenant-avatar">${t.name.charAt(0)}</div>
+                <div>
+                  <strong style="color: var(--ink); font-size: 0.95rem; display: block;">${t.name}</strong>
+                  <div class="tiny muted">${t.legalName} · ${t.city}</div>
+                  <div style="font-family: var(--mono); font-size: 0.72rem; color: var(--action); margin-top: 2px;">
+                    RUC: ${t.ruc}
+                  </div>
+                </div>
+              </div>
+            </td>
+
+            <td>
+              <div>
+                <a href="https://${t.subdomain}" target="_blank" style="font-family: var(--mono); font-size: 0.8rem; color: #0284C7; text-decoration: none; font-weight: 700; display: block;">
+                  ${t.subdomain}
+                </a>
+                ${t.customDomain ? `
+                  <div style="font-family: var(--mono); font-size: 0.74rem; color: #475569; margin-top: 2px;">
+                    🌐 ${t.customDomain}
+                  </div>
+                ` : ''}
+                <div style="margin-top: 4px;">${sslBadge}</div>
+              </div>
+            </td>
+
+            <td>
+              <div>
+                ${planBadge}
+                <div style="font-weight: 800; font-size: 0.96rem; color: var(--ink); margin-top: 4px;">
+                  S/ ${t.monthlyFee}/mes
+                </div>
+                <div class="tiny muted">Renovación: ${t.nextBillingDate}</div>
+              </div>
+            </td>
+
+            <td>
+              <div>
+                <strong style="color: var(--ink); font-size: 0.92rem;">${t.chairsUsed} / ${t.chairsLimit} Sillones</strong>
+                <div class="tiny muted">${t.practitionersCount} Especialistas</div>
+                <div class="tiny muted">${t.patientsCount} Pacientes</div>
+              </div>
+            </td>
+
+            <td>
+              <div style="display: flex; flex-wrap: wrap; gap: 4px; max-width: 170px;">
+                ${modulesHtml || '<span class="tiny muted">Básico</span>'}
+              </div>
+            </td>
+
+            <td>
+              ${statusBadge}
+              ${t.status === 'SUSPENDED' && t.suspendedReason ? `
+                <div class="tiny" style="color: #DC2626; margin-top: 4px; max-width: 140px;">
+                  ${t.suspendedReason}
+                </div>
+              ` : ''}
+            </td>
+
+            <td style="text-align: right; white-space: nowrap;">
+              <div style="display: inline-flex; gap: 6px; align-items: center;">
+                <button class="btn btn-primary btn-small" style="padding: 5px 12px; font-size: 0.78rem; background: #007A55;" onclick="window.enterTenantConsole('${t.id}')" title="Ingresar a la consola médica de esta clínica">
+                  🏢 Entrar
+                </button>
+                <button class="btn btn-secondary btn-small" style="padding: 5px 10px; font-size: 0.78rem;" onclick="window.openEditTenantModal('${t.id}')" title="Editar suscripción y cuotas">
+                  ✏️
+                </button>
+                <button class="btn btn-small" style="padding: 5px 10px; font-size: 0.78rem; ${t.status === 'ACTIVE' ? 'color: #D97706; border: 1px solid #FDE68A; background: #FFFBEB;' : 'color: #16A34A; border: 1px solid #BBF7D0; background: #F0FDF4;'}" onclick="window.toggleTenantStatus('${t.id}')" title="${t.status === 'ACTIVE' ? 'Suspender por falta de pago' : 'Reactivar acceso a clínica'}">
+                  ${t.status === 'ACTIVE' ? '⏸️' : '▶️'}
+                </button>
+                <button class="btn btn-small" style="padding: 5px 8px; font-size: 0.78rem; color: #DC2626; border: 1px solid #FECACA; background: #FEF2F2;" onclick="window.deleteTenant('${t.id}')" title="Eliminar clínica">
+                  ✕
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // CONTROLADORES GLOBALES
+    window.filterTenants = function() {
+      renderTenantsTable();
+    };
+
+    window.openNewTenantModal = function() {
+      const modal = document.getElementById('newTenantModal');
+      if (modal) modal.classList.add('active');
+    };
+
+    window.closeModal = function(modalId) {
+      const modal = document.getElementById(modalId);
+      if (modal) modal.classList.remove('active');
+    };
+
+    window.handleModalBackdrop = function(e, modalId) {
+      if (e.target.id === modalId) window.closeModal(modalId);
+    };
+
+    window.autoFillSlug = function(name) {
+      const slugInput = document.getElementById('tSlug');
+      if (slugInput && name) {
+        slugInput.value = name.toLowerCase()
+          .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+          .replace(/[^a-z0-9]/g, '');
+      }
+    };
+
+    window.handlePlanChange = function(plan) {
+      const chairInput = document.getElementById('tChairsLimit');
+      if (chairInput) {
+        if (plan === 'STARTER') chairInput.value = 1;
+        else if (plan === 'PRO') chairInput.value = 4;
+        else if (plan === 'ENTERPRISE') chairInput.value = 12;
+      }
+    };
+
+    window.handleCreateTenantSubmit = function(e) {
+      e.preventDefault();
+      const name = document.getElementById('tName').value.trim();
+      const legalName = document.getElementById('tLegalName').value.trim();
+      const ruc = document.getElementById('tRuc').value.trim();
+      const city = document.getElementById('tCity').value.trim();
+      const address = document.getElementById('tAddress').value.trim();
+      const slug = document.getElementById('tSlug').value.trim();
+      const customDomain = document.getElementById('tCustomDomain').value.trim() || null;
+      const plan = document.getElementById('tPlan').value;
+      const chairsLimit = parseInt(document.getElementById('tChairsLimit').value, 10);
+      const adminName = document.getElementById('tAdminName').value.trim();
+      const adminEmail = document.getElementById('tAdminEmail').value.trim();
+
+      const modules = {
+        pacs3d: document.getElementById('modPacs').checked,
+        digitalSignature: document.getElementById('modSignature').checked,
+        sunatElectronicBilling: document.getElementById('modSunat').checked,
+        whatsappReminders: document.getElementById('modWhatsapp').checked,
+        inventory: document.getElementById('modInventory').checked
+      };
+
+      const created = mockApi.createTenant({
+        name,
+        legalName,
+        ruc,
+        city,
+        address,
+        slug,
+        customDomain,
+        plan,
+        chairsLimit,
+        adminName,
+        adminEmail,
+        modules
+      });
+
+      showToast('✓ Clínica ' + created.name + ' aprovisionada con éxito.', 'success');
+      window.closeModal('newTenantModal');
+      document.getElementById('newTenantForm').reset();
+      renderMetrics();
+      renderTenantsTable();
+    };
+
+    window.openEditTenantModal = function(tenantId) {
+      const t = mockApi.getTenantById(tenantId);
+      if (!t) return;
+
+      document.getElementById('editTenantId').value = t.id;
+      document.getElementById('editName').value = t.name;
+      document.getElementById('editPlan').value = t.plan;
+      document.getElementById('editStatus').value = t.status;
+      document.getElementById('editChairsLimit').value = t.chairsLimit;
+      document.getElementById('editCustomDomain').value = t.customDomain || '';
+      document.getElementById('editSuspendedReason').value = t.suspendedReason || '';
+
+      document.getElementById('editModalTitle').textContent = 'Editar ' + t.name;
+      document.getElementById('editModalSubtitle').textContent = 'Subdominio: ' + t.subdomain + ' · RUC: ' + t.ruc;
+
+      const modal = document.getElementById('editTenantModal');
+      if (modal) modal.classList.add('active');
+    };
+
+    window.handleEditTenantSubmit = function(e) {
+      e.preventDefault();
+      const id = document.getElementById('editTenantId').value;
+      const name = document.getElementById('editName').value.trim();
+      const plan = document.getElementById('editPlan').value;
+      const status = document.getElementById('editStatus').value;
+      const chairsLimit = parseInt(document.getElementById('editChairsLimit').value, 10);
+      const customDomain = document.getElementById('editCustomDomain').value.trim() || null;
+      const suspendedReason = document.getElementById('editSuspendedReason').value.trim() || null;
+
+      mockApi.updateTenant(id, {
+        name,
+        plan,
+        status,
+        chairsLimit,
+        customDomain,
+        suspendedReason: status === 'SUSPENDED' ? (suspendedReason || 'Suspensión por cobro.') : null
+      });
+
+      showToast('✓ Cambios guardados para ' + name, 'success');
+      window.closeModal('editTenantModal');
+      renderMetrics();
+      renderTenantsTable();
+    };
+
+    window.toggleTenantStatus = function(tenantId) {
+      const res = mockApi.toggleTenantStatus(tenantId);
+      if (res) {
+        showToast(res.status === 'ACTIVE' ? '✓ Clínica reactivada exitosamente.' : '⚠️ Clínica suspendida.', 'info');
+        renderMetrics();
+        renderTenantsTable();
+      }
+    };
+
+    window.deleteTenant = function(tenantId) {
+      const t = mockApi.getTenantById(tenantId);
+      if (!t) return;
+      if (confirm('¿Confirma eliminar la clínica ' + t.name + ' (' + t.subdomain + ')? Se eliminarán sus registros asignados.')) {
+        mockApi.deleteTenant(tenantId);
+        showToast('Clínica eliminada de la plataforma SaaS', 'info');
+        renderMetrics();
+        renderTenantsTable();
+      }
+    };
+
+    window.enterTenantConsole = function(tenantId) {
+      const t = mockApi.setActiveTenant(tenantId);
+      if (t) {
+        showToast('Conmutando al entorno de: ' + t.name, 'success');
+        setTimeout(() => {
+          window.location.href = '../staff/index.html?view=agenda';
+        }, 350);
+      }
+    };
+
+    // TEMA CLARO / OSCURO
+    window.toggleTheme = function() {
+      const cur = document.documentElement.getAttribute('data-theme') || 'light';
+      const next = cur === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('sd-theme', next);
+    };
+
+    // INICIALIZACIÓN
+    renderMetrics();
+    renderTenantsTable();
+  </script>
+</body>
+</html>

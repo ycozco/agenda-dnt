@@ -722,10 +722,10 @@
       <div>
         <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 0 4px 16px; border-bottom: 1px solid rgba(255,255,255,0.12);">
           <div style="display: flex; align-items: center; gap: 10px;">
-            <div style="width: 32px; height: 32px; background: var(--action); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.05rem;">S</div>
+            <div id="staffBrandLogo" style="width: 32px; height: 32px; background: var(--action); border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.05rem;">S</div>
             <div>
-              <div style="font-weight: 800; font-size: 0.95rem; letter-spacing: -0.01em;">SILLAR DENTAL</div>
-              <div style="font-size: 0.7rem; opacity: 0.65; letter-spacing: 0.05em; text-transform: uppercase;">Consola Privada</div>
+              <div id="staffTenantName" style="font-weight: 800; font-size: 0.92rem; letter-spacing: -0.01em; line-height: 1.2;">SILLAR DENTAL</div>
+              <div id="staffTenantSlug" style="font-size: 0.68rem; opacity: 0.65; letter-spacing: 0.04em;">Consola Privada</div>
             </div>
           </div>
           <button class="btn btn-secondary btn-small" id="btnCloseSidebarMobile" onclick="window.closeStaffSidebar()" style="display:none;padding:4px 8px;font-size:0.8rem;color:white;border-color:rgba(255,255,255,0.3);">✕</button>
@@ -757,6 +757,7 @@
             <a href="?view=imaging" class="staff-menu-item" id="nav-imaging-spec" style="font-size: 0.8rem; padding: 7px 12px;"><span>📸 Visor Radiológico PACS (W/L)</span></a>
             <a href="?view=documents" class="staff-menu-item" id="nav-docs-spec" style="font-size: 0.8rem; padding: 7px 12px;"><span>📄 Expediente & Procesador PDF</span></a>
             <a href="?view=users" class="staff-menu-item" id="nav-users" style="font-size: 0.8rem; padding: 7px 12px;"><span>👥 Personal & Roles COP</span></a>
+            <a href="../superadmin/index.html" class="staff-menu-item" style="font-size: 0.8rem; padding: 7px 12px; border: 1px dashed rgba(14, 165, 233, 0.5); color: #38BDF8; font-weight: 700;"><span>👑 Super Admin SaaS</span></a>
           </div>
         </div>
       </div>
@@ -1282,6 +1283,17 @@
       if (sidebar) sidebar.classList.remove('mobile-open');
       if (backdrop) backdrop.classList.remove('active');
     };
+
+    // CONTEXTO DE TENANT / CLÍNICA ACTIVA
+    const activeTenant = mockApi.getActiveTenant();
+    if (activeTenant) {
+      const elName = document.getElementById('staffTenantName');
+      const elSlug = document.getElementById('staffTenantSlug');
+      const elLogo = document.getElementById('staffBrandLogo');
+      if (elName) elName.textContent = activeTenant.name;
+      if (elSlug) elSlug.textContent = activeTenant.city + ' · ' + activeTenant.subdomain;
+      if (elLogo) elLogo.textContent = activeTenant.name.charAt(0);
+    }
 
     // =========================================================================
     // VISTA 1: DASHBOARD OPERATIVO

@@ -109,6 +109,158 @@ class MockApiV2 {
     return false;
   }
 
+
+  // =========================================================================
+  // GESTIÓN DE TENANTS / CLÍNICAS (SUPER ADMIN SAAS)
+  // =========================================================================
+  getTenants() {
+    if (!this.state.tenants || this.state.tenants.length === 0) {
+      this.state.tenants = JSON.parse(JSON.stringify(SEED_V2.tenants || []));
+      this.saveState();
+    }
+    return this.state.tenants;
+  }
+
+  getTenantById(id) {
+    return this.getTenants().find(t => t.id === id) || null;
+  }
+
+  getActiveTenant() {
+    const activeId = this.state.activeTenantId || "tenant_sillar_yanahuara";
+    return this.getTenantById(activeId) || this.getTenants()[0];
+  }
+
+  setActiveTenant(tenantId) {
+    const tenant = this.getTenantById(tenantId);
+    if (tenant) {
+      this.state.activeTenantId = tenantId;
+      this.logAuditEvent("CAMBIO_TENANT_ACTIVO", "Super Admin conmutó contexto a clínica: " + tenant.name + " (" + tenant.id + ")");
+      this.saveState();
+      return tenant;
+    }
+    return null;
+  }
+
+  getSaaSMetrics() {
+    const tenants = this.getTenants();
+    const active = tenants.filter(t => t.status === "ACTIVE");
+    const trials = tenants.filter(t => t.status === "TRIAL");
+    const suspended = tenants.filter(t => t.status === "SUSPENDED");
+    
+    const mrr = active.reduce((acc, t) => acc + (t.monthlyFee || 0), 0);
+    const totalChairs = tenants.reduce((acc, t) => acc + (t.chairsUsed || 0), 0);
+    const totalPatients = tenants.reduce((acc, t) => acc + (t.patientsCount || 0), 0);
+    const totalPractitioners = tenants.reduce((acc, t) => acc + (t.practitionersCount || 0), 0);
+
+    return {
+      totalTenants: tenants.length,
+      activeCount: active.length,
+      trialCount: trials.length,
+      suspendedCount: suspended.length,
+      mrr: mrr,
+      currency: "PEN",
+      totalChairs: totalChairs,
+      totalPatients: totalPatients,
+      totalPractitioners: totalPractitioners
+    };
+  }
+
+  createTenant(data) {
+    const tenants = this.getTenants();
+    const cleanSlug = (data.slug || data.name || "clinica").toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 16);
+    const tenantId = "tenant_" + cleanSlug + "_" + Math.floor(Math.random() * 900 + 100);
+    
+    const plansFees = {
+      STARTER: 149,
+      PRO: 389,
+      ENTERPRISE: 799
+    };
+    const plan = data.plan || "PRO";
+
+    const newTenant = {
+      id: tenantId,
+      name: data.name || "Nueva Clínica Odontológica",
+      legalName: data.legalName || data.name || "Razón Social S.A.C.",
+      slug: cleanSlug,
+      subdomain: cleanSlug + ".sillardental.pe",
+      customDomain: data.customDomain || null,
+      sslStatus: data.customDomain ? "PROVISIONING" : "ACTIVE_VALID",
+      ruc: data.ruc || "20" + Math.floor(Math.random() * 899999999 + 100000000),
+      plan: plan,
+      status: data.status || "ACTIVE",
+      chairsLimit: parseInt(data.chairsLimit || (plan === 'STARTER' ? 1 : plan === 'PRO' ? 4 : 15), 10),
+      chairsUsed: 1,
+      practitionersCount: 1,
+      patientsCount: 0,
+      monthlyFee: plansFees[plan] || 389,
+      currency: "PEN",
+      billingCycle: "MONTHLY",
+      nextBillingDate: new Date(Date.now() + 30 * 86400000).toISOString().split('T')[0],
+      adminName: data.adminName || "Director Odontológico",
+      adminEmail: data.adminEmail || ("contacto@" + cleanSlug + ".pe"),
+      adminPhone: data.adminPhone || "+51 900 000 000",
+      city: data.city || "Arequipa",
+      address: data.address || "Sede Central",
+      modules: {
+        pacs3d: data.modules ? !!data.modules.pacs3d : true,
+        digitalSignature: data.modules ? !!data.modules.digitalSignature : true,
+        sunatElectronicBilling: data.modules ? !!data.modules.sunatElectronicBilling : true,
+        whatsappReminders: data.modules ? !!data.modules.whatsappReminders : true,
+        multiChair: plan !== 'STARTER',
+        inventory: data.modules ? !!data.modules.inventory : true
+      },
+      createdAt: new Date().toISOString().split('T')[0]
+    };
+
+    tenants.push(newTenant);
+    this.state.tenants = tenants;
+    this.logAuditEvent("ALTA_TENANT_SAAS", "Super Admin registró nueva clínica: " + newTenant.name + " (" + newTenant.subdomain + ") Plan: " + newTenant.plan);
+    this.saveState();
+    return newTenant;
+  }
+
+  updateTenant(id, patch) {
+    const tenants = this.getTenants();
+    const idx = tenants.findIndex(t => t.id === id);
+    if (idx !== -1) {
+      if (patch.plan && patch.plan !== tenants[idx].plan) {
+        const plansFees = { STARTER: 149, PRO: 389, ENTERPRISE: 799 };
+        patch.monthlyFee = plansFees[patch.plan] || tenants[idx].monthlyFee;
+      }
+      Object.assign(tenants[idx], patch);
+      this.state.tenants = tenants;
+      this.logAuditEvent("ACTUALIZAR_TENANT_SAAS", "Super Admin modificó datos de clínica: " + tenants[idx].name + " (Estado: " + tenants[idx].status + ")");
+      this.saveState();
+      return tenants[idx];
+    }
+    return null;
+  }
+
+  toggleTenantStatus(id) {
+    const tenant = this.getTenantById(id);
+    if (tenant) {
+      const nextStatus = tenant.status === "ACTIVE" ? "SUSPENDED" : "ACTIVE";
+      const res = this.updateTenant(id, {
+        status: nextStatus,
+        suspendedReason: nextStatus === "SUSPENDED" ? "Suspensión administrativa preventiva o corte por facturación." : null
+      });
+      return res;
+    }
+    return null;
+  }
+
+  deleteTenant(id) {
+    const tenants = this.getTenants();
+    const target = tenants.find(t => t.id === id);
+    if (target) {
+      this.state.tenants = tenants.filter(t => t.id !== id);
+      this.logAuditEvent("BAJA_TENANT_SAAS", "Super Admin eliminó el tenant/clínica: " + target.name + " (" + target.subdomain + ")");
+      this.saveState();
+      return true;
+    }
+    return false;
+  }
+
   getDocuments() {
     return this.state.documents || [];
   }
