@@ -720,6 +720,11 @@ h3 {
   </footer>
 
   <script type="module">
+    function escapeHtml(str) {
+      if (str == null) return '';
+      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+    }
+
     import { mockApi } from '../assets/js/mock-api-v2.js';
     import { showToast } from '../assets/js/components.js';
 
@@ -1014,7 +1019,7 @@ h3 {
             ¡Cita Médica Confirmada con Éxito!
           </h2>
           <p class="muted" style="max-width: 520px; margin: 0 auto 20px; font-size: 1.05rem;">
-            Gracias, <strong>${name}</strong>. Tu cita para <strong>${selectedTreatment.name}</strong> ha sido agendada con la <strong>${selectedDoctor.name}</strong> en <strong>${chairName}</strong>.
+            Gracias, <strong>${escapeHtml(name)}</strong>. Tu cita para <strong>${escapeHtml(selectedTreatment.name)}</strong> ha sido agendada con la <strong>${escapeHtml(selectedDoctor.name)}</strong> en <strong>${escapeHtml(chairName)}</strong>.
           </p>
 
           <div style="background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 20px; max-width: 520px; margin: 0 auto 28px; text-align: left;">

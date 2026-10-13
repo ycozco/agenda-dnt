@@ -439,8 +439,11 @@
       </div>
 
       <div style="display: flex; align-items: center; gap: 14px;">
-        <a href="../selector.html" class="btn btn-secondary btn-small" style="background: rgba(255,255,255,0.08); color: white; border-color: rgba(255,255,255,0.2);">
-          ← Navegador Central
+        <a href="../public/index.html" class="btn btn-secondary btn-small" style="background: rgba(255,255,255,0.08); color: white; border-color: rgba(255,255,255,0.2);">
+          ← Web Pública
+        </a>
+        <a href="../staff/login.html" onclick="document.cookie='sillar_superadmin_auth=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';" class="btn btn-secondary btn-small" style="background: rgba(255,255,255,0.08); color: white; border-color: rgba(255,255,255,0.2);">
+          Cerrar Sesión
         </a>
         <button id="themeToggleBtn" class="btn btn-secondary btn-small" onclick="window.toggleTheme()" style="background: rgba(255,255,255,0.08); color: white; border-color: rgba(255,255,255,0.2);">
           🌓
@@ -834,7 +837,7 @@
   <!-- SCRIPT CENTRAL SUPER ADMIN -->
   <script type="module">
     import { mockApi } from '../assets/js/mock-api-v2.js';
-    import { showToast } from '../assets/js/components.js';
+    import { showToast, escapeHtml } from '../assets/js/components.js';
 
     // RENDERIZAR MÉTRICAS SAAS
     function renderMetrics() {
@@ -859,9 +862,9 @@
           t.name.toLowerCase().includes(q) || 
           t.ruc.toLowerCase().includes(q) || 
           t.subdomain.toLowerCase().includes(q) || 
-          t.city.toLowerCase().includes(q) ||
-          (t.customDomain && t.customDomain.toLowerCase().includes(q));
-        
+          (t.customDomain && t.customDomain.toLowerCase().includes(q)) ||
+          t.city.toLowerCase().includes(q);
+
         const matchesStatus = statusFilter === 'ALL' || t.status === statusFilter;
         const matchesPlan = planFilter === 'ALL' || t.plan === planFilter;
 
@@ -885,11 +888,19 @@
       }
 
       tbody.innerHTML = filtered.map(t => {
+        const safeName = escapeHtml(t.name);
+        const safeLegalName = escapeHtml(t.legalName || '');
+        const safeCity = escapeHtml(t.city || '');
+        const safeRuc = escapeHtml(t.ruc || '');
+        const safeSubdomain = escapeHtml(t.subdomain || '');
+        const safeCustomDomain = escapeHtml(t.customDomain || '');
+        const safeSuspendedReason = escapeHtml(t.suspendedReason || '');
+
         const statusBadge = t.status === 'ACTIVE' 
           ? '<span class="badge-status badge-status-active">● ACTIVO</span>'
           : t.status === 'TRIAL'
           ? '<span class="badge-status badge-status-trial">⏳ TRIAL (9 días)</span>'
-          : '<span class="badge-status badge-status-suspended" title="' + (t.suspendedReason || '') + '">✕ SUSPENDIDO</span>';
+          : '<span class="badge-status badge-status-suspended" title="' + safeSuspendedReason + '">✕ SUSPENDIDO</span>';
 
         const planBadge = t.plan === 'ENTERPRISE'
           ? '<span class="badge-plan badge-plan-enterprise">Red Enterprise</span>'
@@ -914,12 +925,12 @@
           <tr>
             <td>
               <div style="display: flex; align-items: center; gap: 12px;">
-                <div class="tenant-avatar">${t.name.charAt(0)}</div>
+                <div class="tenant-avatar">${safeName.charAt(0)}</div>
                 <div>
-                  <strong style="color: var(--ink); font-size: 0.95rem; display: block;">${t.name}</strong>
-                  <div class="tiny muted">${t.legalName} · ${t.city}</div>
+                  <strong style="color: var(--ink); font-size: 0.95rem; display: block;">${safeName}</strong>
+                  <div class="tiny muted">${safeLegalName} · ${safeCity}</div>
                   <div style="font-family: var(--mono); font-size: 0.72rem; color: var(--action); margin-top: 2px;">
-                    RUC: ${t.ruc}
+                    RUC: ${safeRuc}
                   </div>
                 </div>
               </div>
@@ -927,12 +938,12 @@
 
             <td>
               <div>
-                <a href="https://${t.subdomain}" target="_blank" style="font-family: var(--mono); font-size: 0.8rem; color: #0284C7; text-decoration: none; font-weight: 700; display: block;">
-                  ${t.subdomain}
+                <a href="https://${safeSubdomain}" target="_blank" style="font-family: var(--mono); font-size: 0.8rem; color: #0284C7; text-decoration: none; font-weight: 700; display: block;">
+                  ${safeSubdomain}
                 </a>
                 ${t.customDomain ? `
                   <div style="font-family: var(--mono); font-size: 0.74rem; color: #475569; margin-top: 2px;">
-                    🌐 ${t.customDomain}
+                    🌐 ${safeCustomDomain}
                   </div>
                 ` : ''}
                 <div style="margin-top: 4px;">${sslBadge}</div>

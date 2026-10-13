@@ -139,6 +139,16 @@ export function renderPublicFooter() {
   `;
 }
 
+export function escapeHtml(str) {
+  if (str == null) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
 export function showToast(message, type = "info") {
   let container = document.getElementById("toastContainer");
   if (!container) {
@@ -149,7 +159,18 @@ export function showToast(message, type = "info") {
   }
   const toast = document.createElement("div");
   toast.className = `toast toast-${type}`;
-  toast.innerHTML = `<span>${type === 'success' ? '✓' : type === 'error' ? '✕' : 'ℹ'}</span> <span>${message}</span>`;
+
+  // Construcción segura del DOM con textContent para mitigar XSS (SEC-006)
+  const iconSpan = document.createElement("span");
+  iconSpan.textContent = type === 'success' ? '✓' : type === 'error' ? '✕' : 'ℹ';
+
+  const msgSpan = document.createElement("span");
+  msgSpan.textContent = message; // Safe text node assignment
+
+  toast.appendChild(iconSpan);
+  toast.appendChild(document.createTextNode(" "));
+  toast.appendChild(msgSpan);
+
   container.appendChild(toast);
   setTimeout(() => {
     toast.style.opacity = '0';
@@ -179,5 +200,32 @@ export function setupHeaderInteractions() {
       const label = themeBtn.querySelector(".theme-label");
       if (label) label.textContent = next === "dark" ? "Oscuro" : "Claro";
     });
+  }
+}
+
+/**
+ * Monta un banner no intrusivo pero visible que marca claramente el entorno de demostración
+ * Requisito Fase 0 del Roadmap de remediación
+ */
+export function mountDemoBanner() {
+  if (typeof document === 'undefined') return;
+  if (document.getElementById('sillar-demo-banner')) return;
+  const banner = document.createElement('div');
+  banner.id = 'sillar-demo-banner';
+  banner.style.cssText = 'background: #FEF3C7; color: #92400E; border-bottom: 1px solid #FCD34D; font-size: 0.72rem; font-weight: 700; text-align: center; padding: 4px 12px; position: sticky; top: 0; z-index: 999999; display: flex; align-items: center; justify-content: center; gap: 8px; font-family: system-ui, -apple-system, sans-serif; letter-spacing: 0.02em;';
+  banner.innerHTML = '<span>🧪 AMBIENTE DEMOSTRACIÓN · PROTOTIPO CLÍNICO SILLAR DENTAL OS · DATOS SINTÉTICOS SIN VALIDEZ MÉDICA REAL</span>';
+  if (document.body) {
+    document.body.prepend(banner);
+  } else {
+    document.addEventListener('DOMContentLoaded', () => document.body.prepend(banner));
+  }
+}
+
+// Auto-montar banner si se ejecuta en navegador
+if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', mountDemoBanner);
+  } else {
+    mountDemoBanner();
   }
 }

@@ -1,16 +1,19 @@
 /**
- * Seed Dataset de demostración v2 para Sillar Dental Especialidades.
- * Incluye clínica, directorio de pacientes, 8 profesionales colegiados COP,
- * agenda multi-sillón, odontograma FDI de 52 piezas, documentos, caja e inventario.
+ * Sillar Dental OS - Dataset sintético de demostración (Seed v2).
+ * AVISO DE PRIVACIDAD Y SEGURIDAD:
+ * Todos los datos contenidos en este archivo son ficticios y sintéticos,
+ * generados exclusivamente para pruebas de interfaz y diseño. No contienen
+ * información médica real, historias clínicas auténticas ni secretos de producción.
+ * Cumplimiento con Ley 29733 (Protección de Datos Personales) y NTS 139-MINSA.
  */
 export const SEED_V2 = {
   security: {
     twoFactorConfig: {
       enabled: true,
       method: "TOTP_AUTHENTICATOR",
-      issuer: "Sillar Dental OS",
+      issuer: "Sillar Dental OS (DEMO)",
       account: "ana.flores@sillardental.pe",
-      secret: "SILLAR-COP18240-SECURE-KEY",
+      secret: "DEMO_SYNTHETIC_MOCK_KEY_NOT_A_REAL_SECRET",
       verifiedAt: "2026-09-10 09:15:00",
       backupCodes: ["4829-1049", "8920-5512", "7381-9921", "6190-3341", "5512-8831", "9012-4412"]
     },
@@ -713,9 +716,12 @@ export const SEED_V2 = {
       { number: 46, status: "IMPLANT_PLANNED", surface: "Raíz/Corona", finding: "Ausencia dental previa", treatmentProposed: "Implante de titanio + corona" }
     ]
   },
-  documents: [
+    documents: [
   {
     "id": "doc_rad_pan",
+    "patientId": "pat_maria",
+    "organizationId": "tenant_sillar_yanahuara",
+    "siteId": "site_yanahuara_01",
     "title": "Informe Radiológico Panorámico OPG (Centro CERAD)",
     "category": "RADIOLOGIA_PDF",
     "date": "2026-07-10",
@@ -735,6 +741,9 @@ export const SEED_V2 = {
   },
   {
     "id": "doc_odonto_nts",
+    "patientId": "pat_maria",
+    "organizationId": "tenant_sillar_yanahuara",
+    "siteId": "site_yanahuara_01",
     "title": "Ficha Odontoestomatológica Oficial NTS 188-MINSA",
     "category": "ODONTOGRAMA_PDF",
     "date": "2026-07-20",
@@ -752,6 +761,9 @@ export const SEED_V2 = {
   },
   {
     "id": "doc_consent_imp",
+    "patientId": "pat_maria",
+    "organizationId": "tenant_sillar_yanahuara",
+    "siteId": "site_yanahuara_01",
     "title": "Consentimiento Informado para Implante Dental & Cirugía (#46)",
     "category": "CONSENTIMIENTO_PDF",
     "date": "2026-07-25",
@@ -765,11 +777,14 @@ export const SEED_V2 = {
     "status": "SIGNED_PATIENT",
     "hasRadiograph": false,
     "summary": "Consentimiento legal informado conforme a la Ley General de Salud N.º 26842. Detalla beneficios, riesgos, alternativas y cuidados postoperatorios para la colocación de implante osteointegrado en lecho #46.",
-    "notes": "Firmado digitalmente con evidencia biométrica por la paciente María Quispe Condori."
+    "notes": "Firmado digitalmente con hash trazable por María Quispe Condori."
   },
   {
     "id": "doc_receta_01",
-    "title": "Receta Médica Electrónica — Terapia Antibiótica & Analgésica",
+    "patientId": "pat_maria",
+    "organizationId": "tenant_sillar_yanahuara",
+    "siteId": "site_yanahuara_01",
+    "title": "Receta Médica Digital Odontológica (Amoxicilina 500mg)",
     "category": "RECETA_PDF",
     "date": "2026-09-08",
     "time": "11:30 AM",
@@ -781,11 +796,14 @@ export const SEED_V2 = {
     "sha256": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
     "status": "ACTIVE",
     "hasRadiograph": false,
-    "summary": "Prescripción de Amoxicilina 500mg (1 tableta cada 8 horas x 6 días) e Ibuprofeno 400mg (1 tableta cada 8 horas condicional al dolor), con código QR de verificación para farmacia.",
+    "summary": "Prescripción de Amoxicilina 500mg e Ibuprofeno 400mg con código QR de verificación para farmacia.",
     "notes": "Código QR trazable: QR-REC-2026-0908-45892104."
   },
   {
     "id": "doc_receta_fisica_scan",
+    "patientId": "pat_maria",
+    "organizationId": "tenant_sillar_yanahuara",
+    "siteId": "site_yanahuara_01",
     "title": "Receta Médica Sellada y Firmada en Físico (Digitalización Móvil)",
     "category": "RECETA_FISICA_SCAN",
     "date": "2026-09-08",
@@ -801,11 +819,14 @@ export const SEED_V2 = {
     "hasScannedPhysical": true,
     "scannedBy": "Dra. Ana Flores (Cámara Móvil Consultorio 1)",
     "qrRefCode": "QR-SCAN-RX-45892104-01",
-    "summary": "Receta física original con sello y firma manuscrita de la odontóloga, impresa desde el sistema, firmada con bolígrafo y fotografiada/digitalizada desde el teléfono celular del consultorio conforme a NTS N.º 139-MINSA.",
-    "notes": "Soporte físico original archivado en carpeta física Yanahuara. Registro de digitalización verificado con sello criptográfico."
+    "summary": "Receta física original con sello y firma manuscrita de la odontóloga, impresa desde el sistema y digitalizada desde el teléfono celular conforme a NTS N.º 139-MINSA.",
+    "notes": "Soporte físico original archivado en carpeta física Yanahuara."
   },
   {
     "id": "doc_perio_exam",
+    "patientId": "pat_maria",
+    "organizationId": "tenant_sillar_yanahuara",
+    "siteId": "site_yanahuara_01",
     "title": "Ficha de Sondaje Periodontal (6 Sitios - AAP/EFP 2018)",
     "category": "PERIODONCIA_PDF",
     "date": "2026-09-08",
@@ -818,11 +839,14 @@ export const SEED_V2 = {
     "sha256": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
     "status": "VALIDATED",
     "hasRadiograph": false,
-    "summary": "Ficha clínica con matriz milimétrica en 6 sitios por pieza dental, profundidad de bolsa (PS), margen gingival (MG), cálculo de CAL e índice de sangrado al sondaje (BOP: 18.5%).",
+    "summary": "Ficha clínica con matriz milimétrica en 6 sitios por pieza dental, profundidad de bolsa (PS) e índice de sangrado BOP: 18.5%.",
     "notes": "Diagnóstico: Periodontitis Estadio II, Grado B."
   },
   {
     "id": "doc_presupuesto",
+    "patientId": "pat_maria",
+    "organizationId": "tenant_sillar_yanahuara",
+    "siteId": "site_yanahuara_01",
     "title": "Presupuesto & Acuerdo Económico de Tratamiento Multietapa",
     "category": "PRESUPUESTO_PDF",
     "date": "2026-07-20",
@@ -835,14 +859,57 @@ export const SEED_V2 = {
     "sha256": "8a72b22e1b8b8d0032e3a6c5332f170c406856012759e9ec47e70ec4a87c0827",
     "status": "ACCEPTED",
     "hasRadiograph": false,
-    "summary": "Acuerdo de tratamiento de 4 fases (Periodontal, Restauradora, Ortodóntica e Implante) por un monto total de S/ 3,850.00 con cronograma de pagos fraccionado en 6 cuotas.",
+    "summary": "Acuerdo de tratamiento de 4 fases por un monto total de S/ 3,850.00 con cronograma de pagos fraccionado en cuotas.",
     "notes": "Aceptado y firmado por María Quispe Condori."
+  },
+  {
+    "id": "doc_carlos_cbct",
+    "patientId": "pat_carlos",
+    "organizationId": "tenant_sillar_yanahuara",
+    "siteId": "site_yanahuara_01",
+    "title": "Tomografía Computarizada Cone Beam 3D Mandibular (#46)",
+    "category": "RADIOLOGIA_PDF",
+    "date": "2026-09-07",
+    "time": "11:30 AM",
+    "author": "Dr. Roberto Salas Delgado",
+    "authorCmp": "COP 14980",
+    "entity": "CERAD Arequipa 3D",
+    "pages": 3,
+    "size": "4.8 MB",
+    "sha256": "3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b",
+    "status": "VALIDATED_PUBLISHED",
+    "hasRadiograph": true,
+    "studyId": "rad_carlos_01",
+    "summary": "Tomografía sectorial 3D de reborde alveolar posterior inferior derecho. Grosor óseo de 7.2mm y distancia al canal mandibular de 14.1mm.",
+    "notes": "Apto para implante de 4.0 x 11.5 mm sin necesidad de regeneración previa."
+  },
+  {
+    "id": "doc_carlos_consent",
+    "patientId": "pat_carlos",
+    "organizationId": "tenant_sillar_yanahuara",
+    "siteId": "site_yanahuara_01",
+    "title": "Consentimiento Informado para Implante de Titanio Neodent",
+    "category": "CONSENTIMIENTO_PDF",
+    "date": "2026-09-07",
+    "time": "12:15 PM",
+    "author": "Dr. Carlos Mendoza Ramos",
+    "authorCmp": "COP 15420",
+    "entity": "Sillar Dental Especialidades",
+    "pages": 2,
+    "size": "980 KB",
+    "sha256": "f1e2d3c4b5a6f0e9d8c7b6a5f4e3d2c1b0a9f8e7d6c5b4a3f2e1d0c9b8a7f6e5",
+    "status": "SIGNED_PATIENT",
+    "hasRadiograph": false,
+    "summary": "Consentimiento para colocación quirúrgica de implante Neodent Helix GM en pieza 46.",
+    "notes": "Firmado por Carlos Ramos Delgado (DNI 29481023)."
   }
 ],
   payments: [
-    { id: "pay_01", concept: "Cuota 01/06 — Ortodoncia e Instalación", amount: 600.00, dueDate: "2026-06-15", status: "PAID", paidDate: "2026-06-14", receiptNumber: "B001-000452", method: "Yape" },
-    { id: "pay_02", concept: "Cuota 02/06 — Control Mensual Ortodoncia", amount: 350.00, dueDate: "2026-07-15", status: "PAID", paidDate: "2026-07-12", receiptNumber: "B001-000510", method: "POS Niubiz" },
-    { id: "pay_03", concept: "Cuota 03/06 — Control Mensual Ortodoncia", amount: 350.00, dueDate: "2026-08-15", status: "PENDING", paidDate: null, receiptNumber: null, method: null }
+    { id: "pay_01", patientId: "pat_maria", organizationId: "tenant_sillar_yanahuara", siteId: "site_yanahuara_01", concept: "Cuota 01/06 — Ortodoncia e Instalación", amount: 600.00, dueDate: "2026-06-15", status: "PAID", paidDate: "2026-06-14", receiptNumber: "B001-000452", method: "Yape" },
+    { id: "pay_02", patientId: "pat_maria", organizationId: "tenant_sillar_yanahuara", siteId: "site_yanahuara_01", concept: "Cuota 02/06 — Control Mensual Ortodoncia", amount: 350.00, dueDate: "2026-07-15", status: "PAID", paidDate: "2026-07-12", receiptNumber: "B001-000510", method: "POS Niubiz" },
+    { id: "pay_03", patientId: "pat_maria", organizationId: "tenant_sillar_yanahuara", siteId: "site_yanahuara_01", concept: "Cuota 03/06 — Control Mensual Ortodoncia", amount: 350.00, dueDate: "2026-08-15", status: "PENDING", paidDate: null, receiptNumber: null, method: null },
+    { id: "pay_c01", patientId: "pat_carlos", organizationId: "tenant_sillar_yanahuara", siteId: "site_yanahuara_01", concept: "Adelanto Fase Quirúrgica Implante #46", amount: 1500.00, dueDate: "2026-09-07", status: "PAID", paidDate: "2026-09-07", receiptNumber: "B001-000538", method: "Transferencia BCP" },
+    { id: "pay_c02", patientId: "pat_carlos", organizationId: "tenant_sillar_yanahuara", siteId: "site_yanahuara_01", concept: "Saldo Pendiente Corona Zirconio CAD/CAM", amount: 1350.00, dueDate: "2026-10-15", status: "PENDING", paidDate: null, receiptNumber: null, method: "POS Niubiz" }
   ],
   cashRegister: {
     openingBalance: 500.00,

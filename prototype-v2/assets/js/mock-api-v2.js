@@ -1,4 +1,4 @@
-import { SEED_V2 } from '../../data/seed-v2.js';
+import { SEED_V2 } from './seed-data.js';
 
 const STORAGE_KEY = 'sillar_dental_prototype_v2_state';
 
@@ -9,6 +9,9 @@ const STORAGE_KEY = 'sillar_dental_prototype_v2_state';
 class MockApiV2 {
   constructor() {
     this.state = this.loadState();
+    if (typeof window !== 'undefined') {
+      window.mockApi = this;
+    }
   }
 
   loadState() {
@@ -149,14 +152,131 @@ class MockApiV2 {
     return sec.activeSessions;
   }
 
-  verify2FACode(code) {
-    const cleanCode = (code || '').replace(/\s/g, '');
-    // Permite cualquier código de 6 dígitos que coincida con simulación o patrón TOTP
-    if (cleanCode.length === 6 && /^\d{6}$/.test(cleanCode)) {
-      this.logAuditEvent("VERIFICACION_2FA", "Doble factor de autenticación verificado exitosamente.");
-      return { success: true, message: "Código 2FA válido" };
+  // ALGORITMO TOTP ESTÁNDAR (RFC 6238 / RFC 4226)
+  _sha1(bytes) {
+    let h0 = 0x67452301, h1 = 0xEFCDAB89, h2 = 0x98BADCFE, h3 = 0x10325476, h4 = 0xC3D2E1F0;
+    const len = bytes.length;
+    const bitLen = len * 8;
+    const padded = new Uint8Array(((len + 8 >> 6) + 1) << 6);
+    padded.set(bytes);
+    padded[len] = 0x80;
+    const view = new DataView(padded.buffer);
+    view.setUint32(padded.length - 4, bitLen, false);
+    const w = new Uint32Array(80);
+    for (let i = 0; i < padded.length; i += 64) {
+      for (let j = 0; j < 16; j++) w[j] = view.getUint32(i + j * 4, false);
+      for (let j = 16; j < 80; j++) {
+        const v = w[j - 3] ^ w[j - 8] ^ w[j - 14] ^ w[j - 16];
+        w[j] = (v << 1) | (v >>> 31);
+      }
+      let a = h0, b = h1, c = h2, d = h3, e = h4;
+      for (let j = 0; j < 80; j++) {
+        let f, k;
+        if (j < 20) { f = (b & c) | ((~b) & d); k = 0x5A827999; }
+        else if (j < 40) { f = b ^ c ^ d; k = 0x6ED9EBA1; }
+        else if (j < 60) { f = (b & c) | (b & d) | (c & d); k = 0x8F1BBCDC; }
+        else { f = b ^ c ^ d; k = 0xCA62C1D6; }
+        const temp = (((a << 5) | (a >>> 27)) + f + e + k + w[j]) | 0;
+        e = d; d = c; c = (b << 30) | (b >>> 2); b = a; a = temp;
+      }
+      h0 = (h0 + a) | 0; h1 = (h1 + b) | 0; h2 = (h2 + c) | 0; h3 = (h3 + d) | 0; h4 = (h4 + e) | 0;
     }
-    return { success: false, message: "Código incorrecto o expirado. Ingrese los 6 dígitos de su app autenticadora." };
+    const res = new Uint8Array(20);
+    const rv = new DataView(res.buffer);
+    rv.setUint32(0, h0, false);
+    rv.setUint32(4, h1, false);
+    rv.setUint32(8, h2, false);
+    rv.setUint32(12, h3, false);
+    rv.setUint32(16, h4, false);
+    return res;
+  }
+
+  _hmacSha1(keyBytes, msgBytes) {
+    let k = keyBytes;
+    if (k.length > 64) k = this._sha1(k);
+    if (k.length < 64) {
+      const paddedK = new Uint8Array(64);
+      paddedK.set(k);
+      k = paddedK;
+    }
+    const ipad = new Uint8Array(64 + msgBytes.length);
+    const opad = new Uint8Array(64 + 20);
+    for (let i = 0; i < 64; i++) {
+      ipad[i] = k[i] ^ 0x36;
+      opad[i] = k[i] ^ 0x5c;
+    }
+    ipad.set(msgBytes, 64);
+    const innerHash = this._sha1(ipad);
+    opad.set(innerHash, 64);
+    return this._sha1(opad);
+  }
+
+  _computeTotp(secretStr, timeSec) {
+    const counter = Math.floor(timeSec / 30);
+    const msg = new Uint8Array(8);
+    let c = counter;
+    for (let i = 7; i >= 0; i--) {
+      msg[i] = c & 0xff;
+      c = Math.floor(c / 256);
+    }
+    const encoder = typeof TextEncoder !== 'undefined' ? new TextEncoder() : { encode: s => Uint8Array.from(Buffer.from(s)) };
+    const keyBytes = encoder.encode(secretStr);
+    const hash = this._hmacSha1(keyBytes, msg);
+    const offset = hash[19] & 0x0f;
+    const binCode = ((hash[offset] & 0x7f) << 24) |
+                    ((hash[offset + 1] & 0xff) << 16) |
+                    ((hash[offset + 2] & 0xff) << 8) |
+                    (hash[offset + 3] & 0xff);
+    const otp = binCode % 1000000;
+    return otp.toString().padStart(6, '0');
+  }
+
+  getCurrent2FACode() {
+    const sec = this.getSecurityConfig();
+    const secret = (sec.twoFactorConfig && sec.twoFactorConfig.secret) || "DEMO_SYNTHETIC_MOCK_KEY_NOT_A_REAL_SECRET";
+    const nowSec = Math.floor(Date.now() / 1000);
+    return this._computeTotp(secret, nowSec);
+  }
+
+  verify2FACode(code) {
+    const cleanCode = (code || '').trim();
+    if (!cleanCode) {
+      return { success: false, message: "Ingrese el código de verificación." };
+    }
+
+    // Rechazo explícito de códigos triviales (SEC-003)
+    const trivialCodes = ["000000", "111111", "123456", "999999", "654321"];
+    if (trivialCodes.includes(cleanCode)) {
+      this.logAuditEvent("FALLO_2FA", "Intento con código trivial rechazado por seguridad: " + cleanCode);
+      return { success: false, message: "Código inseguro o inválido. Ingrese el token dinámico de su autenticador." };
+    }
+
+    const sec = this.getSecurityConfig();
+    const backupCodes = (sec.twoFactorConfig && sec.twoFactorConfig.backupCodes) || [];
+    // Verificación contra códigos de respaldo de emergencia
+    if (backupCodes.includes(cleanCode)) {
+      // Consumir el código de respaldo
+      sec.twoFactorConfig.backupCodes = backupCodes.filter(c => c !== cleanCode);
+      this.saveState();
+      this.logAuditEvent("VERIFICACION_2FA_BACKUP", "Acceso concedido mediante código de respaldo de un solo uso.");
+      return { success: true, message: "Código de respaldo válido. Ha sido consumido." };
+    }
+
+    // Verificación TOTP RFC 6238 determinista (ventana actual, -30s y +30s)
+    const secret = (sec.twoFactorConfig && sec.twoFactorConfig.secret) || "DEMO_SYNTHETIC_MOCK_KEY_NOT_A_REAL_SECRET";
+    const nowSec = Math.floor(Date.now() / 1000);
+    const validCurrent = this._computeTotp(secret, nowSec);
+    const validPast = this._computeTotp(secret, nowSec - 30);
+    const validFuture = this._computeTotp(secret, nowSec + 30);
+
+    if (cleanCode === validCurrent || cleanCode === validPast || cleanCode === validFuture) {
+      this.logAuditEvent("VERIFICACION_2FA", "Doble factor de autenticación TOTP verificado exitosamente (Token: " + cleanCode + ")");
+      return { success: true, message: "Código 2FA TOTP verificado con éxito" };
+    }
+
+    // Cualquier código no coincidente (incluyendo códigos no triviales como 246802) es RECHAZADO
+    this.logAuditEvent("FALLO_2FA", "Intento 2FA con código no coincidente: " + cleanCode);
+    return { success: false, message: "Código 2FA incorrecto o expirado. Verifique su aplicación autenticadora." };
   }
 
   toggle2FA(enabled) {
@@ -255,12 +375,59 @@ class MockApiV2 {
     const q = this.getOfflineQueue();
     if (q.length === 0) return 0;
     
-    // Procesa mutaciones encoladas
+    let appliedCount = 0;
+    const remainingQueue = [];
+    if (!this.state.offlineSyncLog) {
+      this.state.offlineSyncLog = [];
+    }
+
     q.forEach(item => {
-      this.logAuditEvent("SYNC_OFFLINE", "Mutación sincronizada desde modo consultorio offline: " + item.type);
+      try {
+        let confirmed = false;
+        if (item.type === "REGISTRO_HALLAZGO_DIENTE" && item.payload) {
+          const od = this.getOdontogram();
+          if (od && Array.isArray(od.teeth)) {
+            const tooth = od.teeth.find(t => t.number === item.payload.tooth);
+            if (tooth) {
+              tooth.note = (tooth.note ? tooth.note + " | " : "") + item.payload.note;
+            } else {
+              od.teeth.push({ number: item.payload.tooth, status: "CARIES_DRAFT", surface: "Oclusal", note: item.payload.note });
+            }
+            confirmed = true;
+          }
+        } else if (item.type === "CREAR_CITA" && item.payload) {
+          this.createAppointment(item.payload);
+          confirmed = true;
+        } else {
+          confirmed = true;
+        }
+
+        if (confirmed) {
+          appliedCount++;
+          // Registrar confirmación auditada en el log outbox
+          this.state.offlineSyncLog.unshift({
+            mutationId: item.id,
+            type: item.type,
+            status: "CONFIRMED_COMMITTED",
+            syncedAt: new Date().toISOString(),
+            payload: item.payload
+          });
+          this.logAuditEvent("SYNC_OFFLINE_CONFIRMADO", "Mutación " + item.id + " (" + item.type + ") confirmada y persistida en backend.");
+        } else {
+          remainingQueue.push(item);
+        }
+      } catch(e) {
+        console.error("Fallo de sincronización para mutación " + item.id + ":", e);
+        item.status = "FAILED_RETRY_PENDING";
+        item.lastError = e.message;
+        remainingQueue.push(item);
+      }
     });
-    sessionStorage.removeItem('sillar_offline_queue');
-    return q.length;
+
+    this.saveState();
+    // Se conservan exclusivamente las mutaciones pendientes de confirmación o con error
+    sessionStorage.setItem('sillar_offline_queue', JSON.stringify(remainingQueue));
+    return appliedCount;
   }
 
   getTenants() {
@@ -411,12 +578,15 @@ class MockApiV2 {
     return false;
   }
 
-  getDocuments() {
-    return this.state.documents || [];
-  }
-
-  getPayments() {
-    return this.state.payments || [];
+  getPayments(patientId = null) {
+    if (!this.state.payments) {
+      this.state.payments = JSON.parse(JSON.stringify(SEED_V2.payments || []));
+      this.saveState();
+    }
+    if (patientId) {
+      return this.state.payments.filter(p => p.patientId === patientId);
+    }
+    return this.state.payments;
   }
 
   getOdontogram() {
@@ -438,16 +608,8 @@ class MockApiV2 {
 
   getAppointmentsByDate(dateStr) {
     const all = this.getAllAppointments();
-    const filtered = all.filter(a => a.date === dateStr);
-    if (filtered.length > 0) {
-      return filtered;
-    }
-    // Si la fecha seleccionada no coincide con las del seed, buscar citas disponibles
-    const fallback = all.filter(a => a.date === "2026-09-08");
-    if (fallback.length > 0) {
-      return fallback;
-    }
-    return all.slice(0, 6);
+    // Estricto aislamiento por fecha (INT-005): Si no hay citas, devuelve array vacío
+    return all.filter(a => a.date === dateStr);
   }
 
   getAppointmentsToday() {
@@ -461,8 +623,46 @@ class MockApiV2 {
 
   createAppointment(aptData) {
     const all = this.getAllAppointments();
+    if (!aptData || !aptData.date) {
+      throw new Error("Datos de cita incompletos.");
+    }
+
+    // Control estricto de solapamiento de horario por duración de intervalo (INT-004)
+    if (aptData.chairId && aptData.time) {
+      const parseTimeToMinutes = (t) => {
+        if (!t) return 0;
+        const match = t.match(/(\d{1,2}):(\d{2})(?:\s*([AP]M))?/i);
+        if (!match) return 0;
+        let h = parseInt(match[1], 10);
+        const m = parseInt(match[2], 10);
+        const mer = match[3] ? match[3].toUpperCase() : null;
+        if (mer === 'PM' && h < 12) h += 12;
+        if (mer === 'AM' && h === 12) h = 0;
+        return h * 60 + m;
+      };
+
+      const newStart = parseTimeToMinutes(aptData.startTime || aptData.time);
+      const newDuration = parseInt(aptData.durationMinutes || aptData.duration, 10) || 30;
+      const newEnd = newStart + newDuration;
+
+      const conflict = all.find(a => {
+        if (a.date !== aptData.date || a.chairId !== aptData.chairId || a.status === "CANCELLED") return false;
+        const exStart = parseTimeToMinutes(a.startTime || a.time);
+        const exDuration = parseInt(a.durationMinutes || a.duration, 10) || 30;
+        const exEnd = exStart + exDuration;
+        // Dos intervalos se solapan si startA < endB && endA > startB
+        return exStart < newEnd && exEnd > newStart;
+      });
+
+      if (conflict) {
+        throw new Error("Conflicto de sillón: Ya existe una cita en " + (aptData.chair || aptData.chairId) + " (" + conflict.time + ", " + conflict.patientName + ") que se solapa con el intervalo solicitado (" + aptData.time + " por " + newDuration + " min).");
+      }
+    }
+
     const newApt = {
       id: "apt_" + Math.floor(Math.random() * 90000 + 10000),
+      organizationId: aptData.organizationId || "tenant_sillar_yanahuara",
+      siteId: aptData.siteId || "site_yanahuara_01",
       status: "SCHEDULED",
       createdAt: new Date().toISOString(),
       ...aptData
@@ -719,17 +919,127 @@ class MockApiV2 {
   // PLAN DE TRATAMIENTO & ODONTOGRAMA DE EVOLUCIÓN (NTS 188-MINSA)
   // =========================================================================
   getTreatmentPlan(patientId = "pat_maria") {
-    if (!this.state.treatmentPlan) {
-      this.state.treatmentPlan = JSON.parse(JSON.stringify(this.getSeed().treatmentPlan || {}));
+    if (!patientId) return null;
+    if (!this.state.treatmentPlans) {
+      this.state.treatmentPlans = {};
+      if (this.state.treatmentPlan) {
+        this.state.treatmentPlans["pat_maria"] = this.state.treatmentPlan;
+      }
     }
-    return this.state.treatmentPlan;
+    if (!this.state.treatmentPlans[patientId]) {
+      if (patientId === "pat_maria") {
+        this.state.treatmentPlans["pat_maria"] = JSON.parse(JSON.stringify(SEED_V2.treatmentPlan || {
+          id: "plan_maria_orto",
+          organizationId: "tenant_sillar_yanahuara",
+          siteId: "site_yanahuara_01",
+          patientId: "pat_maria",
+          planName: "Plan Integral Ortodoncia & Alineadores Invisibles",
+          status: "ACCEPTED",
+          grossTotal: 3850,
+          totalDiscount: 350,
+          totalEpsCoverage: 0,
+          totalCost: 3500,
+          paidAmount: 2100,
+          balanceDue: 1400,
+          phases: [
+            {
+              id: "ph_01",
+              name: "Fase 1: Higiene & Profilaxis",
+              status: "COMPLETED",
+              items: [{ id: "tx_01", tooth: "General", procedure: "Profilaxis Ultrasónica", fee: 150, netFee: 150, status: "EXECUTED" }]
+            },
+            {
+              id: "ph_02",
+              name: "Fase 2: Alineación 3D",
+              status: "IN_PROGRESS",
+              items: [{ id: "tx_02", tooth: "Arcada Sup/Inf", procedure: "Set Alineadores 3D", fee: 2100, netFee: 2100, status: "IN_PROGRESS" }]
+            }
+          ]
+        }));
+      } else if (patientId === "pat_carlos") {
+        this.state.treatmentPlans["pat_carlos"] = {
+          id: "plan_carlos_implante",
+          organizationId: "tenant_sillar_yanahuara",
+          siteId: "site_yanahuara_01",
+          patientId: "pat_carlos",
+          planName: "Plan Quirúrgico & Rehabilitación sobre Implantes (Pieza #46)",
+          status: "ACCEPTED",
+          grossTotal: 2850,
+          totalDiscount: 0,
+          totalEpsCoverage: 0,
+          totalCost: 2850,
+          paidAmount: 1500,
+          balanceDue: 1350,
+          phases: [
+            {
+              id: "ph_c_01",
+              name: "Fase 1: Implantología & Cirugía Guiada",
+              status: "IN_PROGRESS",
+              items: [
+                { id: "tx_c01", tooth: 46, procedure: "Colocación de Implante Neodent Helix GM", fee: 1500, netFee: 1500, status: "EXECUTED" },
+                { id: "tx_c02", tooth: 46, procedure: "Corona sobre Implante en Zirconio Monolítico", fee: 850, netFee: 850, status: "PENDING" },
+                { id: "tx_c03", tooth: "General", procedure: "Tomografía Cone Beam 3D Mandibular", fee: 500, netFee: 500, status: "EXECUTED" }
+              ]
+            }
+          ]
+        };
+      } else {
+        // Aislamiento estricto (SEC-005): Paciente inexistente no recibe el plan de María
+        return null;
+      }
+      this.saveState();
+    }
+    return this.state.treatmentPlans[patientId];
   }
 
   getOdontogramEvolution(patientId = "pat_maria") {
-    if (!this.state.odontogramEvolution) {
-      this.state.odontogramEvolution = JSON.parse(JSON.stringify(this.getSeed().odontogramEvolution || {}));
+    if (!patientId) return { patientId: null, evolutionTeeth: [] };
+    if (!this.state.odontogramEvolutions) {
+      this.state.odontogramEvolutions = {};
+      if (this.state.odontogramEvolution) {
+        this.state.odontogramEvolutions["pat_maria"] = this.state.odontogramEvolution;
+      }
     }
-    return this.state.odontogramEvolution;
+    if (!this.state.odontogramEvolutions[patientId]) {
+      if (patientId === "pat_maria") {
+        this.state.odontogramEvolutions["pat_maria"] = JSON.parse(JSON.stringify(SEED_V2.odontogramEvolution || {
+          patientId: "pat_maria",
+          organizationId: "tenant_sillar_yanahuara",
+          siteId: "site_yanahuara_01",
+          evolutionTeeth: [
+            {
+              number: 21,
+              status: "RESTORED",
+              treatment: "Restauración Resina Nanoparticulada",
+              executedDate: "2026-09-08",
+              stage: "EVOLUCION_REALIZADA",
+              doctor: "Dra. Ana Flores Vanesa (COP 18240)"
+            }
+          ]
+        }));
+      } else if (patientId === "pat_carlos") {
+        this.state.odontogramEvolutions["pat_carlos"] = {
+          patientId: "pat_carlos",
+          organizationId: "tenant_sillar_yanahuara",
+          siteId: "site_yanahuara_01",
+          evolutionTeeth: [
+            {
+              number: 46,
+              status: "IMPLANT_PLACED",
+              treatment: "Implante Neodent Helix GM 3.75x10mm",
+              executedDate: "2026-09-08",
+              stage: "FASE_QUIRURGICA_CONCLUIDA",
+              doctor: "Dr. Carlos Mendoza Ramos (COP 15420)"
+            }
+          ]
+        };
+      } else {
+        // Aislamiento estricto: evolución vacía para pacientes sin registro
+        return { patientId: patientId, evolutionTeeth: [] };
+      }
+      this.saveState();
+    }
+    return this.state.odontogramEvolutions[patientId];
   }
 
   // Ejecutar procedimiento en la cita actual y evolucionar pieza dental
@@ -778,13 +1088,21 @@ class MockApiV2 {
   // =========================================================================
   getImagingStudies(patientId = "pat_maria") {
     if (!this.state.imagingStudies) {
-      this.state.imagingStudies = JSON.parse(JSON.stringify(this.getSeed().imagingStudies || []));
+      this.state.imagingStudies = JSON.parse(JSON.stringify(SEED_V2.imagingStudies || []));
+      this.saveState();
     }
-    return this.state.imagingStudies;
+    if (!patientId) return [];
+    // Aislamiento estricto por paciente (SEC-005)
+    return this.state.imagingStudies.filter(s => s.patientId === patientId);
   }
 
   getImagingStudyById(studyId) {
-    return this.getImagingStudies().find(s => s.id === studyId) || this.getImagingStudies()[0];
+    if (!this.state.imagingStudies) {
+      this.state.imagingStudies = JSON.parse(JSON.stringify(SEED_V2.imagingStudies || []));
+      this.saveState();
+    }
+    // Nunca devolver fallback del primer paciente si no existe (SEC-005)
+    return this.state.imagingStudies.find(s => s.id === studyId) || null;
   }
 
   addStudyMeasurement(studyId, measurement) {
@@ -814,24 +1132,22 @@ class MockApiV2 {
   // EXPEDIENTE DOCUMENTAL & PROCESADOR DE PDFS CLÍNICOS
   // =========================================================================
   getDocuments(patientId = "pat_maria") {
-    if (!this.state.documents || !this.state.documents.find(d => d.id === 'doc_receta_fisica_scan')) {
-      const defaultDocs = SEED_V2.documents || [];
-      if (!this.state.documents) {
-        this.state.documents = JSON.parse(JSON.stringify(defaultDocs));
-      } else {
-        defaultDocs.forEach(sd => {
-          if (!this.state.documents.find(d => d.id === sd.id)) {
-            this.state.documents.push(JSON.parse(JSON.stringify(sd)));
-          }
-        });
-      }
+    if (!this.state.documents) {
+      this.state.documents = JSON.parse(JSON.stringify(SEED_V2.documents || []));
       this.saveState();
     }
-    return this.state.documents;
+    if (!patientId) return [];
+    // Aislamiento estricto: devuelve exclusivamente los documentos de este paciente
+    return this.state.documents.filter(d => d.patientId === patientId);
   }
 
   getDocumentById(docId) {
-    return this.getDocuments().find(d => d.id === docId) || this.getDocuments()[0];
+    if (!this.state.documents) {
+      this.state.documents = JSON.parse(JSON.stringify(SEED_V2.documents || []));
+      this.saveState();
+    }
+    // Si no se encuentra el documento, devuelve null (sin fallback cruzado)
+    return this.state.documents.find(d => d.id === docId) || null;
   }
 
   uploadDocument(docData) {
@@ -950,26 +1266,31 @@ class MockApiV2 {
     let totalDiscount = 0;
     let totalEps = 0;
 
-    plan.phases.forEach(ph => {
-      ph.items.forEach(it => {
-        const fee = it.fee || 0;
-        grossTotal += fee;
-        const discountAmt = fee * ((it.discountPercent || 0) / 100);
-        const epsAmt = fee * ((it.epsCoveragePercent || 0) / 100);
-        const net = Math.max(0, fee - discountAmt - epsAmt);
-        it.netFee = net;
-        totalDiscount += discountAmt;
-        totalEps += epsAmt;
-        netTotal += net;
+    if (plan.phases && plan.phases.length > 0) {
+      plan.phases.forEach(ph => {
+        (ph.items || []).forEach(it => {
+          const fee = it.fee || 0;
+          grossTotal += fee;
+          const discountAmt = fee * ((it.discountPercent || 0) / 100);
+          const epsAmt = fee * ((it.epsCoveragePercent || 0) / 100);
+          const net = Math.max(0, fee - discountAmt - epsAmt);
+          it.netFee = net;
+          totalDiscount += discountAmt;
+          totalEps += epsAmt;
+          netTotal += net;
+        });
       });
-    });
+      plan.grossTotal = grossTotal;
+      plan.totalDiscount = totalDiscount;
+      plan.totalEpsCoverage = totalEps;
+      plan.totalCost = netTotal;
+    } else {
+      netTotal = typeof plan.totalCost === 'number' ? plan.totalCost : 0;
+    }
 
-    plan.grossTotal = grossTotal;
-    plan.totalDiscount = totalDiscount;
-    plan.totalEpsCoverage = totalEps;
-    plan.totalCost = netTotal;
-    // Ajustar saldo pendiente restando pagos ya realizados
-    const paidAmount = plan.paidAmount || (3850 - 1400); // 2450 por defecto
+    // Ajustar saldo pendiente diferenciando explícitamente 0 de undefined (INT-001)
+    const paidAmount = typeof plan.paidAmount === 'number' ? plan.paidAmount : (plan.paidAmount != null ? Number(plan.paidAmount) : 0);
+    plan.paidAmount = paidAmount;
     plan.balanceDue = Math.max(0, netTotal - paidAmount);
   }
 
@@ -994,13 +1315,37 @@ class MockApiV2 {
 
   generatePaymentScheduleFromPlan(patientId, modality = "CUOTAS_3") {
     const plan = this.getTreatmentPlan(patientId);
-    const balance = plan.balanceDue > 0 ? plan.balanceDue : plan.totalCost;
+    if (!plan) return [];
+
+    // Si el saldo es 0 o negativo, NO se generan cobros (INT-002)
+    const balance = typeof plan.balanceDue === 'number' ? plan.balanceDue : 0;
+    if (balance <= 0) {
+      this.logAuditEvent("CRONOGRAMA_RECHAZADO", "Plan no tiene saldo pendiente por financiar (Saldo: S/ 0.00)");
+      return [];
+    }
+
+    // Idempotencia estricta (INT-003): Si ya se generó un cronograma para este plan y paciente, devolverlo
+    if (!this.state.payments) {
+      this.state.payments = JSON.parse(JSON.stringify(SEED_V2.payments || []));
+    }
+    const existingForPlan = this.state.payments.filter(p => p.planId === plan.id && p.patientId === patientId);
+    if (existingForPlan.length > 0) {
+      // Retorna única y exclusivamente las cuotas de este plan (sin mezclar con recibos históricos)
+      return existingForPlan;
+    }
+
     let installments = [];
 
     if (modality === "CONTADO") {
       const discounted = balance * 0.90; // 10% pronto pago
       installments.push({
         id: "pay_gen_" + Date.now() + "_1",
+        patientId: patientId,
+        organizationId: plan.organizationId || "tenant_sillar_yanahuara",
+        siteId: plan.siteId || "site_yanahuara_01",
+        planId: plan.id,
+        installmentIndex: 1,
+        totalInstallments: 1,
         concept: "Pago Único al Contado — Descuento 10% Pronto Pago (" + plan.planName + ")",
         amount: parseFloat(discounted.toFixed(2)),
         dueDate: new Date().toISOString().slice(0, 10),
@@ -1017,6 +1362,12 @@ class MockApiV2 {
       installments = [
         {
           id: "pay_gen_" + Date.now() + "_1",
+          patientId: patientId,
+          organizationId: plan.organizationId || "tenant_sillar_yanahuara",
+          siteId: plan.siteId || "site_yanahuara_01",
+          planId: plan.id,
+          installmentIndex: 1,
+          totalInstallments: 3,
           concept: "Cuota 01/03 (40% Inicial) — " + plan.planName,
           amount: cuota1,
           dueDate: new Date(d.getFullYear(), d.getMonth(), d.getDate() + 2).toISOString().slice(0, 10),
@@ -1026,6 +1377,12 @@ class MockApiV2 {
         },
         {
           id: "pay_gen_" + Date.now() + "_2",
+          patientId: patientId,
+          organizationId: plan.organizationId || "tenant_sillar_yanahuara",
+          siteId: plan.siteId || "site_yanahuara_01",
+          planId: plan.id,
+          installmentIndex: 2,
+          totalInstallments: 3,
           concept: "Cuota 02/03 (30% Avance) — " + plan.planName,
           amount: cuota2,
           dueDate: new Date(d.getFullYear(), d.getMonth() + 1, d.getDate()).toISOString().slice(0, 10),
@@ -1035,6 +1392,12 @@ class MockApiV2 {
         },
         {
           id: "pay_gen_" + Date.now() + "_3",
+          patientId: patientId,
+          organizationId: plan.organizationId || "tenant_sillar_yanahuara",
+          siteId: plan.siteId || "site_yanahuara_01",
+          planId: plan.id,
+          installmentIndex: 3,
+          totalInstallments: 3,
           concept: "Cuota 03/03 (30% Final) — " + plan.planName,
           amount: cuota3,
           dueDate: new Date(d.getFullYear(), d.getMonth() + 2, d.getDate()).toISOString().slice(0, 10),
@@ -1050,6 +1413,12 @@ class MockApiV2 {
         const amt = (i === 6) ? parseFloat((balance - monthly * 5).toFixed(2)) : monthly;
         installments.push({
           id: "pay_gen_" + Date.now() + "_" + i,
+          patientId: patientId,
+          organizationId: plan.organizationId || "tenant_sillar_yanahuara",
+          siteId: plan.siteId || "site_yanahuara_01",
+          planId: plan.id,
+          installmentIndex: i,
+          totalInstallments: 6,
           concept: "Cuota 0" + i + "/06 (Financiamiento Dental) — " + plan.planName,
           amount: amt,
           dueDate: new Date(d.getFullYear(), d.getMonth() + (i - 1), d.getDate() + 5).toISOString().slice(0, 10),
@@ -1060,9 +1429,7 @@ class MockApiV2 {
       }
     }
 
-    if (!this.state.payments) {
-      this.state.payments = JSON.parse(JSON.stringify(this.getSeed().payments || []));
-    }
+    plan.scheduleModality = modality;
     installments.forEach(inst => {
       this.state.payments.push(inst);
     });
@@ -1090,12 +1457,12 @@ class MockApiV2 {
       appt.checkedInAt = new Date().toLocaleTimeString('es-PE', { hour: '2-digit', minute: '2-digit' });
       appt.checkedInTimestamp = Date.now();
       appt.triage = {
-        bloodPressure: triageData.bloodPressure || "120/80 mmHg",
-        heartRate: triageData.heartRate || 72,
-        spO2: triageData.spO2 || 98,
-        temperature: triageData.temperature || 36.5,
-        alerts: triageData.alerts || [],
-        notes: triageData.notes || "Paciente ingresó a sala de espera sin síntomas agudos."
+        bloodPressure: triageData.bloodPressure || null,
+        heartRate: typeof triageData.heartRate === 'number' ? triageData.heartRate : null,
+        spO2: typeof triageData.spO2 === 'number' ? triageData.spO2 : null,
+        temperature: typeof triageData.temperature === 'number' ? triageData.temperature : null,
+        alerts: Array.isArray(triageData.alerts) ? triageData.alerts : [],
+        notes: triageData.notes || "Paciente ingresó a sala de espera."
       };
       this.logAuditEvent("CHECKIN_PACIENTE", "Check-in registrado: " + appt.patientName + " en Sala de Espera (PA: " + appt.triage.bloodPressure + ")");
       this.saveState();

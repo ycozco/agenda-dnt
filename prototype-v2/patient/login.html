@@ -235,6 +235,16 @@
         el.setAttribute('href', prefix + 'staff/inventario.html');
       } else if (text.includes('consulta') || text.includes('odontograma')) {
         el.setAttribute('href', prefix + 'staff/consulta.html');
+    });
+
+    document.addEventListener('click', (e) => {
+      const a = e.target.closest('a');
+      if (!a) return;
+      const href = a.getAttribute('href') || '';
+      if (href.includes('/patient/') || href.includes('patient/index')) {
+        document.cookie = "sillar_patient_auth=true; path=/; SameSite=Lax";
+      } else if (href.includes('/staff/') || href.includes('staff/')) {
+        document.cookie = "sillar_staff_auth=true; path=/; SameSite=Lax";
       }
     });
   });

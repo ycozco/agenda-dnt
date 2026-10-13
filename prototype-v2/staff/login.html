@@ -27,6 +27,7 @@
           <option value="doctor">Profesional Dental (Dra. Ana Flores)</option>
           <option value="reception">Recepción / Admisión</option>
           <option value="cashier">Caja & Facturación</option>
+          <option value="superadmin">Super Administrador SaaS (Global)</option>
         </select>
       </label>
       <label class="form-label">
@@ -43,10 +44,19 @@
     document.getElementById("staffLoginForm").addEventListener("submit", (e) => {
       e.preventDefault();
       const role = document.getElementById("roleSelect").value;
-      showToast(`Accediendo a la consola como ${role}`, "success");
-      setTimeout(() => {
-        window.location.href = `index.html?view=dashboard&role=${role}`;
-      }, 500);
+      if (role === "superadmin") {
+        document.cookie = "sillar_superadmin_auth=true; path=/; SameSite=Lax";
+        showToast("Accediendo a consola Super Admin Global", "success");
+        setTimeout(() => {
+          window.location.href = "../superadmin/index.html";
+        }, 400);
+      } else {
+        document.cookie = "sillar_staff_auth=true; path=/; SameSite=Lax";
+        showToast(`Accediendo a la consola como ${role}`, "success");
+        setTimeout(() => {
+          window.location.href = `index.html?view=dashboard&role=${role}`;
+        }, 400);
+      }
     });
   </script>
 </body>

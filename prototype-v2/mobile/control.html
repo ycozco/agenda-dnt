@@ -100,7 +100,7 @@
   </div>
 
   <script type="module">
-    import { showToast } from '../assets/js/components.js';
+    import { showToast, escapeHtml } from '../assets/js/components.js';
 
     const input = document.getElementById('fileInput');
     const dropZone = document.getElementById('dropZone');
@@ -111,7 +111,7 @@
     function formatBytes(bytes) { return bytes < 1024 * 1024 ? `${Math.max(1, Math.round(bytes / 1024))} KB` : `${(bytes / (1024 * 1024)).toFixed(1)} MB`; }
     function renderQueue() {
       sendButton.disabled = files.length === 0;
-      queue.innerHTML = files.length ? files.map(file => `<div class="upload-item"><div><strong>${file.name}</strong><span>${formatBytes(file.size)} · ${file.type || 'archivo'}</span></div><span class="upload-status">Listo para revisar</span></div>`).join('') : '<div class="empty-state" style="padding: 22px 16px;">Aún no has seleccionado archivos.</div>';
+      queue.innerHTML = files.length ? files.map(file => `<div class="upload-item"><div><strong>${escapeHtml(file.name)}</strong><span>${formatBytes(file.size)} · ${escapeHtml(file.type || 'archivo')}</span></div><span class="upload-status">Listo para revisar</span></div>`).join('') : '<div class="empty-state" style="padding: 22px 16px;">Aún no has seleccionado archivos.</div>';
     }
     function addFiles(fileList) { files = [...files, ...Array.from(fileList)].slice(0, 8); renderQueue(); }
     input.addEventListener('change', event => addFiles(event.target.files));

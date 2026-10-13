@@ -776,7 +776,7 @@
             🟢 Online (18ms)
           </button>
         </div>
-        <a href="login.html" class="btn btn-secondary btn-small" style="width: 100%; color: white; border-color: rgba(255,255,255,0.25); background: transparent;">Cerrar Sesión</a>
+        <a href="login.html" onclick="document.cookie='sillar_staff_auth=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT'; document.cookie='sillar_superadmin_auth=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';" class="btn btn-secondary btn-small" style="width: 100%; color: white; border-color: rgba(255,255,255,0.25); background: transparent;">Cerrar Sesión</a>
       </div>
     </aside>
 
@@ -1350,9 +1350,76 @@
   <!-- SCRIPT CENTRAL DE LA CONSOLA -->
   <script type="module">
     import { mockApi } from '../assets/js/mock-api-v2.js';
-    import { showToast } from '../assets/js/components.js';
+    import { showToast, escapeHtml } from '../assets/js/components.js';
     import { renderWaitingRoom } from './waiting-room.js';
     import { renderTreatmentPlans } from './treatment-plans.js';
+
+    // Exponer API y utilidades tempranamente en window
+    window.mockApi = mockApi;
+    window.escapeHtml = escapeHtml;
+
+    // CONTROLADORES GLOBALES DE SEGURIDAD, 2FA Y SESIONES
+    window.openSecurityModal = function() {
+      window.renderActiveSessionsList();
+      const m = document.getElementById('securityModal');
+      if (m) m.style.display = 'flex';
+    };
+
+    window.closeSecurityModal = function() {
+      const m = document.getElementById('securityModal');
+      if (m) m.style.display = 'none';
+    };
+
+    window.handleSecurityBackdrop = function(e) {
+      if (e.target.id === 'securityModal') window.closeSecurityModal();
+    };
+
+    window.renderActiveSessionsList = function() {
+      const container = document.getElementById('activeSessionsContainer');
+      if (!container) return;
+      const sessions = mockApi.getActiveSessions();
+      container.innerHTML = sessions.map(s => `
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; background: #F8FAFC; border: 1px solid var(--line); border-radius: 8px;">
+          <div>
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <strong style="color: var(--ink); font-size: 0.88rem;">${escapeHtml(s.device)}</strong>
+              ${s.isCurrent ? '<span class="chip chip-success" style="font-size: 0.65rem; padding: 1px 6px;">Dispositivo Actual</span>' : ''}
+            </div>
+            <div class="tiny muted">${escapeHtml(s.browser)} · IP: ${escapeHtml(s.ip)} (${escapeHtml(s.location)})</div>
+            <div class="tiny" style="color: #64748B;">Actividad: ${escapeHtml(s.lastActive)}</div>
+          </div>
+          ${!s.isCurrent ? `
+            <button class="btn btn-secondary btn-small" onclick="window.revokeSingleSession('${escapeHtml(s.id)}')" style="font-size: 0.72rem; color: #DC2626; border-color: #FECACA; padding: 3px 8px;">
+              Cerrar
+            </button>
+          ` : '<span class="tiny" style="color: #10B981; font-weight: 700;">Conectado</span>'}
+        </div>
+      `).join('');
+    };
+
+    window.revokeSingleSession = function(sessionId) {
+      mockApi.revokeSession(sessionId);
+      showToast('Sesión remota revocada exitosamente.', 'info');
+      window.renderActiveSessionsList();
+    };
+
+    window.revokeAllOtherSessions = function() {
+      mockApi.revokeAllOtherSessions();
+      showToast('Se han cerrado todas las demás sesiones remotas.', 'success');
+      window.renderActiveSessionsList();
+    };
+
+    window.verifyTest2FA = function() {
+      const input = document.getElementById('test2faInput');
+      const val = input ? input.value.trim() : '';
+      const res = mockApi.verify2FACode(val);
+      if (res.success) {
+        showToast('✓ ' + res.message, 'success');
+        if (input) input.value = '';
+      } else {
+        showToast('⚠️ ' + res.message, 'error');
+      }
+    };
 
     // 1. LEER VISTA DE PARÁMETROS URL
     const params = new URLSearchParams(window.location.search);
@@ -4127,9 +4194,7 @@
       window.closeNewAptModal();
       window.location.reload();
     };
-  </script>
-  <script src="../components/prototype-switcher.js">
-    // CONTROLADORES DE GESTIÓN DE PROFESIONALES (MODAL & CRUD)
+
     window.openNewPractitionerModal = function() {
       const m = document.getElementById('newPractitionerModal');
       if (m) m.style.display = 'flex';
@@ -4221,70 +4286,6 @@
       }
     };
 
-  
-    // CONTROLADORES DE SEGURIDAD, 2FA Y SESIONES
-    window.openSecurityModal = function() {
-      window.renderActiveSessionsList();
-      const m = document.getElementById('securityModal');
-      if (m) m.style.display = 'flex';
-    };
-
-    window.closeSecurityModal = function() {
-      const m = document.getElementById('securityModal');
-      if (m) m.style.display = 'none';
-    };
-
-    window.handleSecurityBackdrop = function(e) {
-      if (e.target.id === 'securityModal') window.closeSecurityModal();
-    };
-
-    window.renderActiveSessionsList = function() {
-      const container = document.getElementById('activeSessionsContainer');
-      if (!container) return;
-      const sessions = mockApi.getActiveSessions();
-      container.innerHTML = sessions.map(s => `
-        <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; background: #F8FAFC; border: 1px solid var(--line); border-radius: 8px;">
-          <div>
-            <div style="display: flex; align-items: center; gap: 6px;">
-              <strong style="color: var(--ink); font-size: 0.88rem;">${s.device}</strong>
-              ${s.isCurrent ? '<span class="chip chip-success" style="font-size: 0.65rem; padding: 1px 6px;">Dispositivo Actual</span>' : ''}
-            </div>
-            <div class="tiny muted">${s.browser} · IP: ${s.ip} (${s.location})</div>
-            <div class="tiny" style="color: #64748B;">Actividad: ${s.lastActive}</div>
-          </div>
-          ${!s.isCurrent ? `
-            <button class="btn btn-secondary btn-small" onclick="window.revokeSingleSession('${s.id}')" style="font-size: 0.72rem; color: #DC2626; border-color: #FECACA; padding: 3px 8px;">
-              Cerrar
-            </button>
-          ` : '<span class="tiny" style="color: #10B981; font-weight: 700;">Conectado</span>'}
-        </div>
-      `).join('');
-    };
-
-    window.revokeSingleSession = function(sessionId) {
-      mockApi.revokeSession(sessionId);
-      showToast('Sesión remota revocada exitosamente.', 'info');
-      window.renderActiveSessionsList();
-    };
-
-    window.revokeAllOtherSessions = function() {
-      mockApi.revokeAllOtherSessions();
-      showToast('Se han cerrado todas las demás sesiones remotas.', 'success');
-      window.renderActiveSessionsList();
-    };
-
-    window.verifyTest2FA = function() {
-      const input = document.getElementById('test2faInput');
-      const val = input ? input.value.trim() : '';
-      const res = mockApi.verify2FACode(val);
-      if (res.success) {
-        showToast('✓ ' + res.message, 'success');
-        if (input) input.value = '';
-      } else {
-        showToast('⚠️ ' + res.message, 'error');
-      }
-    };
-
     // MODO CONSULTORIO OFFLINE & RESILIENCIA
     let isOfflineSimulated = false;
     window.toggleOfflineSimulation = function() {
@@ -4327,5 +4328,6 @@
     };
 
   </script>
+  <script src="../components/prototype-switcher.js"></script>
 </body>
 </html>

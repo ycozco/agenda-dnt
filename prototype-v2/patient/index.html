@@ -209,7 +209,7 @@
           </button>
           <span class="chip chip-success" style="font-size: 0.7rem;">Al día</span>
         </div>
-        <a href="/public/index.html" class="btn btn-secondary btn-small" style="width: 100%; color: white; border-color: rgba(255, 255, 255, 0.25); background: transparent;">
+        <a href="/public/index.html" onclick="document.cookie='sillar_patient_auth=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';" class="btn btn-secondary btn-small" style="width: 100%; color: white; border-color: rgba(255,255,255,0.25); background: transparent;">
           Salir del Portal
         </a>
       </div>
@@ -380,7 +380,7 @@
 
   <script type="module">
     import { mockApi } from '../assets/js/mock-api-v2.js';
-    import { showToast } from '../assets/js/components.js';
+    import { showToast, escapeHtml } from '../assets/js/components.js';
 
     // 1. Selector y Persistencia de Tema
     window.toggleTheme = function() {
@@ -397,14 +397,16 @@
     const themeLabel = document.getElementById('themeLabel');
     if (themeLabel) themeLabel.textContent = savedTheme === 'dark' ? 'Oscuro' : 'Claro';
 
+    const currentPatientId = 'pat_maria';
+
     // 2. Renderizado de Citas Programadas
     function renderAppointments() {
       const container = document.getElementById('patientAppointmentsList');
       if (!container) return;
 
       const allAppts = mockApi.getAllAppointments();
-      // Filtrar citas de la paciente María Quispe o reservas recientes
-      const myAppts = allAppts.filter(a => (a.patientName && a.patientName.toLowerCase().includes('maría')) || a.patientId === 'pat_maria' || !a.patientId);
+      // Filtrar citas estrictamente por identidad del paciente (pat_maria)
+      const myAppts = allAppts.filter(a => a.patientId === currentPatientId);
 
       if (myAppts.length === 0) {
         container.innerHTML = `
@@ -437,30 +439,29 @@
             <div style="flex: 1; min-width: 260px;">
               <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
                 ${statusBadge}
-                <span class="tiny" style="font-family: var(--mono); color: var(--action); font-weight: 700;">${apt.id.toUpperCase()}</span>
+                <span class="tiny" style="font-family: var(--mono); color: var(--action); font-weight: 700;">${escapeHtml(apt.id.toUpperCase())}</span>
                 <span class="tiny muted">· Sede Yanahuara</span>
               </div>
-              <strong style="font-size: 1.15rem; color: var(--ink); display: block; margin-bottom: 4px;">${apt.reason || 'Consulta Odontológica'}</strong>
+              <strong style="font-size: 1.15rem; color: var(--ink); display: block; margin-bottom: 4px;">${escapeHtml(apt.reason || 'Consulta Odontológica')}</strong>
               <div style="font-size: 0.88rem; color: var(--ink-soft); display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 4px;">
-                <span>🗓️ <strong>${apt.date}</strong></span>
-                <span>⏱️ <strong>${apt.time}</strong> (${apt.duration || '45 min'})</span>
-                <span>👨‍⚕️ ${apt.practitioner || 'Dra. Ana Flores (COP 18240)'}</span>
-                <span>💺 <strong style="color: var(--action);">${apt.chair || 'Sillón 1 (Ortodoncia)'}</strong></span>
+                <span>🗓️ <strong>${escapeHtml(apt.date)}</strong></span>
+                <span>⏱️ <strong>${escapeHtml(apt.time)}</strong> (${escapeHtml(apt.duration || '45 min')})</span>
+                <span>👨‍⚕️ ${escapeHtml(apt.practitioner || 'Dra. Ana Flores (COP 18240)')}</span>
+                <span>💺 <strong style="color: var(--action);">${escapeHtml(apt.chair || 'Sillón 1 (Ortodoncia)')}</strong></span>
               </div>
             </div>
 
-            <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+            <div style="display: flex; gap: 10px;">
               ${!isConfirmed && !isCompleted ? `
-                <button class="btn btn-primary btn-small" onclick="window.confirmMyAppointment('${apt.id}')" style="background: #0E7060; font-weight: 700;">
+                <button class="btn btn-primary btn-small" onclick="window.confirmMyAppointment('${escapeHtml(apt.id)}')" style="font-size: 0.8rem;">
                   ✓ Confirmar Asistencia
                 </button>
               ` : ''}
-              <button class="btn btn-secondary btn-small" onclick="window.rescheduleMyAppointment('${apt.id}')">
-                🔄 Reprogramar
-              </button>
-              <a href="https://wa.me/51954123456?text=Hola%2C%20quisiera%20consultar%20sobre%20mi%20cita%20${apt.id}" target="_blank" class="btn btn-secondary btn-small" style="color: #16A34A; border-color: #86EFAC;">
-                💬 WhatsApp
-              </a>
+              ${!isCompleted ? `
+                <button class="btn btn-secondary btn-small" onclick="window.rescheduleMyAppointment('${escapeHtml(apt.id)}')" style="font-size: 0.8rem;">
+                  Reprogramar
+                </button>
+              ` : ''}
             </div>
           </div>
         `;
@@ -472,28 +473,42 @@
       const container = document.getElementById('patientDocumentsList');
       if (!container) return;
 
-      const docs = mockApi.getDocuments('pat_maria');
-      container.innerHTML = docs.map(d => {
-        const isPhysical = d.status === 'PHYSICAL_SIGNED_DIGITIZED';
-        const isRad = d.category.includes('RADIOLOGIA');
+      const docs = mockApi.getDocuments(currentPatientId);
+      if (docs.length === 0) {
+        container.innerHTML = `
+          <div style="background: var(--surface); border: 1px dashed var(--line); border-radius: var(--radius-md); padding: 36px 20px; text-align: center;">
+            <span style="font-size: 2.2rem; display: block; margin-bottom: 10px;">📁</span>
+            <strong style="color: var(--ink); font-size: 1.1rem; display: block;">No hay documentos emitidos todavía</strong>
+            <p class="muted" style="max-width: 400px; margin: 6px auto; font-size: 0.9rem;">
+              Sus recetas médicas y radiografías validadas aparecerán aquí tan pronto sean emitidas por su odontólogo.
+            </p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = docs.map(doc => {
+        const isRecetaFisica = doc.category === 'RECETA_FISICA_SCAN';
         return `
-          <div class="doc-card">
-            <div>
-              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; gap: 6px;">
-                <span class="chip ${isPhysical ? 'chip-success' : isRad ? 'chip-warning' : 'chip-neutral'}" style="font-size: 0.68rem; font-weight: 800;">
-                  ${isPhysical ? '📱 FÍSICO SELLADO COP' : d.category.split('_')[0]}
-                </span>
-                <span class="tiny muted" style="font-family: var(--mono);">${d.date}</span>
+          <div class="card" style="background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-md); padding: 20px; box-shadow: var(--shadow-sm); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
+            <div style="display: flex; align-items: center; gap: 16px;">
+              <div style="width: 44px; height: 44px; border-radius: var(--radius-sm); background: ${isRecetaFisica ? 'rgba(245, 158, 11, 0.12)' : 'var(--action-soft)'}; color: ${isRecetaFisica ? '#D97706' : 'var(--action)'}; display: grid; place-items: center; font-size: 1.3rem;">
+                ${isRecetaFisica ? '📱' : '📄'}
               </div>
-              <h4 style="font-size: 1.05rem; margin: 0 0 6px; color: var(--ink);">${d.title}</h4>
-              <p class="tiny muted" style="margin-bottom: 14px; line-height: 1.4;">${d.summary}</p>
-              <div class="tiny" style="font-family: var(--mono); color: var(--ink-faint); margin-bottom: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-                SHA: ${d.sha256.substring(0, 16)}...
+              <div>
+                <strong style="font-size: 1rem; color: var(--ink); display: block;">${escapeHtml(doc.title)}</strong>
+                <div class="tiny muted" style="margin-top: 2px;">
+                  <span>${escapeHtml(doc.date)}</span> · <span>${escapeHtml(doc.author)}</span> · <span>${escapeHtml(doc.size || 'PDF')}</span>
+                  ${isRecetaFisica ? '<span class="chip chip-warning" style="margin-left: 6px; font-size: 0.65rem; padding: 1px 6px;">Firma & Sello Físico</span>' : ''}
+                </div>
+                <div class="tiny" style="color: var(--ink-soft); margin-top: 4px; max-width: 600px;">
+                  ${escapeHtml(doc.summary)}
+                </div>
               </div>
             </div>
             <div>
-              <a href="/staff/index.html?view=documents&doc=${d.id}" class="btn btn-secondary btn-small" style="width: 100%; text-align: center; text-decoration: none; font-weight: 700;">
-                ${isPhysical ? '🔍 Ver Foto con Sello COP' : isRad ? '⚡ Analizar en Visor PACS' : '📄 Descargar Documento'}
+              <a href="./viewers/pdf.html?id=${encodeURIComponent(doc.id)}" class="btn btn-secondary btn-small" style="font-size: 0.8rem;">
+                👁️ Ver Documento
               </a>
             </div>
           </div>
@@ -506,7 +521,8 @@
       const container = document.getElementById('patientPaymentsTableContainer');
       if (!container) return;
 
-      const payments = mockApi.getPayments();
+      // Filtrar pagos estrictamente por identidad del paciente (pat_maria)
+      const payments = mockApi.getPayments(currentPatientId);
       container.innerHTML = `
         <div class="table-responsive">
           <table class="data-table" style="width: 100%; border-collapse: collapse;">
@@ -523,11 +539,11 @@
             <tbody>
               ${payments.map(p => `
                 <tr style="border-bottom: 1px solid var(--line-soft); font-size: 0.86rem;">
-                  <td style="padding: 12px 8px;"><strong>${p.concept}</strong></td>
-                  <td style="padding: 12px 8px; font-family: var(--mono); font-size: 0.8rem;">${p.dueDate}</td>
-                  <td style="padding: 12px 8px; font-weight: 700; color: var(--ink);">S/ ${p.amount.toFixed(2)}</td>
-                  <td style="padding: 12px 8px; font-family: var(--mono); font-size: 0.8rem;">${p.receiptNumber || '—'}</td>
-                  <td style="padding: 12px 8px;"><span class="chip chip-neutral" style="font-size: 0.7rem; padding: 2px 6px;">${p.method || 'Pendiente'}</span></td>
+                  <td style="padding: 12px 8px;"><strong>${escapeHtml(p.concept)}</strong></td>
+                  <td style="padding: 12px 8px; font-family: var(--mono); font-size: 0.8rem;">${escapeHtml(p.dueDate || '—')}</td>
+                  <td style="padding: 12px 8px; font-weight: 700; color: var(--ink);">S/ ${typeof p.amount === 'number' ? p.amount.toFixed(2) : escapeHtml(p.amount)}</td>
+                  <td style="padding: 12px 8px; font-family: var(--mono); font-size: 0.8rem;">${escapeHtml(p.receiptNumber || '—')}</td>
+                  <td style="padding: 12px 8px;"><span class="chip chip-neutral" style="font-size: 0.7rem; padding: 2px 6px;">${escapeHtml(p.method || 'Pendiente')}</span></td>
                   <td style="padding: 12px 8px;">
                     <span class="chip ${p.status === 'PAID' ? 'chip-success' : 'chip-warning'}" style="font-size: 0.72rem; padding: 2px 8px; font-weight: 800;">
                       ${p.status === 'PAID' ? '✓ PAGADO' : 'PENDIENTE'}
