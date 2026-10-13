@@ -43,7 +43,40 @@ class MockApiV2 {
   }
 
   getPatients() {
+    if (!this.state.patients || this.state.patients.length === 0) {
+      this.state.patients = JSON.parse(JSON.stringify(SEED_V2.patients || []));
+      this.saveState();
+    }
     return this.state.patients || [];
+  }
+
+  addPatient(data) {
+    if (!this.state.patients || this.state.patients.length === 0) {
+      this.state.patients = JSON.parse(JSON.stringify(SEED_V2.patients || []));
+    }
+    const cleanId = "pat_" + (data.name ? data.name.toLowerCase().replace(/[^a-z0-9]/g, '_').slice(0, 15) : "paciente") + "_" + Math.floor(Math.random() * 900 + 100);
+    const allergiesList = data.allergies
+      ? (Array.isArray(data.allergies) ? data.allergies : data.allergies.split(',').map(a => a.trim()).filter(Boolean))
+      : ["Ninguna"];
+    const newPat = {
+      id: cleanId,
+      name: data.name || "Nuevo Paciente",
+      documentType: data.documentType || "DNI",
+      documentNumber: data.documentNumber || "",
+      birthDate: data.birthDate || "1995-01-01",
+      phone: data.phone || "",
+      email: data.email || "",
+      bloodType: data.bloodType || "O+",
+      allergies: allergiesList.length > 0 ? allergiesList : ["Ninguna"],
+      status: "ACTIVE",
+      totalSpent: 0.00,
+      balanceDue: 0.00,
+      notes: data.notes || "Admisión ambulatoria inicial."
+    };
+    this.state.patients.push(newPat);
+    this.saveState();
+    this.logAuditEvent("REGISTRO_PACIENTE", `Admisión formal de paciente: ${newPat.name} (Doc: ${newPat.documentType} ${newPat.documentNumber})`);
+    return newPat;
   }
 
   getPractitioners() {

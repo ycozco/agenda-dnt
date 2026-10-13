@@ -1129,7 +1129,106 @@
     </div>
   </div>
 
-  
+  <!-- MODAL 4B: ADMISIÓN DE NUEVO PACIENTE & HISTORIA CLÍNICA (NTS 139-MINSA) -->
+  <div class="drawer-modal-overlay" id="newPatientModal" style="display:none;" onclick="window.handlePatientBackdrop(event)">
+    <div class="drawer-modal-card" style="width: min(600px, 95vw); max-height: 90vh; overflow-y: auto;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 1px solid var(--line); padding-bottom: 12px;">
+        <div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <h3 style="margin: 0; font-size: 1.25rem; color: var(--ink);">👤 Admisión de Nuevo Paciente</h3>
+            <span class="chip chip-success" style="font-size: 0.68rem; padding: 2px 8px;">NTS 139-MINSA</span>
+          </div>
+          <span class="tiny muted">Apertura de expediente clínico estomatológico y datos de filiación.</span>
+        </div>
+        <button class="btn btn-secondary btn-small" onclick="window.closeNewPatientModal()">✕</button>
+      </div>
+
+      <form id="newPatientForm" onsubmit="window.handlePatientSubmit(event)">
+        <div class="segmented-form-section">
+          <div class="segmented-section-title">
+            <span>🪪 1. Filiación e Identificación Legal</span>
+          </div>
+          <div style="display: grid; grid-template-columns: 140px 1fr; gap: 10px; margin-bottom: 10px;">
+            <div>
+              <label class="tiny muted" style="font-weight: 700; display: block; margin-bottom: 4px;">Tipo Doc:</label>
+              <select id="patDocType" class="form-select" required>
+                <option value="DNI">DNI</option>
+                <option value="CE">Carné Extranjería</option>
+                <option value="PASAPORTE">Pasaporte</option>
+              </select>
+            </div>
+            <div>
+              <label class="tiny muted" style="font-weight: 700; display: block; margin-bottom: 4px;">Número de Documento:</label>
+              <input type="text" id="patDocNumber" class="form-control" placeholder="Ej. 72348190" required>
+            </div>
+          </div>
+          <div style="margin-bottom: 10px;">
+            <label class="tiny muted" style="font-weight: 700; display: block; margin-bottom: 4px;">Nombres y Apellidos Completos:</label>
+            <input type="text" id="patFullName" class="form-control" placeholder="Ej. Rodrigo Salazar Medina" required>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div>
+              <label class="tiny muted" style="font-weight: 700; display: block; margin-bottom: 4px;">Fecha de Nacimiento:</label>
+              <input type="date" id="patBirthDate" class="form-control" value="1996-05-18" required>
+            </div>
+            <div>
+              <label class="tiny muted" style="font-weight: 700; display: block; margin-bottom: 4px;">Grupo Sanguíneo:</label>
+              <select id="patBloodType" class="form-select">
+                <option value="O+">O Positivo (O+)</option>
+                <option value="O-">O Negativo (O-)</option>
+                <option value="A+">A Positivo (A+)</option>
+                <option value="A-">A Negativo (A-)</option>
+                <option value="B+">B Positivo (B+)</option>
+                <option value="B-">B Negativo (B-)</option>
+                <option value="AB+">AB Positivo (AB+)</option>
+                <option value="AB-">AB Negativo (AB-)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="segmented-form-section">
+          <div class="segmented-section-title">
+            <span>📱 2. Contacto & Notificaciones</span>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div>
+              <label class="tiny muted" style="font-weight: 700; display: block; margin-bottom: 4px;">Teléfono / WhatsApp:</label>
+              <input type="tel" id="patPhone" class="form-control" placeholder="Ej. +51 984 123 456" required>
+            </div>
+            <div>
+              <label class="tiny muted" style="font-weight: 700; display: block; margin-bottom: 4px;">Correo Electrónico:</label>
+              <input type="email" id="patEmail" class="form-control" placeholder="rodrigo.salazar@correo.pe">
+            </div>
+          </div>
+        </div>
+
+        <div class="segmented-form-section">
+          <div class="segmented-section-title">
+            <span>⚠️ 3. Alertas Médicas & Antecedentes</span>
+          </div>
+          <div style="margin-bottom: 10px;">
+            <label class="tiny muted" style="font-weight: 700; display: block; margin-bottom: 4px;">Alergias Medicamentosas (separadas por coma):</label>
+            <input type="text" id="patAllergies" class="form-control" placeholder="Ej. Penicilina, AINEs o Ninguna" value="Ninguna">
+          </div>
+          <div>
+            <label class="tiny muted" style="font-weight: 700; display: block; margin-bottom: 4px;">Motivo de Consulta / Anamnesis Inicial:</label>
+            <textarea id="patNotes" class="form-control" rows="2" placeholder="Ej. Evaluación ortodóntica y limpieza ultrasónica preventiva..."></textarea>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 10px; margin-top: 14px;">
+          <button type="submit" class="btn btn-primary" style="flex: 1; padding: 12px; background: #007A55; font-weight: 800;">
+            ✓ Registrar Paciente y Abrir HC
+          </button>
+          <button type="button" class="btn btn-secondary" onclick="window.closeNewPatientModal()">
+            Cancelar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <!-- MODAL 5: ALTA DE PROFESIONAL COLEGIADO COP (RBAC & SILLÓN) -->
   <div class="drawer-modal-overlay" id="newPractitionerModal" style="display:none;" onclick="window.handlePractitionerBackdrop(event)">
     <div class="drawer-modal-card" style="width: min(580px, 95vw); max-height: 90vh; overflow-y: auto;">
@@ -1372,6 +1471,24 @@
 
     window.handleSecurityBackdrop = function(e) {
       if (e.target.id === 'securityModal') window.closeSecurityModal();
+    };
+
+    window.openNewPatientModal = function() {
+      const modal = document.getElementById('newPatientModal');
+      if (modal) modal.style.display = 'flex';
+    };
+
+    window.closeNewPatientModal = function() {
+      const modal = document.getElementById('newPatientModal');
+      if (modal) modal.style.display = 'none';
+      const form = document.getElementById('newPatientForm');
+      if (form) form.reset();
+    };
+
+    window.handlePatientBackdrop = function(e) {
+      if (e.target && e.target.id === 'newPatientModal') {
+        window.closeNewPatientModal();
+      }
     };
 
     window.renderActiveSessionsList = function() {
@@ -3614,7 +3731,7 @@
               <h1 style="margin: 0; font-size: 1.85rem; font-weight: 800;">Directorio de Pacientes & Historias Clínicas</h1>
               <p class="muted" style="margin: 4px 0 0;">Gestión de filiación, antecedentes y planes de tratamiento.</p>
             </div>
-            <button class="btn btn-primary btn-small" onclick="alert('Formulario de admisión de nuevo paciente abierto')">Nuevo Paciente</button>
+            <button class="btn btn-primary btn-small" onclick="window.openNewPatientModal()">+ Nuevo Paciente</button>
           </div>
 
           <div class="card">
@@ -3634,14 +3751,14 @@
                 <tbody>
                   ${patients.map(p => `
                     <tr>
-                      <td><strong>${p.documentType}: ${p.documentNumber}</strong></td>
-                      <td><strong>${p.name}</strong><div class="tiny">${p.email}</div></td>
-                      <td>${p.phone}</td>
-                      <td><span class="chip ${p.allergies.includes('Ninguna') ? 'chip-neutral' : 'chip-danger'}" style="font-size: 0.72rem; padding: 2px 8px;">${p.allergies.join(', ')}</span></td>
-                      <td style="font-weight: 700;">S/ ${p.balanceDue.toFixed(2)}</td>
-                      <td><span class="chip ${p.status === 'IN_CHAIR' ? 'chip-success' : p.status === 'WAITING' ? 'chip-warning' : 'chip-neutral'}" style="font-size: 0.72rem; padding: 2px 8px;">${p.status}</span></td>
+                      <td><strong>${escapeHtml(p.documentType)}: ${escapeHtml(p.documentNumber)}</strong></td>
+                      <td><strong>${escapeHtml(p.name)}</strong><div class="tiny">${escapeHtml(p.email || '')}</div></td>
+                      <td>${escapeHtml(p.phone || '')}</td>
+                      <td><span class="chip ${(p.allergies || []).includes('Ninguna') ? 'chip-neutral' : 'chip-danger'}" style="font-size: 0.72rem; padding: 2px 8px;">${escapeHtml((p.allergies || ['Ninguna']).join(', '))}</span></td>
+                      <td style="font-weight: 700;">S/ ${(typeof p.balanceDue === 'number' ? p.balanceDue : 0).toFixed(2)}</td>
+                      <td><span class="chip ${p.status === 'IN_CHAIR' ? 'chip-success' : p.status === 'WAITING' ? 'chip-warning' : 'chip-neutral'}" style="font-size: 0.72rem; padding: 2px 8px;">${escapeHtml(p.status || 'ACTIVE')}</span></td>
                       <td>
-                        <a href="?view=patient&patient=${p.id}" class="btn btn-secondary btn-small">Ver Odontograma</a>
+                        <a href="?view=patient&patient=${escapeHtml(p.id)}" class="btn btn-secondary btn-small">Ver Odontograma</a>
                       </td>
                     </tr>
                   `).join("")}
@@ -4236,6 +4353,53 @@
 
       showToast('✓ Profesional colegiado ' + created.name + ' registrado con éxito.', 'success');
       window.closeNewPractitionerModal();
+      window.location.reload();
+    };
+
+    window.openNewPatientModal = function() {
+      const modal = document.getElementById('newPatientModal');
+      if (modal) modal.style.display = 'flex';
+    };
+
+    window.closeNewPatientModal = function() {
+      const modal = document.getElementById('newPatientModal');
+      if (modal) modal.style.display = 'none';
+      const form = document.getElementById('newPatientForm');
+      if (form) form.reset();
+    };
+
+    window.handlePatientBackdrop = function(e) {
+      if (e.target && e.target.id === 'newPatientModal') {
+        window.closeNewPatientModal();
+      }
+    };
+
+    window.handlePatientSubmit = function(e) {
+      e.preventDefault();
+      const docType = document.getElementById('patDocType').value;
+      const docNum = document.getElementById('patDocNumber').value.trim();
+      const name = document.getElementById('patFullName').value.trim();
+      const birthDate = document.getElementById('patBirthDate').value;
+      const bloodType = document.getElementById('patBloodType').value;
+      const phone = document.getElementById('patPhone').value.trim();
+      const email = document.getElementById('patEmail').value.trim();
+      const allergies = document.getElementById('patAllergies').value.trim();
+      const notes = document.getElementById('patNotes').value.trim();
+
+      const created = mockApi.addPatient({
+        name: name,
+        documentType: docType,
+        documentNumber: docNum,
+        birthDate: birthDate,
+        bloodType: bloodType,
+        phone: phone,
+        email: email || `${docNum}@pacientes.sillardental.pe`,
+        allergies: allergies || 'Ninguna',
+        notes: notes
+      });
+
+      showToast('✓ Paciente ' + created.name + ' admitido con éxito en el sistema.', 'success');
+      window.closeNewPatientModal();
       window.location.reload();
     };
 
